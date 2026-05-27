@@ -30,10 +30,10 @@ Our research systematically surveyed the Agent capability matrix, resulting in f
 
 | Research Direction | Agent Component | Theoretical Role & Code Implication |
 |-------------------|----------------|-------------------------------------|
-| **SimCLR + Unsupervised Learning** | **Memory System** | Replaces raw data storage with latent space representation learning. Enables true episodic memory via robust anomaly detection and contrastive feature extraction. |
+| **SimCLR + VICReg + Unsupervised Learning** | **Memory System** | Replaces raw data storage with latent space representation learning. Enables true episodic memory via robust anomaly detection and contrastive feature extraction. |
 | **RL (NLP) — Studied & Reversed** | **Tool System** | Transitions probabilistic tool use into a deterministic action space. We mapped RL value alignment, then reverse-engineered it into a hard-constrained causal execution graph. |
 | **Federated Learning + Spatiotemporal** | **Collaboration System** | Ensures distributed convergence across multi-agent networks. Utilizes privacy-preserving aggregation and spatiotemporal graphs for non-IID data harmony without a central server. |
-| **Gradient Entropy (Original Theory)** | **Architecture Principle** | A novel metric quantifying information dissipation. By clamping gradient entropy bounds, we physically prevent mode collapse and structural divergence. |
+| **Gradient Entropy (FIM/NTK Theory)** | **Architecture Principle** | A novel metric quantifying information dissipation. By clamping gradient entropy bounds, we physically prevent mode collapse and structural divergence. |
 
 ### Structure & Roadmap
 - `docs/en/`: Deep-dive English documentation (1000+ words each) featuring academic derivations, source code/pseudocode analysis, and beginner-friendly analogies.
@@ -69,10 +69,10 @@ For a detailed technical index and reading guide, please refer to the specific `
 
 | 学术研究方向 | 智能体核心组件 | 理论作用与源码启示 |
 |-------------------|----------------|-------------------------------------|
-| **SimCLR + 无监督学习** | **记忆系统 (Memory System)** | 放弃原始数据存储，采用隐空间表征学习。通过对比特征提取和异常检测，实现真正的事件级和结构化记忆。 |
+| **SimCLR + VICReg + 无监督学习** | **记忆系统 (Memory System)** | 放弃原始数据存储，采用隐空间表征学习。通过对比特征提取和异常检测，实现真正的事件级和结构化记忆。 |
 | **强化学习 (NLP) — 逆向工程** | **工具系统 (Tool System)** | 将概率性的工具使用转化为确定性的动作空间。我们学习了 RL 价值对齐，随后将其逆向推导为具有硬性约束的因果执行图。 |
 | **联邦学习 + 时空建模** | **协作系统 (Collaboration System)** | 保证多智能体网络中的分布式收敛。无需中心服务器，通过隐私保护聚合和时空图卷积网络解决 Non-IID 数据协同问题。 |
-| **梯度熵 (原创理论)** | **架构原则 (Architecture Principle)** | 一种量化信息耗散的新型指标。通过锁定梯度熵的上下界，我们在物理与数学层面彻底阻断了模型崩溃与结构发散。 |
+| **梯度熵 (FIM/NTK 理论)** | **架构原则 (Architecture Principle)** | 一种量化信息耗散的新型指标。通过锁定梯度熵的上下界，我们在物理与数学层面彻底阻断了模型崩溃与结构发散。 |
 
 ### 文档结构与导读
 - `docs/en/`：英文深度技术文档目录。

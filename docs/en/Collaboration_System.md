@@ -81,8 +81,8 @@ class FederatedSpatiotemporalAggregator:
             # ST-Weight merges time freshness and local data volume
             st_weight = base_weight * time_weight
 
-            # 3. Inject Differential Privacy noise to prevent reverse engineering
-            local_grad = self._apply_differential_privacy(local_grad)
+            # 3. Byzantine Robust Filtering (Krum) & Differential Privacy
+            local_grad = self._apply_krum_and_dp(local_grad)
 
             # 4. Weighted aggregation
             for name in global_grad.keys():

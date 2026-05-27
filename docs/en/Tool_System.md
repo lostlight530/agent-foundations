@@ -37,7 +37,7 @@ Being "useful" isn't enough. For an agent with execution privileges, being "safe
 Our project README states: "We studied it, then reversed it." This is the crown jewel of our entire system.
 We know that RL in an open universe is extremely fragile and hyper-sensitive to parameters. Expecting an online RL agent to never go crazy is impossible.
 
-* **Ultimate Reverse Engineering**: We don't let the agent use RL to do trial-and-error in production. Instead, we use RL in a closed sandbox to train a "Perfect Causal Dependency Graph". Then, we **reverse engineer** this black-box probabilistic policy, compiling it directly into a pure, deterministic execution router with absolute causal logic.
+* **Ultimate Reverse Engineering**: We don't let the agent use RL to do trial-and-error in production. Instead, we use RL in a closed sandbox to train a "Perfect Causal Dependency Graph". Then, we **reverse engineer** this black-box probabilistic policy, compiling it via **Symbolic Policy Distillation** into a pure, interpretable, and deterministic execution router with absolute causal logic.
 * **Inevitable Convergence**: We sacrificed a tiny percentage of random flexibility in exchange for 100% execution predictability. Within this reverse-engineered, locked-down tool chain, no matter how chaotic the user's prompt is, the tool execution flow is mathematically proven to inevitably converge to a safe state.
 
 ---

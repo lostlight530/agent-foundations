@@ -25,7 +25,7 @@
 
 ### 2.1 分布式收敛 (Distributed Convergence)
 在多智能体协同中，如何保证群体策略最终收敛是一个极其困难的数学难题。我们不依赖于中心化的大规模暴力计算，而是从拓扑学上保证收敛。
-* **参数聚合优化 (Federated Aggregation)**：采用经过严格数学约束改进的 FedAvg（联邦平均）算法或基于全局动量（Momentum）的聚合协议。每个智能体在自己的局部环境（比如处理特定用户的私人任务）中更新大脑状态后，仅将求导后的“梯度向量”发送至安全聚合节点。
+* **参数聚合优化 (Federated Aggregation)**：采用具备 **拜占庭容错（Byzantine Robustness）** 能力的聚合协议（如 Krum 或 Bulyan 算法），改进了传统的 FedAvg或基于全局动量（Momentum）的聚合协议。每个智能体在自己的局部环境（比如处理特定用户的私人任务）中更新大脑状态后，仅将求导后的“梯度向量”发送至安全聚合节点。
 * **时空一致性补偿 (Spatiotemporal Consistency)**：不同的智能体存在于不同的物理或虚拟网格空间中。我们在聚合参数时，创新性地引入了时空图卷积网络（STGCN）。系统在合并知识时，会根据智能体之间的空间距离和时间延迟给予不同的权重分配，这从数学理论上严格保证了整个网络在面对 Non-IID 数据时，依然存在一个全局极小值并能够顺利收敛。
 
 ### 2.2 绝对的隐私保护机制 (Privacy-Preserving Paradigm)
@@ -82,8 +82,13 @@ class FederatedSpatiotemporalAggregator:
             # ST-Weight 融合了时间新鲜度与局部数据量
             st_weight = base_weight * time_weight
 
-            # 3. 注入差分隐私噪声，确保反向推导不可行
-            local_grad = self._apply_differential_privacy(local_grad)
+        # 3. 拜占庭容错处理 (Byzantine Robustness)
+        # 采用 Krum 算子：计算各梯度间的欧氏距离，选取距离最近的“诚实”子集
+        filtered_updates = self._krum_filter(agent_updates)
+
+        # 4. 注入差分隐私噪声
+        for update in filtered_updates:
+            local_grad = self._apply_differential_privacy(update['grad'])
 
             # 4. 加权聚合
             for name in global_grad.keys():
@@ -102,7 +107,7 @@ class FederatedSpatiotemporalAggregator:
         注入拉普拉斯噪声或高斯噪声，切断数据与梯度的确定性映射
         """
         noise = torch.randn_like(grad_tensor) * epsilon
-        # 裁剪梯度范数，防止恶意节点通过超大梯度毒化全局模型
+        # 裁剪梯度范数，通过 Krum 算子识别并剔除离群的异常梯度，防止恶意或故障节点毒化全局模型
         torch.nn.utils.clip_grad_norm_(grad_tensor, max_norm=1.0)
         return grad_tensor + noise
 ```

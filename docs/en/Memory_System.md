@@ -14,7 +14,7 @@ To solve this, we abandoned the outdated approach of "storing raw data." Instead
 
 The memory system is the foundation of any agent's perception and understanding of complex environments. In our deterministic agent architecture, we completely abandoned traditional heuristic memory management (such as simple text truncation, sliding windows, or primitive embedding matching).
 
-Instead, we adopted a rigorous representation learning framework based on **SimCLR (Simple Framework for Contrastive Learning of Visual Representations)** and Unsupervised Learning.
+Instead, we adopted a rigorous representation learning framework based on **SimCLR and **VICReg (Variance-Invariance-Covariance Regularization)**** and Unsupervised Learning.
 The core idea of SimCLR is "Contrastive Learning": it forces the model to mathematically maximize the similarity between different views of the same object (e.g., a photo of a cat and its sketch) while minimizing its similarity to unrelated objects (e.g., a dog).
 
 In the context of agent memory, this means we execute a brutal mathematical dimensionality reduction. We do not store raw input data filled with redundant pixels and useless characters on the hard drive. Instead, we use algorithms to extract and memorize **high-dimensional, continuous, and intrinsically structured invariant features**.
@@ -80,21 +80,23 @@ class ContrastiveMemorySystem(nn.Module):
         Core derivation: Temporal contrastive learning based on InfoNCE Loss.
         x_t1, x_t2 are temporally adjacent observation states (Positive Pair).
         """
-        # 1. Extract features and project
+        # 1. Feature extraction & Projection
         z1 = self.projector(self.encoder(x_t1))
         z2 = self.projector(self.encoder(x_t2))
 
-        # Normalize projections to the unit hypersphere
-        z1 = F.normalize(z1, dim=1)
-        z2 = F.normalize(z2, dim=1)
+        # 2. Core: VICReg Loss (Collapse Prevention)
+        # Variance: Prevents all samples from collapsing to a single point
+        std_z = torch.sqrt(z1.var(dim=0) + 1e-4)
+        std_loss = torch.mean(F.relu(1 - std_z))
 
-        # 2. Calculate positive similarity (higher is better)
-        temperature = 0.5
-        pos_sim = torch.exp(torch.sum(z1 * z2, dim=-1) / temperature)
+        # Covariance: Decouples features to ensure zero redundancy
+        cov_z = (z1.T @ z1) / (z1.shape[0] - 1)
+        cov_loss = (cov_z.pow(2).sum() - cov_z.pow(2).diag().sum()) / z1.shape[1]
 
-        # Omitted negative sample calculations for brevity
-        # loss = -log( pos_sim / (pos_sim + neg_sim) )
-        pass
+        # Invariance: Traditional MSE/SimCLR objective
+        sim_loss = F.mse_loss(z1, z2)
+
+        return sim_loss + std_loss + cov_loss
 
     def observe_and_memorize(self, current_observation):
         """
