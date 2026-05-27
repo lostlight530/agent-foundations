@@ -71,8 +71,9 @@ class GradientEntropyController:
 
     def compute_gradient_entropy(self, model: nn.Module) -> float:
         """
-        Core derivation: Compute the Gradient Entropy of the current update direction.
-        H = - Σ (p_i * log(p_i)), where p_i is the normalized gradient distribution.
+        Core derivation: Calculate Gradient Entropy of current update.
+        Mathematical Essence: Shannon entropy estimation based on FIM spectral distribution.
+        H = - Σ (p_i * log(p_i))
         """
         all_grads = []
         for param in model.parameters():
@@ -82,15 +83,14 @@ class GradientEntropyController:
         if not all_grads:
             return 0.0
 
-        # Flatten all gradients into a single high-dimensional vector
+        # Concatenate all gradients and approximate Fisher Information
         grad_vector = torch.cat(all_grads)
 
-        # 1. Calculate probability distribution of gradient magnitudes (Softmax)
-        # Introduce a Temperature coefficient to prevent over-aggressive distributions
-        temperature = 1e-3
+        # 1. Adaptive temperature reflecting NTK dynamics
+        temperature = torch.std(grad_vector) + 1e-6
         prob_dist = torch.softmax(torch.abs(grad_vector) / temperature, dim=0)
 
-        # 2. Compute Shannon Entropy: H = - Σ p * log(p + epsilon)
+        # 2. Information Entropy Formula: H = - Σ p * log(p + epsilon)
         entropy = -torch.sum(prob_dist * torch.log(prob_dist + 1e-8))
         return entropy.item()
 

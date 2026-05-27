@@ -6,7 +6,7 @@
 就像人类拥有短期的“工作记忆（Working Memory）”和长期的“情景记忆（Episodic Memory）”一样，智能体也需要记住它看过什么、做过什么。
 但是，如果你简单粗暴地把所有的聊天记录、图片、网页截图都存到数据库（比如传统的向量数据库）里，没过多久，系统就会被海量的“垃圾数据”塞满，不仅变慢，而且很难找到真正有用的核心信息。
 
-为了解决这个问题，我们放弃了“存储原始数据”的落后方式，引入了一种名为 **SimCLR（无监督对比学习）** 的前沿 AI 视觉算法。我们的系统不再强记“屏幕长什么样”，而是像人类一样，自动提取出“屏幕里发生了什么本质变化”，从而实现极致高效、永远不会撑爆存储的结构化记忆系统。
+为了解决这个问题，我们放弃了“存储原始数据”的落后方式，引入了一种名为 **SimCLR 与 VICReg（方差-不变性-协方差正则化）** 的前沿 AI 视觉算法。我们的系统不再强记“屏幕长什么样”，而是像人类一样，自动提取出“屏幕里发生了什么本质变化”，从而实现极致高效、永远不会撑爆存储的结构化记忆系统。
 
 ---
 
@@ -17,7 +17,7 @@
 我们转而采用基于 **SimCLR（Simple Framework for Contrastive Learning of Visual Representations）** 和无监督学习（Unsupervised Learning）的严谨表征学习框架。
 SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：它强制模型最大化同一个事物的不同形态（比如一只猫的照片和它的素描版）之间的数学相似度，同时最小化它与无关事物（比如狗）的相似度。
 
-在智能体记忆的上下文中，这意味着我们在数学上做了一次极其残酷的“降维打击”：我们不再把原始的、充满冗余像素和无用字符的输入数据存入硬盘，而是利用算法提取并记忆那些**高维连续的、内在结构化的核心不变特征（Invariant Features）**。
+在智能体记忆的上下文中，这意味着我们在数学上做了一次极其残酷的“降维打击”：我们不再把原始的、充满冗余像素和无用字符的输入数据存入硬盘，而是利用算法提取并记忆那些**高维连续的、内在结构化的核心不变特征（Invariant Features）。通过引入 VICReg 约束，我们不仅要求“认得准”，还要求隐空间的表征必须具备足够高的方差和低协方差，从数学层面彻底杜绝表征崩溃（Representation Collapse）。**。
 
 ---
 
@@ -84,18 +84,19 @@ class ContrastiveMemorySystem(nn.Module):
         z1 = self.projector(self.encoder(x_t1))
         z2 = self.projector(self.encoder(x_t2))
 
-        # 归一化投影到单位超球面上
-        z1 = F.normalize(z1, dim=1)
-        z2 = F.normalize(z2, dim=1)
+        # 2. 核心：VICReg 损失计算 (防止崩溃)
+        # Variance: 保证特征不缩减为单一常数
+        std_z = torch.sqrt(z1.var(dim=0) + 1e-4)
+        std_loss = torch.mean(F.relu(1 - std_z))
 
-        # 2. 计算正样本相似度 (越高越好)
-        temperature = 0.5
-        pos_sim = torch.exp(torch.sum(z1 * z2, dim=-1) / temperature)
+        # Covariance: 保证特征之间互不冗余 (解耦)
+        cov_z = (z1.T @ z1) / (z1.shape[0] - 1)
+        cov_loss = (cov_z.pow(2).sum() - cov_z.pow(2).diag().sum()) / z1.shape[1]
 
-        # 这里省略了负样本计算，实际中会使用同一个 Batch 内的其他状态作为负样本
-        # loss = -log( pos_sim / (pos_sim + neg_sim) )
-        # return loss
-        pass
+        # Invariance: 保证时序稳定性 (传统 SimCLR 核心)
+        sim_loss = F.mse_loss(z1, z2)
+
+        return sim_loss + std_loss + cov_loss
 
     def observe_and_memorize(self, current_observation):
         """

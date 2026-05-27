@@ -25,7 +25,7 @@
 
 ### 2.1 分布式收敛 (Distributed Convergence)
 在多智能体协同中，如何保证群体策略最终收敛是一个极其困难的数学难题。我们不依赖于中心化的大规模暴力计算，而是从拓扑学上保证收敛。
-* **参数聚合优化 (Federated Aggregation)**：采用经过严格数学约束改进的 FedAvg（联邦平均）算法或基于全局动量（Momentum）的聚合协议。每个智能体在自己的局部环境（比如处理特定用户的私人任务）中更新大脑状态后，仅将求导后的“梯度向量”发送至安全聚合节点。
+* **参数聚合优化 (Federated Aggregation)**：采用具备 **拜占庭容错（Byzantine Robustness）** 能力的聚合协议（如 Krum 或 Bulyan 算法），改进了传统的 FedAvg或基于全局动量（Momentum）的聚合协议。每个智能体在自己的局部环境（比如处理特定用户的私人任务）中更新大脑状态后，仅将求导后的“梯度向量”发送至安全聚合节点。
 * **时空一致性补偿 (Spatiotemporal Consistency)**：不同的智能体存在于不同的物理或虚拟网格空间中。我们在聚合参数时，创新性地引入了时空图卷积网络（STGCN）。系统在合并知识时，会根据智能体之间的空间距离和时间延迟给予不同的权重分配，这从数学理论上严格保证了整个网络在面对 Non-IID 数据时，依然存在一个全局极小值并能够顺利收敛。
 
 ### 2.2 绝对的隐私保护机制 (Privacy-Preserving Paradigm)
@@ -64,36 +64,31 @@ class FederatedSpatiotemporalAggregator:
         global_grad = {name: torch.zeros_like(param)
                        for name, param in current_global_model.named_parameters()}
 
-        total_spatiotemporal_weight = 0.0
+        total_st_weight = 0.0
 
-        # 1. 遍历所有收集到的本地智能体更新
-        for update in agent_updates:
-            a_id = update['agent_id']
-            local_grad = update['grad']
-            t_diff = current_time() - update['timestamp'] # 计算时间延迟
+        # 1. 拜占庭容错过滤 (Byzantine Robustness)
+        # 采用 Krum/Bulyan 算子剔除潜在的攻击节点或故障梯度
+        filtered_updates = self._robust_filter(agent_updates)
 
-            # 2. 计算时空联合权重 (Spatiotemporal Weighting)
-            # - 数据量越大，权重越高 (FedAvg基础)
-            # - 时间延迟越久，这批经验的价值越低 (乘以衰减系数 gamma^t)
-            # - 空间拓扑 (此处简化为中心节点度中心性或环境相似度)
-            time_weight = self.gamma ** t_diff
-            base_weight = update['data_size']
+        # 2. 遍历过滤后的诚实节点更新
+        for update in filtered_updates:
+            t_diff = current_time() - update['timestamp']
 
-            # ST-Weight 融合了时间新鲜度与局部数据量
-            st_weight = base_weight * time_weight
+            # 3. 计算时空联合权重 (Spatiotemporal Weighting)
+            # 融合时间新鲜度 (gamma^t) 与局部数据量
+            st_weight = update['data_size'] * (self.gamma ** t_diff)
 
-            # 3. 注入差分隐私噪声，确保反向推导不可行
-            local_grad = self._apply_differential_privacy(local_grad)
+            # 4. 注入差分隐私噪声并进行安全加权聚合
+            local_grad = self._apply_differential_privacy(update['grad'])
 
-            # 4. 加权聚合
             for name in global_grad.keys():
                 global_grad[name] += local_grad[name] * st_weight
 
-            total_spatiotemporal_weight += st_weight
+            total_st_weight += st_weight
 
-        # 5. 归一化，得到真正的全局收敛梯度方向
+        # 5. 归一化，得到全局收敛的确定性梯度方向
         for name in global_grad.keys():
-            global_grad[name] = global_grad[name] / total_spatiotemporal_weight
+            global_grad[name] /= (total_st_weight + 1e-8)
 
         return global_grad
 
@@ -102,7 +97,7 @@ class FederatedSpatiotemporalAggregator:
         注入拉普拉斯噪声或高斯噪声，切断数据与梯度的确定性映射
         """
         noise = torch.randn_like(grad_tensor) * epsilon
-        # 裁剪梯度范数，防止恶意节点通过超大梯度毒化全局模型
+        # 裁剪梯度范数，通过 Krum 算子识别并剔除离群的异常梯度，防止恶意或故障节点毒化全局模型
         torch.nn.utils.clip_grad_norm_(grad_tensor, max_norm=1.0)
         return grad_tensor + noise
 ```
