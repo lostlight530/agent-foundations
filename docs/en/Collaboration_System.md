@@ -57,42 +57,38 @@ class FederatedSpatiotemporalAggregator:
 
     def aggregate_gradients(self, agent_updates, current_global_model):
         """
-        Core derivation: Federated gradient aggregation with spatiotemporal awareness and DP.
-        agent_updates: list of dicts from agents
+        Core derivation: Federated gradient aggregation based on spatiotemporal awareness.
+        agent_updates: List of dicts from agents
                        { 'agent_id': int, 'grad': Tensor, 'timestamp': float, 'data_size': int }
         """
         global_grad = {name: torch.zeros_like(param)
                        for name, param in current_global_model.named_parameters()}
 
-        total_spatiotemporal_weight = 0.0
+        total_st_weight = 0.0
 
-        # 1. Iterate through all collected local agent updates
-        for update in agent_updates:
-            a_id = update['agent_id']
-            local_grad = update['grad']
-            t_diff = current_time() - update['timestamp'] # Calculate time delay
+        # 1. Byzantine Robust Filtering (Byzantine Robustness)
+        # Use Krum/Bulyan operators to prune potential attack nodes or faulty gradients
+        filtered_updates = self._robust_filter(agent_updates)
 
-            # 2. Compute Spatiotemporal Weighting
-            # - More data = higher weight (Basic FedAvg)
-            # - Older data = lower weight (decay factor gamma^t)
-            time_weight = self.gamma ** t_diff
-            base_weight = update['data_size']
+        # 2. Iterate through filtered honest node updates
+        for update in filtered_updates:
+            t_diff = current_time() - update['timestamp']
 
-            # ST-Weight merges time freshness and local data volume
-            st_weight = base_weight * time_weight
+            # 3. Calculate Spatiotemporal Weighting
+            # Merges temporal freshness (gamma^t) with local data size
+            st_weight = update['data_size'] * (self.gamma ** t_diff)
 
-            # 3. Byzantine Robust Filtering (Krum) & Differential Privacy
-            local_grad = self._apply_krum_and_dp(local_grad)
+            # 4. Apply Differential Privacy and perform safe weighted aggregation
+            local_grad = self._apply_differential_privacy(update['grad'])
 
-            # 4. Weighted aggregation
             for name in global_grad.keys():
                 global_grad[name] += local_grad[name] * st_weight
 
-            total_spatiotemporal_weight += st_weight
+            total_st_weight += st_weight
 
-        # 5. Normalize to get the true global convergence direction
+        # 5. Normalization: obtain the globally convergent deterministic gradient direction
         for name in global_grad.keys():
-            global_grad[name] = global_grad[name] / total_spatiotemporal_weight
+            global_grad[name] /= (total_st_weight + 1e-8)
 
         return global_grad
 

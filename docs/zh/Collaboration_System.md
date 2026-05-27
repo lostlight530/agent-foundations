@@ -64,41 +64,31 @@ class FederatedSpatiotemporalAggregator:
         global_grad = {name: torch.zeros_like(param)
                        for name, param in current_global_model.named_parameters()}
 
-        total_spatiotemporal_weight = 0.0
+        total_st_weight = 0.0
 
-        # 1. 遍历所有收集到的本地智能体更新
-        for update in agent_updates:
-            a_id = update['agent_id']
-            local_grad = update['grad']
-            t_diff = current_time() - update['timestamp'] # 计算时间延迟
+        # 1. 拜占庭容错过滤 (Byzantine Robustness)
+        # 采用 Krum/Bulyan 算子剔除潜在的攻击节点或故障梯度
+        filtered_updates = self._robust_filter(agent_updates)
 
-            # 2. 计算时空联合权重 (Spatiotemporal Weighting)
-            # - 数据量越大，权重越高 (FedAvg基础)
-            # - 时间延迟越久，这批经验的价值越低 (乘以衰减系数 gamma^t)
-            # - 空间拓扑 (此处简化为中心节点度中心性或环境相似度)
-            time_weight = self.gamma ** t_diff
-            base_weight = update['data_size']
-
-            # ST-Weight 融合了时间新鲜度与局部数据量
-            st_weight = base_weight * time_weight
-
-        # 3. 拜占庭容错处理 (Byzantine Robustness)
-        # 采用 Krum 算子：计算各梯度间的欧氏距离，选取距离最近的“诚实”子集
-        filtered_updates = self._krum_filter(agent_updates)
-
-        # 4. 注入差分隐私噪声
+        # 2. 遍历过滤后的诚实节点更新
         for update in filtered_updates:
+            t_diff = current_time() - update['timestamp']
+
+            # 3. 计算时空联合权重 (Spatiotemporal Weighting)
+            # 融合时间新鲜度 (gamma^t) 与局部数据量
+            st_weight = update['data_size'] * (self.gamma ** t_diff)
+
+            # 4. 注入差分隐私噪声并进行安全加权聚合
             local_grad = self._apply_differential_privacy(update['grad'])
 
-            # 4. 加权聚合
             for name in global_grad.keys():
                 global_grad[name] += local_grad[name] * st_weight
 
-            total_spatiotemporal_weight += st_weight
+            total_st_weight += st_weight
 
-        # 5. 归一化，得到真正的全局收敛梯度方向
+        # 5. 归一化，得到全局收敛的确定性梯度方向
         for name in global_grad.keys():
-            global_grad[name] = global_grad[name] / total_spatiotemporal_weight
+            global_grad[name] /= (total_st_weight + 1e-8)
 
         return global_grad
 
