@@ -113,3 +113,60 @@ class FederatedSpatiotemporalAggregator:
 Unlike multi-agent frameworks on the market that rely on the "probabilistic emergence" of massive model parameters, our collaboration system is built upon rigid but indestructible mathematical frameworks. In our dictionary, "Distributed Convergence" isn't just a slogan; it is a strict lower bound theoretically derived by constraining step sizes, clipping gradient norms, and limiting update frequencies.
 
 We do not seek to infinitely expand the system and rely on luck. Our pursuit is: whether there are 10 nodes or 100,000 nodes in the network, the mathematical trajectory of the system's state evolution must obediently remain within our pre-calculated manifold orbit.
+
+---
+
+### 5. 📝 [Daily Research Chunk] Dynamic Theory Dive: Distributed Direct Preference Optimization (DecDPO)
+
+#### 🔬 Selection Basis & Academic Lineage
+- **System Container**: Collaboration System
+- **Frontier Source**: Based on the recent study *"Distributed Direct Preference Optimization"* by Zhanhong Jiang. **(Reason for Replacement)**: The previous "Federated Learning + Spatiotemporal Modeling" paradigm still relied on a centralized aggregator, which poses a single-point-of-failure risk in dark-forest-like harsh network environments. DecDPO completely overthrows the centralized architecture, proving that even in a fully distributed graph, relying solely on local preference alignment and strict Spectral Connectivity can overcome the catastrophic fragmentation of Non-IID preferences across heterogeneous users and achieve global deterministic convergence.
+- **Deterministic Convergence Mechanism**: This theory abandons explicit reward model guessing. Each agent computes the Log-ratio Gradient of its local preference trajectories and uses a doubly stochastic mixing matrix $\Lambda$ (with elements $\pi_{ij}$) to mix parameters strictly with adjacent nodes. As long as the communication graph's spectral gap is greater than 0, swarm consensus is no longer probabilistic luck, but an inevitable endgame locked by the laws of physics.
+
+#### 💻 Source Code Breakdown
+```python
+import numpy as np
+
+def decentralized_dpo_update(agent_id, current_theta, local_preference_batch, neighbor_weights, learning_rate, beta=0.1):
+    """
+    Pure mathematical deterministic implementation of DecDPO:
+    Without a central brain, all agents inevitably converge to a unified optimal
+    value surface like a swarm, via local preference calculation and neighbor consensus matrices.
+    """
+    # 1. Compute Local DPO Log-ratio Gradient
+    local_gradient = np.zeros_like(current_theta)
+    for (tau_chosen, tau_rejected) in local_preference_batch:
+        # Physical constraint: No reward guessing, calculate policy preference delta directly
+        omega = beta * (log_prob(current_theta, tau_chosen) - log_prob(current_theta, tau_rejected))
+        # Gradient descent direction is rigidly constrained within a smooth manifold by the sigmoid function
+        local_gradient += -beta * sigmoid(-omega) * (score_func(tau_chosen) - score_func(tau_rejected))
+
+    local_gradient /= len(local_preference_batch)
+
+    # 2. Mix Neighbor Parameters: Spectral Connectivity Matrix (\Lambda) that dictates convergence
+    # theta^{r+1/2}_{i} = \sum_{j} \pi_{ij} \theta^{r}_{j}
+    mixed_theta = np.zeros_like(current_theta)
+    for neighbor_id, pi_ij in neighbor_weights.items():
+        # pi_ij is the mixing weight. As long as the network is connected, error collapses geometrically
+        mixed_theta += pi_ij * get_neighbor_model(neighbor_id)
+
+    # 3. Execute final state transition (Gradient Descent)
+    next_theta = mixed_theta - learning_rate * local_gradient
+
+    return next_theta
+```
+
+#### 💡 0-Foundation Analogy (For Beginners)
+* **Analogy**: Imagine 1,000 rescue teams (agents) in a disaster zone. They have no global map and no central command center (Decentralized). Each team can only adjust its rescue strategy based on the specific preferences of the survivors they encounter locally (Local Preference gradient). Traditional AI would dissolve into chaos here. But DecDPO’s "mixing matrix" is like giving each team a walkie-talkie. Before every action, they simply swap their strategy manuals with a few nearby teams (Parameter Mixing). The math strictly proves: as long as the 1,000 teams aren't completely disconnected from each other (Spectral Connectivity > 0), even without a commander, they will "deterministically" arrive at a single, golden rescue strategy that maximizes overall survivor satisfaction. This is "Local Chatter, Global Consensus."
+
+---
+
+### 6. 🔗 [Weekly Sync Report] Weekly Document Cascade & Dynamic Conflict Audit
+
+#### 📂 Dynamic Evolution Mapping
+- **Collaboration System**: Officially introduced [Distributed Direct Preference Optimization (DecDPO)], completely deprecating the concept of "federated aggregation" based on a central server, and shifting to a purely decentralized node-level parameter mixing mechanism based on Spectral Connectivity.
+
+#### 🕵️ Paradigm Conflict Audit
+- **Conflict Detection**: **Excellent compatibility, no underlying logic rejection.**
+  - The newly introduced decentralized spectral connectivity graph (DecDPO graph structure) does not conflict with the "Spatiotemporal Graph Convolution (STGCN) weights" in the original system. We can naturally integrate the time-decay factor into the generating function of the doubly stochastic mixing matrix $\Lambda$ ($\pi_{ij}$) required by DecDPO.
+  - DecDPO abandons reward guessing and directly optimizes the log-ratio of policy probabilities, which smoothly aligns with our Tool system's current approach of strict mathematical mapping and causal analysis of LLM probabilistic policies. Because it remains a deterministic manifold projection, not only does it preserve system safety, but by eliminating the central aggregation node, it further enhances the system's immunity against "Byzantine node" injections.

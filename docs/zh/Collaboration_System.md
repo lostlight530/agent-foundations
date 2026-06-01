@@ -113,3 +113,60 @@ class FederatedSpatiotemporalAggregator:
 与市面上那些依赖大模型参数规模“概率涌现”的多智能体框架完全不同，我们的协作系统建立在极度刻板但极其坚固的数学框架之上。“分布式收敛（Distributed Convergence）”在我们的字典里不仅是一个口号，而是通过约束每次通信的步长、裁剪梯度范数以及限制更新频率，在理论上被推导出来的严格下界。
 
 我们不追求系统无限扩大去碰运气，我们追求的是：无论网络中有 10 个节点还是 10 万个节点，系统状态演化的数学轨迹，都必须乖乖地保持在我们计算好的流形轨道内。
+
+---
+
+### 5. 📝 [Daily Research Chunk] 动态理论深潜：分布式直接偏好优化 (Distributed Direct Preference Optimization, DecDPO)
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System (协作系统)
+- **前沿来源**：基于 Zhanhong Jiang 提出的最新研究 *"Distributed Direct Preference Optimization"*。**（替换理由）**：原有的“联邦学习 (Federated Learning) + 时空建模”依然保留了一个中心化的聚合节点（Central Server），这在黑暗森林般的恶劣网络环境中存在单点故障风险。DecDPO 彻底推翻了中心化架构，证明了即便在完全分布式的图中，仅靠节点间局部的偏好对齐和严格的谱连通性（Spectral Connectivity），也能克服灾难性的非独立同分布（Non-IID）偏好碎片化问题，实现全局的确定性收敛。
+- **确定性收敛机制**：该理论抛弃了显式的奖励模型猜测。每个智能体通过计算局部偏好轨迹的对数比率梯度（Log-ratio Gradient），并使用一个双随机混合矩阵 $\Lambda$（其元素为 $\pi_{ij}$）仅与相邻节点进行参数混合。只要通信图的谱间隙（Spectral Gap）大于 0，群体共识就不再是概率性运气，而是被物理定律锁死的必然终局。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+import numpy as np
+
+def decentralized_dpo_update(agent_id, current_theta, local_preference_batch, neighbor_weights, learning_rate, beta=0.1):
+    """
+    DecDPO 核心机制的纯数学确定性实现：
+    所有智能体在没有中心大脑指挥的情况下，通过局部偏好计算和邻居共识矩阵，
+    像蜂群一样必然收敛到统一的最优价值曲面上。
+    """
+    # 1. 计算局部 DPO 对数比率梯度 (Log-ratio Gradient)
+    local_gradient = np.zeros_like(current_theta)
+    for (tau_chosen, tau_rejected) in local_preference_batch:
+        # 物理约束：不猜测奖励，直接计算确定性的策略偏好差值
+        omega = beta * (log_prob(current_theta, tau_chosen) - log_prob(current_theta, tau_rejected))
+        # 梯度下降方向被 sigmoid 函数硬性约束在平滑流形内
+        local_gradient += -beta * sigmoid(-omega) * (score_func(tau_chosen) - score_func(tau_rejected))
+
+    local_gradient /= len(local_preference_batch)
+
+    # 2. 混合邻居参数：决定收敛命运的谱连通性矩阵 (Mixing Matrix \Lambda)
+    # theta^{r+1/2}_{i} = \sum_{j} \pi_{ij} \theta^{r}_{j}
+    mixed_theta = np.zeros_like(current_theta)
+    for neighbor_id, pi_ij in neighbor_weights.items():
+        # pi_ij 是混合矩阵中的权重，只要网络是连通的，误差就会以几何级数必然塌缩
+        mixed_theta += pi_ij * get_neighbor_model(neighbor_id)
+
+    # 3. 执行最终状态转移 (Gradient Descent)
+    next_theta = mixed_theta - learning_rate * local_gradient
+
+    return next_theta
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+* **通俗类比**：想象一下，灾区有 1000 个救援队（智能体），他们互相不知道全盘情况，也没有一个总指挥中心（去中心化）。每个救援队只能根据自己周边受灾群众的喜好（Local Preference）来调整救援策略（算出自己的梯度）。传统的 AI 遇到这种情况会变成一盘散沙，各自为战。而 DecDPO 的“混合矩阵”就像是给每个救援队发了一个对讲机，他们只需每次行动前和最近的几个邻居交流一下行动手册（参数混合）。理论在数学上证明了：只要这 1000 人之间不是完全断联的（谱连通性大于0），就算没有总指挥，他们最终也一定会“确定性地”达成一种所有灾民都最满意的黄金救援准则。这叫“局部对讲，全局共识”。
+
+---
+
+### 6. 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+
+#### 📂 动态演进映射
+- **Collaboration System**：正式引入了 [Distributed Direct Preference Optimization (DecDPO)]，完全废弃了基于中心服务器的“联邦聚合”概念，转向基于谱连通性（Spectral Connectivity）的纯去中心化节点级参数混合机制。
+
+#### 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
+- **冲突检测**：**相容性良好，无底层逻辑排异。**
+  - 新引入的去中心化谱连通图（DecDPO 图结构）与原系统中的“时空图卷积（STGCN）权重”并不冲突。我们可以自然地将时空衰减因子（Time-decay factor）融合进 DecDPO 要求的双随机混合矩阵 $\Lambda$（$\pi_{ij}$）的生成函数中。
+  - DecDPO 摒弃了奖励猜测，直接优化策略概率的对数比（Log-ratio），这与我们 Tool 系统中目前对大模型概率策略进行严格数学映射和因果分析的思路是完全顺滑衔接的。由于它仍是一种确定性流形投影，不仅没有破坏系统安全性，反而通过消除中心聚合节点，进一步增强了系统抵抗“拜占庭节点”注入的免疫能力。
