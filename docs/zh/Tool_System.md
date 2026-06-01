@@ -103,3 +103,41 @@ class ToolExecutionRouter:
 **代码级解析：**
 1. **因果铁律 (`causal_dependency_graph`)**：我们不让大模型在运行时自由发挥想用什么用什么，而是让系统在启动时就加载这套雷打不动的“法律”。如果智能体想调用高危动作，发现它之前没执行过校验，路由层会像防雷墙一样直接将其打回（`_check_causal_dependencies`）。
 2. **深度截断 (`max_tool_chain_depth`)**：大模型最容易犯的错就是在一个工具里一直纠结报错出不来。这里是一条纯数学性质的物理斩断线。这体现了“我们不优化，我们保证收敛”——如果不能收敛到结果，那就强行收敛到“终止状态”，绝不允许系统失控发散。
+
+## 4. 前沿演进：符号策略蒸馏实战 (Symbolic Policy Distillation)
+
+为了应对日益复杂的组合工具需求，我们在近期的架构迭代中引入了“符号策略蒸馏”技术。这也是“从试错到绝对可控”的最核心实战落地。
+
+### 4.1 通俗类比 (For Beginners)：从“走迷宫”到“修铁轨”
+想象一下，传统的智能体（基于概率的大模型）像是一个蒙着眼罩在**迷宫**里摸索的人。他通过“感觉”去尝试一条路（调用搜索API），如果碰壁了，再退回来换一条路。即使他走通了一次，下一次让他重走，他依然可能走错。
+我们的“符号策略蒸馏”就像是让算法在封闭靶场里走了一万次迷宫。在它找到那条绝对完美的必胜路线后，我们直接把这条路线上的杂草全部铲平，铺上一条极其死板的**钢铁轨道**。从今天起，智能体不需要再做任何“思考”和“概率计算”，它只需要坐上火车，沿着铁轨（确定性路由）全速前进，中途绝无可能出轨。
+
+### 4.2 硬核伪代码：塌缩马尔可夫决策概率
+在底层数学中，我们将强化学习输出的概率策略网络 $\pi_\theta(a|s)$ 强制塌缩（Collapse）为具有二元真值（Boolean）的符号有向无环图（DAG）。
+
+```python
+import networkx as nx
+
+def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=0.99):
+    """
+    将黑盒强化学习策略，蒸馏为白盒的、确定性的因果执行图 (DAG)
+    """
+    causal_dag = nx.DiGraph()
+    state_space = extract_all_safe_states()
+
+    for state in state_space:
+        # 获取 RL 策略的动作概率分布
+        action_probs = rl_policy_network.get_probabilities(state)
+        best_action, max_prob = max(action_probs.items(), key=lambda x: x[1])
+
+        # 约束铁律：只有当算法在沙盒中有 99% 的绝对把握时，才将其固化为铁律
+        if max_prob >= confidence_threshold:
+            causal_dag.add_edge(state.previous_action, best_action, weight=1.0)
+        else:
+            # 拒绝含糊不清的策略发散，宁可抛出人类介入异常，也绝不让机器蒙眼狂奔
+            causal_dag.add_edge(state.previous_action, "HALT_AND_REQUIRE_HUMAN", weight=1.0)
+
+    # 循环依赖检测：确保系统拓扑必然收敛
+    assert nx.is_directed_acyclic_graph(causal_dag), "Fatal: Distilled policy contains infinite loops."
+    return causal_dag
+```
