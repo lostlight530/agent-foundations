@@ -284,3 +284,54 @@ def swarm_agentic_consensus_step(agent_i, current_position, local_best, neighbor
 #### 💡 0基础业务通俗类比 (For Beginners)
 * **通俗类比**：想象一群在巨大黑暗森林里找水源的蜜蜂（Swarm Agent）。森林里没有向导，也没有蜂王指挥大家往哪飞。一开始，大家就像没头苍蝇一样散开（高方差探索）。但每只蜜蜂身上都有两套简单的规则：第一，它记得自己飞过的地方哪里最湿润（认知力量）；第二，它会和旁边飞过的其他蜜蜂交流，“嘿，你那边有水吗？”（社会力量/同行评审）。
 随着时间推移，蜜蜂飞累了（惯性权重衰减）。当某几只蜜蜂在某个区域发现了极度湿润的泥土，这个消息会像水波一样通过“邻居告诉邻居”传遍全网。数学家证明了：只要这群蜜蜂没有完全脱节（网络连通），这种看似混乱的互相拉扯，最终会产生一股不可抗拒的物理合力。在一瞬间，漫天飞舞的蜂群会如同被磁铁吸住一样，“确定性”地聚拢在森林中最庞大的水源上方。这就是去中心化蜂群的共识奇迹。
+
+---
+
+### 📝 [Daily Research Chunk] 动态理论深潜：基于谱间隙的去中心化随机凸优化 (Near-Optimal Decentralized Stochastic Convex Optimization over Networks)
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System (协作系统)
+- **前沿来源**：基于最新研究 *"Near-Optimal Decentralized Stochastic Convex Optimization over Networks"* (arXiv:2606.04757)。选择该理论是为了完成本月战略蓝图（Roadmap）中关于验证去中心化网络收敛界限的目标。该理论专门探讨了在完全去中心化、网络拓扑为时变图（Gossip Network）的情境下，如何实现接近最优的收敛速度。
+- **确定性收敛机制**：该研究摆脱了传统的“单步共识收缩假设（one-step consensus-contraction）”，而是基于更底层的物理约束——**Gossip 网络的谱间隙（Spectral Gap, $\rho \in (0, 1]$，其中 $1 - \lambda_2(P) \ge \rho > 0$）**。理论引入了一种“单步延迟随机加速（one-step-delayed stochastic acceleration）”方案，巧妙地将小批量计算（minibatching）与加速 Gossip 协议交织在一起。通过这种机制，系统能够主动控制残差分歧（residual disagreement），在数学上被证明具有几乎最佳的收敛界限，而且对局部数据异构性（optimum-local heterogeneity）的依赖仅是对数级别的。这再次从图谱理论层面印证了，即使断开中心节点，只要满足 $\rho > 0$（网络没有从物理上断裂），全网一定能以极高的效率收敛。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+import numpy as np
+
+def spectral_delayed_accelerated_gossip_step(agent_i, current_x, delayed_x, prev_momentum, local_gradient_fn, W_row, beta, alpha, eta):
+    """
+    基于谱间隙与单步延迟加速的去中心化随机优化。
+    通过交织 Minibatching 和 Gossip 通信控制节点分歧，实现接近最优的收敛速度。
+    """
+    # 1. 单步延迟状态合并 (One-step-delayed acceleration)
+    # 利用上一步的延迟状态 (delayed_x) 进行内推加速计算，代替传统的纯 Nesterov 动量。
+    # 这给 Gossip 信息的传播预留了时间差（时空折叠补偿）。
+    accelerated_point = current_x + beta * (current_x - delayed_x)
+
+    # 2. 随机梯度计算
+    # 在加速点上获取本轮的小批量随机梯度 (Minibatch stochastic gradient)
+    stochastic_grad = local_gradient_fn(accelerated_point)
+
+    # 3. 局部动量更新
+    # 混合过去动量与当前梯度方向
+    next_momentum = prev_momentum + alpha * stochastic_grad
+
+    # 4. 执行基于谱间隙的参数修正
+    local_update = accelerated_point - eta * next_momentum
+
+    # 5. Gossip 拓扑通信：邻居间的状态平均
+    # 这一步受到图拓扑的谱间隙 \rho 约束，\rho 越大，共识达成越快。
+    # 只要 $1 - \lambda_2(P) \ge \rho > 0$，误差就会迅速塌缩。
+    neighbors_states = get_neighbors_states()
+    next_x = np.dot(W_row, neighbors_states)  # W_row 是包含 agent_i 在内的双随机混合矩阵行
+
+    # 更新状态记忆
+    next_delayed_x = current_x
+
+    return next_x, next_delayed_x, next_momentum
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+* **通俗类比**：想象一个有上千人的特工网络在敌后执行联合解谜任务，他们不能用对讲机呼叫总部（没中心节点），只能用隐蔽的敲击声和隔壁几个房间的同伴交换线索（Gossip 通信）。最怕的是什么？是张三刚收到线索就急冲冲跑去下一个房间，结果李四的线索还没传过来，导致大家步调不一致（残差分歧）。
+这个理论的做法是发给每个特工一个“延迟加速沙漏”。特工在得到新线索后，不马上采取行动，而是根据上一步的记忆（单步延迟），先在脑子里预判一个“假想解”（加速点）。然后才开始算题，最后再跟隔壁特工敲墙对答案（参数混合）。
+数学上证明了，只要特工之间敲墙的声音能连成一张没有断裂的网（谱间隙 $> 0$），配合这种“让子弹飞一会”的单步延迟策略，一千个没有领导的特工，不仅能完美破解谜题（全局收敛），而且速度快得就像有一个上帝视角的总部在统一指挥一样（接近最优收敛率）。这真正实现了“无为而治”。
