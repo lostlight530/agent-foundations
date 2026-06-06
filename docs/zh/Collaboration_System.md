@@ -335,3 +335,53 @@ def spectral_delayed_accelerated_gossip_step(agent_i, current_x, delayed_x, prev
 * **通俗类比**：想象一个有上千人的特工网络在敌后执行联合解谜任务，他们不能用对讲机呼叫总部（没中心节点），只能用隐蔽的敲击声和隔壁几个房间的同伴交换线索（Gossip 通信）。最怕的是什么？是张三刚收到线索就急冲冲跑去下一个房间，结果李四的线索还没传过来，导致大家步调不一致（残差分歧）。
 这个理论的做法是发给每个特工一个“延迟加速沙漏”。特工在得到新线索后，不马上采取行动，而是根据上一步的记忆（单步延迟），先在脑子里预判一个“假想解”（加速点）。然后才开始算题，最后再跟隔壁特工敲墙对答案（参数混合）。
 数学上证明了，只要特工之间敲墙的声音能连成一张没有断裂的网（谱间隙 $> 0$），配合这种“让子弹飞一会”的单步延迟策略，一千个没有领导的特工，不仅能完美破解谜题（全局收敛），而且速度快得就像有一个上帝视角的总部在统一指挥一样（接近最优收敛率）。这真正实现了“无为而治”。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：带耦合约束的去中心化优化 (Decentralized Optimization with Coupled Constraints)
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System (协作系统)
+- **前沿来源**：基于 2024 年最新论文 *"Decentralized Optimization with Coupled Constraints"* (arXiv:2407.02020v4)。选择该理论是为了进一步夯实我们的纯去中心化分布式优化架构。在真实的多智能体协作环境中，智能体之间不仅需要对齐模型参数，往往还会面临共享资源的硬性物理约束（如总算力池上限、全局能量消耗限制），这种问题在数学上表现为“耦合约束（Coupled Constraints）”。该研究填补了这一领域的理论空白。
+- **确定性收敛机制**：本研究正式建立了带仿射耦合约束的去中心化优化的**下界复杂度（Lower Complexity Bounds）**。理论证明，在离散时间同步轮次（包括局部梯度计算、局部矩阵乘法和节点间通信）下，无论算法多么精妙，要达到特定的精度 $\epsilon$，其所需的通信与计算轮次都存在一个被数学定律锁死的物理下界 $\Omega(1/\sqrt{\epsilon})$（或针对特定强凸条件下的线性收敛界）。这为我们系统设计时分配算力与通信带宽提供了绝对可靠的理论预警线，确保我们在满足全局资源约束的同时，能够以理论最优的速率实现确定性收敛。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+import numpy as np
+
+def decentralized_coupled_constraint_step(agent_i, current_x, current_lambda, W_row, local_grad_f, local_constraint_matrix, total_resource_limit, step_size_x, step_size_lambda, total_agents):
+    """
+    带耦合约束的去中心化优化核心更新逻辑。
+    不仅要求各节点在目标上达成共识，还必须满足全局的严格资源约束（如 A_1 x_1 + A_2 x_2 + ... = b）。
+    通过引入对偶变量 (Dual Variables) 与 Gossip 拓扑通信交替进行。
+    """
+    # 1. Gossip 拓扑通信：邻居间的状态与对偶变量平均
+    # 这一步保证了无中心状态下，局部对全局状态的近似追踪
+    neighbors_x = get_neighbors_states('x')
+    neighbors_lambda = get_neighbors_states('lambda')
+
+    mixed_x = np.dot(W_row, neighbors_x)
+    mixed_lambda = np.dot(W_row, neighbors_lambda)
+
+    # 2. 局部变量的原始更新 (Primal Update)
+    # 梯度下降方向不仅包含自身的目标函数梯度，还包含了由局部耦合约束带来的拉格朗日惩罚项
+    grad_f_val = local_grad_f(mixed_x)
+    constraint_penalty = np.dot(local_constraint_matrix.T, mixed_lambda)
+
+    # 执行原始变量状态转移
+    next_x = mixed_x - step_size_x * (grad_f_val + constraint_penalty)
+
+    # 3. 对偶变量的局部更新 (Dual Update)
+    # 利用当前的原始变量计算局部约束的偏差，并通过梯度上升更新对偶变量
+    # 这里的 local_constraint_b 是分配给该节点的局部资源配额（总和等于 total_resource_limit）
+    local_constraint_b = total_resource_limit / total_agents
+    constraint_violation = np.dot(local_constraint_matrix, next_x) - local_constraint_b
+
+    # 执行对偶变量状态转移 (Gradient Ascent)
+    next_lambda = mixed_lambda + step_size_lambda * constraint_violation
+
+    return next_x, next_lambda
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+* **通俗类比**：想象一个大型跨国电商平台的“双十一”大促。平台上有上千个独立运营的海外仓（去中心化智能体），每个仓库都在努力让自己的发货速度最快、成本最低（优化目标）。但是，整个集团今天能调用的跨国包机航班总吨位是固定的（这就是**耦合约束 Coupled Constraints**）。
+如果没有总指挥部，大家很容易因为抢夺航班舱位而导致系统崩溃。这个理论相当于给每个仓库经理发了一套数学公式：大家每次调整发货计划后，不仅要和附近的几个仓库（邻居）交流各自的计划（Primal 更新），还要交流一下大家对“航班舱位紧缺程度”的心理预期价格（对偶变量 Lambda 更新）。
+数学家严格证明了（复杂度下界）：只要大家按这个规则互相沟通，哪怕永远不向总部汇报，整个网络最终也一定能找到一个完美的排班表。在这个排班表下，不仅每个仓库的效率达到了极值，而且所有仓库加起来的包裹重量，绝不会超载一克，也绝不会浪费一吨舱位！这就是在极其苛刻的现实约束下，去中心化协作的硬核底气。
