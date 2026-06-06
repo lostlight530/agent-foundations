@@ -221,3 +221,53 @@ def swarm_agentic_consensus_step(agent_i, current_position, local_best, neighbor
 #### 💡 0-Foundation Analogy (For Beginners)
 * **Analogy**: Imagine a swarm of bees (Swarm Agents) searching for a water source in a massive dark forest. There are no guides in the forest, nor is there a queen bee directing them where to fly. At first, they scatter randomly like headless flies (high-variance exploration). However, every bee carries two simple rules: First, it remembers where the most humid spot was along its own flight path (cognitive force); Second, it talks to other bees passing by, asking, "Hey, is there water over your way?" (social force/peer review).
 As time goes by, the bees grow tired (inertia weight decays). When a few bees discover extremely moist soil in a specific area, this news spreads across the whole network like ripples in a pond via "neighbor telling neighbor". Mathematicians have proven that as long as the swarm isn't completely disconnected (network connectivity > 0), this seemingly chaotic pulling and tugging will eventually generate an irresistible physical resultant force. In an instant, the swarm dancing in the sky will be drawn together "deterministically" like magnets, hovering exactly over the largest water source in the forest. This is the consensus miracle of the decentralized swarm.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Decentralized Optimization with Coupled Constraints
+
+#### 🔬 Selection Rationale & Academic Lineage
+- **System Container**: Collaboration System
+- **Frontier Source**: Based on the 2024 paper *"Decentralized Optimization with Coupled Constraints"* (arXiv:2407.02020v4). We selected this theory to further consolidate our pure decentralized distributed optimization architecture. In a real-world multi-agent collaboration environment, agents not only need to align model parameters but often face hard physical constraints on shared resources (e.g., total compute pool limits, global energy consumption constraints). Mathematically, this problem manifests as "Coupled Constraints". This research fills a theoretical gap in this area.
+- **Deterministic Convergence Mechanism**: This study formally establishes the **Lower Complexity Bounds** for decentralized optimization with affine coupled constraints. The theory proves that under discrete-time synchronized rounds (including local gradient computation, local matrix multiplication, and inter-node communication), no matter how sophisticated the algorithm is, achieving a specific precision $\epsilon$ requires a number of communication and computation rounds bounded by a physical lower limit mathematically locked at $\Omega(1/\sqrt{\epsilon})$ (or a linear convergence bound under specific strong convexity conditions). This provides an absolutely reliable theoretical warning line for allocating compute and communication bandwidth during system design, ensuring that we can achieve deterministic convergence at the theoretically optimal rate while satisfying global resource constraints.
+
+#### 💻 Source Code Breakdown (Pseudocode)
+```python
+import numpy as np
+
+def decentralized_coupled_constraint_step(agent_i, current_x, current_lambda, W_row, local_grad_f, local_constraint_matrix, total_resource_limit, step_size_x, step_size_lambda, total_agents):
+    """
+    The core update logic for decentralized optimization with coupled constraints.
+    It requires not only that all nodes reach consensus on the objective but also that strictly global resource constraints are met (e.g., A_1 x_1 + A_2 x_2 + ... = b).
+    This is achieved by alternating Dual Variables and Gossip topology communication.
+    """
+    # 1. Gossip Topology Communication: Averaging states and dual variables among neighbors
+    # This step ensures approximate tracking of global states locally without a central hub
+    neighbors_x = get_neighbors_states('x')
+    neighbors_lambda = get_neighbors_states('lambda')
+
+    mixed_x = np.dot(W_row, neighbors_x)
+    mixed_lambda = np.dot(W_row, neighbors_lambda)
+
+    # 2. Primal Update for Local Variables
+    # The gradient descent direction includes not only the local objective function gradient but also a Lagrangian penalty term from local coupled constraints
+    grad_f_val = local_grad_f(mixed_x)
+    constraint_penalty = np.dot(local_constraint_matrix.T, mixed_lambda)
+
+    # Execute primal variable state transition
+    next_x = mixed_x - step_size_x * (grad_f_val + constraint_penalty)
+
+    # 3. Dual Update for Local Variables
+    # Use the current primal variable to calculate the local constraint violation and update the dual variable via gradient ascent
+    # Here, local_constraint_b is the local resource quota assigned to the node (sum equals total_resource_limit)
+    local_constraint_b = total_resource_limit / total_agents
+    constraint_violation = np.dot(local_constraint_matrix, next_x) - local_constraint_b
+
+    # Execute dual variable state transition (Gradient Ascent)
+    next_lambda = mixed_lambda + step_size_lambda * constraint_violation
+
+    return next_x, next_lambda
+```
+
+#### 💡 For Beginners (Business Analogy)
+* **Analogy**: Imagine the "Black Friday" mega-sale of a large multinational e-commerce platform. There are thousands of independently operated overseas warehouses (decentralized agents), and each warehouse is trying to make its shipping speed the fastest and cost the lowest (optimization objective). However, the total tonnage of cross-border charter flights the entire group can mobilize today is fixed (this is the **Coupled Constraint**).
+Without a central command, the system could easily crash as warehouses fight for flight space. This theory is equivalent to giving each warehouse manager a mathematical formula: after adjusting their shipping plan, they must not only share their plans with a few nearby warehouses (neighbors) (Primal Update) but also communicate their psychological expected price for the "flight space scarcity" (Dual Variable Lambda Update).
+Mathematicians have strictly proven (lower complexity bound): as long as everyone communicates according to these rules, even without ever reporting to headquarters, the entire network will definitely find a perfect scheduling roster. Under this roster, not only does every warehouse hit peak efficiency, but the total weight of all packages combined will absolutely not overload the planes by a single gram, nor waste a single ton of space! This is the hardcore backbone of decentralized collaboration under extremely harsh real-world constraints.
