@@ -372,3 +372,30 @@ We do not seek to infinitely expand the system and rely on luck. Our pursuit is:
 - **Conflict Detection**: **Excellent compatibility, forming strong mathematical interlocking, no underlying logic rejection.**
   - **Compatibility Deduction with the Causal State Premise of the Memory System**: The Memory System relies on Causal Graphs to maintain the state of memories. The newly introduced decentralized strategy completely abandons central nodes, shifting to peer-to-peer (Gossip) communication based on a network topology mixing matrix (Mixing Matrix $W$). This topology dimensionality reduction **does not destroy the original causal state premise**. On the contrary, by introducing the "one-step-delayed stochastic acceleration" of Gossip networks and the double-communication mechanism of DS-ADMM, the system can precisely compensate for spatial communication delays in the temporal dimension. Mathematically, this is equivalent to embedding "causal timestamp locks" in local distributed nodes, ensuring that the entire network strictly follows local causal time manifolds as it approaches consensus.
   - **Coupled Constraints and Resource Allocation**: The newly introduced coupled constraints optimization utilizes Dual Variables to transform total network compute/energy limits into locally perceivable Lagrangian multiplier constraints. This is completely consistent with the deterministic tool call boundaries in the Tool System, ensuring that multi-agent swarms will not cause physical hardware resources to crash due to "unbounded exploration" while achieving pure autonomous consensus. The Spectral Gap serves not only as a guarantee of convergence but also as the physical metric of the entire swarm's communication resilience.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Distributed Direct Preference Optimization (DecDPO)
+#### 🔬 Selection Rationale & Academic Lineage
+- **System Container**: Collaboration System
+- **Frontier Source**: *Distributed Direct Preference Optimization* (arXiv:2605.20696)
+- **Deterministic Convergence Mechanism**: This theory overthrows centralized aggregation by introducing Direct Preference Optimization in a fully distributed graph. The core mechanism relies on the spectral connectivity of the communication graph. Through doubly stochastic matrix mixing of local preference gradients, it mathematically proves that even under severe Non-IID conditions, as long as the step size constraint $\eta=\Theta(\sqrt{\frac{1}{R}})$ is met, it achieves a deterministic global convergence bound of $\mathcal{O}(1/\sqrt{R} + 1/(R(1-\rho^{2})))$, completely eliminating the single point of failure.
+#### 💻 Source Code Breakdown
+```python
+def decdpo_gradient_update(current_theta, local_batch, beta):
+    # Log-ratio gradient formulation:
+    # g = \frac{1}{b}\sum \beta \sigma(-\omega)( \nu(\tau^+) - \nu(\tau^-) )
+    grad = 0
+    for tau_plus, tau_minus in local_batch:
+        omega = beta * (log_prob(current_theta, tau_plus) - log_prob(current_theta, tau_minus))
+        # Deterministic boundary constraint via sigmoid decay
+        grad += beta * sigmoid(-omega) * (score(current_theta, tau_plus) - score(current_theta, tau_minus))
+    return grad / len(local_batch)
+
+def decentralized_mixing(current_theta, neighbors, mixing_weights):
+    # Neighborhood averaging constrained by Spectral Gap \rho
+    mixed_theta = mixing_weights['self'] * current_theta
+    for neighbor in neighbors:
+        mixed_theta += mixing_weights[neighbor] * get_theta(neighbor)
+    return mixed_theta
+```
+#### 💡 For Beginners
+Imagine a massive symphony orchestra without a conductor. In the traditional setup (centralized), there must be a conductor (central server) listening to everyone and giving unified instructions; if the conductor gets sick, the whole performance crashes. The DecDPO approach is different: each musician only listens to the few people closest to them (local mixing) and slightly adjusts their rhythm based on the audience's applause (preference gradient). Mathematical theorems (spectral connectivity) guarantee that as long as no one is wearing earplugs (the graph is unbroken), no matter how chaotic the playing is initially, the entire orchestra will "inevitably" and spontaneously converge into a perfect symphony, completely rendering the fragile role of the conductor obsolete.
