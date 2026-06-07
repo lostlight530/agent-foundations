@@ -377,3 +377,30 @@ def decentralized_coupled_constraint_step(agent_i, current_x, current_lambda, W_
 - **冲突检测**：**相容性良好，形成强烈的数学互锁，无底层逻辑排异。**
   - **与 Memory System 的因果状态前提的相容性推演**：Memory System 依赖于因果图（Causal Graph）来维护记忆的状态。新引入的去中心化策略彻底抛弃了中心节点，转向基于网络拓扑混合矩阵（Mixing Matrix $W$）的对等（Gossip）通信。这种拓扑降维**并没有破坏原有的因果状态前提**。相反，通过引入 Gossip 网络的“单步延迟随机加速（one-step-delayed stochastic acceleration）”和 DS-ADMM 的双通信机制，系统能够在时间维度上精确地补偿空间通信的延迟。这在数学上等价于在局部分布式节点中内嵌了“因果时间戳锁定”，使得全网在逼近共识的过程中，依然严格遵循局部的因果时间流形。
   - **耦合约束与资源分配**：新引入的耦合约束优化（Coupled Constraints）利用对偶变量（Dual Variables）将全网的总算力/能量限制转化为局部可感知的拉格朗日乘子约束。这与 Tool 系统中的确定性工具调用边界完全一致，确保了多智能体集群在实现纯自治共识的过程中，不会由于“无界探索”而导致物理硬件资源的崩溃。谱间隙（Spectral Gap）不仅是收敛的保证，更成为了整个集群通信韧性的物理度量。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Distributed Direct Preference Optimization (DecDPO)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System
+- **前沿来源**：*Distributed Direct Preference Optimization* (arXiv:2605.20696)
+- **确定性收敛机制**：该理论推翻了中心化聚合，在完全分布式的图中引入直接偏好优化。核心机制基于图的谱连通性（Spectral Connectivity）。通过局部偏好梯度的双随机矩阵混合，其在数学上严格证明了即使在极其严重的非独立同分布（Non-IID）情况下，只要满足步长约束 $\eta=\Theta(\sqrt{\frac{1}{R}})$，也能实现确定性的全局收敛界限 $\mathcal{O}(1/\sqrt{R} + 1/(R(1-\rho^{2})))$，彻底消除了单点故障。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def decdpo_gradient_update(current_theta, local_batch, beta):
+    # Log-ratio gradient formulation:
+    # g = \frac{1}{b}\sum \beta \sigma(-\omega)( \nu(\tau^+) - \nu(\tau^-) )
+    grad = 0
+    for tau_plus, tau_minus in local_batch:
+        omega = beta * (log_prob(current_theta, tau_plus) - log_prob(current_theta, tau_minus))
+        # Deterministic boundary constraint via sigmoid decay
+        grad += beta * sigmoid(-omega) * (score(current_theta, tau_plus) - score(current_theta, tau_minus))
+    return grad / len(local_batch)
+
+def decentralized_mixing(current_theta, neighbors, mixing_weights):
+    # Neighborhood averaging constrained by Spectral Gap \rho
+    mixed_theta = mixing_weights['self'] * current_theta
+    for neighbor in neighbors:
+        mixed_theta += mixing_weights[neighbor] * get_theta(neighbor)
+    return mixed_theta
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一场没有总导演的大型交响乐演奏。传统的方案里（中心化），必须有一个指挥家（中心服务器）听所有人演奏，然后给出统一指示，一旦指挥家生病，全场瘫痪。而 DecDPO 的方案是：每个乐手只听离自己最近的几个人的声音（局部对讲），并根据观众的掌声（偏好梯度）微调自己的节奏。数学定理（谱连通性）保证了，只要每个人都不戴耳机（图未断裂），无论一开始大家演奏得多乱，最终全场一定会“必然地”自发汇聚成一首完美的交响乐，彻底淘汰了脆弱的指挥家角色。
