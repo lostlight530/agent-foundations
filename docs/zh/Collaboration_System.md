@@ -404,3 +404,38 @@ def decentralized_mixing(current_theta, neighbors, mixing_weights):
 ```
 #### 💡 0基础业务通俗类比 (For Beginners)
 想象一场没有总导演的大型交响乐演奏。传统的方案里（中心化），必须有一个指挥家（中心服务器）听所有人演奏，然后给出统一指示，一旦指挥家生病，全场瘫痪。而 DecDPO 的方案是：每个乐手只听离自己最近的几个人的声音（局部对讲），并根据观众的掌声（偏好梯度）微调自己的节奏。数学定理（谱连通性）保证了，只要每个人都不戴耳机（图未断裂），无论一开始大家演奏得多乱，最终全场一定会“必然地”自发汇聚成一首完美的交响乐，彻底淘汰了脆弱的指挥家角色。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：ADOLF (Adaptive Decentralized Optimization with Line-search-Free Stepsize)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2405.00711v1 (A Line-search-free Method for Adaptive Decentralized Optimization)。选择该理论是因为我们已弃用中心化联邦学习，转向去中心化分布式优化（DecDPO）以消除单点故障（SPOF）。该理论提供了一种无需全局调参和线搜索的完全去中心化自适应步长算法。
+- **确定性收敛机制**：基于局部曲率估计的自适应步长规则（公式15）：$\alpha^{k} = \min \left\{\frac{1}{\sqrt{(L^{k})^{2}+2\sigma^{k}/c_{1}}+L^{k}}, \sqrt{1+c_{2}\gamma^{k-1}}\alpha^{k-1}, \pi^{k}(\alpha^{k-1})\right\}$。根据定理1，该机制在仅有局部平滑性的条件下即可证明其具备确定性的次线性收敛率，且收敛率仅依赖于受限的利普希茨常数（restricted Lipschitz constant $\widetilde{L}$）。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 核心机制的零依赖确定性算法实现 (ADOLF-local 启发式伪代码)
+import math
+# 核心机制的零依赖确定性算法实现 (ADOLF-local 启发式伪代码)
+def adolf_local_step(X_k, X_prev, D_k, alpha_prev, gamma_prev, grad_F, L_k, sigma_k, c1, c2):
+    # 1. 局部曲率估计与标量平均
+    # L_k = sqrt( sum(||grad_f(x_k) - grad_f(x_{k-1})||^2) / sum(||x_k - x_{k-1}||^2) )
+
+    # 2. 局部无搜索自适应步长选择 (Eq 15)
+    term1 = 1.0 / (math.sqrt((L_k)**2 + 2*sigma_k/c1) + L_k)
+    term2 = math.sqrt(1 + c2 * gamma_prev) * alpha_prev
+    term3 = pi_k(alpha_prev) # 策略控制约束
+
+    alpha_k = min(term1, term2, term3)
+    gamma_k = alpha_k / alpha_prev
+
+    # 3. 对偶与原变量更新
+    D_next = D_k + sigma_k * alpha_k * (I - W) @ ((1 + gamma_k)*X_k - gamma_k*X_prev)
+    X_next = X_k - alpha_k * (grad_F(X_k) + D_next)
+
+    return X_next, D_next, alpha_k, gamma_k
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一群被蒙上眼睛的人需要在高低不平的旷野中寻找地势最低的洼地。
+**旧方法（中心化/全局调参）**：所有人必须把自己的位置大声报告给一个“总指挥”，由总指挥计算全局的平均坡度，然后统一喊话告诉所有人该迈多大的步子。如果总指挥的对讲机坏了（单点故障），或者旷野太大听不到，所有人就只能原地停滞。
+**ADOLF机制（去中心化自适应）**：每个人只需和身边手牵手的人（直接邻居）交流。根据自己脚下感受到的坡度变化（局部曲率 $L^k$）以及邻居的拉力，动态调整自己的步伐大小（$\alpha^k$）。如果脚下崎岖，就小心翼翼迈小步；如果平坦，就迈大步。背后的数学公式（Eq 15）保证了即使没有总指挥，整个群体也100%能在数学上被证明最终收敛汇聚到最低点，彻底杜绝了因盲目大步导致的“系统崩溃”。
