@@ -18,7 +18,7 @@ We highly recommend reading the documents in the following order, which follows 
 * **Theoretical Highlight**: Details the original **Gradient Entropy** theory, the ultimate weapon for quantifying information dissipation and physically severing catastrophic divergence, complete with a pseudocode controller implementation.
 
 ### 📍 Step 2: Swarm Intelligence
-**[Collaboration System: Distributed Convergence via Federated Learning](./Collaboration_System.md)**
+**[Collaboration System: Distributed Convergence via Pure Decentralized Spectral Graph Optimization (DecDPO)](./Collaboration_System.md)**
 * **Core Content**: Analyzes how the system collaborates when scaled to multiple agents, shattering the myth of the centralized server.
 * **Theoretical Highlight**: Combines differential privacy with spatiotemporal graph networks in a federated aggregation mechanism, mathematically proving distributed convergence of global states without data ever leaving the local node.
 

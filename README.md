@@ -90,7 +90,7 @@ For a detailed technical index and reading guide, please refer to the specific `
 - **当前路线防御力评估**：我们本月在协作容器中正式部署的 DecDPO 理论对上述灾难完全免疫。因为在我们的数学设计中，根本不存在“总指挥”。每个节点仅依赖双随机混合矩阵 $\Lambda$ 与局部邻居通信，物理切断了单点故障的可能。
 
 #### 🔄 核心研究方向修正与下月 Roadmap
-- **方向废弃/替换评估（CRITICAL）**：基于本月的深度审计，我正式评估认为：原有的 **“联邦学习 (Federated Learning) + 时空图模型”** 范式中，联邦聚合过程虽然保护了隐私，但依旧残留了对中心参数服务器的路径依赖。**决定果断“切割”**！全面废弃中心化联邦学习，用纯粹的“去中心化分布式优化 (Decentralized Distributed Optimization)”彻底替换协作系统的底层骨架。
+- **方向废弃/替换评估（CRITICAL）**：基于本月的深度审计，我正式评估认为：原有的 **已被废弃的“联邦学习 (Federated Learning) + 时空图模型”** 范式中，联邦聚合过程虽然保护了隐私，但依旧残留了对中心参数服务器的路径依赖。**决定果断“切割”**！全面废弃中心化联邦学习，用纯粹的“去中心化分布式优化 (Decentralized Distributed Optimization)”彻底替换协作系统的底层骨架。
 - **蓝图开辟**：继续维持四大系统容器，但 Collaboration 容器内部的理论血液已全部更新为“DecDPO”。
 - **下月仓库演进路线图 (Roadmap)**：
   - [Collaboration]：全面编写基于网络谱间隙（Spectral Gap）验证去中心化收敛速度的 Python 分析模块，验证 $\mathcal{O}(1/\varepsilon^{2})$ 的时间复杂度下界。
