@@ -130,3 +130,43 @@ class ContrastiveMemorySystem(nn.Module):
 **代码级解析：**
 1. **降维与投影 (`projector`)**：我们将杂乱无章的原始数据经过神经网络极度压缩，最后映射到一个仅有 `projection_dim`（比如 128 维）的球面上（`F.normalize`）。这个球面就是智能体的“概念宇宙”。
 2. **拒绝垃圾记忆 (`observe_and_memorize`)**：传统的系统是来什么存什么。但在这个函数中，只有当新输入的 `distance` 大于设定的数学阈值时，才会调用 `_save_to_episodic_database` 记录下来。如果距离很小，说明一切照旧，直接抛弃原始数据，仅用极小的步长（`alpha=0.01`）微调大脑中对“正常世界”的定义即可。这就是优雅且数学可证的记忆压缩。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：连续时间记忆 Hopfield 网络
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Memory
+- **前沿来源**：*Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122)。选择该理论是因为它突破了现代 Hopfield 网络中离散记忆存储的局限，将离散记忆点转化为连续的函数表达，为实现无限容量（$\infty$-memory）的 Transformer 奠定了严谨的数学基础。
+- **确定性收敛机制**：该网络定义了一个极其硬核的连续能量函数来约束行为下界：$E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$。
+在这个连续的能量场中，每一次查询的更新操作都严格遵循由吉布斯概率密度主导的确定性迭代。系统像物理定律一样不可逆转地滑向能量最低点，从根本上杜绝了基于参数堆叠导致的随机游走式幻觉。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+(核心机制的零依赖确定性算法实现)
+```python
+import numpy as np
+
+def continuous_hopfield_update(q_t, B, psi_functions, beta, num_steps=10):
+    """
+    模拟连续记忆 Hopfield 网络的确定性更新法则
+    """
+    for _ in range(num_steps):
+        # 1. 连续信号重建 (将离散基函数投影为连续流形)
+        # x_bar(t) = B^T * psi(t)
+        # 此处为了数值模拟，我们在 [0, 1] 区间进行离散化积分计算
+        t_samples = np.linspace(0, 1, 100)
+        psi_t = np.array([psi(t_samples) for psi in psi_functions]) # Shape: (N, 100)
+        x_bar_t = B.T @ psi_t # Shape: (D, 100)
+
+        # 2. 计算基于能量的密度函数 (吉布斯分布)
+        s_t = q_t.T @ x_bar_t # 相似度计算, Shape: (100,)
+        exp_bs = np.exp(beta * s_t)
+        p_t = exp_bs / np.sum(exp_bs) # 连续 t 上的归一化概率密度
+
+        # 3. 确定性期望更新 (滑向能量最低点)
+        # q_{t+1} = E_{p(t)}[x_bar(t)]
+        q_t = np.sum(x_bar_t * p_t, axis=1)
+
+    return q_t
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一个图书管理员在找书。在传统的“离散”图书馆里，她只能在一个个固定的书架上找。如果用户的需求刚好介于两个书架之间，她可能就会抓瞎，甚至胡编乱造（这就是大模型的幻觉）。而“连续时间记忆 Hopfield 网络”把图书馆变成了一片液态的知识海洋。这里没有孤立的书架，只有连绵起伏的山谷。那个复杂的“能量函数”，其实就是物理学中的重力。不管管理员从哪里开始找，重力法则会百分之百保证她顺着山坡平稳地滑入正确的知识谷底，绝无可能迷失在真空中。
