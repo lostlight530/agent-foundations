@@ -129,3 +129,43 @@ class ContrastiveMemorySystem(nn.Module):
 **Code Analysis:**
 1. **Dimensionality Reduction & Projection (`projector`)**: We compress chaotic raw data through neural networks, ultimately mapping it onto a hypersphere of only `projection_dim` (e.g., 128) dimensions (`F.normalize`). This sphere is the agent's "conceptual universe."
 2. **Rejecting Junk Memory (`observe_and_memorize`)**: Traditional systems save everything that comes in. In this function, we only call `_save_to_episodic_database` if the `distance` of the new input is mathematically greater than the threshold. If the distance is small, it means nothing new happened; we discard the raw data and only slightly tweak the brain's definition of "normal" (`alpha=0.01`). This is elegant and mathematically proven memory compression.
+
+### 📝 [Daily Research Chunk] Dynamic Theoretical Deep Dive: Continuous-Time Memory Hopfield Networks
+
+#### 🔬 Selection Rationale and Academic Context
+- **Target System Container**: Memory
+- **Frontier Source**: *Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122). We selected this theory because it extends the connection between discrete memory storage in Modern Hopfield Networks and continuous representation, paving the way for infinite-memory transformer equivalents.
+- **Deterministic Convergence Mechanism**: This theory mathematically bounds the behavioral trajectory using a rigorous continuous energy function: $E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$.
+This continuous energy landscape enforces stable, convergent retrieval dynamics where the iterative update, bounded by a Gibbs probability density, deterministically maps queries to a structurally coherent continuous memory trace. It strictly prohibits unconstrained random walk hallucination.
+
+#### 💻 Source Code Breakdown
+(Zero-Dependency Deterministic Algorithm for Core Mechanism)
+```python
+import numpy as np
+
+def continuous_hopfield_update(q_t, B, psi_functions, beta, num_steps=10):
+    """
+    Simulates the deterministic continuous memory update rule.
+    """
+    for _ in range(num_steps):
+        # 1. Project discrete basis into continuous signal
+        # x_bar(t) = B^T * psi(t)
+        # We discretize the continuous integral for numerical simulation
+        t_samples = np.linspace(0, 1, 100)
+        psi_t = np.array([psi(t_samples) for psi in psi_functions]) # Shape: (N, 100)
+        x_bar_t = B.T @ psi_t # Shape: (D, 100)
+
+        # 2. Compute energy-based density (Gibbs distribution proxy)
+        s_t = q_t.T @ x_bar_t # Shape: (100,)
+        exp_bs = np.exp(beta * s_t)
+        p_t = exp_bs / np.sum(exp_bs) # Normalized density over continuous t
+
+        # 3. Deterministic expectation update
+        # q_{t+1} = E_{p(t)}[x_bar(t)]
+        q_t = np.sum(x_bar_t * p_t, axis=1)
+
+    return q_t
+```
+
+#### 💡 For Beginners
+Imagine a librarian looking for a specific book. In a traditional (discrete) library, she checks exact shelves one by one. If a book falls between two known categories, she might be stuck or give a completely wrong answer (hallucination). The continuous-time Hopfield network transforms the library into a fluid spectrum. Instead of isolated shelves, knowledge is a continuous landscape. The "energy function" is like gravity pulling a ball down a smooth valley. No matter where the librarian starts searching, gravity guarantees she will slide smoothly and definitively into the correct valley of knowledge, never getting lost in empty space.
