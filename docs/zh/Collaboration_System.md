@@ -455,3 +455,55 @@ def relaxed_smooth_decentralized_step(agent_id, x_current, W_row, local_grad_fn,
 3. **基于李雅普诺夫边界的安全探索**：如同坚不可摧的防波堤，我们的能量函数将智能体的探索行为死死地限制在安全的流形空间内。不论智能体集群扩展到多大规模，其累积偏差始终有界。
 
 我们不依靠规模堆叠去赌概率，我们通过数学设计铸就绝对的确定性韧性。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：去中心化梯度追踪与高概率收敛 (Decentralized Gradient Tracking)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：*High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281)
+- **选型原因**：全面贯彻月度战略中“彻底废弃中心化联邦学习、拥抱纯粹的去中心化分布式优化（DecDPO）”的指令。传统的 DSGD 在异构数据下难以收敛，而该理论引入了梯度追踪（Gradient Tracking）机制，通过误差修正完美解决了 Non-IID 数据协同问题，且不依赖任何中心节点。
+- **确定性收敛机制**：该研究首次证明了在包含次高斯噪声的去中心化网络中，基于梯度追踪的算法（GT-DSGD）能在高概率（HP）意义下达到确定性收敛边界。对于非凸成本，其收敛率严格界定在 $\mathcal{O}(\frac{\log(1/\delta)}{\sqrt{nT}})$；这意味着系统能够在保证极高概率 $1-\delta$ 的前提下，抵御节点级别的恶意噪声，实现无单点故障（SPOF）的确定性协同收敛。核心迭代公式利用双重随机通信矩阵约束参数 $x_{i}^{t}$ 与追踪变量 $y_{i}^{t}$ 的发散：
+  $y_{i}^{t} = \sum_{j \in \mathcal{N}_{i}} w_{ij}(y_{i}^{t-1} + g_{j}^{t} - g_{j}^{t-1})$
+  $x_{i}^{t+1} = \sum_{j \in \mathcal{N}_{i}} w_{ij}(x_{j}^{t} - \alpha_{t} y_{j}^{t})$
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+import numpy as np
+
+def decentralized_gradient_tracking_step(agent_i, current_x, current_y, prev_grad, local_grad_fn, W_row, alpha_t):
+    """
+    基于梯度追踪的去中心化随机优化核心逻辑 (GT-DSGD)。
+    免疫 SPOF，完全通过邻居节点通信实现近似全局梯度的追踪。
+    """
+    # 1. 计算当前时间步的局部随机梯度
+    current_grad = local_grad_fn(current_x)
+
+    # 2. 梯度追踪更新 (Tracking Update)
+    # y 变量用于追踪全局梯度的估计。它不仅混合了自身的历史信息，
+    # 还通过当前梯度与上一轮梯度的差值进行误差修正 (Bias-correction)。
+    local_y_update = current_y + current_grad - prev_grad
+
+    # 获取邻居的追踪变量 y，进行 Gossip 聚合
+    neighbors_y_updates = get_neighbors_states('y_update')
+    # 利用双重随机矩阵 W 的当前行进行加权混合
+    mixed_y = np.dot(W_row, neighbors_y_updates)
+
+    # 3. 状态变量更新 (State Update)
+    # 获取邻居的状态变量 x
+    neighbors_x = get_neighbors_states('x')
+    # 节点不使用自身的局部梯度来更新状态，而是使用追踪到的混合全局梯度 mixed_y
+    local_x_update = neighbors_x - alpha_t * mixed_y
+
+    # 再次通过 Gossip 通信进行状态共识混合
+    next_x = np.dot(W_row, local_x_update)
+
+    # 记录当前梯度以备下一轮差分计算
+    next_grad = current_grad
+
+    return next_x, mixed_y, next_grad
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象有 100 个互相不认识的寻宝猎人（Agents）散布在一座大山里寻找主矿脉（全局最优解）。
+- **传统方式（联邦学习/SPOF）**：大家必须通过卫星电话把坐标发给总部的“指挥官”，由指挥官汇总后发号施令。如果指挥官的卫星坏了（单点故障），所有人瞬间变成无头苍蝇。
+- **纯局部探索（DSGD）**：猎人们只和身边 5 米内的同行交流。因为每个人看到的地形不同（异构数据 Non-IID），很容易被局部的小矿坑误导，大家在山里兜圈子。
+- **我们的解法（去中心化梯度追踪 GT-DSGD）**：我们取消了指挥官。每个猎人手里除了拿一个“指南针”（局部状态 $x$），还多拿了一个“探风仪”（追踪变量 $y$）。探风仪不仅记录周围人的移动，还会根据大家上一步到这一步的风向变化（梯度差分）来修正误差。由于所有人都在不停地互相交换“探风仪”的读数，全网的信息像涟漪一样扩散。从数学上可以证明，只要猎人们按着探风仪的平均方向走，无论地形多复杂，就算有人胡乱指路（次高斯噪声），整个队伍也能以 $99.99\%$ 的确定性（高概率收敛）最终汇聚在主矿脉上！
