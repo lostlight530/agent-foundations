@@ -1,10 +1,10 @@
-# Tool System: Policy Optimization & Value Alignment via NLP Reinforcement Learning
+# Tool System: Policy Optimization & Value Alignment via NLP RL
 
-## 0. Introduction & Core Quick Look (For Beginners)
+## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**
-Modern AI is incredibly smart. It can chat with you, search the web, write code, and even order food. These external capabilities are called "Tools".
-However, when AI is left alone to use these tools, it sometimes acts foolishly or loses control. For instance, to check the weather, it might spam a search engine 100 times. Or worse, it might execute code that deletes your important files without understanding the consequences.
+Today's AIs are incredibly smart. They can chat, search the web, write code, and even order food. These external functions they call are collectively known as "Tools."
+However, when an AI uses these tools on its own, it can sometimes act "foolish" or "out of control." For instance, to check the weather, it might ping a search engine 100 times; or worse, it might execute a code command to delete crucial files without understanding the consequences.
 
 How do we tame this brilliant "beast"? We utilize "Reinforcement Learning (RL)"—a technique often used to train robot dogs or master board games like Go. We let the AI explore, fail, get punished, and get rewarded inside a safe sandbox (this is optimization and alignment). Once it discovers the perfect path of actions, we "lock" that path into a rigid rule. This ensures our agent is flexible yet absolutely fail-safe when using any tool.
 

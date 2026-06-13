@@ -29,10 +29,16 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 * **非线性投影网路 (Non-linear Projection)**：利用深层残差神经网络等架构，将原始的高维输入转换为一个由几百个数字组成的致密向量。
 * **时序对比学习 (Temporal Contrastive Dynamics)**：现实世界是连续流动的。系统会将极短时间内（比如相差 0.1 秒）的两个状态作为“正样本对”（认为它们本质上讲的是一回事），将相隔很久的状态作为“负样本”，通过这种拉扯，记忆网络自动学会了捕捉事物的发展规律和时序因果结构，而无需任何人类手动标注。
 
-### 2.2 特征提取与极致压缩 (Extreme Feature Extraction)
+### 2.2 连续时间记忆 Hopfield 网络 (Continuous-Time Memory Hopfield Networks)
+在离散的记忆映射基础上，我们进一步引入了 **连续时间记忆 Hopfield 网络**。
+* **选型依据与学术脉络**：基于 *Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122)，该理论突破了现代 Hopfield 网络中离散记忆存储的局限，将离散记忆点转化为连续的函数表达，为实现无限容量（$\infty$-memory）的 Transformer 奠定了严谨的数学基础。
+* **确定性收敛机制**：该网络定义了一个极其硬核的连续能量函数来约束行为下界：$E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$。
+在这个连续的能量场中，每一次查询的更新操作都严格遵循由吉布斯概率密度主导的确定性迭代。系统像物理定律一样不可逆转地滑向能量最低点，从根本上杜绝了基于参数堆叠导致的随机游走式幻觉。
+
+### 2.3 特征提取与极致压缩 (Extreme Feature Extraction)
 我们的记忆系统**从不直接存储经验本身**，它只存储经验背后的“法则（Features）”。这种数学上的压缩不仅将存储成本和计算算力消耗降低了几个数量级，更重要的是，它像一个超级滤网，过滤掉了环境中的一切无用噪声（比如网页上跳动的广告、背景颜色的变化），只保留了对智能体未来决策真正有绝对价值的特征。
 
-### 2.3 异常检测与注意力重定向 (Anomaly Detection & Attention Shift)
+### 2.4 异常检测与注意力重定向 (Anomaly Detection & Attention Shift)
 当一个模型长期在稳定环境中运行，它的隐空间内会形成一个结构极其稳定的“数学聚类域”。此时，任何偏离这个熟悉分布的新鲜输入，都会在数学上引发巨大的梯度波动。
 由于我们的系统实时监控这种波动，新颖的情况会被自然且极其敏锐地标记为“异常（Anomaly）”或“新奇（Novelty）”。
 * **注意力自动重定向**：一旦异常信号突破了预设的数学阈值，立刻触发智能体的极高关注度。系统被强制脱离原有的“自动驾驶”状态，调动算力去深度解析并记录这一关键转折点，这正是产生真正意义上的“人类级别事件记忆（Episodic Memory）”的底层基石。
@@ -49,6 +55,8 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 ---
 
 ## 4. 源码解析与架构伪代码 (Source Code Breakdown)
+
+### 4.1 对比记忆系统 (Contrastive Memory System)
 
 以下的伪代码展示了记忆系统如何将连续的观察状态输入，通过对比学习的思想转化为高维隐空间特征，并自动实现异常检测机制。
 
@@ -131,16 +139,10 @@ class ContrastiveMemorySystem(nn.Module):
 1. **降维与投影 (`projector`)**：我们将杂乱无章的原始数据经过神经网络极度压缩，最后映射到一个仅有 `projection_dim`（比如 128 维）的球面上（`F.normalize`）。这个球面就是智能体的“概念宇宙”。
 2. **拒绝垃圾记忆 (`observe_and_memorize`)**：传统的系统是来什么存什么。但在这个函数中，只有当新输入的 `distance` 大于设定的数学阈值时，才会调用 `_save_to_episodic_database` 记录下来。如果距离很小，说明一切照旧，直接抛弃原始数据，仅用极小的步长（`alpha=0.01`）微调大脑中对“正常世界”的定义即可。这就是优雅且数学可证的记忆压缩。
 
-### 📝 [Daily Research Chunk] 动态理论深潜：连续时间记忆 Hopfield 网络
+### 4.2 连续时间 Hopfield 网络更新
 
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Memory
-- **前沿来源**：*Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122)。选择该理论是因为它突破了现代 Hopfield 网络中离散记忆存储的局限，将离散记忆点转化为连续的函数表达，为实现无限容量（$\infty$-memory）的 Transformer 奠定了严谨的数学基础。
-- **确定性收敛机制**：该网络定义了一个极其硬核的连续能量函数来约束行为下界：$E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$。
-在这个连续的能量场中，每一次查询的更新操作都严格遵循由吉布斯概率密度主导的确定性迭代。系统像物理定律一样不可逆转地滑向能量最低点，从根本上杜绝了基于参数堆叠导致的随机游走式幻觉。
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
 (核心机制的零依赖确定性算法实现)
+
 ```python
 import numpy as np
 
@@ -168,5 +170,9 @@ def continuous_hopfield_update(q_t, B, psi_functions, beta, num_steps=10):
     return q_t
 ```
 
-#### 💡 0基础业务通俗类比 (For Beginners)
+---
+
+## 5. 0基础业务通俗类比 (For Beginners)
+
+### 5.1 连续时间 Hopfield 网络
 想象一个图书管理员在找书。在传统的“离散”图书馆里，她只能在一个个固定的书架上找。如果用户的需求刚好介于两个书架之间，她可能就会抓瞎，甚至胡编乱造（这就是大模型的幻觉）。而“连续时间记忆 Hopfield 网络”把图书馆变成了一片液态的知识海洋。这里没有孤立的书架，只有连绵起伏的山谷。那个复杂的“能量函数”，其实就是物理学中的重力。不管管理员从哪里开始找，重力法则会百分之百保证她顺着山坡平稳地滑入正确的知识谷底，绝无可能迷失在真空中。
