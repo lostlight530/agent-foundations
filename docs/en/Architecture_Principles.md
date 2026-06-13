@@ -29,7 +29,7 @@ Instead of blindly increasing model parameters and hoping for intelligence to pr
 
 ### 1.3 Guarantee Convergence over Optimize
 In deep learning, "optimization" often means searching for a local optimum within a complex, high-dimensional loss landscape—a process full of randomness and uncertainty.
-We model the agent's learning and decision-making processes as deterministic dynamical systems. Our goal is not to probabilistically "try to find a better result," but rather to use extreme algorithmic design (such as deterministic tool chains and federated convergence, detailed later) to ensure that the system's mathematical state **inevitably and absolutely** settles on a well-defined stable manifold.
+We model the agent's learning and decision-making processes as deterministic dynamical systems. Our goal is not to probabilistically "try to find a better result," but rather to use extreme algorithmic design (such as deterministic tool chains and decentralized convergence, detailed later) to ensure that the system's mathematical state **inevitably and absolutely** settles on a well-defined stable manifold.
 
 ---
 
@@ -50,7 +50,7 @@ As stated in the project README: "Five research directions learned existing theo
 ### 2.1 What is Gradient Entropy?
 In traditional thermodynamics and information theory, Entropy represents the degree of disorder or chaos in a system. In deep learning and large-scale multi-agent networks, as models continuously backpropagate over massive datasets, the direction and magnitude of gradient flows tend to become randomized and chaotic.
 
-**Gradient Entropy** is an original theoretical metric we devised. It measures the information dissipation and disorder of an agent's learning state. It precisely quantifies the degree of divergence in the high-dimensional gradient vector field during backpropagation or federated parameter exchange.
+**Gradient Entropy** is an original theoretical metric we devised. It measures the information dissipation and disorder of an agent's learning state. It precisely quantifies the degree of divergence in the high-dimensional gradient vector field during backpropagation or decentralized parameter exchange.
 
 **Analogy**: Imagine a group of people in heavy fog trying to find the lowest point of a valley. If everyone points and walks in the exact same direction, the "gradient entropy" is low. If everyone runs around blindly like headless chickens, canceling out each other's efforts, the "gradient entropy" is extremely high.
 
