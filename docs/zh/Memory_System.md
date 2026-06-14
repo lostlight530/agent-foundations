@@ -222,3 +222,56 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
   **检测目标**：新引入的流形匹配自编码器（利用 $\mathcal{L}_{\text{topo}}$）是否破坏了连续时间 Hopfield 网络的收敛性，或与因果状态前提发生冲突？
   **推演结论**：**无冲突且具有相容性 (Compatible)**。
   **证明简述**：流形匹配自编码器只通过距离约束保证降维特征向量的拓扑连通性，它改变的是状态的隐空间拓扑表示 $x_{bar}(t)$ 的初始映射基底，但由于其距离度量连续，投影仍保留在Lipschitz连续闭域中。因此，针对这些被安全投射的特征，Hopfield 网络中能量函数 $E(q)$ 的梯度流计算法则不变，吉布斯概率密度主导的确定性迭代依然严格成立，系统不仅绝不发散，反而因流形平滑化而提升了收敛到最优谷底的稳定性。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Memory
+- **前沿来源**：arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
+- **确定性收敛机制**：DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+import math
+
+class DeterministicMemoryDecay:
+    def __init__(self, decay_rate_lambda=0.05, inertia_eta=0.8, kill_threshold=0.1):
+        self.lambda_val = decay_rate_lambda
+        self.eta_val = inertia_eta
+        self.omega_kill = kill_threshold
+        self.memory_entries = []
+        self.current_interaction_index = 0
+
+    def add_memory(self, text, survival_score_omega):
+        # survival_score_omega (Ω) is pre-computed deterministically from NLP features [0, 1]
+        entry = {
+            'text': text,
+            'omega': survival_score_omega,
+            'interaction_index': self.current_interaction_index
+        }
+        self.memory_entries.append(entry)
+        self.current_interaction_index += 1
+
+    def prune_memory(self):
+        retained_entries = []
+        for entry in self.memory_entries:
+            # Δn is the number of newer interactions
+            delta_n = self.current_interaction_index - entry['interaction_index']
+
+            # Calculate effective survival score Ω_eff(Δn)
+            # Equation: Ω_eff(Δn) = Ω * exp(-λ * (1 - η * Ω) * Δn)
+            omega = entry['omega']
+            exponent = -self.lambda_val * (1 - self.eta_val * omega) * delta_n
+            omega_eff = omega * math.exp(exponent)
+
+            # Deterministic eviction condition: evict(i) ⇔ Ω_{eff, i} < Ω_{kill}
+            if omega_eff >= self.omega_kill:
+                retained_entries.append(entry)
+
+        self.memory_entries = retained_entries
+        return self.memory_entries
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一下，你的大脑像一个有着固定大小的“收纳盒”。在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）。
+如果用传统的大模型黑盒方法来整理这个收纳盒，就像是雇了一个性格阴晴不定、每次收费还很高的临时工，让他每次凭感觉把不重要的东西扔掉，你永远不知道他下次会扔掉什么。
+而“基于互动计数的确定性指数衰减定律”则像是引入了一套严格的物理法则：每个记忆都会随着“新发生事情的次数”（$\Delta n$，而不是过去了多少天）按比例慢慢变淡。这个变淡的速度（$\lambda$）不仅是固定的，而且最初“重要性标签”越高的记忆，它变淡得就越慢（受到惯性参数 $\eta$ 的保护）。一旦某个记忆的清晰度降到了一条死线（$\Omega_{\mathrm{kill}}$）以下，它就会被百分之百确定地移出大脑的“常用工作区”，归档到日记本（长期冷数据档案）里。这样一来，收纳盒永远不会满，每一次留下的记忆都是数学公式精确计算过的结果，完全不需要那个昂贵的临时工。

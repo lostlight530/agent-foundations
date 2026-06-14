@@ -221,3 +221,56 @@ Imagine you have a huge, crumpled map of the world (a high-dimensional complex e
   **Target**: Does the newly introduced Manifold-Matching Autoencoder (using $\mathcal{L}_{\text{topo}}$) destroy the convergence of the Continuous-Time Hopfield Network or conflict with causal state premises?
   **Deduction**: **No Conflict; Mathematically Compatible**.
   **Proof Sketch**: The manifold-matching autoencoder merely uses distance constraints to ensure the topological connectivity of reduced features. It updates the base projection of the latent space topology $x_{bar}(t)$, but because the distance metric is continuous, the projection remains strictly within a Lipschitz-continuous closed domain. Therefore, the gradient flow of the Hopfield energy function $E(q)$ over these safely projected features remains unchanged. The deterministic iteration driven by Gibbs probability density holds strictly. The system will never diverge; instead, manifold smoothing accelerates and stabilizes the convergence towards the optimal valley.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+#### 🔬 Selection Rationale & Academic Lineage
+- **System Container**: Memory
+- **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
+- **Deterministic Convergence Mechanism**: DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
+
+#### 💻 Source Code Breakdown
+```python
+import math
+
+class DeterministicMemoryDecay:
+    def __init__(self, decay_rate_lambda=0.05, inertia_eta=0.8, kill_threshold=0.1):
+        self.lambda_val = decay_rate_lambda
+        self.eta_val = inertia_eta
+        self.omega_kill = kill_threshold
+        self.memory_entries = []
+        self.current_interaction_index = 0
+
+    def add_memory(self, text, survival_score_omega):
+        # survival_score_omega (Ω) is pre-computed deterministically from NLP features [0, 1]
+        entry = {
+            'text': text,
+            'omega': survival_score_omega,
+            'interaction_index': self.current_interaction_index
+        }
+        self.memory_entries.append(entry)
+        self.current_interaction_index += 1
+
+    def prune_memory(self):
+        retained_entries = []
+        for entry in self.memory_entries:
+            # Δn is the number of newer interactions
+            delta_n = self.current_interaction_index - entry['interaction_index']
+
+            # Calculate effective survival score Ω_eff(Δn)
+            # Equation: Ω_eff(Δn) = Ω * exp(-λ * (1 - η * Ω) * Δn)
+            omega = entry['omega']
+            exponent = -self.lambda_val * (1 - self.eta_val * omega) * delta_n
+            omega_eff = omega * math.exp(exponent)
+
+            # Deterministic eviction condition: evict(i) ⇔ Ω_{eff, i} < Ω_{kill}
+            if omega_eff >= self.omega_kill:
+                retained_entries.append(entry)
+
+        self.memory_entries = retained_entries
+        return self.memory_entries
+```
+
+#### 💡 0-Foundation Business Analogy (For Beginners)
+Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
+Using a traditional LLM black-box approach to organize this box is like hiring a highly unpredictable and expensive temp worker who randomly throws things away based on "gut feeling"—you never know what they might toss out next.
+In contrast, the "Deterministic Exponential Decay Law based on Interaction Count" introduces a strict set of physics. Every memory slowly fades away based on the "number of new events that have happened" ($\Delta n$, not how many days have passed). The speed at which it fades ($\lambda$) is not only fixed, but memories with initially higher "importance tags" will fade slower (protected by the inertia parameter $\eta$). Once a memory's clarity drops below a hard deadline ($\Omega_{\mathrm{kill}}$), it is 100% deterministically removed from the brain's "active workspace" and archived in a diary (long-term cold storage). This way, the storage box never overflows, and every retained memory is the result of precise mathematical calculation, completely eliminating the need for that expensive temp worker.
