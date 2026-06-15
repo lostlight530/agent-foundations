@@ -185,3 +185,36 @@ Imagine experts from different departments drafting a budget for a massive proje
 - **First-Order Optimization (Old Model)**: Like blind men feeling an elephant. Experts adjust budget amounts slightly based on current deviations. For complex balances (non-convex), they argue for hundreds of rounds.
 - **Pure Second-Order (Ideal Model)**: Experts forecast future trend curves (Hessian matrix). But if everyone mailed their entire complex mental deduction process, the communication network would crash.
 - **Quantized Decentralized Consensus ALADIN (New Mechanism)**: Every expert uses a clever mental trick (BFGS) to simulate future trends privately. When calling others, they don't give long speeches or precise decimals; they report a "rough integer bracket (quantized communication)." Due to mathematical design, these rough numbers allow everyone to mentally piece together the optimal global trend. Without thick documents or a central supervisor, they deterministically finalize a perfect budget at astonishing speed!
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Decentralized Stochastic Gradient Tracking (DSGT)
+#### 🔬 选型依据与学术脉络 (Selection Rationale & Academic Context)
+- **所属系统容器 (System Container)**: Collaboration System
+- **前沿来源 (Frontier Source)**: "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking" (arXiv:2605.00281v1). Selected because it provides a highly rigorous bound on convergence over decentralized networks without a central authority.
+- **确定性收敛机制 (Deterministic Convergence Mechanism)**: The paper proves that the Decentralized Stochastic Gradient Tracking (DSGT) algorithm achieves a high-probability convergence bound, where the probability of error bounding $X_t$ exceeding a threshold is strictly constrained: $\mathbb{P}\bigg(X_{t}>\frac{\log(\nicefrac{{1}}{{\delta}})}{t^{\beta}}\bigg)\leq\delta$. The bias-correction is achieved through tracking variables mathematically formulated as:
+  - Tracker Update: $\mathbf{y}^{t} = \mathbf{W}(\mathbf{y}^{t-1} + \mathbf{g}^{t} - \mathbf{g}^{t-1})$
+  - Model Update: $\mathbf{x}^{t+1} = \mathbf{W}(\mathbf{x}^{t} - \alpha_{t}\mathbf{y}^{t})$
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
+    # x_t: Models at time t for all nodes (matrix)
+    # y_t_prev: Gradient trackers at time t-1
+    # g_t, g_t_prev: Stochastic gradients at t and t-1
+    # W: Doubly stochastic weight matrix defining network topology
+    # alpha_t: Step size at time t
+
+    # 1. Update Tracker (y^t) using local neighborhood
+    # Tracking the "global gradient" shift using local differences
+    y_t = W.dot(y_t_prev + g_t - g_t_prev)
+
+    # 2. Update Local Models (x^{t+1}) using tracked direction
+    # Moving towards the combined local consensus and global gradient
+    x_t_next = W.dot(x_t - alpha_t * y_t)
+
+    return x_t_next, y_t
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine a massive company with no CEO (Decentralized). Every department (node) is working on optimizing a common project.
+- **The old way (DSGD)**: Departments only shared their local work progress. This caused "echo chambers" where specific departments diverged because their local data was heavily biased.
+- **The new way (DSGT)**: Every department maintains *two* notebooks. The first notebook tracks their own work (`x`). The second notebook (`y`) tracks the "company-wide rumor" of where the overall project should be heading. By constantly telling neighbors "Here is how my local project changed" and "Here is how I heard the global rumor changed", the entire company mathematically converges to the exact optimal global plan, completely avoiding blind spots without ever needing a centralized boss.

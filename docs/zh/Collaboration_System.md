@@ -184,3 +184,36 @@ def accelerated_decentralized_step(agent_i, current_x, delayed_x, prev_momentum,
 - **一阶优化（旧模式）**：大家盲人摸象。专家根据当前偏差稍微调整金额，遇到复杂问题要扯皮上百个回合，效率极低。
 - **纯二阶优化（理想模式）**：专家预测未来变化趋势（Hessian矩阵）。但如果要把复杂的推导过程全打印出来寄给别人，网络直接堵死。
 - **量化去中心化共识 ALADIN（新机制）**：每个专家用聪明的方法在脑子里模拟未来趋势。打电话沟通时，他们不说长篇大论，只报一个“粗略的整数挡位（量化通信）”。由于数学上的精妙设计，大家只凭这些简单的数字，就能在脑中拼接出全局最优趋势。结果是，不用传厚文件，也没主管拍板，却能“确定性”地以惊人速度敲定完美预算案！
+
+### 📝 [Daily Research Chunk] 动态理论深潜：去中心化随机梯度追踪 (DSGT)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System (协作系统)
+- **前沿来源**："High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking" (arXiv:2605.00281v1)。选择该理论是因为它为没有中心节点的去中心化网络提供了极其严谨的收敛边界证明，彻底摒弃了概率黑盒。
+- **确定性收敛机制**：论文证明了去中心化随机梯度追踪（DSGT）算法能实现高概率收敛，误差项 $X_t$ 超出阈值的概率被严格约束：$\mathbb{P}\bigg(X_{t}>\frac{\log(\nicefrac{{1}}{{\delta}})}{t^{\beta}}\bigg)\leq\delta$。消除异构数据偏差的核心在于追踪变量的数学更新规则：
+  - 追踪器更新 (Tracker Update)：$\mathbf{y}^{t} = \mathbf{W}(\mathbf{y}^{t-1} + \mathbf{g}^{t} - \mathbf{g}^{t-1})$
+  - 模型更新 (Model Update)：$\mathbf{x}^{t+1} = \mathbf{W}(\mathbf{x}^{t} - \alpha_{t}\mathbf{y}^{t})$
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
+    # x_t: t时刻所有节点的模型矩阵
+    # y_t_prev: t-1时刻的梯度追踪器
+    # g_t, g_t_prev: t和t-1时刻的随机梯度估计
+    # W: 定义网络拓扑的双随机权重矩阵
+    # alpha_t: t时刻的步长(学习率)
+
+    # 1. 更新追踪器 (y^t)：利用局部邻居网络
+    # 通过局部梯度变化来“追踪”全局梯度的真实漂移
+    y_t = W.dot(y_t_prev + g_t - g_t_prev)
+
+    # 2. 更新局部模型 (x^{t+1})：使用被修正的追踪方向
+    # 在向邻居模型对齐的同时，沿着全局梯度方向下降
+    x_t_next = W.dot(x_t - alpha_t * y_t)
+
+    return x_t_next, y_t
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一家没有 CEO 的巨型企业（完全去中心化），每个部门（节点）都在试图优化同一个全公司的大项目。
+- **老办法（DSGD）**：部门之间只互相抄各自的工作进度。如果某个部门自己的业务数据很偏门，他们就会越走越偏，形成“信息茧房”。
+- **新机制（DSGT）**：每个部门现在必须维护**两本账**。第一本账记录自己的工作进度（`x`），第二本账记录“全公司风向的传闻”（`y`）。部门每次和邻居开会，不仅说“我的进度变了多少”，还要说“我听到的全公司大方向变了多少”。通过这种巧妙的双重账本机制，全公司的每个部门最终会在数学上确定性地达成一模一样的最优决策，彻底消灭了瞎子摸象的问题，且全程不需要任何老板来指挥。
