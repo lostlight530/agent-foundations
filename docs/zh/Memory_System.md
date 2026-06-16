@@ -275,3 +275,61 @@ class DeterministicMemoryDecay:
 想象一下，你的大脑像一个有着固定大小的“收纳盒”。在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）。
 如果用传统的大模型黑盒方法来整理这个收纳盒，就像是雇了一个性格阴晴不定、每次收费还很高的临时工，让他每次凭感觉把不重要的东西扔掉，你永远不知道他下次会扔掉什么。
 而“基于互动计数的确定性指数衰减定律”则像是引入了一套严格的物理法则：每个记忆都会随着“新发生事情的次数”（$\Delta n$，而不是过去了多少天）按比例慢慢变淡。这个变淡的速度（$\lambda$）不仅是固定的，而且最初“重要性标签”越高的记忆，它变淡得就越慢（受到惯性参数 $\eta$ 的保护）。一旦某个记忆的清晰度降到了一条死线（$\Omega_{\mathrm{kill}}$）以下，它就会被百分之百确定地移出大脑的“常用工作区”，归档到日记本（长期冷数据档案）里。这样一来，收纳盒永远不会满，每一次留下的记忆都是数学公式精确计算过的结果，完全不需要那个昂贵的临时工。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：确定性因果结构 (Deterministic Causal Structure, DCS)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Memory
+- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)。选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦。
+- **确定性收敛机制**：该理论通过一个极简公理集确立了确定性因果结构 (DCS)。极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义。局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 核心机制的零依赖确定性算法实现：DCS 确定性合并逻辑
+class JoinSemilatticeState:
+    def __init__(self):
+        # 集合(Set)是一个天然的上半格，并集操作即为合并(join)操作
+        self.state = set()
+
+    def merge(self, payload_set):
+        # 合并操作 ⊔ (并集) 满足交换律、结合律和幂等律
+        # M_i(k, t+1) <- M_i(k, t) ⊔ payload(δ)
+        self.state = self.state.union(payload_set)
+
+    def get_state(self):
+        # 排序以确保确定性的可观测输出
+        return sorted(list(self.state))
+
+class AgentNode:
+    def __init__(self, agent_id):
+        self.id = agent_id
+        # 针对键 k 的局部状态 M_i(k)
+        self.local_states = {}
+
+    def receive_contribution(self, key, payload):
+        if key not in self.local_states:
+            self.local_states[key] = JoinSemilatticeState()
+
+        # 单调更新：由公理2 (定向完备上半格) 保证确定性收敛
+        self.local_states[key].merge(payload)
+
+# 无论消息到达顺序如何，各节点必定收敛至完全相同的最终状态
+agent_a = AgentNode("A")
+agent_b = AgentNode("B")
+
+# 调度序列 1：先事实1，后事实2
+agent_a.receive_contribution("task_1", {"fact_1"})
+agent_a.receive_contribution("task_1", {"fact_2"})
+
+# 调度序列 2：先事实2，后事实1 (模拟网络乱序到达)
+agent_b.receive_contribution("task_1", {"fact_2"})
+agent_b.receive_contribution("task_1", {"fact_1"})
+
+# 验证确定性收敛：两者状态绝对一致
+assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象好几个人正在合作拼一幅巨大的拼图（系统的共享记忆状态）。
+以前的做法是大家需要互相争抢“谁先放下一块”，或者担心“有人把拼图寄晚了导致全盘错乱”（这叫策略与网络路由问题）。而现在，我们给每一块拼图都印上独一无二的条形码（这就是带有唯一 `rid` 的 Contribution）。
+
+通过名为“上半格”的数学魔法，把拼图拼起来的过程就像把它们全倒在桌子上。你先从左手倒下拼图，还是先从右手倒下拼图根本不重要（满足“交换律”和“结合律”，与顺序无关）；如果有人不小心寄给了你两块完全一样的拼图，它们也能完美重叠在一起，不影响整体画面（满足“幂等律”）。最终，只要所有人都拿到了所有的拼图块，大家拼出来的画面就是**绝对一致且确定的**。这就在底层机制上彻底实现了“快递怎么送”和“拼图长什么样”的完美解耦。
