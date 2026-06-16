@@ -274,3 +274,61 @@ class DeterministicMemoryDecay:
 Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
 Using a traditional LLM black-box approach to organize this box is like hiring a highly unpredictable and expensive temp worker who randomly throws things away based on "gut feeling"—you never know what they might toss out next.
 In contrast, the "Deterministic Exponential Decay Law based on Interaction Count" introduces a strict set of physics. Every memory slowly fades away based on the "number of new events that have happened" ($\Delta n$, not how many days have passed). The speed at which it fades ($\lambda$) is not only fixed, but memories with initially higher "importance tags" will fade slower (protected by the inertia parameter $\eta$). Once a memory's clarity drops below a hard deadline ($\Omega_{\mathrm{kill}}$), it is 100% deterministically removed from the brain's "active workspace" and archived in a diary (long-term cold storage). This way, the storage box never overflows, and every retained memory is the result of precise mathematical calculation, completely eliminating the need for that expensive temp worker.
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Deterministic Causal Structure (DCS)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Memory
+- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
+- **确定性收敛机制**：The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Zero-dependency implementation of the DCS deterministic merge logic
+class JoinSemilatticeState:
+    def __init__(self):
+        # A set acts as a simple join-semilattice where union is the join operation
+        self.state = set()
+
+    def merge(self, payload_set):
+        # The join operation ⊔ (union) is commutative, associative, and idempotent
+        # M_i(k, t+1) <- M_i(k, t) ⊔ payload(δ)
+        self.state = self.state.union(payload_set)
+
+    def get_state(self):
+        # Sort to ensure deterministic observability
+        return sorted(list(self.state))
+
+class AgentNode:
+    def __init__(self, agent_id):
+        self.id = agent_id
+        # Local state M_i(k) for key k
+        self.local_states = {}
+
+    def receive_contribution(self, key, payload):
+        if key not in self.local_states:
+            self.local_states[key] = JoinSemilatticeState()
+
+        # Monotonic update: convergence guaranteed by Axiom 2
+        # (Directed-Complete Join Semilattice)
+        self.local_states[key].merge(payload)
+
+# Regardless of message order, agents converge to the same final state.
+agent_a = AgentNode("A")
+agent_b = AgentNode("B")
+
+# Schedule 1: Order A -> B
+agent_a.receive_contribution("task_1", {"fact_1"})
+agent_a.receive_contribution("task_1", {"fact_2"})
+
+# Schedule 2: Order B -> A (simulating network reordering)
+agent_b.receive_contribution("task_1", {"fact_2"})
+agent_b.receive_contribution("task_1", {"fact_1"})
+
+assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine multiple people filling out a shared, massive puzzle (the memory state).
+Instead of fighting over who gets to place the next piece or worrying if someone mailed their piece late (policy & network routing), we assign every puzzle piece a unique barcode (Contribution with unique `rid`).
+
+Because of the "Join-Semilattice" math magic, putting the pieces together is like dumping them all on the table. It doesn't matter if you drop the pieces from your left hand first or your right hand first (order independence), and if you accidentally drop a duplicate piece, it just stacks perfectly on top of the identical one (idempotence). In the end, everyone who gets all the pieces will build the exact same deterministic picture, effectively separating "how the mail gets delivered" from "the truth of the puzzle".
