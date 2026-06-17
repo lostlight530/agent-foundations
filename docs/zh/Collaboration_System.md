@@ -217,3 +217,27 @@ def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
 想象一家没有 CEO 的巨型企业（完全去中心化），每个部门（节点）都在试图优化同一个全公司的大项目。
 - **老办法（DSGD）**：部门之间只互相抄各自的工作进度。如果某个部门自己的业务数据很偏门，他们就会越走越偏，形成“信息茧房”。
 - **新机制（DSGT）**：每个部门现在必须维护**两本账**。第一本账记录自己的工作进度（`x`），第二本账记录“全公司风向的传闻”（`y`）。部门每次和邻居开会，不仅说“我的进度变了多少”，还要说“我听到的全公司大方向变了多少”。通过这种巧妙的双重账本机制，全公司的每个部门最终会在数学上确定性地达成一模一样的最优决策，彻底消灭了瞎子摸象的问题，且全程不需要任何老板来指挥。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Decentralized Block-Wise Adam Convergence
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System
+- **前沿来源**：DECA: Decentralizing Block-Wise Adam for Efficient LLM Full-Parameter Fine-Tuning on Non-IID Data (arXiv:2606.03209v1). 选择此理论是因为系统将 Centralized Federated Learning 完全废弃，转向 Decentralized Distributed Optimization (DecDPO) 以消除单点故障 (SPOF)。
+- **确定性收敛机制**：其核心证明了全局梯度的分布式动态追踪，消除黑盒随机性。提取的核心数学机制（局部参数更新与去中心化共识）为：
+  $$ x^{[t,r+\frac{1}{2}]}_{i,k}=x^{[t,r]}_{i,k}-\gamma\cdot{\widehat{m}^{[t,r]}_{i,k}}\Big/{\left(\sqrt{\widehat{v}^{[t,r]}_{i,k}}+\epsilon\right)}. $$
+  $$ x^{[t,r+1]}_{i,k}=\sum_{j\in\mathcal{N}_{i}}w_{i,j}x^{[t,r+\frac{1}{2}]}_{j,k}. $$
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def decentralized_adam_update(x_i_k, m_hat_i_k, v_hat_i_k, gamma, epsilon, neighbors_w_x):
+    # Eq 6: x^{[t,r+1/2]}_{i,k} = x^{[t,r]}_{i,k} - gamma * m_hat / (sqrt(v_hat) + epsilon)
+    x_half = x_i_k - gamma * m_hat_i_k / (v_hat_i_k**0.5 + epsilon)
+    # Eq 7: x^{[t,r+1]}_{i,k} = sum_{j in N_i} w_{i,j} x^{[t,r+1/2]}_{j,k}
+    x_next = sum(w_ij * x_half_j for w_ij, x_half_j in neighbors_w_x)
+    return x_next
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一个没有“村长”（中央服务器）的村庄（去中心化网络）。如果村民们要共同决定一个财务账本（优化模型）：
+1. **本地估算**：每个村民先根据自己的账单，用一种带记忆的智能算盘（Adam优化器）算出一个初步的调整值。
+2. **邻里对账**：村民不向中央汇报，而是只和隔壁几个邻居交换这个初步调整值（去中心化共识）。
+3. **确定性收敛**：数学公式严格证明了，只要大家坚持这种“本地计算+局部交流”的方法，并且网络连通，整个村子的账本最终一定会达成完全一致的最优状态，绝不会因为哪个村民掉线就导致系统崩溃（消除SPOF）。

@@ -218,3 +218,27 @@ def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
 Imagine a massive company with no CEO (Decentralized). Every department (node) is working on optimizing a common project.
 - **The old way (DSGD)**: Departments only shared their local work progress. This caused "echo chambers" where specific departments diverged because their local data was heavily biased.
 - **The new way (DSGT)**: Every department maintains *two* notebooks. The first notebook tracks their own work (`x`). The second notebook (`y`) tracks the "company-wide rumor" of where the overall project should be heading. By constantly telling neighbors "Here is how my local project changed" and "Here is how I heard the global rumor changed", the entire company mathematically converges to the exact optimal global plan, completely avoiding blind spots without ever needing a centralized boss.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Decentralized Block-Wise Adam Convergence
+#### 🔬 Selection Rationale & Academic Context
+- **System Container**: Collaboration System
+- **Frontier Source**: DECA: Decentralizing Block-Wise Adam for Efficient LLM Full-Parameter Fine-Tuning on Non-IID Data (arXiv:2606.03209v1). Selected because Centralized Federated Learning is entirely deprecated in favor of Decentralized Distributed Optimization (DecDPO) to eliminate Single Points of Failure (SPOF).
+- **Deterministic Convergence Mechanism**: It proves decentralized dynamic tracking of global gradients, eliminating black-box randomness. The extracted hardcore mathematical mechanism (local parameter update and decentralized consensus) is:
+  $$ x^{[t,r+\frac{1}{2}]}_{i,k}=x^{[t,r]}_{i,k}-\gamma\cdot{\widehat{m}^{[t,r]}_{i,k}}\Big/{\left(\sqrt{\widehat{v}^{[t,r]}_{i,k}}+\epsilon\right)}. $$
+  $$ x^{[t,r+1]}_{i,k}=\sum_{j\in\mathcal{N}_{i}}w_{i,j}x^{[t,r+\frac{1}{2}]}_{j,k}. $$
+
+#### 💻 Source Code Breakdown
+```python
+def decentralized_adam_update(x_i_k, m_hat_i_k, v_hat_i_k, gamma, epsilon, neighbors_w_x):
+    # Eq 6: x^{[t,r+1/2]}_{i,k} = x^{[t,r]}_{i,k} - gamma * m_hat / (sqrt(v_hat) + epsilon)
+    x_half = x_i_k - gamma * m_hat_i_k / (v_hat_i_k**0.5 + epsilon)
+    # Eq 7: x^{[t,r+1]}_{i,k} = sum_{j in N_i} w_{i,j} x^{[t,r+1/2]}_{j,k}
+    x_next = sum(w_ij * x_half_j for w_ij, x_half_j in neighbors_w_x)
+    return x_next
+```
+
+#### 💡 For Beginners
+Imagine a village (decentralized network) without a "village chief" (centralized server). If the villagers need to jointly agree on a financial ledger (optimization model):
+1. **Local Estimation**: Each villager first calculates a preliminary adjustment based on their own bills using a smart abacus with memory (Adam optimizer).
+2. **Neighborhood Reconciliation**: Instead of reporting to a central authority, villagers only exchange this preliminary adjustment with their immediate neighbors (decentralized consensus).
+3. **Deterministic Convergence**: The mathematical formula strictly proves that as long as everyone sticks to this "local computation + local communication" approach and the network is connected, the entire village's ledger will definitively reach the identical optimal state. The system will never collapse just because one villager disconnects (eliminating SPOF).
