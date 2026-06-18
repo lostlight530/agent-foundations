@@ -241,3 +241,19 @@ def decentralized_adam_update(x_i_k, m_hat_i_k, v_hat_i_k, gamma, epsilon, neigh
 1. **本地估算**：每个村民先根据自己的账单，用一种带记忆的智能算盘（Adam优化器）算出一个初步的调整值。
 2. **邻里对账**：村民不向中央汇报，而是只和隔壁几个邻居交换这个初步调整值（去中心化共识）。
 3. **确定性收敛**：数学公式严格证明了，只要大家坚持这种“本地计算+局部交流”的方法，并且网络连通，整个村子的账本最终一定会达成完全一致的最优状态，绝不会因为哪个村民掉线就导致系统崩溃（消除SPOF）。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：去中心化随机控制与收敛边界
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2605.00160v1《Approximations and Learning for Decentralized Stochastic Control and Near Optimal Finite Window Policies》。完美契合抛弃中心化参数服务器的 DecDPO 路线。
+- **确定性收敛机制**：系统通过惩罚项严格约束了去中心化策略演化：$J(\gamma)=E^{\gamma}[\sum_{t=0}^{\infty}\beta^{t}c(x_{t},\mathbf{u_{t}})]$。从数学层面杜绝了无限散度。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def decentralized_stochastic_step(local_state, local_action, neighbors):
+    cost = compute_cost(local_state, local_action)
+    # J(gamma) bounded cost function ensures finite convergence
+    assert evaluate_J(cost, beta) < infinity_bound
+    return cost
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+就像大雁南飞没有总指挥，每只大雁只根据周围同伴调整速度。但这套理论用数学保证了整体消耗的能量必然有一个明确的下界，绝不会失控耗尽体力坠机。

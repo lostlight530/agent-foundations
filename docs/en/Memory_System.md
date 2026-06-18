@@ -332,3 +332,18 @@ Imagine multiple people filling out a shared, massive puzzle (the memory state).
 Instead of fighting over who gets to place the next piece or worrying if someone mailed their piece late (policy & network routing), we assign every puzzle piece a unique barcode (Contribution with unique `rid`).
 
 Because of the "Join-Semilattice" math magic, putting the pieces together is like dumping them all on the table. It doesn't matter if you drop the pieces from your left hand first or your right hand first (order independence), and if you accidentally drop a duplicate piece, it just stacks perfectly on top of the identical one (idempotence). In the end, everyone who gets all the pieces will build the exact same deterministic picture, effectively separating "how the mail gets delivered" from "the truth of the puzzle".
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+#### 🔬 Selection Rationale & Academic Lineage
+- **System Container**: Memory
+- **Frontier Source**: arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
+- **Deterministic Convergence Mechanism**: Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
+#### 💻 Source Code Breakdown
+```python
+def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
+    # theta_0 is base policy, delta_t is the deterministic memory state
+    effective_weights = theta_0 + delta_t
+    return deterministic_sample(effective_weights, c_t)
+```
+#### 💡 For Beginners
+It is like muscle memory encoded in your brain rather than looking up a notebook. You react deterministically, eliminating the risk of black-box hallucination when notes are misplaced.

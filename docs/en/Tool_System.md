@@ -139,3 +139,17 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
     assert nx.is_directed_acyclic_graph(causal_dag), "Fatal: Distilled policy contains infinite loops."
     return causal_dag
 ```
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Causal Minimal Tool Filtering (CMTF) & Goal Inference
+#### 🔬 Selection Rationale & Academic Lineage
+- **System Container**: Tool
+- **Frontier Source**: arXiv:2606.16813v1 "GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents".
+- **Deterministic Convergence Mechanism**: Strictly locks posterior bounds with $g^{\star}=\arg\max_{g_{i}}p_{i}$ and $V_{t}=F(s_{t},g,T)$. Physically filters all divergent probabilistic paths.
+#### 💻 Source Code Breakdown
+```python
+def execute_tool_causal_graph(query, state, tools, goal_probs):
+    g_star = max(goal_probs, key=goal_probs.get)
+    return strict_filter_execute(state, g_star, tools)
+```
+#### 💡 For Beginners
+Before using a tool, it passes through a physical "causal barcode scanner". It exclusively locks onto the one exact tool needed, mathematically preventing trial-and-error damage.

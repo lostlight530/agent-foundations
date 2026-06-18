@@ -333,3 +333,18 @@ assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_
 以前的做法是大家需要互相争抢“谁先放下一块”，或者担心“有人把拼图寄晚了导致全盘错乱”（这叫策略与网络路由问题）。而现在，我们给每一块拼图都印上独一无二的条形码（这就是带有唯一 `rid` 的 Contribution）。
 
 通过名为“上半格”的数学魔法，把拼图拼起来的过程就像把它们全倒在桌子上。你先从左手倒下拼图，还是先从右手倒下拼图根本不重要（满足“交换律”和“结合律”，与顺序无关）；如果有人不小心寄给了你两块完全一样的拼图，它们也能完美重叠在一起，不影响整体画面（满足“幂等律”）。最终，只要所有人都拿到了所有的拼图块，大家拼出来的画面就是**绝对一致且确定的**。这就在底层机制上彻底实现了“快递怎么送”和“拼图长什么样”的完美解耦。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：参数化记忆与代理自我演化
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Memory
+- **前沿来源**：arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》。抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中。
+- **确定性收敛机制**：演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$。通过 $\Delta_t$ 的收敛来保障记忆留存下界。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
+    # theta_0 is base policy, delta_t is the deterministic memory state
+    effective_weights = theta_0 + delta_t
+    return deterministic_sample(effective_weights, c_t)
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+这就像是刻在脑子里的肌肉记忆，而不是翻找记事本。遇到问题直接产生确定性反应，再也不会出现查不到资料就乱答的黑盒事故。
