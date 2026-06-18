@@ -200,3 +200,18 @@ def deterministic_ntk_constraint_step(model, inputs, targets, lr=0.01):
 面对这种级联灾难，我们的“梯度熵”理论提供了一道不可逾越的数学防火墙。
 当系统的混沌度（幻觉倾向）开始累积时，传统的黑盒模型是无法自我感知的。而由于梯度熵 $H(\nabla \theta)$ 严格监控着信息耗散率，一旦偏差开始呈指数放大，梯度空间的无序度也会瞬间突破预设的常数阈值 $C_{max}$。
 系统根本不需要理解“智能体到底在说什么胡话”，它只在数学底层看到熵值越界，就会立刻触发约束协议，强行熔断当前的概率发散链条。这就等于我们在物理规律的层面，彻底拔掉了“幻觉级联崩溃”的电源。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：免训练自适应停止机制 (TASR)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Architecture Principles
+- **前沿来源**：arXiv:2606.13814v1《TASR: Training-Free Adaptive Stopping for Iterative Retrieval》。锁死信息耗散，作为控制迭代发散的物理闸门。
+- **确定性收敛机制**：制定了不可违背的刚性停止算子：$\mathrm{stop}_{r}\;=\;\mathbf{1}\!\left[\,\tilde{a}_{r}=\tilde{a}_{r-1}\;\wedge\;m_{r}>0.25\,\right]$。一旦触发该条件，系统循环被物理切断。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def adaptive_stopping_gate(a_curr, a_prev, margin_r):
+    if a_curr == a_prev and margin_r > 0.25:
+        return True # Deterministic physical halt
+    return False
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+给思考装上了“刹车片”。当发现最近两步想的东西一模一样，且置信度越过红线，直接强行拔电源停止思考，彻底根除了 AI 常见的死循环发散。

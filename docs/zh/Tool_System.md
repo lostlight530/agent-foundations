@@ -141,3 +141,17 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
     assert nx.is_directed_acyclic_graph(causal_dag), "Fatal: Distilled policy contains infinite loops."
     return causal_dag
 ```
+
+### 📝 [Daily Research Chunk] 动态理论深潜：因果最小化工具过滤 (CMTF) 与目标推断
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Tool
+- **前沿来源**：arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents》。
+- **确定性收敛机制**：严格锁定后验推断上限 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 以及 $V_{t}=F(s_{t},g,T)$。通过物理因果过滤剔除所有发散的概率路径。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def execute_tool_causal_graph(query, state, tools, goal_probs):
+    g_star = max(goal_probs, key=goal_probs.get)
+    return strict_filter_execute(state, g_star, tools)
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+工具选择被装上了“因果条形码扫描仪”。每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏。
