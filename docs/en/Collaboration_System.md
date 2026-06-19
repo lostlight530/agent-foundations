@@ -258,3 +258,41 @@ def decentralized_stochastic_step(local_state, local_action, neighbors):
 ```
 #### 💡 For Beginners
 It is like a flock of geese flying south without a commander. Each goose adjusts to neighbors, and this math physically guarantees their total energy consumption has a lower bound, eliminating the risk of crashing from exhaustion.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
+#### 🔬 Selection Rationale and Academic Context
+- **System Container**: Collaboration System
+- **Frontier Source**: arXiv:2606.19871v1 "Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization of Networked Nonlinear Systems". Selected because it provides a deterministic convergence boundary for decentralized non-convex optimization under networked input delays, perfectly aligning with our pure Decentralized Distributed Optimization (DecDPO) paradigm.
+- **Deterministic Convergence Mechanism**: The algorithm achieves Input-Delay Tolerant Semiglobal Convergence (IDTSC) by decoupling the nonlinear dynamics and consensus tracking via a hierarchical design. The system mathematically bounds the pre-convergence Lyapunov function derivative as: $\displaystyle\dot{V}_{pre}\leq -2\vartheta\lambda_{2}(\bar{\mathcal{L}})V_{pre}$, ensuring strict determinism under the coupling between delays and nonconvex optimization objectives. The local control input is strictly bound by $\displaystyle u_{i}(t)=g_{i}(x_{i}(t))^{-1}(-f_{i}(x_{i}(t))+{\bar{u}}_{i}(t))$.
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def semiglobal_input_delay_tolerant_step(x_i, neighbors_x, f_i, g_i, u_bar_eta_i, u_bar_eta_j_list, theta, epsilon):
+    """
+    Core implementation of the SIDT algorithm for decentralized optimization.
+    Variables u_bar_eta_i and wp_ij directly map to the trace definitions.
+    """
+    # Consensus tracking term and delay-tolerant sign-based compensation
+    sum_consensus = 0.0
+    sum_sign_compensation = 0.0
+
+    for j, x_j in enumerate(neighbors_x):
+        diff = x_j - x_i
+        sum_consensus += diff
+
+        # Derived from: \wp_{ij}(t-d)=\|\bar{u}_{\eta,i}(t-d)\|+\|\bar{u}_{\eta,j}(t-d)\|
+        wp_ij = norm(u_bar_eta_i) + norm(u_bar_eta_j_list[j])
+        sum_sign_compensation += wp_ij * (1 if diff > 0 else (-1 if diff < 0 else 0))
+
+    # Auxiliary control input combining consensus and local gradients
+    u_bar_i = theta * sum_consensus + epsilon * sum_sign_compensation + u_bar_eta_i
+
+    # Nonlinear dynamic decoupling controller
+    u_i = (1.0 / g_i(x_i)) * (-f_i(x_i) + u_bar_i)
+
+    return u_i
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine a fleet of self-driving delivery trucks (a decentralized network) trying to find the optimal global route together. The challenge is that they are driving on rugged, non-linear terrain (nonlinear dynamics), the communication signals between them are delayed (input delay), and there is no central dispatcher (SPOF eliminated).
+Instead of blindly guessing or trusting outdated GPS coordinates, each truck calculates a "deterministic correction steering wheel angle" (the control input $u_i(t)$). It mathematically cancels out its own physical inertia (via the inverse function $g_i^{-1}$) and computes a strictly bounded consensus offset relative to its neighbors, plus a local terrain gradient. Even if the messages from neighbors are delayed, the mathematical boundary design ensures the entire fleet acts like a highly cohesive, deterministic flock of birds converging perfectly onto the optimal destination without ever scattering.
