@@ -257,3 +257,41 @@ def decentralized_stochastic_step(local_state, local_action, neighbors):
 ```
 #### 💡 0基础业务通俗类比 (For Beginners)
 就像大雁南飞没有总指挥，每只大雁只根据周围同伴调整速度。但这套理论用数学保证了整体消耗的能量必然有一个明确的下界，绝不会失控耗尽体力坠机。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：网络化非线性系统的半全局输入延迟容忍去中心化优化
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration System
+- **前沿来源**：arXiv:2606.19871v1《Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization of Networked Nonlinear Systems》。该理论在网络输入延迟下，为去中心化非凸优化提供了确定性的收敛边界证明，完美契合我们废弃单点故障的纯去中心化分布式优化（DecDPO）范式。
+- **确定性收敛机制**：该算法通过解耦非线性动力学和共识追踪，实现了输入延迟容忍的半全局收敛（IDTSC）。系统在数学上将李雅普诺夫函数的导数严格限制为：$\displaystyle\dot{V}_{pre}\leq -2\vartheta\lambda_{2}(\bar{\mathcal{L}})V_{pre}$，确保了在延迟和非凸优化目标耦合下的绝对确定性。本地控制输入被严格约束为 $\displaystyle u_{i}(t)=g_{i}(x_{i}(t))^{-1}(-f_{i}(x_{i}(t))+{\bar{u}}_{i}(t))$。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def semiglobal_input_delay_tolerant_step(x_i, neighbors_x, f_i, g_i, u_bar_eta_i, u_bar_eta_j_list, theta, epsilon):
+    """
+    去中心化优化的 SIDT 算法核心实现，消除网络延迟带来的发散风险。
+    变量 u_bar_eta_i 和 wp_ij 直接映射自论文的公式定义。
+    """
+    # 共识追踪项与基于符号的延迟容忍补偿
+    sum_consensus = 0.0
+    sum_sign_compensation = 0.0
+
+    for j, x_j in enumerate(neighbors_x):
+        diff = x_j - x_i
+        sum_consensus += diff
+
+        # 来源于: \wp_{ij}(t-d)=\|\bar{u}_{\eta,i}(t-d)\|+\|\bar{u}_{\eta,j}(t-d)\|
+        wp_ij = norm(u_bar_eta_i) + norm(u_bar_eta_j_list[j])
+        sum_sign_compensation += wp_ij * (1 if diff > 0 else (-1 if diff < 0 else 0))
+
+    # 结合共识和局部梯度的辅助控制输入
+    u_bar_i = theta * sum_consensus + epsilon * sum_sign_compensation + u_bar_eta_i
+
+    # 非线性动力学解耦控制器
+    u_i = (1.0 / g_i(x_i)) * (-f_i(x_i) + u_bar_i)
+
+    return u_i
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一支没有中央调度中心（去除单点故障）的自动驾驶无人配送车队，它们需要共同规划出一条全局最优的送货路线。难点在于，它们行驶在崎岖的山路（非线性动力学模型）上，彼此之间通过对讲机同步位置时还有严重的信号延迟（输入延迟）。
+如果依靠概率黑盒算法，车队很容易因为信息滞后而发生连环相撞或彻底跑偏。但基于该确定性算法，每辆车都会计算出一个“绝对纠偏方向盘角度”。它首先用数学手段抵消掉自身的物理惯性干扰，然后通过严格的边界函数，把邻居延迟传来的位置信息和一个补偿系数结合起来。这就好比即使每个人听到的指令都慢了半拍，这套数学公式也能保证整个车队像大雁南飞一样，以 100% 的确定性聚拢在最优路线上，绝不溃散！
