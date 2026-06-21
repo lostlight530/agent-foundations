@@ -21,6 +21,11 @@
 ---
 
 ## 2. 核心机制：从试错到绝对可控 (Core Mechanisms)
+### 动态理论深潜：因果最小化工具过滤 (CMTF) 与目标推断
+- **所属系统容器**：Tool
+- **前沿来源**：arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents》。
+- **确定性收敛机制**：严格锁定后验推断上限 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 以及 $V_{t}=F(s_{t},g,T)$。通过物理因果过滤剔除所有发散的概率路径。
+
 
 ### 2.1 策略优化 (Policy Optimization)
 在我们的数学架构中，智能体选择某个工具的决定不再是一个简单的字符串输出，而是被视为一个策略网络 $\pi_\theta(a|s)$ 所输出的数学概率。其中 $s$ 是当前状态（过去的对话历史与环境反馈），$a$ 则是具体的工具调用动作。
@@ -43,6 +48,13 @@
 ---
 
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
+### Code for 动态理论深潜：因果最小化工具过滤 (CMTF) 与目标推断
+```python
+def execute_tool_causal_graph(query, state, tools, goal_probs):
+    g_star = max(goal_probs, key=goal_probs.get)
+    return strict_filter_execute(state, g_star, tools)
+```
+
 
 以下的伪代码展示了我们是如何从“强化学习奖励评估”跳跃到“确定性约束拦截”的。
 
@@ -105,6 +117,9 @@ class ToolExecutionRouter:
 2. **深度截断 (`max_tool_chain_depth`)**：大模型最容易犯的错就是在一个工具里一直纠结报错出不来。这里是一条纯数学性质的物理斩断线。这体现了“我们不优化，我们保证收敛”——如果不能收敛到结果，那就强行收敛到“终止状态”，绝不允许系统失控发散。
 
 ## 4. 前沿演进：符号策略蒸馏实战 (Symbolic Policy Distillation)
+### Analogy for 动态理论深潜：因果最小化工具过滤 (CMTF) 与目标推断
+工具选择被装上了“因果条形码扫描仪”。每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏。
+
 
 为了应对日益复杂的组合工具需求，我们在近期的架构迭代中引入了“符号策略蒸馏”技术。这也是“从试错到绝对可控”的最核心实战落地。
 
@@ -142,16 +157,11 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
     return causal_dag
 ```
 
-### 📝 [Daily Research Chunk] 动态理论深潜：因果最小化工具过滤 (CMTF) 与目标推断
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Tool
-- **前沿来源**：arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents》。
-- **确定性收敛机制**：严格锁定后验推断上限 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 以及 $V_{t}=F(s_{t},g,T)$。通过物理因果过滤剔除所有发散的概率路径。
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-def execute_tool_causal_graph(query, state, tools, goal_probs):
-    g_star = max(goal_probs, key=goal_probs.get)
-    return strict_filter_execute(state, g_star, tools)
-```
-#### 💡 0基础业务通俗类比 (For Beginners)
-工具选择被装上了“因果条形码扫描仪”。每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏。
+
+### 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+#### 📂 动态演进映射
+- **[Tool System (工具系统)]**：引入了**因果最小化工具过滤 (CMTF) 与目标推断**，更新了执行路由机制，通过 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 严格锁定后验推断上限。
+#### 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
+- **冲突检测**：CMTF 的目标推断是否与现有的符号策略蒸馏（DAG）及确定性执行相冲突？
+- **推演结论**：**无冲突且具有相容性 (Compatible)**。
+- **证明简述**：符号策略蒸馏将概率转化为确定性因果图。CMTF 作为因果图边界的物理扫描仪，在触发执行之前进行严格过滤（$V_{t}=F(s_{t},g,T)$）。它物理排除了所有发散的概率路径，斩断了错误分支，从而在数学层面进一步加固了“必然的收敛”这一公理。
