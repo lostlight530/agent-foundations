@@ -22,6 +22,21 @@ In the context of agent memory, this represents a brutal mathematical "dimension
 ---
 
 ## 2. Core Mechanisms: Memory Compression & Anomaly Capture
+### Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+- **System Container**: Memory
+- **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
+- **Deterministic Convergence Mechanism**: DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
+
+### Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+- **所属系统容器**：Memory
+- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
+- **确定性收敛机制**：The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
+
+### Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+- **System Container**: Memory
+- **Frontier Source**: arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
+- **Deterministic Convergence Mechanism**: Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
+
 
 ### 2.1 Representation Learning & Temporal Contrast
 As an agent interacts with computers, webpages, or the real world, it constantly receives an overwhelming barrage of complex observations.
@@ -62,6 +77,102 @@ We do not use brute-force computing to memorize the superficial details of the w
 ---
 
 ## 4. Source Code Breakdown & Pseudocode
+### Code for Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+```python
+import math
+
+class DeterministicMemoryDecay:
+    def __init__(self, decay_rate_lambda=0.05, inertia_eta=0.8, kill_threshold=0.1):
+        self.lambda_val = decay_rate_lambda
+        self.eta_val = inertia_eta
+        self.omega_kill = kill_threshold
+        self.memory_entries = []
+        self.current_interaction_index = 0
+
+    def add_memory(self, text, survival_score_omega):
+        # survival_score_omega (Ω) is pre-computed deterministically from NLP features [0, 1]
+        entry = {
+            'text': text,
+            'omega': survival_score_omega,
+            'interaction_index': self.current_interaction_index
+        }
+        self.memory_entries.append(entry)
+        self.current_interaction_index += 1
+
+    def prune_memory(self):
+        retained_entries = []
+        for entry in self.memory_entries:
+            # Δn is the number of newer interactions
+            delta_n = self.current_interaction_index - entry['interaction_index']
+
+            # Calculate effective survival score Ω_eff(Δn)
+            # Equation: Ω_eff(Δn) = Ω * exp(-λ * (1 - η * Ω) * Δn)
+            omega = entry['omega']
+            exponent = -self.lambda_val * (1 - self.eta_val * omega) * delta_n
+            omega_eff = omega * math.exp(exponent)
+
+            # Deterministic eviction condition: evict(i) ⇔ Ω_{eff, i} < Ω_{kill}
+            if omega_eff >= self.omega_kill:
+                retained_entries.append(entry)
+
+        self.memory_entries = retained_entries
+        return self.memory_entries
+```
+
+### Code for Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+```python
+# Zero-dependency implementation of the DCS deterministic merge logic
+class JoinSemilatticeState:
+    def __init__(self):
+        # A set acts as a simple join-semilattice where union is the join operation
+        self.state = set()
+
+    def merge(self, payload_set):
+        # The join operation ⊔ (union) is commutative, associative, and idempotent
+        # M_i(k, t+1) <- M_i(k, t) ⊔ payload(δ)
+        self.state = self.state.union(payload_set)
+
+    def get_state(self):
+        # Sort to ensure deterministic observability
+        return sorted(list(self.state))
+
+class AgentNode:
+    def __init__(self, agent_id):
+        self.id = agent_id
+        # Local state M_i(k) for key k
+        self.local_states = {}
+
+    def receive_contribution(self, key, payload):
+        if key not in self.local_states:
+            self.local_states[key] = JoinSemilatticeState()
+
+        # Monotonic update: convergence guaranteed by Axiom 2
+        # (Directed-Complete Join Semilattice)
+        self.local_states[key].merge(payload)
+
+# Regardless of message order, agents converge to the same final state.
+agent_a = AgentNode("A")
+agent_b = AgentNode("B")
+
+# Schedule 1: Order A -> B
+agent_a.receive_contribution("task_1", {"fact_1"})
+agent_a.receive_contribution("task_1", {"fact_2"})
+
+# Schedule 2: Order B -> A (simulating network reordering)
+agent_b.receive_contribution("task_1", {"fact_2"})
+agent_b.receive_contribution("task_1", {"fact_1"})
+
+assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
+```
+
+### Code for Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+```python
+def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
+    # theta_0 is base policy, delta_t is the deterministic memory state
+    effective_weights = theta_0 + delta_t
+    return deterministic_sample(effective_weights, c_t)
+```
+
 
 ### 4.1 Contrastive Memory System
 
@@ -200,6 +311,20 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
+### Analogy for Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
+Using a traditional LLM black-box approach to organize this box is like hiring a highly unpredictable and expensive temp worker who randomly throws things away based on "gut feeling"—you never know what they might toss out next.
+In contrast, the "Deterministic Exponential Decay Law based on Interaction Count" introduces a strict set of physics. Every memory slowly fades away based on the "number of new events that have happened" ($\Delta n$, not how many days have passed). The speed at which it fades ($\lambda$) is not only fixed, but memories with initially higher "importance tags" will fade slower (protected by the inertia parameter $\eta$). Once a memory's clarity drops below a hard deadline ($\Omega_{\mathrm{kill}}$), it is 100% deterministically removed from the brain's "active workspace" and archived in a diary (long-term cold storage). This way, the storage box never overflows, and every retained memory is the result of precise mathematical calculation, completely eliminating the need for that expensive temp worker.
+
+### Analogy for Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+Imagine multiple people filling out a shared, massive puzzle (the memory state).
+Instead of fighting over who gets to place the next piece or worrying if someone mailed their piece late (policy & network routing), we assign every puzzle piece a unique barcode (Contribution with unique `rid`).
+
+Because of the "Join-Semilattice" math magic, putting the pieces together is like dumping them all on the table. It doesn't matter if you drop the pieces from your left hand first or your right hand first (order independence), and if you accidentally drop a duplicate piece, it just stacks perfectly on top of the identical one (idempotence). In the end, everyone who gets all the pieces will build the exact same deterministic picture, effectively separating "how the mail gets delivered" from "the truth of the puzzle".
+
+### Analogy for Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+It is like muscle memory encoded in your brain rather than looking up a notebook. You react deterministically, eliminating the risk of black-box hallucination when notes are misplaced.
+
 
 ### 5.1 Continuous-Time Hopfield Networks
 Imagine a librarian looking for a specific book. In a traditional (discrete) library, she checks exact shelves one by one. If a book falls between two known categories, she might be stuck or give a completely wrong answer (hallucination). The continuous-time Hopfield network transforms the library into a fluid spectrum. Instead of isolated shelves, knowledge is a continuous landscape. The "energy function" is like gravity pulling a ball down a smooth valley. No matter where the librarian starts searching, gravity guarantees she will slide smoothly and definitively into the correct valley of knowledge, never getting lost in empty space.
@@ -210,140 +335,10 @@ Imagine you have a huge, crumpled map of the world (a high-dimensional complex e
 "Topological Manifold Matching" acts like a mathematical microscope (Persistent Homology) that inspects every loop and connection. When we compress the map, we rigorously guarantee: if there is a real-world road between two cities, the compressed memory must also have that road. It ensures the "shape" of the memory never distorts.
 
 
-
 ### 🔗 [Weekly Sync Report] Weekly Document Cascade & Dynamic Conflict Audit
-
 #### 📂 Dynamic Evolution Mapping
-- **[Memory System]**: Introduced **Manifold-Matching Autoencoders**, updating feature extraction constraints and memory compression via Persistent Homology.
-
+- **[Memory System]**: Introduced **Deterministic Exponential Decay**, **Deterministic Causal Structure (DCS)**, and **Parametric Memory**, updating memory lifecycle constraints and state synchronization.
 #### 🕵️ Paradigm Conflict Audit
-- **Conflict Detection**:
-  **Target**: Does the newly introduced Manifold-Matching Autoencoder (using $\mathcal{L}_{\text{topo}}$) destroy the convergence of the Continuous-Time Hopfield Network or conflict with causal state premises?
-  **Deduction**: **No Conflict; Mathematically Compatible**.
-  **Proof Sketch**: The manifold-matching autoencoder merely uses distance constraints to ensure the topological connectivity of reduced features. It updates the base projection of the latent space topology $x_{bar}(t)$, but because the distance metric is continuous, the projection remains strictly within a Lipschitz-continuous closed domain. Therefore, the gradient flow of the Hopfield energy function $E(q)$ over these safely projected features remains unchanged. The deterministic iteration driven by Gibbs probability density holds strictly. The system will never diverge; instead, manifold smoothing accelerates and stabilizes the convergence towards the optimal valley.
-
-### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
-#### 🔬 Selection Rationale & Academic Lineage
-- **System Container**: Memory
-- **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
-- **Deterministic Convergence Mechanism**: DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
-
-#### 💻 Source Code Breakdown
-```python
-import math
-
-class DeterministicMemoryDecay:
-    def __init__(self, decay_rate_lambda=0.05, inertia_eta=0.8, kill_threshold=0.1):
-        self.lambda_val = decay_rate_lambda
-        self.eta_val = inertia_eta
-        self.omega_kill = kill_threshold
-        self.memory_entries = []
-        self.current_interaction_index = 0
-
-    def add_memory(self, text, survival_score_omega):
-        # survival_score_omega (Ω) is pre-computed deterministically from NLP features [0, 1]
-        entry = {
-            'text': text,
-            'omega': survival_score_omega,
-            'interaction_index': self.current_interaction_index
-        }
-        self.memory_entries.append(entry)
-        self.current_interaction_index += 1
-
-    def prune_memory(self):
-        retained_entries = []
-        for entry in self.memory_entries:
-            # Δn is the number of newer interactions
-            delta_n = self.current_interaction_index - entry['interaction_index']
-
-            # Calculate effective survival score Ω_eff(Δn)
-            # Equation: Ω_eff(Δn) = Ω * exp(-λ * (1 - η * Ω) * Δn)
-            omega = entry['omega']
-            exponent = -self.lambda_val * (1 - self.eta_val * omega) * delta_n
-            omega_eff = omega * math.exp(exponent)
-
-            # Deterministic eviction condition: evict(i) ⇔ Ω_{eff, i} < Ω_{kill}
-            if omega_eff >= self.omega_kill:
-                retained_entries.append(entry)
-
-        self.memory_entries = retained_entries
-        return self.memory_entries
-```
-
-#### 💡 0-Foundation Business Analogy (For Beginners)
-Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
-Using a traditional LLM black-box approach to organize this box is like hiring a highly unpredictable and expensive temp worker who randomly throws things away based on "gut feeling"—you never know what they might toss out next.
-In contrast, the "Deterministic Exponential Decay Law based on Interaction Count" introduces a strict set of physics. Every memory slowly fades away based on the "number of new events that have happened" ($\Delta n$, not how many days have passed). The speed at which it fades ($\lambda$) is not only fixed, but memories with initially higher "importance tags" will fade slower (protected by the inertia parameter $\eta$). Once a memory's clarity drops below a hard deadline ($\Omega_{\mathrm{kill}}$), it is 100% deterministically removed from the brain's "active workspace" and archived in a diary (long-term cold storage). This way, the storage box never overflows, and every retained memory is the result of precise mathematical calculation, completely eliminating the need for that expensive temp worker.
-
-### 📝 [Daily Research Chunk] 动态理论深潜：Deterministic Causal Structure (DCS)
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Memory
-- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
-- **确定性收敛机制**：The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-# Zero-dependency implementation of the DCS deterministic merge logic
-class JoinSemilatticeState:
-    def __init__(self):
-        # A set acts as a simple join-semilattice where union is the join operation
-        self.state = set()
-
-    def merge(self, payload_set):
-        # The join operation ⊔ (union) is commutative, associative, and idempotent
-        # M_i(k, t+1) <- M_i(k, t) ⊔ payload(δ)
-        self.state = self.state.union(payload_set)
-
-    def get_state(self):
-        # Sort to ensure deterministic observability
-        return sorted(list(self.state))
-
-class AgentNode:
-    def __init__(self, agent_id):
-        self.id = agent_id
-        # Local state M_i(k) for key k
-        self.local_states = {}
-
-    def receive_contribution(self, key, payload):
-        if key not in self.local_states:
-            self.local_states[key] = JoinSemilatticeState()
-
-        # Monotonic update: convergence guaranteed by Axiom 2
-        # (Directed-Complete Join Semilattice)
-        self.local_states[key].merge(payload)
-
-# Regardless of message order, agents converge to the same final state.
-agent_a = AgentNode("A")
-agent_b = AgentNode("B")
-
-# Schedule 1: Order A -> B
-agent_a.receive_contribution("task_1", {"fact_1"})
-agent_a.receive_contribution("task_1", {"fact_2"})
-
-# Schedule 2: Order B -> A (simulating network reordering)
-agent_b.receive_contribution("task_1", {"fact_2"})
-agent_b.receive_contribution("task_1", {"fact_1"})
-
-assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
-```
-
-#### 💡 0基础业务通俗类比 (For Beginners)
-Imagine multiple people filling out a shared, massive puzzle (the memory state).
-Instead of fighting over who gets to place the next piece or worrying if someone mailed their piece late (policy & network routing), we assign every puzzle piece a unique barcode (Contribution with unique `rid`).
-
-Because of the "Join-Semilattice" math magic, putting the pieces together is like dumping them all on the table. It doesn't matter if you drop the pieces from your left hand first or your right hand first (order independence), and if you accidentally drop a duplicate piece, it just stacks perfectly on top of the identical one (idempotence). In the end, everyone who gets all the pieces will build the exact same deterministic picture, effectively separating "how the mail gets delivered" from "the truth of the puzzle".
-
-### 📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
-#### 🔬 Selection Rationale & Academic Lineage
-- **System Container**: Memory
-- **Frontier Source**: arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
-- **Deterministic Convergence Mechanism**: Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
-#### 💻 Source Code Breakdown
-```python
-def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
-    # theta_0 is base policy, delta_t is the deterministic memory state
-    effective_weights = theta_0 + delta_t
-    return deterministic_sample(effective_weights, c_t)
-```
-#### 💡 For Beginners
-It is like muscle memory encoded in your brain rather than looking up a notebook. You react deterministically, eliminating the risk of black-box hallucination when notes are misplaced.
+- **Conflict Detection**: Do parametric memory integration and exponential decay contradict the Continuous-Time Memory Hopfield Networks or the DCS join-semilattice update rule?
+- **Deduction**: **No Conflict; Mathematically Compatible**.
+- **Proof Sketch**: DCS enforces monotonic state updates via a join-semilattice ($x\sqsubseteq x\sqcup y$). Exponential decay bounds the survival score $\Omega$, preventing unbounded state bloat. These bounds act as a pre-filtration on the memory items submitted to the Hopfield network and DCS. The parametric shift $\Delta_t$ encodes these preserved memories directly into the weights $\theta_0+\Delta_t$, acting as a deterministic attractor landscape. The system converges reliably because memory eviction is not probabilistic, preserving the topological integrity of the continuous-time energy function.
