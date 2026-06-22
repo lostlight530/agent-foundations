@@ -68,6 +68,14 @@ Building on feature extraction, the Memory System incorporates Topological Data 
 * **Joint Dimensionality Reduction**: By constructing the joint distance matrix $D_{\text{joint}}=\begin{pmatrix}\mathbf{0}_{n\times n}&D_{X}^{T}\\D_{X}&\min(D_{X},D_{Z})\end{pmatrix}$, we mathematically ensure that memory concepts do not suffer manifold tearing under extreme compression, making sure anomaly detection occurs within the mathematically correct measure space.
 
 
+### 2.6 Decentralized Semantic Slice Alignment
+- **System Container**: Memory
+- **Frontier Source**: arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems"). Chosen because it provides a rigorous formal model for decentralizing memory alignment without centralized control, directly eliminating single points of failure (SPOF) while maintaining deterministic semantic coherence.
+- **Deterministic Convergence Mechanism**: The framework establishes a strict upper bound on invalid memory commits via $\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$, where $\varepsilon_{\max}$ is the local false acceptance probability and $r$ is the number of overlapping validators. This strict mathematical upper bound deterministically contains failure without centralized coordination.
+
+**💡 For Beginners**:
+Imagine a massive global library (Global Memory) where no single head librarian is in charge. Instead, each local librarian (Agent) is responsible for only a specific aisle (Ontology Slice). When a new book is added or revised anywhere in the library, a notification is sent out. A local librarian only pays attention if the book belongs to their aisle. Before putting the book on the shelf, they require at least $r$ independent expert reviewers to verify it. Even if one reviewer is wrong (with a small probability $\varepsilon_{\max}$), the chance of all $r$ reviewers being simultaneously wrong drops exponentially. Therefore, every local librarian's aisle deterministically matches the "true" state of the global library over time, without ever needing a central boss to coordinate them!
+
 ## 3. Why Unsupervised Learning?
 
 In the long and lonely lifecycle of an agent, there can be no real-time, perfect human tutor labeling every action as "right" or "wrong." Unsupervised learning (especially contrastive learning) empowers the agent to "bootstrap" itself, automatically building a physically intuitive "World Model" purely from massive amounts of self-interaction.
@@ -334,22 +342,7 @@ Imagine a librarian looking for a specific book. In a traditional (discrete) lib
 Imagine you have a huge, crumpled map of the world (a high-dimensional complex environment). If you squash it flat into a picture frame (traditional dimensionality reduction), neighboring cities might be torn apart, or different continents forcefully glued together (triggering disastrous hallucinations in downstream decisions).
 "Topological Manifold Matching" acts like a mathematical microscope (Persistent Homology) that inspects every loop and connection. When we compress the map, we rigorously guarantee: if there is a real-world road between two cities, the compressed memory must also have that road. It ensures the "shape" of the memory never distorts.
 
-
-### 🔗 [Weekly Sync Report] Weekly Document Cascade & Dynamic Conflict Audit
-#### 📂 Dynamic Evolution Mapping
-- **[Memory System]**: Introduced **Deterministic Exponential Decay**, **Deterministic Causal Structure (DCS)**, and **Parametric Memory**, updating memory lifecycle constraints and state synchronization.
-#### 🕵️ Paradigm Conflict Audit
-- **Conflict Detection**: Do parametric memory integration and exponential decay contradict the Continuous-Time Memory Hopfield Networks or the DCS join-semilattice update rule?
-- **Deduction**: **No Conflict; Mathematically Compatible**.
-- **Proof Sketch**: DCS enforces monotonic state updates via a join-semilattice ($x\sqsubseteq x\sqcup y$). Exponential decay bounds the survival score $\Omega$, preventing unbounded state bloat. These bounds act as a pre-filtration on the memory items submitted to the Hopfield network and DCS. The parametric shift $\Delta_t$ encodes these preserved memories directly into the weights $\theta_0+\Delta_t$, acting as a deterministic attractor landscape. The system converges reliably because memory eviction is not probabilistic, preserving the topological integrity of the continuous-time energy function.
-
-### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Decentralized Semantic Slice Alignment
-#### 🔬 Selection Rationale & Academic Lineage
-- **System Container**: Memory
-- **Frontier Source**: arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems"). Chosen because it provides a rigorous formal model for decentralizing memory alignment without centralized control, directly eliminating single points of failure (SPOF) while maintaining deterministic semantic coherence.
-- **Deterministic Convergence Mechanism**: The framework establishes a strict upper bound on invalid memory commits via $\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$, where $\varepsilon_{\max}$ is the local false acceptance probability and $r$ is the number of overlapping validators. This strict mathematical upper bound deterministically contains failure without centralized coordination.
-
-#### 💻 Source Code Breakdown
+### 4.4 Deterministic Semantic Slice Synchronization
 ```python
 def synchronize_semantic_slice(
     local_memory: dict,
@@ -381,6 +374,3 @@ def synchronize_semantic_slice(
 
     return local_memory
 ```
-
-#### 💡 For Beginners
-Imagine a massive global library (Global Memory) where no single head librarian is in charge. Instead, each local librarian (Agent) is responsible for only a specific aisle (Ontology Slice). When a new book is added or revised anywhere in the library, a notification is sent out. A local librarian only pays attention if the book belongs to their aisle. Before putting the book on the shelf, they require at least $r$ independent expert reviewers to verify it. Even if one reviewer is wrong (with a small probability $\varepsilon_{\max}$), the chance of all $r$ reviewers being simultaneously wrong drops exponentially. Therefore, every local librarian's aisle deterministically matches the "true" state of the global library over time, without ever needing a central boss to coordinate them!
