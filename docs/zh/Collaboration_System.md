@@ -369,3 +369,56 @@ def asynchronous_decentralized_step(x_v, z_v, h_v, g_v, a_vu, w_vu, mu, alpha, r
 - **量化去中心化共识 ALADIN（新机制）**：每个专家用聪明的方法在脑子里模拟未来趋势。打电话沟通时，他们不说长篇大论，只报一个“粗略的整数挡位（量化通信）”。由于数学上的精妙设计，大家只凭这些简单的数字，就能在脑中拼接出全局最优趋势。结果是，不用传厚文件，也没主管拍板，却能“确定性”地以惊人速度敲定完美预算案！
 
 
+
+### 📝 [Daily Research Chunk] 动态理论深潜：行随机网络下的确定性多步梯度追踪
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). 选择该理论是因为它突破了去中心化优化长期依赖“双随机”或“列随机”通信矩阵的限制，首次证明了在更符合真实单向广播场景的“行随机(Row-Stochastic)”网络中，系统仍能实现确定性的线性加速。
+- **确定性收敛机制**：理论证明了当多轮Gossip通信次数满足 $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$ 时，算法可完全补偿行随机不对称带来的下降方向偏移。通过特征向量追踪对角线补偿，严格约束了总迭代步数收敛下界为 $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$。
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
+    """
+    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
+    基于提取自 Algorithm 3 的真实伪代码逻辑。
+    """
+    # 1. 局部状态初始化
+    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
+    phi_i = x_i_t - gamma * y_i_t
+    v_inner_i = v_i_t_0
+
+    # 2. 多轮拓扑同步 (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
+        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
+        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
+        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
+
+    # 3. 状态提交与新梯度计算
+    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
+    next_x_i = phi_i
+    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
+    next_v_i_0 = v_inner_i
+
+    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
+    next_g_i = calc_grad_f(next_x_i)
+
+    # 4. 带对角线补偿的追踪变量计算
+    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
+    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
+
+    # 5. 追踪变量的多轮同步 (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
+        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
+
+    # 6. 最终更新
+    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
+    next_y_i = psi_i
+
+    return next_x_i, next_y_i, next_v_i_0, next_g_i
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一个大型跨国企业，信息流动是“单向”的（A部门会听取B部门，但B部门不听A的，即“行随机网络”）。
+- **过去的问题**：因为缺乏双向确认，某些“大嗓门”部门的意见会被无限放大，导致全公司战略方向发散崩溃。
+- **全新的机制 (MG-Pull-Diag-GT)**：每个部门都在心里维护一个“偏见追踪器 ($v_i$)”，精确计算自己受哪些单向声音影响最大。在做出任何战略调整（梯度更新）前，先快速开几轮对齐短会（多轮Gossip，$R$ 次），并严格用这个追踪器去除杂音。数学证明了，即使在极其不对称的单向沟通网络中，只要遵守这套规则，全公司也必定能完美协同收敛到同一个最优战略。

@@ -371,3 +371,56 @@ Imagine experts from different departments drafting a budget for a massive proje
 - **Quantized Decentralized Consensus ALADIN (New Mechanism)**: Every expert uses a clever mental trick (BFGS) to simulate future trends privately. When calling others, they don't give long speeches or precise decimals; they report a "rough integer bracket (quantized communication)." Due to mathematical design, these rough numbers allow everyone to mentally piece together the optimal global trend. Without thick documents or a central supervisor, they deterministically finalize a perfect budget at astonishing speed!
 
 
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). Chosen because it breaks the limitation of requiring doubly-stochastic or column-stochastic matrices, proving that row-stochastic networks can achieve deterministic linear speedup via the MG-Pull-Diag-GT protocol.
+- **确定性收敛机制**：The paper proves that under standard assumptions, when the multi-round gossip communication number $R$ satisfies $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$, the algorithm compensates for descent deviation. The total iterations are strictly bounded to converge deterministically when $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$.
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
+    """
+    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
+    Extracted directly from Algorithm 3.
+    """
+    # 1. State Initialization
+    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
+    phi_i = x_i_t - gamma * y_i_t
+    v_inner_i = v_i_t_0
+
+    # 2. Multi-round Gossip (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
+        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
+        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
+        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
+
+    # 3. Update States
+    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
+    next_x_i = phi_i
+    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
+    next_v_i_0 = v_inner_i
+
+    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
+    next_g_i = calc_grad_f(next_x_i)
+
+    # 4. Compute tracking variable with diagonal compensation
+    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
+    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
+
+    # 5. Multi-round Gossip for gradient tracking (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
+        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
+
+    # 6. Final Update
+    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
+    next_y_i = psi_i
+
+    return next_x_i, next_y_i, next_v_i_0, next_g_i
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine a company where information only flows in one direction (A tells B, but B cannot tell A - Row-stochastic network).
+- **Old problem**: Without two-way confirmation, rumors (gradients) get amplified indefinitely, and the consensus diverges.
+- **New method (MG-Pull-Diag-GT)**: Every employee keeps a bias tracker ($v_i$) that calculates exactly how much they are being influenced by the loudest one-way talkers. Before making any project decision, they run multiple fast alignment meetings ($R$ rounds) and divide their action plan by this tracker. This mathematically guarantees that even in one-way communication networks, everyone will deterministically converge to the exact same optimal company goal.
