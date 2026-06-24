@@ -422,3 +422,51 @@ def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, c
 想象一个大型跨国企业，信息流动是“单向”的（A部门会听取B部门，但B部门不听A的，即“行随机网络”）。
 - **过去的问题**：因为缺乏双向确认，某些“大嗓门”部门的意见会被无限放大，导致全公司战略方向发散崩溃。
 - **全新的机制 (MG-Pull-Diag-GT)**：每个部门都在心里维护一个“偏见追踪器 ($v_i$)”，精确计算自己受哪些单向声音影响最大。在做出任何战略调整（梯度更新）前，先快速开几轮对齐短会（多轮Gossip，$R$ 次），并严格用这个追踪器去除杂音。数学证明了，即使在极其不对称的单向沟通网络中，只要遵守这套规则，全公司也必定能完美协同收敛到同一个最优战略。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：基于梯度追踪的去中心化高概率收敛 (Gradient Tracking in DecDPO)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：*High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). 选用此理论是因为它打破了传统去中心化随机梯度下降（DSGD）对异质数据的强假设，引入梯度追踪（Gradient Tracking）实现了即使在高噪声下也能保证高概率收敛的确定性边界，完美契合我们彻底摒弃单点故障（SPOF）的分布式优化蓝图。
+- **确定性收敛机制**：在放宽次高斯噪声的条件下，严格证明了对于非凸函数，其高概率（HP）收敛界为 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$。核心机制通过参数更新方程与梯度修正项解耦实现：参数收敛 $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$，其中追踪方向 $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ 利用邻居节点权重矩阵 $w_{ij}$ 消除系统残差。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
+def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
+    """
+    node_id: Current agent ID
+    x_t: Current parameter state of the node
+    y_t: Current tracked gradient direction of the node
+    g_t_prev: Previous raw gradient (g^{t-1})
+    alpha_t: Learning rate
+    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
+    compute_gradient: Function to compute current stochastic gradient
+    """
+    # 1. Compute local stochastic gradient
+    g_t_curr = compute_gradient(x_t)
+
+    # 2. Receive neighbors' parameters and tracking vectors
+    # (In practice, this implies fetching state from connected agents)
+    x_neighbors = fetch_neighbor_states('x')
+    y_neighbors = fetch_neighbor_states('y')
+    g_neighbors_curr = fetch_neighbor_states('g_curr')
+    g_neighbors_prev = fetch_neighbor_states('g_prev')
+
+    # 3. Update local parameters via decentralized mixing
+    x_next = 0
+    for j, w_ij in neighbors_weights.items():
+        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
+
+    # 4. Update tracking vector (Gradient Tracking)
+    y_next = 0
+    for j, w_ij in neighbors_weights.items():
+        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
+
+    return x_next, y_next, g_t_curr
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+**“盲人摸象”的终结：分公司如何不靠总公司也能做出完美决策？**
+想象一个没有总部的跨国企业（完全去中心化）。每个分公司（Agent）都在自己所在的国家做市场调研（计算局部梯度 $g_i$）。
+如果只是简单地和隔壁分公司交流经验（传统的 DSGD），很容易出现“盲人摸象”——大家都只看到局部，导致全局战略疯狂摇摆。
+**梯度追踪（Gradient Tracking）** 就像是给每个分公司发了一个“全局趋势预测器”（追踪向量 $y_i$）。分公司不仅交流当前的行动方案，还交流“我们对市场变化的预期差”（$g^{t}_{j}-g^{t-1}_{j}$）。通过这种双重确认，即使没有总部统筹，所有分公司也能以数学上绝对确定的概率（高概率收敛界 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$）达成完美的全球统一战略。
