@@ -472,3 +472,49 @@ def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights,
 Imagine a multinational corporation with zero headquarters (purely decentralized). Every branch office (Agent) conducts its own market research locally (computing local gradient $g_i$).
 If they merely exchange basic experiences with neighboring branches (traditional DSGD), they fall into the "blind men and the elephant" trap—everyone only sees a partial picture, causing the global strategy to violently oscillate.
 **Gradient Tracking** is like equipping every branch with a "Global Trend Predictor" (tracking vector $y_i$). Branches don't just exchange their current plans; they also exchange their "expected shift in market dynamics" ($g^{t}_{j}-g^{t-1}_{j}$). Through this dual-confirmation mechanism, even without a central HQ, all branches will mathematically converge on a perfect global strategy with absolute certainty (a high-probability convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$).
+
+### 📝 [Daily Research Chunk] 动态理论深潜：Decentralized Stochastic Optimization with Gradient Tracking
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2605.00281v1 "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking". This theory is selected because it strictly enforces Decentralized Distributed Optimization (DecDPO) principles, eliminating Single Points of Failure (SPOF) while guaranteeing bounded convergence without centralized coordination.
+- **确定性收敛机制**：The framework provides a deterministic high-probability upper bound on the optimization error, guaranteeing a convergence rate bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$, relying on the exact synchronization constraint where $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$.
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def decentralized_gradient_tracking_step(
+    x_t: dict,           # Current parameters for each node i
+    y_t_minus_1: dict,   # Previous tracked gradient for each node i
+    g_t: dict,           # Current stochastic gradient g_{i}^{t} for each node
+    g_t_minus_1: dict,   # Previous stochastic gradient for each node
+    alpha_t: float,      # Step size \alpha_{t}
+    N_i: callable,       # Neighborhood set \mathcal{N}_{i} for node i
+    w_ij: callable       # Mixing matrix weight function w_{ij}
+) -> tuple:
+    """
+    Executes one step of decentralized gradient tracking and parameter update.
+    """
+    # 1. Update the tracked gradient y^{t}_{i}
+    # Mathematical formulation: y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
+    y_t = {}
+    for i in x_t.keys():
+        y_t[i] = sum(
+            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
+            for j in N_i(i)
+        )
+
+    # 2. Update the parameters x^{t+1}_{i}
+    # Mathematical formulation: x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
+    x_t_plus_1 = {}
+    for i in x_t.keys():
+        x_t_plus_1[i] = sum(
+            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
+            for j in N_i(i)
+        )
+
+    return x_t_plus_1, y_t
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine a decentralized fleet of delivery trucks (nodes) trying to find the optimal global route (optimization problem) without a central dispatcher (eliminating SPOF). If each driver only looks at local traffic, they might diverge. However, with "Gradient Tracking", drivers constantly share both their current location and their *changes in traffic assessment* with nearby trucks ($g^t_j - g^{t-1}_j$). By blending this shared information, the entire fleet behaves like a single, massive coordinated truck, mathematically guaranteeing they will reach the best routes with high probability bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$.
