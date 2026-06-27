@@ -92,6 +92,129 @@ Imagine a massive global logistics network where distribution centers need to ne
 However, the network is terrible: emails from some centers are severely delayed, and some communication lines are one-way (can send but not receive). In a synchronous meeting setup, the entire network would freeze and deadlock just waiting for a single late email.
 Under the asynchronous decentralized mechanism, every center maintains two secret reconciliation ledgers ($\mathbf{p}^{v}$ and $\mathbf{h}^{v}$). If a neighbor's new email doesn't arrive on time, the center simply estimates the situation based on old emails. Although they are acting on "outdated" information every time, those two ledgers operate mathematical calculations in the background to precisely cancel out the bias caused by the time lag and one-way transmissions. This rigorous mathematical system ensures that even if everyone is forever communicating with delayed information, the entire logistics network will 100% reliably arrive at the exact same perfect scheduling plan without any divergence.
 
+
+### 2.6 Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). Chosen because it breaks the limitation of requiring doubly-stochastic or column-stochastic matrices, proving that row-stochastic networks can achieve deterministic linear speedup via the MG-Pull-Diag-GT protocol.
+- **确定性收敛机制**：The paper proves that under standard assumptions, when the multi-round gossip communication number $R$ satisfies $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$, the algorithm compensates for descent deviation. The total iterations are strictly bounded to converge deterministically when $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$.
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
+    """
+    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
+    Extracted directly from Algorithm 3.
+    """
+    # 1. State Initialization
+    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
+    phi_i = x_i_t - gamma * y_i_t
+    v_inner_i = v_i_t_0
+
+    # 2. Multi-round Gossip (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
+        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
+        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
+        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
+
+    # 3. Update States
+    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
+    next_x_i = phi_i
+    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
+    next_v_i_0 = v_inner_i
+
+    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
+    next_g_i = calc_grad_f(next_x_i)
+
+    # 4. Compute tracking variable with diagonal compensation
+    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
+    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
+
+    # 5. Multi-round Gossip for gradient tracking (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
+        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
+
+    # 6. Final Update
+    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
+    next_y_i = psi_i
+
+    return next_x_i, next_y_i, next_v_i_0, next_g_i
+```
+#### 💡 0基础业务通俗类比 (For Beginners)
+Imagine a company where information only flows in one direction (A tells B, but B cannot tell A - Row-stochastic network).
+- **Old problem**: Without two-way confirmation, rumors (gradients) get amplified indefinitely, and the consensus diverges.
+- **New method (MG-Pull-Diag-GT)**: Every employee keeps a bias tracker ($v_i$) that calculates exactly how much they are being influenced by the loudest one-way talkers. Before making any project decision, they run multiple fast alignment meetings ($R$ rounds) and divide their action plan by this tracker. This mathematically guarantees that even in one-way communication networks, everyone will deterministically converge to the exact same optimal company goal.
+
+### 2.10 High-Probability Convergence via Gradient Tracking in DecDPO (Duplicate/Extra)
+#### 🔬 Selection Rationale & Academic Context
+- **System Container**: Collaboration
+- **Frontier Source**: *High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). This theory was selected because it shatters the strong assumptions on data heterogeneity required by traditional Decentralized Stochastic Gradient Descent (DSGD). By introducing Gradient Tracking, it guarantees high-probability convergence even under relaxed noise conditions, perfectly aligning with our blueprint of eliminating Single Points of Failure (SPOF) through purely decentralized architecture.
+- **Deterministic Convergence Mechanism**: It strictly proves a high-probability (HP) convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$ for non-convex functions under relaxed sub-Gaussian noise. The core mechanism decouples parameter updates from gradient corrections: parameter convergence is given by $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$, while the tracking direction $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ leverages the neighbor weight matrix $w_{ij}$ to eliminate systemic steady-state errors.
+
+#### 💻 Source Code Breakdown
+```python
+# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
+def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
+    """
+    node_id: Current agent ID
+    x_t: Current parameter state of the node
+    y_t: Current tracked gradient direction of the node
+    g_t_prev: Previous raw gradient (g^{t-1})
+    alpha_t: Learning rate
+    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
+    compute_gradient: Function to compute current stochastic gradient
+    """
+    # 1. Compute local stochastic gradient
+    g_t_curr = compute_gradient(x_t)
+
+    # 2. Receive neighbors' parameters and tracking vectors
+    # (In practice, this implies fetching state from connected agents)
+    x_neighbors = fetch_neighbor_states('x')
+    y_neighbors = fetch_neighbor_states('y')
+    g_neighbors_curr = fetch_neighbor_states('g_curr')
+    g_neighbors_prev = fetch_neighbor_states('g_prev')
+
+    # 3. Update local parameters via decentralized mixing
+    x_next = 0
+    for j, w_ij in neighbors_weights.items():
+        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
+
+    # 4. Update tracking vector (Gradient Tracking)
+    y_next = 0
+    for j, w_ij in neighbors_weights.items():
+        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
+
+    return x_next, y_next, g_t_curr
+```
+
+#### 💡 For Beginners (Business Analogy)
+**The End of the "Blind Men and the Elephant": How Branch Offices Make Perfect Decisions Without a Headquarters**
+Imagine a multinational corporation with zero headquarters (purely decentralized). Every branch office (Agent) conducts its own market research locally (computing local gradient $g_i$).
+If they merely exchange basic experiences with neighboring branches (traditional DSGD), they fall into the "blind men and the elephant" trap—everyone only sees a partial picture, causing the global strategy to violently oscillate.
+**Gradient Tracking** is like equipping every branch with a "Global Trend Predictor" (tracking vector $y_i$). Branches don't just exchange their current plans; they also exchange their "expected shift in market dynamics" ($g^{t}_{j}-g^{t-1}_{j}$). Through this dual-confirmation mechanism, even without a central HQ, all branches will mathematically converge on a perfect global strategy with absolute certainty (a high-probability convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$).
+
+### 2.11 Decentralized Stochastic Optimization with Gradient Tracking (Duplicate/Extra)
+
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2605.00281v1 "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking". This theory is selected because it strictly enforces Decentralized Distributed Optimization (DecDPO) principles, eliminating Single Points of Failure (SPOF) while guaranteeing bounded convergence without centralized coordination.
+- **确定性收敛机制**：The framework provides a deterministic high-probability upper bound on the optimization error, guaranteeing a convergence rate bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$, relying on the exact synchronization constraint where $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$.
+
+### 2.7 High-Probability Convergence via Gradient Tracking in DecDPO
+- **System Container**: Collaboration
+- **Frontier Source**: *High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). This theory was selected because it shatters the strong assumptions on data heterogeneity required by traditional Decentralized Stochastic Gradient Descent (DSGD). By introducing Gradient Tracking, it guarantees high-probability convergence even under relaxed noise conditions, perfectly aligning with our blueprint of eliminating Single Points of Failure (SPOF) through purely decentralized architecture.
+- **Deterministic Convergence Mechanism**: It strictly proves a high-probability (HP) convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$ for non-convex functions under relaxed sub-Gaussian noise. The core mechanism decouples parameter updates from gradient corrections: parameter convergence is given by $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$, while the tracking direction $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ leverages the neighbor weight matrix $w_{ij}$ to eliminate systemic steady-state errors.
+
+### 2.8 Decentralized Stochastic Optimization with Gradient Tracking
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2605.00281v1 "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking". This theory is selected because it strictly enforces Decentralized Distributed Optimization (DecDPO) principles, eliminating Single Points of Failure (SPOF) while guaranteeing bounded convergence without centralized coordination.
+- **确定性收敛机制**：The framework provides a deterministic high-probability upper bound on the optimization error, guaranteeing a convergence rate bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$, relying on the exact synchronization constraint where $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$.
+
+### 2.9 Accelerated Decentralized Constraint-Coupled Optimization (iD2A)
+- **System Container**: Collaboration
+- **Frontier Source**: [arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach. Selected because it develops accelerated algorithms in decentralized networks via a Dual$^2$ method.
+- **Deterministic Convergence Mechanism**: The algorithm achieves highly deterministic convergence in decentralized settings. The core update equations are strictly defined as $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ and $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$.
+
 ## 3. Source Code Breakdown & Pseudocode
 ### Code for Dynamic Theory Deep Dive: Decentralized Stochastic Gradient Tracking (DSGT)
 ```python
@@ -321,6 +444,132 @@ def asynchronous_decentralized_step(x_v, z_v, h_v, g_v, a_vu, w_vu, mu, alpha, r
     return next_x_v, next_z_v, next_h_v, next_g_v
 ```
 
+
+### 3.5 Code for Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
+```python
+def decentralized_gradient_tracking_step(
+    x_t: dict,           # Current parameters for each node i
+    y_t_minus_1: dict,   # Previous tracked gradient for each node i
+    g_t: dict,           # Current stochastic gradient g_{i}^{t} for each node
+    g_t_minus_1: dict,   # Previous stochastic gradient for each node
+    alpha_t: float,      # Step size \alpha_{t}
+    N_i: callable,       # Neighborhood set \mathcal{N}_{i} for node i
+    w_ij: callable       # Mixing matrix weight function w_{ij}
+) -> tuple:
+    """
+    Executes one step of decentralized gradient tracking and parameter update.
+    """
+    # 1. Update the tracked gradient y^{t}_{i}
+    # Mathematical formulation: y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
+    y_t = {}
+    for i in x_t.keys():
+        y_t[i] = sum(
+            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
+            for j in N_i(i)
+        )
+
+    # 2. Update the parameters x^{t+1}_{i}
+    # Mathematical formulation: x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
+    x_t_plus_1 = {}
+    for i in x_t.keys():
+        x_t_plus_1[i] = sum(
+            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
+            for j in N_i(i)
+        )
+
+    return x_t_plus_1, y_t
+```
+
+### 3.6 Code for High-Probability Convergence via Gradient Tracking in DecDPO
+```python
+# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
+def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
+    """
+    node_id: Current agent ID
+    x_t: Current parameter state of the node
+    y_t: Current tracked gradient direction of the node
+    g_t_prev: Previous raw gradient (g^{t-1})
+    alpha_t: Learning rate
+    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
+    compute_gradient: Function to compute current stochastic gradient
+    """
+    # 1. Compute local stochastic gradient
+    g_t_curr = compute_gradient(x_t)
+
+    # 2. Receive neighbors' parameters and tracking vectors
+    # (In practice, this implies fetching state from connected agents)
+    x_neighbors = fetch_neighbor_states('x')
+    y_neighbors = fetch_neighbor_states('y')
+    g_neighbors_curr = fetch_neighbor_states('g_curr')
+    g_neighbors_prev = fetch_neighbor_states('g_prev')
+
+    # 3. Update local parameters via decentralized mixing
+    x_next = 0
+    for j, w_ij in neighbors_weights.items():
+        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
+
+    # 4. Update tracking vector (Gradient Tracking)
+    y_next = 0
+    for j, w_ij in neighbors_weights.items():
+        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
+
+    return x_next, y_next, g_t_curr
+```
+
+### 3.7 Code for Decentralized Stochastic Optimization with Gradient Tracking
+```python
+def decentralized_gradient_tracking_step(
+    x_t: dict,           # Current parameters for each node i
+    y_t_minus_1: dict,   # Previous tracked gradient for each node i
+    g_t: dict,           # Current stochastic gradient g_{i}^{t} for each node
+    g_t_minus_1: dict,   # Previous stochastic gradient for each node
+    alpha_t: float,      # Step size \alpha_{t}
+    N_i: callable,       # Neighborhood set \mathcal{N}_{i} for node i
+    w_ij: callable       # Mixing matrix weight function w_{ij}
+) -> tuple:
+    """
+    Executes one step of decentralized gradient tracking and parameter update.
+    """
+    # 1. Update the tracked gradient y^{t}_{i}
+    # Mathematical formulation: y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
+    y_t = {}
+    for i in x_t.keys():
+        y_t[i] = sum(
+            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
+            for j in N_i(i)
+        )
+
+    # 2. Update the parameters x^{t+1}_{i}
+    # Mathematical formulation: x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
+    x_t_plus_1 = {}
+    for i in x_t.keys():
+        x_t_plus_1[i] = sum(
+            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
+            for j in N_i(i)
+        )
+
+    return x_t_plus_1, y_t
+```
+
+### 3.8 Code for Accelerated Decentralized Constraint-Coupled Optimization (iD2A)
+```python
+def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
+    # Zero-dependency deterministic algorithm implementation of the core mechanism
+    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
+    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
+
+    # 1. Update based on C and lambda
+    step_update = C @ lambda_k_plus_1
+
+    # 2. Update w^{k+1}
+    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
+
+    # 3. Update z^{k+1}
+    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
+
+    return w_k_plus_1, z_k_plus_1
+```
+
 ## 4. The Global Defense: Mathematical Immunity to SPOF
 
 In the wake of industry scandals where central server failures paralyzed entire multi-agent networks, our collaboration system provides a mathematically proven defense mechanism.
@@ -372,179 +621,20 @@ Imagine experts from different departments drafting a budget for a massive proje
 
 
 
-### 📝 [Daily Research Chunk] 动态理论深潜：Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). Chosen because it breaks the limitation of requiring doubly-stochastic or column-stochastic matrices, proving that row-stochastic networks can achieve deterministic linear speedup via the MG-Pull-Diag-GT protocol.
-- **确定性收敛机制**：The paper proves that under standard assumptions, when the multi-round gossip communication number $R$ satisfies $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$, the algorithm compensates for descent deviation. The total iterations are strictly bounded to converge deterministically when $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$.
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
-    """
-    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
-    Extracted directly from Algorithm 3.
-    """
-    # 1. State Initialization
-    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
-    phi_i = x_i_t - gamma * y_i_t
-    v_inner_i = v_i_t_0
 
-    # 2. Multi-round Gossip (r=0,1,...,R-1)
-    for r in range(R):
-        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
-        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
-        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
-        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
+### 5.3 Analogy for Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
+Imagine a decentralized fleet of delivery trucks (nodes) trying to find the optimal global route (optimization problem) without a central dispatcher (eliminating SPOF). If each driver only looks at local traffic, they might diverge. However, with "Gradient Tracking", drivers constantly share both their current location and their *changes in traffic assessment* with nearby trucks ($g^t_j - g^{t-1}_j$). By blending this shared information, the entire fleet behaves like a single, massive coordinated truck, mathematically guaranteeing they will reach the best routes with high probability bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$.
 
-    # 3. Update States
-    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
-    next_x_i = phi_i
-    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
-    next_v_i_0 = v_inner_i
-
-    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
-    next_g_i = calc_grad_f(next_x_i)
-
-    # 4. Compute tracking variable with diagonal compensation
-    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
-    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
-
-    # 5. Multi-round Gossip for gradient tracking (r=0,1,...,R-1)
-    for r in range(R):
-        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
-        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
-
-    # 6. Final Update
-    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
-    next_y_i = psi_i
-
-    return next_x_i, next_y_i, next_v_i_0, next_g_i
-```
-#### 💡 0基础业务通俗类比 (For Beginners)
-Imagine a company where information only flows in one direction (A tells B, but B cannot tell A - Row-stochastic network).
-- **Old problem**: Without two-way confirmation, rumors (gradients) get amplified indefinitely, and the consensus diverges.
-- **New method (MG-Pull-Diag-GT)**: Every employee keeps a bias tracker ($v_i$) that calculates exactly how much they are being influenced by the loudest one-way talkers. Before making any project decision, they run multiple fast alignment meetings ($R$ rounds) and divide their action plan by this tracker. This mathematically guarantees that even in one-way communication networks, everyone will deterministically converge to the exact same optimal company goal.
-
-### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: High-Probability Convergence via Gradient Tracking in DecDPO
-#### 🔬 Selection Rationale & Academic Context
-- **System Container**: Collaboration
-- **Frontier Source**: *High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). This theory was selected because it shatters the strong assumptions on data heterogeneity required by traditional Decentralized Stochastic Gradient Descent (DSGD). By introducing Gradient Tracking, it guarantees high-probability convergence even under relaxed noise conditions, perfectly aligning with our blueprint of eliminating Single Points of Failure (SPOF) through purely decentralized architecture.
-- **Deterministic Convergence Mechanism**: It strictly proves a high-probability (HP) convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$ for non-convex functions under relaxed sub-Gaussian noise. The core mechanism decouples parameter updates from gradient corrections: parameter convergence is given by $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$, while the tracking direction $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ leverages the neighbor weight matrix $w_{ij}$ to eliminate systemic steady-state errors.
-
-#### 💻 Source Code Breakdown
-```python
-# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
-def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
-    """
-    node_id: Current agent ID
-    x_t: Current parameter state of the node
-    y_t: Current tracked gradient direction of the node
-    g_t_prev: Previous raw gradient (g^{t-1})
-    alpha_t: Learning rate
-    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
-    compute_gradient: Function to compute current stochastic gradient
-    """
-    # 1. Compute local stochastic gradient
-    g_t_curr = compute_gradient(x_t)
-
-    # 2. Receive neighbors' parameters and tracking vectors
-    # (In practice, this implies fetching state from connected agents)
-    x_neighbors = fetch_neighbor_states('x')
-    y_neighbors = fetch_neighbor_states('y')
-    g_neighbors_curr = fetch_neighbor_states('g_curr')
-    g_neighbors_prev = fetch_neighbor_states('g_prev')
-
-    # 3. Update local parameters via decentralized mixing
-    x_next = 0
-    for j, w_ij in neighbors_weights.items():
-        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
-
-    # 4. Update tracking vector (Gradient Tracking)
-    y_next = 0
-    for j, w_ij in neighbors_weights.items():
-        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
-
-    return x_next, y_next, g_t_curr
-```
-
-#### 💡 For Beginners (Business Analogy)
+### 5.4 Analogy for High-Probability Convergence via Gradient Tracking in DecDPO
 **The End of the "Blind Men and the Elephant": How Branch Offices Make Perfect Decisions Without a Headquarters**
 Imagine a multinational corporation with zero headquarters (purely decentralized). Every branch office (Agent) conducts its own market research locally (computing local gradient $g_i$).
 If they merely exchange basic experiences with neighboring branches (traditional DSGD), they fall into the "blind men and the elephant" trap—everyone only sees a partial picture, causing the global strategy to violently oscillate.
 **Gradient Tracking** is like equipping every branch with a "Global Trend Predictor" (tracking vector $y_i$). Branches don't just exchange their current plans; they also exchange their "expected shift in market dynamics" ($g^{t}_{j}-g^{t-1}_{j}$). Through this dual-confirmation mechanism, even without a central HQ, all branches will mathematically converge on a perfect global strategy with absolute certainty (a high-probability convergence bound of $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$).
 
-### 📝 [Daily Research Chunk] 动态理论深潜：Decentralized Stochastic Optimization with Gradient Tracking
-
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：arXiv:2605.00281v1 "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking". This theory is selected because it strictly enforces Decentralized Distributed Optimization (DecDPO) principles, eliminating Single Points of Failure (SPOF) while guaranteeing bounded convergence without centralized coordination.
-- **确定性收敛机制**：The framework provides a deterministic high-probability upper bound on the optimization error, guaranteeing a convergence rate bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$, relying on the exact synchronization constraint where $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$.
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-
-```python
-def decentralized_gradient_tracking_step(
-    x_t: dict,           # Current parameters for each node i
-    y_t_minus_1: dict,   # Previous tracked gradient for each node i
-    g_t: dict,           # Current stochastic gradient g_{i}^{t} for each node
-    g_t_minus_1: dict,   # Previous stochastic gradient for each node
-    alpha_t: float,      # Step size \alpha_{t}
-    N_i: callable,       # Neighborhood set \mathcal{N}_{i} for node i
-    w_ij: callable       # Mixing matrix weight function w_{ij}
-) -> tuple:
-    """
-    Executes one step of decentralized gradient tracking and parameter update.
-    """
-    # 1. Update the tracked gradient y^{t}_{i}
-    # Mathematical formulation: y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
-    y_t = {}
-    for i in x_t.keys():
-        y_t[i] = sum(
-            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
-            for j in N_i(i)
-        )
-
-    # 2. Update the parameters x^{t+1}_{i}
-    # Mathematical formulation: x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
-    x_t_plus_1 = {}
-    for i in x_t.keys():
-        x_t_plus_1[i] = sum(
-            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
-            for j in N_i(i)
-        )
-
-    return x_t_plus_1, y_t
-```
-
-#### 💡 0基础业务通俗类比 (For Beginners)
+### 5.5 Analogy for Decentralized Stochastic Optimization with Gradient Tracking
 Imagine a decentralized fleet of delivery trucks (nodes) trying to find the optimal global route (optimization problem) without a central dispatcher (eliminating SPOF). If each driver only looks at local traffic, they might diverge. However, with "Gradient Tracking", drivers constantly share both their current location and their *changes in traffic assessment* with nearby trucks ($g^t_j - g^{t-1}_j$). By blending this shared information, the entire fleet behaves like a single, massive coordinated truck, mathematically guaranteeing they will reach the best routes with high probability bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$.
 
-### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Accelerated Decentralized Constraint-Coupled Optimization (iD2A)
-#### 🔬 Selection Rationale & Academic Context
-- **System Container**: Collaboration
-- **Frontier Source**: [arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach. Selected because it develops accelerated algorithms in decentralized networks via a Dual$^2$ method.
-- **Deterministic Convergence Mechanism**: The algorithm achieves highly deterministic convergence in decentralized settings. The core update equations are strictly defined as $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ and $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$.
-
-#### 💻 Source Code Breakdown
-```python
-def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
-    # Zero-dependency deterministic algorithm implementation of the core mechanism
-    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
-    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
-
-    # 1. Update based on C and lambda
-    step_update = C @ lambda_k_plus_1
-
-    # 2. Update w^{k+1}
-    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
-
-    # 3. Update z^{k+1}
-    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
-
-    return w_k_plus_1, z_k_plus_1
-```
-
-#### 💡 For Beginners (Business Analogy)
+### 5.6 Analogy for Accelerated Decentralized Constraint-Coupled Optimization (iD2A)
 Imagine different branches (nodes) of a multinational company needing to agree on next year's total budget. They cannot reveal their core financial secrets and can only exchange information with neighboring branches (decentralized communication). In this process:
 - **Constraint-Coupled**: The sum of all branches' spending must strictly equal the hard cap set by the headquarters.
 - **Dual$^2$ Method**: It’s like the branches adjusting not only based on current deviations (first-level feedback) but through a multi-layered approach (Dual$^2$).

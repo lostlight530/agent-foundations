@@ -91,6 +91,27 @@ $1 - \lambda_2$ 的差值被称为 **谱间隙（Spectral Gap, $\rho$）**。
 但网络很糟糕：有的中心发出的邮件严重延迟，有的通信线路是单向的（只能发不能收）。如果用同步开会模式，大家为了等一封迟到的邮件，整个网络会死锁崩溃。
 而在异步去中心化机制下，每个中心准备了两个专门对账的秘密账本（$\mathbf{p}^{v}$ 和 $\mathbf{h}^{v}$）。如果邻居的新邮件没按时来，中心就直接估算最近的旧邮件情况。虽然每次用的都是“过时”的信息，但那两个账本在后台通过数学计算，精准抵消了这种时间差和单向传输带来的偏见。这套精密的数学机制保证了，即使大家永远拿着半拍落后的信息在沟通，整个物流网最终也能 100% 毫无分歧地达成一模一样的完美调度计划。
 
+
+### 2.6 行随机网络下的确定性多步梯度追踪
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). 选择该理论是因为它突破了去中心化优化长期依赖“双随机”或“列随机”通信矩阵的限制，首次证明了在更符合真实单向广播场景的“行随机(Row-Stochastic)”网络中，系统仍能实现确定性的线性加速。
+- **确定性收敛机制**：理论证明了当多轮Gossip通信次数满足 $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$ 时，算法可完全补偿行随机不对称带来的下降方向偏移。通过特征向量追踪对角线补偿，严格约束了总迭代步数收敛下界为 $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$。
+
+### 2.7 基于梯度追踪的去中心化高概率收敛 (Gradient Tracking in DecDPO)
+- **所属系统容器**：Collaboration
+- **前沿来源**：*High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). 选用此理论是因为它打破了传统去中心化随机梯度下降（DSGD）对异质数据的强假设，引入梯度追踪（Gradient Tracking）实现了即使在高噪声下也能保证高概率收敛的确定性边界，完美契合我们彻底摒弃单点故障（SPOF）的分布式优化蓝图。
+- **确定性收敛机制**：在放宽次高斯噪声的条件下，严格证明了对于非凸函数，其高概率（HP）收敛界为 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$。核心机制通过参数更新方程与梯度修正项解耦实现：参数收敛 $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$，其中追踪方向 $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ 利用邻居节点权重矩阵 $w_{ij}$ 消除系统残差。
+
+### 2.8 Decentralized Stochastic Optimization with Gradient Tracking
+- **所属系统容器**：Collaboration
+- **前沿来源**：arXiv:2605.00281v1《High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking》。选择该理论作为核心是因为它严格贯彻了去中心化分布式优化（DecDPO）原则，通过数学推导消除了单点故障（SPOF），同时在无需中心化协调的情况下保证了收敛的边界。
+- **确定性收敛机制**：该框架在优化误差上提供了确定性的高概率上界，保证了被 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$ 约束的收敛率，依赖于精确的同步约束即 $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$。
+
+### 2.9 加速去中心化约束耦合优化 (iD2A)
+- **所属系统容器**：Collaboration
+- **前沿来源**：[arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach。选择该理论是因为其通过 Dual$^2$ 方法在去中心化网络中开发了加速算法。
+- **确定性收敛机制**：算法通过精确的机制实现了去中心化环境下的确定性收敛。核心更新公式严格定义为 $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ 与 $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$。
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
 ### Code for 动态理论深潜：去中心化随机梯度追踪 (DSGT)
 ```python
@@ -319,6 +340,141 @@ def asynchronous_decentralized_step(x_v, z_v, h_v, g_v, a_vu, w_vu, mu, alpha, r
     return next_x_v, next_z_v, next_h_v, next_g_v
 ```
 
+
+### 3.5 行随机网络下的确定性多步梯度追踪源码解析
+```python
+def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
+    """
+    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
+    基于提取自 Algorithm 3 的真实伪代码逻辑。
+    """
+    # 1. 局部状态初始化
+    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
+    phi_i = x_i_t - gamma * y_i_t
+    v_inner_i = v_i_t_0
+
+    # 2. 多轮拓扑同步 (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
+        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
+        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
+        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
+
+    # 3. 状态提交与新梯度计算
+    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
+    next_x_i = phi_i
+    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
+    next_v_i_0 = v_inner_i
+
+    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
+    next_g_i = calc_grad_f(next_x_i)
+
+    # 4. 带对角线补偿的追踪变量计算
+    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
+    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
+
+    # 5. 追踪变量的多轮同步 (r=0,1,...,R-1)
+    for r in range(R):
+        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
+        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
+
+    # 6. 最终更新
+    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
+    next_y_i = psi_i
+
+    return next_x_i, next_y_i, next_v_i_0, next_g_i
+```
+
+### 3.6 基于梯度追踪的去中心化高概率收敛源码解析
+```python
+# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
+def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
+    """
+    node_id: Current agent ID
+    x_t: Current parameter state of the node
+    y_t: Current tracked gradient direction of the node
+    g_t_prev: Previous raw gradient (g^{t-1})
+    alpha_t: Learning rate
+    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
+    compute_gradient: Function to compute current stochastic gradient
+    """
+    # 1. Compute local stochastic gradient
+    g_t_curr = compute_gradient(x_t)
+
+    # 2. Receive neighbors' parameters and tracking vectors
+    # (In practice, this implies fetching state from connected agents)
+    x_neighbors = fetch_neighbor_states('x')
+    y_neighbors = fetch_neighbor_states('y')
+    g_neighbors_curr = fetch_neighbor_states('g_curr')
+    g_neighbors_prev = fetch_neighbor_states('g_prev')
+
+    # 3. Update local parameters via decentralized mixing
+    x_next = 0
+    for j, w_ij in neighbors_weights.items():
+        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
+
+    # 4. Update tracking vector (Gradient Tracking)
+    y_next = 0
+    for j, w_ij in neighbors_weights.items():
+        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
+
+    return x_next, y_next, g_t_curr
+```
+
+### 3.7 Decentralized Stochastic Optimization with Gradient Tracking源码解析
+```python
+def decentralized_gradient_tracking_step(
+    x_t: dict,           # 每个节点 i 的当前参数
+    y_t_minus_1: dict,   # 每个节点 i 的上一步追踪梯度
+    g_t: dict,           # 每个节点的当前随机梯度 g_{i}^{t}
+    g_t_minus_1: dict,   # 每个节点的上一步随机梯度
+    alpha_t: float,      # 步长 \alpha_{t}
+    N_i: callable,       # 节点 i 的邻居集合 \mathcal{N}_{i}
+    w_ij: callable       # 混合矩阵权重函数 w_{ij}
+) -> tuple:
+    """
+    执行去中心化梯度追踪与参数更新的单步迭代。
+    """
+    # 1. 更新追踪梯度 y^{t}_{i}
+    # 数学公式：y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
+    y_t = {}
+    for i in x_t.keys():
+        y_t[i] = sum(
+            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
+            for j in N_i(i)
+        )
+
+    # 2. 更新节点参数 x^{t+1}_{i}
+    # 数学公式：x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
+    x_t_plus_1 = {}
+    for i in x_t.keys():
+        x_t_plus_1[i] = sum(
+            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
+            for j in N_i(i)
+        )
+
+    return x_t_plus_1, y_t
+```
+
+### 3.8 加速去中心化约束耦合优化 (iD2A)源码解析
+```python
+def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
+    # 核心机制的零依赖确定性算法实现
+    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
+    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
+
+    # 1. Update based on C and lambda
+    step_update = C @ lambda_k_plus_1
+
+    # 2. Update w^{k+1}
+    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
+
+    # 3. Update z^{k+1}
+    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
+
+    return w_k_plus_1, z_k_plus_1
+```
+
 ## 4. 全局防线：对单点故障与系统崩溃的数学级免疫
 
 在当前业内多智能体框架频繁暴露出“中心服务器单点故障（SPOF）”导致全网瘫痪丑闻的背景下，我们的协作系统提供了一种在数学和物理层面被严格证明的防御机制。
@@ -370,179 +526,22 @@ def asynchronous_decentralized_step(x_v, z_v, h_v, g_v, a_vu, w_vu, mu, alpha, r
 
 
 
-### 📝 [Daily Research Chunk] 动态理论深潜：行随机网络下的确定性多步梯度追踪
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). 选择该理论是因为它突破了去中心化优化长期依赖“双随机”或“列随机”通信矩阵的限制，首次证明了在更符合真实单向广播场景的“行随机(Row-Stochastic)”网络中，系统仍能实现确定性的线性加速。
-- **确定性收敛机制**：理论证明了当多轮Gossip通信次数满足 $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$ 时，算法可完全补偿行随机不对称带来的下降方向偏移。通过特征向量追踪对角线补偿，严格约束了总迭代步数收敛下界为 $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$。
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-def mg_pull_diag_gt_step(x_i_t, y_i_t, v_i_t_0, g_i_t, a_ij_weights, R, gamma, calc_grad_f, i):
-    """
-    MG-Pull-Diag-GT: Multi-Round Gossip Pull-Diag Gradient Tracking
-    基于提取自 Algorithm 3 的真实伪代码逻辑。
-    """
-    # 1. 局部状态初始化
-    # \bm{\phi}^{(t+1,0)}=\bm{x}_{i}^{(t)}-\gamma\bm{y}_{i}^{(t)}
-    phi_i = x_i_t - gamma * y_i_t
-    v_inner_i = v_i_t_0
 
-    # 2. 多轮拓扑同步 (r=0,1,...,R-1)
-    for r in range(R):
-        # \bm{\phi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\phi}^{(t+1,r)}_{j}
-        phi_i = sum(weight * neighbor.phi_j for weight, neighbor in a_ij_weights)
-        # \bm{v}^{(t,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{v}^{(t,r)}_{j}
-        v_inner_i = sum(weight * neighbor.v_inner_j for weight, neighbor in a_ij_weights)
-
-    # 3. 状态提交与新梯度计算
-    # \bm{x}_{i}^{(t+1)}=\bm{\phi}^{(t+1,R)}_{i}
-    next_x_i = phi_i
-    # \bm{v}^{(t+1,0)}_{i}=\bm{v}^{(t,R)}_{i}
-    next_v_i_0 = v_inner_i
-
-    # \bm{g}_{i}^{(t+1)}=\frac{1}{R}\sum_{r=1}^{R}\nabla F(bm{x}_{i}^{(t+1)};\xi_{i}^{(t+1,r)})
-    next_g_i = calc_grad_f(next_x_i)
-
-    # 4. 带对角线补偿的追踪变量计算
-    # \bm{\psi}^{(t+1,0)}_{i}=\bm{y}^{(t)}_{i}+[\bm{v}^{(t+1,0)}_{i}]_{i}^{-1}\bm{g}^{(t+1)}_{i}-[\bm{v}^{(t,0)}_{i}]_{i}^{-1}\bm{g}^{(t)}_{i}
-    psi_i = y_i_t + (1.0 / next_v_i_0[i]) * next_g_i - (1.0 / v_i_t_0[i]) * g_i_t
-
-    # 5. 追踪变量的多轮同步 (r=0,1,...,R-1)
-    for r in range(R):
-        # \bm{\psi}^{(t+1,r+1)}_{i}=\sum_{j\in\mathcal{N}_{i}^{\mathrm{in}}}a_{ij}\bm{\psi}^{(t+1,r)}_{j}
-        psi_i = sum(weight * neighbor.psi_j for weight, neighbor in a_ij_weights)
-
-    # 6. 最终更新
-    # \bm{y}^{(t+1)}_{i}=\bm{\psi}_{i}^{(t+1,R)}
-    next_y_i = psi_i
-
-    return next_x_i, next_y_i, next_v_i_0, next_g_i
-```
-#### 💡 0基础业务通俗类比 (For Beginners)
+### 5.3 业务通俗类比：行随机网络下的确定性多步梯度追踪
 想象一个大型跨国企业，信息流动是“单向”的（A部门会听取B部门，但B部门不听A的，即“行随机网络”）。
 - **过去的问题**：因为缺乏双向确认，某些“大嗓门”部门的意见会被无限放大，导致全公司战略方向发散崩溃。
 - **全新的机制 (MG-Pull-Diag-GT)**：每个部门都在心里维护一个“偏见追踪器 ($v_i$)”，精确计算自己受哪些单向声音影响最大。在做出任何战略调整（梯度更新）前，先快速开几轮对齐短会（多轮Gossip，$R$ 次），并严格用这个追踪器去除杂音。数学证明了，即使在极其不对称的单向沟通网络中，只要遵守这套规则，全公司也必定能完美协同收敛到同一个最优战略。
 
-### 📝 [Daily Research Chunk] 动态理论深潜：基于梯度追踪的去中心化高概率收敛 (Gradient Tracking in DecDPO)
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：*High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking* (arXiv:2605.00281v1). 选用此理论是因为它打破了传统去中心化随机梯度下降（DSGD）对异质数据的强假设，引入梯度追踪（Gradient Tracking）实现了即使在高噪声下也能保证高概率收敛的确定性边界，完美契合我们彻底摒弃单点故障（SPOF）的分布式优化蓝图。
-- **确定性收敛机制**：在放宽次高斯噪声的条件下，严格证明了对于非凸函数，其高概率（HP）收敛界为 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$。核心机制通过参数更新方程与梯度修正项解耦实现：参数收敛 $x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)$，其中追踪方向 $y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)$ 利用邻居节点权重矩阵 $w_{ij}$ 消除系统残差。
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-# DecDPO with Gradient Tracking (GT-DSGD) - Zero-Dependency Deterministic Implementation
-def gt_dsgd_node_update(node_id, x_t, y_t, g_t_prev, alpha_t, neighbors_weights, compute_gradient):
-    """
-    node_id: Current agent ID
-    x_t: Current parameter state of the node
-    y_t: Current tracked gradient direction of the node
-    g_t_prev: Previous raw gradient (g^{t-1})
-    alpha_t: Learning rate
-    neighbors_weights: Dictionary mapping neighbor_id to w_{ij}
-    compute_gradient: Function to compute current stochastic gradient
-    """
-    # 1. Compute local stochastic gradient
-    g_t_curr = compute_gradient(x_t)
-
-    # 2. Receive neighbors' parameters and tracking vectors
-    # (In practice, this implies fetching state from connected agents)
-    x_neighbors = fetch_neighbor_states('x')
-    y_neighbors = fetch_neighbor_states('y')
-    g_neighbors_curr = fetch_neighbor_states('g_curr')
-    g_neighbors_prev = fetch_neighbor_states('g_prev')
-
-    # 3. Update local parameters via decentralized mixing
-    x_next = 0
-    for j, w_ij in neighbors_weights.items():
-        x_next += w_ij * (x_neighbors[j] - alpha_t * y_neighbors[j])
-
-    # 4. Update tracking vector (Gradient Tracking)
-    y_next = 0
-    for j, w_ij in neighbors_weights.items():
-        y_next += w_ij * (y_neighbors[j] + g_neighbors_curr[j] - g_neighbors_prev[j])
-
-    return x_next, y_next, g_t_curr
-```
-
-#### 💡 0基础业务通俗类比 (For Beginners)
+### 5.4 业务通俗类比：基于梯度追踪的去中心化高概率收敛
 **“盲人摸象”的终结：分公司如何不靠总公司也能做出完美决策？**
 想象一个没有总部的跨国企业（完全去中心化）。每个分公司（Agent）都在自己所在的国家做市场调研（计算局部梯度 $g_i$）。
 如果只是简单地和隔壁分公司交流经验（传统的 DSGD），很容易出现“盲人摸象”——大家都只看到局部，导致全局战略疯狂摇摆。
 **梯度追踪（Gradient Tracking）** 就像是给每个分公司发了一个“全局趋势预测器”（追踪向量 $y_i$）。分公司不仅交流当前的行动方案，还交流“我们对市场变化的预期差”（$g^{t}_{j}-g^{t-1}_{j}$）。通过这种双重确认，即使没有总部统筹，所有分公司也能以数学上绝对确定的概率（高概率收敛界 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$）达成完美的全球统一战略。
 
-### 📝 [Daily Research Chunk] 动态理论深潜：Decentralized Stochastic Optimization with Gradient Tracking
-
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：arXiv:2605.00281v1《High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking》。选择该理论作为核心是因为它严格贯彻了去中心化分布式优化（DecDPO）原则，通过数学推导消除了单点故障（SPOF），同时在无需中心化协调的情况下保证了收敛的边界。
-- **确定性收敛机制**：该框架在优化误差上提供了确定性的高概率上界，保证了被 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$ 约束的收敛率，依赖于精确的同步约束即 $z_{i}^{t}\coloneqq g_{i}^{t}-\nabla f_{i}(x_{i}^{t})$。
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-
-```python
-def decentralized_gradient_tracking_step(
-    x_t: dict,           # 每个节点 i 的当前参数
-    y_t_minus_1: dict,   # 每个节点 i 的上一步追踪梯度
-    g_t: dict,           # 每个节点的当前随机梯度 g_{i}^{t}
-    g_t_minus_1: dict,   # 每个节点的上一步随机梯度
-    alpha_t: float,      # 步长 \alpha_{t}
-    N_i: callable,       # 节点 i 的邻居集合 \mathcal{N}_{i}
-    w_ij: callable       # 混合矩阵权重函数 w_{ij}
-) -> tuple:
-    """
-    执行去中心化梯度追踪与参数更新的单步迭代。
-    """
-    # 1. 更新追踪梯度 y^{t}_{i}
-    # 数学公式：y^{t}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(y_{j}^{t-1}+g^{t}_{j}-g^{t-1}_{j}\big)
-    y_t = {}
-    for i in x_t.keys():
-        y_t[i] = sum(
-            w_ij(i, j) * (y_t_minus_1[j] + g_t[j] - g_t_minus_1[j])
-            for j in N_i(i)
-        )
-
-    # 2. 更新节点参数 x^{t+1}_{i}
-    # 数学公式：x^{t+1}_{i}=\sum_{j\in\mathcal{N}_{i}}w_{ij}\big(x_{j}^{t}-\alpha_{t}y_{j}^{t}\big)
-    x_t_plus_1 = {}
-    for i in x_t.keys():
-        x_t_plus_1[i] = sum(
-            w_ij(i, j) * (x_t[j] - alpha_t * y_t[j])
-            for j in N_i(i)
-        )
-
-    return x_t_plus_1, y_t
-```
-
-#### 💡 0基础业务通俗类比 (For Beginners)
+### 5.5 业务通俗类比：Decentralized Stochastic Optimization with Gradient Tracking
 想象一支去中心化的物流车队（节点）在没有中央调度员（消除SPOF）的情况下，试图寻找全局最优路线（优化问题）。如果每个司机只关注局部路况，车队很容易走散。但是，通过“梯度追踪（Gradient Tracking）”技术，司机们不仅不断与附近的卡车分享自己的当前位置，还分享他们对*路况评估的变化*（$g^t_j - g^{t-1}_j$）。通过融合这些共享信息，整支车队就像一辆巨大的、高度协调的卡车一样运作，在数学上高概率保证他们能达到最佳路线，其收敛速度受限于 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$。
 
-### 📝 [Daily Research Chunk] 动态理论深潜：加速去中心化约束耦合优化 (iD2A)
-#### 🔬 选型依据与学术脉络
-- **所属系统容器**：Collaboration
-- **前沿来源**：[arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach。选择该理论是因为其通过 Dual$^2$ 方法在去中心化网络中开发了加速算法。
-- **确定性收敛机制**：算法通过精确的机制实现了去中心化环境下的确定性收敛。核心更新公式严格定义为 $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ 与 $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$。
-
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
-    # 核心机制的零依赖确定性算法实现
-    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
-    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
-
-    # 1. Update based on C and lambda
-    step_update = C @ lambda_k_plus_1
-
-    # 2. Update w^{k+1}
-    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
-
-    # 3. Update z^{k+1}
-    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
-
-    return w_k_plus_1, z_k_plus_1
-```
-
-#### 💡 0基础业务通俗类比 (For Beginners)
+### 5.6 业务通俗类比：加速去中心化约束耦合优化 (iD2A)
 想象一个大型跨国公司的各个分部（节点）需要共同决定明年的总预算，但各分部不能暴露自己的核心财务机密，只能与相邻的分部交换信息（去中心化通信）。在这个过程中：
 - **约束耦合**：所有分部的支出总和必须等于总部规定的硬性上限。
 - **Dual$^2$方法**：就像分部不仅根据当下的偏差来调整（第一层反馈），还通过多层级的机制（Dual$^2$）进行调整。
