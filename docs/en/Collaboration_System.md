@@ -518,3 +518,34 @@ def decentralized_gradient_tracking_step(
 
 #### 💡 0基础业务通俗类比 (For Beginners)
 Imagine a decentralized fleet of delivery trucks (nodes) trying to find the optimal global route (optimization problem) without a central dispatcher (eliminating SPOF). If each driver only looks at local traffic, they might diverge. However, with "Gradient Tracking", drivers constantly share both their current location and their *changes in traffic assessment* with nearby trucks ($g^t_j - g^{t-1}_j$). By blending this shared information, the entire fleet behaves like a single, massive coordinated truck, mathematically guaranteeing they will reach the best routes with high probability bounded by $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$.
+
+### 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Accelerated Decentralized Constraint-Coupled Optimization (iD2A)
+#### 🔬 Selection Rationale & Academic Context
+- **System Container**: Collaboration
+- **Frontier Source**: [arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach. Selected because it develops accelerated algorithms in decentralized networks via a Dual$^2$ method.
+- **Deterministic Convergence Mechanism**: The algorithm achieves highly deterministic convergence in decentralized settings. The core update equations are strictly defined as $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ and $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$.
+
+#### 💻 Source Code Breakdown
+```python
+def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
+    # Zero-dependency deterministic algorithm implementation of the core mechanism
+    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
+    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
+
+    # 1. Update based on C and lambda
+    step_update = C @ lambda_k_plus_1
+
+    # 2. Update w^{k+1}
+    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
+
+    # 3. Update z^{k+1}
+    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
+
+    return w_k_plus_1, z_k_plus_1
+```
+
+#### 💡 For Beginners (Business Analogy)
+Imagine different branches (nodes) of a multinational company needing to agree on next year's total budget. They cannot reveal their core financial secrets and can only exchange information with neighboring branches (decentralized communication). In this process:
+- **Constraint-Coupled**: The sum of all branches' spending must strictly equal the hard cap set by the headquarters.
+- **Dual$^2$ Method**: It’s like the branches adjusting not only based on current deviations (first-level feedback) but through a multi-layered approach (Dual$^2$).
+This allows the entire company to reach a perfectly consistent budget allocation quickly and "deterministically" without relying on a central headquarters, entirely eliminating endless back-and-forth arguments (black-box probabilistic convergence).
