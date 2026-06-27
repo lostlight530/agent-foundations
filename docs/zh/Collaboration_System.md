@@ -516,3 +516,34 @@ def decentralized_gradient_tracking_step(
 
 #### 💡 0基础业务通俗类比 (For Beginners)
 想象一支去中心化的物流车队（节点）在没有中央调度员（消除SPOF）的情况下，试图寻找全局最优路线（优化问题）。如果每个司机只关注局部路况，车队很容易走散。但是，通过“梯度追踪（Gradient Tracking）”技术，司机们不仅不断与附近的卡车分享自己的当前位置，还分享他们对*路况评估的变化*（$g^t_j - g^{t-1}_j$）。通过融合这些共享信息，整支车队就像一辆巨大的、高度协调的卡车一样运作，在数学上高概率保证他们能达到最佳路线，其收敛速度受限于 $\mathcal{O}\Big(\frac{\log(\nicefrac{{1}}{{\delta}})}{\sqrt{nT}}\Big)$。
+
+### 📝 [Daily Research Chunk] 动态理论深潜：加速去中心化约束耦合优化 (iD2A)
+#### 🔬 选型依据与学术脉络
+- **所属系统容器**：Collaboration
+- **前沿来源**：[arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach。选择该理论是因为其通过 Dual$^2$ 方法在去中心化网络中开发了加速算法。
+- **确定性收敛机制**：算法通过精确的机制实现了去中心化环境下的确定性收敛。核心更新公式严格定义为 $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ 与 $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$。
+
+#### 💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
+    # 核心机制的零依赖确定性算法实现
+    # w^{k+1} = z^k + (1 / L_F_rho) * C * lambda^{k+1}
+    # z^{k+1} = w^{k+1} + beta_k * (w^{k+1} - w^k)
+
+    # 1. Update based on C and lambda
+    step_update = C @ lambda_k_plus_1
+
+    # 2. Update w^{k+1}
+    w_k_plus_1 = z_k + (1.0 / L_F_rho) * step_update
+
+    # 3. Update z^{k+1}
+    z_k_plus_1 = w_k_plus_1 + beta_k * (w_k_plus_1 - w_k)
+
+    return w_k_plus_1, z_k_plus_1
+```
+
+#### 💡 0基础业务通俗类比 (For Beginners)
+想象一个大型跨国公司的各个分部（节点）需要共同决定明年的总预算，但各分部不能暴露自己的核心财务机密，只能与相邻的分部交换信息（去中心化通信）。在这个过程中：
+- **约束耦合**：所有分部的支出总和必须等于总部规定的硬性上限。
+- **Dual$^2$方法**：就像分部不仅根据当下的偏差来调整（第一层反馈），还通过多层级的机制（Dual$^2$）进行调整。
+这使得整个公司能在不依赖中央总部的情况下，快速且“确定性”地达成完全一致的预算分配，彻底杜绝了无休止的扯皮（黑盒概率收敛）。
