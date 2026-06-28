@@ -23,20 +23,16 @@ In the context of agent memory, this represents a brutal mathematical "dimension
 
 ## 2. Core Mechanisms: Memory Compression & Anomaly Capture
 ### Deterministic Exponential Decay for Memory Survival based on Interaction Count
-- **System Container**: Memory
 - **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
-- **Deterministic Convergence Mechanism**: DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
+DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
 
 ### Deterministic Causal Structure (DCS)
-- **所属系统容器**：Memory
-- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
-- **确定性收敛机制**：The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
+*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
+The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
 
 ### Parametric Memory & Self-Evolving Agents
-- **System Container**: Memory
-- **Frontier Source**: arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
-- **Deterministic Convergence Mechanism**: Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
-
+arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
+Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
 
 ### 2.1 Representation Learning & Temporal Contrast
 As an agent interacts with computers, webpages, or the real world, it constantly receives an overwhelming barrage of complex observations.
@@ -61,17 +57,14 @@ Because our system monitors these fluctuations in real-time, novel situations ar
 
 ---
 
-
 ### 2.5 Topological Manifold Matching & Persistent Homology
 Building on feature extraction, the Memory System incorporates Topological Data Analysis (TDA) to maintain global geometric integrity. Since traditional autoencoders often shatter latent space connectivity during compression, we utilize Manifold-Matching Autoencoders, computing distance matrices at the mini-batch level through Persistent Homology.
 * **Topological Loss Constraint**: We introduce a persistent homology topological loss: $\mathcal{L}_{\text{topo}}=\frac{1}{2}\sum_{(i,j)\in\mathcal{P}_{X}}(D_{X}^{ij}-D_{Z}^{ij})^{2}+\frac{1}{2}\sum_{(k,l)\in\mathcal{P}_{Z}}(D_{Z}^{kl}-D_{X}^{kl})^{2}$. This guarantees that the dimensionally reduced manifold strictly matches the topological connectivity of the raw observations.
 * **Joint Dimensionality Reduction**: By constructing the joint distance matrix $D_{\text{joint}}=\begin{pmatrix}\mathbf{0}_{n\times n}&D_{X}^{T}\\D_{X}&\min(D_{X},D_{Z})\end{pmatrix}$, we mathematically ensure that memory concepts do not suffer manifold tearing under extreme compression, making sure anomaly detection occurs within the mathematically correct measure space.
 
-
 ### 2.6 Decentralized Semantic Slice Alignment
-- **System Container**: Memory
-- **Frontier Source**: arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems"). Chosen because it provides a rigorous formal model for decentralizing memory alignment without centralized control, directly eliminating single points of failure (SPOF) while maintaining deterministic semantic coherence.
-- **Deterministic Convergence Mechanism**: The framework establishes a strict upper bound on invalid memory commits via $\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$, where $\varepsilon_{\max}$ is the local false acceptance probability and $r$ is the number of overlapping validators. This strict mathematical upper bound deterministically contains failure without centralized coordination.
+arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems"). Chosen because it provides a rigorous formal model for decentralizing memory alignment without centralized control, directly eliminating single points of failure (SPOF) while maintaining deterministic semantic coherence.
+The framework establishes a strict upper bound on invalid memory commits via $\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$, where $\varepsilon_{\max}$ is the local false acceptance probability and $r$ is the number of overlapping validators. This strict mathematical upper bound deterministically contains failure without centralized coordination.
 
 **💡 For Beginners**:
 Imagine a massive global library (Global Memory) where no single head librarian is in charge. Instead, each local librarian (Agent) is responsible for only a specific aisle (Ontology Slice). When a new book is added or revised anywhere in the library, a notification is sent out. A local librarian only pays attention if the book belongs to their aisle. Before putting the book on the shelf, they require at least $r$ independent expert reviewers to verify it. Even if one reviewer is wrong (with a small probability $\varepsilon_{\max}$), the chance of all $r$ reviewers being simultaneously wrong drops exponentially. Therefore, every local librarian's aisle deterministically matches the "true" state of the global library over time, without ever needing a central boss to coordinate them!
@@ -180,7 +173,6 @@ def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
     effective_weights = theta_0 + delta_t
     return deterministic_sample(effective_weights, c_t)
 ```
-
 
 ### 4.1 Contrastive Memory System
 
@@ -297,7 +289,6 @@ def continuous_hopfield_update(q_t, B, psi_functions, beta, num_steps=10):
 
 ---
 
-
 ### 4.3 Manifold-Matching Autoencoder
 
 ```python
@@ -317,7 +308,6 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
     return loss_X_to_Z + loss_Z_to_X
 ```
 
-
 ## 5. 0-Foundation Business Analogies (For Beginners)
 ### Analogy for Deterministic Exponential Decay for Memory Survival based on Interaction Count
 Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
@@ -333,10 +323,8 @@ Because of the "Join-Semilattice" math magic, putting the pieces together is lik
 ### Analogy for Parametric Memory & Self-Evolving Agents
 It is like muscle memory encoded in your brain rather than looking up a notebook. You react deterministically, eliminating the risk of black-box hallucination when notes are misplaced.
 
-
 ### 5.1 Continuous-Time Hopfield Networks
 Imagine a librarian looking for a specific book. In a traditional (discrete) library, she checks exact shelves one by one. If a book falls between two known categories, she might be stuck or give a completely wrong answer (hallucination). The continuous-time Hopfield network transforms the library into a fluid spectrum. Instead of isolated shelves, knowledge is a continuous landscape. The "energy function" is like gravity pulling a ball down a smooth valley. No matter where the librarian starts searching, gravity guarantees she will slide smoothly and definitively into the correct valley of knowledge, never getting lost in empty space.
-
 
 ### 5.2 Manifold-Matching Autoencoder
 Imagine you have a huge, crumpled map of the world (a high-dimensional complex environment). If you squash it flat into a picture frame (traditional dimensionality reduction), neighboring cities might be torn apart, or different continents forcefully glued together (triggering disastrous hallucinations in downstream decisions).
@@ -375,10 +363,16 @@ def synchronize_semantic_slice(
     return local_memory
 ```
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+
 📂 动态演进映射
-Memory System: introduced Deterministic Exponential Decay, DCS, and Parametric Memory, updated Core Mechanisms
-Collaboration System: introduced DSGT, Block-Wise Adam, Decentralized Stochastic Control, Delay Tolerance, and Smoothed Gradient Clipping, updated Convergence on the Spectral Graph
+
+Architecture Principles: woven TASR and Distributed Gradient-Regularized Newton Method.
+Collaboration System: woven DSGT, Block-Wise Adam, Decentralized Stochastic Control, IDTSC, Smoothed Gradient Clipping, Asynchronous Directed Graphs, Row-Stochastic Networks.
+Memory System: woven Deterministic Exponential Decay, DCS, Parametric Memory, Decentralized Semantic Slice Alignment.
+Tool System: woven CMTF.
+MISSING_SOURCE: None
+
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-Conflict Detection: The introduced theories in Memory System (deterministic representation learning, parametric memory shifts) and Collaboration System (decentralized spectral graph convergence, bounded gradients) are completely mathematically compatible. Both heavily rely on physically bounding divergence and monotonic convergence metrics while entirely deprecating centralized controllers and single points of failure. No structural or paradigm conflicts exist.
+
+Conflict Detection: The woven theories across Architecture Principles, Collaboration System, Memory System, and Tool System have been rigorously audited. All newly integrated mathematical bounds (such as DSGT's tracking, TASR's stopping operator, and CMTF's goal inference) perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
