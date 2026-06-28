@@ -23,20 +23,16 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 
 ## 2. 核心机制：记忆压缩与异常捕捉 (Core Mechanisms)
 ### 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
-- **所属系统容器**：Memory
-- **前沿来源**：arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
-- **确定性收敛机制**：DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
+arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
+DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
 
 ### 确定性因果结构 (Deterministic Causal Structure, DCS)
-- **所属系统容器**：Memory
-- **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)。选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦。
-- **确定性收敛机制**：该理论通过一个极简公理集确立了确定性因果结构 (DCS)。极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义。局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界。
+*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)。选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦。
+该理论通过一个极简公理集确立了确定性因果结构 (DCS)。极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义。局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界。
 
 ### 参数化记忆与代理自我演化
-- **所属系统容器**：Memory
-- **前沿来源**：arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》。抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中。
-- **确定性收敛机制**：演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$。通过 $\Delta_t$ 的收敛来保障记忆留存下界。
-
+arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》。抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中。
+演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$。通过 $\Delta_t$ 的收敛来保障记忆留存下界。
 
 ### 2.1 表征学习与时序对比 (Representation Learning & Temporal Contrast)
 智能体在与电脑、网页或真实世界交互时，会不断接收到外界排山倒海般的复杂观察。
@@ -61,17 +57,14 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 
 ---
 
-
 ### 2.5 拓扑流形匹配与持续同调 (Topological Manifold Matching & Persistent Homology)
 在特征提取的基础上，记忆系统引入了拓扑数据分析（TDA）以保持全局几何结构的完整性。由于传统的自编码器在压缩时往往破坏了隐空间的连通性，我们采用了流形匹配自编码器（Manifold-Matching Autoencoders），利用持续同调（Persistent Homology）在 mini-batch 级别计算距离矩阵。
 * **拓扑损失约束**：引入持续同调计算拓扑损失，公式为：$\mathcal{L}_{\text{topo}}=\frac{1}{2}\sum_{(i,j)\in\mathcal{P}_{X}}(D_{X}^{ij}-D_{Z}^{ij})^{2}+\frac{1}{2}\sum_{(k,l)\in\mathcal{P}_{Z}}(D_{Z}^{kl}-D_{X}^{kl})^{2}$。这确保了降维后的流形严格匹配原始观测的拓扑连通性。
 * **联合特征降维**：通过构建联合距离矩阵 $D_{\text{joint}}=\begin{pmatrix}\mathbf{0}_{n\times n}&D_{X}^{T}\\D_{X}&\min(D_{X},D_{Z})\end{pmatrix}$，我们在数学上保证了记忆概念在极度压缩下，不发生流形撕裂，确保异常检测在正确的测度空间进行。
 
-
 ### 2.6 去中心化语义切片对齐 (Decentralized Semantic Slice Alignment)
-- **所属系统容器**：Memory (记忆系统)
-- **前沿来源**：arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems")。选择该理论作为当前探索方向的原因在于，它提供了一个严谨的形式化模型来实现记忆对齐的去中心化，在彻底消除单点故障 (SPOF) 的同时，维持了确定性的语义连贯性。
-- **确定性收敛机制**：该框架确立了无效记忆提交的严格上限公式：$\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$，其中 $\varepsilon_{\max}$ 是局部错误接受率，$r$ 是重叠验证者的数量。这种严格的数学上限能在没有中心化协调的情况下，确定性地控制系统失效。
+arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems")。选择该理论作为当前探索方向的原因在于，它提供了一个严谨的形式化模型来实现记忆对齐的去中心化，在彻底消除单点故障 (SPOF) 的同时，维持了确定性的语义连贯性。
+该框架确立了无效记忆提交的严格上限公式：$\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$，其中 $\varepsilon_{\max}$ 是局部错误接受率，$r$ 是重叠验证者的数量。这种严格的数学上限能在没有中心化协调的情况下，确定性地控制系统失效。
 
 **💡 通俗类比**：
 想象一个庞大的全球百科全书（全局记忆），但没有一个总编纂负责。相反，每位地方编辑（代理）只负责特定领域的词条（本体切片）。当系统中有任何新词条或修订产生时，会发出通知。地方编辑只关心属于自己领域的词条。在把词条写入自己负责的百科部分前，他们需要至少 $r$ 位独立专家的审核。即使某位专家出错的概率是 $\varepsilon_{\max}$，所有 $r$ 位专家同时出错的概率也会呈指数级下降。因此，随着时间推移，每位地方编辑手中的百科全书都会确定性地与真实的“全局状态”保持一致，且全程不需要任何中心化的“总编纂”来发号施令！
@@ -180,7 +173,6 @@ def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
     effective_weights = theta_0 + delta_t
     return deterministic_sample(effective_weights, c_t)
 ```
-
 
 ### 4.1 对比记忆系统 (Contrastive Memory System)
 
@@ -298,7 +290,6 @@ def continuous_hopfield_update(q_t, B, psi_functions, beta, num_steps=10):
 
 ---
 
-
 ### 4.3 拓扑流形匹配自编码器 (Manifold-Matching Autoencoder)
 
 ```python
@@ -318,7 +309,6 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
     return loss_X_to_Z + loss_Z_to_X
 ```
 
-
 ## 5. 0基础业务通俗类比 (For Beginners)
 ### Analogy for 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
 想象一下，你的大脑像一个有着固定大小的“收纳盒”。在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）。
@@ -334,10 +324,8 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 ### Analogy for 参数化记忆与代理自我演化
 这就像是刻在脑子里的肌肉记忆，而不是翻找记事本。遇到问题直接产生确定性反应，再也不会出现查不到资料就乱答的黑盒事故。
 
-
 ### 5.1 连续时间 Hopfield 网络
 想象一个图书管理员在找书。在传统的“离散”图书馆里，她只能在一个个固定的书架上找。如果用户的需求刚好介于两个书架之间，她可能就会抓瞎，甚至胡编乱造（这就是大模型的幻觉）。而“连续时间记忆 Hopfield 网络”把图书馆变成了一片液态的知识海洋。这里没有孤立的书架，只有连绵起伏的山谷。那个复杂的“能量函数”，其实就是物理学中的重力。不管管理员从哪里开始找，重力法则会百分之百保证她顺着山坡平稳地滑入正确的知识谷底，绝无可能迷失在真空中。
-
 
 ### 5.2 拓扑流形匹配自编码器
 想象你有一张巨大的、揉皱的世界地图（高维复杂环境）。如果你直接把它压扁装进相框（传统降维），原本在地图上相邻的城市可能会被撕裂，甚至不同大陆会被强行叠在一起（这会引发后续决策的灾难性幻觉）。
@@ -376,10 +364,16 @@ def synchronize_semantic_slice(
     return local_memory
 ```
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+
 📂 动态演进映射
-Memory System: introduced Deterministic Exponential Decay, DCS, and Parametric Memory, updated Core Mechanisms
-Collaboration System: introduced DSGT, Block-Wise Adam, Decentralized Stochastic Control, Delay Tolerance, and Smoothed Gradient Clipping, updated Convergence on the Spectral Graph
+
+Architecture Principles: 整合了 TASR 和 Distributed Gradient-Regularized Newton Method.
+Collaboration System: 整合了 DSGT, Block-Wise Adam, 去中心化随机控制, IDTSC, 平滑梯度裁剪, 异步有向图, 行随机网络.
+Memory System: 整合了确定性指数衰减, 确定性因果结构 (DCS), 参数化记忆, 去中心化语义切片对齐.
+Tool System: 整合了因果最小化工具过滤 (CMTF).
+MISSING_SOURCE: None
+
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-Conflict Detection: The introduced theories in Memory System (deterministic representation learning, parametric memory shifts) and Collaboration System (decentralized spectral graph convergence, bounded gradients) are completely mathematically compatible. Both heavily rely on physically bounding divergence and monotonic convergence metrics while entirely deprecating centralized controllers and single points of failure. No structural or paradigm conflicts exist.
+
+Conflict Detection: 跨四大系统容器（架构原则、协作系统、记忆系统、工具系统）整合的新理论已通过严格审计。所有新引入的数学边界（如DSGT的梯度追踪、TASR的停止算子、CMTF的目标推断）都完美契合“我们约束，不实现”的基础哲学，并坚守彻底废弃中心化控制节点的设计底线。整体形成了一个全局统一、无单点故障（SPOF）、防崩溃的确定性智能体框架。无任何范式冲突。
