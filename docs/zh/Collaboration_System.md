@@ -542,3 +542,62 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: 跨四大系统容器（架构原则、协作系统、记忆系统、工具系统）整合的新理论已通过严格审计。所有新引入的数学边界（如DSGT的梯度追踪、TASR的停止算子、CMTF的目标推断）都完美契合“我们约束，不实现”的基础哲学，并坚守彻底废弃中心化控制节点的设计底线。整体形成了一个全局统一、无单点故障（SPOF）、防崩溃的确定性智能体框架。无任何范式冲突。
+
+📝 [Daily Research Chunk] 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+Frontier Source: http://arxiv.org/abs/2409.05293v1
+Deterministic Convergence Mechanism: 该算法提出了一种结合时变对数障碍（log-barrier）惩罚函数的分布式连续时间优化控制器。它能强制执行严格的时变不等式约束，并追踪移动的最优路径。Lyapunov稳定性分析保证了全局的最终一致性，且无需假设各智能体具有相同的海森矩阵（Hessian）。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# System: Collaboration
+# Focus: Distributed Continuous-Time Optimization with Log-Barrier
+
+def compute_continuous_time_update(x_i, t, neighbors_i, f_i, g_i, rho_i, sigma_i, beta):
+    """
+    x_i: 智能体 i 的局部状态
+    t: 当前时间
+    neighbors_i: 智能体 i 的邻居集合
+    f_i: 局部代价函数
+    g_i: 局部不等式约束
+    rho_i: 时变障碍参数
+    sigma_i: 时变松弛函数
+    beta: 一致性增益
+
+    Returns 状态的导数: dot_x_i
+    """
+
+    # 1. 计算惩罚目标函数
+    # \tilde{L}_{i}(x_{i},t)=f_{i}(x_{i},t)-\frac{1}{\rho_{i}(t)}\sum_{j=1}^{q_{i}}\log\big{(}\sigma_{i}(t)-g_{ij}(x_{i},t)\big{)}
+    L_tilde_i = compute_penalized_objective(f_i, g_i, rho_i, sigma_i, x_i, t)
+
+    # 2. 计算惩罚目标函数的一阶和二阶导数
+    grad_L = compute_gradient(L_tilde_i, x_i)
+    hess_L = compute_hessian(L_tilde_i, x_i)
+    hess_L_inv = invert(hess_L)
+    grad_L_dt = compute_time_derivative_of_gradient(L_tilde_i, x_i, t)
+
+    # 3. 计算标称优化器速度
+    # \psi_{i}=\left(\nabla^{2}\tilde{L}_{i}(x_{i},t)\right)^{-1}\left(\nabla\tilde{L}_{i}(x_{i},t)+\frac{\partial}{\partial t}\nabla\tilde{L}_{i}(x_{i},t)\right)
+    psi_i = multiply(hess_L_inv, add(grad_L, grad_L_dt))
+
+    # 4. 计算一致性协议及最终的连续时间更新律
+    # \begin{split}\dot{x}_{i}(t)=&-\beta\left(\nabla^{2}\tilde{L}_{i}(x_{i},t)\right)^{-1}\sum_{j\in\mathcal{N}_{i}}\text{sign}(x_{i}-x_{j})\\
+    # &-\left(\nabla^{2}\tilde{L}_{i}(x_{i},t)\right)^{-1}\left(\nabla\tilde{L}_{i}(x_{i},t)+\frac{\partial}{\partial t}\nabla\tilde{L}_{i}(x_{i},t)\right)\end{split}
+    sum_sign_diff = 0
+    for j in neighbors_i:
+        sum_sign_diff += sign(x_i - x_j)
+
+    dot_x_i = -beta * multiply(hess_L_inv, sum_sign_diff) - psi_i
+
+    return dot_x_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一支自主送货无人机编队正试图以紧密的队形飞行，同时在不断变化的送货路线上优化其能源使用（时变代价函数）。它们必须避免撞上动态障碍物或进入禁飞区（时变约束）。
+它们并不需要一个中央控制塔来规划路线，每架无人机只与附近的无人机进行通信。它们使用一种“排斥护盾”（对数障碍），如果它们太靠近禁飞区边界，护盾就会变得无限强，从而确保它们永远不会越界。相应的更新规则精确地告诉它们，该以多快的速度相对于邻居和目标进行位置调整，在数学层面上绝对保证了编队能进行完美同步且绝对安全的移动，彻底消除了对中心化协调器的需求。
