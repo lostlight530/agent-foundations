@@ -22,17 +22,17 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 ---
 
 ## 2. 核心机制：记忆压缩与异常捕捉 (Core Mechanisms)
-### 动态理论深潜：基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
+### 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
 - **所属系统容器**：Memory
 - **前沿来源**：arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
 - **确定性收敛机制**：DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
 
-### 动态理论深潜：确定性因果结构 (Deterministic Causal Structure, DCS)
+### 确定性因果结构 (Deterministic Causal Structure, DCS)
 - **所属系统容器**：Memory
 - **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)。选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦。
 - **确定性收敛机制**：该理论通过一个极简公理集确立了确定性因果结构 (DCS)。极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义。局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界。
 
-### 动态理论深潜：参数化记忆与代理自我演化
+### 参数化记忆与代理自我演化
 - **所属系统容器**：Memory
 - **前沿来源**：arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》。抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中。
 - **确定性收敛机制**：演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$。通过 $\Delta_t$ 的收敛来保障记忆留存下界。
@@ -85,7 +85,7 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 ---
 
 ## 4. 源码解析与架构伪代码 (Source Code Breakdown)
-### Code for 动态理论深潜：基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
+### Code for 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
 ```python
 import math
 
@@ -127,7 +127,7 @@ class DeterministicMemoryDecay:
         return self.memory_entries
 ```
 
-### Code for 动态理论深潜：确定性因果结构 (Deterministic Causal Structure, DCS)
+### Code for 确定性因果结构 (Deterministic Causal Structure, DCS)
 ```python
 # 核心机制的零依赖确定性算法实现：DCS 确定性合并逻辑
 class JoinSemilatticeState:
@@ -173,7 +173,7 @@ agent_b.receive_contribution("task_1", {"fact_1"})
 assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
 ```
 
-### Code for 动态理论深潜：参数化记忆与代理自我演化
+### Code for 参数化记忆与代理自我演化
 ```python
 def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
     # theta_0 is base policy, delta_t is the deterministic memory state
@@ -320,18 +320,18 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 
 ## 5. 0基础业务通俗类比 (For Beginners)
-### Analogy for 动态理论深潜：基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
+### Analogy for 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
 想象一下，你的大脑像一个有着固定大小的“收纳盒”。在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）。
 如果用传统的大模型黑盒方法来整理这个收纳盒，就像是雇了一个性格阴晴不定、每次收费还很高的临时工，让他每次凭感觉把不重要的东西扔掉，你永远不知道他下次会扔掉什么。
 而“基于互动计数的确定性指数衰减定律”则像是引入了一套严格的物理法则：每个记忆都会随着“新发生事情的次数”（$\Delta n$，而不是过去了多少天）按比例慢慢变淡。这个变淡的速度（$\lambda$）不仅是固定的，而且最初“重要性标签”越高的记忆，它变淡得就越慢（受到惯性参数 $\eta$ 的保护）。一旦某个记忆的清晰度降到了一条死线（$\Omega_{\mathrm{kill}}$）以下，它就会被百分之百确定地移出大脑的“常用工作区”，归档到日记本（长期冷数据档案）里。这样一来，收纳盒永远不会满，每一次留下的记忆都是数学公式精确计算过的结果，完全不需要那个昂贵的临时工。
 
-### Analogy for 动态理论深潜：确定性因果结构 (Deterministic Causal Structure, DCS)
+### Analogy for 确定性因果结构 (Deterministic Causal Structure, DCS)
 想象好几个人正在合作拼一幅巨大的拼图（系统的共享记忆状态）。
 以前的做法是大家需要互相争抢“谁先放下一块”，或者担心“有人把拼图寄晚了导致全盘错乱”（这叫策略与网络路由问题）。而现在，我们给每一块拼图都印上独一无二的条形码（这就是带有唯一 `rid` 的 Contribution）。
 
 通过名为“上半格”的数学魔法，把拼图拼起来的过程就像把它们全倒在桌子上。你先从左手倒下拼图，还是先从右手倒下拼图根本不重要（满足“交换律”和“结合律”，与顺序无关）；如果有人不小心寄给了你两块完全一样的拼图，它们也能完美重叠在一起，不影响整体画面（满足“幂等律”）。最终，只要所有人都拿到了所有的拼图块，大家拼出来的画面就是**绝对一致且确定的**。这就在底层机制上彻底实现了“快递怎么送”和“拼图长什么样”的完美解耦。
 
-### Analogy for 动态理论深潜：参数化记忆与代理自我演化
+### Analogy for 参数化记忆与代理自我演化
 这就像是刻在脑子里的肌肉记忆，而不是翻找记事本。遇到问题直接产生确定性反应，再也不会出现查不到资料就乱答的黑盒事故。
 
 
@@ -375,3 +375,11 @@ def synchronize_semantic_slice(
 
     return local_memory
 ```
+
+
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+📂 动态演进映射
+Memory System: introduced Deterministic Exponential Decay, DCS, and Parametric Memory, updated Core Mechanisms
+Collaboration System: introduced DSGT, Block-Wise Adam, Decentralized Stochastic Control, Delay Tolerance, and Smoothed Gradient Clipping, updated Convergence on the Spectral Graph
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
+Conflict Detection: The introduced theories in Memory System (deterministic representation learning, parametric memory shifts) and Collaboration System (decentralized spectral graph convergence, bounded gradients) are completely mathematically compatible. Both heavily rely on physically bounding divergence and monotonic convergence metrics while entirely deprecating centralized controllers and single points of failure. No structural or paradigm conflicts exist.

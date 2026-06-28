@@ -23,31 +23,31 @@ In DecDPO, agents are arranged in a peer-to-peer network topology (an undirected
 ---
 
 ## 2. Core Mechanisms: Convergence on the Spectral Graph
-### Dynamic Theory Deep Dive: Decentralized Stochastic Gradient Tracking (DSGT)
+### Decentralized Stochastic Gradient Tracking (DSGT)
 - **所属系统容器 (System Container)**: Collaboration System
 - **前沿来源 (Frontier Source)**: "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking" (arXiv:2605.00281v1). Selected because it provides a highly rigorous bound on convergence over decentralized networks without a central authority.
 - **确定性收敛机制 (Deterministic Convergence Mechanism)**: The paper proves that the Decentralized Stochastic Gradient Tracking (DSGT) algorithm achieves a high-probability convergence bound, where the probability of error bounding $X_t$ exceeding a threshold is strictly constrained: $\mathbb{P}\bigg(X_{t}>\frac{\log(\nicefrac{{1}}{{\delta}})}{t^{\beta}}\bigg)\leq\delta$. The bias-correction is achieved through tracking variables mathematically formulated as:
   - Tracker Update: $\mathbf{y}^{t} = \mathbf{W}(\mathbf{y}^{t-1} + \mathbf{g}^{t} - \mathbf{g}^{t-1})$
   - Model Update: $\mathbf{x}^{t+1} = \mathbf{W}(\mathbf{x}^{t} - \alpha_{t}\mathbf{y}^{t})$
 
-### Dynamic Theory Deep Dive: Decentralized Block-Wise Adam Convergence
+### Decentralized Block-Wise Adam Convergence
 - **System Container**: Collaboration System
 - **Frontier Source**: DECA: Decentralizing Block-Wise Adam for Efficient LLM Full-Parameter Fine-Tuning on Non-IID Data (arXiv:2606.03209v1). Selected because Centralized Federated Learning is entirely deprecated in favor of Decentralized Distributed Optimization (DecDPO) to eliminate Single Points of Failure (SPOF).
 - **Deterministic Convergence Mechanism**: It proves decentralized dynamic tracking of global gradients, eliminating black-box randomness. The extracted hardcore mathematical mechanism (local parameter update and decentralized consensus) is:
   $$ x^{[t,r+\frac{1}{2}]}_{i,k}=x^{[t,r]}_{i,k}-\gamma\cdot{\widehat{m}^{[t,r]}_{i,k}}\Big/{\left(\sqrt{\widehat{v}^{[t,r]}_{i,k}}+\epsilon\right)}. $$
   $$ x^{[t,r+1]}_{i,k}=\sum_{j\in\mathcal{N}_{i}}w_{i,j}x^{[t,r+\frac{1}{2}]}_{j,k}. $$
 
-### Dynamic Theory Deep-Dive: Decentralized Stochastic Control & Convergence Bounds
+### Decentralized Stochastic Control & Convergence Bounds
 - **System Container**: Collaboration
 - **Frontier Source**: arXiv:2605.00160v1 "Approximations and Learning for Decentralized Stochastic Control and Near Optimal Finite Window Policies". Perfectly aligns with our DecDPO route removing central servers.
 - **Deterministic Convergence Mechanism**: The system physically bounds decentralized policy evolution via $J(\gamma)=E^{\gamma}[\sum_{t=0}^{\infty}\beta^{t}c(x_{t},\mathbf{u_{t}})]$, effectively destroying infinite divergence in math.
 
-### Dynamic Theory Deep Dive: Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
+### Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
 - **System Container**: Collaboration System
 - **Frontier Source**: arXiv:2606.19871v1 "Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization of Networked Nonlinear Systems". Selected because it provides a deterministic convergence boundary for decentralized non-convex optimization under networked input delays, perfectly aligning with our pure Decentralized Distributed Optimization (DecDPO) paradigm.
 - **Deterministic Convergence Mechanism**: The algorithm achieves Input-Delay Tolerant Semiglobal Convergence (IDTSC) by decoupling the nonlinear dynamics and consensus tracking via a hierarchical design. The system mathematically bounds the pre-convergence Lyapunov function derivative as: $\displaystyle\dot{V}_{pre}\leq -2\vartheta\lambda_{2}(\bar{\mathcal{L}})V_{pre}$, ensuring strict determinism under the coupling between delays and nonconvex optimization objectives. The local control input is strictly bound by $\displaystyle u_{i}(t)=g_{i}(x_{i}(t))^{-1}(-f_{i}(x_{i}(t))+{\bar{u}}_{i}(t))$.
 
-### Dynamic Theory Deep Dive: Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
+### Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
 - **System Container**: Collaboration System
 - **Frontier Source**: arXiv:2310.16920v3 "Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization under Symmetric Heavy-Tailed Noise". This theory perfectly aligns with the pure Decentralized Distributed Optimization (DecDPO) paradigm, proving robust convergence even under heavy-tailed gradient noise without a central server.
 - **Deterministic Convergence Mechanism**: The algorithm introduces a strictly bounded smooth clipping operator designed to tackle inherent bias in heterogeneous decentralized optimization under heavy-tailed noise. The smooth clipping operator mathematically strictly bounds extreme values and is formulated as:
@@ -216,7 +216,7 @@ If they merely exchange basic experiences with neighboring branches (traditional
 - **Deterministic Convergence Mechanism**: The algorithm achieves highly deterministic convergence in decentralized settings. The core update equations are strictly defined as $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ and $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$.
 
 ## 3. Source Code Breakdown & Pseudocode
-### Code for Dynamic Theory Deep Dive: Decentralized Stochastic Gradient Tracking (DSGT)
+### Code for Decentralized Stochastic Gradient Tracking (DSGT)
 ```python
 def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
     # x_t: Models at time t for all nodes (matrix)
@@ -236,7 +236,7 @@ def dsgt_step(x_t, y_t_prev, g_t, g_t_prev, W, alpha_t):
     return x_t_next, y_t
 ```
 
-### Code for Dynamic Theory Deep Dive: Decentralized Block-Wise Adam Convergence
+### Code for Decentralized Block-Wise Adam Convergence
 ```python
 def decentralized_adam_update(x_i_k, m_hat_i_k, v_hat_i_k, gamma, epsilon, neighbors_w_x):
     # Eq 6: x^{[t,r+1/2]}_{i,k} = x^{[t,r]}_{i,k} - gamma * m_hat / (sqrt(v_hat) + epsilon)
@@ -246,7 +246,7 @@ def decentralized_adam_update(x_i_k, m_hat_i_k, v_hat_i_k, gamma, epsilon, neigh
     return x_next
 ```
 
-### Code for Dynamic Theory Deep-Dive: Decentralized Stochastic Control & Convergence Bounds
+### Code for Decentralized Stochastic Control & Convergence Bounds
 ```python
 def decentralized_stochastic_step(local_state, local_action, neighbors):
     cost = compute_cost(local_state, local_action)
@@ -255,7 +255,7 @@ def decentralized_stochastic_step(local_state, local_action, neighbors):
     return cost
 ```
 
-### Code for Dynamic Theory Deep Dive: Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
+### Code for Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
 ```python
 def semiglobal_input_delay_tolerant_step(x_i, neighbors_x, f_i, g_i, u_bar_eta_i, u_bar_eta_j_list, theta, epsilon):
     """
@@ -283,7 +283,7 @@ def semiglobal_input_delay_tolerant_step(x_i, neighbors_x, f_i, g_i, u_bar_eta_i
     return u_i
 ```
 
-### Code for Dynamic Theory Deep Dive: Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
+### Code for Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
 ```python
 def smoothed_clipping_decentralized_step(y, phi_t, epsilon_t, current_m_i, current_x, beta_t, eta_t, n_agents, calc_next_m_i, calc_next_x):
     """
@@ -583,25 +583,25 @@ We do not scale to gamble on probabilities. We forge absolute deterministic resi
 ---
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
-### Analogy for Dynamic Theory Deep Dive: Decentralized Stochastic Gradient Tracking (DSGT)
+### Analogy for Decentralized Stochastic Gradient Tracking (DSGT)
 Imagine a massive company with no CEO (Decentralized). Every department (node) is working on optimizing a common project.
 - **The old way (DSGD)**: Departments only shared their local work progress. This caused "echo chambers" where specific departments diverged because their local data was heavily biased.
 - **The new way (DSGT)**: Every department maintains *two* notebooks. The first notebook tracks their own work (`x`). The second notebook (`y`) tracks the "company-wide rumor" of where the overall project should be heading. By constantly telling neighbors "Here is how my local project changed" and "Here is how I heard the global rumor changed", the entire company mathematically converges to the exact optimal global plan, completely avoiding blind spots without ever needing a centralized boss.
 
-### Analogy for Dynamic Theory Deep Dive: Decentralized Block-Wise Adam Convergence
+### Analogy for Decentralized Block-Wise Adam Convergence
 Imagine a village (decentralized network) without a "village chief" (centralized server). If the villagers need to jointly agree on a financial ledger (optimization model):
 1. **Local Estimation**: Each villager first calculates a preliminary adjustment based on their own bills using a smart abacus with memory (Adam optimizer).
 2. **Neighborhood Reconciliation**: Instead of reporting to a central authority, villagers only exchange this preliminary adjustment with their immediate neighbors (decentralized consensus).
 3. **Deterministic Convergence**: The mathematical formula strictly proves that as long as everyone sticks to this "local computation + local communication" approach and the network is connected, the entire village's ledger will definitively reach the identical optimal state. The system will never collapse just because one villager disconnects (eliminating SPOF).
 
-### Analogy for Dynamic Theory Deep-Dive: Decentralized Stochastic Control & Convergence Bounds
+### Analogy for Decentralized Stochastic Control & Convergence Bounds
 It is like a flock of geese flying south without a commander. Each goose adjusts to neighbors, and this math physically guarantees their total energy consumption has a lower bound, eliminating the risk of crashing from exhaustion.
 
-### Analogy for Dynamic Theory Deep Dive: Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
+### Analogy for Semiglobal Input-Delay Tolerance Algorithm for Distributed Nonconvex Optimization
 Imagine a fleet of self-driving delivery trucks (a decentralized network) trying to find the optimal global route together. The challenge is that they are driving on rugged, non-linear terrain (nonlinear dynamics), the communication signals between them are delayed (input delay), and there is no central dispatcher (SPOF eliminated).
 Instead of blindly guessing or trusting outdated GPS coordinates, each truck calculates a "deterministic correction steering wheel angle" (the control input $u_i(t)$). It mathematically cancels out its own physical inertia (via the inverse function $g_i^{-1}$) and computes a strictly bounded consensus offset relative to its neighbors, plus a local terrain gradient. Even if the messages from neighbors are delayed, the mathematical boundary design ensures the entire fleet acts like a highly cohesive, deterministic flock of birds converging perfectly onto the optimal destination without ever scattering.
 
-### Analogy for Dynamic Theory Deep Dive: Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
+### Analogy for Smoothed Gradient Clipping and Error Feedback for Decentralized Optimization
 Imagine a network of weather stations (decentralized nodes) trying to predict the exact optimal climate model. Sometimes, a single station gets hit by a massive storm, sending out ridiculously huge and completely inaccurate wind data (heavy-tailed noise).
 - **The Old Way**: A central server tries to average these readings and gets completely thrown off by the extreme storm data, ruining the global prediction.
 - **The New Way (Smoothed Clipping + Error Feedback)**: Each station has a smart filter (smooth clipping operator). If a neighbor screams an impossibly huge number, the filter smoothly caps it mathematically so the network doesn't panic. But to make sure they don't ignore real trends, they keep a memory of the errors they clipped (error feedback) and slowly bleed them back in. The mathematical proof guarantees that even if extreme outliers happen randomly, all stations will deterministically arrive at the exact correct climate model without needing a central boss.
@@ -639,3 +639,11 @@ Imagine different branches (nodes) of a multinational company needing to agree o
 - **Constraint-Coupled**: The sum of all branches' spending must strictly equal the hard cap set by the headquarters.
 - **Dual$^2$ Method**: It’s like the branches adjusting not only based on current deviations (first-level feedback) but through a multi-layered approach (Dual$^2$).
 This allows the entire company to reach a perfectly consistent budget allocation quickly and "deterministically" without relying on a central headquarters, entirely eliminating endless back-and-forth arguments (black-box probabilistic convergence).
+
+
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+📂 动态演进映射
+Memory System: introduced Deterministic Exponential Decay, DCS, and Parametric Memory, updated Core Mechanisms
+Collaboration System: introduced DSGT, Block-Wise Adam, Decentralized Stochastic Control, Delay Tolerance, and Smoothed Gradient Clipping, updated Convergence on the Spectral Graph
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
+Conflict Detection: The introduced theories in Memory System (deterministic representation learning, parametric memory shifts) and Collaboration System (decentralized spectral graph convergence, bounded gradients) are completely mathematically compatible. Both heavily rely on physically bounding divergence and monotonic convergence metrics while entirely deprecating centralized controllers and single points of failure. No structural or paradigm conflicts exist.

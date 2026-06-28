@@ -22,17 +22,17 @@ In the context of agent memory, this represents a brutal mathematical "dimension
 ---
 
 ## 2. Core Mechanisms: Memory Compression & Anomaly Capture
-### Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+### Deterministic Exponential Decay for Memory Survival based on Interaction Count
 - **System Container**: Memory
 - **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
 - **Deterministic Convergence Mechanism**: DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
 
-### Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+### Deterministic Causal Structure (DCS)
 - **所属系统容器**：Memory
 - **前沿来源**：*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1). We selected this theory because it provides a foundational mechanism for achieving structural determinism over mere value convergence in decentralized systems, effectively decoupling system correctness from volatile execution policies.
 - **确定性收敛机制**：The theory establishes a Deterministic Causal Structure (DCS) guaranteed by a minimal axiom set. The limit state is defined algebraically by a directed-complete join-semilattice $(L_{k},\sqsubseteq,\sqcup)$. The local state update rule is monotonic: $M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$, where the join operation $\sqcup$ is inflationary ($x\sqsubseteq x\sqcup y$), assuring monotonic convergence regardless of network delivery anomalies.
 
-### Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+### Parametric Memory & Self-Evolving Agents
 - **System Container**: Memory
 - **Frontier Source**: arXiv:2606.04536v1 "Scaling Self-Evolving Agents via Parametric Memory". Discards brittle external datastores, absorbing memory into deterministic parametric shifts.
 - **Deterministic Convergence Mechanism**: Evolution bounds are defined via $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$. Convergence of $\Delta_t$ ensures a strict behavioral lower bound.
@@ -85,7 +85,7 @@ We do not use brute-force computing to memorize the superficial details of the w
 ---
 
 ## 4. Source Code Breakdown & Pseudocode
-### Code for Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+### Code for Deterministic Exponential Decay for Memory Survival based on Interaction Count
 ```python
 import math
 
@@ -127,7 +127,7 @@ class DeterministicMemoryDecay:
         return self.memory_entries
 ```
 
-### Code for Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+### Code for Deterministic Causal Structure (DCS)
 ```python
 # Zero-dependency implementation of the DCS deterministic merge logic
 class JoinSemilatticeState:
@@ -173,7 +173,7 @@ agent_b.receive_contribution("task_1", {"fact_1"})
 assert agent_a.local_states["task_1"].get_state() == agent_b.local_states["task_1"].get_state()
 ```
 
-### Code for Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+### Code for Parametric Memory & Self-Evolving Agents
 ```python
 def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
     # theta_0 is base policy, delta_t is the deterministic memory state
@@ -319,18 +319,18 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
-### Analogy for Dynamic Theory Deep Dive: Deterministic Exponential Decay for Memory Survival based on Interaction Count
+### Analogy for Deterministic Exponential Decay for Memory Survival based on Interaction Count
 Imagine your brain is a storage box with a fixed size. Every time you place a new memory fragment inside (e.g., "The customer likes iced Americano"), your brain attaches an "importance tag" (Survival Score $\Omega$) to it.
 Using a traditional LLM black-box approach to organize this box is like hiring a highly unpredictable and expensive temp worker who randomly throws things away based on "gut feeling"—you never know what they might toss out next.
 In contrast, the "Deterministic Exponential Decay Law based on Interaction Count" introduces a strict set of physics. Every memory slowly fades away based on the "number of new events that have happened" ($\Delta n$, not how many days have passed). The speed at which it fades ($\lambda$) is not only fixed, but memories with initially higher "importance tags" will fade slower (protected by the inertia parameter $\eta$). Once a memory's clarity drops below a hard deadline ($\Omega_{\mathrm{kill}}$), it is 100% deterministically removed from the brain's "active workspace" and archived in a diary (long-term cold storage). This way, the storage box never overflows, and every retained memory is the result of precise mathematical calculation, completely eliminating the need for that expensive temp worker.
 
-### Analogy for Dynamic Theory Deep Dive: Deterministic Causal Structure (DCS)
+### Analogy for Deterministic Causal Structure (DCS)
 Imagine multiple people filling out a shared, massive puzzle (the memory state).
 Instead of fighting over who gets to place the next piece or worrying if someone mailed their piece late (policy & network routing), we assign every puzzle piece a unique barcode (Contribution with unique `rid`).
 
 Because of the "Join-Semilattice" math magic, putting the pieces together is like dumping them all on the table. It doesn't matter if you drop the pieces from your left hand first or your right hand first (order independence), and if you accidentally drop a duplicate piece, it just stacks perfectly on top of the identical one (idempotence). In the end, everyone who gets all the pieces will build the exact same deterministic picture, effectively separating "how the mail gets delivered" from "the truth of the puzzle".
 
-### Analogy for Dynamic Theory Deep-Dive: Parametric Memory & Self-Evolving Agents
+### Analogy for Parametric Memory & Self-Evolving Agents
 It is like muscle memory encoded in your brain rather than looking up a notebook. You react deterministically, eliminating the risk of black-box hallucination when notes are misplaced.
 
 
@@ -374,3 +374,11 @@ def synchronize_semantic_slice(
 
     return local_memory
 ```
+
+
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+📂 动态演进映射
+Memory System: introduced Deterministic Exponential Decay, DCS, and Parametric Memory, updated Core Mechanisms
+Collaboration System: introduced DSGT, Block-Wise Adam, Decentralized Stochastic Control, Delay Tolerance, and Smoothed Gradient Clipping, updated Convergence on the Spectral Graph
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
+Conflict Detection: The introduced theories in Memory System (deterministic representation learning, parametric memory shifts) and Collaboration System (decentralized spectral graph convergence, bounded gradients) are completely mathematically compatible. Both heavily rely on physically bounding divergence and monotonic convergence metrics while entirely deprecating centralized controllers and single points of failure. No structural or paradigm conflicts exist.
