@@ -601,3 +601,48 @@ def compute_continuous_time_update(x_i, t, neighbors_i, f_i, g_i, rho_i, sigma_i
 
 想象一支自主送货无人机编队正试图以紧密的队形飞行，同时在不断变化的送货路线上优化其能源使用（时变代价函数）。它们必须避免撞上动态障碍物或进入禁飞区（时变约束）。
 它们并不需要一个中央控制塔来规划路线，每架无人机只与附近的无人机进行通信。它们使用一种“排斥护盾”（对数障碍），如果它们太靠近禁飞区边界，护盾就会变得无限强，从而确保它们永远不会越界。相应的更新规则精确地告诉它们，该以多快的速度相对于邻居和目标进行位置调整，在数学层面上绝对保证了编队能进行完美同步且绝对安全的移动，彻底消除了对中心化协调器的需求。
+
+📝 [Daily Research Chunk] 动态理论深潜：去中心化策略优化 (DPO)
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration System
+
+Frontier Source: arxiv:2211.03032 - https://arxiv.org/abs/2211.03032
+
+Deterministic Convergence Mechanism: 提供了一个无需中心化 Critic 即可保证联合策略（Joint Policy）单调递增的下界机制。该定理 1 提供了一个显式的代理目标（Surrogate Objective）下界：J(\pi_new) - J(\pi_old) \geq (1/N)\sum L^i_old(\pi_new^i) - M_tilde * \sum D_KL^max(\pi_old^i||\pi_new^i) - C * \sum D_KL^max(\pi_old^i||\pi_new^i)。这允许每个智能体独立优化，同时通过惩罚项限制策略发散，从而保证整个多智能体系统的联合策略稳步改善。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# 基于定理1提取：去中心化代理目标下界
+def optimize_agent_policy(pi_old_i, N, M_tilde, C):
+    # pi_new_i = argmax_{\pi^i} ( (1/N) * L^i_old(\pi^i) - M_tilde * D_KL_max(\pi_old_i || \pi^i) - C * D_KL_max(\pi_old_i || \pi^i) )
+    # M_tilde and C are explicit constants defined in the proof trace
+
+    # 遍历智能体 i 的可用动作概率
+    best_surrogate = -float('inf')
+    best_pi_i = None
+
+    for pi_i in search_space:
+        advantage_loss = (1 / N) * compute_L_old(pi_old_i, pi_i)
+        d_kl_max = compute_D_KL_max(pi_old_i, pi_i)
+
+        # 基于定理 1 显式边界的惩罚项
+        penalty_1 = M_tilde * d_kl_max
+        penalty_2 = C * d_kl_max
+
+        surrogate = advantage_loss - penalty_1 - penalty_2
+
+        if surrogate > best_surrogate:
+            best_surrogate = surrogate
+            best_pi_i = pi_i
+
+    return best_pi_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一个厨师团队（智能体）在一起做一个巨大的蛋糕（联合任务），但没有主厨（中心化 Critic）来发号施令。如果每个厨师都只顾着改进自己负责的部分而不考虑其他人，整个蛋糕可能会塌陷（环境非平稳性）。
+
+DPO 的代理目标就像是给每个厨师的一份严格的个人契约：“你可以修改你的配方，但你必须根据你修改的剧烈程度扣除一个‘风险惩罚’（KL 散度项）。只要你遵守这个规则，我就可以在数学上保证整个蛋糕一定会变得更好，即使你从头到尾都没和其他厨师说过一句话。” 它通过强制局部的谨慎，来确保全局的确定性提升。
