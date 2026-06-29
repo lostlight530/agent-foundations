@@ -640,3 +640,48 @@ def compute_continuous_time_update(x_i, t, neighbors_i, f_i, g_i, rho_i, sigma_i
 
 Imagine a fleet of autonomous delivery drones trying to fly in tight formation while optimizing their energy usage over a changing delivery route (time-varying cost function). They must avoid hitting dynamic obstacles or entering no-fly zones (time-varying constraints).
 Instead of a central control tower plotting their paths, each drone communicates only with nearby drones. They use a "repulsion shield" (log-barrier) that gets infinitely strong if they get too close to a no-fly zone boundary, ensuring they never cross it. The resulting rule tells them exactly how fast to adjust their position relative to their neighbors and the target, guaranteeing synchronized and strictly safe fleet movement mathematically, completely eliminating the need for a central coordinator.
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Policy Optimization (DPO)
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration System
+
+Frontier Source: arxiv:2211.03032 - https://arxiv.org/abs/2211.03032
+
+Deterministic Convergence Mechanism: DPO provides a decentralized surrogate for policy optimization that guarantees monotonic improvement of the joint policy. Theorem 1 establishes a lower bound for joint policy improvement: J(\pi_new) - J(\pi_old) \geq (1/N)\sum L^i_old(\pi_new^i) - M_tilde * \sum D_KL^max(\pi_old^i||\pi_new^i) - C * \sum D_KL^max(\pi_old^i||\pi_new^i). This allows each agent to optimize independently and stably without a central authority.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# Extracted from Theorem 1: Decentralized surrogate objective lower bound
+def optimize_agent_policy(pi_old_i, N, M_tilde, C):
+    # pi_new_i = argmax_{\pi^i} ( (1/N) * L^i_old(\pi^i) - M_tilde * D_KL_max(\pi_old_i || \pi^i) - C * D_KL_max(\pi_old_i || \pi^i) )
+    # M_tilde and C are explicit constants defined in the proof trace
+
+    # Iterate over available action probabilities for agent i
+    best_surrogate = -float('inf')
+    best_pi_i = None
+
+    for pi_i in search_space:
+        advantage_loss = (1 / N) * compute_L_old(pi_old_i, pi_i)
+        d_kl_max = compute_D_KL_max(pi_old_i, pi_i)
+
+        # Penalties based on explicit bounds from Theorem 1
+        penalty_1 = M_tilde * d_kl_max
+        penalty_2 = C * d_kl_max
+
+        surrogate = advantage_loss - penalty_1 - penalty_2
+
+        if surrogate > best_surrogate:
+            best_surrogate = surrogate
+            best_pi_i = pi_i
+
+    return best_pi_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine a team of chefs (agents) baking a giant cake (the joint task) without a head chef (centralized critic) giving orders. If every chef just tries to improve their own section without considering the others, the whole cake might collapse (non-stationarity).
+
+The DPO surrogate objective acts like a strict individual contract for each chef: "You can change your recipe, but you must subtract a 'risk penalty' based on how drastically you change it (the KL divergence terms). If you follow this rule, I mathematically guarantee the whole cake will get better, even if you never talk to the other chefs." It forces local caution to ensure global improvement.
