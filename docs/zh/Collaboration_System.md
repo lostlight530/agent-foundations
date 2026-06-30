@@ -646,3 +646,70 @@ def optimize_agent_policy(pi_old_i, N, M_tilde, C):
 想象一个厨师团队（智能体）在一起做一个巨大的蛋糕（联合任务），但没有主厨（中心化 Critic）来发号施令。如果每个厨师都只顾着改进自己负责的部分而不考虑其他人，整个蛋糕可能会塌陷（环境非平稳性）。
 
 DPO 的代理目标就像是给每个厨师的一份严格的个人契约：“你可以修改你的配方，但你必须根据你修改的剧烈程度扣除一个‘风险惩罚’（KL 散度项）。只要你遵守这个规则，我就可以在数学上保证整个蛋糕一定会变得更好，即使你从头到尾都没和其他厨师说过一句话。” 它通过强制局部的谨慎，来确保全局的确定性提升。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: Decentralized Optimization in Networks with Arbitrary Delays (arXiv:2401.11344)
+
+Deterministic Convergence Mechanism: DT-GO (Delay-Tolerant Gossip Optimization) 算法为具有任意延迟的有向图上的去中心化随机优化建立了严格的收敛边界。它证明了收敛速率上界为 $\mathcal{O}\left(\left(\frac{LF_{0}\overline{\sigma}^{2}}{NT}\right)^{1/2}+\left(\frac{\left\lVert D\right\rVert_{2}GLF_{0}}{cT}\right)^{2/3}+\frac{LF_{0}}{T}\right)$。该方法引入了包含虚拟延迟节点的扩展Gossip矩阵 $W_v$，从而规避了节点必须知道其出度（out-degree）的要求。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# 具有任意延迟的去中心化平均与优化
+# 变量和公式提取自 DT-GO 算法设计
+
+# 初始化阶段：乘子向量估计
+# 每个节点 n 将其初始状态 x_n(0) 乘以 d_n = 1 / (N * pi_n)
+# 向量 pi_n 通过使用 x_n(0) = e_n 的预热阶段找到
+def warmup_phase(W, T_warm_up, N):
+    # W: 包含延迟的扩展 Gossip 矩阵 W_v
+    # 初始化字典或独热向量 e_n 用于跟踪
+    states = [e_n for n in range(N)]
+    for t in range(T_warm_up):
+        states = apply_gossip_matrix(W, states)
+
+    # 从极限平稳分布中提取 pi_n
+    pi = compute_pi_from_stationary(states)
+    return pi
+
+def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
+    # D: 对角校正矩阵
+    # eta: 步长 (step size)
+    # tau_g: Gossip 迭代次数
+    x = x_init.copy()
+
+    for t in range(T):
+        y = [None] * N
+        z = [None] * N
+        for n in range(N):
+            # 计算随机梯度步
+            grad_F_n = f_grads[n].compute(x[n])
+            y[n] = x[n] - eta * grad_F_n
+
+            # Gossip 之前的局部更新
+            z[n] = x[n] + (1 / (N * pi[n])) * (y[n] - x[n])
+
+        # 应用 tau_g 次 Gossip 迭代
+        for _ in range(tau_g):
+            # z_n <- sum_{m=1}^{N} W_{nm} z_m
+            z = apply_gossip_matrix(W, z)
+
+        for n in range(N):
+            x[n] = z[n]
+
+    return x
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory
+
+想象一家大型物流公司，有许多区域枢纽（节点）需要同步库存数据，但它们只能单向发送信息（有向图），并且信息经常在邮递中被任意延迟。如果每个人只是盲目地平均他们收到的数据，那些发送信息较多的枢纽会意外地使数据产生偏差。DT-GO算法添加了“虚拟枢纽”来代表运输中被延迟的邮件，并运行一个快速的“预热”阶段，在这个阶段中，每个人都发送一张唯一的身份证。通过观察他们最终持有的每张身份证的比例，他们可以准确算出需要将自己的更新数据“降权”多少 ($d_n$)。这使得所有枢纽即使在通信线路混乱和缓慢的情况下也能达成完美的共识（平稳解），保证整个公司在没有任何中央协调员的情况下高效地优化路线规划。
