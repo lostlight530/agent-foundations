@@ -685,3 +685,70 @@ def optimize_agent_policy(pi_old_i, N, M_tilde, C):
 Imagine a team of chefs (agents) baking a giant cake (the joint task) without a head chef (centralized critic) giving orders. If every chef just tries to improve their own section without considering the others, the whole cake might collapse (non-stationarity).
 
 The DPO surrogate objective acts like a strict individual contract for each chef: "You can change your recipe, but you must subtract a 'risk penalty' based on how drastically you change it (the KL divergence terms). If you follow this rule, I mathematically guarantee the whole cake will get better, even if you never talk to the other chefs." It forces local caution to ensure global improvement.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: Decentralized Optimization in Networks with Arbitrary Delays (arXiv:2401.11344)
+
+Deterministic Convergence Mechanism: The Delay-Tolerant Gossip Optimization (DT-GO) algorithm establishes a rigorous bound for decentralized stochastic optimization over directed graphs with arbitrary delays, proving a convergence rate bounded by $\mathcal{O}\left(\left(\frac{LF_{0}\overline{\sigma}^{2}}{NT}\right)^{1/2}+\left(\frac{\left\lVert D\right\rVert_{2}GLF_{0}}{cT}\right)^{2/3}+\frac{LF_{0}}{T}\right)$, circumventing the need for nodes to know their out-degree while using an extended gossip matrix $W_v$ incorporating virtual delay nodes.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# Decentralized Averaging & Optimization with Arbitrary Delays
+# Variables and formula extracted from DT-GO Algorithm Design
+
+# Initialization phase: Multiplier vector estimation
+# Each node n multiplies its initial state x_n(0) by d_n = 1 / (N * pi_n)
+# The vector pi_n is found by a warm-up phase using x_n(0) = e_n
+def warmup_phase(W, T_warm_up, N):
+    # W: Gossip matrix extended with delays W_v
+    # Initialize dictionary or one-hot vectors e_n for tracking
+    states = [e_n for n in range(N)]
+    for t in range(T_warm_up):
+        states = apply_gossip_matrix(W, states)
+
+    # pi_n is extracted from the limiting stationary distribution
+    pi = compute_pi_from_stationary(states)
+    return pi
+
+def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
+    # D: diagonal correction matrix
+    # eta: step size
+    # tau_g: number of gossip iterations
+    x = x_init.copy()
+
+    for t in range(T):
+        y = [None] * N
+        z = [None] * N
+        for n in range(N):
+            # Compute stochastic gradient step
+            grad_F_n = f_grads[n].compute(x[n])
+            y[n] = x[n] - eta * grad_F_n
+
+            # Local update before gossip
+            z[n] = x[n] + (1 / (N * pi[n])) * (y[n] - x[n])
+
+        # Apply gossip iterations tau_g times
+        for _ in range(tau_g):
+            # z_n <- sum_{m=1}^{N} W_{nm} z_m
+            z = apply_gossip_matrix(W, z)
+
+        for n in range(N):
+            x[n] = z[n]
+
+    return x
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory
+
+Imagine a large logistics company with many regional hubs (nodes) that want to synchronize their inventory data, but they can only send messages one way (directed graph) and messages often get delayed arbitrarily in the mail. If everyone just blindly averages what they receive, hubs that send more messages will accidentally skew the data. The DT-GO algorithm adds "virtual hubs" to represent the delayed mail in transit and runs a quick "warm-up" phase where everyone sends a unique ID card. By seeing how much of each ID card they eventually hold, they figure out exactly how much to "down-weight" their own updates ($d_n$). This allows all hubs to reach perfect agreement (stationary solution) even when communication lines are chaotic and slow, guaranteeing that the whole company optimizes its route planning efficiently without any central coordinator.
