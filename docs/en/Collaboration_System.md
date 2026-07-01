@@ -752,3 +752,49 @@ def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
 Use a local, beginner-friendly analogy that preserves the actual theory
 
 Imagine a large logistics company with many regional hubs (nodes) that want to synchronize their inventory data, but they can only send messages one way (directed graph) and messages often get delayed arbitrarily in the mail. If everyone just blindly averages what they receive, hubs that send more messages will accidentally skew the data. The DT-GO algorithm adds "virtual hubs" to represent the delayed mail in transit and runs a quick "warm-up" phase where everyone sends a unique ID card. By seeing how much of each ID card they eventually hold, they figure out exactly how much to "down-weight" their own updates ($d_n$). This allows all hubs to reach perfect agreement (stationary solution) even when communication lines are chaotic and slow, guaranteeing that the whole company optimizes its route planning efficiently without any central coordinator.
+
+📝 [Daily Research Chunk] 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: Asynchronous Decentralized Optimization with Constraints: Achievable Speeds of Convergence for Directed Graphs (arXiv:2401.03136)
+
+Deterministic Convergence Mechanism: To bypass the difficulty of finding explicit Lyapunov functions for asynchronous double averaging and gradient projection (ASY-DAGP) on directed graphs, the theory formulates a Linear Quadratic Performance Estimation Problem (LQ-PEP). It establishes convergence bounds by aggregating worst-case lower bounds over linear-quadratic constraint inequalities like $\mu(F^{v}_{k+1}+T^{v}_{k+1}) +\Big{\langle}\mathbf{x}^{*}-\mathbf{x}^{v}_{k+1},\mathbf{z}^{v}_{k+1}-\mathbf{x}^{v}_{k+1}+\mu\big{(}\nabla f^{v}(\mathbf{x}^{v}_{k})-\nabla f^{v}(\mathbf{x}^{*})-\mathbf{n}^{v}\big{)}\Big{\rangle}\leq 0$, ensuring stationary consensus unconditionally under convex delays.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# Variables explicitly supported by arXiv:2401.03136 extraction trace
+# F_v, T_v: Objective function and surrogate bounds for node v (F^{v}_{k+1}, T^{v}_{k+1})
+# x_v_next, x_star: Next iterate and optimal point (\mathbf{x}^{v}_{k+1}, \mathbf{x}^{*})
+# z_v_next: Auxiliary dual mapping (\mathbf{z}^{v}_{k+1})
+# grad_f_v_k, grad_f_star: Gradients (\nabla f^{v}(\mathbf{x}^{v}_{k}), \nabla f^{v}(\mathbf{x}^{*}))
+# mu, n_v: Step size and constraint normals (\mu, \mathbf{n}^{v})
+
+def verify_lq_pep_constraint(F_v_next, T_v_next, x_v_next, x_star, z_v_next, grad_f_v_k, grad_f_star, mu, n_v):
+    # Evaluates the core LQ-PEP invariant equation from the paper
+    # \mu(F^{v}_{k+1}+T^{v}_{k+1}) + \langle \mathbf{x}^{*}-\mathbf{x}^{v}_{k+1}, \mathbf{z}^{v}_{k+1}-\mathbf{x}^{v}_{k+1} + \mu(\nabla f^{v}(\mathbf{x}^{v}_{k}) - \nabla f^{v}(\mathbf{x}^{*}) - \mathbf{n}^{v}) \rangle \leq 0
+
+    # Calculate scalar function bound
+    scalar_term = mu * (F_v_next + T_v_next)
+
+    # Calculate vector differences
+    x_diff = x_star - x_v_next
+    gradient_diff = grad_f_v_k - grad_f_star - n_v
+    z_diff = z_v_next - x_v_next + (mu * gradient_diff)
+
+    # Calculate inner product
+    inner_product = sum(x * z for x, z in zip(x_diff, z_diff))
+
+    # The algebraic inequality serving as the deterministic bound
+    lq_pep_bound = scalar_term + inner_product
+    assert lq_pep_bound <= 0
+
+    return lq_pep_bound
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine trying to figure out if a massive plumbing system (directed network of agents) will eventually balance its water pressure (reach convergence) while everyone adjusts their valves at different random times (asynchronous delays). Usually, engineers try to find one magical "total energy" equation (Lyapunov function) that drops every second. But that's too hard here. Instead, LQ-PEP acts like a "worst-case auditor". It writes down all the localized, basic physical rules of the pipes as simple algebraic inequalities ($\leq 0$) and mathematically proves that even in the absolute worst sequence of delays, the entire system cannot physically avoid reaching a balanced state.
