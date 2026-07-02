@@ -660,8 +660,6 @@ Deterministic Convergence Mechanism: DT-GO (Delay-Tolerant Gossip Optimization) 
 
 💻 源码级伪代码解析 (Source Code Breakdown)
 
-Use grounded pseudocode only
-
 ```python
 # 具有任意延迟的去中心化平均与优化
 # 变量和公式提取自 DT-GO 算法设计
@@ -710,8 +708,6 @@ def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
 
 💡 0基础业务通俗类比 (For Beginners)
 
-Use a local, beginner-friendly analogy that preserves the actual theory
-
 想象一家大型物流公司，有许多区域枢纽（节点）需要同步库存数据，但它们只能单向发送信息（有向图），并且信息经常在邮递中被任意延迟。如果每个人只是盲目地平均他们收到的数据，那些发送信息较多的枢纽会意外地使数据产生偏差。DT-GO算法添加了“虚拟枢纽”来代表运输中被延迟的邮件，并运行一个快速的“预热”阶段，在这个阶段中，每个人都发送一张唯一的身份证。通过观察他们最终持有的每张身份证的比例，他们可以准确算出需要将自己的更新数据“降权”多少 ($d_n$)。这使得所有枢纽即使在通信线路混乱和缓慢的情况下也能达成完美的共识（平稳解），保证整个公司在没有任何中央协调员的情况下高效地优化路线规划。
 
 📝 [Daily Research Chunk] 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
@@ -759,3 +755,87 @@ def verify_lq_pep_constraint(F_v_next, T_v_next, x_v_next, x_star, z_v_next, gra
 💡 0基础业务通俗类比 (For Beginners)
 
 想象你要判断一个巨大的管道系统（有向网络智能体）最终是否能平衡水压（达到收敛），而每个人都在不同的随机时间调节他们的阀门（异步延迟）。通常，工程师会试图找到一个神奇的“总能量”公式（Lyapunov 函数），证明它每秒都在下降。但这在这里太难了。相反，LQ-PEP 就像一个“最坏情况审计员”。它把管道所有局部的、基本的物理规则写成简单的代数不等式（$\leq 0$），并在数学上证明：即使在极其恶劣的延迟顺序下，整个系统在物理上也无法逃避，最终必须达到平衡状态。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：去中心化优化的强概率收敛与梯度追踪
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: [High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking](http://arxiv.org/abs/2605.00281v1)
+
+Deterministic Convergence Mechanism: 该论文为结合梯度追踪的去中心化随机梯度下降（GT-DSGD）建立了严格的高概率（HP）收敛边界。在放宽的亚高斯噪声条件下，针对非凸和 Polyak-Lojasiewicz 成本函数，分别证明了 $\mathcal{O}\Big(\frac{\log(1/\delta)}{\sqrt{nT}}\Big)$ 和 $\mathcal{O}\Big(\frac{\log(1/\delta)}{nT}\Big)$ 的最优阶高概率收敛率。从中提取的一个核心确定性机制是对共识误差的显式约束：$\|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2}\leq\frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2}+\frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}$，其中 $\lambda \in [0,1)$ 是混合矩阵的第二大奇异值，以及追踪网络误差演化的显式矩母函数（MGF）边界。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# 基于提取公式的去中心化优化参数
+lambda_spectral = 0.9  # \lambda: 混合矩阵 W 的第二大奇异值，用于约束 \|W-J\|
+alpha = 0.01          # \alpha: 步长 (学习率)
+x_consensus_error_t = 0.5 # \|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2} 当前步的一致性误差
+y_tracking_error_t = 0.2  # \|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2} 当前步的追踪误差
+
+# 基于引理 9 的一致性差距确定性更新约束:
+# \|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2} \leq \frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2} + \frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}
+def compute_next_consensus_error_bound(x_error, y_error, lam, lr):
+    contraction_factor = (1 + lam**2) / 2
+    tracking_penalty_factor = (2 * lr**2 * lam**2) / (1 - lam**2)
+    next_x_error_bound = contraction_factor * x_error + tracking_penalty_factor * y_error
+    return next_x_error_bound
+
+next_error_bound = compute_next_consensus_error_bound(x_consensus_error_t, y_tracking_error_t, lambda_spectral, alpha)
+print(f"下一步一致性误差的确定性边界: {next_error_bound}")
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一个厨师团队（智能体）在各自的厨房里试图烤出完全相同的蛋糕配方（全局模型）。他们只能与隔壁的厨房交流。
+- `lambda_spectral`（谱隙）就像是厨房之间信息传递的速度。lambda 越小，说明信息同步越快。
+- 一致性差距（他们的蛋糕有多大差异）的公式表明，他们的分歧会随着时间推移而缩小（公式中 `(1+lambda^2)/2` 的部分，它小于 1），但也会因为各自记录配料时的追踪误差（`y_tracking_error_t` 的部分）而产生轻微的偏离。
+- 高概率边界（High-probability bound）是一种严格的数学保证：“我 99.9% 确定在 T 小时后，所有的蛋糕尝起来会一模一样，即使个别厨师偶尔称错配料（亚高斯噪声）。”
+
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于统计多样性的自适应权重 Push-SUM 去中心化优化
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: [Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity](http://arxiv.org/abs/2412.07252v1)
+
+Deterministic Convergence Mechanism: 该论文通过引入自适应权重 Push-SUM（Adaptive Weighting Push-SUM）协议，为 Push-SUM 建立了一个广义理论框架。它明确解决了去中心化网络中由于统计多样性（数据异构）导致的性能下降问题。通过推导共识距离（consensus distance）的严格上界，作者确定性地证明了在充分通信下，新协议的共识距离上界缩小到 $O(1/N)$，而传统的 Push-SUM 的上界为 $O(1)$。此外，它还确立了基于该协议的 SGD 和 Momentum SGD 的显式收敛率：$O(N/T)$，这比标准 Push-SUM 协议的 $O(Nd/T)$ 边界（其中 $d$ 是参数规模，$T$ 是迭代次数）有了显著的确定性改进。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# 基于提取公式的去中心化优化理论参数
+N = 10  # N: 网络中的节点（智能体）数量
+T_iter = 1000 # T: 总迭代次数
+d = 10000 # d: 模型的参数规模
+
+# 基于广义 Push-SUM 协议的理论边界对比
+def evaluate_protocol_bounds(N, T, d):
+    # 传统 Push-SUM 协议的理论边界
+    traditional_consensus_bound = 1.0 # O(1)
+    traditional_convergence_rate = (N * d) / T # O(Nd/T)
+
+    # 自适应权重 Push-SUM 协议的理论边界
+    adaptive_consensus_bound = 1.0 / N # O(1/N)
+    adaptive_convergence_rate = N / T # O(N/T)
+
+    return {
+        "Push-SUM": {"Consensus": traditional_consensus_bound, "Convergence": traditional_convergence_rate},
+        "Adaptive Weighting Push-SUM": {"Consensus": adaptive_consensus_bound, "Convergence": adaptive_convergence_rate}
+    }
+
+bounds = evaluate_protocol_bounds(N, T_iter, d)
+print(f"自适应协议的一致性误差规模: {bounds['Adaptive Weighting Push-SUM']['Consensus']}")
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一个大型研究团队（由 $N$ 个节点组成的网络）正试图合写一份报告。每个研究员只有部分数据（统计多样性），且只能与相邻座位的同事交流。
+- 在标准做法（传统 Push-SUM）中，他们只是盲目地平均大家的笔记。因为某些节点的数据差异极大，“分歧”（共识距离）永远无法完全消除（$O(1)$），而且报告的规模（$d$）越大，所有人的收敛速度就越慢（$O(Nd/T)$）。
+- 在自适应权重（Adaptive Weighting）方法中，团队对邻居的笔记应用了巧妙的加权公式（Moreau weighting）。这在数学上保证了团队规模（$N$）越大，最终的分歧反而越小（$O(1/N)$），从而彻底打破了由报告规模（$d$）带来的性能瓶颈。
