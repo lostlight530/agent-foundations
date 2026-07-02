@@ -699,8 +699,6 @@ Deterministic Convergence Mechanism: The Delay-Tolerant Gossip Optimization (DT-
 
 💻 源码级伪代码解析 (Source Code Breakdown)
 
-Use grounded pseudocode only
-
 ```python
 # Decentralized Averaging & Optimization with Arbitrary Delays
 # Variables and formula extracted from DT-GO Algorithm Design
@@ -749,8 +747,6 @@ def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
 
 💡 0基础业务通俗类比 (For Beginners)
 
-Use a local, beginner-friendly analogy that preserves the actual theory
-
 Imagine a large logistics company with many regional hubs (nodes) that want to synchronize their inventory data, but they can only send messages one way (directed graph) and messages often get delayed arbitrarily in the mail. If everyone just blindly averages what they receive, hubs that send more messages will accidentally skew the data. The DT-GO algorithm adds "virtual hubs" to represent the delayed mail in transit and runs a quick "warm-up" phase where everyone sends a unique ID card. By seeing how much of each ID card they eventually hold, they figure out exactly how much to "down-weight" their own updates ($d_n$). This allows all hubs to reach perfect agreement (stationary solution) even when communication lines are chaotic and slow, guaranteeing that the whole company optimizes its route planning efficiently without any central coordinator.
 
 📝 [Daily Research Chunk] 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
@@ -798,3 +794,87 @@ def verify_lq_pep_constraint(F_v_next, T_v_next, x_v_next, x_star, z_v_next, gra
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine trying to figure out if a massive plumbing system (directed network of agents) will eventually balance its water pressure (reach convergence) while everyone adjusts their valves at different random times (asynchronous delays). Usually, engineers try to find one magical "total energy" equation (Lyapunov function) that drops every second. But that's too hard here. Instead, LQ-PEP acts like a "worst-case auditor". It writes down all the localized, basic physical rules of the pipes as simple algebraic inequalities ($\leq 0$) and mathematically proves that even in the absolute worst sequence of delays, the entire system cannot physically avoid reaching a balanced state.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：High-Probability Convergence in Decentralized Optimization
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: [High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking](http://arxiv.org/abs/2605.00281v1)
+
+Deterministic Convergence Mechanism: The paper establishes rigorous high-probability (HP) convergence bounds for Decentralized Stochastic Gradient Descent with Gradient Tracking (GT-DSGD). It proves order-optimal HP convergence rates of $\mathcal{O}\Big(\frac{\log(1/\delta)}{\sqrt{nT}}\Big)$ and $\mathcal{O}\Big(\frac{\log(1/\delta)}{nT}\Big)$ for non-convex and Polyak-Lojasiewicz costs, respectively, under relaxed sub-Gaussian noise conditions. A key deterministic mechanism derived from this is the explicit bound on the consensus error: $\|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2}\leq\frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2}+\frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}$, where $\lambda \in [0,1)$ is the second largest singular value of the mixing matrix, and the explicit Moment-Generating Function (MGF) bounds tracking the network error evolution.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# Decentralized optimization parameters from extracted equations
+lambda_spectral = 0.9  # \lambda: Second largest singular value of mixing matrix W, bound on \|W-J\|
+alpha = 0.01          # \alpha: Step size (learning rate)
+x_consensus_error_t = 0.5 # \|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2}
+y_tracking_error_t = 0.2  # \|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}
+
+# Deterministic update constraint on consensus gap based on Lemma 9:
+# \|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2} \leq \frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2} + \frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}
+def compute_next_consensus_error_bound(x_error, y_error, lam, lr):
+    contraction_factor = (1 + lam**2) / 2
+    tracking_penalty_factor = (2 * lr**2 * lam**2) / (1 - lam**2)
+    next_x_error_bound = contraction_factor * x_error + tracking_penalty_factor * y_error
+    return next_x_error_bound
+
+next_error_bound = compute_next_consensus_error_bound(x_consensus_error_t, y_tracking_error_t, lambda_spectral, alpha)
+print(f"Deterministic bound on next step consensus error: {next_error_bound}")
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine a team of chefs (agents) in separate kitchens trying to bake the exact same cake recipe (the global model). They can only communicate with their immediate neighbors.
+- `lambda_spectral` (spectral gap) is like how fast information travels between the kitchens. A smaller lambda means faster communication.
+- The formula for the consensus gap (how different their cakes are) shows that their differences shrink over time (the `(1+lambda^2)/2` part, which is less than 1), but are slightly pushed apart by the errors in their local ingredient tracking (the `y_tracking_error_t` part).
+- The high-probability bound is a strict mathematical guarantee: "I am 99.9% sure that after T hours, the cakes will taste identical, even if individual chefs occasionally measure ingredients wrong (sub-Gaussian noise)."
+
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Adaptive Weighting Push-SUM for Decentralized Optimization
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: [Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity](http://arxiv.org/abs/2412.07252v1)
+
+Deterministic Convergence Mechanism: The paper establishes a generalized theoretical framework for the Push-SUM protocol by introducing the Adaptive Weighting Push-SUM protocol. It explicitly addresses the performance degradation caused by statistical diversity in decentralized networks. By deriving tight upper bounds on the consensus distance, the authors deterministically prove that under sufficient communication, the consensus distance bound is reduced to $O(1/N)$, compared to the traditional Push-SUM bound of $O(1)$. Furthermore, it establishes explicit convergence rates for SGD and Momentum SGD variants under this protocol: $O(N/T)$, a significant improvement over the $O(Nd/T)$ bound of the standard Push-SUM protocol (where $d$ is parameter size and $T$ is the number of iterations).
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# Decentralized optimization parameters from extracted equations
+N = 10  # N: Number of agents in the network
+T_iter = 1000 # T: Total number of iterations
+d = 10000 # d: Parameter size of the model
+
+# Theoretical bounds comparison based on the generalized Push-SUM protocol
+def evaluate_protocol_bounds(N, T, d):
+    # Traditional Push-SUM protocol bounds
+    traditional_consensus_bound = 1.0 # O(1)
+    traditional_convergence_rate = (N * d) / T # O(Nd/T)
+
+    # Adaptive Weighting Push-SUM protocol bounds
+    adaptive_consensus_bound = 1.0 / N # O(1/N)
+    adaptive_convergence_rate = N / T # O(N/T)
+
+    return {
+        "Push-SUM": {"Consensus": traditional_consensus_bound, "Convergence": traditional_convergence_rate},
+        "Adaptive Weighting Push-SUM": {"Consensus": adaptive_consensus_bound, "Convergence": adaptive_convergence_rate}
+    }
+
+bounds = evaluate_protocol_bounds(N, T_iter, d)
+print(f"Adaptive protocol consensus error scales as: {bounds['Adaptive Weighting Push-SUM']['Consensus']}")
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine a large team of researchers (a network of $N$ nodes) trying to write a report. Each researcher only has partial data (statistical diversity) and can only talk to their desk neighbors.
+- In the standard approach (traditional Push-SUM), they blindly average everyone's notes. Because some nodes have vastly different data, the "disagreement" (consensus distance) never fully vanishes ($O(1)$) and scaling up the model size ($d$) slows everyone down drastically ($O(Nd/T)$).
+- In the Adaptive Weighting approach, the team applies a clever weighting formula to their neighbors' notes (Moreau weighting). This mathematically guarantees that the larger the team ($N$), the smaller the final disagreement becomes ($O(1/N)$), completely breaking the bottleneck caused by the size of the report ($d$).
