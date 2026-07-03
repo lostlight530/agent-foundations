@@ -839,3 +839,41 @@ print(f"自适应协议的一致性误差规模: {bounds['Adaptive Weighting Pus
 想象一个大型研究团队（由 $N$ 个节点组成的网络）正试图合写一份报告。每个研究员只有部分数据（统计多样性），且只能与相邻座位的同事交流。
 - 在标准做法（传统 Push-SUM）中，他们只是盲目地平均大家的笔记。因为某些节点的数据差异极大，“分歧”（共识距离）永远无法完全消除（$O(1)$），而且报告的规模（$d$）越大，所有人的收敛速度就越慢（$O(Nd/T)$）。
 - 在自适应权重（Adaptive Weighting）方法中，团队对邻居的笔记应用了巧妙的加权公式（Moreau weighting）。这在数学上保证了团队规模（$N$）越大，最终的分歧反而越小（$O(1/N)$），从而彻底打破了由报告规模（$d$）带来的性能瓶颈。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
+Deterministic Convergence Mechanism: DSGTm-TV算法通过在时变有向图上结合梯度跟踪和heavy-ball动量，保证收敛到全局最优。最大步长$\bar{\alpha}$受到确定性约束以确保稳定：$\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$，建立了$\mathcal{O}(\rho_{M}^{k})$的线性收敛率，其中$\rho_{M}<1$为混合矩阵的谱半径。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+```python
+# 基于Algorithm 1: The DSGTm-TV Algorithm
+# 变量: A_k, B_k (第k轮的随机混合矩阵), alpha_i (步长), beta_i (动量参数)
+
+def local_state_update(x_k, y_k, x_prev, A_k, alpha_i, beta_i, n, i):
+    # 通信步骤: 接收邻居节点的 x_k^j
+    sum_A_x = sum(A_k[i][j] * x_k[j] for j in range(n))
+
+    # 结合heavy-ball动量的状态更新
+    x_k_plus_1 = sum_A_x - alpha_i * y_k[i] + beta_i * (x_k[i] - x_prev[i])
+    return x_k_plus_1
+
+def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1, xi_k):
+    # 通信步骤: 接收邻居节点的 B_k[i][j]*y_k^j
+    sum_B_y = sum(B_k[i][j] * y_k[j] for j in range(n))
+
+    # 梯度跟踪更新
+    grad_current = g_fn(x_k_plus_1, xi_k_plus_1)
+    grad_prev = g_fn(x_k, xi_k)
+    y_k_plus_1 = sum_B_y + grad_current - grad_prev
+    return y_k_plus_1
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory
+想象一家拥有多个区域分公司的大型企业。与其让一个中央总部直接处理所有销售数据（中心化），不如让各分公司相互交流以弄清整体市场趋势（去中心化）。在这种动态结构中，分公司之间的沟通渠道会随时间变化（时变有向网络）。为了让大家保持正轨而不丢失信息，每个分公司维护两部分信息：自己的本地市场策略（$x$）和对全局市场趋势的估计（$y$）。在每一步中，分公司通过融合其可达邻居的信息（$A_k x$），并朝着趋势迈出一步来更新其策略，同时利用之前决策的一点动量（$\beta_i$）来避免变化过于突兀。然后，他们通过跟踪本地数据梯度的变化（$g(x_{k+1}) - g(x_k)$）并将其与邻居的估计值（$B_k y$）混合，来更新全局趋势估计（$y$）。只要他们的更新幅度（步长）不太激进（受到网络最差连通速度的数学约束），所有人的策略就会确定性地收敛到唯一的最佳全局策略。
