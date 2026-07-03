@@ -878,3 +878,41 @@ print(f"Adaptive protocol consensus error scales as: {bounds['Adaptive Weighting
 Imagine a large team of researchers (a network of $N$ nodes) trying to write a report. Each researcher only has partial data (statistical diversity) and can only talk to their desk neighbors.
 - In the standard approach (traditional Push-SUM), they blindly average everyone's notes. Because some nodes have vastly different data, the "disagreement" (consensus distance) never fully vanishes ($O(1)$) and scaling up the model size ($d$) slows everyone down drastically ($O(Nd/T)$).
 - In the Adaptive Weighting approach, the team applies a clever weighting formula to their neighbors' notes (Moreau weighting). This mathematically guarantees that the larger the team ($N$), the smaller the final disagreement becomes ($O(1/N)$), completely breaking the bottleneck caused by the size of the report ($d$).
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
+Deterministic Convergence Mechanism: The DSGTm-TV algorithm guarantees convergence to the global optimum using gradient tracking and heavy-ball momentum over time-varying directed graphs. The largest stepsize $\bar{\alpha}$ is deterministically bounded to ensure stability: $\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$, establishing a linear convergence rate $\mathcal{O}(\rho_{M}^{k})$ where $\rho_{M}<1$ is the spectral radius of the mixing matrix.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+```python
+# Based on Algorithm 1: The DSGTm-TV Algorithm
+# Variables: A_k, B_k (stochastic mixing matrices for iteration k), alpha_i (stepsize), beta_i (momentum)
+
+def local_state_update(x_k, y_k, x_prev, A_k, alpha_i, beta_i, n, i):
+    # Communication Step: receive x_k^j from in-neighbors
+    sum_A_x = sum(A_k[i][j] * x_k[j] for j in range(n))
+
+    # State update with heavy-ball momentum
+    x_k_plus_1 = sum_A_x - alpha_i * y_k[i] + beta_i * (x_k[i] - x_prev[i])
+    return x_k_plus_1
+
+def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1, xi_k):
+    # Communication Step: receive B_k[i][j]*y_k^j from in-neighbors
+    sum_B_y = sum(B_k[i][j] * y_k[j] for j in range(n))
+
+    # Gradient tracking update
+    grad_current = g_fn(x_k_plus_1, xi_k_plus_1)
+    grad_prev = g_fn(x_k, xi_k)
+    y_k_plus_1 = sum_B_y + grad_current - grad_prev
+    return y_k_plus_1
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory
+Imagine a large corporation with multiple regional branches. Instead of a central headquarters trying to process all sales data directly (centralized), the branches talk to each other to figure out the overall market trend (decentralized). In this dynamic setup, the communication channels between branches change over time (time-varying directed networks). To keep everyone on track without losing information, each branch maintains two pieces of information: their own local market strategy ($x$) and an estimate of the global market trend ($y$). At each step, a branch updates its strategy by blending information from its accessible neighbors ($A_k x$) and stepping towards the trend, with a little bit of momentum ($\beta_i$) from their previous decision to avoid changing too abruptly. Then, they update their global trend estimate ($y$) by tracking the changes in their local data gradient ($g(x_{k+1}) - g(x_k)$) and mixing it with their neighbors' estimates ($B_k y$). As long as their update steps (stepsizes) aren't too drastic, mathematically bounded by the network's worst-case connectivity speed, everyone's strategy deterministically converges to the single best global strategy.
