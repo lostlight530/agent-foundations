@@ -877,3 +877,37 @@ def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1,
 
 Use a local, beginner-friendly analogy that preserves the actual theory
 想象一家拥有多个区域分公司的大型企业。与其让一个中央总部直接处理所有销售数据（中心化），不如让各分公司相互交流以弄清整体市场趋势（去中心化）。在这种动态结构中，分公司之间的沟通渠道会随时间变化（时变有向网络）。为了让大家保持正轨而不丢失信息，每个分公司维护两部分信息：自己的本地市场策略（$x$）和对全局市场趋势的估计（$y$）。在每一步中，分公司通过融合其可达邻居的信息（$A_k x$），并朝着趋势迈出一步来更新其策略，同时利用之前决策的一点动量（$\beta_i$）来避免变化过于突兀。然后，他们通过跟踪本地数据梯度的变化（$g(x_{k+1}) - g(x_k)$）并将其与邻居的估计值（$B_k y$）混合，来更新全局趋势估计（$y$）。只要他们的更新幅度（步长）不太激进（受到网络最差连通速度的数学约束），所有人的策略就会确定性地收敛到唯一的最佳全局策略。
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
+Deterministic Convergence Mechanism: 该算法为具有马尔可夫时变图的去中心化共识建立了显式的线性收敛速率 $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$。它利用对混合时间 $\tau$ 的严格边界机制，以及对 $B = \lceil b \log_{2}M \rceil$ 等参数的严格约束，来控制图拓扑变化的散度。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+Use grounded pseudocode only
+
+```python
+# 提取自 Algorithm 1: 具有马尔可夫变化的图上的加速共识
+def accelerated_consensus_step(x, x_f, gamma, p, beta, theta, eta, g_k):
+    # g_k 是从本地邻居计算出的梯度估计
+    # 参数约束: p = 1/4, beta = sqrt(4 * p^2 * mu * gamma / 3) 等
+
+    # 1. 更新辅助变量 x_g^k
+    x_g_k = theta * x_f + (1 - theta) * x
+
+    # 2. 对 x_f^{k+1} 执行梯度下降步
+    x_f_next = x_g_k - p * gamma * g_k
+
+    # 3. 基于动量更新 x^{k+1}
+    x_next = (eta * x_f_next +
+              (p - eta) * x_f +
+              (1 - p) * (1 - beta) * x +
+              (1 - p) * beta * x_g_k)
+
+    return x_next, x_f_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Use a local, beginner-friendly analogy that preserves the actual theory
+想象一群在不同房间里的工人试图同步他们的时钟（共识）。房间之间的门随机地打开和关闭（马尔可夫时变图）。如果每个人都盲目地相信刚走进来的人，时钟就会剧烈波动。相反，每个人都保持着严格的“惯性”（动量参数 $\theta, \eta, \beta$），并且只根据在设定时间窗口（$B$）内精心计算的平均值（$g^k$）来稍微更新他们的时钟。这个严格的公式确保了无论门的行为有多混乱，时钟都能保证以可预测的速度完美对齐。
