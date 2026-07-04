@@ -916,3 +916,37 @@ def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1,
 
 Use a local, beginner-friendly analogy that preserves the actual theory
 Imagine a large corporation with multiple regional branches. Instead of a central headquarters trying to process all sales data directly (centralized), the branches talk to each other to figure out the overall market trend (decentralized). In this dynamic setup, the communication channels between branches change over time (time-varying directed networks). To keep everyone on track without losing information, each branch maintains two pieces of information: their own local market strategy ($x$) and an estimate of the global market trend ($y$). At each step, a branch updates its strategy by blending information from its accessible neighbors ($A_k x$) and stepping towards the trend, with a little bit of momentum ($\beta_i$) from their previous decision to avoid changing too abruptly. Then, they update their global trend estimate ($y$) by tracking the changes in their local data gradient ($g(x_{k+1}) - g(x_k)$) and mixing it with their neighbors' estimates ($B_k y$). As long as their update steps (stepsizes) aren't too drastic, mathematically bounded by the network's worst-case connectivity speed, everyone's strategy deterministically converges to the single best global strategy.
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
+Deterministic Convergence Mechanism: The algorithm establishes an explicit linear convergence rate $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$ for decentralized consensus with Markovian time-varying graphs. It leverages a rigorous bounding mechanism on the mixing time $\tau$ and strict constraints on parameters like $B = \lceil b \log_{2}M \rceil$ to control the divergence of graph topology variations.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+Use grounded pseudocode only
+
+```python
+# Extracted from Algorithm 1: Accelerated consensus over graphs with Markovian changes
+def accelerated_consensus_step(x, x_f, gamma, p, beta, theta, eta, g_k):
+    # g_k is the computed gradient estimate from local neighbors
+    # parameter constraints: p = 1/4, beta = sqrt(4 * p^2 * mu * gamma / 3), etc.
+
+    # 1. Update auxiliary variable x_g^k
+    x_g_k = theta * x_f + (1 - theta) * x
+
+    # 2. Gradient descent step for x_f^{k+1}
+    x_f_next = x_g_k - p * gamma * g_k
+
+    # 3. Momentum-based update for x^{k+1}
+    x_next = (eta * x_f_next +
+              (p - eta) * x_f +
+              (1 - p) * (1 - beta) * x +
+              (1 - p) * beta * x_g_k)
+
+    return x_next, x_f_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Use a local, beginner-friendly analogy that preserves the actual theory
+Imagine a group of workers in different rooms trying to synchronize their clocks (consensus). The doors between the rooms randomly open and close (Markovian time-varying graphs). If everyone blindly trusts whoever just walked in, the clocks will fluctuate wildly. Instead, everyone keeps a strict "inertia" (momentum parameters $\theta, \eta, \beta$) and only updates their clock slightly based on a carefully calculated average ($g^k$) over a set time window ($B$). The strict formula ensures that no matter how chaotic the doors act, the clocks are guaranteed to perfectly align at a predictable speed.
