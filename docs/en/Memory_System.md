@@ -69,6 +69,11 @@ The framework establishes a strict upper bound on invalid memory commits via $\P
 **💡 For Beginners**:
 Imagine a massive global library (Global Memory) where no single head librarian is in charge. Instead, each local librarian (Agent) is responsible for only a specific aisle (Ontology Slice). When a new book is added or revised anywhere in the library, a notification is sent out. A local librarian only pays attention if the book belongs to their aisle. Before putting the book on the shelf, they require at least $r$ independent expert reviewers to verify it. Even if one reviewer is wrong (with a small probability $\varepsilon_{\max}$), the chance of all $r$ reviewers being simultaneously wrong drops exponentially. Therefore, every local librarian's aisle deterministically matches the "true" state of the global library over time, without ever needing a central boss to coordinate them!
 
+### Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+System Container: Memory System
+Frontier Source: arXiv:2501.00237 (Wei Chen et al., 2025)
+Deterministic Convergence Mechanism: The paper leverages contrastive representation constraints to alleviate catastrophic forgetting by managing domain shift deterministically during incremental learning.
+
 ## 3. Why Unsupervised Learning?
 
 In the long and lonely lifecycle of an agent, there can be no real-time, perfect human tutor labeling every action as "right" or "wrong." Unsupervised learning (especially contrastive learning) empowers the agent to "bootstrap" itself, automatically building a physically intuitive "World Model" purely from massive amounts of self-interaction.
@@ -76,6 +81,19 @@ In the long and lonely lifecycle of an agent, there can be no real-time, perfect
 We do not use brute-force computing to memorize the superficial details of the world. We use a theoretically proven convergent contrastive loss function (InfoNCE Loss) to ensure that the agent's memory system can stably extract the essence of the world during its near-infinite exploration.
 
 ---
+
+### Code for Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+```python
+# Grounded pseudocode based on exact formula extraction
+# Formula: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
+def calculate_fts(J_t_t_prime, delta_theta_t, delta_theta_t_prime):
+    # J_t_t_prime represents the Jaccard similarity index: J(t,t') = |H_t intersection H_t'| / |H_t union H_t'|
+    norm_t = calculate_l2_norm(delta_theta_t)
+    norm_t_prime = calculate_l2_norm(delta_theta_t_prime)
+
+    fts_value = J_t_t_prime * ((norm_t + norm_t_prime) / 2.0)
+    return fts_value
+```
 
 ## 4. Source Code Breakdown & Pseudocode
 ### Code for Deterministic Exponential Decay for Memory Survival based on Interaction Count
@@ -363,39 +381,17 @@ def synchronize_semantic_slice(
     return local_memory
 ```
 
+### Analogy for Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+Imagine your memory is a crowded library. Instead of throwing out old books (catastrophic forgetting) when new ones arrive, we mathematically calculate how similar the new books are to the old ones (the Jaccard similarity $J(t,t')$) and group them. We only adjust the library's layout by a strictly calculated distance, ensuring the old knowledge space remains undisturbed.
+
+
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
 
-Architecture Principles: woven TASR and Distributed Gradient-Regularized Newton Method.
-Collaboration System: woven DSGT, Block-Wise Adam, Decentralized Stochastic Control, IDTSC, Smoothed Gradient Clipping, Asynchronous Directed Graphs, Row-Stochastic Networks.
-Memory System: woven Deterministic Exponential Decay, DCS, Parametric Memory, Decentralized Semantic Slice Alignment.
-Tool System: woven CMTF.
+Memory System: introduced contrastive representation for catastrophic forgetting, updated Core Mechanisms and Source Code
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
-Conflict Detection: The woven theories across Architecture Principles, Collaboration System, Memory System, and Tool System have been rigorously audited. All newly integrated mathematical bounds (such as DSGT's tracking, TASR's stopping operator, and CMTF's goal inference) perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
-
-
-📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
-🔬 Selection Basis and Academic Lineage
-System Container: Memory System
-Frontier Source: arXiv:2501.00237 (Wei Chen et al., 2025)
-Deterministic Convergence Mechanism: The paper leverages contrastive representation constraints to alleviate catastrophic forgetting by managing domain shift deterministically during incremental learning.
-
-💻 Source Code Breakdown
-```python
-# Grounded pseudocode based on exact formula extraction
-# Formula: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
-def calculate_fts(J_t_t_prime, delta_theta_t, delta_theta_t_prime):
-    # J_t_t_prime represents the Jaccard similarity index: J(t,t') = |H_t intersection H_t'| / |H_t union H_t'|
-    norm_t = calculate_l2_norm(delta_theta_t)
-    norm_t_prime = calculate_l2_norm(delta_theta_t_prime)
-
-    fts_value = J_t_t_prime * ((norm_t + norm_t_prime) / 2.0)
-    return fts_value
-```
-
-💡 For Beginners
-Imagine your memory is a crowded library. Instead of throwing out old books (catastrophic forgetting) when new ones arrive, we mathematically calculate how similar the new books are to the old ones (the Jaccard similarity $J(t,t')$) and group them. We only adjust the library's layout by a strictly calculated distance, ensuring the old knowledge space remains undisturbed.
+Conflict Detection: The woven theories across Memory System have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.

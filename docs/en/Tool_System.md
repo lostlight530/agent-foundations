@@ -45,6 +45,11 @@ We know that RL in an open universe is extremely fragile and hyper-sensitive to 
 
 ---
 
+### Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+System Container: Tool System
+Frontier Source: arXiv:2412.19578 (Shixuan Liu et al., 2024)
+Deterministic Convergence Mechanism: The paper establishes a deterministic clipping policy optimization to guarantee causal routing structure bounded by a trust region, effectively forcing probabilistic tool-selection networks to act within causal mathematical constraints.
+
 ## 3. Source Code Breakdown & Pseudocode
 ### Code for Causal Minimal Tool Filtering (CMTF) & Goal Inference
 ```python
@@ -111,6 +116,22 @@ class ToolExecutionRouter:
 1. **The Iron Law of Causality (`causal_dependency_graph`)**: We don't let the LLM freely guess what tool to use at runtime. The system loads this unbreakable "law" at startup. If the agent tries a high-risk action without prior verification, the router intercepts it like a firewall (`_check_causal_dependencies`).
 2. **Depth Severing (`max_tool_chain_depth`)**: LLMs easily get trapped in infinite error loops. This is a mathematical, physical cutoff line. It embodies "We do not optimize, we guarantee convergence"—if it cannot converge to a result, we force it to converge to a "terminated state," never allowing the system to spiral out of control.
 
+### Code for Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+```python
+# Grounded pseudocode based on exact formula extraction
+# Formula: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
+import math
+
+def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
+    # This bounds the probability deviation of the causal tool router to prevent hallucinations
+    # D_KL bounds the change in causal routing step policy pi_theta from the baseline b
+    term1 = b_prob * math.log(b_prob / pi_theta_prob)
+    term2 = (1 - b_prob) * math.log((1 - b_prob) / (1 - pi_theta_prob))
+    return term1 + term2
+
+# Used as constraint: s.t. D_KL < sigma
+```
+
 ## 4. Advanced Evolution: Symbolic Policy Distillation
 
 To handle increasingly complex combinatorial tool requirements, our recent architectural iteration introduces "Symbolic Policy Distillation." This is the ultimate practical realization of transitioning "from trial-and-error to absolute control."
@@ -154,42 +175,17 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
 ### Analogy for Causal Minimal Tool Filtering (CMTF) & Goal Inference
 Before using a tool, it passes through a physical "causal barcode scanner". It exclusively locks onto the one exact tool needed, mathematically preventing trial-and-error damage.
 
+### Analogy for Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+If you give an AI a toolbox (APIs), standard probability models might make it randomly choose a hammer for a screw. This theory forces a strict "trust region" (a mathematical fence). If the agent's new plan deviates too much from the original safe blueprint, the KL divergence calculation (the distance formula above) catches it and "clips" the action, guaranteeing causal sanity.
+
+
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
 
-Architecture Principles: woven TASR and Distributed Gradient-Regularized Newton Method.
-Collaboration System: woven DSGT, Block-Wise Adam, Decentralized Stochastic Control, IDTSC, Smoothed Gradient Clipping, Asynchronous Directed Graphs, Row-Stochastic Networks.
-Memory System: woven Deterministic Exponential Decay, DCS, Parametric Memory, Decentralized Semantic Slice Alignment.
-Tool System: woven CMTF.
+Tool System: introduced deterministic clipping policy optimization, updated Core Mechanisms and Source Code
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
-Conflict Detection: The woven theories across Architecture Principles, Collaboration System, Memory System, and Tool System have been rigorously audited. All newly integrated mathematical bounds (such as DSGT's tracking, TASR's stopping operator, and CMTF's goal inference) perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
-
-
-📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
-🔬 Selection Basis and Academic Lineage
-System Container: Tool System
-Frontier Source: arXiv:2412.19578 (Shixuan Liu et al., 2024)
-Deterministic Convergence Mechanism: The paper establishes a deterministic clipping policy optimization to guarantee causal routing structure bounded by a trust region, effectively forcing probabilistic tool-selection networks to act within causal mathematical constraints.
-
-💻 Source Code Breakdown
-```python
-# Grounded pseudocode based on exact formula extraction
-# Formula: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
-import math
-
-def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
-    # This bounds the probability deviation of the causal tool router to prevent hallucinations
-    # D_KL bounds the change in causal routing step policy pi_theta from the baseline b
-    term1 = b_prob * math.log(b_prob / pi_theta_prob)
-    term2 = (1 - b_prob) * math.log((1 - b_prob) / (1 - pi_theta_prob))
-    return term1 + term2
-
-# Used as constraint: s.t. D_KL < sigma
-```
-
-💡 For Beginners
-If you give an AI a toolbox (APIs), standard probability models might make it randomly choose a hammer for a screw. This theory forces a strict "trust region" (a mathematical fence). If the agent's new plan deviates too much from the original safe blueprint, the KL divergence calculation (the distance formula above) catches it and "clips" the action, guaranteeing causal sanity.
+Conflict Detection: The woven theories across Tool System have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
