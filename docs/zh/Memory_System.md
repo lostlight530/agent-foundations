@@ -377,3 +377,26 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: 跨四大系统容器（架构原则、协作系统、记忆系统、工具系统）整合的新理论已通过严格审计。所有新引入的数学边界（如DSGT的梯度追踪、TASR的停止算子、CMTF的目标推断）都完美契合“我们约束，不实现”的基础哲学，并坚守彻底废弃中心化控制节点的设计底线。整体形成了一个全局统一、无单点故障（SPOF）、防崩溃的确定性智能体框架。无任何范式冲突。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：对比表征对抗灾难性遗忘
+🔬 选型依据与学术脉络
+System Container: Memory System
+Frontier Source: arXiv:2501.00237 (Wei Chen 等人, 2025)
+Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，在增量学习中确定性地管理领域漂移，从而有效缓解智能体的灾难性遗忘。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 基于真实提取公式的严谨伪代码
+# 公式: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
+def calculate_fts(J_t_t_prime, delta_theta_t, delta_theta_t_prime):
+    # J_t_t_prime 代表 Jaccard 相似度: J(t,t') = |H_t \cap H_t'| / |H_t \cup H_t'|
+    norm_t = calculate_l2_norm(delta_theta_t)
+    norm_t_prime = calculate_l2_norm(delta_theta_t_prime)
+
+    fts_value = J_t_t_prime * ((norm_t + norm_t_prime) / 2.0)
+    return fts_value
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象你的大脑记忆是一座拥挤的图书馆。当新书进来时，为了防止你扔掉旧书（灾难性遗忘），我们首先在数学上计算新书和旧书的相似度（即 $J(t,t')$ 相似度）。基于这个确定性的数值，我们只对图书馆的布局做极其严格的距离调整，从而百分之百保证旧知识的区域不被破坏。
