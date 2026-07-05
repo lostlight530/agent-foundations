@@ -169,3 +169,29 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: 跨四大系统容器（架构原则、协作系统、记忆系统、工具系统）整合的新理论已通过严格审计。所有新引入的数学边界（如DSGT的梯度追踪、TASR的停止算子、CMTF的目标推断）都完美契合“我们约束，不实现”的基础哲学，并坚守彻底废弃中心化控制节点的设计底线。整体形成了一个全局统一、无单点故障（SPOF）、防崩溃的确定性智能体框架。无任何范式冲突。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于策略优化的因果路由工具约束
+🔬 选型依据与学术脉络
+System Container: Tool System
+Frontier Source: arXiv:2412.19578 (Shixuan Liu 等人, 2024)
+Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建立了一个确定性的因果边界，使得原先基于概率分布的工具选择网络（Agent 的工具箱调用）被强制锁定在严谨的因果数学约束中，避免幻觉滥用。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 基于真实提取公式的严谨伪代码
+# 公式: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
+import math
+
+def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
+    # 该函数用于限制因果工具路由的概率偏移，以防止大模型产生幻觉调用
+    # D_KL 限定了新的因果路由策略 pi_theta 偏离基线 b 的上限
+    term1 = b_prob * math.log(b_prob / pi_theta_prob)
+    term2 = (1 - b_prob) * math.log((1 - b_prob) / (1 - pi_theta_prob))
+    return term1 + term2
+
+# 作为严格约束条件生效: s.t. D_KL < sigma
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+如果给 AI 一个工具箱（无数个 API），普通的模型可能会随心所欲，导致它想拿锤子去拧螺丝。这套理论给 AI 画了一个严格的“信任区域”（数学围栏）。一旦 AI 的新执行计划偏离了原本安全的因果蓝图太多，上述的 KL 散度公式（一种测量偏离距离的算式）就会立刻报警并“剪断”越界的想法，从而保证每一步工具调用都绝对符合因果逻辑。

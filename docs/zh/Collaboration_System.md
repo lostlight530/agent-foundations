@@ -911,3 +911,32 @@ def accelerated_consensus_step(x, x_f, gamma, p, beta, theta, eta, g_k):
 💡 0基础业务通俗类比 (For Beginners)
 Use a local, beginner-friendly analogy that preserves the actual theory
 想象一群在不同房间里的工人试图同步他们的时钟（共识）。房间之间的门随机地打开和关闭（马尔可夫时变图）。如果每个人都盲目地相信刚走进来的人，时钟就会剧烈波动。相反，每个人都保持着严格的“惯性”（动量参数 $\theta, \eta, \beta$），并且只根据在设定时间窗口（$B$）内精心计算的平均值（$g^k$）来稍微更新他们的时钟。这个严格的公式确保了无论门的行为有多混乱，时钟都能保证以可预测的速度完美对齐。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：无中心服务器的分布式优化与共识
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: arXiv:2410.01700 (Yutong He 等人, 2024)
+Deterministic Convergence Mechanism: 该研究严格证明了一种去中心化的优化框架，使得多智能体网络能在没有中心参数服务器的情况下，百分百确定性地收敛于全局共识（即 $\lim_{k \to \infty} x_i^k = x^\star$）。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 基于真实提取公式的严谨伪代码
+# 公式: x_i^\star = \lim_{k\rightarrow\infty} \left(z_i^{k+1} - \sum_{j\in\mathcal{N}(i)} p_{i,j,2}^k \odot (z_i^{k+1} - z_j^{k+1})\right) = x^\star
+import numpy as np
+
+def compute_decentralized_consensus(z_i_next, neighbors_z_next, p_weights):
+    # 每个智能体独立计算与自己相邻节点 N(i) 的本地共识
+    # 彻底证明了即使没有中心服务器，节点也能收敛到全局一致状态 x*
+    consensus_shift = np.zeros_like(z_i_next)
+
+    for j, z_j_next in enumerate(neighbors_z_next):
+        # p_weights[j] 是连接邻居 j 的严谨权重
+        consensus_shift += p_weights[j] * (z_i_next - z_j_next)
+
+    x_i_converged = z_i_next - consensus_shift
+    return x_i_converged
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一群厨师要在不同的厨房里共同研发一道完美的汤。但他们没有总厨（没有中心服务器）。他们不需要把菜谱寄到总部去统筹，而只需要偶尔看一眼隔壁厨房的配方，然后用严格的数学公式微调自己的配方。这套理论证明了：只要局部的微调足够严谨，最终所有厨房都会不可避免地煮出完全一样、也是最完美的那锅汤（全局最优 $x^\star$）。

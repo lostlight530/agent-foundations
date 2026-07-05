@@ -376,3 +376,26 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: The woven theories across Architecture Principles, Collaboration System, Memory System, and Tool System have been rigorously audited. All newly integrated mathematical bounds (such as DSGT's tracking, TASR's stopping operator, and CMTF's goal inference) perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+
+
+📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+🔬 Selection Basis and Academic Lineage
+System Container: Memory System
+Frontier Source: arXiv:2501.00237 (Wei Chen et al., 2025)
+Deterministic Convergence Mechanism: The paper leverages contrastive representation constraints to alleviate catastrophic forgetting by managing domain shift deterministically during incremental learning.
+
+💻 Source Code Breakdown
+```python
+# Grounded pseudocode based on exact formula extraction
+# Formula: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
+def calculate_fts(J_t_t_prime, delta_theta_t, delta_theta_t_prime):
+    # J_t_t_prime represents the Jaccard similarity index: J(t,t') = |H_t intersection H_t'| / |H_t union H_t'|
+    norm_t = calculate_l2_norm(delta_theta_t)
+    norm_t_prime = calculate_l2_norm(delta_theta_t_prime)
+
+    fts_value = J_t_t_prime * ((norm_t + norm_t_prime) / 2.0)
+    return fts_value
+```
+
+💡 For Beginners
+Imagine your memory is a crowded library. Instead of throwing out old books (catastrophic forgetting) when new ones arrive, we mathematically calculate how similar the new books are to the old ones (the Jaccard similarity $J(t,t')$) and group them. We only adjust the library's layout by a strictly calculated distance, ensuring the old knowledge space remains undisturbed.

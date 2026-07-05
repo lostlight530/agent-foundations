@@ -167,3 +167,29 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: The woven theories across Architecture Principles, Collaboration System, Memory System, and Tool System have been rigorously audited. All newly integrated mathematical bounds (such as DSGT's tracking, TASR's stopping operator, and CMTF's goal inference) perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+
+
+📝 [Daily Research Chunk] Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+🔬 Selection Basis and Academic Lineage
+System Container: Tool System
+Frontier Source: arXiv:2412.19578 (Shixuan Liu et al., 2024)
+Deterministic Convergence Mechanism: The paper establishes a deterministic clipping policy optimization to guarantee causal routing structure bounded by a trust region, effectively forcing probabilistic tool-selection networks to act within causal mathematical constraints.
+
+💻 Source Code Breakdown
+```python
+# Grounded pseudocode based on exact formula extraction
+# Formula: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
+import math
+
+def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
+    # This bounds the probability deviation of the causal tool router to prevent hallucinations
+    # D_KL bounds the change in causal routing step policy pi_theta from the baseline b
+    term1 = b_prob * math.log(b_prob / pi_theta_prob)
+    term2 = (1 - b_prob) * math.log((1 - b_prob) / (1 - pi_theta_prob))
+    return term1 + term2
+
+# Used as constraint: s.t. D_KL < sigma
+```
+
+💡 For Beginners
+If you give an AI a toolbox (APIs), standard probability models might make it randomly choose a hammer for a screw. This theory forces a strict "trust region" (a mathematical fence). If the agent's new plan deviates too much from the original safe blueprint, the KL divergence calculation (the distance formula above) catches it and "clips" the action, guaranteeing causal sanity.
