@@ -279,3 +279,46 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: The woven theories across Architecture Principles have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+
+📝 [Daily Research Chunk] 动态理论深潜：Mamba State-Space Models Lyapunov Stability
+
+🔬 选型依据与学术脉络
+
+System Container: Architecture Principles
+
+Frontier Source: "Mamba State-Space Models Are Lyapunov-Stable Learners" (arXiv:2406.00209v3) by John T. Halloran, Manbir Gulati, Paul Roysdon
+
+Deterministic Convergence Mechanism: 基于理论上界 $\max|F_{\theta}^{N}(\bm{x}_{t-1},\mathbf{u}_{t})-F_{\theta}^{N}(\bm{x}_{t-1}+\varepsilon,\mathbf{u}_{t}+\varepsilon)|\in\mathcal{O}(\varepsilon\exp{(N\zeta)})$ （其中 $\zeta\leq 0$），证明了由于李雅普诺夫指数（Lyapunov exponents）被限制，由混合精度微调等引入的微小输入偏差在离散时间序列内呈指数级非增长（即稳定收敛）。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only:
+```python
+def lyapunov_stable_mamba_block(x_prev, u_t, epsilon, N, F_theta):
+    # F_theta: Mamba 块的离散状态转移函数
+    # x_prev: 隐藏状态 \bm{x}_{t-1}
+    # u_t: 输入 \mathbf{u}_{t}
+    # epsilon: \varepsilon 输入扰动
+
+    # 基础输出
+    y_base = F_theta_pow(F_theta, N, x_prev, u_t)
+
+    # 受扰动输出
+    y_perturbed = F_theta_pow(F_theta, N, x_prev + epsilon, u_t + epsilon)
+
+    # 最大偏差受到 O(epsilon * exp(N * zeta)) 的严格约束
+    # 其中 zeta <= 0 确保了指数级的稳定性
+    max_deviation = abs(y_base - y_perturbed)
+
+    return max_deviation
+
+def F_theta_pow(F_theta, N, x, u):
+    val = x
+    for _ in range(N):
+        val = F_theta(val, u)
+    return val
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一个陡峭的碗形山谷。无论你把弹珠放在碗里的哪个位置（代表输入扰动 $\varepsilon$），重力都会把它拉向底部的中心。即使在它滚动时你轻轻推它一下，它也不会飞出碗外。在 Mamba 架构中，“李雅普诺夫稳定性（Lyapunov stability）”就像是这个碗——它确保了计算过程中产生的微小误差（比如为了省内存而使用低精度计算产生的误差）只会像碗里的推力一样自然平息，而不会滚雪球般演变成灾难性的崩溃，从而保证系统在长序列生成时依然稳如泰山。
