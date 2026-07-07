@@ -957,3 +957,50 @@ def fspda_computation_thread(i, B_i, x_i, lambda_i_hat, t_i, g_i, eta, alpha, ga
 💡 0基础业务通俗类比 (For Beginners)
 
 Use a local, beginner-friendly analogy that preserves the actual theory: 想象一支在巨大森林（优化空间）中探索的侦察兵小队（节点）。他们的对讲机非常不可靠，由于干扰（随机网络拓扑），信号会随机中断。每个侦察兵并没有等待中央指挥官下达全局命令，而是根据当地地形（本地梯度）继续前进。当信号偶尔与附近的侦察兵接通时（进入通信缓冲区），他们会迅速综合彼此的位置（一致性项）并调整内置指南针的偏差（对偶变量更新）。FSPDA 的数学边界保证了，即使对讲机连接处于混沌的随机状态，整个侦察兵小队最终也会在严格的时间框架（$\mathcal{O}(1/\sqrt{T})$）内收敛到森林中的最佳位置，完全不需要依赖任何中央总部。
+
+📝 [Daily Research Chunk] 动态理论深潜：去中心化随机次梯度收敛性
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration System
+
+Frontier Source: Convergence of Decentralized Stochastic Subgradient-based Methods for Nonsmooth Nonconvex functions (arXiv 2403.11565)
+
+Deterministic Convergence Mechanism: 由去中心化学习更新 ${\bm{Z}}_{k+1}={\bm{Z}}_{k}{\bm{W}}-\eta_{k}({\bm{H}}_{k}+\Xi_{k+1})$ 生成的去中心化状态序列 $\{{\bm{Z}}_{k}\}$ 的轨迹，会确定性地追踪连续时间微分包含 $\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}\in-\mathrm{conv}\,\left(\frac{1}{d}\sum_{i=1}^{d}\Phi_{i}({\bm{z}})\right)$。这提供了一个有保证的行为下界：去中心化序列的所有极限点都将严格收敛到由李雅普诺夫函数 $\psi$ 控制的稳定集 $\mathcal{A}$。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
+    """
+    计算去中心化状态更新。
+    变量完全基于 arXiv 2403.11565 的追踪提取：
+    Z_k ({\bm{Z}}_{k}): d 个智能体的当前本地状态 \mathbb{R}^{m\times d}
+    W ({\bm{W}}): 用于去中心化通信的混合矩阵 \in \mathbb{R}^{d\times d}
+    H_k ({\bm{H}}_{k}): 本地次梯度评估 \mathbb{R}^{m\times d}
+    Xi_k_plus_1 (\Xi_{k+1}): 随机次梯度误差/噪声 \mathbb{R}^{m\times d}
+    eta_k (\eta_{k}): 步长，必须满足 \sum_{k=0}^{\infty}\eta_{k}=+\infty
+    """
+
+    # 1. 共识通信阶段：Z_k * W
+    # 智能体通过混合矩阵 W 共享它们的参数
+    consensus_state = Z_k @ W
+
+    # 2. 随机次梯度计算阶段：H_k + Xi_k_plus_1
+    # 智能体评估次梯度并纳入随机噪声
+    stochastic_update = H_k + Xi_k_plus_1
+
+    # 3. 去中心化状态更新公式
+    # MATH 74: {\bm{Z}}_{k+1}={\bm{Z}}_{k}{\bm{W}}-\eta_{k}({\bm{H}}_{k}+\Xi_{k+1}).
+    Z_k_plus_1 = consensus_state - eta_k * stochastic_update
+
+    # 数学保证：
+    # 随着 k -> 无穷大，Z_k_plus_1 会确定性地逼近
+    # 由连续包含 dz/dt \in -conv(1/d \sum \Phi_i(z)) 定义的稳定集 \mathcal{A}
+
+    return Z_k_plus_1
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一队探险家（多个智能体 $d$）在没有中央队长的情况下，正在测绘一座崎岖多雾的大山（非平滑非凸函数）。在迈出每一步后，每个探险家只和他们身边的邻居交流以求得一个平均位置（混合矩阵 ${\bm{W}}$），然后根据自己那起雾的指南针读数（${\bm{H}}_{k}+\Xi_{k+1}$）向下迈出一步。数学理论保证了，尽管有大雾且缺乏中央地图，团队的集体路线 $\{{\bm{Z}}_{k}\}$ 将表现得就像有一只巨大的、无形的手（$\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}$）在平滑地引导他们到达谷底（稳定集 $\mathcal{A}$）。
