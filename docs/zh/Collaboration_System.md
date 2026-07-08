@@ -1004,3 +1004,46 @@ def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
 💡 0基础业务通俗类比 (For Beginners)
 
 想象一队探险家（多个智能体 $d$）在没有中央队长的情况下，正在测绘一座崎岖多雾的大山（非平滑非凸函数）。在迈出每一步后，每个探险家只和他们身边的邻居交流以求得一个平均位置（混合矩阵 ${\bm{W}}$），然后根据自己那起雾的指南针读数（${\bm{H}}_{k}+\Xi_{k+1}$）向下迈出一步。数学理论保证了，尽管有大雾且缺乏中央地图，团队的集体路线 $\{{\bm{Z}}_{k}\}$ 将表现得就像有一只巨大的、无形的手（$\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}$）在平滑地引导他们到达谷底（稳定集 $\mathcal{A}$）。
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Actor-Critic Convergence in Markov Games
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: Convergence of Decentralized Actor-Critic Algorithm in General-sum Markov Games (arXiv:2409.04613v6)
+
+Deterministic Convergence Mechanism: 该算法利用马尔可夫近势函数 (Markov Near-Potential Function, MNPF) $\Phi$ 作为去中心化学习动态的近似 Lyapunov 函数。它提供了一个严格的理论行为下界，确保在代理无需了解其他人的策略或收益的情况下，异步的去中心化 Actor-Critic 更新将无条件且确定性地收敛到近似纳什均衡集合 $\textsf{NE}(\epsilon)$。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# 一般和马尔可夫博弈中的去中心化 Actor-Critic 更新
+# 变量严格来源于提取的公式:
+# pi_i_t (\pi_{i}^{t}): 代理 i 的当前策略
+# q_i_t (q_{i}^{t}): 代理 i 的状态-动作价值的 critic 估计
+# br_hat_i (\widehat{\textrm{br}}_{i}): 估计的最优反应策略
+# beta (\beta): 步长参数
+# A_i: 代理 i 的动作空间
+
+def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_minus_1, beta, A_i):
+    # 1. 最优反应估计
+    # \widehat{\textrm{br}}_{i}\in\arg\max_{\pi_{i}\in\Delta(A_{i})}\pi_{i}^{\top}q_{i}^{t-1}(s^{t-1})
+    best_response_estimate = argmax_policy(q_i_t_minus_1[s_t_minus_1], A_i)
+
+    # 2. 策略向最优反应方向更新
+    # \pi_{i}^{t}(s^{t-1})=\pi_{i}^{t-1}(s^{t-1})+\beta(n^{t}(s^{t-1}))\cdot(\widehat{\textrm{br}}_{i}-\pi_{i}^{t-1}(s^{t-1}))
+    pi_i_t_s = pi_i_t_minus_1[s_t_minus_1] + beta * (best_response_estimate - pi_i_t_minus_1[s_t_minus_1])
+
+    # 数学保证:
+    # MNPF \Phi 充当 Lyapunov 函数，使得平均 d/d\tau \Phi >= 0,
+    # 这确保了联合策略确定性地收敛至纳什均衡 \textsf{NE}(\epsilon)。
+
+    return pi_i_t_s
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory: 想象一个熙熙攘攘的复杂菜市场，几个独立的摊贩（代理）都在试图最大化自己的利润，但他们根本不知道竞争对手的底牌策略。与其雇佣一个中心化的市场管理员来协调大家，每个摊贩只是简单地记录自己过去的销售情况（Critic），并把今天的价格稍微向看起来最赚钱的方向调整（最优反应）。数学上的 Lyapunov 理论就像一只看不见的引力之手——它在数学上保证了，只要每个人都坚持做这种微调，整个原本混乱的市场最终会自然而然地收敛到一个所有人都不愿再单方面改变的稳定状态（纳什均衡），从而彻底避免了中心化系统的崩溃风险。

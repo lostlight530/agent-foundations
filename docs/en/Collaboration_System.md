@@ -1043,3 +1043,46 @@ def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine a team of explorers (multiple agents $d$) mapping a rugged, foggy mountain (nonsmooth nonconvex function) without a central leader. After taking each step, an explorer talks only to their immediate neighbors to find an average position (mixing matrix ${\bm{W}}$), and then takes a step downhill based on their own foggy compass reading (${\bm{H}}_{k}+\Xi_{k+1}$). The mathematical theory guarantees that, despite the fog and the lack of a central map, the collective path of the team $\{{\bm{Z}}_{k}\}$ will behave exactly as if a giant, invisible hand ($\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}$) is smoothly guiding them to the bottom of the valley (stationary set $\mathcal{A}$).
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Actor-Critic Convergence in Markov Games
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: Convergence of Decentralized Actor-Critic Algorithm in General-sum Markov Games (arXiv:2409.04613v6)
+
+Deterministic Convergence Mechanism: The algorithm utilizes a Markov Near-Potential Function (MNPF) $\Phi$ which serves as an approximate Lyapunov function for decentralized learning dynamics. It provides a strict theoretical behavioral lower bound, ensuring that asynchronous, decentralized actor-critic updates unconditionally converge to the approximate Nash Equilibrium set $\textsf{NE}(\epsilon)$ without requiring agents to have knowledge of others' strategies or payoffs.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# Decentralized Actor-Critic Update in General-sum Markov Games
+# Variables extracted from explicit formulas:
+# pi_i_t (\pi_{i}^{t}): current policy of agent i
+# q_i_t (q_{i}^{t}): critic estimate of state-action value for agent i
+# br_hat_i (\widehat{\textrm{br}}_{i}): estimated best response policy
+# beta (\beta): step size
+# A_i: action space of agent i
+
+def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_minus_1, beta, A_i):
+    # 1. Best response estimation
+    # \widehat{\textrm{br}}_{i}\in\arg\max_{\pi_{i}\in\Delta(A_{i})}\pi_{i}^{\top}q_{i}^{t-1}(s^{t-1})
+    best_response_estimate = argmax_policy(q_i_t_minus_1[s_t_minus_1], A_i)
+
+    # 2. Policy update moving towards best response
+    # \pi_{i}^{t}(s^{t-1})=\pi_{i}^{t-1}(s^{t-1})+\beta(n^{t}(s^{t-1}))\cdot(\widehat{\textrm{br}}_{i}-\pi_{i}^{t-1}(s^{t-1}))
+    pi_i_t_s = pi_i_t_minus_1[s_t_minus_1] + beta * (best_response_estimate - pi_i_t_minus_1[s_t_minus_1])
+
+    # Mathematical Guarantee:
+    # The MNPF \Phi acts as a Lyapunov function where d/d\tau \Phi >= 0 on average,
+    # ensuring the joint policy deterministically converges to \textsf{NE}(\epsilon).
+
+    return pi_i_t_s
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory: Imagine a bustling, complex marketplace where several independent store owners (agents) are trying to maximize their profits without knowing the secret pricing strategies of their competitors. Instead of hiring a central market analyst to coordinate everyone, each owner simply tracks their own past sales (critic) and slightly tweaks their prices towards whatever seems most profitable today (best response). The mathematical Lyapunov theory acts like an invisible hand of gravity—it guarantees that if everyone makes these small, stubborn adjustments, the entire chaotic marketplace will naturally settle into a stable state (Nash Equilibrium) where no owner can unilaterally improve their situation, completely avoiding a centralized collapse.
