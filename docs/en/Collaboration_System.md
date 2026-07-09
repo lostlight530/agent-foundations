@@ -1086,3 +1086,18 @@ def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_
 💡 0基础业务通俗类比 (For Beginners)
 
 Use a local, beginner-friendly analogy that preserves the actual theory: Imagine a bustling, complex marketplace where several independent store owners (agents) are trying to maximize their profits without knowing the secret pricing strategies of their competitors. Instead of hiring a central market analyst to coordinate everyone, each owner simply tracks their own past sales (critic) and slightly tweaks their prices towards whatever seems most profitable today (best response). The mathematical Lyapunov theory acts like an invisible hand of gravity—it guarantees that if everyone makes these small, stubborn adjustments, the entire chaotic marketplace will naturally settle into a stable state (Nash Equilibrium) where no owner can unilaterally improve their situation, completely avoiding a centralized collapse.
+
+📝 [Daily Research Chunk] 动态理论深潜：Robust Compressed Push-Pull (RCPP) Method
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: arXiv:2408.01727 (A Robust Compressed Push-Pull Method for Decentralized Nonconvex Optimization)
+Deterministic Convergence Mechanism: The RCPP algorithm implements gradient tracking with communication compression under general directed networks. It achieves a sublinear convergence rate for smooth and possibly nonconvex objective functions, maintaining bounds on the optimization error $\Omega_o^k$ and the consensus error $\Omega_c^k$. The mechanism is robust under a much more general class of compression operators that allow both relative and absolute compression errors.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+MISSING_SOURCE
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a decentralized supply chain network with many separate warehouses (agents) coordinating stock levels. Because calling each other every minute is expensive, they only send highly compressed summary reports. Even with relative and absolute compression errors in the reports, the warehouses track and maintain consensus ($\Omega_c^k$) and limit their optimization error ($\Omega_o^k$), allowing them to gradually reach agreement over time in a general directed network.

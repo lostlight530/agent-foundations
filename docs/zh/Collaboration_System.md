@@ -1047,3 +1047,18 @@ def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_
 💡 0基础业务通俗类比 (For Beginners)
 
 Use a local, beginner-friendly analogy that preserves the actual theory: 想象一个熙熙攘攘的复杂菜市场，几个独立的摊贩（代理）都在试图最大化自己的利润，但他们根本不知道竞争对手的底牌策略。与其雇佣一个中心化的市场管理员来协调大家，每个摊贩只是简单地记录自己过去的销售情况（Critic），并把今天的价格稍微向看起来最赚钱的方向调整（最优反应）。数学上的 Lyapunov 理论就像一只看不见的引力之手——它在数学上保证了，只要每个人都坚持做这种微调，整个原本混乱的市场最终会自然而然地收敛到一个所有人都不愿再单方面改变的稳定状态（纳什均衡），从而彻底避免了中心化系统的崩溃风险。
+
+📝 [Daily Research Chunk] 动态理论深潜：Robust Compressed Push-Pull (RCPP) Method
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: arXiv:2408.01727 (A Robust Compressed Push-Pull Method for Decentralized Nonconvex Optimization)
+Deterministic Convergence Mechanism: RCPP 算法在一般有向图下实现了带有通信压缩的梯度追踪机制。对于平滑且可能非凸的目标函数，它实现了次线性收敛率，并约束了优化误差 $\Omega_o^k$ 与一致性误差 $\Omega_c^k$。该机制在允许相对和绝对压缩误差的更一般压缩算子下依然保持稳健。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+MISSING_SOURCE
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个由多个独立仓库（智能体）组成的去中心化供应链网络，它们需要协调库存。因为互相通电话成本太高，所以它们只发送高度压缩的摘要报告。即使报告中存在相对和绝对压缩误差，各个仓库依然能够追踪并保持一致性（$\Omega_c^k$），限制优化误差（$\Omega_o^k$），从而允许它们在这个有向网络中逐步达成完全一致的库存规划。
