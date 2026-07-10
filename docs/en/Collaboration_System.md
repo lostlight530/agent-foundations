@@ -1101,3 +1101,38 @@ MISSING_SOURCE
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine a decentralized supply chain network with many separate warehouses (agents) coordinating stock levels. Because calling each other every minute is expensive, they only send highly compressed summary reports. Even with relative and absolute compression errors in the reports, the warehouses track and maintain consensus ($\Omega_c^k$) and limit their optimization error ($\Omega_o^k$), allowing them to gradually reach agreement over time in a general directed network.
+
+📝 [Daily Research Chunk] 动态理论深潜：KL Property for Decentralized Gradient Tracking
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556v1)
+Deterministic Convergence Mechanism: The gradient tracking-based decentralized scheme guarantees asymptotic convergence when the objective function satisfies the Kurdyka-Łojasiewicz (KL) property. The algorithm establishes deterministic linear or sub-linear convergence bounds (e.g., $\|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}$) depending on the KL exponent, without requiring centralized coordination.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# Decentralized Gradient Tracking Update
+# Variables extracted from arXiv:2412.09556v1:
+# Y^{\nu}: explicitly in formula {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# \nabla F(X^{\nu}): explicitly in formula {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# W: explicitly in formula {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+
+def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
+    # Tracking Variable Update Step
+    # Based on the explicitly extracted update rule:
+    # Y^{\nu+1} = {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+    Y_nu_plus_1 = W @ (Y_nu + nabla_F_X_nu_plus_1 - nabla_F_X_nu)
+
+    # Mathematical Guarantee:
+    # Ensures deterministic convergence bounds such as
+    # \|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}
+
+    return Y_nu_plus_1
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory: Imagine a team of architects (decentralized agents) designing a complex city plan. They each have different parts of the blueprint and only talk to their immediate neighbors. Instead of constantly reporting to a chief architect (no central server), they calculate the changes needed for their block and pass along an estimated summary of what the whole city is doing. The Kurdyka-Łojasiewicz (KL) property is like a strict geometric slope rule of the landscape they are building on. The theory proves mathematically that, as long as they follow this tracking formula, their blueprints will deterministically align into one unified, perfect city plan ($1(x^\star)^\top$) with a predictable, guaranteed speed, completely eliminating the risk of a single chief architect being a bottleneck.

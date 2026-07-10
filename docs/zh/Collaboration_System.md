@@ -1062,3 +1062,38 @@ MISSING_SOURCE
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一个由多个独立仓库（智能体）组成的去中心化供应链网络，它们需要协调库存。因为互相通电话成本太高，所以它们只发送高度压缩的摘要报告。即使报告中存在相对和绝对压缩误差，各个仓库依然能够追踪并保持一致性（$\Omega_c^k$），限制优化误差（$\Omega_o^k$），从而允许它们在这个有向网络中逐步达成完全一致的库存规划。
+
+📝 [Daily Research Chunk] 动态理论深潜：基于 KL 性质的去中心化梯度追踪机制
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556v1)
+Deterministic Convergence Mechanism: 基于梯度追踪的去中心化机制在目标函数满足 Kurdyka-Łojasiewicz (KL) 性质时，能够保证渐进收敛。算法建立了确定性的线性或次线性收敛边界（例如 $\|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}$），而无需任何中心化的协调。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+Use grounded pseudocode only
+
+```python
+# 去中心化梯度追踪更新
+# 变量严格来源于提取的 arXiv:2412.09556v1:
+# Y^{\nu}: 提取自公式 {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# \nabla F(X^{\nu}): 提取自公式 {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# W: 提取自公式 {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+
+def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
+    # 追踪变量更新步骤
+    # 基于显式提取的更新规则:
+    # Y^{\nu+1} = {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+    Y_nu_plus_1 = W @ (Y_nu + nabla_F_X_nu_plus_1 - nabla_F_X_nu)
+
+    # 数学保证:
+    # 确保了确定性的收敛边界，例如：
+    # \|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}
+
+    return Y_nu_plus_1
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Use a local, beginner-friendly analogy that preserves the actual theory: 想象一个建筑师团队（去中心化代理）正在设计一个复杂的城市规划。他们每个人都持有蓝图的不同部分，并且只能与紧挨着的邻居交谈。他们不需要不断向总建筑师汇报（没有中央服务器），而是计算自己街区需要的改动，并传递一份关于整个城市建设动向的估计摘要。Kurdyka-Łojasiewicz (KL) 性质就像是他们所建设地貌的一种严格的几何坡度规则。该理论在数学上证明了：只要他们遵循这个追踪公式，即使没有总建筑师，他们的蓝图也会以可预测的、有保证的速度（收敛边界）确定性地对齐成一个统一的完美城市规划（$1(x^\star)^\top$），彻底消除了中央决策带来的单点故障风险。
