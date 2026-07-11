@@ -1136,3 +1136,29 @@ def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
 💡 0基础业务通俗类比 (For Beginners)
 
 Use a local, beginner-friendly analogy that preserves the actual theory: Imagine a team of architects (decentralized agents) designing a complex city plan. They each have different parts of the blueprint and only talk to their immediate neighbors. Instead of constantly reporting to a chief architect (no central server), they calculate the changes needed for their block and pass along an estimated summary of what the whole city is doing. The Kurdyka-Łojasiewicz (KL) property is like a strict geometric slope rule of the landscape they are building on. The theory proves mathematically that, as long as they follow this tracking formula, their blueprints will deterministically align into one unified, perfect city plan ($1(x^\star)^\top$) with a predictable, guaranteed speed, completely eliminating the risk of a single chief architect being a bottleneck.
+
+### Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS) Convergence
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Memoryless BFGS (DMBFGS)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: arXiv:2409.07122v3 "Decentralized Conjugate Gradient and Memoryless BFGS Methods"
+Deterministic Convergence Mechanism: The DMBFGS method establishes a strict deterministic linear convergence rate under strong convexity and Lipschitz continuity without centralized coordination. The mechanism uses an explicit upper bound on the step size $\alpha \leq \min\left\{\frac{(1-\sigma^{2})^{2}}{2L\Psi\kappa_{H}\sigma^{2}}\sqrt{\frac{1}{688}}\sqrt{\frac{1}{\kappa_{f}}},\frac{1}{6L\Psi\kappa_{H}}\right\}$ to guarantee stability. Furthermore, it enforces the error vector upper bound ${\bf{u}}^{t+1}\preceq{\bf{J}}{\bf{u}}^{t}$, proving that the global convergence rate strictly obeys $\rho({\bf{J}})=1-O\left(\min\left\{\frac{(1-\sigma^{2})^{2}}{\kappa_{f}^{2}\sigma^{2}},\frac{1}{\kappa_{f}}\right\}\right)$.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Decentralized Memoryless BFGS (DMBFGS) execution step
+# Extracted from Algorithm 2
+
+def dmbfgs_update(x_t_plus_1_i, x_t_i):
+    # Extract local node state change
+    # Extracted formula: {\bf{s}}_{i}^{t}={\bf{x}}_{i}^{t+1}-{\bf{x}}_{i}^{t}
+
+    s_t_i = x_t_plus_1_i - x_t_i
+
+    return s_t_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a massive logistics network where regional warehouses (nodes) must optimize their inventory globally without a central headquarters (Decentralized Distributed Optimization). In a normal network, each warehouse only adjusts its stock based on immediate neighbors, which often leads to huge delays and oscillating errors. DMBFGS acts as an advanced local memory protocol. Instead of remembering the entire history of global trends (which is impossible without a central server), each warehouse uses a memoryless BFGS approximation—a highly compressed mathematical trick that estimates the "curvature" or trend of the supply chain using just the change in the last step. The convergence mechanism explicitly bounds how fast they are allowed to react ($\alpha$ bound), ensuring that even without central coordination, the entire network deterministically aligns its inventory at a guaranteed exponential speed ($\rho({\bf{J}})$), strictly preventing any SPOF (Single Point of Failure) collapse.
