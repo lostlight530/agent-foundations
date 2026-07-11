@@ -1097,3 +1097,29 @@ def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
 💡 0基础业务通俗类比 (For Beginners)
 
 Use a local, beginner-friendly analogy that preserves the actual theory: 想象一个建筑师团队（去中心化代理）正在设计一个复杂的城市规划。他们每个人都持有蓝图的不同部分，并且只能与紧挨着的邻居交谈。他们不需要不断向总建筑师汇报（没有中央服务器），而是计算自己街区需要的改动，并传递一份关于整个城市建设动向的估计摘要。Kurdyka-Łojasiewicz (KL) 性质就像是他们所建设地貌的一种严格的几何坡度规则。该理论在数学上证明了：只要他们遵循这个追踪公式，即使没有总建筑师，他们的蓝图也会以可预测的、有保证的速度（收敛边界）确定性地对齐成一个统一的完美城市规划（$1(x^\star)^\top$），彻底消除了中央决策带来的单点故障风险。
+
+### Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS) Convergence
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Memoryless BFGS (DMBFGS)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: arXiv:2409.07122v3 "Decentralized Conjugate Gradient and Memoryless BFGS Methods"
+Deterministic Convergence Mechanism: DMBFGS 方法在无中心协调的情况下，在强凸性和李普希茨连续性下建立了严格的确定性线性收敛率。该机制使用显式的步长上限 $\alpha \leq \min\left\{\frac{(1-\sigma^{2})^{2}}{2L\Psi\kappa_{H}\sigma^{2}}\sqrt{\frac{1}{688}}\sqrt{\frac{1}{\kappa_{f}}},\frac{1}{6L\Psi\kappa_{H}}\right\}$ 来保证稳定性。此外，它强制执行误差向量上限 ${\bf{u}}^{t+1}\preceq{\bf{J}}{\bf{u}}^{t}$，证明全局收敛率严格服从 $\rho({\bf{J}})=1-O\left(\min\left\{\frac{(1-\sigma^{2})^{2}}{\kappa_{f}^{2}\sigma^{2}},\frac{1}{\kappa_{f}}\right\}\right)$。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Decentralized Memoryless BFGS (DMBFGS) execution step
+# 提取自 Algorithm 2
+
+def dmbfgs_update(x_t_plus_1_i, x_t_i):
+    # 提取本地节点状态变化
+    # 提取的公式: {\bf{s}}_{i}^{t}={\bf{x}}_{i}^{t+1}-{\bf{x}}_{i}^{t}
+
+    s_t_i = x_t_plus_1_i - x_t_i
+
+    return s_t_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个庞大的物流网络，各区域仓库（节点）必须在没有中央总部（去中心化分布式优化）的情况下对全球库存进行优化。在普通网络中，每个仓库仅根据直接邻居调整库存，这往往导致巨大的延迟和误差波动。DMBFGS 就像一个高级本地记忆协议。每个仓库并不需要记住全局趋势的完整历史（在没有中央服务器的情况下这是不可能的），而是使用“无记忆 BFGS 近似”——一种高度压缩的数学技巧，仅通过最后一步的变化来估计供应链的“曲率”或趋势。收敛机制显式限制了它们的反应速度上限（$\alpha$ 上界），确保即使没有中央协调，整个网络也能以有保证的指数级速度（$\rho({\bf{J}})$）确定性地对齐库存，严格防止任何单点故障 (SPOF) 导致的崩溃。
