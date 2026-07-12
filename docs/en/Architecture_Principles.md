@@ -72,6 +72,12 @@ System Container: Architecture Principles
 Frontier Source: arXiv:2411.15111 (Afrah Farea et al., 2024)
 Deterministic Convergence Mechanism: The paper applies Physics-Informed bounds into neural network optimization, formally enforcing deterministic gradient stability (via initial and boundary conditions) preventing architectural divergence.
 
+### Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+
+**Frontier Source:** "Mamba State-Space Models Are Lyapunov-Stable Learners" (arXiv:2406.00209v3) by John T. Halloran, Manbir Gulati, Paul Roysdon
+
+**Deterministic Convergence Mechanism:** The theoretical bound $\max|F_{\theta}^{N}(\bm{x}_{t-1},\mathbf{u}_{t})-F_{\theta}^{N}(\bm{x}_{t-1}+\varepsilon,\mathbf{u}_{t}+\varepsilon)|\in\mathcal{O}(\varepsilon\exp{(N\zeta)})$ where $\zeta\leq 0$, demonstrating that small input deviations (e.g. from Mixed-Precision Fine-Tuning) are exponentially non-increasing over discrete-time due to bounded Lyapunov exponents.
+
 ## 3. Source Code Breakdown & Pseudocode
 ### Code for Training-Free Adaptive Stopping (TASR)
 ```python
@@ -242,6 +248,34 @@ def compute_physically_constrained_loss(L_phy, L_bc, L_ic, lambdas):
     return total_loss
 ```
 
+### Code for Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+
+```python
+def lyapunov_stable_mamba_block(x_prev, u_t, epsilon, N, F_theta):
+    # F_theta: Mamba block discrete transition function
+    # x_prev: latent state \bm{x}_{t-1}
+    # u_t: input \mathbf{u}_{t}
+    # epsilon: \varepsilon input change
+
+    # Base outputs
+    y_base = F_theta_pow(F_theta, N, x_prev, u_t)
+
+    # Perturbed outputs
+    y_perturbed = F_theta_pow(F_theta, N, x_prev + epsilon, u_t + epsilon)
+
+    # The maximum deviation is bounded by O(epsilon * exp(N * zeta))
+    # where zeta <= 0 guarantees exponential stability
+    max_deviation = abs(y_base - y_perturbed)
+
+    return max_deviation
+
+def F_theta_pow(F_theta, N, x, u):
+    val = x
+    for _ in range(N):
+        val = F_theta(val, u)
+    return val
+```
+
 ## 4. Conclusion
 
 "The four repositories dictate what the system does. This repository explains why it works."
@@ -269,9 +303,15 @@ In traditional methods, everyone shouts to a boss, causing a bottleneck. In this
 If you tell an AI to build a virtual bridge, it might design something that looks great but would collapse under gravity. Normal models only care about "looking right". This theory hardcodes physics (like gravity and solid ground boundaries) straight into the AI's core engine. It physically stops the network's internal math from exploring impossible designs, keeping its internal structure universally stable.
 
 
+### Analogy for Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+
+Imagine a steep valley shaped like a bowl. No matter where you place a marble inside the bowl (the input perturbation $\varepsilon$), gravity will pull it towards the bottom center (the fixed point). Even if you slightly nudge the marble while it rolls, it won't fly out of the bowl. In Mamba architecture, the "Lyapunov stability" ensures that tiny computational errors (like those from using lower-precision math to save memory) act like nudges in a bowl—they naturally settle down instead of snowballing into a catastrophic crash, allowing the system to remain stable over long sequence generations.
+
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
+
+Architecture Principles: introduced Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability, updated Source Code Breakdown
 
 Architecture Principles: introduced Physics-Informed bounds, updated Core Mechanisms and Source Code
 MISSING_SOURCE: None
@@ -280,45 +320,3 @@ MISSING_SOURCE: None
 
 Conflict Detection: The woven theories across Architecture Principles have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
 
-📝 [Daily Research Chunk] 动态理论深潜：Mamba State-Space Models Lyapunov Stability
-
-🔬 选型依据与学术脉络
-
-System Container: Architecture Principles
-
-Frontier Source: "Mamba State-Space Models Are Lyapunov-Stable Learners" (arXiv:2406.00209v3) by John T. Halloran, Manbir Gulati, Paul Roysdon
-
-Deterministic Convergence Mechanism: The theoretical bound $\max|F_{\theta}^{N}(\bm{x}_{t-1},\mathbf{u}_{t})-F_{\theta}^{N}(\bm{x}_{t-1}+\varepsilon,\mathbf{u}_{t}+\varepsilon)|\in\mathcal{O}(\varepsilon\exp{(N\zeta)})$ where $\zeta\leq 0$, demonstrating that small input deviations (e.g. from Mixed-Precision Fine-Tuning) are exponentially non-increasing over discrete-time due to bounded Lyapunov exponents.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-
-Use grounded pseudocode only:
-```python
-def lyapunov_stable_mamba_block(x_prev, u_t, epsilon, N, F_theta):
-    # F_theta: Mamba block discrete transition function
-    # x_prev: latent state \bm{x}_{t-1}
-    # u_t: input \mathbf{u}_{t}
-    # epsilon: \varepsilon input change
-
-    # Base outputs
-    y_base = F_theta_pow(F_theta, N, x_prev, u_t)
-
-    # Perturbed outputs
-    y_perturbed = F_theta_pow(F_theta, N, x_prev + epsilon, u_t + epsilon)
-
-    # The maximum deviation is bounded by O(epsilon * exp(N * zeta))
-    # where zeta <= 0 guarantees exponential stability
-    max_deviation = abs(y_base - y_perturbed)
-
-    return max_deviation
-
-def F_theta_pow(F_theta, N, x, u):
-    val = x
-    for _ in range(N):
-        val = F_theta(val, u)
-    return val
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-
-Imagine a steep valley shaped like a bowl. No matter where you place a marble inside the bowl (the input perturbation $\varepsilon$), gravity will pull it towards the bottom center (the fixed point). Even if you slightly nudge the marble while it rolls, it won't fly out of the bowl. In Mamba architecture, the "Lyapunov stability" ensures that tiny computational errors (like those from using lower-precision math to save memory) act like nudges in a bowl—they naturally settle down instead of snowballing into a catastrophic crash, allowing the system to remain stable over long sequence generations.
