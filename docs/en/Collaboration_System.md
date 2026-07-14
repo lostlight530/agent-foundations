@@ -1242,3 +1242,45 @@ MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 Conflict Detection: The woven theories across all core systems have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+
+📝 [Daily Research Chunk] 动态理论深潜：耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Decentralized Optimization with Coupled Constraints (arXiv:2407.02020)
+Deterministic Convergence Mechanism: The architecture enforces strict bounds through a Chebyshev-accelerated dual tracking topology, yielding an explicit geometric convergence rate bound of $\leq\left(\!1+\frac{1}{4}\min\left\{\frac{1}{\sqrt{\kappa_{G}\kappa_{\mathbf{K}}}},\frac{1}{\kappa_{\mathbf{K}}}\right\}\!\right)^{-k}C$. By leveraging smooth and strongly convex formulations, this mechanism completely avoids single points of failure (SPOF) while deterministically tracking both primal variables and dual affine consensus variables, demonstrating the first linearly convergent first-order decentralized algorithm for general affine coupled constraints.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def linearly_convergent_decentralized_step(u_k, u_f_k, z_k, tau, eta, alpha, theta):
+    # u_{g}^{k}\coloneqq\tau u^{k}+(1-\tau)u_{f}^{k}
+    # Calculate intermediate step aggregating current and tracking variables
+    u_g_k = tau * u_k + (1 - tau) * u_f_k
+
+    # g^{k}\coloneqq\mathrm{\mathbf{grad\_G}}(u_{g}^{k})-\alpha u_{g}^{k}
+    # Compute generalized gradient of objective G
+    g_k = grad_G(u_g_k) - alpha * u_g_k
+
+    # u^{k+\frac{1}{2}}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k}))
+    # Half-step primal update using previous dual tracking
+    u_half_k = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_k))
+
+    # z^{k+1}\coloneqq z^{k}+\theta\cdot\mathrm{\mathbf{K\_Chebyshev}}(u^{k+\frac{1}{2}})
+    # Dual variable update with Chebyshev acceleration on network graph
+    z_next = z_k + theta * K_Chebyshev(u_half_k)
+
+    # u^{k+1}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k+1}))
+    # Full primal update
+    u_next = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_next))
+
+    # u_{f}^{k+1}\coloneqq u_{g}^{k}+\tfrac{2\tau}{2-\tau}(u^{k+1}-u^{k})
+    # Update tracking variable
+    u_f_next = u_g_k + (2 * tau / (2 - tau)) * (u_next - u_k)
+
+    return u_next, u_f_next, z_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine multiple bank branches (nodes) that must collectively manage a strict regulatory deposit ratio (a coupled affine constraint) without a central headquarters (no central server). Previously, branches had to either compromise on exact compliance or elect a leader, creating a bottleneck. This Chebyshev-accelerated method gives every branch two ledgers: an internal action plan (primal variable) and a shared "regulation gap" tracker (dual variable). By applying a mathematical "Chebyshev filter" to their communication, branches aggressively eliminate misunderstandings (high-frequency errors) across the network. The formula guarantees that the entire bank converges to the mathematically optimal resource allocation exponentially fast (linear convergence), without ever relying on a central authority.

@@ -1203,3 +1203,45 @@ MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 Conflict Detection: The woven theories across all core systems have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+
+📝 [Daily Research Chunk] 动态理论深潜：耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Decentralized Optimization with Coupled Constraints (arXiv:2407.02020)
+Deterministic Convergence Mechanism: 该架构通过切比雪夫加速的对偶跟踪拓扑强制执行严格的边界，产生显式的几何收敛率界限 $\leq\left(\!1+\frac{1}{4}\min\left\{\frac{1}{\sqrt{\kappa_{G}\kappa_{\mathbf{K}}}},\frac{1}{\kappa_{\mathbf{K}}}\right\}\!\right)^{-k}C$。通过利用平滑和强凸公式，该机制完全避免了单点故障 (SPOF)，同时确定性地跟踪原变量和对偶仿射共识变量，展示了针对一般仿射耦合约束的首个线性收敛的一阶去中心化算法。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def linearly_convergent_decentralized_step(u_k, u_f_k, z_k, tau, eta, alpha, theta):
+    # u_{g}^{k}\coloneqq\tau u^{k}+(1-\tau)u_{f}^{k}
+    # 计算聚合当前变量和跟踪变量的中间步骤
+    u_g_k = tau * u_k + (1 - tau) * u_f_k
+
+    # g^{k}\coloneqq\mathrm{\mathbf{grad\_G}}(u_{g}^{k})-\alpha u_{g}^{k}
+    # 计算目标 G 的广义梯度
+    g_k = grad_G(u_g_k) - alpha * u_g_k
+
+    # u^{k+\frac{1}{2}}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k}))
+    # 使用先前对偶跟踪的半步原变量更新
+    u_half_k = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_k))
+
+    # z^{k+1}\coloneqq z^{k}+\theta\cdot\mathrm{\mathbf{K\_Chebyshev}}(u^{k+\frac{1}{2}})
+    # 在网络图上使用切比雪夫加速更新对偶变量
+    z_next = z_k + theta * K_Chebyshev(u_half_k)
+
+    # u^{k+1}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k+1}))
+    # 完整的原变量更新
+    u_next = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_next))
+
+    # u_{f}^{k+1}\coloneqq u_{g}^{k}+\tfrac{2\tau}{2-\tau}(u^{k+1}-u^{k})
+    # 更新跟踪变量
+    u_f_next = u_g_k + (2 * tau / (2 - tau)) * (u_next - u_k)
+
+    return u_next, u_f_next, z_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象多个银行分行（节点）必须共同管理一个严格的监管存款比例（耦合仿射约束），且没有总部（无中央服务器）。以前，分行必须在精确合规上妥协，或者选举一个领导者，从而产生瓶颈。这种切比雪夫加速方法为每个分行提供了两个账本：一个内部行动计划（原变量）和一个共享的“监管差距”跟踪器（对偶变量）。通过对它们的通信应用数学“切比雪夫滤波器”，分支机构积极消除跨网络的误解（高频误差）。该公式保证了整个银行以指数级速度（线性收敛）收敛到数学上最佳的资源分配，而完全不依赖中央权威。
