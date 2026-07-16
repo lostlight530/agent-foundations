@@ -1289,3 +1289,49 @@ def GT_PGA_step(k, tau, L, beta, x_i, y_i, local_stochastic_gradient, prev_local
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一支去中心化的送货卡车车队（节点），试图在没有调度员的情况下共同计算出穿越城市的最佳路线。通常，它们只会向附近的卡车询问估算值（梯度追踪），但这会随着时间推移积累误差。通过“周期性全局平均” (PGA)，每隔 $\tau$ 小时（同步周期），所有卡车都会短暂地调入一个全局无线电频道，以完美对齐它们的路线 ($\frac{1}{n}\sum x_{i}^{(k)}$)。数学证明，通过严格限制它们的更新激进程度（步长 $\alpha$），这种混合方法大大加快了找到最佳路线的速度，并且在数学上永远不会导致系统发散或崩溃。
+
+📝 [Daily Research Chunk] 动态理论深潜：基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity (arXiv:2412.07252v1)
+Deterministic Convergence Mechanism: 该理论解决了极端统计多样性（非独立同分布数据）下，时变有向图上的去中心化优化挑战。通过引入去中心化 Moreau 包络 (DME) 框架和自适应通信权重 $w_{j,i}^{(t)}$，它建立了一个确定性的拓扑约束和严格的显式步长边界 $\gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}$。这种机制在理论上限制了更新方差和动量追踪，确保局部更新通过去中心化共识结构正确对齐，而无需集中式协调。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted Adaptive Push-SUM Algorithm Mechanics
+# Variables defined based on explicit arXiv trace extraction
+# \left\{\begin{matrix}\textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}\\
+# \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}\\
+# \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}\\
+# \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}\\
+# \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}\end{matrix}\right.
+# \gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}
+
+def adaptive_push_sum_step(i, X_prev, a_prev, M_prev, G_prev, neighbors_N_i, W_t, beta, gamma):
+    # Phase 1: 局部动量与参数更新
+    # \textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}
+    M_t_i = beta * M_prev[i] + G_prev[i]
+
+    # \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}
+    X_half_t_i = X_prev[i] - gamma * M_t_i
+
+    # Phase 2: 去中心化网络聚合 (Push-SUM 核心机制)
+    # \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}
+    a_t_i = 0
+    # \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}
+    X_t_i = 0
+
+    for j in neighbors_N_i:
+        a_t_i += W_t[i][j] * a_prev[j]
+        X_t_i += W_t[i][j] * X_half_t[j]
+
+    # Phase 3: 质量守恒修正 (消除有向图带来的不平衡)
+    # \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}
+    Y_t_i = X_t_i / a_t_i
+
+    return Y_t_i, X_t_i, a_t_i, M_t_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个由独立气象站（节点）组成的去中心化网络，它们试图通过断断续续的无线电连接（时变有向图）共同计算出一个全球气候模型。有些气象站在沙漠里，有些在雨林里，这导致它们本地的数据差异巨大（统计多样性 / 非独立同分布）。如果它们只是盲目地平均各自的发现，极端的异常数据就会导致模型崩溃。“自适应权重 Push-SUM” 方法为每个气象站配备了一个智能通信过滤器。针对它们更新速度的严格数学边界 ($\gamma$) 确保了这种谨慎、自适应的通信方式，能在数学上百分之百保证它们最终达成完美的全球气候共识，而永远不需要一个中央权威机构，也不会被当地的极端天气带偏。
