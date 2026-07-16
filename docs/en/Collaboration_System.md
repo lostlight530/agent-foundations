@@ -1284,3 +1284,47 @@ def linearly_convergent_decentralized_step(u_k, u_f_k, z_k, tau, eta, alpha, the
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine multiple bank branches (nodes) that must collectively manage a strict regulatory deposit ratio (a coupled affine constraint) without a central headquarters (no central server). Previously, branches had to either compromise on exact compliance or elect a leader, creating a bottleneck. This Chebyshev-accelerated method gives every branch two ledgers: an internal action plan (primal variable) and a shared "regulation gap" tracker (dual variable). By applying a mathematical "Chebyshev filter" to their communication, branches aggressively eliminate misunderstandings (high-frequency errors) across the network. The formula guarantees that the entire bank converges to the mathematically optimal resource allocation exponentially fast (linear convergence), without ever relying on a central authority.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: Accelerating Gradient Tracking with Periodic Global Averaging (arXiv:2403.11293v2)
+URL: https://arxiv.org/abs/2403.11293v2
+Selection Reason: This paper introduces a rigorously bounded decentralized optimization method (GT-PGA) that balances local communication with periodic global averaging, providing explicit step-size constraints and a strict convergence mechanism for strongly connected networks.
+Deterministic Convergence Mechanism: This theory defines the GT-PGA algorithm, which structurally eliminates data heterogeneity using gradient tracking while periodically enforcing exact global consensus. It provides a deterministic upper bound on the stepsize $\alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}$ where $\tau\in\mathbb{N}_{\geq 2}$ is the global averaging period. This explicit constraint ensures descent inequality and bounds the consensus error, proving that periodic synchronization accelerates the transient phase without violating the theoretical convergence guarantees.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted GT-PGA Algorithm Mechanics
+# Variables defined based on explicit arXiv trace extraction
+# \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
+# \tau\in\mathbb{N}_{\geq 2}
+# \displaystyle x_{i}^{(k+1)}
+# \mathbb{E}[\nabla F_{i}(x_{i}^{(k)};\xi_{i}^{(k)})\mid\mathcal{F}^{(k)}]=\nabla f_{i}(x_{i}^{(k)})
+
+def GT_PGA_step(k, tau, L, beta, x_i, y_i, local_stochastic_gradient, prev_local_stochastic_gradient, W_matrix):
+    # Calculate strictly bounded step size to ensure deterministic convergence
+    # \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
+    alpha = min(1 / (2 * L), 1 / (4 * (6 ** 0.5) * beta * (tau ** 2) * L))
+
+    # Check if this step is a periodic global averaging step (\tau)
+    is_global_averaging = (k % tau == 0)
+
+    if is_global_averaging:
+        # Periodic Global Averaging
+        # \displaystyle:=\frac{1}{n}\sum\limits_{i=1}^{n}x_{i}^{(k)}.
+        x_next = global_average(x_i) - alpha * global_average(y_i)
+        y_next = global_average(y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
+    else:
+        # Decentralized Gradient Tracking step
+        # \displaystyle x_{i}^{(k+1)} using local neighborhood matrix W
+        x_next = local_consensus(W_matrix, x_i) - alpha * y_i
+        y_next = local_consensus(W_matrix, y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
+
+    return x_next, y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a decentralized fleet of delivery trucks (nodes) trying to collectively calculate the optimal route across a city without a dispatcher. Usually, they just ask nearby trucks for their estimates (gradient tracking), but errors can build up over time. With "Periodic Global Averaging" (PGA), every $\tau$ hours (the synchronization period), all trucks briefly tune into a global radio channel to perfectly align their routes ($\frac{1}{n}\sum x_{i}^{(k)}$). The math proves that by strictly capping their update aggressiveness (the stepsize $\alpha$), this hybrid approach drastically speeds up finding the optimal route without ever causing the system to mathematically diverge or crash.

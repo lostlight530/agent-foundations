@@ -1245,3 +1245,47 @@ def linearly_convergent_decentralized_step(u_k, u_f_k, z_k, tau, eta, alpha, the
 💡 0基础业务通俗类比 (For Beginners)
 
 想象多个银行分行（节点）必须共同管理一个严格的监管存款比例（耦合仿射约束），且没有总部（无中央服务器）。以前，分行必须在精确合规上妥协，或者选举一个领导者，从而产生瓶颈。这种切比雪夫加速方法为每个分行提供了两个账本：一个内部行动计划（原变量）和一个共享的“监管差距”跟踪器（对偶变量）。通过对它们的通信应用数学“切比雪夫滤波器”，分支机构积极消除跨网络的误解（高频误差）。该公式保证了整个银行以指数级速度（线性收敛）收敛到数学上最佳的资源分配，而完全不依赖中央权威。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: Accelerating Gradient Tracking with Periodic Global Averaging (arXiv:2403.11293v2)
+URL: https://arxiv.org/abs/2403.11293v2
+Selection Reason: 该论文引入了一种具有严格边界的去中心化优化方法 (GT-PGA)，该方法平衡了局部通信与周期性全局平均，为强连通网络提供了明确的步长约束和严格的收敛机制。
+Deterministic Convergence Mechanism: 该理论定义了 GT-PGA 算法，在结构上使用梯度追踪消除数据异质性，同时周期性地强制执行精确的全局共识。它为步长提供了一个确定性的上限 $\alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}$，其中 $\tau\in\mathbb{N}_{\geq 2}$ 是全局平均周期。这种显式约束确保了下降不等式并限制了共识误差，证明了周期性同步可以在不违反理论收敛保证的情况下加速暂态阶段。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted GT-PGA Algorithm Mechanics
+# Variables defined based on explicit arXiv trace extraction
+# \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
+# \tau\in\mathbb{N}_{\geq 2}
+# \displaystyle x_{i}^{(k+1)}
+# \mathbb{E}[\nabla F_{i}(x_{i}^{(k)};\xi_{i}^{(k)})\mid\mathcal{F}^{(k)}]=\nabla f_{i}(x_{i}^{(k)})
+
+def GT_PGA_step(k, tau, L, beta, x_i, y_i, local_stochastic_gradient, prev_local_stochastic_gradient, W_matrix):
+    # Calculate strictly bounded step size to ensure deterministic convergence
+    # \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
+    alpha = min(1 / (2 * L), 1 / (4 * (6 ** 0.5) * beta * (tau ** 2) * L))
+
+    # Check if this step is a periodic global averaging step (\tau)
+    is_global_averaging = (k % tau == 0)
+
+    if is_global_averaging:
+        # Periodic Global Averaging
+        # \displaystyle:=\frac{1}{n}\sum\limits_{i=1}^{n}x_{i}^{(k)}.
+        x_next = global_average(x_i) - alpha * global_average(y_i)
+        y_next = global_average(y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
+    else:
+        # Decentralized Gradient Tracking step
+        # \displaystyle x_{i}^{(k+1)} using local neighborhood matrix W
+        x_next = local_consensus(W_matrix, x_i) - alpha * y_i
+        y_next = local_consensus(W_matrix, y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
+
+    return x_next, y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一支去中心化的送货卡车车队（节点），试图在没有调度员的情况下共同计算出穿越城市的最佳路线。通常，它们只会向附近的卡车询问估算值（梯度追踪），但这会随着时间推移积累误差。通过“周期性全局平均” (PGA)，每隔 $\tau$ 小时（同步周期），所有卡车都会短暂地调入一个全局无线电频道，以完美对齐它们的路线 ($\frac{1}{n}\sum x_{i}^{(k)}$)。数学证明，通过严格限制它们的更新激进程度（步长 $\alpha$），这种混合方法大大加快了找到最佳路线的速度，并且在数学上永远不会导致系统发散或崩溃。
