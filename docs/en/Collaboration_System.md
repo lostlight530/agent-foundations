@@ -1328,3 +1328,49 @@ def GT_PGA_step(k, tau, L, beta, x_i, y_i, local_stochastic_gradient, prev_local
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine a decentralized fleet of delivery trucks (nodes) trying to collectively calculate the optimal route across a city without a dispatcher. Usually, they just ask nearby trucks for their estimates (gradient tracking), but errors can build up over time. With "Periodic Global Averaging" (PGA), every $\tau$ hours (the synchronization period), all trucks briefly tune into a global radio channel to perfectly align their routes ($\frac{1}{n}\sum x_{i}^{(k)}$). The math proves that by strictly capping their update aggressiveness (the stepsize $\alpha$), this hybrid approach drastically speeds up finding the optimal route without ever causing the system to mathematically diverge or crash.
+
+📝 [Daily Research Chunk] 动态理论深潜：基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity (arXiv:2412.07252v1)
+Deterministic Convergence Mechanism: This theory resolves the challenge of decentralized optimization on time-varying directed graphs under extreme statistical diversity (non-IID data). By introducing a Decentralized Moreau Envelope (DME) framework and adaptive communication weights $w_{j,i}^{(t)}$, it establishes a deterministic topological constraint and a rigorous explicit step size bound $\gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}$. This mechanism theoretically limits update variance and momentum tracking, ensuring that local updates correctly align through decentralized consensus structures without centralized coordination.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted Adaptive Push-SUM Algorithm Mechanics
+# Variables defined based on explicit arXiv trace extraction
+# \left\{\begin{matrix}\textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}\\
+# \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}\\
+# \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}\\
+# \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}\\
+# \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}\end{matrix}\right.
+# \gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}
+
+def adaptive_push_sum_step(i, X_prev, a_prev, M_prev, G_prev, neighbors_N_i, W_t, beta, gamma):
+    # Phase 1: Local momentum and parameter update
+    # \textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}
+    M_t_i = beta * M_prev[i] + G_prev[i]
+
+    # \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}
+    X_half_t_i = X_prev[i] - gamma * M_t_i
+
+    # Phase 2: Decentralized network aggregation (Push-SUM)
+    # \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}
+    a_t_i = 0
+    # \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}
+    X_t_i = 0
+
+    for j in neighbors_N_i:
+        a_t_i += W_t[i][j] * a_prev[j]
+        X_t_i += W_t[i][j] * X_half_t[j]
+
+    # Phase 3: Mass conservation correction
+    # \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}
+    Y_t_i = X_t_i / a_t_i
+
+    return Y_t_i, X_t_i, a_t_i, M_t_i
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a decentralized network of independent weather stations (nodes) trying to collectively calculate a global climate model over intermittent radio links (time-varying directed graph). Some stations are in deserts, others in rainforests, creating massive differences in their local data (statistical diversity / non-IID). If they just average their findings blindly, the extreme data points will crash the model. The "Adaptive Weighting Push-SUM" method gives each station an intelligent communication filter. The strict mathematical bound ($\gamma$) on their update speed ensures that this cautious, adaptive communication mathematically guarantees they will all reach a perfect global climate consensus without ever needing a central authority or being derailed by local extreme weather.
