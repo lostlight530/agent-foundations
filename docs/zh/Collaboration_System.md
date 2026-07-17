@@ -1335,3 +1335,35 @@ def adaptive_push_sum_step(i, X_prev, a_prev, M_prev, G_prev, neighbors_N_i, W_t
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一个由独立气象站（节点）组成的去中心化网络，它们试图通过断断续续的无线电连接（时变有向图）共同计算出一个全球气候模型。有些气象站在沙漠里，有些在雨林里，这导致它们本地的数据差异巨大（统计多样性 / 非独立同分布）。如果它们只是盲目地平均各自的发现，极端的异常数据就会导致模型崩溃。“自适应权重 Push-SUM” 方法为每个气象站配备了一个智能通信过滤器。针对它们更新速度的严格数学边界 ($\gamma$) 确保了这种谨慎、自适应的通信方式，能在数学上百分之百保证它们最终达成完美的全球气候共识，而永远不需要一个中央权威机构，也不会被当地的极端天气带偏。
+
+📝 [Daily Research Chunk] 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: http://arxiv.org/abs/2409.05293v1
+Deterministic Convergence Mechanism: 该框架利用对数障碍惩罚函数（log-barrier penalty functions）结合积分滑模控制，通过李雅普诺夫分析和非平滑技术提供了确定性跟踪边界，保证在存在时变约束和扰动的情况下，多智能体系统的跟踪误差依然能确定性地收敛到零。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+# Distributed Robust Continuous-Time Optimization implementation
+# 公式与变量严格来源于 arXiv HTML 提取记录
+
+# 系统建模变量
+# \mathcal{V}=\{1,\ldots,N\}
+# \mathcal{E}\subseteq\mathcal{V}\times\mathcal{V}
+# \dot{x}=f(x,t)
+
+# 李雅普诺夫非平滑映射与滑模边界
+# V:\mathbb{R}^{n}\to\mathbb{R}
+# \dot{V}(x)\leq-\alpha V^{p}(x)-\beta V^{q}(x)
+# \dot{V}_{S1}\leq-2^{\frac{\rho_{1}+1}{2}}k_{1}V_{S1}^{\frac{\rho_{1}+1}{2}}-2^{\frac{\rho_{2}+1}{2}}k_{2}(Nn)^{\frac{1-\rho_{2}}{2}}V_{S1}^{\frac{\rho_{2}+1}{2}}
+
+def calculate_lyapunov_descent(V_S1, k1, k2, rho1, rho2, N, n):
+    """
+    根据提取的边界公式，计算滑模导数的确定性上界。
+    """
+    term1 = (2 ** ((rho1 + 1) / 2)) * k1 * (V_S1 ** ((rho1 + 1) / 2))
+    term2 = (2 ** ((rho2 + 1) / 2)) * k2 * ((N * n) ** ((1 - rho2) / 2)) * (V_S1 ** ((rho2 + 1) / 2))
+    return -(term1 + term2)
+
+💡 0基础业务通俗类比 (For Beginners)
+想象你在管理一支去中心化的自动驾驶无人机机队（分布在网络 $\mathcal{V}$ 上的多智能体系统）。它们需要协同找到最优飞行路径，但禁飞区（时变约束）和风况（扰动）却在不断变化。与其依赖缓慢的中央服务器，每架无人机都实现了一个本地的“滑模控制器”，就像一个超级灵敏的减震器。即使突然遭遇强风，底层的李雅普诺夫数学边界（$\dot{V}(x)$）也能保证无人机会在有限时间内，确定性地“滑”回最优且安全的编队轨迹，在不断变化的边界中安全穿梭而不会坠毁。
