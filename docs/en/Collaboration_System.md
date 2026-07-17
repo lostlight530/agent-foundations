@@ -1374,3 +1374,35 @@ def adaptive_push_sum_step(i, X_prev, a_prev, M_prev, G_prev, neighbors_N_i, W_t
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine a decentralized network of independent weather stations (nodes) trying to collectively calculate a global climate model over intermittent radio links (time-varying directed graph). Some stations are in deserts, others in rainforests, creating massive differences in their local data (statistical diversity / non-IID). If they just average their findings blindly, the extreme data points will crash the model. The "Adaptive Weighting Push-SUM" method gives each station an intelligent communication filter. The strict mathematical bound ($\gamma$) on their update speed ensures that this cautious, adaptive communication mathematically guarantees they will all reach a perfect global climate consensus without ever needing a central authority or being derailed by local extreme weather.
+
+📝 [Daily Research Chunk] 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: http://arxiv.org/abs/2409.05293v1
+Deterministic Convergence Mechanism: The framework utilizes log-barrier penalty functions combined with integral sliding mode control for multi-agent systems, providing deterministic tracking via Lyapunov analysis and non-smooth techniques to guarantee tracking error convergence to zero despite time-varying constraints and disturbances.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+# Distributed Robust Continuous-Time Optimization implementation
+# Formulas and variables explicitly extracted from arXiv HTML trace
+
+# System modeling variables explicitly from trace
+# \mathcal{V}=\{1,\ldots,N\}
+# \mathcal{E}\subseteq\mathcal{V}\times\mathcal{V}
+# \dot{x}=f(x,t)
+
+# Lyapunov non-smooth mapping and sliding mode bounds
+# V:\mathbb{R}^{n}\to\mathbb{R}
+# \dot{V}(x)\leq-\alpha V^{p}(x)-\beta V^{q}(x)
+# \dot{V}_{S1}\leq-2^{\frac{\rho_{1}+1}{2}}k_{1}V_{S1}^{\frac{\rho_{1}+1}{2}}-2^{\frac{\rho_{2}+1}{2}}k_{2}(Nn)^{\frac{1-\rho_{2}}{2}}V_{S1}^{\frac{\rho_{2}+1}{2}}
+
+def calculate_lyapunov_descent(V_S1, k1, k2, rho1, rho2, N, n):
+    """
+    Calculates the deterministic upper bound of the sliding mode derivative based on explicitly extracted bounds.
+    """
+    term1 = (2 ** ((rho1 + 1) / 2)) * k1 * (V_S1 ** ((rho1 + 1) / 2))
+    term2 = (2 ** ((rho2 + 1) / 2)) * k2 * ((N * n) ** ((1 - rho2) / 2)) * (V_S1 ** ((rho2 + 1) / 2))
+    return -(term1 + term2)
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine you manage a decentralized fleet of autonomous drones (the multi-agent system over $\mathcal{V}$). They need to collaboratively find the optimal flight path while the no-fly zones (time-varying constraints) and wind conditions (disturbances) constantly change. Instead of relying on slow centralized servers, each drone implements a local "sliding mode controller" acting like an ultra-fast shock absorber. Even if a sudden gust of wind hits, the underlying Lyapunov mathematical bounding ($\dot{V}(x)$) guarantees that the drone will deterministically "slide" back to the optimal, safe formation in finite time, safely navigating the shifting boundaries without crashing.
