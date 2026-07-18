@@ -1367,3 +1367,36 @@ def calculate_lyapunov_descent(V_S1, k1, k2, rho1, rho2, N, n):
 
 💡 0基础业务通俗类比 (For Beginners)
 想象你在管理一支去中心化的自动驾驶无人机机队（分布在网络 $\mathcal{V}$ 上的多智能体系统）。它们需要协同找到最优飞行路径，但禁飞区（时变约束）和风况（扰动）却在不断变化。与其依赖缓慢的中央服务器，每架无人机都实现了一个本地的“滑模控制器”，就像一个超级灵敏的减震器。即使突然遭遇强风，底层的李雅普诺夫数学边界（$\dot{V}(x)$）也能保证无人机会在有限时间内，确定性地“滑”回最优且安全的编队轨迹，在不断变化的边界中安全穿梭而不会坠毁。
+
+📝 [Daily Research Chunk] 动态理论深潜：Adaptive Weighting Push-SUM & MSGAP Convergence
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: "Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity" (URL: https://arxiv.org/abs/2412.07252v1)
+
+Deterministic Convergence Mechanism: MSGAP算法结合自适应权重Push-SUM提供了 $\displaystyle\leq O\left(\frac{1}{\sqrt{NT}}\right)+O\left(\frac{\sigma^{2}}{\sqrt{NT}}\right)+O\left(\frac{N\kappa^{2}}{T}\right).$ 的收敛界。这显式刻画了收敛速率以及统计多样性对去中心化动量SGD的影响，确保了优化的稳定性。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# 提取自MSGAP算法定义:
+# \displaystyle MSGAP:\quad\left\{\begin{array}[]{ll}\textbf{m}_{i}^{(t)}=\beta\textbf{m}_{i}^{(t-1)}+\textbf{g}_{i}^{(t-1)}\\
+# \varepsilon^{(t-1)}_{i}=-\gamma\textbf{m}_{i}^{(t)}\end{array}\right.;
+def msgap_local_update(m_i_prev, g_i_prev, beta, gamma):
+    # m_i_prev: \textbf{m}_{i}^{(t-1)}
+    # g_i_prev: \textbf{g}_{i}^{(t-1)}
+    # beta: \beta
+    # gamma: \gamma
+
+    # \textbf{m}_{i}^{(t)} = \beta\textbf{m}_{i}^{(t-1)} + \textbf{g}_{i}^{(t-1)}
+    m_i_current = beta * m_i_prev + g_i_prev
+
+    # \varepsilon^{(t-1)}_{i} = -\gamma\textbf{m}_{i}^{(t)}
+    epsilon_i_prev = -gamma * m_i_current
+
+    return m_i_current, epsilon_i_prev
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个去中心化的分析师团队（节点）试图在没有中央老板的情况下就最佳预测模型达成一致。他们没有将每个人的意见同等对待（如果有些人发言太随意，这会导致偏差），而是使用了“自适应权重”方法。每个分析师根据最近的可靠性调整他们对邻居输入的信任度。他们还使用“动量”（MSGAP），意味着他们会记住过去成功的方向，这样就不会对突然的噪音反应过度。数学推导证明，无论他们各自的数据有多么不同，他们的集体答案都会确定性地收敛于正确的解决方案，并受到严格数学极限的约束。

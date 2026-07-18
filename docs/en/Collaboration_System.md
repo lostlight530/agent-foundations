@@ -1406,3 +1406,36 @@ def calculate_lyapunov_descent(V_S1, k1, k2, rho1, rho2, N, n):
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine you manage a decentralized fleet of autonomous drones (the multi-agent system over $\mathcal{V}$). They need to collaboratively find the optimal flight path while the no-fly zones (time-varying constraints) and wind conditions (disturbances) constantly change. Instead of relying on slow centralized servers, each drone implements a local "sliding mode controller" acting like an ultra-fast shock absorber. Even if a sudden gust of wind hits, the underlying Lyapunov mathematical bounding ($\dot{V}(x)$) guarantees that the drone will deterministically "slide" back to the optimal, safe formation in finite time, safely navigating the shifting boundaries without crashing.
+
+📝 [Daily Research Chunk] 动态理论深潜：Adaptive Weighting Push-SUM & MSGAP Convergence
+
+🔬 选型依据与学术脉络
+
+System Container: Collaboration
+
+Frontier Source: "Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity" (URL: https://arxiv.org/abs/2412.07252v1)
+
+Deterministic Convergence Mechanism: The MSGAP algorithm with Adaptive Weighting Push-SUM provides a convergence bound of $\displaystyle\leq O\left(\frac{1}{\sqrt{NT}}\right)+O\left(\frac{\sigma^{2}}{\sqrt{NT}}\right)+O\left(\frac{N\kappa^{2}}{T}\right).$ This explicitly characterizes the convergence rate and the impact of statistical diversity on decentralized momentum SGD, ensuring stable optimization.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted from MSGAP algorithmic definition:
+# \displaystyle MSGAP:\quad\left\{\begin{array}[]{ll}\textbf{m}_{i}^{(t)}=\beta\textbf{m}_{i}^{(t-1)}+\textbf{g}_{i}^{(t-1)}\\
+# \varepsilon^{(t-1)}_{i}=-\gamma\textbf{m}_{i}^{(t)}\end{array}\right.;
+def msgap_local_update(m_i_prev, g_i_prev, beta, gamma):
+    # m_i_prev: \textbf{m}_{i}^{(t-1)}
+    # g_i_prev: \textbf{g}_{i}^{(t-1)}
+    # beta: \beta
+    # gamma: \gamma
+
+    # \textbf{m}_{i}^{(t)} = \beta\textbf{m}_{i}^{(t-1)} + \textbf{g}_{i}^{(t-1)}
+    m_i_current = beta * m_i_prev + g_i_prev
+
+    # \varepsilon^{(t-1)}_{i} = -\gamma\textbf{m}_{i}^{(t)}
+    epsilon_i_prev = -gamma * m_i_current
+
+    return m_i_current, epsilon_i_prev
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a team of decentralized analysts (nodes) trying to agree on the best prediction model without a central boss. Instead of always treating everyone's opinion equally (which causes delays if some speak too loudly or too little), they use an "Adaptive Weighting" method. Each analyst adjusts how much they trust their neighbors' inputs based on recent reliability. They also use "momentum" (MSGAP), meaning they remember past successful directions so they don't overreact to sudden noise. The math proves that no matter how diverse their individual data is, their collective answer will deterministically tighten around the correct solution, bounded by a strict mathematical limit.
