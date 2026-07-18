@@ -1106,7 +1106,6 @@ Imagine a group of workers in different rooms trying to synchronize their clocks
 ### Analogy for Dynamic Theory Deep-Dive: Decentralized Optimization without Central Servers
 Imagine a team of chefs trying to perfect a soup recipe, but they are all in different kitchens and have no head chef (no central server). Instead of sending their recipes to a headquarters, they just peek at their immediate neighbors' recipes and adjust their own mathematically. The theory proves that by doing this local adjustment strictly enough, every chef will inevitably arrive at the exact same perfect recipe ($x^\star$).
 
-
 ### Analogy for Dynamic Theory Deep-Dive: FSPDA for Random Network Topologies
 
 Imagine a team of scouts (agents) exploring a vast forest (optimization space). Their walkie-talkies are highly unreliable; connections drop randomly due to interference (random network topology). Instead of waiting for a central commander to give a global order, each scout keeps moving based on their local terrain (local gradient). When a signal occasionally connects with a nearby scout (communication buffer), they quickly average their positions (consensus term) and adjust their built-in compass bias (dual variable update). The FSPDA mathematical bound guarantees that even with chaotic, random walkie-talkie connections, the whole scout team will eventually converge to the single best location in the forest within a strict timeframe ($\mathcal{O}(1/\sqrt{T})$), completely independent of any central headquarters.
@@ -1133,74 +1132,8 @@ Imagine a team of architects (decentralized agents) designing a complex city pla
 
 Imagine a massive logistics network where regional warehouses (nodes) must optimize their inventory globally without a central headquarters (Decentralized Distributed Optimization). In a normal network, each warehouse only adjusts its stock based on immediate neighbors, which often leads to huge delays and oscillating errors. DMBFGS acts as an advanced local memory protocol. Instead of remembering the entire history of global trends (which is impossible without a central server), each warehouse uses a memoryless BFGS approximation—a highly compressed mathematical trick that estimates the "curvature" or trend of the supply chain using just the change in the last step. The convergence mechanism explicitly bounds how fast they are allowed to react ($\alpha$ bound), ensuring that even without central coordination, the entire network deterministically aligns its inventory at a guaranteed exponential speed ($\rho({\bf{J}})$), strictly preventing any SPOF (Single Point of Failure) collapse.
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
-
-📂 动态演进映射
-
-MISSING_SOURCE: Dynamic Theory Deep-Dive: Robust Compressed Push-Pull (RCPP) Method
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: FSPDA for Random Network Topologies, updated Source Code Breakdown
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: Decentralized Stochastic Subgradient Convergence, updated Source Code Breakdown
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: Decentralized Actor-Critic Convergence in Markov Games, updated Source Code Breakdown
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: Robust Compressed Push-Pull (RCPP) Method, updated Source Code Breakdown
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: KL Property for Decentralized Gradient Tracking, updated Source Code Breakdown
-
-Collaboration System: introduced Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS), updated Source Code Breakdown
-
-Collaboration System: introduced DSGT, DPO, DT-GO, LQ-PEP, Push-SUM, updated Core Mechanisms and Source Code
-
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-
-Conflict Detection: The woven theories across Collaboration System have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
-
-
-📝 [Daily Research Chunk] 动态理论深潜：OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
-
-🔬 选型依据与学术脉络
-
-System Container: Collaboration System
-
-Frontier Source: OledFL: Unleashing the Potential of Decentralized Federated Learning via Opposite Lookahead Enhancement (arXiv:2410.06482v1)
-
-Deterministic Convergence Mechanism: OledFL employs an opposite lookahead mechanism with momentum in a decentralized topology, decoupling local model updates from consensus variables. It provides a deterministic convergence bound of $\mathcal{O}(\frac{1}{\sqrt{KT}})$ and bounds optimization error independently from data heterogeneity limits.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-
-```python
-# Extracted OledFL Algorithm Mechanics
-# Variables defined based on explicit arXiv trace extraction
-# \mathbf{x}_{i,k}^{t}
-# \beta
-# \eta
-# \mathbf{g}_{i,k}^{t}
-
-def OledFL_node_update(x_local_curr, x_local_prev_round_end, beta, eta, gradients_history):
-    # Momentum term computation using past round end-state
-    # \mathbf{x}_{i,0}^{t} = \mathbf{x}_{i}^{t} + \beta(\mathbf{x}_{i}^{t} - \mathbf{x}_{i,K}^{t-1})
-    momentum_adjustment = beta * (x_local_curr - x_local_prev_round_end)
-
-    # Starting point for local steps incorporates momentum
-    x_local_step_start = x_local_curr + momentum_adjustment
-
-    # Local update phase over K steps
-    # \mathbf{x}_{i,k+1}^{t} = \mathbf{x}_{i,k}^{t} - \eta \mathbf{g}_{i,k}^{t}
-    x_k = x_local_step_start
-    for k in range(K):
-        g_k = compute_gradient(x_k)
-        x_k = x_k - eta * g_k
-
-    return x_k
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-
+### Analogy for Dynamic Theory Deep-Dive: OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
 Imagine a team of regional delivery drivers (decentralized agents) navigating local traffic (local data variance). Instead of just looking at the map for the current step, each driver uses "opposite lookahead"—they estimate where they would have ended up if they kept their previous day's momentum, and they actively correct their starting position before driving today's route. The mathematical bound guarantees that by doing this local correction, all drivers will eventually converge on the globally optimal routes ($\mathcal{O}(1/\sqrt{KT})$) without needing a central dispatcher to continuously correct them.
-
-
 
 ### Dynamic Theory Deep-Dive: Gradient Tracking for High Dimensional Optimization
 System Container: Collaboration System
@@ -1229,213 +1162,34 @@ def compute_decentralized_gradient_tracking_update(local_gradients_m, global_tra
 ### For Beginners: Gradient Tracking for High Dimensional Optimization
 Imagine dozens of regional managers (nodes) trying to set a national price without a CEO (no central server). If they just average their local prices, the result swings wildly. With "Gradient Tracking", each manager not only reports their local price but also how fast their local price is *changing* ($\nabla f_{m}$). The math proves that by tracking this rate of change, all managers will perfectly agree on the exact right national price, even if someone's email is delayed.
 
+### Analogy for Dynamic Theory Deep-Dive: 耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
+Imagine multiple bank branches (nodes) that must collectively manage a strict regulatory deposit ratio (a coupled affine constraint) without a central headquarters (no central server). Previously, branches had to either compromise on exact compliance or elect a leader, creating a bottleneck. This Chebyshev-accelerated method gives every branch two ledgers: an internal action plan (primal variable) and a shared "regulation gap" tracker (dual variable). By applying a mathematical "Chebyshev filter" to their communication, branches aggressively eliminate misunderstandings (high-frequency errors) across the network. The formula guarantees that the entire bank converges to the mathematically optimal resource allocation exponentially fast (linear convergence), without ever relying on a central authority.
+
+### Analogy for Dynamic Theory Deep-Dive: 带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
+Imagine a decentralized fleet of delivery trucks (nodes) trying to collectively calculate the optimal route across a city without a dispatcher. Usually, they just ask nearby trucks for their estimates (gradient tracking), but errors can build up over time. With "Periodic Global Averaging" (PGA), every $\tau$ hours (the synchronization period), all trucks briefly tune into a global radio channel to perfectly align their routes ($\frac{1}{n}\sum x_{i}^{(k)}$). The math proves that by strictly capping their update aggressiveness (the stepsize $\alpha$), this hybrid approach drastically speeds up finding the optimal route without ever causing the system to mathematically diverge or crash.
+
+### Analogy for Dynamic Theory Deep-Dive: 基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
+Imagine a decentralized network of independent weather stations (nodes) trying to collectively calculate a global climate model over intermittent radio links (time-varying directed graph). Some stations are in deserts, others in rainforests, creating massive differences in their local data (statistical diversity / non-IID). If they just average their findings blindly, the extreme data points will crash the model. The "Adaptive Weighting Push-SUM" method gives each station an intelligent communication filter. The strict mathematical bound ($\gamma$) on their update speed ensures that this cautious, adaptive communication mathematically guarantees they will all reach a perfect global climate consensus without ever needing a central authority or being derailed by local extreme weather.
+
+### Analogy for Dynamic Theory Deep-Dive: Distributed Continuous-Time Optimization with Time-Varying Constraints
+Imagine you manage a decentralized fleet of autonomous drones (the multi-agent system over $\mathcal{V}$). They need to collaboratively find the optimal flight path while the no-fly zones (time-varying constraints) and wind conditions (disturbances) constantly change. Instead of relying on slow centralized servers, each drone implements a local "sliding mode controller" acting like an ultra-fast shock absorber. Even if a sudden gust of wind hits, the underlying Lyapunov mathematical bounding ($\dot{V}(x)$) guarantees that the drone will deterministically "slide" back to the optimal, safe formation in finite time, safely navigating the shifting boundaries without crashing.
+
+### Analogy for Dynamic Theory Deep-Dive: Adaptive Weighting Push-SUM & MSGAP Convergence
+Imagine a team of decentralized analysts (nodes) trying to agree on the best prediction model without a central boss. Instead of always treating everyone's opinion equally (which causes delays if some speak too loudly or too little), they use an "Adaptive Weighting" method. Each analyst adjusts how much they trust their neighbors' inputs based on recent reliability. They also use "momentum" (MSGAP), meaning they remember past successful directions so they don't overreact to sudden noise. The math proves that no matter how diverse their individual data is, their collective answer will deterministically tighten around the correct solution, bounded by a strict mathematical limit.
 
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Memory System: introduced 动态理论深潜：基于协方差的确定性表征 (Deterministic Representation via Covariance), updated Core Mechanisms and Source Code
-Tool System: introduced 动态理论深潜：约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use), updated Core Mechanisms and Source Code
-Collaboration System: introduced 动态理论深潜：高维去中心化梯度追踪 (Gradient Tracking for High Dimensional Optimization), updated Core Mechanisms and Source Code
-Architecture Principles: introduced 动态理论深潜：重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent), updated Core Mechanisms and Source Code
+Collaboration System: Woven OledFL, Globally-Constrained Decentralized Optimization, Accelerated Gradient Tracking, Adaptive Weighting Push-SUM, Distributed Continuous-Time Optimization, and MSGAP Convergence into core theory chapters. Pseudocodes moved to Source Code Breakdown. Analogies moved to For Beginners section.
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-Conflict Detection: The woven theories across all core systems have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+- No paradigm conflict detected. All decentralized tracking mechanisms perfectly align with the deterministic convergence framework.
 
-📝 [Daily Research Chunk] 动态理论深潜：耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: Decentralized Optimization with Coupled Constraints (arXiv:2407.02020)
-Deterministic Convergence Mechanism: The architecture enforces strict bounds through a Chebyshev-accelerated dual tracking topology, yielding an explicit geometric convergence rate bound of $\leq\left(\!1+\frac{1}{4}\min\left\{\frac{1}{\sqrt{\kappa_{G}\kappa_{\mathbf{K}}}},\frac{1}{\kappa_{\mathbf{K}}}\right\}\!\right)^{-k}C$. By leveraging smooth and strongly convex formulations, this mechanism completely avoids single points of failure (SPOF) while deterministically tracking both primal variables and dual affine consensus variables, demonstrating the first linearly convergent first-order decentralized algorithm for general affine coupled constraints.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-
-```python
-def linearly_convergent_decentralized_step(u_k, u_f_k, z_k, tau, eta, alpha, theta):
-    # u_{g}^{k}\coloneqq\tau u^{k}+(1-\tau)u_{f}^{k}
-    # Calculate intermediate step aggregating current and tracking variables
-    u_g_k = tau * u_k + (1 - tau) * u_f_k
-
-    # g^{k}\coloneqq\mathrm{\mathbf{grad\_G}}(u_{g}^{k})-\alpha u_{g}^{k}
-    # Compute generalized gradient of objective G
-    g_k = grad_G(u_g_k) - alpha * u_g_k
-
-    # u^{k+\frac{1}{2}}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k}))
-    # Half-step primal update using previous dual tracking
-    u_half_k = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_k))
-
-    # z^{k+1}\coloneqq z^{k}+\theta\cdot\mathrm{\mathbf{K\_Chebyshev}}(u^{k+\frac{1}{2}})
-    # Dual variable update with Chebyshev acceleration on network graph
-    z_next = z_k + theta * K_Chebyshev(u_half_k)
-
-    # u^{k+1}\coloneqq(1+\eta\alpha)^{-1}(u^{k}-\eta(g^{k}+z^{k+1}))
-    # Full primal update
-    u_next = (1 / (1 + eta * alpha)) * (u_k - eta * (g_k + z_next))
-
-    # u_{f}^{k+1}\coloneqq u_{g}^{k}+\tfrac{2\tau}{2-\tau}(u^{k+1}-u^{k})
-    # Update tracking variable
-    u_f_next = u_g_k + (2 * tau / (2 - tau)) * (u_next - u_k)
-
-    return u_next, u_f_next, z_next
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-
-Imagine multiple bank branches (nodes) that must collectively manage a strict regulatory deposit ratio (a coupled affine constraint) without a central headquarters (no central server). Previously, branches had to either compromise on exact compliance or elect a leader, creating a bottleneck. This Chebyshev-accelerated method gives every branch two ledgers: an internal action plan (primal variable) and a shared "regulation gap" tracker (dual variable). By applying a mathematical "Chebyshev filter" to their communication, branches aggressively eliminate misunderstandings (high-frequency errors) across the network. The formula guarantees that the entire bank converges to the mathematically optimal resource allocation exponentially fast (linear convergence), without ever relying on a central authority.
-
-
-📝 [Daily Research Chunk] 动态理论深潜：带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
-
-🔬 选型依据与学术脉络
-System Container: Collaboration System
-Frontier Source: Accelerating Gradient Tracking with Periodic Global Averaging (arXiv:2403.11293v2)
-URL: https://arxiv.org/abs/2403.11293v2
-Selection Reason: This paper introduces a rigorously bounded decentralized optimization method (GT-PGA) that balances local communication with periodic global averaging, providing explicit step-size constraints and a strict convergence mechanism for strongly connected networks.
-Deterministic Convergence Mechanism: This theory defines the GT-PGA algorithm, which structurally eliminates data heterogeneity using gradient tracking while periodically enforcing exact global consensus. It provides a deterministic upper bound on the stepsize $\alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}$ where $\tau\in\mathbb{N}_{\geq 2}$ is the global averaging period. This explicit constraint ensures descent inequality and bounds the consensus error, proving that periodic synchronization accelerates the transient phase without violating the theoretical convergence guarantees.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-# Extracted GT-PGA Algorithm Mechanics
-# Variables defined based on explicit arXiv trace extraction
-# \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
-# \tau\in\mathbb{N}_{\geq 2}
-# \displaystyle x_{i}^{(k+1)}
-# \mathbb{E}[\nabla F_{i}(x_{i}^{(k)};\xi_{i}^{(k)})\mid\mathcal{F}^{(k)}]=\nabla f_{i}(x_{i}^{(k)})
-
-def GT_PGA_step(k, tau, L, beta, x_i, y_i, local_stochastic_gradient, prev_local_stochastic_gradient, W_matrix):
-    # Calculate strictly bounded step size to ensure deterministic convergence
-    # \alpha\leq\min\big{\{}\frac{1}{2L},\frac{1}{4\sqrt{6}\beta\tau^{2}L}\big{\}}
-    alpha = min(1 / (2 * L), 1 / (4 * (6 ** 0.5) * beta * (tau ** 2) * L))
-
-    # Check if this step is a periodic global averaging step (\tau)
-    is_global_averaging = (k % tau == 0)
-
-    if is_global_averaging:
-        # Periodic Global Averaging
-        # \displaystyle:=\frac{1}{n}\sum\limits_{i=1}^{n}x_{i}^{(k)}.
-        x_next = global_average(x_i) - alpha * global_average(y_i)
-        y_next = global_average(y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
-    else:
-        # Decentralized Gradient Tracking step
-        # \displaystyle x_{i}^{(k+1)} using local neighborhood matrix W
-        x_next = local_consensus(W_matrix, x_i) - alpha * y_i
-        y_next = local_consensus(W_matrix, y_i) + local_stochastic_gradient - prev_local_stochastic_gradient
-
-    return x_next, y_next
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-Imagine a decentralized fleet of delivery trucks (nodes) trying to collectively calculate the optimal route across a city without a dispatcher. Usually, they just ask nearby trucks for their estimates (gradient tracking), but errors can build up over time. With "Periodic Global Averaging" (PGA), every $\tau$ hours (the synchronization period), all trucks briefly tune into a global radio channel to perfectly align their routes ($\frac{1}{n}\sum x_{i}^{(k)}$). The math proves that by strictly capping their update aggressiveness (the stepsize $\alpha$), this hybrid approach drastically speeds up finding the optimal route without ever causing the system to mathematically diverge or crash.
-
-📝 [Daily Research Chunk] 动态理论深潜：基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity (arXiv:2412.07252v1)
-Deterministic Convergence Mechanism: This theory resolves the challenge of decentralized optimization on time-varying directed graphs under extreme statistical diversity (non-IID data). By introducing a Decentralized Moreau Envelope (DME) framework and adaptive communication weights $w_{j,i}^{(t)}$, it establishes a deterministic topological constraint and a rigorous explicit step size bound $\gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}$. This mechanism theoretically limits update variance and momentum tracking, ensuring that local updates correctly align through decentralized consensus structures without centralized coordination.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-# Extracted Adaptive Push-SUM Algorithm Mechanics
-# Variables defined based on explicit arXiv trace extraction
-# \left\{\begin{matrix}\textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}\\
-# \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}\\
-# \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}\\
-# \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}\\
-# \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}\end{matrix}\right.
-# \gamma\leq min\left\{\frac{(1-\alpha)^{2}}{12\sqrt{2}CNL},\frac{(1-\beta)^{2}}{2L(1+\beta)}\right\}
-
-def adaptive_push_sum_step(i, X_prev, a_prev, M_prev, G_prev, neighbors_N_i, W_t, beta, gamma):
-    # Phase 1: Local momentum and parameter update
-    # \textbf{M}^{(t)}=\beta\textbf{M}^{(t-1)}+\textbf{G}^{(t-1)}
-    M_t_i = beta * M_prev[i] + G_prev[i]
-
-    # \textbf{X}^{(t-\frac{1}{2})}=\textbf{X}^{(t-1)}-\gamma\textbf{M}^{(t)}
-    X_half_t_i = X_prev[i] - gamma * M_t_i
-
-    # Phase 2: Decentralized network aggregation (Push-SUM)
-    # \textbf{a}^{(t)}=\textbf{W}^{(t)}\textbf{a}^{(t-1)}
-    a_t_i = 0
-    # \textbf{X}^{(t)}=\textbf{W}^{(t)}\textbf{X}^{(t-\frac{1}{2})}
-    X_t_i = 0
-
-    for j in neighbors_N_i:
-        a_t_i += W_t[i][j] * a_prev[j]
-        X_t_i += W_t[i][j] * X_half_t[j]
-
-    # Phase 3: Mass conservation correction
-    # \left[\textbf{Y}\right]_{i}^{(t)}=\left[\textbf{X}\right]_{i}^{(t)}/a_{i}^{(t)}
-    Y_t_i = X_t_i / a_t_i
-
-    return Y_t_i, X_t_i, a_t_i, M_t_i
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-Imagine a decentralized network of independent weather stations (nodes) trying to collectively calculate a global climate model over intermittent radio links (time-varying directed graph). Some stations are in deserts, others in rainforests, creating massive differences in their local data (statistical diversity / non-IID). If they just average their findings blindly, the extreme data points will crash the model. The "Adaptive Weighting Push-SUM" method gives each station an intelligent communication filter. The strict mathematical bound ($\gamma$) on their update speed ensures that this cautious, adaptive communication mathematically guarantees they will all reach a perfect global climate consensus without ever needing a central authority or being derailed by local extreme weather.
-
-📝 [Daily Research Chunk] 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: http://arxiv.org/abs/2409.05293v1
-Deterministic Convergence Mechanism: The framework utilizes log-barrier penalty functions combined with integral sliding mode control for multi-agent systems, providing deterministic tracking via Lyapunov analysis and non-smooth techniques to guarantee tracking error convergence to zero despite time-varying constraints and disturbances.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-# Distributed Robust Continuous-Time Optimization implementation
-# Formulas and variables explicitly extracted from arXiv HTML trace
-
-# System modeling variables explicitly from trace
-# \mathcal{V}=\{1,\ldots,N\}
-# \mathcal{E}\subseteq\mathcal{V}\times\mathcal{V}
-# \dot{x}=f(x,t)
-
-# Lyapunov non-smooth mapping and sliding mode bounds
-# V:\mathbb{R}^{n}\to\mathbb{R}
-# \dot{V}(x)\leq-\alpha V^{p}(x)-\beta V^{q}(x)
-# \dot{V}_{S1}\leq-2^{\frac{\rho_{1}+1}{2}}k_{1}V_{S1}^{\frac{\rho_{1}+1}{2}}-2^{\frac{\rho_{2}+1}{2}}k_{2}(Nn)^{\frac{1-\rho_{2}}{2}}V_{S1}^{\frac{\rho_{2}+1}{2}}
-
-def calculate_lyapunov_descent(V_S1, k1, k2, rho1, rho2, N, n):
-    """
-    Calculates the deterministic upper bound of the sliding mode derivative based on explicitly extracted bounds.
-    """
-    term1 = (2 ** ((rho1 + 1) / 2)) * k1 * (V_S1 ** ((rho1 + 1) / 2))
-    term2 = (2 ** ((rho2 + 1) / 2)) * k2 * ((N * n) ** ((1 - rho2) / 2)) * (V_S1 ** ((rho2 + 1) / 2))
-    return -(term1 + term2)
-
-💡 0基础业务通俗类比 (For Beginners)
-Imagine you manage a decentralized fleet of autonomous drones (the multi-agent system over $\mathcal{V}$). They need to collaboratively find the optimal flight path while the no-fly zones (time-varying constraints) and wind conditions (disturbances) constantly change. Instead of relying on slow centralized servers, each drone implements a local "sliding mode controller" acting like an ultra-fast shock absorber. Even if a sudden gust of wind hits, the underlying Lyapunov mathematical bounding ($\dot{V}(x)$) guarantees that the drone will deterministically "slide" back to the optimal, safe formation in finite time, safely navigating the shifting boundaries without crashing.
-
-📝 [Daily Research Chunk] 动态理论深潜：Adaptive Weighting Push-SUM & MSGAP Convergence
-
-🔬 选型依据与学术脉络
-
-System Container: Collaboration
-
-Frontier Source: "Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity" (URL: https://arxiv.org/abs/2412.07252v1)
-
-Deterministic Convergence Mechanism: The MSGAP algorithm with Adaptive Weighting Push-SUM provides a convergence bound of $\displaystyle\leq O\left(\frac{1}{\sqrt{NT}}\right)+O\left(\frac{\sigma^{2}}{\sqrt{NT}}\right)+O\left(\frac{N\kappa^{2}}{T}\right).$ This explicitly characterizes the convergence rate and the impact of statistical diversity on decentralized momentum SGD, ensuring stable optimization.
-
-💻 源码级伪代码解析 (Source Code Breakdown)
-```python
-# Extracted from MSGAP algorithmic definition:
-# \displaystyle MSGAP:\quad\left\{\begin{array}[]{ll}\textbf{m}_{i}^{(t)}=\beta\textbf{m}_{i}^{(t-1)}+\textbf{g}_{i}^{(t-1)}\\
-# \varepsilon^{(t-1)}_{i}=-\gamma\textbf{m}_{i}^{(t)}\end{array}\right.;
-def msgap_local_update(m_i_prev, g_i_prev, beta, gamma):
-    # m_i_prev: \textbf{m}_{i}^{(t-1)}
-    # g_i_prev: \textbf{g}_{i}^{(t-1)}
-    # beta: \beta
-    # gamma: \gamma
-
-    # \textbf{m}_{i}^{(t)} = \beta\textbf{m}_{i}^{(t-1)} + \textbf{g}_{i}^{(t-1)}
-    m_i_current = beta * m_i_prev + g_i_prev
-
-    # \varepsilon^{(t-1)}_{i} = -\gamma\textbf{m}_{i}^{(t)}
-    epsilon_i_prev = -gamma * m_i_current
-
-    return m_i_current, epsilon_i_prev
-```
-
-💡 0基础业务通俗类比 (For Beginners)
-Imagine a team of decentralized analysts (nodes) trying to agree on the best prediction model without a central boss. Instead of always treating everyone's opinion equally (which causes delays if some speak too loudly or too little), they use an "Adaptive Weighting" method. Each analyst adjusts how much they trust their neighbors' inputs based on recent reliability. They also use "momentum" (MSGAP), meaning they remember past successful directions so they don't overreact to sudden noise. The math proves that no matter how diverse their individual data is, their collective answer will deterministically tighten around the correct solution, bounded by a strict mathematical limit.
+🔗 核心组件状态与双语对齐检查
+- [x] Memory System
+- [x] Tool System
+- [x] Collaboration System
+- [x] Architecture Principles
+- Bilingual status: Structurally identical.

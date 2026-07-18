@@ -302,33 +302,20 @@ def F_theta_pow(F_theta, N, x, u):
 ### Analogy for 动态理论深潜：基于物理边界约束的架构稳定性
 如果让 AI 去设计一座桥，它可能会画出悬在半空中、现实里一秒就会塌的图纸。普通的黑盒模型只在乎“像不像桥”。而这套理论直接把“万有引力”和“地基不可穿透”这种死规矩，刻进 AI 的核心引擎里。它在物理上彻底阻止了系统去探索那些“看起来很美但必定崩溃”的状态，从而保证了其架构永远脚踏实地。
 
-
 ### Analogy for 动态理论深潜：Mamba State-Space Models Lyapunov Stability
 
 想象一个陡峭的碗形山谷。无论你把弹珠放在碗里的哪个位置（代表输入扰动 $\varepsilon$），重力都会把它拉向底部的中心。即使在它滚动时你轻轻推它一下，它也不会飞出碗外。在 Mamba 架构中，“李雅普诺夫稳定性（Lyapunov stability）”就像是这个碗——它确保了计算过程中产生的微小误差（比如为了省内存而使用低精度计算产生的误差）只会像碗里的推力一样自然平息，而不会滚雪球般演变成灾难性的崩溃，从而保证系统在长序列生成时依然稳如泰山。
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+### Dynamically Woven Decentralized Theories
 
-📂 动态演进映射
-
-Architecture Principles: introduced 动态理论深潜：Mamba State-Space Models Lyapunov Stability, updated Source Code Breakdown
-
-Architecture Principles: introduced Physics-Informed bounds, updated Core Mechanisms and Source Code
-MISSING_SOURCE: None
-
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-
-Conflict Detection: The woven theories across Architecture Principles have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
-
-
-📝 [Daily Research Chunk] 动态理论深潜：Predictive Coding Networks Lyapunov Stability
-
-🔬 选型依据与学术脉络
+#### Predictive Coding Networks Lyapunov Stability
 System Container: Architecture Principles
 Frontier Source: Tight Stability, Convergence, and Robustness Bounds for Predictive Coding Networks (arXiv:2410.04708v1, https://arxiv.org/abs/2410.04708)
 Deterministic Convergence Mechanism: 预测编码网络 (PCNs) 内在最小化一个复合能量函数，该函数作为一个严格的Lyapunov函数 $V_{\text{PC}}(W)=L(W)+\tilde{E}(W)$。其连续时间参数动态严格耗散能量，由 $\dot{V}_{\text{PC}}(W)=-\left\|\frac{\partial L}{\partial W}+\frac{\partial\tilde{E}}{\partial W}\right\|^{2}\leq 0$ 定义，确保确定性地收敛到平衡点。此外，该架构提供了一个指数级的有界扰动恢复机制，其中 $\|W(t)-W^{*}\|\leq Ce^{-\lambda t}\|\Delta W\|+O(\epsilon)$，确保对环境干扰的鲁棒性。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+### Source Code Breakdown
+
+#### Code: Predictive Coding Networks Lyapunov Stability
 ```python
 # 基于提取出的确切追踪变量与极限：
 # V_{\text{PC}}(W)=L(W)+\tilde{E}(W)
@@ -351,10 +338,10 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
     return W_new
 ```
 
-💡 0基础业务通俗类比 (For Beginners)
+### For Beginners: Practical Analogies
+
+#### Analogy: Predictive Coding Networks Lyapunov Stability
 想象一个水球在一个带有摩擦力的山谷中滚落（能量函数 $V_{\text{PC}}$）。山谷的形状由最终目标 ($L$) 和中间约束 ($\tilde{E}$) 共同决定。该理论证明，无论球从哪里开始，或者是否发生小地震使其颠簸（有界扰动 $O(\epsilon)$），它都将始终严格向下滚动（$\dot{V}_{\text{PC}} \leq 0$），并且以指数级的速度向最底部 ($W^*$) 靠近，而不会无休止地打转或被甩出去。
-
-
 
 ### 动态理论深潜：重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent)
 System Container: Architecture Principles
@@ -381,16 +368,19 @@ def rescaled_gradient_lyapunov_step(x_k, grad_f, alpha_k, delta):
 ### 0基础业务通俗类比 (For Beginners)
 想象你正开着车在一个极为陡峭、充满发夹弯的山道上下坡。传统 AI 是瞎踩油门，祈祷自己别冲下悬崖（这叫梯度爆炸）。而这套“李雅普诺夫重缩放”方法，就像是给车子装上了一个物理限速器加完美的自动底盘几何计算。它针对每一个弯道，在数学上精确计算出物理定律允许的绝对最高安全速度（$\arg\min$），这保证了你能以物理允许的最快速度一路冲到山脚下，而且绝对不会翻车发散。
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Memory System: introduced 动态理论深潜：基于协方差的确定性表征 (Deterministic Representation via Covariance), updated Core Mechanisms and Source Code
-Tool System: introduced 动态理论深潜：约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use), updated Core Mechanisms and Source Code
-Collaboration System: introduced 动态理论深潜：高维去中心化梯度追踪 (Gradient Tracking for High Dimensional Optimization), updated Core Mechanisms and Source Code
-Architecture Principles: introduced 动态理论深潜：重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent), updated Core Mechanisms and Source Code
+Architecture Principles: Woven Predictive Coding Networks Lyapunov Stability into stability principles section.
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-Conflict Detection: The woven theories across all core systems have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+- No paradigm conflict detected. PCN stability fits perfectly within the NTK / Lyapunov stability bounding framework.
+
+🔗 核心组件状态与双语对齐检查
+- [x] Memory System
+- [x] Tool System
+- [x] Collaboration System
+- [x] Architecture Principles
+- Bilingual status: Structurally identical.

@@ -302,33 +302,20 @@ In traditional methods, everyone shouts to a boss, causing a bottleneck. In this
 ### Analogy for Dynamic Theory Deep-Dive: Physical Boundary Constraints for Structural Stability
 If you tell an AI to build a virtual bridge, it might design something that looks great but would collapse under gravity. Normal models only care about "looking right". This theory hardcodes physics (like gravity and solid ground boundaries) straight into the AI's core engine. It physically stops the network's internal math from exploring impossible designs, keeping its internal structure universally stable.
 
-
 ### Analogy for Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
 
 Imagine a steep valley shaped like a bowl. No matter where you place a marble inside the bowl (the input perturbation $\varepsilon$), gravity will pull it towards the bottom center (the fixed point). Even if you slightly nudge the marble while it rolls, it won't fly out of the bowl. In Mamba architecture, the "Lyapunov stability" ensures that tiny computational errors (like those from using lower-precision math to save memory) act like nudges in a bowl—they naturally settle down instead of snowballing into a catastrophic crash, allowing the system to remain stable over long sequence generations.
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
+### Dynamically Woven Decentralized Theories
 
-📂 动态演进映射
-
-Architecture Principles: introduced Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability, updated Source Code Breakdown
-
-Architecture Principles: introduced Physics-Informed bounds, updated Core Mechanisms and Source Code
-MISSING_SOURCE: None
-
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-
-Conflict Detection: The woven theories across Architecture Principles have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
-
-
-📝 [Daily Research Chunk] 动态理论深潜：Predictive Coding Networks Lyapunov Stability
-
-🔬 选型依据与学术脉络
+#### Predictive Coding Networks Lyapunov Stability
 System Container: Architecture Principles
 Frontier Source: Tight Stability, Convergence, and Robustness Bounds for Predictive Coding Networks (arXiv:2410.04708v1, https://arxiv.org/abs/2410.04708)
 Deterministic Convergence Mechanism: Predictive Coding Networks (PCNs) inherently minimize a composite energy function acting as a strict Lyapunov function $V_{\text{PC}}(W)=L(W)+\tilde{E}(W)$. The continuous-time parameter dynamics strictly dissipate energy, defined by $\dot{V}_{\text{PC}}(W)=-\left\|\frac{\partial L}{\partial W}+\frac{\partial\tilde{E}}{\partial W}\right\|^{2}\leq 0$, ensuring deterministic convergence to an equilibrium. Furthermore, the architecture provides an exponential bounded perturbation recovery mechanism where $\|W(t)-W^{*}\|\leq Ce^{-\lambda t}\|\Delta W\|+O(\epsilon)$, ensuring robustness against environmental disturbances.
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+### Source Code Breakdown
+
+#### Code: Predictive Coding Networks Lyapunov Stability
 ```python
 # Based on exact extracted trace variables and bounds:
 # V_{\text{PC}}(W)=L(W)+\tilde{E}(W)
@@ -351,10 +338,10 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
     return W_new
 ```
 
-💡 0基础业务通俗类比 (For Beginners)
+### For Beginners: Practical Analogies
+
+#### Analogy: Predictive Coding Networks Lyapunov Stability
 Imagine a water ball rolling down a valley (energy function $V_{\text{PC}}$) with some friction. The valley's shape is determined by both the final goal ($L$) and intermediate constraints ($\tilde{E}$). The theory proves that no matter where the ball starts or if a small earthquake bumps it (bounded perturbation $O(\epsilon)$), it will always roll strictly downward ($\dot{V}_{\text{PC}} \leq 0$) and exponentially fast towards the exact bottom ($W^*$), without endlessly circling or getting thrown out.
-
-
 
 ### Dynamic Theory Deep-Dive: Lyapunov Acceleration of Rescaled Gradient Descent
 System Container: Architecture Principles
@@ -381,16 +368,19 @@ def rescaled_gradient_lyapunov_step(x_k, grad_f, alpha_k, delta):
 ### For Beginners: Lyapunov Acceleration of Rescaled Gradient Descent
 Imagine driving down a steep, curved mountain road. A standard AI presses the gas randomly and hopes it doesn't fly off a cliff (gradient explosion). The "Lyapunov Rescaled" method is like a physical speed limiter combined with perfect steering geometry. It mathematically calculates the absolute maximum safe speed for every single curve ($\arg\min$), ensuring you get to the bottom as fast as physically possible without ever crashing.
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Memory System: introduced 动态理论深潜：基于协方差的确定性表征 (Deterministic Representation via Covariance), updated Core Mechanisms and Source Code
-Tool System: introduced 动态理论深潜：约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use), updated Core Mechanisms and Source Code
-Collaboration System: introduced 动态理论深潜：高维去中心化梯度追踪 (Gradient Tracking for High Dimensional Optimization), updated Core Mechanisms and Source Code
-Architecture Principles: introduced 动态理论深潜：重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent), updated Core Mechanisms and Source Code
+Architecture Principles: Woven Predictive Coding Networks Lyapunov Stability into stability principles section.
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-Conflict Detection: The woven theories across all core systems have been rigorously audited. All newly integrated mathematical bounds perfectly adhere to the foundational constraints: "We constrain, we do not implement" and the deprecation of centralized architectures. They form a globally unified, deterministic, and SPOF-immune agent framework. No paradigm conflicts exist.
+- No paradigm conflict detected. PCN stability fits perfectly within the NTK / Lyapunov stability bounding framework.
+
+🔗 核心组件状态与双语对齐检查
+- [x] Memory System
+- [x] Tool System
+- [x] Collaboration System
+- [x] Architecture Principles
+- Bilingual status: Structurally identical.
