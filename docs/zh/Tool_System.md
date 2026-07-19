@@ -45,7 +45,7 @@ arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Fil
 
 ---
 
-### 动态理论深潜：基于策略优化的因果路由工具约束
+### 基于策略优化的因果路由工具约束
 System Container: Tool System
 Frontier Source: arXiv:2412.19578 (Shixuan Liu 等人, 2024)
 Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建立了一个确定性的因果边界，使得原先基于概率分布的工具选择网络（Agent 的工具箱调用）被强制锁定在严谨的因果数学约束中，避免幻觉滥用。
@@ -118,7 +118,7 @@ class ToolExecutionRouter:
 1. **因果铁律 (`causal_dependency_graph`)**：我们不让大模型在运行时自由发挥想用什么用什么，而是让系统在启动时就加载这套雷打不动的“法律”。如果智能体想调用高危动作，发现它之前没执行过校验，路由层会像防雷墙一样直接将其打回（`_check_causal_dependencies`）。
 2. **深度截断 (`max_tool_chain_depth`)**：大模型最容易犯的错就是在一个工具里一直纠结报错出不来。这里是一条纯数学性质的物理斩断线。这体现了“我们不优化，我们保证收敛”——如果不能收敛到结果，那就强行收敛到“终止状态”，绝不允许系统失控发散。
 
-### Code for 动态理论深潜：基于策略优化的因果路由工具约束
+### Code for 基于策略优化的因果路由工具约束
 ```python
 # 基于真实提取公式的严谨伪代码
 # 公式: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
@@ -177,10 +177,10 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
 ### Analogy for 因果最小化工具过滤 (CMTF) 与目标推断
 工具选择被装上了“因果条形码扫描仪”。每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏。
 
-### Analogy for 动态理论深潜：基于策略优化的因果路由工具约束
+### Analogy for 基于策略优化的因果路由工具约束
 如果给 AI 一个工具箱（无数个 API），普通的模型可能会随心所欲，导致它想拿锤子去拧螺丝。这套理论给 AI 画了一个严格的“信任区域”（数学围栏）。一旦 AI 的新执行计划偏离了原本安全的因果蓝图太多，上述的 KL 散度公式（一种测量偏离距离的算式）就会立刻报警并“剪断”越界的想法，从而保证每一步工具调用都绝对符合因果逻辑。
 
-### 动态理论深潜：约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use)
+### 约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use)
 System Container: Tool System
 Frontier Source: CoVe: Training Interactive Tool-Use Agents via Constraint-Guided Verification (arXiv:2603.01940)
 Deterministic Convergence Mechanism: 该框架在一个确定性的马尔可夫决策过程 $\mathcal{M}=(\mathcal{S},\mathcal{A},\mathcal{O},\mathcal{T})$ 中，对动作空间 $\mathcal{A}$ 施加了一个硬性约束集 $C=\{c_{1},c_{2},\dots,c_{n}\}$。通过在数学上验证每一步工具调用都必须满足这些约束，它彻底切断了策略发生越界发散的可能性。
@@ -208,16 +208,11 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Tool System: No new daily chunks to weave this week. Cleaned up legacy wrappers to maintain structure.
+
+Tool System: introduced Constraint-Guided Verification for Tool Use, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. All sub-components maintain strict deterministic bounds.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.

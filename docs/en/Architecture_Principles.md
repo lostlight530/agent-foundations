@@ -67,12 +67,12 @@ In traditional thermodynamics and information theory, Entropy represents the deg
 arXiv:2605.19396 "Distributed Gradient-Regularized Newton Method: Scheduled Consensus and O(epsilon^{-1}) Global Iteration Complexity". This theory is selected because it strictly enforces the Decentralized Distributed Optimization (DecDPO) paradigm, mathematically neutralizing Single Points of Failure (SPOF) present in legacy Centralized Federated Learning.
 The algorithm mathematically guarantees that the gradient norm is bounded within a global iteration complexity of $\mathcal{O}(\varepsilon^{-1})$. It relies on a gradient-regularized constraint $\lambda_{i,k}=\sqrt{M\|\tilde{g}_{i,k}\|}$ rather than probabilistic black-box approximations. The residual update is constrained by $r_{k}=(\nabla^{2}f(\bar{x}_{k})+\lambda_{k}I)\bar{s}_{k}+g_{k}.$
 
-### Dynamic Theory Deep-Dive: Physical Boundary Constraints for Structural Stability
+### Physical Boundary Constraints for Structural Stability
 System Container: Architecture Principles
 Frontier Source: arXiv:2411.15111 (Afrah Farea et al., 2024)
 Deterministic Convergence Mechanism: The paper applies Physics-Informed bounds into neural network optimization, formally enforcing deterministic gradient stability (via initial and boundary conditions) preventing architectural divergence.
 
-### Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+### Mamba State-Space Models Lyapunov Stability
 
 **Frontier Source:** "Mamba State-Space Models Are Lyapunov-Stable Learners" (arXiv:2406.00209v3) by John T. Halloran, Manbir Gulati, Paul Roysdon
 
@@ -228,7 +228,7 @@ def distributed_newton_step(x_k, g_k, H_k, lambda_k):
     return x_next
 ```
 
-### Code for Dynamic Theory Deep-Dive: Physical Boundary Constraints for Structural Stability
+### Code for Physical Boundary Constraints for Structural Stability
 ```python
 # Grounded pseudocode based on exact formula extraction
 # Formula: L(theta) = min_theta ( lambda_1 || L_phy || + lambda_2 || L_bc || + lambda_3 || L_ic || )
@@ -248,7 +248,7 @@ def compute_physically_constrained_loss(L_phy, L_bc, L_ic, lambdas):
     return total_loss
 ```
 
-### Code for Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+### Code for Mamba State-Space Models Lyapunov Stability
 
 ```python
 def lyapunov_stable_mamba_block(x_prev, u_t, epsilon, N, F_theta):
@@ -299,10 +299,10 @@ The system does not need to understand "what nonsense the agent is babbling"; it
 Imagine a team of navigators (nodes) trying to find the deepest point in a valley (optimal solution) without a central leader (SPOF elimination).
 In traditional methods, everyone shouts to a boss, causing a bottleneck. In this DecDPO approach, everyone calculates their slope (gradient) and curvature (Hessian). If the slope is steep, they automatically apply a strong "brakes" mechanism ($\lambda_{k}$). The math guarantees that even if they only whisper to their immediate neighbors, the entire team will deterministically reach the valley floor in exactly $\mathcal{O}(\varepsilon^{-1})$ steps. It’s like a swarm of drones perfectly landing without a central control tower.
 
-### Analogy for Dynamic Theory Deep-Dive: Physical Boundary Constraints for Structural Stability
+### Analogy for Physical Boundary Constraints for Structural Stability
 If you tell an AI to build a virtual bridge, it might design something that looks great but would collapse under gravity. Normal models only care about "looking right". This theory hardcodes physics (like gravity and solid ground boundaries) straight into the AI's core engine. It physically stops the network's internal math from exploring impossible designs, keeping its internal structure universally stable.
 
-### Analogy for Dynamic Theory Deep-Dive: Mamba State-Space Models Lyapunov Stability
+### Analogy for Mamba State-Space Models Lyapunov Stability
 
 Imagine a steep valley shaped like a bowl. No matter where you place a marble inside the bowl (the input perturbation $\varepsilon$), gravity will pull it towards the bottom center (the fixed point). Even if you slightly nudge the marble while it rolls, it won't fly out of the bowl. In Mamba architecture, the "Lyapunov stability" ensures that tiny computational errors (like those from using lower-precision math to save memory) act like nudges in a bowl—they naturally settle down instead of snowballing into a catastrophic crash, allowing the system to remain stable over long sequence generations.
 
@@ -343,7 +343,7 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
 #### Analogy: Predictive Coding Networks Lyapunov Stability
 Imagine a water ball rolling down a valley (energy function $V_{\text{PC}}$) with some friction. The valley's shape is determined by both the final goal ($L$) and intermediate constraints ($\tilde{E}$). The theory proves that no matter where the ball starts or if a small earthquake bumps it (bounded perturbation $O(\epsilon)$), it will always roll strictly downward ($\dot{V}_{\text{PC}} \leq 0$) and exponentially fast towards the exact bottom ($W^*$), without endlessly circling or getting thrown out.
 
-### Dynamic Theory Deep-Dive: Lyapunov Acceleration of Rescaled Gradient Descent
+### Lyapunov Acceleration of Rescaled Gradient Descent
 System Container: Architecture Principles
 Frontier Source: Accelerating Rescaled Gradient Descent: Fast Optimization of Smooth Functions (arXiv:1902.08825)
 Deterministic Convergence Mechanism: The theory leverages a rescaled Lyapunov function to enforce strict continuous-time descent boundaries. It establishes that $\textstyle\frac{w_{a}(\delta(k+1))-w_{a}(\delta k)}{\delta}\leq\frac{1}{a}(1+\frac{\delta(k+1)}{ap})^{p-1}$, bounding the rate of energy change. This ensures that the descent trajectory deterministically accelerates towards the global minimum without chaotic divergence.
@@ -371,16 +371,11 @@ Imagine driving down a steep, curved mountain road. A standard AI presses the ga
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Architecture Principles: Woven Predictive Coding Networks Lyapunov Stability into stability principles section.
+
+Architecture Principles: introduced Predictive Coding Networks Lyapunov Stability and Lyapunov Acceleration of Rescaled Gradient Descent, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. PCN stability fits perfectly within the NTK / Lyapunov stability bounding framework.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.

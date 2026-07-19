@@ -69,7 +69,7 @@ The framework establishes a strict upper bound on invalid memory commits via $\P
 **💡 For Beginners**:
 Imagine a massive global library (Global Memory) where no single head librarian is in charge. Instead, each local librarian (Agent) is responsible for only a specific aisle (Ontology Slice). When a new book is added or revised anywhere in the library, a notification is sent out. A local librarian only pays attention if the book belongs to their aisle. Before putting the book on the shelf, they require at least $r$ independent expert reviewers to verify it. Even if one reviewer is wrong (with a small probability $\varepsilon_{\max}$), the chance of all $r$ reviewers being simultaneously wrong drops exponentially. Therefore, every local librarian's aisle deterministically matches the "true" state of the global library over time, without ever needing a central boss to coordinate them!
 
-### Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+### Contrastive Representation for Catastrophic Forgetting
 System Container: Memory System
 Frontier Source: arXiv:2501.00237 (Wei Chen et al., 2025)
 Deterministic Convergence Mechanism: The paper leverages contrastive representation constraints to alleviate catastrophic forgetting by managing domain shift deterministically during incremental learning.
@@ -82,7 +82,7 @@ We do not use brute-force computing to memorize the superficial details of the w
 
 ---
 
-### Code for Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+### Code for Contrastive Representation for Catastrophic Forgetting
 ```python
 # Grounded pseudocode based on exact formula extraction
 # Formula: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
@@ -381,10 +381,10 @@ def synchronize_semantic_slice(
     return local_memory
 ```
 
-### Analogy for Dynamic Theory Deep-Dive: Contrastive Representation for Catastrophic Forgetting
+### Analogy for Contrastive Representation for Catastrophic Forgetting
 Imagine your memory is a crowded library. Instead of throwing out old books (catastrophic forgetting) when new ones arrive, we mathematically calculate how similar the new books are to the old ones (the Jaccard similarity $J(t,t')$) and group them. We only adjust the library's layout by a strictly calculated distance, ensuring the old knowledge space remains undisturbed.
 
-### Dynamic Theory Deep-Dive: Deterministic Representation via Covariance
+### Deterministic Representation via Covariance
 System Container: Memory System
 Frontier Source: Set-Inclusive Uncertainty Modeling for Robust Brain Tumor Segmentation (arXiv:2606.30374)
 Deterministic Convergence Mechanism: The system mathematically bounds uncertainty using covariance mapping in the latent space. By explicitly tracking the covariance of parameter perturbations $\mathrm{Cov}_{\epsilon}[\nabla_{\theta}L(\theta;\epsilon)]=\frac{\partial{\mu_{i}}}{\partial\theta}^{\top}\mathrm{Cov}_{\epsilon}[\nabla_{r_{i}}L(\theta;\epsilon)]\ \frac{\partial{\mu_{i}}}{\partial\theta}$, it forces the memory representation to separate confident deterministic features from random noise.
@@ -413,16 +413,11 @@ Imagine you are drawing a map from a moving car on a bumpy road. Standard memory
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Memory System: No new daily chunks to weave this week. Cleaned up legacy wrappers to maintain structure.
+
+Memory System: introduced Deterministic Representation via Covariance, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. All sub-components maintain strict deterministic bounds.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.
