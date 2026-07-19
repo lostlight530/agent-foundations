@@ -106,92 +106,92 @@ The framework provides a deterministic high-probability upper bound on the optim
 [arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach. Selected because it develops accelerated algorithms in decentralized networks via a Dual$^2$ method.
 The algorithm achieves highly deterministic convergence in decentralized settings. The core update equations are strictly defined as $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ and $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$.
 
-### Dynamic Theory Deep-Dive: Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Distributed Continuous-Time Optimization with Time-Varying Constraints
 System Container: Collaboration
 Frontier Source: http://arxiv.org/abs/2409.05293v1
 Deterministic Convergence Mechanism: The algorithm proposes a distributed continuous-time sliding mode controller combined with a time-varying log-barrier penalty function. It enforces strict time-varying inequality constraints and tracks moving optimal paths. Lyapunov stability analysis guarantees global consensus without requiring uniform Hessian assumptions across agents.
 
-### Dynamic Theory Deep-Dive: Decentralized Policy Optimization (DPO)
+### Decentralized Policy Optimization (DPO)
 System Container: Collaboration System
 
 Frontier Source: arxiv:2211.03032 - https://arxiv.org/abs/2211.03032
 
 Deterministic Convergence Mechanism: DPO provides a decentralized surrogate for policy optimization that guarantees monotonic improvement of the joint policy. Theorem 1 establishes a lower bound for joint policy improvement: J(\pi_new) - J(\pi_old) \geq (1/N)\sum L^i_old(\pi_new^i) - M_tilde * \sum D_KL^max(\pi_old^i||\pi_new^i) - C * \sum D_KL^max(\pi_old^i||\pi_new^i). This allows each agent to optimize independently and stably without a central authority.
 
-### Dynamic Theory Deep-Dive: Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 System Container: Collaboration
 
 Frontier Source: Decentralized Optimization in Networks with Arbitrary Delays (arXiv:2401.11344)
 
 Deterministic Convergence Mechanism: The Delay-Tolerant Gossip Optimization (DT-GO) algorithm establishes a rigorous bound for decentralized stochastic optimization over directed graphs with arbitrary delays, proving a convergence rate bounded by $\mathcal{O}\left(\left(\frac{LF_{0}\overline{\sigma}^{2}}{NT}\right)^{1/2}+\left(\frac{\left\lVert D\right\rVert_{2}GLF_{0}}{cT}\right)^{2/3}+\frac{LF_{0}}{T}\right)$, circumventing the need for nodes to know their out-degree while using an extended gossip matrix $W_v$ incorporating virtual delay nodes.
 
-### Dynamic Theory Deep-Dive: ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 System Container: Collaboration
 
 Frontier Source: Asynchronous Decentralized Optimization with Constraints: Achievable Speeds of Convergence for Directed Graphs (arXiv:2401.03136)
 
 Deterministic Convergence Mechanism: To bypass the difficulty of finding explicit Lyapunov functions for asynchronous double averaging and gradient projection (ASY-DAGP) on directed graphs, the theory formulates a Linear Quadratic Performance Estimation Problem (LQ-PEP). It establishes convergence bounds by aggregating worst-case lower bounds over linear-quadratic constraint inequalities like $\mu(F^{v}_{k+1}+T^{v}_{k+1}) +\Big{\langle}\mathbf{x}^{*}-\mathbf{x}^{v}_{k+1},\mathbf{z}^{v}_{k+1}-\mathbf{x}^{v}_{k+1}+\mu\big{(}\nabla f^{v}(\mathbf{x}^{v}_{k})-\nabla f^{v}(\mathbf{x}^{*})-\mathbf{n}^{v}\big{)}\Big{\rangle}\leq 0$, ensuring stationary consensus unconditionally under convex delays.
 
-### Dynamic Theory Deep-Dive: High-Probability Convergence in Decentralized Optimization
+### High-Probability Convergence in Decentralized Optimization
 System Container: Collaboration
 
 Frontier Source: [High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking](http://arxiv.org/abs/2605.00281v1)
 
 Deterministic Convergence Mechanism: The paper establishes rigorous high-probability (HP) convergence bounds for Decentralized Stochastic Gradient Descent with Gradient Tracking (GT-DSGD). It proves order-optimal HP convergence rates of $\mathcal{O}\Big(\frac{\log(1/\delta)}{\sqrt{nT}}\Big)$ and $\mathcal{O}\Big(\frac{\log(1/\delta)}{nT}\Big)$ for non-convex and Polyak-Lojasiewicz costs, respectively, under relaxed sub-Gaussian noise conditions. A key deterministic mechanism derived from this is the explicit bound on the consensus error: $\|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2}\leq\frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2}+\frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}$, where $\lambda \in [0,1)$ is the second largest singular value of the mixing matrix, and the explicit Moment-Generating Function (MGF) bounds tracking the network error evolution.
 
-### Dynamic Theory Deep-Dive: Adaptive Weighting Push-SUM for Decentralized Optimization
+### Adaptive Weighting Push-SUM for Decentralized Optimization
 System Container: Collaboration
 
 Frontier Source: [Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity](http://arxiv.org/abs/2412.07252v1)
 
 Deterministic Convergence Mechanism: The paper establishes a generalized theoretical framework for the Push-SUM protocol by introducing the Adaptive Weighting Push-SUM protocol. It explicitly addresses the performance degradation caused by statistical diversity in decentralized networks. By deriving tight upper bounds on the consensus distance, the authors deterministically prove that under sufficient communication, the consensus distance bound is reduced to $O(1/N)$, compared to the traditional Push-SUM bound of $O(1)$. Furthermore, it establishes explicit convergence rates for SGD and Momentum SGD variants under this protocol: $O(N/T)$, a significant improvement over the $O(Nd/T)$ bound of the standard Push-SUM protocol (where $d$ is parameter size and $T$ is the number of iterations).
 
-### Dynamic Theory Deep-Dive: Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 System Container: Collaboration
 Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
 Deterministic Convergence Mechanism: The DSGTm-TV algorithm guarantees convergence to the global optimum using gradient tracking and heavy-ball momentum over time-varying directed graphs. The largest stepsize $\bar{\alpha}$ is deterministically bounded to ensure stability: $\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$, establishing a linear convergence rate $\mathcal{O}(\rho_{M}^{k})$ where $\rho_{M}<1$ is the spectral radius of the mixing matrix.
 
-### Dynamic Theory Deep-Dive: Decentralized Optimization Over Slowly Time-Varying Graphs
+### Decentralized Optimization Over Slowly Time-Varying Graphs
 System Container: Collaboration
 Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
 Deterministic Convergence Mechanism: The algorithm establishes an explicit linear convergence rate $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$ for decentralized consensus with Markovian time-varying graphs. It leverages a rigorous bounding mechanism on the mixing time $\tau$ and strict constraints on parameters like $B = \lceil b \log_{2}M \rceil$ to control the divergence of graph topology variations.
 
-### Dynamic Theory Deep-Dive: Decentralized Optimization without Central Servers
+### Decentralized Optimization without Central Servers
 System Container: Collaboration System
 Frontier Source: arXiv:2410.01700 (Yutong He et al., 2024)
 Deterministic Convergence Mechanism: The paper validates a fully decentralized optimization framework where multi-agent consensus converges deterministically ($\lim_{k \to \infty} x_i^k = x^\star$), entirely abolishing the need for a central parameter server.
 
-### Dynamic Theory Deep-Dive: FSPDA for Random Network Topologies
+### FSPDA for Random Network Topologies
 
 **Frontier Source:** A Stochastic Approximation Approach for Efficient Decentralized Optimization on Random Networks (arXiv:2410.18774v2)
 
 **Deterministic Convergence Mechanism:** The Fully Stochastic Primal Dual Algorithm (FSPDA) establishes a strict $\mathcal{O}(1/\sqrt{T})$ convergence bound for decentralized optimization over random, time-varying networks. By utilizing a stochastic augmented Lagrangian approach, the algorithm provides structural stability against unreliability, eliminating single points of failure (SPOF) while achieving deterministic convergence thresholds despite chaotic edge connectivity.
 
-### Dynamic Theory Deep-Dive: Decentralized Stochastic Subgradient Convergence
+### Decentralized Stochastic Subgradient Convergence
 
 **Frontier Source:** Convergence of Decentralized Stochastic Subgradient-based Methods for Nonsmooth Nonconvex functions (arXiv 2403.11565)
 
 **Deterministic Convergence Mechanism:** The trajectory of the decentralized state sequence $\{{\bm{Z}}_{k}\}$ generated by decentralized learning updates ${\bm{Z}}_{k+1}={\bm{Z}}_{k}{\bm{W}}-\eta_{k}({\bm{H}}_{k}+\Xi_{k+1})$ deterministically tracks the continuous-time differential inclusion $\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}\in-\mathrm{conv}\,\left(\frac{1}{d}\sum_{i=1}^{d}\Phi_{i}({\bm{z}})\right)$. This provides a guaranteed behavioral lower bound: all limit points of the decentralized sequence will strictly converge to the stationary set $\mathcal{A}$ governed by the Lyapunov function $\psi$.
 
-### Dynamic Theory Deep-Dive: Decentralized Actor-Critic Convergence in Markov Games
+### Decentralized Actor-Critic Convergence in Markov Games
 
 **Frontier Source:** Convergence of Decentralized Actor-Critic Algorithm in General-sum Markov Games (arXiv:2409.04613v6)
 
 **Deterministic Convergence Mechanism:** The algorithm utilizes a Markov Near-Potential Function (MNPF) $\Phi$ which serves as an approximate Lyapunov function for decentralized learning dynamics. It provides a strict theoretical behavioral lower bound, ensuring that asynchronous, decentralized actor-critic updates unconditionally converge to the approximate Nash Equilibrium set $\textsf{NE}(\epsilon)$ without requiring agents to have knowledge of others' strategies or payoffs.
 
-### Dynamic Theory Deep-Dive: Robust Compressed Push-Pull (RCPP) Method
+### Robust Compressed Push-Pull (RCPP) Method
 
 **Frontier Source:** arXiv:2408.01727 (A Robust Compressed Push-Pull Method for Decentralized Nonconvex Optimization)
 
 **Deterministic Convergence Mechanism:** The RCPP algorithm implements gradient tracking with communication compression under general directed networks. It achieves a sublinear convergence rate for smooth and possibly nonconvex objective functions, maintaining bounds on the optimization error $\Omega_o^k$ and the consensus error $\Omega_c^k$. The mechanism is robust under a much more general class of compression operators that allow both relative and absolute compression errors.
 
-### Dynamic Theory Deep-Dive: KL Property for Decentralized Gradient Tracking
+### KL Property for Decentralized Gradient Tracking
 
 **Frontier Source:** Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556v1)
 
 **Deterministic Convergence Mechanism:** The gradient tracking-based decentralized scheme guarantees asymptotic convergence when the objective function satisfies the Kurdyka-Łojasiewicz (KL) property. The algorithm establishes deterministic linear or sub-linear convergence bounds (e.g., $\|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}$) depending on the KL exponent, without requiring centralized coordination.
 
-### Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS)
+### Decentralized Memoryless BFGS (DMBFGS)
 
 **Frontier Source:** arXiv:2409.07122v3 "Decentralized Conjugate Gradient and Memoryless BFGS Methods"
 
@@ -593,7 +593,7 @@ def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
     return w_k_plus_1, z_k_plus_1
 ```
 
-### Code for 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Code for Distributed Continuous-Time Optimization with Time-Varying Constraints
 ```python
 # System: Collaboration
 # Focus: Distributed Continuous-Time Optimization with Log-Barrier
@@ -638,7 +638,7 @@ def compute_continuous_time_update(x_i, t, neighbors_i, f_i, g_i, rho_i, sigma_i
     return dot_x_i
 ```
 
-### Code for 动态理论深潜：Decentralized Policy Optimization (DPO)
+### Code for Decentralized Policy Optimization (DPO)
 ```python
 # Extracted from Theorem 1: Decentralized surrogate objective lower bound
 def optimize_agent_policy(pi_old_i, N, M_tilde, C):
@@ -666,7 +666,7 @@ def optimize_agent_policy(pi_old_i, N, M_tilde, C):
     return best_pi_i
 ```
 
-### Code for 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Code for Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 ```python
 # Decentralized Averaging & Optimization with Arbitrary Delays
 # Variables and formula extracted from DT-GO Algorithm Design
@@ -713,7 +713,7 @@ def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
     return x
 ```
 
-### Code for 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### Code for ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 ```python
 # Variables explicitly supported by arXiv:2401.03136 extraction trace
 # F_v, T_v: Objective function and surrogate bounds for node v (F^{v}_{k+1}, T^{v}_{k+1})
@@ -744,7 +744,7 @@ def verify_lq_pep_constraint(F_v_next, T_v_next, x_v_next, x_star, z_v_next, gra
     return lq_pep_bound
 ```
 
-### Code for 动态理论深潜：High-Probability Convergence in Decentralized Optimization
+### Code for High-Probability Convergence in Decentralized Optimization
 ```python
 # Decentralized optimization parameters from extracted equations
 lambda_spectral = 0.9  # \lambda: Second largest singular value of mixing matrix W, bound on \|W-J\|
@@ -764,7 +764,7 @@ next_error_bound = compute_next_consensus_error_bound(x_consensus_error_t, y_tra
 print(f"Deterministic bound on next step consensus error: {next_error_bound}")
 ```
 
-### Code for 动态理论深潜：Adaptive Weighting Push-SUM for Decentralized Optimization
+### Code for Adaptive Weighting Push-SUM for Decentralized Optimization
 ```python
 # Decentralized optimization parameters from extracted equations
 N = 10  # N: Number of agents in the network
@@ -790,7 +790,7 @@ bounds = evaluate_protocol_bounds(N, T_iter, d)
 print(f"Adaptive protocol consensus error scales as: {bounds['Adaptive Weighting Push-SUM']['Consensus']}")
 ```
 
-### Code for 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Code for Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 ```python
 # Based on Algorithm 1: The DSGTm-TV Algorithm
 # Variables: A_k, B_k (stochastic mixing matrices for iteration k), alpha_i (stepsize), beta_i (momentum)
@@ -814,7 +814,7 @@ def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1,
     return y_k_plus_1
 ```
 
-### Code for 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+### Code for Decentralized Optimization Over Slowly Time-Varying Graphs
 
 ```python
 # Extracted from Algorithm 1: Accelerated consensus over graphs with Markovian changes
@@ -837,7 +837,7 @@ def accelerated_consensus_step(x, x_f, gamma, p, beta, theta, eta, g_k):
     return x_next, x_f_next
 ```
 
-### Code for Dynamic Theory Deep-Dive: Decentralized Optimization without Central Servers
+### Code for Decentralized Optimization without Central Servers
 ```python
 # Grounded pseudocode based on exact formula extraction
 # Formula: x_i^\star = \lim_{k\rightarrow\infty} \left(z_i^{k+1} - \sum_{j\in\mathcal{N}(i)} p_{i,j,2}^k \odot (z_i^{k+1} - z_j^{k+1})\right) = x^\star
@@ -856,7 +856,7 @@ def compute_decentralized_consensus(z_i_next, neighbors_z_next, p_weights):
     return x_i_converged
 ```
 
-### Code for Dynamic Theory Deep-Dive: FSPDA for Random Network Topologies
+### Code for FSPDA for Random Network Topologies
 
 ```python
 # Fully Stochastic Primal Dual Algorithm (FSPDA)
@@ -901,7 +901,7 @@ def fspda_computation_thread(i, B_i, x_i, lambda_i_hat, t_i, g_i, eta, alpha, ga
         return x_i_next, lambda_i_next, t_i, g_i, B_i
 ```
 
-### Code for Dynamic Theory Deep-Dive: Decentralized Stochastic Subgradient Convergence
+### Code for Decentralized Stochastic Subgradient Convergence
 
 ```python
 def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
@@ -935,7 +935,7 @@ def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
     return Z_k_plus_1
 ```
 
-### Code for Dynamic Theory Deep-Dive: Decentralized Actor-Critic Convergence in Markov Games
+### Code for Decentralized Actor-Critic Convergence in Markov Games
 
 ```python
 # Decentralized Actor-Critic Update in General-sum Markov Games
@@ -962,13 +962,13 @@ def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_
     return pi_i_t_s
 ```
 
-### Code for Dynamic Theory Deep-Dive: Robust Compressed Push-Pull (RCPP) Method
+### Code for Robust Compressed Push-Pull (RCPP) Method
 
 ```python
 MISSING_SOURCE
 ```
 
-### Code for Dynamic Theory Deep-Dive: KL Property for Decentralized Gradient Tracking
+### Code for KL Property for Decentralized Gradient Tracking
 
 ```python
 # Decentralized Gradient Tracking Update
@@ -990,7 +990,7 @@ def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
     return Y_nu_plus_1
 ```
 
-### Code for Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS)
+### Code for Decentralized Memoryless BFGS (DMBFGS)
 
 ```python
 # Decentralized Memoryless BFGS (DMBFGS) execution step
@@ -1071,71 +1071,71 @@ Imagine different branches (nodes) of a multinational company needing to agree o
 - **Dual$^2$ Method**: It’s like the branches adjusting not only based on current deviations (first-level feedback) but through a multi-layered approach (Dual$^2$).
 This allows the entire company to reach a perfectly consistent budget allocation quickly and "deterministically" without relying on a central headquarters, entirely eliminating endless back-and-forth arguments (black-box probabilistic convergence).
 
-### Analogy for 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Analogy for Distributed Continuous-Time Optimization with Time-Varying Constraints
 Imagine a fleet of autonomous delivery drones trying to fly in tight formation while optimizing their energy usage over a changing delivery route (time-varying cost function). They must avoid hitting dynamic obstacles or entering no-fly zones (time-varying constraints).
 Instead of a central control tower plotting their paths, each drone communicates only with nearby drones. They use a "repulsion shield" (log-barrier) that gets infinitely strong if they get too close to a no-fly zone boundary, ensuring they never cross it. The resulting rule tells them exactly how fast to adjust their position relative to their neighbors and the target, guaranteeing synchronized and strictly safe fleet movement mathematically, completely eliminating the need for a central coordinator.
 
-### Analogy for 动态理论深潜：Decentralized Policy Optimization (DPO)
+### Analogy for Decentralized Policy Optimization (DPO)
 Imagine a team of chefs (agents) baking a giant cake (the joint task) without a head chef (centralized critic) giving orders. If every chef just tries to improve their own section without considering the others, the whole cake might collapse (non-stationarity).
 
 The DPO surrogate objective acts like a strict individual contract for each chef: "You can change your recipe, but you must subtract a 'risk penalty' based on how drastically you change it (the KL divergence terms). If you follow this rule, I mathematically guarantee the whole cake will get better, even if you never talk to the other chefs." It forces local caution to ensure global improvement.
 
-### Analogy for 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Analogy for Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 Imagine a large logistics company with many regional hubs (nodes) that want to synchronize their inventory data, but they can only send messages one way (directed graph) and messages often get delayed arbitrarily in the mail. If everyone just blindly averages what they receive, hubs that send more messages will accidentally skew the data. The DT-GO algorithm adds "virtual hubs" to represent the delayed mail in transit and runs a quick "warm-up" phase where everyone sends a unique ID card. By seeing how much of each ID card they eventually hold, they figure out exactly how much to "down-weight" their own updates ($d_n$). This allows all hubs to reach perfect agreement (stationary solution) even when communication lines are chaotic and slow, guaranteeing that the whole company optimizes its route planning efficiently without any central coordinator.
 
-### Analogy for 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### Analogy for ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 Imagine trying to figure out if a massive plumbing system (directed network of agents) will eventually balance its water pressure (reach convergence) while everyone adjusts their valves at different random times (asynchronous delays). Usually, engineers try to find one magical "total energy" equation (Lyapunov function) that drops every second. But that's too hard here. Instead, LQ-PEP acts like a "worst-case auditor". It writes down all the localized, basic physical rules of the pipes as simple algebraic inequalities ($\leq 0$) and mathematically proves that even in the absolute worst sequence of delays, the entire system cannot physically avoid reaching a balanced state.
 
-### Analogy for 动态理论深潜：High-Probability Convergence in Decentralized Optimization
+### Analogy for High-Probability Convergence in Decentralized Optimization
 Imagine a team of chefs (agents) in separate kitchens trying to bake the exact same cake recipe (the global model). They can only communicate with their immediate neighbors.
 - `lambda_spectral` (spectral gap) is like how fast information travels between the kitchens. A smaller lambda means faster communication.
 - The formula for the consensus gap (how different their cakes are) shows that their differences shrink over time (the `(1+lambda^2)/2` part, which is less than 1), but are slightly pushed apart by the errors in their local ingredient tracking (the `y_tracking_error_t` part).
 - The high-probability bound is a strict mathematical guarantee: "I am 99.9% sure that after T hours, the cakes will taste identical, even if individual chefs occasionally measure ingredients wrong (sub-Gaussian noise)."
 
-### Analogy for 动态理论深潜：Adaptive Weighting Push-SUM for Decentralized Optimization
+### Analogy for Adaptive Weighting Push-SUM for Decentralized Optimization
 Imagine a large team of researchers (a network of $N$ nodes) trying to write a report. Each researcher only has partial data (statistical diversity) and can only talk to their desk neighbors.
 - In the standard approach (traditional Push-SUM), they blindly average everyone's notes. Because some nodes have vastly different data, the "disagreement" (consensus distance) never fully vanishes ($O(1)$) and scaling up the model size ($d$) slows everyone down drastically ($O(Nd/T)$).
 - In the Adaptive Weighting approach, the team applies a clever weighting formula to their neighbors' notes (Moreau weighting). This mathematically guarantees that the larger the team ($N$), the smaller the final disagreement becomes ($O(1/N)$), completely breaking the bottleneck caused by the size of the report ($d$).
 
-### Analogy for 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Analogy for Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 Imagine a large corporation with multiple regional branches. Instead of a central headquarters trying to process all sales data directly (centralized), the branches talk to each other to figure out the overall market trend (decentralized). In this dynamic setup, the communication channels between branches change over time (time-varying directed networks). To keep everyone on track without losing information, each branch maintains two pieces of information: their own local market strategy ($x$) and an estimate of the global market trend ($y$). At each step, a branch updates its strategy by blending information from its accessible neighbors ($A_k x$) and stepping towards the trend, with a little bit of momentum ($\beta_i$) from their previous decision to avoid changing too abruptly. Then, they update their global trend estimate ($y$) by tracking the changes in their local data gradient ($g(x_{k+1}) - g(x_k)$) and mixing it with their neighbors' estimates ($B_k y$). As long as their update steps (stepsizes) aren't too drastic, mathematically bounded by the network's worst-case connectivity speed, everyone's strategy deterministically converges to the single best global strategy.
 
-### Analogy for 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+### Analogy for Decentralized Optimization Over Slowly Time-Varying Graphs
 Imagine a group of workers in different rooms trying to synchronize their clocks (consensus). The doors between the rooms randomly open and close (Markovian time-varying graphs). If everyone blindly trusts whoever just walked in, the clocks will fluctuate wildly. Instead, everyone keeps a strict "inertia" (momentum parameters $\theta, \eta, \beta$) and only updates their clock slightly based on a carefully calculated average ($g^k$) over a set time window ($B$). The strict formula ensures that no matter how chaotic the doors act, the clocks are guaranteed to perfectly align at a predictable speed.
 
-### Analogy for Dynamic Theory Deep-Dive: Decentralized Optimization without Central Servers
+### Analogy for Decentralized Optimization without Central Servers
 Imagine a team of chefs trying to perfect a soup recipe, but they are all in different kitchens and have no head chef (no central server). Instead of sending their recipes to a headquarters, they just peek at their immediate neighbors' recipes and adjust their own mathematically. The theory proves that by doing this local adjustment strictly enough, every chef will inevitably arrive at the exact same perfect recipe ($x^\star$).
 
-### Analogy for Dynamic Theory Deep-Dive: FSPDA for Random Network Topologies
+### Analogy for FSPDA for Random Network Topologies
 
 Imagine a team of scouts (agents) exploring a vast forest (optimization space). Their walkie-talkies are highly unreliable; connections drop randomly due to interference (random network topology). Instead of waiting for a central commander to give a global order, each scout keeps moving based on their local terrain (local gradient). When a signal occasionally connects with a nearby scout (communication buffer), they quickly average their positions (consensus term) and adjust their built-in compass bias (dual variable update). The FSPDA mathematical bound guarantees that even with chaotic, random walkie-talkie connections, the whole scout team will eventually converge to the single best location in the forest within a strict timeframe ($\mathcal{O}(1/\sqrt{T})$), completely independent of any central headquarters.
 
-### Analogy for Dynamic Theory Deep-Dive: Decentralized Stochastic Subgradient Convergence
+### Analogy for Decentralized Stochastic Subgradient Convergence
 
 Imagine a team of explorers (multiple agents $d$) mapping a rugged, foggy mountain (nonsmooth nonconvex function) without a central leader. After taking each step, an explorer talks only to their immediate neighbors to find an average position (mixing matrix ${\bm{W}}$), and then takes a step downhill based on their own foggy compass reading (${\bm{H}}_{k}+\Xi_{k+1}$). The mathematical theory guarantees that, despite the fog and the lack of a central map, the collective path of the team $\{{\bm{Z}}_{k}\}$ will behave exactly as if a giant, invisible hand ($\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}$) is smoothly guiding them to the bottom of the valley (stationary set $\mathcal{A}$).
 
-### Analogy for Dynamic Theory Deep-Dive: Decentralized Actor-Critic Convergence in Markov Games
+### Analogy for Decentralized Actor-Critic Convergence in Markov Games
 
 Imagine a bustling, complex marketplace where several independent store owners (agents) are trying to maximize their profits without knowing the secret pricing strategies of their competitors. Instead of hiring a central market analyst to coordinate everyone, each owner simply tracks their own past sales (critic) and slightly tweaks their prices towards whatever seems most profitable today (best response). The mathematical Lyapunov theory acts like an invisible hand of gravity—it guarantees that if everyone makes these small, stubborn adjustments, the entire chaotic marketplace will naturally settle into a stable state (Nash Equilibrium) where no owner can unilaterally improve their situation, completely avoiding a centralized collapse.
 
-### Analogy for Dynamic Theory Deep-Dive: Robust Compressed Push-Pull (RCPP) Method
+### Analogy for Robust Compressed Push-Pull (RCPP) Method
 
 Imagine a decentralized supply chain network with many separate warehouses (agents) coordinating stock levels. Because calling each other every minute is expensive, they only send highly compressed summary reports. Even with relative and absolute compression errors in the reports, the warehouses track and maintain consensus ($\Omega_c^k$) and limit their optimization error ($\Omega_o^k$), allowing them to gradually reach agreement over time in a general directed network.
 
-### Analogy for Dynamic Theory Deep-Dive: KL Property for Decentralized Gradient Tracking
+### Analogy for KL Property for Decentralized Gradient Tracking
 
 Imagine a team of architects (decentralized agents) designing a complex city plan. They each have different parts of the blueprint and only talk to their immediate neighbors. Instead of constantly reporting to a chief architect (no central server), they calculate the changes needed for their block and pass along an estimated summary of what the whole city is doing. The Kurdyka-Łojasiewicz (KL) property is like a strict geometric slope rule of the landscape they are building on. The theory proves mathematically that, as long as they follow this tracking formula, their blueprints will deterministically align into one unified, perfect city plan ($1(x^\star)^\top$) with a predictable, guaranteed speed, completely eliminating the risk of a single chief architect being a bottleneck.
 
-### Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS) Convergence
+### Decentralized Memoryless BFGS (DMBFGS) Convergence
 
-### Analogy for Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS)
+### Analogy for Decentralized Memoryless BFGS (DMBFGS)
 
 Imagine a massive logistics network where regional warehouses (nodes) must optimize their inventory globally without a central headquarters (Decentralized Distributed Optimization). In a normal network, each warehouse only adjusts its stock based on immediate neighbors, which often leads to huge delays and oscillating errors. DMBFGS acts as an advanced local memory protocol. Instead of remembering the entire history of global trends (which is impossible without a central server), each warehouse uses a memoryless BFGS approximation—a highly compressed mathematical trick that estimates the "curvature" or trend of the supply chain using just the change in the last step. The convergence mechanism explicitly bounds how fast they are allowed to react ($\alpha$ bound), ensuring that even without central coordination, the entire network deterministically aligns its inventory at a guaranteed exponential speed ($\rho({\bf{J}})$), strictly preventing any SPOF (Single Point of Failure) collapse.
 
-### Analogy for Dynamic Theory Deep-Dive: OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
+### Analogy for OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
 Imagine a team of regional delivery drivers (decentralized agents) navigating local traffic (local data variance). Instead of just looking at the map for the current step, each driver uses "opposite lookahead"—they estimate where they would have ended up if they kept their previous day's momentum, and they actively correct their starting position before driving today's route. The mathematical bound guarantees that by doing this local correction, all drivers will eventually converge on the globally optimal routes ($\mathcal{O}(1/\sqrt{KT})$) without needing a central dispatcher to continuously correct them.
 
-### Dynamic Theory Deep-Dive: Gradient Tracking for High Dimensional Optimization
+### Gradient Tracking for High Dimensional Optimization
 System Container: Collaboration System
 Frontier Source: Gradient Tracking for High Dimensional Federated Optimization (arXiv:2312.05590)
 Deterministic Convergence Mechanism: The approach applies high-dimensional gradient tracking across decentralized nodes to mathematically eliminate data heterogeneity variance. It establishes a deterministic upper bound $\displaystyle\leq 8d^{2/p}\tau LK^{2}\sum\limits_{{i}={r-\tau}}^{r-1}\sum\limits_{{m}={1}}^{M}{\mathbb{E}}\left\{f_{m}(\bar{{\bm{w}}}_{i,0})-f_{m}({\bm{w}}^{*})-\dots\right\}$, ensuring that despite local delays ($\tau$), global consensus is strictly achieved.
@@ -1162,25 +1162,26 @@ def compute_decentralized_gradient_tracking_update(local_gradients_m, global_tra
 ### For Beginners: Gradient Tracking for High Dimensional Optimization
 Imagine dozens of regional managers (nodes) trying to set a national price without a CEO (no central server). If they just average their local prices, the result swings wildly. With "Gradient Tracking", each manager not only reports their local price but also how fast their local price is *changing* ($\nabla f_{m}$). The math proves that by tracking this rate of change, all managers will perfectly agree on the exact right national price, even if someone's email is delayed.
 
-### Analogy for Dynamic Theory Deep-Dive: 耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
+### Analogy for 耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
 Imagine multiple bank branches (nodes) that must collectively manage a strict regulatory deposit ratio (a coupled affine constraint) without a central headquarters (no central server). Previously, branches had to either compromise on exact compliance or elect a leader, creating a bottleneck. This Chebyshev-accelerated method gives every branch two ledgers: an internal action plan (primal variable) and a shared "regulation gap" tracker (dual variable). By applying a mathematical "Chebyshev filter" to their communication, branches aggressively eliminate misunderstandings (high-frequency errors) across the network. The formula guarantees that the entire bank converges to the mathematically optimal resource allocation exponentially fast (linear convergence), without ever relying on a central authority.
 
-### Analogy for Dynamic Theory Deep-Dive: 带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
+### Analogy for 带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
 Imagine a decentralized fleet of delivery trucks (nodes) trying to collectively calculate the optimal route across a city without a dispatcher. Usually, they just ask nearby trucks for their estimates (gradient tracking), but errors can build up over time. With "Periodic Global Averaging" (PGA), every $\tau$ hours (the synchronization period), all trucks briefly tune into a global radio channel to perfectly align their routes ($\frac{1}{n}\sum x_{i}^{(k)}$). The math proves that by strictly capping their update aggressiveness (the stepsize $\alpha$), this hybrid approach drastically speeds up finding the optimal route without ever causing the system to mathematically diverge or crash.
 
-### Analogy for Dynamic Theory Deep-Dive: 基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
+### Analogy for 基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
 Imagine a decentralized network of independent weather stations (nodes) trying to collectively calculate a global climate model over intermittent radio links (time-varying directed graph). Some stations are in deserts, others in rainforests, creating massive differences in their local data (statistical diversity / non-IID). If they just average their findings blindly, the extreme data points will crash the model. The "Adaptive Weighting Push-SUM" method gives each station an intelligent communication filter. The strict mathematical bound ($\gamma$) on their update speed ensures that this cautious, adaptive communication mathematically guarantees they will all reach a perfect global climate consensus without ever needing a central authority or being derailed by local extreme weather.
 
-### Analogy for Dynamic Theory Deep-Dive: Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Analogy for Distributed Continuous-Time Optimization with Time-Varying Constraints
 Imagine you manage a decentralized fleet of autonomous drones (the multi-agent system over $\mathcal{V}$). They need to collaboratively find the optimal flight path while the no-fly zones (time-varying constraints) and wind conditions (disturbances) constantly change. Instead of relying on slow centralized servers, each drone implements a local "sliding mode controller" acting like an ultra-fast shock absorber. Even if a sudden gust of wind hits, the underlying Lyapunov mathematical bounding ($\dot{V}(x)$) guarantees that the drone will deterministically "slide" back to the optimal, safe formation in finite time, safely navigating the shifting boundaries without crashing.
 
-### Analogy for Dynamic Theory Deep-Dive: Adaptive Weighting Push-SUM & MSGAP Convergence
+### Analogy for Adaptive Weighting Push-SUM & MSGAP Convergence
 Imagine a team of decentralized analysts (nodes) trying to agree on the best prediction model without a central boss. Instead of always treating everyone's opinion equally (which causes delays if some speak too loudly or too little), they use an "Adaptive Weighting" method. Each analyst adjusts how much they trust their neighbors' inputs based on recent reliability. They also use "momentum" (MSGAP), meaning they remember past successful directions so they don't overreact to sudden noise. The math proves that no matter how diverse their individual data is, their collective answer will deterministically tighten around the correct solution, bounded by a strict mathematical limit.
 
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Collaboration System: Woven OledFL, Globally-Constrained Decentralized Optimization, Accelerated Gradient Tracking, Adaptive Weighting Push-SUM, Distributed Continuous-Time Optimization, and MSGAP Convergence into core theory chapters. Pseudocodes moved to Source Code Breakdown. Analogies moved to For Beginners section.
+
+Collaboration System: introduced OledFL, Globally-Constrained Decentralized Optimization, Accelerated Gradient Tracking, Adaptive Weighting Push-SUM, Distributed Continuous-Time Optimization, and MSGAP Convergence, updated Constraints Section
 
 MISSING_SOURCE: None
 

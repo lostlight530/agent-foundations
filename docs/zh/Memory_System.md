@@ -69,7 +69,7 @@ arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Mult
 **💡 通俗类比**：
 想象一个庞大的全球百科全书（全局记忆），但没有一个总编纂负责。相反，每位地方编辑（代理）只负责特定领域的词条（本体切片）。当系统中有任何新词条或修订产生时，会发出通知。地方编辑只关心属于自己领域的词条。在把词条写入自己负责的百科部分前，他们需要至少 $r$ 位独立专家的审核。即使某位专家出错的概率是 $\varepsilon_{\max}$，所有 $r$ 位专家同时出错的概率也会呈指数级下降。因此，随着时间推移，每位地方编辑手中的百科全书都会确定性地与真实的“全局状态”保持一致，且全程不需要任何中心化的“总编纂”来发号施令！
 
-### 动态理论深潜：对比表征对抗灾难性遗忘
+### 对比表征对抗灾难性遗忘
 System Container: Memory System
 Frontier Source: arXiv:2501.00237 (Wei Chen 等人, 2025)
 Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，在增量学习中确定性地管理领域漂移，从而有效缓解智能体的灾难性遗忘。
@@ -82,7 +82,7 @@ Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，�
 
 ---
 
-### Code for 动态理论深潜：对比表征对抗灾难性遗忘
+### Code for 对比表征对抗灾难性遗忘
 ```python
 # 基于真实提取公式的严谨伪代码
 # 公式: FTS(t,t') = J(t,t') * (||Delta_theta_t||_2 + ||Delta_theta_t'||_2) / 2
@@ -382,10 +382,10 @@ def synchronize_semantic_slice(
     return local_memory
 ```
 
-### Analogy for 动态理论深潜：对比表征对抗灾难性遗忘
+### Analogy for 对比表征对抗灾难性遗忘
 想象你的大脑记忆是一座拥挤的图书馆。当新书进来时，为了防止你扔掉旧书（灾难性遗忘），我们首先在数学上计算新书和旧书的相似度（即 $J(t,t')$ 相似度）。基于这个确定性的数值，我们只对图书馆的布局做极其严格的距离调整，从而百分之百保证旧知识的区域不被破坏。
 
-### 动态理论深潜：基于协方差的确定性表征 (Deterministic Representation via Covariance)
+### 基于协方差的确定性表征 (Deterministic Representation via Covariance)
 System Container: Memory System
 Frontier Source: Set-Inclusive Uncertainty Modeling for Robust Brain Tumor Segmentation (arXiv:2606.30374)
 Deterministic Convergence Mechanism: 系统在隐空间中利用协方差映射，从数学上对不确定性进行了限制。通过显式地追踪参数扰动的协方差 $\mathrm{Cov}_{\epsilon}[\nabla_{\theta}L(\theta;\epsilon)]=\frac{\partial{\mu_{i}}}{\partial\theta}^{\top}\mathrm{Cov}_{\epsilon}[\nabla_{r_{i}}L(\theta;\epsilon)]\ \frac{\partial{\mu_{i}}}{\partial\theta}$，它强制记忆表征将高置信度的确定性特征与随机噪声完全分离开来。
@@ -413,16 +413,11 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Memory System: No new daily chunks to weave this week. Cleaned up legacy wrappers to maintain structure.
+
+Memory System: introduced Deterministic Representation via Covariance, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. All sub-components maintain strict deterministic bounds.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.

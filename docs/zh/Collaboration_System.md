@@ -100,92 +100,92 @@ arXiv:2605.00281v1《High-Probability Convergence in Decentralized Stochastic Op
 [arXiv:2505.03719] Accelerated Decentralized Constraint-Coupled Optimization: A Dual$^2$ Approach。选择该理论是因为其通过 Dual$^2$ 方法在去中心化网络中开发了加速算法。
 算法通过精确的机制实现了去中心化环境下的确定性收敛。核心更新公式严格定义为 $\mathbf{w}^{k+1}=\mathbf{z}^{k}+\frac{1}{L_{F_{\rho}}}\mathbf{C}\bm{\lambda}^{k+1}$ 与 $\mathbf{z}^{k+1}=\mathbf{w}^{k+1}+\beta_{k}\left(\mathbf{w}^{k+1}-\mathbf{w}^{k}\right)$。
 
-### 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Distributed Continuous-Time Optimization with Time-Varying Constraints
 System Container: Collaboration
 Frontier Source: http://arxiv.org/abs/2409.05293v1
 Deterministic Convergence Mechanism: 该算法提出了一种结合时变对数障碍（log-barrier）惩罚函数的分布式连续时间优化控制器。它能强制执行严格的时变不等式约束，并追踪移动的最优路径。Lyapunov稳定性分析保证了全局的最终一致性，且无需假设各智能体具有相同的海森矩阵（Hessian）。
 
-### 动态理论深潜：去中心化策略优化 (DPO)
+### 去中心化策略优化 (DPO)
 System Container: Collaboration System
 
 Frontier Source: arxiv:2211.03032 - https://arxiv.org/abs/2211.03032
 
 Deterministic Convergence Mechanism: 提供了一个无需中心化 Critic 即可保证联合策略（Joint Policy）单调递增的下界机制。该定理 1 提供了一个显式的代理目标（Surrogate Objective）下界：J(\pi_new) - J(\pi_old) \geq (1/N)\sum L^i_old(\pi_new^i) - M_tilde * \sum D_KL^max(\pi_old^i||\pi_new^i) - C * \sum D_KL^max(\pi_old^i||\pi_new^i)。这允许每个智能体独立优化，同时通过惩罚项限制策略发散，从而保证整个多智能体系统的联合策略稳步改善。
 
-### 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 System Container: Collaboration
 
 Frontier Source: Decentralized Optimization in Networks with Arbitrary Delays (arXiv:2401.11344)
 
 Deterministic Convergence Mechanism: DT-GO (Delay-Tolerant Gossip Optimization) 算法为具有任意延迟的有向图上的去中心化随机优化建立了严格的收敛边界。它证明了收敛速率上界为 $\mathcal{O}\left(\left(\frac{LF_{0}\overline{\sigma}^{2}}{NT}\right)^{1/2}+\left(\frac{\left\lVert D\right\rVert_{2}GLF_{0}}{cT}\right)^{2/3}+\frac{LF_{0}}{T}\right)$。该方法引入了包含虚拟延迟节点的扩展Gossip矩阵 $W_v$，从而规避了节点必须知道其出度（out-degree）的要求。
 
-### 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 System Container: Collaboration
 
 Frontier Source: Asynchronous Decentralized Optimization with Constraints: Achievable Speeds of Convergence for Directed Graphs (arXiv:2401.03136)
 
 Deterministic Convergence Mechanism: 为了避开在有向图上寻找异步双重平均梯度投影 (ASY-DAGP) 的显式 Lyapunov 函数的困难，该理论构建了一个线性二次性能估计问题 (LQ-PEP)。它通过在类似 $\mu(F^{v}_{k+1}+T^{v}_{k+1}) +\Big{\langle}\mathbf{x}^{*}-\mathbf{x}^{v}_{k+1},\mathbf{z}^{v}_{k+1}-\mathbf{x}^{v}_{k+1}+\mu\big{(}\nabla f^{v}(\mathbf{x}^{v}_{k})-\nabla f^{v}(\mathbf{x}^{*})-\mathbf{n}^{v}\big{)}\Big{\rangle}\leq 0$ 的线性和二次约束不等式上聚合最坏情况的下界，来确立收敛界，从而在凸延迟下无条件地确保平稳共识。
 
-### 动态理论深潜：去中心化优化的强概率收敛与梯度追踪
+### 去中心化优化的强概率收敛与梯度追踪
 System Container: Collaboration
 
 Frontier Source: [High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking](http://arxiv.org/abs/2605.00281v1)
 
 Deterministic Convergence Mechanism: 该论文为结合梯度追踪的去中心化随机梯度下降（GT-DSGD）建立了严格的高概率（HP）收敛边界。在放宽的亚高斯噪声条件下，针对非凸和 Polyak-Lojasiewicz 成本函数，分别证明了 $\mathcal{O}\Big(\frac{\log(1/\delta)}{\sqrt{nT}}\Big)$ 和 $\mathcal{O}\Big(\frac{\log(1/\delta)}{nT}\Big)$ 的最优阶高概率收敛率。从中提取的一个核心确定性机制是对共识误差的显式约束：$\|{\mathbf{x}^{t+1}}-\overline{{\mathbf{x}}}^{t+1}\|^{2}\leq\frac{1+\lambda^{2}}{2}\|{\mathbf{x}^{t}}-\overline{{\mathbf{x}}}^{t}\|^{2}+\frac{2\alpha^{2}\lambda^{2}}{1-\lambda^{2}}\|{\mathbf{y}^{t}}-\overline{{\mathbf{y}}}^{t}\|^{2}$，其中 $\lambda \in [0,1)$ 是混合矩阵的第二大奇异值，以及追踪网络误差演化的显式矩母函数（MGF）边界。
 
-### 动态理论深潜：基于统计多样性的自适应权重 Push-SUM 去中心化优化
+### 基于统计多样性的自适应权重 Push-SUM 去中心化优化
 System Container: Collaboration
 
 Frontier Source: [Adaptive Weighting Push-SUM for Decentralized Optimization with Statistical Diversity](http://arxiv.org/abs/2412.07252v1)
 
 Deterministic Convergence Mechanism: 该论文通过引入自适应权重 Push-SUM（Adaptive Weighting Push-SUM）协议，为 Push-SUM 建立了一个广义理论框架。它明确解决了去中心化网络中由于统计多样性（数据异构）导致的性能下降问题。通过推导共识距离（consensus distance）的严格上界，作者确定性地证明了在充分通信下，新协议的共识距离上界缩小到 $O(1/N)$，而传统的 Push-SUM 的上界为 $O(1)$。此外，它还确立了基于该协议的 SGD 和 Momentum SGD 的显式收敛率：$O(N/T)$，这比标准 Push-SUM 协议的 $O(Nd/T)$ 边界（其中 $d$ 是参数规模，$T$ 是迭代次数）有了显著的确定性改进。
 
-### 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 System Container: Collaboration
 Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
 Deterministic Convergence Mechanism: DSGTm-TV算法通过在时变有向图上结合梯度跟踪和heavy-ball动量，保证收敛到全局最优。最大步长$\bar{\alpha}$受到确定性约束以确保稳定：$\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$，建立了$\mathcal{O}(\rho_{M}^{k})$的线性收敛率，其中$\rho_{M}<1$为混合矩阵的谱半径。
 
-### 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+### Decentralized Optimization Over Slowly Time-Varying Graphs
 System Container: Collaboration
 Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
 Deterministic Convergence Mechanism: 该算法为具有马尔可夫时变图的去中心化共识建立了显式的线性收敛速率 $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$。它利用对混合时间 $\tau$ 的严格边界机制，以及对 $B = \lceil b \log_{2}M \rceil$ 等参数的严格约束，来控制图拓扑变化的散度。
 
-### 动态理论深潜：无中心服务器的分布式优化与共识
+### 无中心服务器的分布式优化与共识
 System Container: Collaboration System
 Frontier Source: arXiv:2410.01700 (Yutong He 等人, 2024)
 Deterministic Convergence Mechanism: 该研究严格证明了一种去中心化的优化框架，使得多智能体网络能在没有中心参数服务器的情况下，百分百确定性地收敛于全局共识（即 $\lim_{k \to \infty} x_i^k = x^\star$）。
 
-### 动态理论深潜：FSPDA 随机网络拓扑优化
+### FSPDA 随机网络拓扑优化
 
 **Frontier Source:** A Stochastic Approximation Approach for Efficient Decentralized Optimization on Random Networks (arXiv:2410.18774v2)
 
 **Deterministic Convergence Mechanism:** FSPDA (Fully Stochastic Primal Dual Algorithm) 建立了一个严格的 $\mathcal{O}(1/\sqrt{T})$ 收敛边界，用于在随机、时变网络上的去中心化优化。通过利用随机增广拉格朗日方法（stochastic augmented Lagrangian approach），该算法在网络不可靠的情况下提供了结构性稳定性，消除了单点故障（SPOF），并在混沌的边缘连接下实现了确定性的收敛阈值。
 
-### 动态理论深潜：去中心化随机次梯度收敛性
+### 去中心化随机次梯度收敛性
 
 **Frontier Source:** Convergence of Decentralized Stochastic Subgradient-based Methods for Nonsmooth Nonconvex functions (arXiv 2403.11565)
 
 **Deterministic Convergence Mechanism:** 由去中心化学习更新 ${\bm{Z}}_{k+1}={\bm{Z}}_{k}{\bm{W}}-\eta_{k}({\bm{H}}_{k}+\Xi_{k+1})$ 生成的去中心化状态序列 $\{{\bm{Z}}_{k}\}$ 的轨迹，会确定性地追踪连续时间微分包含 $\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}\in-\mathrm{conv}\,\left(\frac{1}{d}\sum_{i=1}^{d}\Phi_{i}({\bm{z}})\right)$。这提供了一个有保证的行为下界：去中心化序列的所有极限点都将严格收敛到由李雅普诺夫函数 $\psi$ 控制的稳定集 $\mathcal{A}$。
 
-### 动态理论深潜：Decentralized Actor-Critic Convergence in Markov Games
+### Decentralized Actor-Critic Convergence in Markov Games
 
 **Frontier Source:** Convergence of Decentralized Actor-Critic Algorithm in General-sum Markov Games (arXiv:2409.04613v6)
 
 **Deterministic Convergence Mechanism:** 该算法利用马尔可夫近势函数 (Markov Near-Potential Function, MNPF) $\Phi$ 作为去中心化学习动态的近似 Lyapunov 函数。它提供了一个严格的理论行为下界，确保在代理无需了解其他人的策略或收益的情况下，异步的去中心化 Actor-Critic 更新将无条件且确定性地收敛到近似纳什均衡集合 $\textsf{NE}(\epsilon)$。
 
-### 动态理论深潜：Robust Compressed Push-Pull (RCPP) Method
+### Robust Compressed Push-Pull (RCPP) Method
 
 **Frontier Source:** arXiv:2408.01727 (A Robust Compressed Push-Pull Method for Decentralized Nonconvex Optimization)
 
 **Deterministic Convergence Mechanism:** RCPP 算法在一般有向图下实现了带有通信压缩的梯度追踪机制。对于平滑且可能非凸的目标函数，它实现了次线性收敛率，并约束了优化误差 $\Omega_o^k$ 与一致性误差 $\Omega_c^k$。该机制在允许相对和绝对压缩误差的更一般压缩算子下依然保持稳健。
 
-### 动态理论深潜：基于 KL 性质的去中心化梯度追踪机制
+### 基于 KL 性质的去中心化梯度追踪机制
 
 **Frontier Source:** Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556v1)
 
 **Deterministic Convergence Mechanism:** 基于梯度追踪的去中心化机制在目标函数满足 Kurdyka-Łojasiewicz (KL) 性质时，能够保证渐进收敛。算法建立了确定性的线性或次线性收敛边界（例如 $\|X^{\nu}-1(x^{*})^{\top}\|\leq c^{\prime\prime}(\tau^{\prime})^{\nu}$），而无需任何中心化的协调。
 
-### 动态理论深潜：Decentralized Memoryless BFGS (DMBFGS)
+### Decentralized Memoryless BFGS (DMBFGS)
 
 **Frontier Source:** arXiv:2409.07122v3 "Decentralized Conjugate Gradient and Memoryless BFGS Methods"
 
@@ -552,7 +552,7 @@ def id2a_decentralized_update(z_k, w_k, lambda_k_plus_1, C, L_F_rho, beta_k):
     return w_k_plus_1, z_k_plus_1
 ```
 
-### Code for 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Code for Distributed Continuous-Time Optimization with Time-Varying Constraints
 ```python
 # System: Collaboration
 # Focus: Distributed Continuous-Time Optimization with Log-Barrier
@@ -597,7 +597,7 @@ def compute_continuous_time_update(x_i, t, neighbors_i, f_i, g_i, rho_i, sigma_i
     return dot_x_i
 ```
 
-### Code for 动态理论深潜：去中心化策略优化 (DPO)
+### Code for 去中心化策略优化 (DPO)
 ```python
 # 基于定理1提取：去中心化代理目标下界
 def optimize_agent_policy(pi_old_i, N, M_tilde, C):
@@ -625,7 +625,7 @@ def optimize_agent_policy(pi_old_i, N, M_tilde, C):
     return best_pi_i
 ```
 
-### Code for 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Code for Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 ```python
 # 具有任意延迟的去中心化平均与优化
 # 变量和公式提取自 DT-GO 算法设计
@@ -672,7 +672,7 @@ def DT_GO_optimization(W, x_init, pi, T, N, tau_g, eta, f_grads):
     return x
 ```
 
-### Code for 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### Code for ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 ```python
 # 变量严格遵循 arXiv:2401.03136 提取内容
 # F_v, T_v: 节点 v 的目标函数和代理下界 (F^{v}_{k+1}, T^{v}_{k+1})
@@ -703,7 +703,7 @@ def verify_lq_pep_constraint(F_v_next, T_v_next, x_v_next, x_star, z_v_next, gra
     return lq_pep_bound
 ```
 
-### Code for 动态理论深潜：去中心化优化的强概率收敛与梯度追踪
+### Code for 去中心化优化的强概率收敛与梯度追踪
 ```python
 # 基于提取公式的去中心化优化参数
 lambda_spectral = 0.9  # \lambda: 混合矩阵 W 的第二大奇异值，用于约束 \|W-J\|
@@ -723,7 +723,7 @@ next_error_bound = compute_next_consensus_error_bound(x_consensus_error_t, y_tra
 print(f"下一步一致性误差的确定性边界: {next_error_bound}")
 ```
 
-### Code for 动态理论深潜：基于统计多样性的自适应权重 Push-SUM 去中心化优化
+### Code for 基于统计多样性的自适应权重 Push-SUM 去中心化优化
 ```python
 # 基于提取公式的去中心化优化理论参数
 N = 10  # N: 网络中的节点（智能体）数量
@@ -749,7 +749,7 @@ bounds = evaluate_protocol_bounds(N, T_iter, d)
 print(f"自适应协议的一致性误差规模: {bounds['Adaptive Weighting Push-SUM']['Consensus']}")
 ```
 
-### Code for 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Code for Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 ```python
 # 基于Algorithm 1: The DSGTm-TV Algorithm
 # 变量: A_k, B_k (第k轮的随机混合矩阵), alpha_i (步长), beta_i (动量参数)
@@ -773,7 +773,7 @@ def gradient_tracking_update(y_k, x_k_plus_1, x_k, B_k, g_fn, n, i, xi_k_plus_1,
     return y_k_plus_1
 ```
 
-### Code for 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+### Code for Decentralized Optimization Over Slowly Time-Varying Graphs
 
 ```python
 # 提取自 Algorithm 1: 具有马尔可夫变化的图上的加速共识
@@ -796,7 +796,7 @@ def accelerated_consensus_step(x, x_f, gamma, p, beta, theta, eta, g_k):
     return x_next, x_f_next
 ```
 
-### Code for 动态理论深潜：无中心服务器的分布式优化与共识
+### Code for 无中心服务器的分布式优化与共识
 ```python
 # 基于真实提取公式的严谨伪代码
 # 公式: x_i^\star = \lim_{k\rightarrow\infty} \left(z_i^{k+1} - \sum_{j\in\mathcal{N}(i)} p_{i,j,2}^k \odot (z_i^{k+1} - z_j^{k+1})\right) = x^\star
@@ -815,7 +815,7 @@ def compute_decentralized_consensus(z_i_next, neighbors_z_next, p_weights):
     return x_i_converged
 ```
 
-### Code for 动态理论深潜：FSPDA 随机网络拓扑优化
+### Code for FSPDA 随机网络拓扑优化
 
 ```python
 # 完全随机原始-对偶算法 (FSPDA)
@@ -861,7 +861,7 @@ def fspda_computation_thread(i, B_i, x_i, lambda_i_hat, t_i, g_i, eta, alpha, ga
         return x_i_next, lambda_i_next, t_i, g_i, B_i
 ```
 
-### Code for 动态理论深潜：去中心化随机次梯度收敛性
+### Code for 去中心化随机次梯度收敛性
 
 ```python
 def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
@@ -894,7 +894,7 @@ def decentralized_subgradient_tracking(Z_k, W, H_k, Xi_k_plus_1, eta_k):
     return Z_k_plus_1
 ```
 
-### Code for 动态理论深潜：Decentralized Actor-Critic Convergence in Markov Games
+### Code for Decentralized Actor-Critic Convergence in Markov Games
 
 ```python
 # 一般和马尔可夫博弈中的去中心化 Actor-Critic 更新
@@ -921,13 +921,13 @@ def decentralized_actor_critic_step(agent_i, s_t_minus_1, pi_i_t_minus_1, q_i_t_
     return pi_i_t_s
 ```
 
-### Code for 动态理论深潜：Robust Compressed Push-Pull (RCPP) Method
+### Code for Robust Compressed Push-Pull (RCPP) Method
 
 ```python
 MISSING_SOURCE
 ```
 
-### Code for 动态理论深潜：基于 KL 性质的去中心化梯度追踪机制
+### Code for 基于 KL 性质的去中心化梯度追踪机制
 
 ```python
 # 去中心化梯度追踪更新
@@ -949,7 +949,7 @@ def sonata_gradient_tracking_step(Y_nu, W, nabla_F_X_nu, nabla_F_X_nu_plus_1):
     return Y_nu_plus_1
 ```
 
-### Code for 动态理论深潜：Decentralized Memoryless BFGS (DMBFGS)
+### Code for Decentralized Memoryless BFGS (DMBFGS)
 
 ```python
 # Decentralized Memoryless BFGS (DMBFGS) execution step
@@ -1032,71 +1032,71 @@ def dmbfgs_update(x_t_plus_1_i, x_t_i):
 - **Dual$^2$方法**：就像分部不仅根据当下的偏差来调整（第一层反馈），还通过多层级的机制（Dual$^2$）进行调整。
 这使得整个公司能在不依赖中央总部的情况下，快速且“确定性”地达成完全一致的预算分配，彻底杜绝了无休止的扯皮（黑盒概率收敛）。
 
-### Analogy for 动态理论深潜：Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Analogy for Distributed Continuous-Time Optimization with Time-Varying Constraints
 想象一支自主送货无人机编队正试图以紧密的队形飞行，同时在不断变化的送货路线上优化其能源使用（时变代价函数）。它们必须避免撞上动态障碍物或进入禁飞区（时变约束）。
 它们并不需要一个中央控制塔来规划路线，每架无人机只与附近的无人机进行通信。它们使用一种“排斥护盾”（对数障碍），如果它们太靠近禁飞区边界，护盾就会变得无限强，从而确保它们永远不会越界。相应的更新规则精确地告诉它们，该以多快的速度相对于邻居和目标进行位置调整，在数学层面上绝对保证了编队能进行完美同步且绝对安全的移动，彻底消除了对中心化协调器的需求。
 
-### Analogy for 动态理论深潜：去中心化策略优化 (DPO)
+### Analogy for 去中心化策略优化 (DPO)
 想象一个厨师团队（智能体）在一起做一个巨大的蛋糕（联合任务），但没有主厨（中心化 Critic）来发号施令。如果每个厨师都只顾着改进自己负责的部分而不考虑其他人，整个蛋糕可能会塌陷（环境非平稳性）。
 
 DPO 的代理目标就像是给每个厨师的一份严格的个人契约：“你可以修改你的配方，但你必须根据你修改的剧烈程度扣除一个‘风险惩罚’（KL 散度项）。只要你遵守这个规则，我就可以在数学上保证整个蛋糕一定会变得更好，即使你从头到尾都没和其他厨师说过一句话。” 它通过强制局部的谨慎，来确保全局的确定性提升。
 
-### Analogy for 动态理论深潜：Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
+### Analogy for Decentralized Optimization in Networks with Arbitrary Delays (DT-GO)
 想象一家大型物流公司，有许多区域枢纽（节点）需要同步库存数据，但它们只能单向发送信息（有向图），并且信息经常在邮递中被任意延迟。如果每个人只是盲目地平均他们收到的数据，那些发送信息较多的枢纽会意外地使数据产生偏差。DT-GO算法添加了“虚拟枢纽”来代表运输中被延迟的邮件，并运行一个快速的“预热”阶段，在这个阶段中，每个人都发送一张唯一的身份证。通过观察他们最终持有的每张身份证的比例，他们可以准确算出需要将自己的更新数据“降权”多少 ($d_n$)。这使得所有枢纽即使在通信线路混乱和缓慢的情况下也能达成完美的共识（平稳解），保证整个公司在没有任何中央协调员的情况下高效地优化路线规划。
 
-### Analogy for 动态理论深潜：ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
+### Analogy for ASY-DAGP via Linear Quadratic PEP (LQ-PEP)
 想象你要判断一个巨大的管道系统（有向网络智能体）最终是否能平衡水压（达到收敛），而每个人都在不同的随机时间调节他们的阀门（异步延迟）。通常，工程师会试图找到一个神奇的“总能量”公式（Lyapunov 函数），证明它每秒都在下降。但这在这里太难了。相反，LQ-PEP 就像一个“最坏情况审计员”。它把管道所有局部的、基本的物理规则写成简单的代数不等式（$\leq 0$），并在数学上证明：即使在极其恶劣的延迟顺序下，整个系统在物理上也无法逃避，最终必须达到平衡状态。
 
-### Analogy for 动态理论深潜：去中心化优化的强概率收敛与梯度追踪
+### Analogy for 去中心化优化的强概率收敛与梯度追踪
 想象一个厨师团队（智能体）在各自的厨房里试图烤出完全相同的蛋糕配方（全局模型）。他们只能与隔壁的厨房交流。
 - `lambda_spectral`（谱隙）就像是厨房之间信息传递的速度。lambda 越小，说明信息同步越快。
 - 一致性差距（他们的蛋糕有多大差异）的公式表明，他们的分歧会随着时间推移而缩小（公式中 `(1+lambda^2)/2` 的部分，它小于 1），但也会因为各自记录配料时的追踪误差（`y_tracking_error_t` 的部分）而产生轻微的偏离。
 - 高概率边界（High-probability bound）是一种严格的数学保证：“我 99.9% 确定在 T 小时后，所有的蛋糕尝起来会一模一样，即使个别厨师偶尔称错配料（亚高斯噪声）。”
 
-### Analogy for 动态理论深潜：基于统计多样性的自适应权重 Push-SUM 去中心化优化
+### Analogy for 基于统计多样性的自适应权重 Push-SUM 去中心化优化
 想象一个大型研究团队（由 $N$ 个节点组成的网络）正试图合写一份报告。每个研究员只有部分数据（统计多样性），且只能与相邻座位的同事交流。
 - 在标准做法（传统 Push-SUM）中，他们只是盲目地平均大家的笔记。因为某些节点的数据差异极大，“分歧”（共识距离）永远无法完全消除（$O(1)$），而且报告的规模（$d$）越大，所有人的收敛速度就越慢（$O(Nd/T)$）。
 - 在自适应权重（Adaptive Weighting）方法中，团队对邻居的笔记应用了巧妙的加权公式（Moreau weighting）。这在数学上保证了团队规模（$N$）越大，最终的分歧反而越小（$O(1/N)$），从而彻底打破了由报告规模（$d$）带来的性能瓶颈。
 
-### Analogy for 动态理论深潜：Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
+### Analogy for Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 想象一家拥有多个区域分公司的大型企业。与其让一个中央总部直接处理所有销售数据（中心化），不如让各分公司相互交流以弄清整体市场趋势（去中心化）。在这种动态结构中，分公司之间的沟通渠道会随时间变化（时变有向网络）。为了让大家保持正轨而不丢失信息，每个分公司维护两部分信息：自己的本地市场策略（$x$）和对全局市场趋势的估计（$y$）。在每一步中，分公司通过融合其可达邻居的信息（$A_k x$），并朝着趋势迈出一步来更新其策略，同时利用之前决策的一点动量（$\beta_i$）来避免变化过于突兀。然后，他们通过跟踪本地数据梯度的变化（$g(x_{k+1}) - g(x_k)$）并将其与邻居的估计值（$B_k y$）混合，来更新全局趋势估计（$y$）。只要他们的更新幅度（步长）不太激进（受到网络最差连通速度的数学约束），所有人的策略就会确定性地收敛到唯一的最佳全局策略。
 
-### Analogy for 动态理论深潜：Decentralized Optimization Over Slowly Time-Varying Graphs
+### Analogy for Decentralized Optimization Over Slowly Time-Varying Graphs
 想象一群在不同房间里的工人试图同步他们的时钟（共识）。房间之间的门随机地打开和关闭（马尔可夫时变图）。如果每个人都盲目地相信刚走进来的人，时钟就会剧烈波动。相反，每个人都保持着严格的“惯性”（动量参数 $\theta, \eta, \beta$），并且只根据在设定时间窗口（$B$）内精心计算的平均值（$g^k$）来稍微更新他们的时钟。这个严格的公式确保了无论门的行为有多混乱，时钟都能保证以可预测的速度完美对齐。
 
-### Analogy for 动态理论深潜：无中心服务器的分布式优化与共识
+### Analogy for 无中心服务器的分布式优化与共识
 想象一群厨师要在不同的厨房里共同研发一道完美的汤。但他们没有总厨（没有中心服务器）。他们不需要把菜谱寄到总部去统筹，而只需要偶尔看一眼隔壁厨房的配方，然后用严格的数学公式微调自己的配方。这套理论证明了：只要局部的微调足够严谨，最终所有厨房都会不可避免地煮出完全一样、也是最完美的那锅汤（全局最优 $x^\star$）。
 
-### Analogy for 动态理论深潜：FSPDA 随机网络拓扑优化
+### Analogy for FSPDA 随机网络拓扑优化
 
 想象一支在巨大森林（优化空间）中探索的侦察兵小队（节点）。他们的对讲机非常不可靠，由于干扰（随机网络拓扑），信号会随机中断。每个侦察兵并没有等待中央指挥官下达全局命令，而是根据当地地形（本地梯度）继续前进。当信号偶尔与附近的侦察兵接通时（进入通信缓冲区），他们会迅速综合彼此的位置（一致性项）并调整内置指南针的偏差（对偶变量更新）。FSPDA 的数学边界保证了，即使对讲机连接处于混沌的随机状态，整个侦察兵小队最终也会在严格的时间框架（$\mathcal{O}(1/\sqrt{T})$）内收敛到森林中的最佳位置，完全不需要依赖任何中央总部。
 
-### Analogy for 动态理论深潜：去中心化随机次梯度收敛性
+### Analogy for 去中心化随机次梯度收敛性
 
 想象一队探险家（多个智能体 $d$）在没有中央队长的情况下，正在测绘一座崎岖多雾的大山（非平滑非凸函数）。在迈出每一步后，每个探险家只和他们身边的邻居交流以求得一个平均位置（混合矩阵 ${\bm{W}}$），然后根据自己那起雾的指南针读数（${\bm{H}}_{k}+\Xi_{k+1}$）向下迈出一步。数学理论保证了，尽管有大雾且缺乏中央地图，团队的集体路线 $\{{\bm{Z}}_{k}\}$ 将表现得就像有一只巨大的、无形的手（$\frac{\mathrm{d}{\bm{z}}}{\mathrm{d}t}$）在平滑地引导他们到达谷底（稳定集 $\mathcal{A}$）。
 
-### Analogy for 动态理论深潜：Decentralized Actor-Critic Convergence in Markov Games
+### Analogy for Decentralized Actor-Critic Convergence in Markov Games
 
 想象一个熙熙攘攘的复杂菜市场，几个独立的摊贩（代理）都在试图最大化自己的利润，但他们根本不知道竞争对手的底牌策略。与其雇佣一个中心化的市场管理员来协调大家，每个摊贩只是简单地记录自己过去的销售情况（Critic），并把今天的价格稍微向看起来最赚钱的方向调整（最优反应）。数学上的 Lyapunov 理论就像一只看不见的引力之手——它在数学上保证了，只要每个人都坚持做这种微调，整个原本混乱的市场最终会自然而然地收敛到一个所有人都不愿再单方面改变的稳定状态（纳什均衡），从而彻底避免了中心化系统的崩溃风险。
 
-### Analogy for 动态理论深潜：Robust Compressed Push-Pull (RCPP) Method
+### Analogy for Robust Compressed Push-Pull (RCPP) Method
 
 想象一个由多个独立仓库（智能体）组成的去中心化供应链网络，它们需要协调库存。因为互相通电话成本太高，所以它们只发送高度压缩的摘要报告。即使报告中存在相对和绝对压缩误差，各个仓库依然能够追踪并保持一致性（$\Omega_c^k$），限制优化误差（$\Omega_o^k$），从而允许它们在这个有向网络中逐步达成完全一致的库存规划。
 
-### Analogy for 动态理论深潜：基于 KL 性质的去中心化梯度追踪机制
+### Analogy for 基于 KL 性质的去中心化梯度追踪机制
 
 想象一个建筑师团队（去中心化代理）正在设计一个复杂的城市规划。他们每个人都持有蓝图的不同部分，并且只能与紧挨着的邻居交谈。他们不需要不断向总建筑师汇报（没有中央服务器），而是计算自己街区需要的改动，并传递一份关于整个城市建设动向的估计摘要。Kurdyka-Łojasiewicz (KL) 性质就像是他们所建设地貌的一种严格的几何坡度规则。该理论在数学上证明了：只要他们遵循这个追踪公式，即使没有总建筑师，他们的蓝图也会以可预测的、有保证的速度（收敛边界）确定性地对齐成一个统一的完美城市规划（$1(x^\star)^\top$），彻底消除了中央决策带来的单点故障风险。
 
-### Dynamic Theory Deep-Dive: Decentralized Memoryless BFGS (DMBFGS) Convergence
+### Decentralized Memoryless BFGS (DMBFGS) Convergence
 
-### Analogy for 动态理论深潜：Decentralized Memoryless BFGS (DMBFGS)
+### Analogy for Decentralized Memoryless BFGS (DMBFGS)
 
 想象一个庞大的物流网络，各区域仓库（节点）必须在没有中央总部（去中心化分布式优化）的情况下对全球库存进行优化。在普通网络中，每个仓库仅根据直接邻居调整库存，这往往导致巨大的延迟和误差波动。DMBFGS 就像一个高级本地记忆协议。每个仓库并不需要记住全局趋势的完整历史（在没有中央服务器的情况下这是不可能的），而是使用“无记忆 BFGS 近似”——一种高度压缩的数学技巧，仅通过最后一步的变化来估计供应链的“曲率”或趋势。收敛机制显式限制了它们的反应速度上限（$\alpha$ 上界），确保即使没有中央协调，整个网络也能以有保证的指数级速度（$\rho({\bf{J}})$）确定性地对齐库存，严格防止任何单点故障 (SPOF) 导致的崩溃。
 
-### Analogy for Dynamic Theory Deep-Dive: OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
+### Analogy for OledFL (Opposite Lookahead Enhancement for Decentralized Federated Learning)
 想象一个区域快递司机团队（去中心化代理）在应对本地交通状况（本地数据方差）。每位司机不再仅仅看着地图走当前这一步，而是使用“反向超前”机制——他们估算如果保持前一天的势头最终会到达哪里，并主动纠正今天的起始位置。数学下界保证了，通过进行这种本地纠正，所有司机最终都会收敛到全局最佳路线（速度为 $\mathcal{O}(1/\sqrt{KT})$），而完全不需要中央调度员（中心服务器）来不断地纠正他们。
 
-### 动态理论深潜：高维去中心化梯度追踪 (Gradient Tracking for High Dimensional Optimization)
+### 高维去中心化梯度追踪 (Gradient Tracking for High Dimensional Optimization)
 System Container: Collaboration System
 Frontier Source: Gradient Tracking for High Dimensional Federated Optimization (arXiv:2312.05590)
 Deterministic Convergence Mechanism: 该方法在去中心化节点之间应用了高维梯度追踪技术，从数学上消除了数据异质性带来的方差。它确立了一个确定性的收敛上界 $\displaystyle\leq 8d^{2/p}\tau LK^{2}\sum\limits_{{i}={r-\tau}}^{r-1}\sum\limits_{{m}={1}}^{M}{\mathbb{E}}\left\{f_{m}(\bar{{\bm{w}}}_{i,0})-f_{m}({\bm{w}}^{*})-\dots\right\}$，确保了即使存在局部网络延迟（$\tau$），系统也必将严格达成全局共识。
@@ -1123,25 +1123,26 @@ def compute_decentralized_gradient_tracking_update(local_gradients_m, global_tra
 ### 0基础业务通俗类比 (For Beginners)
 想象几十个大区经理（节点）试图在没有总公司 CEO（去中心化无服务器）的情况下，商量出一个全国统一售价。如果大家只是简单平均各自的报价，价格会疯狂波动。在“梯度追踪”机制下，每个经理不仅上报自己当前的价格，还要上报自己价格**变化的趋势**（$\nabla f_{m}$）。背后的数学原理证明了，只要追踪了这个变化趋势，所有经理最终就一定会完美达成一个完全一致且最优的全国价格，甚至哪怕其中有几个人的邮件晚发了几天（网络延迟）。
 
-### Analogy for Dynamic Theory Deep-Dive: 耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
+### Analogy for 耦合约束下的全局最优去中心化优化 (Globally-Constrained Decentralized Optimization)
 想象多个银行分行（节点）必须共同管理一个严格的监管存款比例（耦合仿射约束），且没有总部（无中央服务器）。以前，分行必须在精确合规上妥协，或者选举一个领导者，从而产生瓶颈。这种切比雪夫加速方法为每个分行提供了两个账本：一个内部行动计划（原变量）和一个共享的“监管差距”跟踪器（对偶变量）。通过对它们的通信应用数学“切比雪夫滤波器”，分支机构积极消除跨网络的误解（高频误差）。该公式保证了整个银行以指数级速度（线性收敛）收敛到数学上最佳的资源分配，而完全不依赖中央权威。
 
-### Analogy for Dynamic Theory Deep-Dive: 带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
+### Analogy for 带有周期性全局平均的加速梯度追踪 (Accelerated Gradient Tracking with Periodic Global Averaging)
 想象一支去中心化的送货卡车车队（节点），试图在没有调度员的情况下共同计算出穿越城市的最佳路线。通常，它们只会向附近的卡车询问估算值（梯度追踪），但这会随着时间推移积累误差。通过“周期性全局平均” (PGA)，每隔 $\tau$ 小时（同步周期），所有卡车都会短暂地调入一个全局无线电频道，以完美对齐它们的路线 ($\frac{1}{n}\sum x_{i}^{(k)}$)。数学证明，通过严格限制它们的更新激进程度（步长 $\alpha$），这种混合方法大大加快了找到最佳路线的速度，并且在数学上永远不会导致系统发散或崩溃。
 
-### Analogy for Dynamic Theory Deep-Dive: 基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
+### Analogy for 基于 DME 的去中心化自适应权重 Push-SUM (Adaptive Weighting Push-SUM for Decentralized Optimization)
 想象一个由独立气象站（节点）组成的去中心化网络，它们试图通过断断续续的无线电连接（时变有向图）共同计算出一个全球气候模型。有些气象站在沙漠里，有些在雨林里，这导致它们本地的数据差异巨大（统计多样性 / 非独立同分布）。如果它们只是盲目地平均各自的发现，极端的异常数据就会导致模型崩溃。“自适应权重 Push-SUM” 方法为每个气象站配备了一个智能通信过滤器。针对它们更新速度的严格数学边界 ($\gamma$) 确保了这种谨慎、自适应的通信方式，能在数学上百分之百保证它们最终达成完美的全球气候共识，而永远不需要一个中央权威机构，也不会被当地的极端天气带偏。
 
-### Analogy for Dynamic Theory Deep-Dive: Distributed Continuous-Time Optimization with Time-Varying Constraints
+### Analogy for Distributed Continuous-Time Optimization with Time-Varying Constraints
 想象你在管理一支去中心化的自动驾驶无人机机队（分布在网络 $\mathcal{V}$ 上的多智能体系统）。它们需要协同找到最优飞行路径，但禁飞区（时变约束）和风况（扰动）却在不断变化。与其依赖缓慢的中央服务器，每架无人机都实现了一个本地的“滑模控制器”，就像一个超级灵敏的减震器。即使突然遭遇强风，底层的李雅普诺夫数学边界（$\dot{V}(x)$）也能保证无人机会在有限时间内，确定性地“滑”回最优且安全的编队轨迹，在不断变化的边界中安全穿梭而不会坠毁。
 
-### Analogy for Dynamic Theory Deep-Dive: Adaptive Weighting Push-SUM & MSGAP Convergence
+### Analogy for Adaptive Weighting Push-SUM & MSGAP Convergence
 想象一个去中心化的分析师团队（节点）试图在没有中央老板的情况下就最佳预测模型达成一致。他们没有将每个人的意见同等对待（如果有些人发言太随意，这会导致偏差），而是使用了“自适应权重”方法。每个分析师根据最近的可靠性调整他们对邻居输入的信任度。他们还使用“动量”（MSGAP），意味着他们会记住过去成功的方向，这样就不会对突然的噪音反应过度。数学推导证明，无论他们各自的数据有多么不同，他们的集体答案都会确定性地收敛于正确的解决方案，并受到严格数学极限的约束。
 
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Collaboration System: Woven OledFL, Globally-Constrained Decentralized Optimization, Accelerated Gradient Tracking, Adaptive Weighting Push-SUM, Distributed Continuous-Time Optimization, and MSGAP Convergence into core theory chapters. Pseudocodes moved to Source Code Breakdown. Analogies moved to For Beginners section.
+
+Collaboration System: introduced OledFL, Globally-Constrained Decentralized Optimization, Accelerated Gradient Tracking, Adaptive Weighting Push-SUM, Distributed Continuous-Time Optimization, and MSGAP Convergence, updated Constraints Section
 
 MISSING_SOURCE: None
 
