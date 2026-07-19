@@ -66,12 +66,12 @@ arXiv:2606.13814v1《TASR: Training-Free Adaptive Stopping for Iterative Retriev
 arXiv:2605.19396《Distributed Gradient-Regularized Newton Method: Scheduled Consensus and O(epsilon^{-1}) Global Iteration Complexity》。选择该理论是因为它严格执行了去中心化分布式优化（DecDPO）范式，从数学底层直接免疫了传统中心化联邦学习中的单点故障（SPOF）。
 该算法在数学上提供了硬核的下界保证，即全局迭代复杂度严格为 $\mathcal{O}(\varepsilon^{-1})$。它通过 $\lambda_{i,k}=\sqrt{M\|\tilde{g}_{i,k}\|}$ 实施动态惩罚约束，彻底摒弃了概率性黑盒逼近。其残差更新受约束于 $r_{k}=(\nabla^{2}f(\bar{x}_{k})+\lambda_{k}I)\bar{s}_{k}+g_{k}.$。
 
-### 动态理论深潜：基于物理边界约束的架构稳定性
+### 基于物理边界约束的架构稳定性
 System Container: Architecture Principles
 Frontier Source: arXiv:2411.15111 (Afrah Farea 等人, 2024)
 Deterministic Convergence Mechanism: 该研究将物理信息边界（Physics-Informed Bounds）引入到神经网络优化中，通过严格的初始条件和边界条件，从数学上强制赋予梯度稳定性，防止模型架构在训练时发生结构性发散。
 
-### 动态理论深潜：Mamba State-Space Models Lyapunov Stability
+### Mamba State-Space Models Lyapunov Stability
 
 **Frontier Source:** "Mamba State-Space Models Are Lyapunov-Stable Learners" (arXiv:2406.00209v3) by John T. Halloran, Manbir Gulati, Paul Roysdon
 
@@ -228,7 +228,7 @@ def distributed_newton_step(x_k, g_k, H_k, lambda_k):
     return x_next
 ```
 
-### Code for 动态理论深潜：基于物理边界约束的架构稳定性
+### Code for 基于物理边界约束的架构稳定性
 ```python
 # 基于真实提取公式的严谨伪代码
 # 公式: L(theta) = min_theta ( lambda_1 || L_phy || + lambda_2 || L_bc || + lambda_3 || L_ic || )
@@ -248,7 +248,7 @@ def compute_physically_constrained_loss(L_phy, L_bc, L_ic, lambdas):
     return total_loss
 ```
 
-### Code for 动态理论深潜：Mamba State-Space Models Lyapunov Stability
+### Code for Mamba State-Space Models Lyapunov Stability
 
 ```python
 def lyapunov_stable_mamba_block(x_prev, u_t, epsilon, N, F_theta):
@@ -299,10 +299,10 @@ def F_theta_pow(F_theta, N, x, u):
 想象一支没有队长的探险队（节点）要在夜间寻找山谷的最深处（最优解），以此消除中心指挥部瘫痪的风险（消灭SPOF）。
 传统方法是所有人向总部汇报，容易拥堵崩溃。而基于该 DecDPO 理论，每个人自己测量脚下的坡度（梯度）和地形凹凸感（海森矩阵）。如果坡度很陡，他们会自动给自己加装强力“刹车”（$\lambda_{k}$）。底层的硬核数学公式保证了，哪怕大家只和身边的几个人交换信息，整个团队也能不多不少、极其精确地在 $\mathcal{O}(\varepsilon^{-1})$ 步内到达谷底。这就像是一群无人机在没有控制塔的情况下，完成了极其完美的蜂群同步降落。
 
-### Analogy for 动态理论深潜：基于物理边界约束的架构稳定性
+### Analogy for 基于物理边界约束的架构稳定性
 如果让 AI 去设计一座桥，它可能会画出悬在半空中、现实里一秒就会塌的图纸。普通的黑盒模型只在乎“像不像桥”。而这套理论直接把“万有引力”和“地基不可穿透”这种死规矩，刻进 AI 的核心引擎里。它在物理上彻底阻止了系统去探索那些“看起来很美但必定崩溃”的状态，从而保证了其架构永远脚踏实地。
 
-### Analogy for 动态理论深潜：Mamba State-Space Models Lyapunov Stability
+### Analogy for Mamba State-Space Models Lyapunov Stability
 
 想象一个陡峭的碗形山谷。无论你把弹珠放在碗里的哪个位置（代表输入扰动 $\varepsilon$），重力都会把它拉向底部的中心。即使在它滚动时你轻轻推它一下，它也不会飞出碗外。在 Mamba 架构中，“李雅普诺夫稳定性（Lyapunov stability）”就像是这个碗——它确保了计算过程中产生的微小误差（比如为了省内存而使用低精度计算产生的误差）只会像碗里的推力一样自然平息，而不会滚雪球般演变成灾难性的崩溃，从而保证系统在长序列生成时依然稳如泰山。
 
@@ -343,7 +343,7 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
 #### Analogy: Predictive Coding Networks Lyapunov Stability
 想象一个水球在一个带有摩擦力的山谷中滚落（能量函数 $V_{\text{PC}}$）。山谷的形状由最终目标 ($L$) 和中间约束 ($\tilde{E}$) 共同决定。该理论证明，无论球从哪里开始，或者是否发生小地震使其颠簸（有界扰动 $O(\epsilon)$），它都将始终严格向下滚动（$\dot{V}_{\text{PC}} \leq 0$），并且以指数级的速度向最底部 ($W^*$) 靠近，而不会无休止地打转或被甩出去。
 
-### 动态理论深潜：重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent)
+### 重缩放梯度下降的李雅普诺夫加速 (Lyapunov Acceleration of Rescaled Gradient Descent)
 System Container: Architecture Principles
 Frontier Source: Accelerating Rescaled Gradient Descent: Fast Optimization of Smooth Functions (arXiv:1902.08825)
 Deterministic Convergence Mechanism: 该理论利用重缩放的 Lyapunov 函数来施加严格的连续时间下降边界。它确立了 $\textstyle\frac{w_{a}(\delta(k+1))-w_{a}(\delta k)}{\delta}\leq\frac{1}{a}(1+\frac{\delta(k+1)}{ap})^{p-1}$ 这一界限，死死限制了系统能量的变化率。这确保了系统的下降轨迹会确定性地向全局最小值加速收敛，而绝对不会出现混沌发散现象。
@@ -371,16 +371,11 @@ def rescaled_gradient_lyapunov_step(x_k, grad_f, alpha_k, delta):
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Architecture Principles: Woven Predictive Coding Networks Lyapunov Stability into stability principles section.
+
+Architecture Principles: introduced Predictive Coding Networks Lyapunov Stability and Lyapunov Acceleration of Rescaled Gradient Descent, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. PCN stability fits perfectly within the NTK / Lyapunov stability bounding framework.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.

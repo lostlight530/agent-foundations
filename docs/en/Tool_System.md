@@ -45,7 +45,7 @@ We know that RL in an open universe is extremely fragile and hyper-sensitive to 
 
 ---
 
-### Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+### Causal Discovery with Policy Optimization for Tool Routing
 System Container: Tool System
 Frontier Source: arXiv:2412.19578 (Shixuan Liu et al., 2024)
 Deterministic Convergence Mechanism: The paper establishes a deterministic clipping policy optimization to guarantee causal routing structure bounded by a trust region, effectively forcing probabilistic tool-selection networks to act within causal mathematical constraints.
@@ -116,7 +116,7 @@ class ToolExecutionRouter:
 1. **The Iron Law of Causality (`causal_dependency_graph`)**: We don't let the LLM freely guess what tool to use at runtime. The system loads this unbreakable "law" at startup. If the agent tries a high-risk action without prior verification, the router intercepts it like a firewall (`_check_causal_dependencies`).
 2. **Depth Severing (`max_tool_chain_depth`)**: LLMs easily get trapped in infinite error loops. This is a mathematical, physical cutoff line. It embodies "We do not optimize, we guarantee convergence"—if it cannot converge to a result, we force it to converge to a "terminated state," never allowing the system to spiral out of control.
 
-### Code for Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+### Code for Causal Discovery with Policy Optimization for Tool Routing
 ```python
 # Grounded pseudocode based on exact formula extraction
 # Formula: D_KL^{i,j}(b,pi_theta|A_t,S_t) = b^{i,j} * ln(b^{i,j}/pi_theta^{i,j}) + (1-b^{i,j}) * ln((1-b^{i,j})/(1-pi_theta^{i,j}))
@@ -175,10 +175,10 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
 ### Analogy for Causal Minimal Tool Filtering (CMTF) & Goal Inference
 Before using a tool, it passes through a physical "causal barcode scanner". It exclusively locks onto the one exact tool needed, mathematically preventing trial-and-error damage.
 
-### Analogy for Dynamic Theory Deep-Dive: Causal Discovery with Policy Optimization for Tool Routing
+### Analogy for Causal Discovery with Policy Optimization for Tool Routing
 If you give an AI a toolbox (APIs), standard probability models might make it randomly choose a hammer for a screw. This theory forces a strict "trust region" (a mathematical fence). If the agent's new plan deviates too much from the original safe blueprint, the KL divergence calculation (the distance formula above) catches it and "clips" the action, guaranteeing causal sanity.
 
-### Dynamic Theory Deep-Dive: Constraint-Guided Verification for Tool Use
+### Constraint-Guided Verification for Tool Use
 System Container: Tool System
 Frontier Source: CoVe: Training Interactive Tool-Use Agents via Constraint-Guided Verification (arXiv:2603.01940)
 Deterministic Convergence Mechanism: The framework enforces a hard constraint set $C=\{c_{1},c_{2},\dots,c_{n}\}$ over the action space $\mathcal{A}$ within a deterministic Markov Decision Process $\mathcal{M}=(\mathcal{S},\mathcal{A},\mathcal{O},\mathcal{T})$. By mathematically verifying that every tool execution step satisfies these constraints, it prevents out-of-bound policy deviations.
@@ -206,16 +206,11 @@ Imagine giving an intern (the AI) a master key to your company's server (tools),
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计
 
 📂 动态演进映射
-Tool System: No new daily chunks to weave this week. Cleaned up legacy wrappers to maintain structure.
+
+Tool System: introduced Constraint-Guided Verification for Tool Use, updated Constraints Section
 
 MISSING_SOURCE: None
 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
-- No paradigm conflict detected. All sub-components maintain strict deterministic bounds.
 
-🔗 核心组件状态与双语对齐检查
-- [x] Memory System
-- [x] Tool System
-- [x] Collaboration System
-- [x] Architecture Principles
-- Bilingual status: Structurally identical.
+Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.
