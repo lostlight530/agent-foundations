@@ -1195,3 +1195,49 @@ MISSING_SOURCE: None
 - [x] Collaboration System
 - [x] Architecture Principles
 - Bilingual status: Structurally identical. The English and Chinese versions of the document are conceptually aligned and all daily chunks are systematically woven.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Enhancing Convergence of Decentralized Gradient Tracking (KL Property)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556)
+Deterministic Convergence Mechanism: 该研究引入了一个近端梯度追踪框架，利用 Kurdyka-Łojasiewicz (KL) 属性为非凸目标上的去中心化优化证明了确定性的全局收敛。其收敛性由步长上限 \alpha<\min\left\{\frac{1}{L/2+\xi/2+14L_{\text{mx}}^{2}\gamma\rho^{2}},\sqrt{\frac{(1-5\rho^{2})\gamma-1/(2\xi)}{2Lw_{\text{mx}}}}\right\} 以及显式的势函数下降不等式 U(X^{\nu+1})\leq U(X^{\nu})-\left(\frac{1}{\alpha}-\frac{L}{2}-\frac{\xi}{2}\right)\|D^{\nu}\|^{2}+\frac{1}{2\xi}\|\Delta^{\nu}\|^{2} 提供了严格的数学保证。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# 基于真实 arXiv 提取的伪代码实现:
+# \alpha<\min\left\{\frac{1}{L/2+\xi/2+14L_{\text{mx}}^{2}\gamma\rho^{2}},\sqrt{\frac{(1-5\rho^{2})\gamma-1/(2\xi)}{2Lw_{\text{mx}}}}\right\}
+# \displaystyle X^{\nu+1} = {W}{X}^{\nu+1/2}
+# \displaystyle Y^{\nu+1} = {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# \texttt{prox}_{\alpha r}(x)
+
+def decentralized_gradient_tracking_step(
+    X_nu, Y_nu, W_matrix, step_size_alpha, r_penalty_func, grad_F
+):
+    # 对本地追踪变量应用近端操作
+    # \displaystyle=\texttt{prox}_{\alpha R}(X^{\nu}-\alpha Y^{\nu})
+    X_half_step = apply_proximal_operator(
+        X_nu - step_size_alpha * Y_nu,
+        step_size_alpha,
+        r_penalty_func
+    )
+
+    # 使用混合矩阵 W 在主变量上进行去中心化共识步骤
+    # \displaystyle=\sum_{j=1}^{m}w_{ij}\,{x}_{j}^{\nu+1/2}
+    X_next = compute_matrix_multiplication(W_matrix, X_half_step)
+
+    # 对偶变量的梯度追踪共识步骤
+    # \displaystyle=\sum_{j=1}^{m}w_{ij}\left(y_{j}^{\nu}+\nabla f_{j}(x_{j}^{\nu+1})-\nabla f_{j}(x_{j}^{\nu})\right)
+    grad_diff = grad_F(X_next) - grad_F(X_nu)
+    Y_next = compute_matrix_multiplication(W_matrix, Y_nu + grad_diff)
+
+    return X_next, Y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一个大型连锁企业（去中心化网络）试图在没有中央总部的情况下统一门店布局（全局优化问题）。各个门店不仅根据本地需求和邻居反馈来更新草图（主变量 $X^{\nu}$），还会同时追踪整个网络的“共识趋势”是如何变化的（对偶变量 $Y^{\nu}$）。
+
+通过在数学上严格限制他们每天修改布局的幅度（步长上限 $\alpha$），系统保证了所有门店最终一定会收敛到一个完美统一的设计。即使面临顽固的本地限制（由 `prox` 算子处理的非凸惩罚），Kurdyka-Łojasiewicz 属性就像一股“引力”，确保他们永远不会陷入无限循环，而是以确定性的方式达成最优共识。

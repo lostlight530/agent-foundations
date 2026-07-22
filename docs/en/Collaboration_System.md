@@ -1234,3 +1234,49 @@ MISSING_SOURCE: None
 - [x] Collaboration System
 - [x] Architecture Principles
 - Bilingual status: Structurally identical. The English and Chinese versions of the document are conceptually aligned and all daily chunks are systematically woven.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Enhancing Convergence of Decentralized Gradient Tracking (KL Property)
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: Enhancing Convergence of Decentralized Gradient Tracking under the KL Property (arXiv:2412.09556)
+Deterministic Convergence Mechanism: This research introduces a proximal gradient tracking framework that exploits the Kurdyka-Łojasiewicz (KL) property to prove deterministic global convergence for decentralized optimization over non-convex objectives. The convergence is mathematically guaranteed by the step-size upper bound \alpha<\min\left\{\frac{1}{L/2+\xi/2+14L_{\text{mx}}^{2}\gamma\rho^{2}},\sqrt{\frac{(1-5\rho^{2})\gamma-1/(2\xi)}{2Lw_{\text{mx}}}}\right\} and the explicit potential function descent inequality U(X^{\nu+1})\leq U(X^{\nu})-\left(\frac{1}{\alpha}-\frac{L}{2}-\frac{\xi}{2}\right)\|D^{\nu}\|^{2}+\frac{1}{2\xi}\|\Delta^{\nu}\|^{2}.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+# Based on grounded arXiv trace extraction:
+# \alpha<\min\left\{\frac{1}{L/2+\xi/2+14L_{\text{mx}}^{2}\gamma\rho^{2}},\sqrt{\frac{(1-5\rho^{2})\gamma-1/(2\xi)}{2Lw_{\text{mx}}}}\right\}
+# \displaystyle X^{\nu+1} = {W}{X}^{\nu+1/2}
+# \displaystyle Y^{\nu+1} = {W}\left(Y^{\nu}+\nabla F(X^{\nu+1})-\nabla F(X^{\nu})\right)
+# \texttt{prox}_{\alpha r}(x)
+
+def decentralized_gradient_tracking_step(
+    X_nu, Y_nu, W_matrix, step_size_alpha, r_penalty_func, grad_F
+):
+    # Apply proximal operator to local tracking variables
+    # \displaystyle=\texttt{prox}_{\alpha R}(X^{\nu}-\alpha Y^{\nu})
+    X_half_step = apply_proximal_operator(
+        X_nu - step_size_alpha * Y_nu,
+        step_size_alpha,
+        r_penalty_func
+    )
+
+    # Decentralized consensus step on primal variables using mixing matrix W
+    # \displaystyle=\sum_{j=1}^{m}w_{ij}\,{x}_{j}^{\nu+1/2}
+    X_next = compute_matrix_multiplication(W_matrix, X_half_step)
+
+    # Gradient tracking consensus step on dual variables
+    # \displaystyle=\sum_{j=1}^{m}w_{ij}\left(y_{j}^{\nu}+\nabla f_{j}(x_{j}^{\nu+1})-\nabla f_{j}(x_{j}^{\nu})\right)
+    grad_diff = grad_F(X_next) - grad_F(X_nu)
+    Y_next = compute_matrix_multiplication(W_matrix, Y_nu + grad_diff)
+
+    return X_next, Y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine a large franchise (a decentralized network) trying to agree on a universal store layout (the global optimization problem) without a central boss. Instead of arguing endlessly, each store creates a draft based on their local needs and neighbors' inputs (the primal variable $X^{\nu}$) while simultaneously tracking how much the "consensus trend" is shifting (the dual variable $Y^{\nu}$).
+
+By mathematically restricting how drastically they can change their layout in one day (the strict step-size bound $\alpha$), the system guarantees that all stores will eventually converge to a perfect, unified design. Even if they face stubborn local constraints (non-convex penalties handled by the `prox` operator), the Kurdyka-Łojasiewicz property acts like a "gravitational pull", ensuring they never get stuck in infinite loops and reach the optimal agreement deterministically.
