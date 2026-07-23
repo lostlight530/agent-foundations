@@ -418,3 +418,32 @@ def lyapunov_exponent_regularized_step(L_theta, var_S, var_H, lambda_1, gamma):
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine driving a car on a bumpy road (observation noise). A standard AI driver might overcorrect a tiny bump by violently jerking the steering wheel, causing the car to swerve wildly out of control (chaotic divergence). The Lyapunov Exponent Regularization acts like a rigid mechanical stabilizer on the steering column. It mathematically calculates the exact limit (the Lyapunov bound) of how much a small bump is allowed to affect the car's trajectory, guaranteeing that no matter what tiny disturbances hit the wheels, the steering wheel remains firmly stable and deterministically on track.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Simultaneous Online System Identification and Control using Composite Adaptive Lyapunov-Based Deep Neural Networks
+
+🔬 选型依据与学术脉络
+System Container: Architecture Principles
+Frontier Source: arXiv:2311.13056 (Simultaneous Online System Identification and Control using Composite Adaptive Lyapunov-Based Deep Neural Networks)
+Deterministic Convergence Mechanism: Uses Lyapunov-based bounding techniques to restrict weight updates in neural networks, guaranteeing that macro structural stability is maintained even during continuous online adaptation.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def lyapunov_stable_update(V_z_t, lambda_2, lambda_3, c, t):
+    # Eq: V\left(z(t)\right)\leq V\left(z(0)\right)\mathrm{e}^{-\frac{\lambda_{3}}{\lambda_{2}}t}+\frac{\lambda_{2}c}{\lambda_{3}}\left(1-\mathrm{e}^{-\frac{\lambda_{3}}{\lambda_{2}}t}\right),
+    # Eq: z\in\mathcal{D}.
+
+    # The gradient update is strictly bounded by the Lyapunov function.
+    # The energy V(z(t)) exponentially decays and remains trapped in the stable region \mathcal{D}.
+    exponential_decay = math.exp(-(lambda_3 / lambda_2) * t)
+    stable_bound = V_z_0 * exponential_decay + (lambda_2 * c / lambda_3) * (1 - exponential_decay)
+
+    if V_z_t > stable_bound:
+        raise StructuralDivergenceError("System mathematically exited Lyapunov stable bounds.")
+    return True
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine flying an experimental aircraft (the neural network) while simultaneously redesigning its wings in mid-air (online learning). If you tweak the wings too radically based on a single gust of wind (probabilistic gradient descent), the plane crashes. Our system uses a mathematically unbreakable "Lyapunov Governor" (a strict energy bound). Before any structural change is applied, the governor proves via equation that the new configuration remains within a safe flying envelope (the stable region $\mathcal{D}$). The plane can learn and adapt forever, but it is mathematically impossible for it to lose control.

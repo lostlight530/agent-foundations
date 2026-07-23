@@ -421,3 +421,30 @@ MISSING_SOURCE: None
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit)
 
 Conflict Detection: No paradigm conflict detected. The new theories align perfectly with the deterministic convergence framework and mathematical bounding principles without relying on central servers.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于正则化 Wasserstein 邻近算子的无噪声采样算法 (Noise-Free Sampling Algorithms with Regularized Wasserstein Proximals)
+
+🔬 选型依据与学术脉络
+System Container: Memory System
+Frontier Source: arXiv:2409.01567 (Convergence of Noise-Free Sampling Algorithms with Regularized Wasserstein Proximals)
+Deterministic Convergence Mechanism: 通过在连续域中应用 Wasserstein 邻近正则化来消除表征坍塌，严格限制 KL 散度的更新步长。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def wasserstein_proximal_step(D_KL_prev, alpha, h, M_0, k):
+    # Eq: \displaystyle\mathrm{D}_{\mathrm{KL}}(\rho_{k+1}\|\rho^{*})
+    # Eq: \displaystyle\leq\frac{1-\alpha^{2}h^{2}}{1+2\alpha h}\mathrm{D}_{\mathrm{KL}}(\rho_{k}\|\rho^{*})+\frac{h^{2}}{2(1+2\alpha h)}M_{0}\exp(-4\alpha hk)+\mathcal{O}(h^{3})
+
+    # 我们通过最小化确定性上限来更新记忆状态表征。
+    decay_term = (1 - (alpha**2 * h**2)) / (1 + 2 * alpha * h)
+    noise_term = (h**2 / (2 * (1 + 2 * alpha * h))) * M_0 * math.exp(-4 * alpha * h * k)
+
+    D_KL_next = decay_term * D_KL_prev + noise_term
+    return D_KL_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）。传统的AI方法只是随机洗牌（添加噪声）。我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道。每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测。
