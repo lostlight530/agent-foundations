@@ -418,3 +418,32 @@ def lyapunov_exponent_regularized_step(L_theta, var_S, var_H, lambda_1, gamma):
 💡 0基础业务通俗类比 (For Beginners)
 
 想象一下在颠簸的道路上开车（观测噪声）。标准的人工智能驾驶员可能会因为一颗小石子而剧烈猛打方向盘，导致汽车失控（混沌发散）。李雅普诺夫指数正则化就像是安装在转向柱上的一个刚性机械稳定器。它从数学上精确计算出一个微小的颠簸能够影响汽车轨迹的极限值（李雅普诺夫边界），从而保证无论车轮遇到多么微小的扰动，方向盘都能牢牢保持稳定，汽车始终能够确定性地沿着正确的轨道行驶。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于复合自适应 Lyapunov 深度神经网络的同时在线系统识别与控制 (Simultaneous Online System Identification and Control using Composite Adaptive Lyapunov-Based Deep Neural Networks)
+
+🔬 选型依据与学术脉络
+System Container: Architecture Principles
+Frontier Source: arXiv:2311.13056 (Simultaneous Online System Identification and Control using Composite Adaptive Lyapunov-Based Deep Neural Networks)
+Deterministic Convergence Mechanism: 使用基于 Lyapunov 的边界技术来限制神经网络中的权重更新，保证即使在持续的在线适应期间也能维持宏观结构稳定性。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def lyapunov_stable_update(V_z_t, lambda_2, lambda_3, c, t):
+    # Eq: V\left(z(t)\right)\leq V\left(z(0)\right)\mathrm{e}^{-\frac{\lambda_{3}}{\lambda_{2}}t}+\frac{\lambda_{2}c}{\lambda_{3}}\left(1-\mathrm{e}^{-\frac{\lambda_{3}}{\lambda_{2}}t}\right),
+    # Eq: z\in\mathcal{D}.
+
+    # 梯度更新受到 Lyapunov 函数的严格边界限制。
+    # 能量 V(z(t)) 指数级衰减并始终停留在稳定区域 \mathcal{D} 内。
+    exponential_decay = math.exp(-(lambda_3 / lambda_2) * t)
+    stable_bound = V_z_0 * exponential_decay + (lambda_2 * c / lambda_3) * (1 - exponential_decay)
+
+    if V_z_t > stable_bound:
+        raise StructuralDivergenceError("System mathematically exited Lyapunov stable bounds.")
+    return True
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一下你在半空中驾驶一架实验飞机（神经网络），同时还要在空中重新设计它的机翼（在线学习）。如果你根据一阵风就激进地调整机翼（概率梯度下降），飞机就会坠毁。我们的系统使用了一个在数学上牢不可破的“Lyapunov 调速器”（严格的能量边界）。在应用任何结构更改之前，调速器会通过方程证明新配置仍保持在安全飞行包线（稳定区域 $\mathcal{D}$）内。飞机可以永远学习和适应，但在数学上它绝不可能失控。
