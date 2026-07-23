@@ -102,6 +102,7 @@ arXiv:2605.00281v1《High-Probability Convergence in Decentralized Stochastic Op
 
 ### Distributed Continuous-Time Optimization with Time-Varying Constraints
 System Container: Collaboration
+
 Frontier Source: http://arxiv.org/abs/2409.05293v1
 Deterministic Convergence Mechanism: 该算法提出了一种结合时变对数障碍（log-barrier）惩罚函数的分布式连续时间优化控制器。它能强制执行严格的时变不等式约束，并追踪移动的最优路径。Lyapunov稳定性分析保证了全局的最终一致性，且无需假设各智能体具有相同的海森矩阵（Hessian）。
 
@@ -142,11 +143,13 @@ Deterministic Convergence Mechanism: 该论文通过引入自适应权重 Push-S
 
 ### Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 System Container: Collaboration
+
 Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
 Deterministic Convergence Mechanism: DSGTm-TV算法通过在时变有向图上结合梯度跟踪和heavy-ball动量，保证收敛到全局最优。最大步长$\bar{\alpha}$受到确定性约束以确保稳定：$\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$，建立了$\mathcal{O}(\rho_{M}^{k})$的线性收敛率，其中$\rho_{M}<1$为混合矩阵的谱半径。
 
 ### Decentralized Optimization Over Slowly Time-Varying Graphs
 System Container: Collaboration
+
 Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
 Deterministic Convergence Mechanism: 该算法为具有马尔可夫时变图的去中心化共识建立了显式的线性收敛速率 $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$。它利用对混合时间 $\tau$ 的严格边界机制，以及对 $B = \lceil b \log_{2}M \rceil$ 等参数的严格约束，来控制图拓扑变化的散度。
 
@@ -1267,3 +1270,54 @@ def holonomic_consensus_step(w_matrix, P_matrix, C_a):
 💡 0基础业务通俗类比 (For Beginners)
 
 想象一支庞大的救援队散布在一个没有中心指挥官的破碎城市中。各小队并不是隔着城市大喊大叫（中心化搜索），而是只与直接相邻的队伍交流。这个方程式在数学上计算出了所有队伍完美同步地图所需的精确状态矩阵（$\mathcal{O}_{w}^{C}$）。因为通信图的完整结构（holonomic structure）保证了信息的流动，整个救援队在数学上注定会达成一致，而不需要任何中央服务器来指挥他们。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于有向图与任意延迟的去中心化优化收敛理论
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+
+Frontier Source: [2401.11344] Decentralized Optimization in Networks with Arbitrary Delays (https://ar5iv.labs.arxiv.org/html/2401.11344)
+
+Deterministic Convergence Mechanism: 该算法采用了非协调的有向通信协议 $x_{n}(t+1)=\sum_{m=1}^{N}W_{nm}x_{m}(t)$，同时显式建立了一个确定性的谱范数收缩界 $\left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1$。这限制了残差的发散，并建立了一个严格的误差边界 $\sum_{n=1}^{N}\left\lVert\tilde{x}(t)-x_{n}(t)\right\rVert^{2}_{2}\leq\eta^{2}\frac{4N\left\lVert D\right\rVert_{2}^{2}G^{2}}{c^{2}}$，证明了即使局部网络更新遭受无界的任意延迟，也能保持确定性的稳定性。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Decentralized Update under Arbitrary Delays (DT-GO algorithm simulation)
+# x_n: Local parameter vector at node n
+# z_n: Auxiliary variable for delay tracking and gradient accumulation
+# W_nm: Weight from node m to node n, obeying \sum_{j=1}^{N}W_{ij}=1
+# eta: Learning rate
+# N: Total number of nodes
+# F_n: Local objective function
+# xi_n: Local stochastic data sample
+
+def decentralized_delay_tolerant_update(x_n_t, eta, W_n_row, node_id, N, pi_n, F_n, xi_n):
+    # Calculate local gradient and pseudo-gradient step
+    # Derived from: y \leftarrow x_{n}(t)-\eta\nabla F_{n}(x_{n}(t),\xi_{n})
+    local_gradient = compute_stochastic_gradient(F_n, x_n_t, xi_n)
+    y = x_n_t - eta * local_gradient
+
+    # Push-pull transformation using the target stationary probability pi_n
+    # Derived from: z_{n}\leftarrow x_{n}(t)+\frac{1}{N\pi_{n}}(y-x_{n}(t))
+    z_n_t = x_n_t + (1.0 / (N * pi_n)) * (y - x_n_t)
+
+    # Broadcast and receive updates with uncoordinated delay tolerance
+    # Derived from: z_{n}\leftarrow\sum_{m=1}^{N}W_{nm}z_{m}
+    z_received = broadcast_and_receive(z_n_t, node_id)
+    z_n_next = sum([W_n_row[m] * z_received[m] for m in range(N)])
+
+    # The spectral bound guarantees convergence:
+    # \left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1
+
+    # Update local state
+    # Derived from: x_{n}(t+1)\leftarrow z_{n}
+    x_n_next = z_n_next
+
+    return x_n_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个跨国物流公司，各个分发中心（节点）需要协同计算出一条全国最优的配送路线图（全局最优解）。但是，因为网络故障和时差，有的中心发来的路况数据会迟到很久（Arbitrary Delays）。
+如果按照传统的方法，大家必须等所有数据到齐再算，整个公司就瘫痪了。
+现在的机制是：每个中心只管算自己的进度并发出广播（`x_{n}(t+1)=\sum_{m=1}^{N}W_{nm}x_{m}(t)`），并且给本地的延迟数据加一个特定的收缩系数进行衰减缓冲。底层的数学机制（谱界收敛 $\left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1$）保证了，只要信息还在流动，大家互相拉扯产生的误差上限被死死锁住（被误差边界公式限制在常数范围内），最终各中心手里的路线图一定会逐渐一致，绝不会因为延迟而彻底崩溃解体。
