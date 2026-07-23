@@ -108,6 +108,7 @@ The algorithm achieves highly deterministic convergence in decentralized setting
 
 ### Distributed Continuous-Time Optimization with Time-Varying Constraints
 System Container: Collaboration
+
 Frontier Source: http://arxiv.org/abs/2409.05293v1
 Deterministic Convergence Mechanism: The algorithm proposes a distributed continuous-time sliding mode controller combined with a time-varying log-barrier penalty function. It enforces strict time-varying inequality constraints and tracks moving optimal paths. Lyapunov stability analysis guarantees global consensus without requiring uniform Hessian assumptions across agents.
 
@@ -148,11 +149,13 @@ Deterministic Convergence Mechanism: The paper establishes a generalized theoret
 
 ### Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks
 System Container: Collaboration
+
 Frontier Source: Duong Thuy Anh Nguyen et al., Decentralized Federated Learning with Gradient Tracking over Time-Varying Directed Networks (arXiv:2409.17189v1, https://arxiv.org/abs/2409.17189v1)
 Deterministic Convergence Mechanism: The DSGTm-TV algorithm guarantees convergence to the global optimum using gradient tracking and heavy-ball momentum over time-varying directed graphs. The largest stepsize $\bar{\alpha}$ is deterministically bounded to ensure stability: $\bar{\alpha} < \min\left\{\tfrac{2}{n\eta(L+\mu)}, \tfrac{1-c^{2}}{2\varphi\varsigma\sqrt{2(1+c^{2})}}\right\}$, establishing a linear convergence rate $\mathcal{O}(\rho_{M}^{k})$ where $\rho_{M}<1$ is the spectral radius of the mixing matrix.
 
 ### Decentralized Optimization Over Slowly Time-Varying Graphs
 System Container: Collaboration
+
 Frontier Source: "Decentralized Optimization Over Slowly Time-Varying Graphs: Algorithms and Lower Bounds" (arXiv:2307.12562)
 Deterministic Convergence Mechanism: The algorithm establishes an explicit linear convergence rate $\mathcal{O}\left(\exp\left(-N\sqrt{\frac{p^{2}\lambda_{\min}\gamma}{3}}\right)\right)$ for decentralized consensus with Markovian time-varying graphs. It leverages a rigorous bounding mechanism on the mixing time $\tau$ and strict constraints on parameters like $B = \lceil b \log_{2}M \rceil$ to control the divergence of graph topology variations.
 
@@ -1306,3 +1309,54 @@ def holonomic_consensus_step(w_matrix, P_matrix, C_a):
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine a massive rescue team spreading out across a shattered city without a central commander. Instead of shouting across town (centralized search), each squad only talks to its direct neighbors. The equation mathematically calculates the precise state matrix ($\mathcal{O}_{w}^{C}$) required for all teams to perfectly sync up their maps. Because the communication graph's holonomic structure guarantees information flow, the entire squad is mathematically destined to reach agreement without any central server directing them.
+
+
+📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Decentralized Optimization Convergence Theory on Directed Graphs with Arbitrary Delays
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+
+Frontier Source: [2401.11344] Decentralized Optimization in Networks with Arbitrary Delays (https://ar5iv.labs.arxiv.org/html/2401.11344)
+
+Deterministic Convergence Mechanism: The algorithm utilizes an uncoordinated directed communication protocol $x_{n}(t+1)=\sum_{m=1}^{N}W_{nm}x_{m}(t)$ while explicitly establishing a deterministic spectral norm contraction bound $\left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1$. This bounds the residual divergence and establishes a strict error margin $\sum_{n=1}^{N}\left\lVert\tilde{x}(t)-x_{n}(t)\right\rVert^{2}_{2}\leq\eta^{2}\frac{4N\left\lVert D\right\rVert_{2}^{2}G^{2}}{c^{2}}$, proving deterministic stability even when local network updates suffer from unbounded arbitrary arbitrary delays.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Decentralized Update under Arbitrary Delays (DT-GO algorithm simulation)
+# x_n: Local parameter vector at node n
+# z_n: Auxiliary variable for delay tracking and gradient accumulation
+# W_nm: Weight from node m to node n, obeying \sum_{j=1}^{N}W_{ij}=1
+# eta: Learning rate
+# N: Total number of nodes
+# F_n: Local objective function
+# xi_n: Local stochastic data sample
+
+def decentralized_delay_tolerant_update(x_n_t, eta, W_n_row, node_id, N, pi_n, F_n, xi_n):
+    # Calculate local gradient and pseudo-gradient step
+    # Derived from: y \leftarrow x_{n}(t)-\eta\nabla F_{n}(x_{n}(t),\xi_{n})
+    local_gradient = compute_stochastic_gradient(F_n, x_n_t, xi_n)
+    y = x_n_t - eta * local_gradient
+
+    # Push-pull transformation using the target stationary probability pi_n
+    # Derived from: z_{n}\leftarrow x_{n}(t)+\frac{1}{N\pi_{n}}(y-x_{n}(t))
+    z_n_t = x_n_t + (1.0 / (N * pi_n)) * (y - x_n_t)
+
+    # Broadcast and receive updates with uncoordinated delay tolerance
+    # Derived from: z_{n}\leftarrow\sum_{m=1}^{N}W_{nm}z_{m}
+    z_received = broadcast_and_receive(z_n_t, node_id)
+    z_n_next = sum([W_n_row[m] * z_received[m] for m in range(N)])
+
+    # The spectral bound guarantees convergence:
+    # \left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1
+
+    # Update local state
+    # Derived from: x_{n}(t+1)\leftarrow z_{n}
+    x_n_next = z_n_next
+
+    return x_n_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a multinational logistics company where various distribution centers (nodes) need to collaboratively compute a nationally optimal delivery route map (global optimal solution). However, due to network failures and time zone differences, traffic data sent by some centers will arrive very late (Arbitrary Delays).
+If using traditional methods, everyone must wait for all data to arrive before computing, paralyzing the entire company.
+The current mechanism works like this: each center simply calculates its own progress and broadcasts it (`x_{n}(t+1)=\sum_{m=1}^{N}W_{nm}x_{m}(t)`), while adding a specific contraction coefficient to buffer the delayed local data. The underlying mathematical mechanism (the spectral convergence bound $\left\lVert W^{\tau_{g}}-W^{\infty}\right\rVert_{2}^{2}\leq C\rho^{\tau_{g}}\coloneqq 1-c<1$) guarantees that as long as information is still flowing, the upper limit of the error generated by everyone pulling on each other is strictly locked down (constrained within a constant range by the error bound formula). Ultimately, the route maps in the hands of each center will definitely gradually align and will absolutely not completely collapse or fall apart due to delays.
