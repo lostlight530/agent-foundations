@@ -447,3 +447,49 @@ def lyapunov_stable_update(V_z_t, lambda_2, lambda_3, c, t):
 💡 0基础业务通俗类比 (For Beginners)
 
 想象一下你在半空中驾驶一架实验飞机（神经网络），同时还要在空中重新设计它的机翼（在线学习）。如果你根据一阵风就激进地调整机翼（概率梯度下降），飞机就会坠毁。我们的系统使用了一个在数学上牢不可破的“Lyapunov 调速器”（严格的能量边界）。在应用任何结构更改之前，调速器会通过方程证明新配置仍保持在安全飞行包线（稳定区域 $\mathcal{D}$）内。飞机可以永远学习和适应，但在数学上它绝不可能失控。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于 Lyapunov 障碍证书的安全深度强化学习
+
+🔬 选型依据与学术脉络
+
+System Container: Architecture Principles
+
+Frontier Source: Formally Verifying Deep Reinforcement Learning Controllers with Lyapunov Barrier Certificates (arXiv:2405.14058, https://arxiv.org/abs/2405.14058)
+
+Deterministic Convergence Mechanism: 该理论引入了李雅普诺夫障碍证书 (Lyapunov Barrier Certificates)，为任务构建可形式化验证的控制器。通过满足严格的下降条件 \(\displaystyle V(x)\leq\beta\rightarrow V(x)-V(f(x,\pi(x)))\geq\epsilon\)，该框架保证了在给定集合 \(\mathcal{X}_{I}\)、\(\mathcal{X}_{G}\) 和 \(\mathcal{X}_{U}\) 中的安全性。这为黑盒强化学习策略施加了硬性的执行物理下界，严格避开 \(\mathcal{X}_{U}\)，并提供了向 \(\mathcal{X}_{G}\) 收敛的可验证边界。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def verify_lyapunov_barrier_step(V, x, beta, epsilon, pi, f, X_G, X_U):
+    # V(x): 状态 x 处的 Lyapunov 障碍函数值
+    # beta: 障碍阈值上限
+    # epsilon: 保证的最小能量下降步长
+    # pi: 策略函数
+    # f: 系统状态转移函数
+    # X_G: 目标状态集合
+    # X_U: 不安全状态集合
+
+    # 断言当前状态安全
+    assert x not in X_U, "状态违反约束，进入不安全集合 X_U"
+
+    if x in X_G:
+        return True # 已到达目标
+
+    # 在安全运行区域必须满足 \displaystyle V(x)\leq\beta
+    assert V(x) <= beta, "状态超出了 Lyapunov 障碍阈值 beta"
+
+    # 计算下一状态 x' = f(x, \pi(x))
+    next_x = f(x, pi(x))
+
+    # 强制确定性下降: \displaystyle V(x)\leq\beta\rightarrow V(x)-V(f(x,\pi(x)))\geq\epsilon
+    energy_drop = V(x) - V(next_x)
+    assert energy_drop >= epsilon, "未能满足严格下降 epsilon 的边界要求"
+
+    return next_x
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+想象一架送货无人机在城市中穿梭，必须前往降落台同时避开禁飞区。李雅普诺夫障碍证书就像是目的地发出的“引力”和禁飞区发出的“排斥力场”的结合体。数学证明保证了无人机的每一步移动，都会让它离目标的“距离”至少缩短一个固定的最小量（\(\epsilon\)），并且绝对不会越界进入禁飞区，这意味着它在数学上必然会安全抵达。

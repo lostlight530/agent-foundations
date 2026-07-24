@@ -447,3 +447,49 @@ def lyapunov_stable_update(V_z_t, lambda_2, lambda_3, c, t):
 💡 0基础业务通俗类比 (For Beginners)
 
 Imagine flying an experimental aircraft (the neural network) while simultaneously redesigning its wings in mid-air (online learning). If you tweak the wings too radically based on a single gust of wind (probabilistic gradient descent), the plane crashes. Our system uses a mathematically unbreakable "Lyapunov Governor" (a strict energy bound). Before any structural change is applied, the governor proves via equation that the new configuration remains within a safe flying envelope (the stable region $\mathcal{D}$). The plane can learn and adapt forever, but it is mathematically impossible for it to lose control.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Lyapunov Barrier Certificates for Safe DRL
+
+🔬 选型依据与学术脉络
+
+System Container: Architecture Principles
+
+Frontier Source: Formally Verifying Deep Reinforcement Learning Controllers with Lyapunov Barrier Certificates (arXiv:2405.14058, https://arxiv.org/abs/2405.14058)
+
+Deterministic Convergence Mechanism: The theory introduces Lyapunov Barrier Certificates for formally verifiable controllers. By satisfying the strict condition \(\displaystyle V(x)\leq\beta\rightarrow V(x)-V(f(x,\pi(x)))\geq\epsilon\), the framework ensures safety across given sets \(\mathcal{X}_{I}\), \(\mathcal{X}_{G}\), and \(\mathcal{X}_{U}\). This enforces a hard execution bound on black-box reinforcement learning policies, strictly avoiding \(\mathcal{X}_{U}\) and providing a verifiable bound towards \(\mathcal{X}_{G}\).
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+
+```python
+def verify_lyapunov_barrier_step(V, x, beta, epsilon, pi, f, X_G, X_U):
+    # V(x): Lyapunov Barrier Function value at state x
+    # beta: Barrier threshold bound
+    # epsilon: Minimum guaranteed energy descent step
+    # pi: Policy function
+    # f: System transition dynamics
+    # X_G: Goal states set
+    # X_U: Unsafe states set
+
+    # Assert state is safe
+    assert x not in X_U, "State breached unsafe set X_U"
+
+    if x in X_G:
+        return True # Reached goal
+
+    # \displaystyle V(x)\leq\beta condition must hold in safe operational region
+    assert V(x) <= beta, "State exceeded Lyapunov barrier beta"
+
+    # Calculate next state x' = f(x, \pi(x))
+    next_x = f(x, pi(x))
+
+    # Enforce deterministic descent: \displaystyle V(x)\leq\beta\rightarrow V(x)-V(f(x,\pi(x)))\geq\epsilon
+    energy_drop = V(x) - V(next_x)
+    assert energy_drop >= epsilon, "Failed to satisfy strict descent epsilon bound"
+
+    return next_x
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+
+Imagine a delivery drone navigating a city to a landing pad while avoiding no-fly zones. The Lyapunov Barrier Certificates act simultaneously as a gravitational pull toward the destination and an invisible forcefield repelling it from danger. The mathematical proof guarantees that every single movement the drone makes will reduce its "distance" to the target by at least a fixed minimum amount (\(\epsilon\)) without ever crossing into a no-fly zone, meaning it is mathematically certain to arrive safely.
