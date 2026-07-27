@@ -1372,3 +1372,36 @@ def decentralized_primal_dual_step(y_k, lambda_star, u_1_star, S_0, S_K, k):
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2024-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，确保了单点故障 (SPOF) 免疫并防止了结构性发散。双语对齐已验证。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于相对距离定位的多目标包围与神经网络反同步控制
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
+Deterministic Convergence Mechanism: 该研究通过构建代价函数 $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ 并结合神经网络反同步控制，使得多智能体在追捕非合作目标时能保证最终误差收敛到有界范围内，即 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$。这种确定性的边界约束保证了分布式协同系统不会发生结构性发散。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def antisynchronization_control_step(
+    e_i_k: float,
+    beta: float,
+    delta: float,
+    k: int
+) -> float:
+    """
+    计算第 i 个智能体在第 k 步的误差演化边界。
+    基于: \lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta
+    并且误差衰减遵循: ||\boldsymbol{e}_{i}(k+1)||^{2}\leq(3(1+\beta)^{2})^{k+1}||\boldsymbol{e}_{i}(0)||^{2}+\hat{\delta}
+    """
+    # 模拟系统衰减系数 (系统要求 3(1+beta)^2 < 1 以保证收敛)
+    decay_factor = (3 * (1 + beta)**2) ** (k + 1)
+
+    # 当前步的误差平方上界估计
+    error_bound_squared = decay_factor * (e_i_k ** 2) + delta
+
+    return error_bound_squared
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象两架无人机在夜间追捕一群四处逃窜的野兔。因为没有GPS（目标非合作且无法直接定位），无人机只能靠彼此之间的相对距离和雷达探测到的野兔距离来推算。反同步控制（antisynchronization control）就像是给这两架无人机设定了一个“镜像包围圈”规则：当无人机A向左移动时，无人机B会自动向右对称移动，将野兔群死死卡在中心。数学公式 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$ 严格保证了无论野兔怎么跑，两架无人机的包围网误差最终都会被压缩在一个极小的固定范围（$\delta$）内，确保猎物绝对无法逃脱，从而实现了无中心化雷达下的确定性协作收敛。

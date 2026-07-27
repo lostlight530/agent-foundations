@@ -1536,3 +1536,36 @@ Imagine a massive group project (decentralized network) where everyone is workin
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2024-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, ensuring SPOF immunity and preventing structural divergence without relying on central coordination. Bilingual alignment verified.
+
+
+📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Multiple Noncooperative Targets Encirclement via Relative Distance and Neural Antisynchronization Control
+
+🔬 Selection Rationale and Academic Lineage
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
+Deterministic Convergence Mechanism: This research guarantees bounded tracking error for multi-agent systems pursuing noncooperative targets by constructing the cost function $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ and applying neural antisynchronization control. It mathematically ensures that the ultimate error converges within a strict bound: $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$. This deterministic boundary constraint guarantees that the distributed collaboration system will not undergo structural divergence.
+
+💻 Source Code Breakdown
+```python
+def antisynchronization_control_step(
+    e_i_k: float,
+    beta: float,
+    delta: float,
+    k: int
+) -> float:
+    """
+    Computes the bounding envelope of error evolution for agent i at step k.
+    Based on: \lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta
+    And the decay dynamic: ||\boldsymbol{e}_{i}(k+1)||^{2}\leq(3(1+\beta)^{2})^{k+1}||\boldsymbol{e}_{i}(0)||^{2}+\hat{\delta}
+    """
+    # Simulating the system decay factor (requires 3(1+beta)^2 < 1 for convergence)
+    decay_factor = (3 * (1 + beta)**2) ** (k + 1)
+
+    # Upper bound estimate of the squared error for the current step
+    error_bound_squared = decay_factor * (e_i_k ** 2) + delta
+
+    return error_bound_squared
+```
+
+💡 For Beginners
+Imagine two drones chasing a group of scattering rabbits at night. Because there is no GPS (the targets are noncooperative and cannot be directly pinpointed), the drones must rely solely on their relative distance to each other and the radar distance to the rabbits to estimate positions. Antisynchronization control acts as a "mirror encirclement" rule: when Drone A moves left, Drone B automatically moves symmetrically to the right, securely trapping the rabbits in the center. The mathematical formula $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$ strictly guarantees that no matter how the rabbits dart around, the encirclement error of the two drones will eventually be compressed within a tiny, fixed limit ($\delta$). This ensures the prey absolutely cannot escape, achieving deterministic collaborative convergence without relying on a centralized radar array.
