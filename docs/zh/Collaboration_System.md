@@ -1405,3 +1405,29 @@ def antisynchronization_control_step(
 
 💡 0基础业务通俗类比 (For Beginners)
 想象两架无人机在夜间追捕一群四处逃窜的野兔。因为没有GPS（目标非合作且无法直接定位），无人机只能靠彼此之间的相对距离和雷达探测到的野兔距离来推算。反同步控制（antisynchronization control）就像是给这两架无人机设定了一个“镜像包围圈”规则：当无人机A向左移动时，无人机B会自动向右对称移动，将野兔群死死卡在中心。数学公式 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$ 严格保证了无论野兔怎么跑，两架无人机的包围网误差最终都会被压缩在一个极小的固定范围（$\delta$）内，确保猎物绝对无法逃脱，从而实现了无中心化雷达下的确定性协作收敛。
+
+📝 [Daily Research Chunk] 动态理论深潜：Understanding the Influence of Digraphs on Decentralized Optimization
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
+Deterministic Convergence Mechanism: 由 $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ 约束的硬性拓扑收敛下界，以及通过 $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$ 映射的去中心化追踪器更新。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
+    # Calculates the local tracker update on the directed graph
+    # Derived directly from the extracted convergence tracker equation:
+    # \displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}
+
+    # Calculate difference in local gradients
+    grad_diff = grad_F_w_next - grad_F_w_k
+
+    # Update tracker vector mapped through the network weight matrix W
+    y_next = W @ (y_k + grad_diff)
+
+    return y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个巨大的物流网络，卡车只能在单行道（有向图）上行驶。即使没有中央调度员下达全局指令，每个区域仓库也会纯粹根据从其直接邻居（$W$）接收到的单向交货以及自身供需（$\nabla F$）的局部变化来调整其库存目标（$y$）。收敛下界方程在数学上保证了，尽管存在严格的单行道限制且缺乏中央通信，整个全球网络的供需不匹配（$\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]$）也必然会在可预测的时间范围内缩小到绝对极小值，从而以确定性的方式强制实现去中心化和谐。

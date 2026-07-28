@@ -1569,3 +1569,29 @@ def antisynchronization_control_step(
 
 💡 For Beginners
 Imagine two drones chasing a group of scattering rabbits at night. Because there is no GPS (the targets are noncooperative and cannot be directly pinpointed), the drones must rely solely on their relative distance to each other and the radar distance to the rabbits to estimate positions. Antisynchronization control acts as a "mirror encirclement" rule: when Drone A moves left, Drone B automatically moves symmetrically to the right, securely trapping the rabbits in the center. The mathematical formula $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$ strictly guarantees that no matter how the rabbits dart around, the encirclement error of the two drones will eventually be compressed within a tiny, fixed limit ($\delta$). This ensures the prey absolutely cannot escape, achieving deterministic collaborative convergence without relying on a centralized radar array.
+
+📝 [Daily Research Chunk] 动态理论深潜：Understanding the Influence of Digraphs on Decentralized Optimization
+
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
+Deterministic Convergence Mechanism: Hard topological convergence lower bound constrained by $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ and decentralized tracker update mapped via $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
+    # Calculates the local tracker update on the directed graph
+    # Derived directly from the extracted convergence tracker equation:
+    # \displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}
+
+    # Calculate difference in local gradients
+    grad_diff = grad_F_w_next - grad_F_w_k
+
+    # Update tracker vector mapped through the network weight matrix W
+    y_next = W @ (y_k + grad_diff)
+
+    return y_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a massive logistics network where trucks only travel on one-way roads (directed graphs). Even without a central dispatcher giving global orders, each regional warehouse adjusts its inventory targets ($y$) based purely on the one-way deliveries it receives from its immediate neighbors ($W$) and the local change in its own supply and demand ($\nabla F$). The lower bound equation mathematically guarantees that, despite the strict one-way constraints and lack of central communication, the entire global network's supply-demand mismatch ($\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]$) will inevitably shrink to an absolute minimum within a predictable timeframe, effectively forcing decentralized harmony.
