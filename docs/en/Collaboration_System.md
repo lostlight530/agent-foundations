@@ -1595,3 +1595,43 @@ def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine a massive logistics network where trucks only travel on one-way roads (directed graphs). Even without a central dispatcher giving global orders, each regional warehouse adjusts its inventory targets ($y$) based purely on the one-way deliveries it receives from its immediate neighbors ($W$) and the local change in its own supply and demand ($\nabla F$). The lower bound equation mathematically guarantees that, despite the strict one-way constraints and lack of central communication, the entire global network's supply-demand mismatch ($\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]$) will inevitably shrink to an absolute minimum within a predictable timeframe, effectively forcing decentralized harmony.
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Non-Smooth Convex Decentralized Optimization over Time-Varying Networks
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
+Deterministic Convergence Mechanism: Theoretical communication complexity bound is established in a time-varying network setting proportional to the network condition number $\chi$ rather than $\sqrt{\chi}$. The optimal complexity bound is explicitly modeled as $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$ for the strongly convex non-smooth case.
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted structural updates for optimal non-smooth decentralization
+def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
+    # Variables grounded in extracted trace:
+    # y^{k}, z^{k}, \overline{y}^{k}, \overline{z}^{k}, \alpha_{k}
+    y_under_k = alpha_k * y_k + (1 - alpha_k) * y_bar_k
+    z_under_k = alpha_k * z_k + (1 - alpha_k) * z_bar_k
+
+    # Gradients calculated based on: g_{y}^{k}=\nabla_{y}G(\underline{y}^{k},\underline{z}^{k})
+    # Gradients calculated based on: g_{z}^{k}=\nabla_{z}G(\underline{y}^{k},\underline{z}^{k})
+    g_y_k = compute_grad_y(y_under_k, z_under_k)
+    g_z_k = compute_grad_z(y_under_k, z_under_k)
+
+    # Gossip matrix communication step with momentum m^{k}
+    # \hat{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})(g_{z}^{k}+m^{k})
+    # \tilde{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})g_{z}^{k}
+    g_z_hat_k = apply_gossip(W_k, g_z_k + m_k)
+    g_z_tilde_k = apply_gossip(W_k, g_z_k)
+
+    # Primal dual update
+    # z^{k+1}=z^{k}-\eta_{z}^{k}\hat{g}_{z}^{k}
+    z_next = z_k - eta_z * g_z_hat_k
+    # \overline{z}^{k+1}=\underline{z}^{k}-\theta_{z}^{k}\tilde{g}_{z}^{k}
+    z_bar_next = z_under_k - theta_z * g_z_tilde_k
+
+    return z_next, z_bar_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine managing a large supply chain (the decentralized network) where the routes and capacities between warehouses are constantly changing every day (time-varying networks). Instead of trying to find a perfectly smooth and stable optimal route which is impossible, you acknowledge that the bottlenecks are jagged (non-smooth). The mathematical lower bound tells us the absolute minimum number of messages warehouses must exchange to align their inventory. By using a specialized tracking algorithm (Algorithm 1) with momentum, the system guarantees that all warehouses will eventually synchronize their stock levels without needing a central headquarters, scaling precisely according to the severity of the network's worst bottleneck ($\chi$).
