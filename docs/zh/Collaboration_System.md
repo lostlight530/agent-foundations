@@ -1431,3 +1431,43 @@ def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一个巨大的物流网络，卡车只能在单行道（有向图）上行驶。即使没有中央调度员下达全局指令，每个区域仓库也会纯粹根据从其直接邻居（$W$）接收到的单向交货以及自身供需（$\nabla F$）的局部变化来调整其库存目标（$y$）。收敛下界方程在数学上保证了，尽管存在严格的单行道限制且缺乏中央通信，整个全球网络的供需不匹配（$\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]$）也必然会在可预测的时间范围内缩小到绝对极小值，从而以确定性的方式强制实现去中心化和谐。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：Non-Smooth Convex Decentralized Optimization over Time-Varying Networks
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
+Deterministic Convergence Mechanism: 在时变网络环境下建立了理论通信复杂度下界，该复杂度与网络条件数 $\chi$ 成正比，而不是固定网络下的 $\sqrt{\chi}$。对于强凸非平滑情况，最优复杂度下界显式建模为 $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$。
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+```python
+# Extracted structural updates for optimal non-smooth decentralization
+def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
+    # 变量提取自：
+    # y^{k}, z^{k}, \overline{y}^{k}, \overline{z}^{k}, \alpha_{k}
+    y_under_k = alpha_k * y_k + (1 - alpha_k) * y_bar_k
+    z_under_k = alpha_k * z_k + (1 - alpha_k) * z_bar_k
+
+    # 梯度计算基于： g_{y}^{k}=\nabla_{y}G(\underline{y}^{k},\underline{z}^{k})
+    # 梯度计算基于： g_{z}^{k}=\nabla_{z}G(\underline{y}^{k},\underline{z}^{k})
+    g_y_k = compute_grad_y(y_under_k, z_under_k)
+    g_z_k = compute_grad_z(y_under_k, z_under_k)
+
+    # 结合动量 m^{k} 的 Gossip 矩阵通信步骤
+    # \hat{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})(g_{z}^{k}+m^{k})
+    # \tilde{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})g_{z}^{k}
+    g_z_hat_k = apply_gossip(W_k, g_z_k + m_k)
+    g_z_tilde_k = apply_gossip(W_k, g_z_k)
+
+    # 原始对偶更新
+    # z^{k+1}=z^{k}-\eta_{z}^{k}\hat{g}_{z}^{k}
+    z_next = z_k - eta_z * g_z_hat_k
+    # \overline{z}^{k+1}=\underline{z}^{k}-\theta_{z}^{k}\tilde{g}_{z}^{k}
+    z_bar_next = z_under_k - theta_z * g_z_tilde_k
+
+    return z_next, z_bar_next
+```
+
+💡 0基础业务通俗类比 (For Beginners)
+想象你在管理一个庞大的供应链（去中心化网络），仓库之间的路线和运力每天都在变化（时变网络）。与其试图找到一条完美的平滑路线，不如承认瓶颈是坑坑洼洼的（非平滑）。数学下界告诉我们，为了对齐库存，仓库之间绝对必须交换的最小消息数量。通过使用带有动量的专门统筹算法（Algorithm 1），系统保证所有仓库最终都能同步库存水平，而不需要中央总部的干预。这种同步的代价严格地与网络中最差瓶颈的严重程度（$\chi$）挂钩。
