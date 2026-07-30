@@ -1471,3 +1471,16 @@ def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, 
 
 💡 0基础业务通俗类比 (For Beginners)
 想象你在管理一个庞大的供应链（去中心化网络），仓库之间的路线和运力每天都在变化（时变网络）。与其试图找到一条完美的平滑路线，不如承认瓶颈是坑坑洼洼的（非平滑）。数学下界告诉我们，为了对齐库存，仓库之间绝对必须交换的最小消息数量。通过使用带有动量的专门统筹算法（Algorithm 1），系统保证所有仓库最终都能同步库存水平，而不需要中央总部的干预。这种同步的代价严格地与网络中最差瓶颈的严重程度（$\chi$）挂钩。
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
+Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+\mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个由多名厨师（节点）组成的团队共同研发一份终极菜谱。有些厨师可能会偶尔休息或失去与厨房的联系（间歇性可用）。团队不需要等所有人都在场才继续工作，而是由当前活跃的厨师们更新他们当前的平均菜谱（\mathbf{\bar{\theta}}^{(k)}），加上他们本地的平均改进（\overline{\mathbf{g}v}^{(k)}）。即使在这种混乱且间歇性的沟通下，整体菜谱质量仍会以 \mathcal{O}{(\ln{k}/\sqrt{k})} 的可预测速率稳步逼近大师级标准，从而保证没有任何一个厨师的缺席会导致整个团队停摆。
