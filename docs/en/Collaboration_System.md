@@ -1635,3 +1635,16 @@ def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, 
 
 💡 0基础业务通俗类比 (For Beginners)
 Imagine managing a large supply chain (the decentralized network) where the routes and capacities between warehouses are constantly changing every day (time-varying networks). Instead of trying to find a perfectly smooth and stable optimal route which is impossible, you acknowledge that the bottlenecks are jagged (non-smooth). The mathematical lower bound tells us the absolute minimum number of messages warehouses must exchange to align their inventory. By using a specialized tracking algorithm (Algorithm 1) with momentum, the system guarantees that all warehouses will eventually synchronize their stock levels without needing a central headquarters, scaling precisely according to the severity of the network's worst bottleneck ($\chi$).
+
+📝 [Daily Research Chunk] 动态理论深潜：Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees
+
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
+Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
+
+💻 源码级伪代码解析 (Source Code Breakdown)
+\mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
+
+💡 0基础业务通俗类比 (For Beginners)
+Imagine a team of chefs (nodes) collaboratively creating a master recipe. Some chefs occasionally take a break or lose their connection to the kitchen (sporadic availability). Instead of forcing everyone to wait until all chefs are present, active chefs periodically blend their current average recipe (\mathbf{\bar{\theta}}^{(k)}), add their average active local improvements (\overline{\mathbf{g}v}^{(k)}). Even with this chaotic and sporadic communication, the overall recipe quality steadily approaches the master standard at a predictable rate of \mathcal{O}{(\ln{k}/\sqrt{k})}, guaranteeing that no single chef's absence can derail the team.
