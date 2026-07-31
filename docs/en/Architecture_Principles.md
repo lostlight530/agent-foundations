@@ -591,3 +591,36 @@ Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm 
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
+
+### CHMAS: A Coupled Hierarchical Framework for Multi-Agent Reinforcement Learning
+
+**System Container:** Architecture Principles
+**Frontier Source:** http://arxiv.org/abs/2607.19555v1 (arXiv:2607.19555v1)
+**Original Problem:** Multi-agent reinforcement learning (MARL) systems face fundamental challenges in balancing global coordination with local execution across different temporal scales.
+**Core Assumptions:**
+- **Smoothness:** $J^{\text{str}}$ and each $J^{\text{tac}}_i$ are $L$-smooth with $L$-Lipschitz gradients.
+- **Boundedness:** $J^{\text{str}} \le J^{\text{str}*}$ and $J^{\text{tac}}_i \le J^{\text{tac}*}_i$ for all $i$.
+- **Bounded variance:** Stochastic gradient estimates satisfy $\mathbb{E}[\|g^{\text{str}}_k - \nabla J^{\text{str}}_k\|^2] \le \sigma^2_{\text{str}}$ and $\mathbb{E}[\|g^{\text{tac}}_{i,e} - \nabla J^{\text{tac}}_i\|^2] \le \sigma^2_{\text{tac}}$.
+- **Biased strategic gradient:** $\mathbb{E}[g^{\text{str}}_k \mid \theta^{\text{str}}_k] = \nabla J^{\text{str}}(\theta^{\text{str}}_k) + b_k$.
+- **PL condition:** Each $J^{\text{tac}}_i$ satisfies the $\mu$-PL inequality.
+- **Coupling structure:** The strategic gradient is $L_b$-Lipschitz in the tactical parameters.
+**Mathematical Mechanism:** Asynchronous updates with decaying strategic step size $\eta^{\text{str}}_k = \alpha/\sqrt{k}$ and constant tactical step size $\eta^{\text{tac}} = \beta/\sqrt{K}$. Strategic parameters update every $N_f = c\sqrt{K}$ tactical episodes.
+**Convergence/Behavior Bound:**
+核心更新公式:
+\[
+    \min_{k \in \{1,\ldots,K\}}
+    \mathbb{E}[\|\nabla J^{\text{str}}(\theta^{\text{str}}_k)\|^2]
+    = \mathcal{O}\!\left(\frac{\log K}{\sqrt{K}}\right)
+\]
+\[
+    \frac{1}{KN_f}\sum_{k=1}^{K}\sum_{e=kN_f}^{(k+1)N_f-1}
+    \sum_{i=1}^N
+    \mathbb{E}[\|\nabla J^{\text{tac}}_i(\theta^{\text{tac}}_{i,e})\|^2]
+    = \mathcal{O}\!\left(\frac{1}{\sqrt{K}}\right)
+\]
+**Scope:** Cooperative multi-agent systems with hierarchical architectures requiring global coordination and local distributed execution.
+**Limitations:** The theoretical analysis is established for policy gradient implementations. The empirical evaluation relies on DQN-based experiments; extending the convergence analysis to Q-learning variants is left for future work.
+**Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+**Repository Implementation Status:** PAPER_ONLY
+**Beginner Analogy:** Imagine a large corporation. The CEO (strategic layer) sets overarching goals and budget allocations (strategic guidance) every quarter based on the whole market (global state). Individual teams (tactical layer) make daily decisions (local actions) based on their specific projects (local state) and the CEO's goals. The teams' success or failure (tactical rewards) over the quarter influences the CEO's next quarterly goals, ensuring the high-level strategy remains grounded in what the teams can actually achieve.
+**Evidence Status:** Extracted from theoretical derivations and algorithm design in arXiv:2607.19555v1 LaTeX source.

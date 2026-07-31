@@ -591,3 +591,36 @@ def lyapunov_exponent_regularized_step(L_theta, var_S, var_H, lambda_1, gamma):
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
+
+### CHMAS: 多智能体强化学习的耦合分层框架
+
+**System Container:** Architecture Principles
+**Frontier Source:** http://arxiv.org/abs/2607.19555v1 (arXiv:2607.19555v1)
+**Original Problem:** 多智能体强化学习（MARL）系统在跨不同时间尺度平衡全局协调与局部执行方面面临根本挑战。
+**Core Assumptions:**
+- **平滑性 (Smoothness):** $J^{\text{str}}$ 和每个 $J^{\text{tac}}_i$ 都是 $L$-平滑的，具有 $L$-Lipschitz 梯度。
+- **有界性 (Boundedness):** 对于所有 $i$，满足 $J^{\text{str}} \le J^{\text{str}*}$ 和 $J^{\text{tac}}_i \le J^{\text{tac}*}_i$。
+- **方差有界 (Bounded variance):** 随机梯度估计满足 $\mathbb{E}[\|g^{\text{str}}_k - \nabla J^{\text{str}}_k\|^2] \le \sigma^2_{\text{str}}$ 和 $\mathbb{E}[\|g^{\text{tac}}_{i,e} - \nabla J^{\text{tac}}_i\|^2] \le \sigma^2_{\text{tac}}$。
+- **有偏战略梯度 (Biased strategic gradient):** $\mathbb{E}[g^{\text{str}}_k \mid \theta^{\text{str}}_k] = \nabla J^{\text{str}}(\theta^{\text{str}}_k) + b_k$。
+- **PL 条件:** 每个 $J^{\text{tac}}_i$ 满足 $\mu$-PL 不等式。
+- **耦合结构 (Coupling structure):** 战略梯度在战术参数上是 $L_b$-Lipschitz 的。
+**Mathematical Mechanism:** 采用异步更新，战略步长衰减为 $\eta^{\text{str}}_k = \alpha/\sqrt{k}$，战术步长保持常数 $\eta^{\text{tac}} = \beta/\sqrt{K}$。战略参数每经过 $N_f = c\sqrt{K}$ 个战术回合更新一次。
+**Convergence/Behavior Bound:**
+核心更新公式:
+\[
+    \min_{k \in \{1,\ldots,K\}}
+    \mathbb{E}[\|\nabla J^{\text{str}}(\theta^{\text{str}}_k)\|^2]
+    = \mathcal{O}\!\left(\frac{\log K}{\sqrt{K}}\right)
+\]
+\[
+    \frac{1}{KN_f}\sum_{k=1}^{K}\sum_{e=kN_f}^{(k+1)N_f-1}
+    \sum_{i=1}^N
+    \mathbb{E}[\|\nabla J^{\text{tac}}_i(\theta^{\text{tac}}_{i,e})\|^2]
+    = \mathcal{O}\!\left(\frac{1}{\sqrt{K}}\right)
+\]
+**Scope:** 需要全局协调和局部分布式执行的，具有分层架构的协作型多智能体系统。
+**Limitations:** 理论分析是针对策略梯度实现建立的。经验评估依赖于基于 DQN 的实验；将收敛性分析扩展到 Q-learning 变体留待尚需实现与测试。
+**Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+**Repository Implementation Status:** PAPER_ONLY
+**Beginner Analogy:** 想象一家大公司。CEO（战略层）每季度根据整体市场（全局状态）设定总体目标和预算分配（战略指导）。各个团队（战术层）根据其具体项目（局部状态）和 CEO 的目标进行日常决策（局部行动）。团队在季度内的成功或失败（战术奖励）会影响 CEO 下个季度的目标，确保高层战略始终立足于团队实际能完成的任务。
+**Evidence Status:** 提取自 arXiv:2607.19555v1 LaTeX 源码中的理论推导与算法设计。
