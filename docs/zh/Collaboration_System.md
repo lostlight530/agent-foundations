@@ -1343,7 +1343,7 @@ System Container: Collaboration
 Frontier Source: Globally-Constrained Decentralized Optimization with Variable Coupling (arXiv:2407.10770v4)
 Deterministic Convergence Mechanism: 提出的去中心化原始-对偶算法通过在数学上限制 $K$ 步内的累积误差来确保确定性收敛：$\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$。通过使用闭式对偶边界 $\bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})$ 进行严格的梯度跟踪，全局目标在无需中心化控制的情况下自然达到稳定。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 # 去中心化投影原始-对偶更新步骤 (Decentralized Projected Primal-Dual Step)
 # 变量基于 arXiv:2407.10770v4 边界约束
@@ -1369,9 +1369,9 @@ def decentralized_primal_dual_step(y_k, lambda_star, u_1_star, S_0, S_K, k):
 💡 0基础业务通俗类比 (For Beginners)
 想象一个大型的小组项目（去中心化网络），每个人都在负责不同的部分，但有一个严格的总预算（全局约束）。与其让一个经理追踪所有的开销（这会造成瓶颈），不如每个人计算一个“预算压力分数”（$\bar{\mathbf{u}}_{1}^{\star}$）并仅与他们相邻的同伴分享。因为数学定理严格限制了总累积误差（$\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$），整个团队的花费自然会保持在预算之内，而永远不需要一个中心化的会计师。
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2024-07
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，确保了单点故障 (SPOF) 免疫并防止了结构性发散。双语对齐已验证。
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
 
 
 📝 [Daily Research Chunk] 动态理论深潜：基于相对距离定位的多目标包围与神经网络反同步控制
@@ -1381,7 +1381,7 @@ System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
 Deterministic Convergence Mechanism: 该研究通过构建代价函数 $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ 并结合神经网络反同步控制，使得多智能体在追捕非合作目标时能保证最终误差收敛到有界范围内，即 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$。这种确定性的边界约束保证了分布式协同系统不会发生结构性发散。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 def antisynchronization_control_step(
     e_i_k: float,
@@ -1413,7 +1413,7 @@ System Container: Collaboration System
 Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
 Deterministic Convergence Mechanism: 由 $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ 约束的硬性拓扑收敛下界，以及通过 $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$ 映射的去中心化追踪器更新。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
     # Calculates the local tracker update on the directed graph
@@ -1440,7 +1440,7 @@ System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
 Deterministic Convergence Mechanism: 在时变网络环境下建立了理论通信复杂度下界，该复杂度与网络条件数 $\chi$ 成正比，而不是固定网络下的 $\sqrt{\chi}$。对于强凸非平滑情况，最优复杂度下界显式建模为 $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 # Extracted structural updates for optimal non-smooth decentralization
 def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
@@ -1478,9 +1478,12 @@ def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, 
 System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
 Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
+Assumptions: 收敛性条件依赖于特定的图连通性、有界的数据异质性、有界的梯度噪声、合适的学习率以及特定的模型条件。
+Scope: 适用于节点零星可用的理论去中心化联邦学习场景。
+Implementation Status: 暂无代码库实现。当前仅为概念映射。
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 \mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
 
 💡 0基础业务通俗类比 (For Beginners)
-想象一个由多名厨师（节点）组成的团队共同研发一份终极菜谱。有些厨师可能会偶尔休息或失去与厨房的联系（间歇性可用）。团队不需要等所有人都在场才继续工作，而是由当前活跃的厨师们更新他们当前的平均菜谱（\mathbf{\bar{\theta}}^{(k)}），加上他们本地的平均改进（\overline{\mathbf{g}v}^{(k)}）。即使在这种混乱且间歇性的沟通下，整体菜谱质量仍会以 \mathcal{O}{(\ln{k}/\sqrt{k})} 的可预测速率稳步逼近大师级标准，从而保证没有任何一个厨师的缺席会导致整个团队停摆。
+想象一个厨师团队（节点）共同开发一份大师级食谱。有些厨师偶尔会休息或失去与厨房的联系（零星可用性）。与其强迫每个人等到所有厨师都在场，不如让活跃的厨师定期混合他们当前的平均食谱（\mathbf{\bar{\theta}}^{(k)}），并加入他们平均的活跃本地改进（\overline{\mathbf{g}v}^{(k)}）。在关于厨房连通性和厨师烹饪差异程度的特定前提下，整体食谱的质量会以 \mathcal{O}{(\ln{k}/\sqrt{k})} 的可预测理论速度稳步接近大师标准。这展示了系统对某些可预测通信中断的鲁棒性，但并不构成一般意义上的绝对免疫。

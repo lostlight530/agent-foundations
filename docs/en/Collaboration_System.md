@@ -110,7 +110,7 @@ Under the asynchronous decentralized mechanism, every center maintains two secre
 ### 2.6 Deterministic Multi-Step Gradient Tracking over Row-Stochastic Networks
 arXiv:2506.04600v1 ("Achieving Linear Speedup and Near-Optimal Complexity for Decentralized Optimization over Row-stochastic Networks"). Chosen because it breaks the limitation of requiring doubly-stochastic or column-stochastic matrices, proving that row-stochastic networks can achieve deterministic linear speedup via the MG-Pull-Diag-GT protocol.
 The paper proves that under standard assumptions, when the multi-round gossip communication number $R$ satisfies $R=\lceil\frac{3(1+\ln(\kappa_{A})+\ln(n))}{1-\beta_{A}}\rceil$, the algorithm compensates for descent deviation. The total iterations are strictly bounded to converge deterministically when $K>\frac{2\kappa_{A}\theta_{A}^{2}}{1-\beta_{A}}$.
-#### 💻 源码级伪代码解析 (Source Code Breakdown)
+#### 💻 核心更新公式 (Core Update Equation)
 #### 💡 0基础业务通俗类比 (For Beginners)
 Imagine a company where information only flows in one direction (A tells B, but B cannot tell A - Row-stochastic network).
 - **Old problem**: Without two-way confirmation, rumors (gradients) get amplified indefinitely, and the consensus diverges.
@@ -1507,7 +1507,7 @@ System Container: Collaboration
 Frontier Source: Globally-Constrained Decentralized Optimization with Variable Coupling (arXiv:2407.10770v4)
 Deterministic Convergence Mechanism: The proposed decentralized primal-dual algorithm ensures deterministic convergence by mathematically bounding the accumulated error over $K$ steps: $\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$. Through rigorous gradient tracking using the closed-form dual bound $\bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})$, the global objective naturally stabilizes without centralized control.
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 # Decentralized Projected Primal-Dual Step
 # Variables based on arXiv:2407.10770v4 bounding constraints
@@ -1533,9 +1533,9 @@ def decentralized_primal_dual_step(y_k, lambda_star, u_1_star, S_0, S_K, k):
 💡 0基础业务通俗类比 (For Beginners)
 Imagine a massive group project (decentralized network) where everyone is working on different parts but there's a strict total budget (global constraint). Instead of having one manager track all expenses (which creates a bottleneck), every person calculates a "budget pressure score" ($\bar{\mathbf{u}}_{1}^{\star}$) and shares it only with their immediate neighbors. Because the math mathematically limits the total accumulated error ($\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$), the entire team's spending naturally stays under budget without ever needing a central accountant.
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2024-07
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, ensuring SPOF immunity and preventing structural divergence without relying on central coordination. Bilingual alignment verified.
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
 
 
 📝 [Daily Research Chunk] Dynamic Theory Deep Dive: Multiple Noncooperative Targets Encirclement via Relative Distance and Neural Antisynchronization Control
@@ -1545,7 +1545,7 @@ System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
 Deterministic Convergence Mechanism: This research guarantees bounded tracking error for multi-agent systems pursuing noncooperative targets by constructing the cost function $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ and applying neural antisynchronization control. It mathematically ensures that the ultimate error converges within a strict bound: $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$. This deterministic boundary constraint guarantees that the distributed collaboration system will not undergo structural divergence.
 
-💻 Source Code Breakdown
+💻 Core Update Equation
 ```python
 def antisynchronization_control_step(
     e_i_k: float,
@@ -1577,7 +1577,7 @@ System Container: Collaboration System
 Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
 Deterministic Convergence Mechanism: Hard topological convergence lower bound constrained by $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ and decentralized tracker update mapped via $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
     # Calculates the local tracker update on the directed graph
@@ -1604,7 +1604,7 @@ System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
 Deterministic Convergence Mechanism: Theoretical communication complexity bound is established in a time-varying network setting proportional to the network condition number $\chi$ rather than $\sqrt{\chi}$. The optimal complexity bound is explicitly modeled as $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$ for the strongly convex non-smooth case.
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 核心更新公式 (Core Update Equation)
 ```python
 # Extracted structural updates for optimal non-smooth decentralization
 def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
@@ -1642,9 +1642,12 @@ Imagine managing a large supply chain (the decentralized network) where the rout
 System Container: Collaboration
 Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
 Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
+Assumptions: Convergence is conditioned on specific graph connectivity, bounded data heterogeneity, bounded gradient noise, suitable learning rates, and specific model conditions.
+Scope: Applicable to theoretical decentralized federated learning scenarios with sporadic node availability.
+Implementation Status: No repository implementation exists. This is a conceptual mapping.
 
-💻 源码级伪代码解析 (Source Code Breakdown)
+💻 Core Update Equation
 \mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
 
 💡 0基础业务通俗类比 (For Beginners)
-Imagine a team of chefs (nodes) collaboratively creating a master recipe. Some chefs occasionally take a break or lose their connection to the kitchen (sporadic availability). Instead of forcing everyone to wait until all chefs are present, active chefs periodically blend their current average recipe (\mathbf{\bar{\theta}}^{(k)}), add their average active local improvements (\overline{\mathbf{g}v}^{(k)}). Even with this chaotic and sporadic communication, the overall recipe quality steadily approaches the master standard at a predictable rate of \mathcal{O}{(\ln{k}/\sqrt{k})}, guaranteeing that no single chef's absence can derail the team.
+Imagine a team of chefs (nodes) collaboratively creating a master recipe. Some chefs occasionally take a break or lose their connection to the kitchen (sporadic availability). Instead of forcing everyone to wait until all chefs are present, active chefs periodically blend their current average recipe (\mathbf{\bar{\theta}}^{(k)}), and add their average active local improvements (\overline{\mathbf{g}v}^{(k)}). Under specific conditions regarding how connected the kitchen is and how differently the chefs cook, the overall recipe quality steadily approaches the master standard at a predictable theoretical rate of \mathcal{O}{(\ln{k}/\sqrt{k})}, demonstrating robustness to certain predictable communication drops without proving universal immunity.
