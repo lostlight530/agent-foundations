@@ -1487,3 +1487,30 @@ Implementation Status: 暂无代码库实现。当前仅为概念映射。
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一个厨师团队（节点）共同开发一份大师级食谱。有些厨师偶尔会休息或失去与厨房的联系（零星可用性）。与其强迫每个人等到所有厨师都在场，不如让活跃的厨师定期混合他们当前的平均食谱（\mathbf{\bar{\theta}}^{(k)}），并加入他们平均的活跃本地改进（\overline{\mathbf{g}v}^{(k)}）。在关于厨房连通性和厨师烹饪差异程度的特定前提下，整体食谱的质量会以 \mathcal{O}{(\ln{k}/\sqrt{k})} 的可预测理论速度稳步接近大师标准。这展示了系统对某些可预测通信中断的鲁棒性，但并不构成一般意义上的绝对免疫。
+
+
+📝 [Daily Research Chunk] 动态理论深潜：基于随机线性规划的平均回报多智能体强化学习收敛率
+
+🔬 选型依据与学术脉络
+- System Container: Collaboration System
+- Frontier Source: https://arxiv.org/abs/2110.12929 (Convergence Rates of Average-Reward Multi-agent Reinforcement Learning via Randomized Linear Programming)
+- Original Problem: 现有的基于一致性协议的多智能体随机优化方法分析依赖于有限方差条件，而当对偶梯度评估对随机梯度估计造成无界噪声时，这一条件可能不成立。鉴于最小最大目标的结构，需要对原变量和对偶变量中的一致性误差进行联合处理。
+- Core Assumptions: 网络强连通性参数 $B$、状态空间 $\mathcal{S}$、动作空间 $\mathcal{A}$、混合时间 $t_{mix}^*$、恒定步长 $\beta$，以及占用测度的时间平均序列。
+- Mathematical Mechanism: 采用了元随机多智能体原对偶（M-RMAPD）算法。利用占用测度的时间平均序列和步长选择 $\beta=\mathcal{\widetilde{\mathcal{O}}}\left(\sqrt{\frac{\mathcal{E}_{0}}{{ \sqrt{n} |\mathcal{S}||\mathcal{A}| \tilde{t}^2_{mix}D(\Gamma, \rho)}T}}\right)$，对偶间隙被约束。
+- Convergence Bound: 以 $1-\delta$ 的概率达到 $\lambda_{\widetilde\pi} \geq \lambda^*-\epsilon$ 所需的总样本数为 $T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)$。
+- Scope: 建立在网络连通图模型上的多智能体随机优化和强化学习问题。
+- Limitations: 需要网络强连通性参数 $B$。样本复杂性高度依赖于状态和动作空间的基数，在连续或无限大的域中可能会爆炸。
+
+🏗️ Agent Architecture Mapping & Evidence
+- Paper Evidence Status: PAPER_ONLY
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT
+
+💻 数学更新规则 (Core Update Equation)
+$$
+T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)
+$$
+
+💡 0基础业务通俗类比 (For Beginners)
+想象一个自动送货机器人车队在一个复杂的仓库中穿梭。它们需要共同找到最佳路线（策略），而没有一个发号施令的中央服务器。由于它们只与直接相邻的节点通信，且只定期通信，很难知道它们是否真的在变好。该理论证明了一个数学“速度极限”：它准确地告诉我们需要多少次练习（样本数，记为 $T$），才能确保有 99% 的把握保证它们的平均送货速度近乎完美。它在数学上纳入了信息通过网络传播的速度（$t_{mix}$）以及存在的地点/动作的数量（$|S||A|$）。
