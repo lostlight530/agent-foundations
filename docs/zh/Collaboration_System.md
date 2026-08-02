@@ -1514,3 +1514,41 @@ $$
 
 💡 0基础业务通俗类比 (For Beginners)
 想象一个自动送货机器人车队在一个复杂的仓库中穿梭。它们需要共同找到最佳路线（策略），而没有一个发号施令的中央服务器。由于它们只与直接相邻的节点通信，且只定期通信，很难知道它们是否真的在变好。该理论证明了一个数学“速度极限”：它准确地告诉我们需要多少次练习（样本数，记为 $T$），才能确保有 99% 的把握保证它们的平均送货速度近乎完美。它在数学上纳入了信息通过网络传播的速度（$t_{mix}$）以及存在的地点/动作的数量（$|S||A|$）。
+
+
+### 针对极大单调算子之和的分布式近似校正算法 (Distributed Proximal-Correction Algorithm)
+
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators in Multi-Agent Network
+  - **Authors:** Authors of arXiv:2310.15607v1
+  - **URL:** http://arxiv.org/abs/2310.15607v1
+  - **Version:** v1
+  - **Date:** 2023-10-24
+  - **Selection Reason:** 提供了一种针对多智能体网络的分布式近似点方法，并附有严格的收敛性分析（包括非精确标准下的线性收敛率），直接解决了去中心化协调和优化的边界问题。
+  - **Extracted Location:** Algorithm 1, Assumption 1, Assumption 2, Theorem 4 from LaTeX Source.
+- **Original Problem:** 连通网络中的智能体如何找到一个共同的决策向量，该向量是其各自私有极大单调算子之和的解，这受到具有耦合约束的分布式凸优化的启发。
+- **Core Assumptions:**
+  - *Network Topology (网络拓扑):* 具有双随机混合矩阵 $W$ 和 $\tilde{W}$ 的连通无向网络，满足 ${\rm null}\{\tilde{W}-W\}={\rm span}\{\mathbf{1}\}$ 和 $(I+W)/2\succcurlyeq\tilde{W}\succcurlyeq W$。
+  - *Operator Properties (算子性质):* 每个局部算子 $T_i$ 都是极大单调的。问题至少存在一个解 $z^*$。
+- **Mathematical Mechanism (算法伪代码):**
+  - 分布式近似校正算法 (Distributed Proximal-Correction Algorithm, DPCA):
+    ```
+    Initialize penalty parameter \alpha > 0, mixing matrices W, \tilde{W}, and arbitrary z_i^0.
+    Set z_i^1 = \text{prox}_{\alpha T_i}\left(\sum_{j=1}^N w_{ij} z_j^0\right)
+    Set v_i^1 = \left(\sum_{j=1}^N w_{ij} z_j^0 - z_i^1\right) / \alpha
+    For k = 0, 1, 2, ...
+        z_i^{k+2} = \text{prox}_{\alpha T_i}\left(z_i^{k+1} + \sum_{j=1}^N w_{ij} z_j^{k+1} - \sum_{j=1}^N \tilde{w}_{ij} z_j^k + \alpha v_i^{k+1}\right)
+        v_i^{k+2} = \left(z_i^{k+1} + \sum_{j=1}^N w_{ij} z_j^{k+1} - \sum_{j=1}^N \tilde{w}_{ij} z_j^k - z_i^{k+2} + \alpha v_i^{k+1}\right) / \alpha
+    ```
+- **Convergence Bound (收敛界):**
+  - 假设 $\Phi^{-1}$ 在 $0$ 处是 Lipschitz 连续的，模数为 $a \ge 0$，且 $\mu = \frac{\Vert P \Vert a}{\sqrt{(\Vert P \Vert a)^2 + 1}} < 1$，则序列 $\{\xi^k\}$ 以线性速率收敛于 $\xi^\infty$：对所有 $k \ge \bar{k}$，有 $\Vert\xi^{k+1}-\xi^\infty\Vert \le \theta_k\Vert\xi^k-\xi^\infty\Vert$，其中 $\theta_k \to \mu \in (0,1)$。
+- **Applicability:** 适用于去中心化的策略协调和分布式凸优化，其中智能体具有私有约束且必须通过合作达成共识。
+- **Limitations:** 收敛性保证取决于通信图的无向连通性和同步执行。线性收敛率要求逆算子具有 Lipschitz 连续性。
+- **Agent Architecture Mapping:** 可在 `Collaboration System` 中用作解决自主子智能体之间冲突约束的去中心化协议，确保系统在数学上收敛到全局最优均衡状态。
+- **Beginner Analogy:** 想象一群朋友试图商定一个聚会地点。每个人都有自己的偏好（私有算子）。他们根据自己的偏好不断提出地点，与直接朋友的建议求平均，并加上一个跟踪过去分歧的“校正”因子，最终汇聚到一个平衡所有人约束的单一聚会地点。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

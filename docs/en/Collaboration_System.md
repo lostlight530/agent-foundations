@@ -1678,3 +1678,41 @@ $$
 
 💡 For Beginners
 Imagine a fleet of autonomous delivery robots navigating a complex warehouse. They need to find the best routes (policy) together without a central server dictating everything. Because they only talk to their immediate neighbors and only periodically, it's hard to know if they are truly getting better. This theory proves a mathematical "speed limit": it tells us exactly how many practice runs (samples, denoted by $T$) the robots need before we can guarantee with 99% certainty that their average delivery speed is nearly perfect. It mathematically incorporates how fast information spreads through their network ($t_{mix}$) and how many locations/actions exist ($|S||A|$).
+
+
+### Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators
+
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators in Multi-Agent Network
+  - **Authors:** Authors of arXiv:2310.15607v1
+  - **URL:** http://arxiv.org/abs/2310.15607v1
+  - **Version:** v1
+  - **Date:** 2023-10-24
+  - **Selection Reason:** Provides a distributed proximal point method with rigorous convergence analysis (including linear convergence rates under inexact criteria) for multi-agent networks, directly addressing decentralised coordination and optimization boundaries.
+  - **Extracted Location:** Algorithm 1, Assumption 1, Assumption 2, Theorem 4 from LaTeX Source.
+- **Original Problem:** How agents in a connected network can find a common decision vector that is the solution to the sum of their private maximal monotone operators, motivated by distributed convex optimization with coupled constraints.
+- **Core Assumptions:**
+  - *Network Topology:* Connected undirected network with doubly-stochastic mixing matrices $W$ and $\tilde{W}$ satisfying ${\rm null}\{\tilde{W}-W\}={\rm span}\{\mathbf{1}\}$ and $(I+W)/2\succcurlyeq\tilde{W}\succcurlyeq W$.
+  - *Operator Properties:* Each local operator $T_i$ is maximal monotone. The problem admits at least one solution $z^*$.
+- **Mathematical Mechanism (算法伪代码):**
+  - Distributed Proximal-Correction Algorithm (DPCA):
+    ```
+    Initialize penalty parameter \alpha > 0, mixing matrices W, \tilde{W}, and arbitrary z_i^0.
+    Set z_i^1 = \text{prox}_{\alpha T_i}\left(\sum_{j=1}^N w_{ij} z_j^0\right)
+    Set v_i^1 = \left(\sum_{j=1}^N w_{ij} z_j^0 - z_i^1\right) / \alpha
+    For k = 0, 1, 2, ...
+        z_i^{k+2} = \text{prox}_{\alpha T_i}\left(z_i^{k+1} + \sum_{j=1}^N w_{ij} z_j^{k+1} - \sum_{j=1}^N \tilde{w}_{ij} z_j^k + \alpha v_i^{k+1}\right)
+        v_i^{k+2} = \left(z_i^{k+1} + \sum_{j=1}^N w_{ij} z_j^{k+1} - \sum_{j=1}^N \tilde{w}_{ij} z_j^k - z_i^{k+2} + \alpha v_i^{k+1}\right) / \alpha
+    ```
+- **Convergence Bound (收敛界):**
+  - Assuming $\Phi^{-1}$ is Lipschitz continuous at $0$ with modulus $a \ge 0$, and $\mu = \frac{\Vert P \Vert a}{\sqrt{(\Vert P \Vert a)^2 + 1}} < 1$, the sequence $\{\xi^k\}$ converges to $\xi^\infty$ with a linear rate: $\Vert\xi^{k+1}-\xi^\infty\Vert \le \theta_k\Vert\xi^k-\xi^\infty\Vert$ for all $k \ge \bar{k}$, where $\theta_k \to \mu \in (0,1)$.
+- **Applicability:** Applicable to decentralized policy reconciliation and distributed convex optimization where agents have private constraints and must reach a consensus cooperatively.
+- **Limitations:** Convergence guarantees depend on the undirected and connected nature of the communication graph and synchronous execution. The linear convergence rate requires Lipschitz continuity of the inverse operator.
+- **Agent Architecture Mapping:** Can be utilized in the `Collaboration System` as a decentralized protocol for resolving conflicting constraints among autonomous sub-agents, ensuring the system reaches a globally optimal equilibrium state mathematically.
+- **Beginner Analogy:** Imagine a group of friends trying to agree on a meeting point. Everyone has their own preferences (private operators). They repeatedly suggest locations based on their preferences, average them with their direct friends' suggestions, and add a "correction" factor tracking past disagreements, ultimately converging to a single meeting spot that balances everyone's constraints.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
