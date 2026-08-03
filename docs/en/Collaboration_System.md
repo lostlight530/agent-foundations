@@ -1716,3 +1716,34 @@ Imagine a fleet of autonomous delivery robots navigating a complex warehouse. Th
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
+
+### Multi-Agent Collaborative Bandit Regret Bound
+- **System Container:** Collaboration System
+- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
+- **Original Problem:** Minimizing regret in a collaborative multi-agent multi-armed bandit model where each agent's optimal arm is defined by the largest expected *mixed* reward, which is a weighted average of local rewards across agents.
+- **Core Assumptions:**
+  - Rewards are drawn from an unknown $\sigma$-sub-Gaussian distribution.
+  - The weight matrix $W$ is fixed, known, and its columns sum to 1.
+  - Agents can communicate empirical means of past local observations to a central server that broadcasts to all agents.
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Optimization Oracle $\mathcal{P}(\Delta)$ for resource allocation):
+    $$ \arg\min_{q \in (\mathbb{R}^+)^{K \times M}} \sum_{k \in [K], m \in [M]} q_{k,m} \Delta_{k,m} $$
+    $$ \text{subject to:} \quad \forall m \in [M], \forall k \in [K], \sum_{n \in [M]} \frac{w^2_{n,m}}{q_{k,n}} \le \frac{\Delta^2_{k,m}}{2} $$
+- **Convergence / Behavioral Bound:**
+  - **收敛界** (Optimal Regret Bound for the *Collaborative Double Exploration* algorithm):
+    $$ \mathcal{R}(T) = \mathcal{O} \left( c^* \log(T) + \frac{(\Delta'_{\max})^2}{\Delta'_{\min}} (\log\log(T))^4 \right) $$
+    where $c^*$ is the problem-specific lower bound complexity term. The algorithm achieves this bound with an expected $\mathcal{O}(\log(1/\Delta'_{\min}))$ communication rounds.
+- **Scope & Limitations:**
+  - The theoretical regret bound requires the $\sigma$-sub-Gaussian assumption on reward distributions.
+  - The algorithm assumes a synchronous learning environment with a central controller available for communication.
+  - The term $c^*$ is dependent on the specific underlying gap parameters which are unknown a priori.
+- **Agent Architecture Mapping:** Can conceptually support decentralized exploration and decision-making modules in a collaborative swarm by providing a resource allocation structure that balances local exploitation and global exploration based on confidence gaps.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** Imagine multiple teams (agents) testing different strategies (arms). Each team's ultimate success depends not just on their own testing but on a weighted average of how well the strategy works for all teams. They have to decide how many times each team should test each strategy so that overall, they quickly figure out the best one without wasting too much time on bad ones, communicating only when absolutely necessary.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+- **Notes:** SELECTION_BIAS_OBSERVED (Collaboration System chosen based on historical frequency balance).
