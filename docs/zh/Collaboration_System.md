@@ -1552,3 +1552,34 @@ $$
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
+
+### 多智能体协作 Bandit 遗憾界 (Multi-Agent Collaborative Bandit Regret Bound)
+- **System Container:** Collaboration System
+- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
+- **Original Problem:** 在协作式多智能体多臂老虎机（Multi-Armed Bandit）模型中最小化遗憾（Regret），其中每个智能体的最优臂由最大的期望*混合*奖励定义，该混合奖励是所有智能体局部奖励的加权平均值。
+- **Core Assumptions:**
+  - 奖励服从未知的 $\sigma$-亚高斯（sub-Gaussian）分布。
+  - 权重矩阵 $W$ 是固定的、已知的，且每列之和为 1。
+  - 智能体可以将过去局部观察的经验均值传达给中央服务器，由中央服务器广播给所有智能体。
+- **Mathematical Mechanism:**
+  - **核心更新公式** (用于资源分配的优化 Oracle $\mathcal{P}(\Delta)$):
+    $$ \arg\min_{q \in (\mathbb{R}^+)^{K \times M}} \sum_{k \in [K], m \in [M]} q_{k,m} \Delta_{k,m} $$
+    $$ \text{subject to:} \quad \forall m \in [M], \forall k \in [K], \sum_{n \in [M]} \frac{w^2_{n,m}}{q_{k,n}} \le \frac{\Delta^2_{k,m}}{2} $$
+- **Convergence / Behavioral Bound:**
+  - **收敛界** (*协作双重探索*算法的最优遗憾界):
+    $$ \mathcal{R}(T) = \mathcal{O} \left( c^* \log(T) + \frac{(\Delta'_{\max})^2}{\Delta'_{\min}} (\log\log(T))^4 \right) $$
+    其中 $c^*$ 是针对特定问题的遗憾下界复杂性项。该算法在预期的 $\mathcal{O}(\log(1/\Delta'_{\min}))$ 通信轮数下达到了此边界。
+- **Scope & Limitations:**
+  - 理论遗憾界要求奖励分布满足 $\sigma$-亚高斯假设。
+  - 该算法假设存在一个可用于通信的中央控制器的同步学习环境。
+  - 复杂性项 $c^*$ 依赖于先验未知的底层特定间隙参数（gap parameters）。
+- **Agent Architecture Mapping:** 可以在概念上支持协作集群中的去中心化探索和决策模块，通过提供一种资源分配结构，基于置信间隙在局部开发（exploitation）和全局探索（exploration）之间取得平衡。
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** 想象多个团队（智能体）正在测试不同的策略（臂）。每个团队的最终成功不仅取决于他们自己的测试，还取决于该策略对所有团队效果的加权平均值。他们必须决定每个团队应该测试每个策略多少次，以便总体而言，他们能够快速找出最佳策略，而不会在糟糕的策略上浪费太多时间，并且仅在绝对必要时才进行沟通。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+- **Notes:** SELECTION_BIAS_OBSERVED (基于历史频率平衡选择 Collaboration System)。
