@@ -624,3 +624,47 @@ def lyapunov_exponent_regularized_step(L_theta, var_S, var_H, lambda_1, gamma):
 **Repository Implementation Status:** PAPER_ONLY
 **Beginner Analogy:** 想象一家大公司。CEO（战略层）每季度根据整体市场（全局状态）设定总体目标和预算分配（战略指导）。各个团队（战术层）根据其具体项目（局部状态）和 CEO 的目标进行日常决策（局部行动）。团队在季度内的成功或失败（战术奖励）会影响 CEO 下个季度的目标，确保高层战略始终立足于团队实际能完成的任务。
 **Evidence Status:** 提取自 arXiv:2607.19555v1 LaTeX 源码中的理论推导与算法设计。
+
+---
+
+## 基于贝叶斯规划与遗憾界的架构设计 (Bayesian Planning with Regret Bounds)
+
+**System Container**: Architecture Principles
+
+**Frontier Source**: Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency (arXiv:2309.17382v3), https://arxiv.org/abs/2309.17382, v3, 2023-09-29. 作者：Zhihan Liu et al. 选择理由：提供理论约束，直接映射到Architecture Principles。
+
+**Original Paper Problem**: 大型语言模型（LLMs）展现出令人印象深刻的推理能力，但在实际物理世界中，如何以可证明的最小交互次数（即最高样本效率）将推理转化为行动，仍是一个艰巨挑战。
+
+**Core Assumptions**:
+1. 假设1（完美规划器）：存在一个$\eps$-最优规划器$\texttt{PL}^\eps$。
+2. 假设2：价值函数的方差有界。
+3. 假设3：具有后验采样机制的LLMs（例如通过自助法 bootstrap method 实现）。
+
+**Mathematical Mechanism**:
+系统的累积遗憾（Regret）受限于后验熵的减少量 $H_0 - H_T$。算法利用$\eps$-最优规划器以及后验采样机制进行前瞻规划，从而鼓励系统在高度不确定的状态下进行探索。
+
+**Convergence or Behavioral Bound**:
+定理2证明了贝叶斯遗憾的边界为：
+$$ \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\eps}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr) $$
+
+**Applicability**:
+适用于可被建模为贝叶斯自适应马尔可夫决策过程（MDPs）的多智能体和单智能体系统，且要求智能体维护一个记忆缓冲区以用于后验更新。
+
+**Limitations**:
+该边界强依赖于方差项$L$以及集中度系数（若不采用后验采样）。在实际的经验LLM推理中，若不借助大量的自助法近似，可能很难严格实现精确的$\eps$-最优规划器和完美的后验采样。
+
+**Agent Architecture Mapping**:
+概念上映射至架构内部的推理与规划模块。
+
+**Evidence Status**:
+- Paper Evidence Status: PAPER_ONLY
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT
+
+**Algorithm**:
+算法伪代码 (Algorithm 2, 结合后验采样的 RAFA):
+在每个轮次 $k$，使用记忆 $\mathcal{D}_{t_k}$ 进行规划 $(\pi_t, V_t)\leftarrow \texttt{PL}^\eps(P_{\texttt{LLM+PS}(\mathcal{D}_{t_k})},r_{\texttt{LLM+PS}(\mathcal{D}_{t_k})})$。执行 $a_t = \pi_t(s_t)$，将新状态和奖励记录到 $\mathcal{D}$ 中，并重复该过程，直到熵减满足条件 $H_{t_k} - H_t > \log 2$。
+
+**For Beginners (初学者类比)**:
+想象你在探索一个巨大的未知迷宫。你不会盲目乱走，而是将所见所闻记录在日记（记忆缓冲区）中。在迈出下一步之前，你会根据日记在脑海中模拟未来的可能路径，并特别倾向于走向那些在日记中完全空白（高度不确定）的路径。你走一步，更新日记，然后再次思考。数学理论保证了你走“错路”（遗憾）的数量增长非常缓慢（$\sqrt{T}$），因为你在系统性地将未知转化为已知。

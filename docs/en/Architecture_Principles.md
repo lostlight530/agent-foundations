@@ -624,3 +624,47 @@ Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm 
 **Repository Implementation Status:** PAPER_ONLY
 **Beginner Analogy:** Imagine a large corporation. The CEO (strategic layer) sets overarching goals and budget allocations (strategic guidance) every quarter based on the whole market (global state). Individual teams (tactical layer) make daily decisions (local actions) based on their specific projects (local state) and the CEO's goals. The teams' success or failure (tactical rewards) over the quarter influences the CEO's next quarterly goals, ensuring the high-level strategy remains grounded in what the teams can actually achieve.
 **Evidence Status:** Extracted from theoretical derivations and algorithm design in arXiv:2607.19555v1 LaTeX source.
+
+---
+
+## Bayesian Planning with Regret Bounds
+
+**System Container**: Architecture Principles
+
+**Frontier Source**: Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency (arXiv:2309.17382v3), https://arxiv.org/abs/2309.17382, v3, 2023-09-29. Authors: Zhihan Liu et al. Selected because it provides theoretical regret bounds for LLM agents using posterior sampling and Bayesian planning, mapping directly to Architecture Principles.
+
+**Original Paper Problem**: Large language models (LLMs) demonstrate impressive reasoning abilities, but translating reasoning into actions in the real world provably within a minimum number of interactions with the external environment remains challenging.
+
+**Core Assumptions**:
+1. Assumption 1 (Perfect Planner): $\eps$-optimal planner $\texttt{PL}^\eps$ exists.
+2. Assumption 2: Variance bound on the value function.
+3. Assumption 3: LLMs with Posterior Sampling Mechanism (e.g. via bootstrap method).
+
+**Mathematical Mechanism**:
+The regret is bounded by the posterior entropy reduction $H_0 - H_T$. The algorithm optimizes the policy by planning ahead using an $\eps$-optimal planner and posterior sampling mechanism to encourage exploration in states with high uncertainty.
+
+**Convergence or Behavioral Bound**:
+Theorem 2 proves the Bayesian Regret is bounded by:
+$$ \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\eps}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr) $$
+
+**Applicability**:
+Applicable to multi-agent and single-agent systems where the environment can be modeled as Bayesian adaptive Markov decision processes (MDPs) and the agent maintains a memory buffer for posterior updates.
+
+**Limitations**:
+The bound depends strongly on the variance term $L$ and the concentrability coefficient (if not using posterior sampling). The existence of an exact $\eps$-optimal planner and perfect posterior sampling might be difficult to realize strictly in empirical LLM inference without heavy bootstrap approximations.
+
+**Agent Architecture Mapping**:
+Maps to the internal reasoning and planning module of the architecture.
+
+**Evidence Status**:
+- Paper Evidence Status: PAPER_ONLY
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT
+
+**Algorithm**:
+Algorithm Pseudocode (Algorithm 2, RAFA with posterior sampling):
+At each epoch $k$, using memory $\mathcal{D}_{t_k}$, plan $(\pi_t, V_t)\leftarrow \texttt{PL}^\eps(P_{\texttt{LLM+PS}(\mathcal{D}_{t_k})},r_{\texttt{LLM+PS}(\mathcal{D}_{t_k})})$. Execute $a_t = \pi_t(s_t)$, record new state and reward into $\mathcal{D}$, and repeat until the entropy reduction $H_{t_k} - H_t > \log 2$.
+
+**For Beginners**:
+Imagine you are exploring a massive, unknown maze. Instead of wandering randomly, you keep a diary (memory buffer) of what you've seen. Before taking a step, you mentally simulate possible futures based on your diary, specifically favoring paths where your diary is completely blank (high uncertainty). You walk one step, update the diary, and think again. The math guarantees that the number of "bad steps" (regret) you take grows very slowly ($\sqrt{T}$), because you systematically turn your uncertainty into knowledge.
