@@ -38,10 +38,30 @@ class SchemaTests(unittest.TestCase):
 
 
 class ProtectedPathTests(unittest.TestCase):
-    def test_protected_change_fails(self) -> None:
+    def test_root_readme_is_denied_by_default(self) -> None:
         with patch.object(validator, "changed_paths", return_value={"README.md", "FOUNDATION/INDEX.md"}):
             errors = validator.validate("origin/main")
         self.assertIn("protected paths changed: ['README.md']", errors)
+
+    def test_root_readme_is_allowed_only_when_explicit(self) -> None:
+        with patch.object(validator, "changed_paths", return_value={"README.md", "FOUNDATION/INDEX.md"}):
+            errors = validator.validate("origin/main", {"README.md"})
+        self.assertFalse(any(error.startswith("protected paths changed") for error in errors))
+
+    def test_root_readme_allowance_does_not_allow_other_protected_paths(self) -> None:
+        changed = {"README.md", "index.html", "LICENSE", "docs/en/README.md", "docs/zh/README.md"}
+        with patch.object(validator, "changed_paths", return_value=changed):
+            errors = validator.validate("origin/main", {"README.md"})
+        self.assertIn(
+            "protected paths changed: ['LICENSE', 'docs/en/README.md', 'docs/zh/README.md', 'index.html']",
+            errors,
+        )
+
+    def test_allowed_paths_normalize_slashes_but_remain_exact(self) -> None:
+        changed = {"docs/en/README.md", "docs/zh/README.md"}
+        with patch.object(validator, "changed_paths", return_value=changed):
+            errors = validator.validate("origin/main", {"docs\\en\\README.md"})
+        self.assertIn("protected paths changed: ['docs/zh/README.md']", errors)
 
     def test_foundation_only_change_passes_protected_gate(self) -> None:
         with patch.object(validator, "changed_paths", return_value={"FOUNDATION/INDEX.md"}):
