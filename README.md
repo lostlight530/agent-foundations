@@ -1,115 +1,131 @@
-# Agent Foundations / 智能体理论基础
+# Agent Foundations / 智能体理论与证据基础
 
-*(English version below | 中文版本见下)*
+Agent Foundations is a bilingual theory, evidence, and architecture-decision base for reasoning about agent systems. It is not an implemented autonomous-agent runtime. Claims in this repository are bounded by named evidence, assumptions, implementation status, and validation status.
 
----
+Agent Foundations 是用于研究智能体系统的双语理论、证据与架构决策基础，不是已实现的自治智能体运行时。本仓库的声明均受明确证据、假设、实现状态与验证状态约束。
 
-## 🇬🇧 English Version
+## English
 
-> *The four repositories dictate what the system does. This repository explains why it works.*
+### Repository boundary
 
-### Introduction
-Welcome to **Agent Foundations**, the theoretical skeleton and mathematical bedrock of a fully deterministic, self-converging Agent architecture. In an era where "Scale is All You Need" dominates AI, bringing stochastic black boxes and unpredictable hallucinations, we chose a fundamentally different path.
+The independently maintained `FOUNDATION/` core separates evidence records and architecture decisions from the existing SOP-generated documentation stream. Equations, paper summaries, analogies, and pseudocode remain references until an executable repository artifact and test exist. External results can motivate a design, but they do not establish a repository capability.
 
-This repository compiles rigorous academic research across six major AI disciplines, dismantling the probabilistic nature of modern Large Language Models (LLMs) and rebuilding an Agent system from scratch. We do not rely on scale to probabilistically approximate intelligence; instead, we use mathematical proofs and rigid constraints to provide deterministic behavioral guarantees.
+### Verified-core reading order
 
-### Core Philosophy
+1. [Evidence contract](FOUNDATION/EVIDENCE.md) — claim and evidence rules.
+2. [Architecture principles](FOUNDATION/ARCHITECTURE.md) — system boundary and evaluation.
+3. [Memory system](FOUNDATION/MEMORY.md) — memory lifecycle and limits.
+4. [Tool system](FOUNDATION/TOOLS.md) — authority, observability, and recovery.
+5. [Collaboration system](FOUNDATION/COLLABORATION.md) — coordination and failure propagation.
+6. [Source registry](FOUNDATION/SOURCES.md) — primary-source records.
+7. [Provenance](FOUNDATION/PROVENANCE.md) — reproducibility and AI-use disclosure.
 
-**We do not implement. We constrain.**
-We eschew brittle, hard-coded `if-else` chains. Instead, we define continuous energy functions and mathematical boundary conditions. The agent explores freely within a constrained, safe manifold.
+Each material statement in the core has a stable Claim ID. English and Chinese text for a claim share that ID and the same evidence state.
 
-**We do not scale. We prove.**
-We refuse to blindly stack parameters and hope for capabilities to emerge. Instead, we use convex optimization and Lyapunov stability theories to mathematically prove the behavioral lower bounds of the system.
+### Evidence and status contract
 
-**We do not optimize. We guarantee convergence.**
-We model learning and decision-making as deterministic dynamical systems. Through meticulously designed algorithms, we ensure the agent is designed to stabilize at a well-defined global or local minimum, resistant to catastrophic forgetting.
+Claim states are `OBSERVED`, `SUPPORTED`, `PROPOSED`, `HYPOTHESIS`, `CONTESTED`, and `RETIRED`. `SUPPORTED` is always limited to the cited system, task, data, configuration, metric, assumptions, and source version.
 
-### System Architecture & Research Matrix
+Evidence levels are:
 
-Our research systematically surveyed the Agent capability matrix, resulting in four core systems backed by distinct theoretical pillars:
+- `E0_REPOSITORY_TEST`: executable artifact, fixture, command, and result in this repository.
+- `E1_PRIMARY_STANDARD`: official standard, specification, or primary system card.
+- `E2_PEER_REVIEWED`: peer-reviewed research with sufficient method detail.
+- `E3_REPRODUCIBLE_PREPRINT`: preprint with a runnable artifact or inspectable data.
+- `E4_PREPRINT`: preprint not reproduced by this repository.
+- `E5_BACKGROUND`: survey, commentary, analogy, or secondary material.
+- `E6_UNVERIFIED`: incomplete provenance or support.
 
-| Research Direction | Agent Component | Theoretical Role & Code Implication |
-|-------------------|----------------|-------------------------------------|
-| **SimCLR + VICReg + Unsupervised Learning** | **Memory System** | Replaces raw data storage with latent space representation learning. Enables true episodic memory via robust anomaly detection and contrastive feature extraction. |
-| **RL (NLP) — Studied & Reversed** | **Tool System** | Transitions probabilistic tool use into a deterministic action space. We mapped RL value alignment, then reverse-engineered it into a hard-constrained causal execution graph. |
-| **Distributed Direct Preference Optimization (DecDPO)** | **Collaboration System** | Ensures distributed convergence across multi-agent networks without a central server. Utilizes decentralized preference alignment and spectral connectivity to resolve Non-IID data harmony. |
-| **Gradient Entropy (FIM/NTK Theory)** | **Architecture Principle** | A novel metric quantifying information dissipation. By clamping gradient entropy bounds, we mathematically constrain mode collapse and structural divergence. |
+Mapping states are `DIRECT_REQUIREMENT`, `DESIGN_ANALOGY`, `CANDIDATE_MECHANISM`, `COUNTEREVIDENCE`, and `OUT_OF_SCOPE`. They distinguish an adopted requirement from an analogy, possible mechanism, limiting evidence, or excluded subject.
 
-### Structure & Roadmap
-- `docs/en/`: Deep-dive English documentation (1000+ words each) featuring academic derivations, source code/pseudocode analysis, and beginner-friendly analogies.
-- `docs/zh/`: Equivalent deep-dive Chinese documentation.
+Implementation states are `NOT_IMPLEMENTED`, `REFERENCE_ONLY`, `PARTIAL_PROTOTYPE`, and `IMPLEMENTED`. Validation states are `NOT_TESTED`, `STATIC_CHECKED`, `EXPERIMENTALLY_TESTED`, `REPRODUCED`, and `EXTERNALLY_REVIEWED`. An `IMPLEMENTED` claim must name a repository path; an `EXPERIMENTALLY_TESTED` claim must record its command, fixture, configuration, metric, and result.
 
-For a detailed technical index and reading guide, please refer to the specific `README.md` within the `docs/en/` or `docs/zh/` directories.
+### Four bounded research domains
 
----
+| Domain | What the core records | Current boundary |
+| --- | --- | --- |
+| Architecture | Complete-system evaluation boundaries, enforceable interfaces, theorem scope, and reconstructable release evidence. | Specifications and evidence maps do not make the underlying model deterministic or constitute a runtime. |
+| Memory | Selection, provenance, retrieval, compaction, retention, correction, and deletion as a lifecycle. | Most mechanisms are proposed or reference-only; this repository has no memory runtime. |
+| Tools | Per-action authority, untrusted-input handling, inspectable plans, observability, monitors, idempotency, and recovery. | These are requirements and candidate mechanisms, not an implemented tool-control plane. |
+| Collaboration | Topology tradeoffs, failure propagation, preserved trajectories, message contracts, and typed consensus. | External coordination results retain their original assumptions; no collaboration protocol is deployed here. |
 
-## 🇨🇳 中文版本
+### Executable repository evidence
 
-> *其他四个仓库展示了系统在“做什么”，而本仓库揭示了系统“为什么有效”。*
+The validator, schema, and contract tests provide executable evidence for documentary structure. Run them with Python 3.12 or 3.14 and no third-party Python packages:
 
-### 简介
-欢迎来到 **Agent Foundations（智能体理论基础）**。这里是构建一个完全确定性、自收敛智能体架构的理论骨架和数学基石。在“算力即一切（Scale is All You Need）”主导的时代，人工智能伴随着黑盒现象与不可预测的幻觉。我们选择了一条截然不同的道路。
+```bash
+python FOUNDATION/validate.py
+python -m unittest FOUNDATION.test_contract -v
+python FOUNDATION/validate.py --base-ref origin/main
+```
 
-本仓库汇集了横跨六大人工智能领域的严谨学术研究。我们解构了现代大语言模型（LLMs）的概率性质，从零开始重构了智能体系统。我们不依赖算力扩展来概率性地逼近智能，而是通过数学证明和严格约束来力求保障智能的确定性。
+The checks cover required files, claim metadata, unique IDs, registered sources, schema structure, restricted overclaims, pinned Actions, and protected paths. They do not establish semantic truth, mathematical correctness, translation quality, or reproduction of external experiments.
 
-### 核心理念
+### Ownership and limitations
 
-**我们不实现，我们约束。**
-我们摒弃脆弱的硬编码（if-else）规则。取而代之的是连续的能量函数与数学边界条件。智能体在一个被严格约束且安全的流形空间内自由探索。
+`FOUNDATION/` is the independently maintained verified core. `docs/` remains the existing SOP-generated research stream and is not silently upgraded into verified evidence by this README. The root README is an entry point; Claim IDs and source-specific records remain authoritative within the core.
 
-**我们不扩展，我们证明。**
-我们拒绝盲目堆叠参数以期盼能力的概率性涌现。我们运用凸优化和李雅普诺夫稳定性理论，从数学层面证明系统行为的下界与安全边界。
+This repository contains no autonomous-agent runtime, deployed memory system, tool-control plane, or collaboration protocol. Mathematical results retain their formal domain. Safety, reliability, and convergence must be evaluated for a named system and failure model; no universal conclusion is asserted here. AI output may assist drafting or consistency checks, but it is not evidence and maintainer review remains required.
 
-**我们不优化，我们保证收敛。**
-我们将学习和决策建模为确定性的动力系统。通过精心设计的算法（如同质收敛的联邦网络），我们确保智能体最终必然稳定在定义明确的状态，设计目标为避免灾难性遗忘。
+## 中文
 
-### 系统架构与研究矩阵
+### 仓库边界
 
-我们历时半年的研究系统性地梳理了智能体能力矩阵，最终形成了由不同理论支柱支撑的四大核心系统：
+独立维护的 `FOUNDATION/` 核心把证据记录与架构决策同现有 SOP 自动生成文档流分开。公式、论文摘要、类比和伪代码在具备可执行仓库产物与测试之前都只是参考材料。外部结果可以启发设计，但不能证明本仓库已经具备相应能力。
 
-| 学术研究方向 | 智能体核心组件 | 理论作用与源码启示 |
-|-------------------|----------------|-------------------------------------|
-| **SimCLR + VICReg + 无监督学习** | **记忆系统 (Memory System)** | 放弃原始数据存储，采用隐空间表征学习。通过对比特征提取和异常检测，实现真正的事件级和结构化记忆。 |
-| **强化学习 (NLP) — 逆向工程** | **工具系统 (Tool System)** | 将概率性的工具使用转化为确定性的动作空间。我们学习了 RL 价值对齐，随后将其逆向推导为具有硬性约束的因果执行图。 |
-| **Distributed Direct Preference Optimization (DecDPO)** | **协作系统 (Collaboration System)** | 保证多智能体网络中的分布式收敛。完全抛弃中心聚合服务器，利用去中心化偏好对齐和确定的谱连通性收敛来解决 Non-IID 数据协同问题。 |
-| **梯度熵 (FIM/NTK 理论)** | **架构原则 (Architecture Principle)** | 一种量化信息耗散的新型指标。通过锁定梯度熵的上下界，我们在物理与数学层面限制了模型崩溃与结构发散。 |
+### 可验证核心阅读顺序
 
-### 文档结构与导读
-- `docs/en/`：英文深度技术文档目录。
-- `docs/zh/`：中文深度技术文档目录。包含架构原则、协作系统、记忆系统和工具系统的全面解析（每篇千字以上），涵盖学术推导、源码剖析（伪代码）以及面向 0 基础读者的通俗讲解。
+1. [证据契约](FOUNDATION/EVIDENCE.md) — 声明与证据规则。
+2. [架构原则](FOUNDATION/ARCHITECTURE.md) — 系统边界与评估。
+3. [记忆系统](FOUNDATION/MEMORY.md) — 记忆生命周期与局限。
+4. [工具系统](FOUNDATION/TOOLS.md) — 权限、可观测性与恢复。
+5. [协作系统](FOUNDATION/COLLABORATION.md) — 协调与故障传播。
+6. [来源登记](FOUNDATION/SOURCES.md) — 一手来源记录。
+7. [来源与复现](FOUNDATION/PROVENANCE.md) — 可复现性与 AI 使用披露。
 
-想了解详细的技术索引和阅读指南，请查阅 `docs/zh/` 和 `docs/en/` 目录下的专属 `README.md`。
+核心中的每项实质性陈述都有稳定的 Claim ID。同一声明的中英文共享该 ID 与相同证据状态。
 
+### 证据与状态契约
 
----
+声明状态包括 `OBSERVED`、`SUPPORTED`、`PROPOSED`、`HYPOTHESIS`、`CONTESTED` 和 `RETIRED`。`SUPPORTED` 始终受所引系统、任务、数据、配置、指标、假设与来源版本约束。
 
-### 🗺️ [Monthly Strategic Blueprint] 月度理论防线加固与路线图大换血
+证据等级包括：
 
-#### ⚡ 外部黑盒翻车案例审计与免疫证明
-- **故障扫描**：本月业内多智能体框架频繁暴露出“中心服务器单点故障（SPOF）”和“数据隐私泄漏”丑闻。当中心化调度节点宕机或遭遇恶意攻击时，整个由数万个 Agents 构成的集群瞬间瘫痪。
-- **当前路线防御力评估**：我们本月在协作容器中正式部署的 DecDPO 理论在架构设计上对上述灾难理论免疫。因为在我们的数学设计中，不设“总指挥”角色。每个节点仅依赖双随机混合矩阵 $\Lambda$ 与局部邻居通信，结构上规避了单点故障的可能。
+- `E0_REPOSITORY_TEST`：本仓库中的可执行产物、夹具、命令与结果。
+- `E1_PRIMARY_STANDARD`：官方标准、规范或一手系统卡。
+- `E2_PEER_REVIEWED`：方法细节充分的同行评审研究。
+- `E3_REPRODUCIBLE_PREPRINT`：带可运行产物或可检查数据的预印本。
+- `E4_PREPRINT`：本仓库尚未复现的预印本。
+- `E5_BACKGROUND`：综述、评论、类比或二手材料。
+- `E6_UNVERIFIED`：来源或支持不完整。
 
-#### 🔄 核心研究方向修正与下月 Roadmap
-- **方向废弃/替换评估（CRITICAL）**：基于本月的深度审计，我正式评估认为：原有的 **已被废弃的“联邦学习 (Federated Learning) + 时空图模型”** 范式中，联邦聚合过程虽然保护了隐私，但依旧残留了对中心参数服务器的路径依赖。**决定果断“切割”**！全面废弃中心化联邦学习，用纯粹的“去中心化分布式优化 (Decentralized Distributed Optimization)”替换协作系统的底层骨架。
-- **蓝图开辟**：继续维持四大系统容器，但 Collaboration 容器内部的理论血液已全部更新为“DecDPO”。
-- **下月仓库演进路线图 (Roadmap)**：
-  - [Collaboration]：全面编写基于网络谱间隙（Spectral Gap）验证去中心化收敛速度的 Python 分析模块，验证 $\mathcal{O}(1/\varepsilon^{2})$ 的时间复杂度下界。
+映射状态包括 `DIRECT_REQUIREMENT`、`DESIGN_ANALOGY`、`CANDIDATE_MECHANISM`、`COUNTEREVIDENCE` 和 `OUT_OF_SCOPE`，用于区分已采纳要求、结构类比、候选机制、限制性证据和范围外主题。
 
-***
+实现状态包括 `NOT_IMPLEMENTED`、`REFERENCE_ONLY`、`PARTIAL_PROTOTYPE` 和 `IMPLEMENTED`。验证状态包括 `NOT_TESTED`、`STATIC_CHECKED`、`EXPERIMENTALLY_TESTED`、`REPRODUCED` 和 `EXTERNALLY_REVIEWED`。`IMPLEMENTED` 必须指向仓库路径；`EXPERIMENTALLY_TESTED` 必须记录命令、夹具、配置、指标和结果。
 
-### 🗺️ [Monthly Strategic Blueprint] Monthly Theoretical Defense Reinforcement & Roadmap Overhaul
+### 四个有边界的研究领域
 
-#### ⚡ External Black-Box Failure Audit & Immunity Proof
-- **Failure Scan**: This month, industry multi-agent frameworks frequently exposed scandals regarding "Single Point of Failure (SPOF) on central servers" and "data privacy leaks." When the centralized dispatch node crashed or was maliciously attacked, entire clusters consisting of tens of thousands of Agents paralyzed instantly.
-- **Current Route Defense Assessment**: The DecDPO theory we officially deployed in the collaboration container this month is theoretically immune to the aforementioned disasters by architectural design. In our mathematical design, there is no "commander-in-chief" role. Each node relies solely on the doubly stochastic mixing matrix $\Lambda$ to communicate with local neighbors, structurally mitigating the possibility of a single point of failure.
+| 领域 | 核心记录内容 | 当前边界 |
+| --- | --- | --- |
+| 架构 | 完整系统评估边界、可执行接口、定理适用域和可重建发布证据。 | 规范和证据映射不会使底层模型变成确定性系统，也不构成运行时。 |
+| 记忆 | 把选择、来源、检索、压缩、保留、纠错和删除视为完整生命周期。 | 多数机制为提案或仅供参考；本仓没有记忆运行时。 |
+| 工具 | 按动作授权、不可信输入处理、可检查计划、可观测性、监控、幂等与恢复。 | 这些是要求和候选机制，不是已实现的工具控制平面。 |
+| 协作 | 拓扑权衡、故障传播、轨迹保留、消息契约和分类型共识。 | 外部协调结果保留其原始假设；本仓没有已部署的协作协议。 |
 
-#### 🔄 Core Research Direction Correction & Next Month's Roadmap
-- **Direction Deprecation/Replacement Assessment (CRITICAL)**: Based on this month's deep audit, I officially assess that: in the original **"Federated Learning + Spatiotemporal Graph Model"** paradigm, although the federated aggregation process protected privacy, it still retained a path dependence on a central parameter server. **Decided to decisively "change tracks"!** Completely deprecate centralized federated learning and replace the underlying skeleton of the collaboration system with pure "Decentralized Distributed Optimization".
-- **Blueprint Expansion**: Continue to maintain the four major system containers, but the theoretical blood inside the Collaboration container has been completely updated to "DecDPO".
-- **Next Month's Repository Evolution Roadmap**:
-  - [Collaboration]: Comprehensively write a Python analysis module based on the network's Spectral Gap to verify the decentralized convergence speed, validating the lower bound of time complexity at $\mathcal{O}(1/\varepsilon^{2})$.
+### 可执行仓库证据
 
-<!-- ARCHIVE_SEAL_NOTE: Absolute language remediation applied 2026-07-31. Changes: "completely immune" -> "theoretically immune by architectural design"; "physically severing" -> "structurally mitigating"; "physically prevent" -> "mathematically constrain"; "immune to catastrophic forgetting" -> "resistant to catastrophic forgetting"; "guarantee it" -> "provide deterministic behavioral guarantees"; "彻底阻断了" -> "限制了"; "完全免疫" -> "理论免疫"; "物理切断了" -> "结构上规避了"; "绝不会发生" -> "设计目标为避免"; "保障智能的必然性" -> "力求保障智能的确定性". Per zero-entropy cognitive ethics: no absolute claims without executable proof. -->
+验证器、Schema 和契约测试为文档结构提供可执行证据。支持 Python 3.12 或 3.14，不依赖第三方 Python 包：
 
----
-*lostLight*
+```bash
+python FOUNDATION/validate.py
+python -m unittest FOUNDATION.test_contract -v
+python FOUNDATION/validate.py --base-ref origin/main
+```
+
+检查范围包括必需文件、声明元数据、唯一 ID、已登记来源、Schema 结构、受限过度声明、Action SHA 固定和保护路径。它们不能证明语义真伪、数学正确性、翻译质量或外部实验复现。
+
+### 所有权与局限
+
+`FOUNDATION/` 是独立维护的可验证核心。`docs/` 仍属于现有 SOP 自动生成研究流，不会因本 README 而自动升级为已验证证据。根 README 是入口；核心内部仍以 Claim ID 和来源特定记录为准。
+
+本仓库不包含自治智能体运行时、已部署记忆系统、工具控制平面或协作协议。数学结果必须保留其形式适用域。安全性、可靠性与收敛性必须针对明确系统和故障模型进行评估，本仓不作普遍结论。AI 输出可以辅助起草或一致性检查，但不构成证据；合并前仍需维护者评审。

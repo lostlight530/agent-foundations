@@ -2,6 +2,7 @@ name: Verify foundation
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
   push:
     branches:
       - main
@@ -34,6 +35,13 @@ jobs:
         run: python FOUNDATION/validate.py
       - name: Enforce protected paths
         if: github.event_name == 'pull_request'
-        run: python FOUNDATION/validate.py --base-ref "origin/${{ github.base_ref }}"
+        env:
+          APPROVED_README: ${{ contains(github.event.pull_request.labels.*.name, 'scope:approved-readme') }}
+        run: |
+          if [ "$APPROVED_README" = "true" ]; then
+            python FOUNDATION/validate.py --base-ref "origin/${{ github.base_ref }}" --allow-protected README.md
+          else
+            python FOUNDATION/validate.py --base-ref "origin/${{ github.base_ref }}"
+          fi
       - name: Run contract regression tests
         run: python -m unittest FOUNDATION/test_contract.py -v
