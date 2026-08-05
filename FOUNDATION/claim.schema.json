@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lostlight530/agent-foundations/FOUNDATION/claim.schema.json",
+  "title": "Agent Foundations Claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claim_id", "state", "evidence", "mapping", "implementation", "validation", "sources", "scope", "limitations"],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^AF-(ARCH|COLLAB|MEM|TOOL)-[0-9]{3}$"},
+    "state": {"enum": ["OBSERVED", "SUPPORTED", "PROPOSED", "HYPOTHESIS", "CONTESTED", "RETIRED"]},
+    "evidence": {"enum": ["E0_REPOSITORY_TEST", "E1_PRIMARY_STANDARD", "E2_PEER_REVIEWED", "E3_REPRODUCIBLE_PREPRINT", "E4_PREPRINT", "E5_BACKGROUND", "E6_UNVERIFIED"]},
+    "mapping": {"enum": ["DIRECT_REQUIREMENT", "DESIGN_ANALOGY", "CANDIDATE_MECHANISM", "COUNTEREVIDENCE", "OUT_OF_SCOPE"]},
+    "implementation": {"enum": ["NOT_IMPLEMENTED", "REFERENCE_ONLY", "PARTIAL_PROTOTYPE", "IMPLEMENTED"]},
+    "validation": {"enum": ["NOT_TESTED", "STATIC_CHECKED", "EXPERIMENTALLY_TESTED", "REPRODUCED", "EXTERNALLY_REVIEWED"]},
+    "sources": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^S[0-9]{2}$"}},
+    "scope": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,39 @@
+name: Verify foundation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-foundation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.14"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.0.2
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Validate independent foundation
+        run: python FOUNDATION/validate.py
+      - name: Enforce protected paths
+        if: github.event_name == 'pull_request'
+        run: python FOUNDATION/validate.py --base-ref "origin/${{ github.base_ref }}"
+      - name: Run contract regression tests
+        run: python -m unittest FOUNDATION/test_contract.py -v
