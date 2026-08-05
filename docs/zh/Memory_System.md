@@ -435,3 +435,27 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
+
+### 面向 Agent 记忆的降阶效用状态
+
+- **System Container:** Memory System
+- **Frontier Source:** RoMeRL: Balancing Feedback Coverage and the Memory-Reward Trap in Self-Evolving Agent Memory via Reduced-Order Utility States (Yi Yang, Zhennan Chen, Yihong Zhuang, Tiehan Fan, Yinan Chen, Jian Li, Jian Yang, Ying Tai, arXiv:2608.02508v2)
+- **Original Problem:** 用于自我进化 LLM Agent 的基于学习的记忆系统面临两个紧密耦合的挑战：1）轨迹索引效用随交互历史增长，将有限的反馈分散在不断扩大的状态空间中；2）轨迹级奖励被联合分配给共同检索的记忆，导致无关经验收到误导性更新并陷入记忆奖励陷阱。
+- **Core Assumptions:** 可获得来自配对反事实展开或等效归因的坐标级因果标签；每个效用坐标遵循平稳的干净-错误转换；干净到错误的概率受 $\gamma$ 限制，错误到干净的概率至少为 $\lambda > 0$。
+- **Mathematical Mechanism:**
+  - **Positive Consolidated Coordinate (PCC)** (核心更新公式):
+    $$m_{g,t}^{+,\mathrm{C}} = \arg\min_{m_i\in\mathcal{D}_{g,t}:y_i=1} \ell_i$$
+  - **Positive Adaptive Coordinate (PAC)** (核心更新公式):
+    $$m_{g,t}^{+,\mathrm{A}} = \arg\min_{\substack{m_i\in\mathcal{D}_{g,t}:y_i=1\\ t_i>t_g^{\mathrm{fail}}}} t_i$$
+  - **Negative Consolidated Coordinate (NCC)** (核心更新公式):
+    $$m_{g,t}^{-,\mathrm{C}} = \arg\max_{\substack{m_i\in\mathcal{D}_{g,t}:y_i=0\\ Q_i>Q_{\mathrm{init}}^{-}}} Q_i$$
+  - **Negative Adaptive Coordinate (NAC)** (核心更新公式):
+    $$m_{g,t}^{-,\mathrm{A}} = \arg\max_{m_i\in\mathcal{D}_{g,t}:y_i=0} t_i$$
+  - **Convergence Bound** (收敛界): 错误活跃坐标的期望数量最多为 $d\frac{\gamma}{\gamma+\lambda}$。
+- **Applicability Scope:** 适用于具有基于学习的记忆系统的自我进化 LLM Agent，需要管理不断扩展的轨迹索引效用而不分散反馈。
+- **Limitations:** 该模型依赖于结果级奖励，这并不能完全解决因果信用分配问题。估计转换量 $\gamma$ 和 $\lambda$ 需要来自配对反事实展开或等效归因的坐标级因果标签。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）。如果你学到了新的一课，你只更新这四本桌上书籍的分数。这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉。

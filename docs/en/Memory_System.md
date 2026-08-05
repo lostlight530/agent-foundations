@@ -435,3 +435,27 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
+
+### Reduced-Order Utility States for Agent Memory
+
+- **System Container:** Memory System
+- **Frontier Source:** RoMeRL: Balancing Feedback Coverage and the Memory-Reward Trap in Self-Evolving Agent Memory via Reduced-Order Utility States (Yi Yang, Zhennan Chen, Yihong Zhuang, Tiehan Fan, Yinan Chen, Jian Li, Jian Yang, Ying Tai, arXiv:2608.02508v2)
+- **Original Problem:** Learning-based memory systems for self-evolving LLM agents face two tightly coupled challenges: 1) trajectory-indexed utilities grow with interaction history, dispersing limited feedback over an expanding state space; 2) trajectory-level rewards are jointly assigned to co-retrieved memories, leading irrelevant experiences to receive misleading updates and enter the memory-reward trap.
+- **Core Assumptions:** Coordinate-level causal labels from paired counterfactual rollouts or equivalent attribution are available; each utility coordinate follows stationary clean-erroneous transitions; clean-to-erroneous probability is bounded by $\gamma$ and erroneous-to-clean is at least $\lambda > 0$.
+- **Mathematical Mechanism:**
+  - **Positive Consolidated Coordinate (PCC)** (Core Update Formula):
+    $$m_{g,t}^{+,\mathrm{C}} = \arg\min_{m_i\in\mathcal{D}_{g,t}:y_i=1} \ell_i$$
+  - **Positive Adaptive Coordinate (PAC)** (Core Update Formula):
+    $$m_{g,t}^{+,\mathrm{A}} = \arg\min_{\substack{m_i\in\mathcal{D}_{g,t}:y_i=1\\ t_i>t_g^{\mathrm{fail}}}} t_i$$
+  - **Negative Consolidated Coordinate (NCC)** (Core Update Formula):
+    $$m_{g,t}^{-,\mathrm{C}} = \arg\max_{\substack{m_i\in\mathcal{D}_{g,t}:y_i=0\\ Q_i>Q_{\mathrm{init}}^{-}}} Q_i$$
+  - **Negative Adaptive Coordinate (NAC)** (Core Update Formula):
+    $$m_{g,t}^{-,\mathrm{A}} = \arg\max_{m_i\in\mathcal{D}_{g,t}:y_i=0} t_i$$
+  - **Convergence Bound** (Convergence Bound): The expected number of erroneous active coordinates is at most $d\frac{\gamma}{\gamma+\lambda}$.
+- **Applicability Scope:** Suitable for self-evolving LLM agents with learning-based memory systems that require managing expanding trajectory-indexed utilities without dispersing feedback.
+- **Limitations:** The model relies on outcome-level rewards, which does not fully resolve causal credit assignment. Estimating the transition quantities $\gamma$ and $\lambda$ requires coordinate-level causal labels from paired counterfactual rollouts or equivalent attribution.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine organizing a massive library where instead of giving a unique score to every single book you read, you only keep four specific "best example" books on your desk (e.g., the shortest success, the first success after a failure, the most promising failure, and the most recent failure). If you learn a new lesson, you only update the score for these four desk books. This way, you don't waste time grading thousands of old books, and if a book on the desk gives you bad advice, it gets swapped out quickly.
