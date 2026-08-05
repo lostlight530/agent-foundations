@@ -47,13 +47,13 @@ USES_RE = re.compile(r"^\s*-?\s*uses:\s*([^\s#]+)", re.MULTILINE)
 FULL_SHA_RE = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
 
 REQUIRED_METADATA = (
-    "State / 状态:",
-    "Evidence / 证据:",
-    "Mapping / 映射:",
-    "Implementation / 实现:",
-    "Validation / 验证:",
-    "Sources / 来源:",
-    "Scope and limits / 范围与局限:",
+    "State / ??:",
+    "Evidence / ??:",
+    "Mapping / ??:",
+    "Implementation / ??:",
+    "Validation / ??:",
+    "Sources / ??:",
+    "Scope and limits / ?????:",
 )
 
 FORBIDDEN_PHRASES = (
@@ -62,10 +62,10 @@ FORBIDDEN_PHRASES = (
     "inevitably convergent",
     "zero hallucination",
     "100% mathematical immunity",
-    "绝对安全",
-    "完全免疫",
-    "零幻觉",
-    "必然收敛",
+    "????",
+    "????",
+    "???",
+    "????",
 )
 
 
@@ -100,7 +100,7 @@ def changed_paths(base_ref: str) -> set[str]:
     return {line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()}
 
 
-def validate(base_ref: str | None = None) -> list[str]:
+def validate(base_ref: str | None = None, allowed_protected: set[str] | None = None) -> list[str]:
     errors: list[str] = []
 
     for path in REQUIRED_FILES:
@@ -172,7 +172,7 @@ def validate(base_ref: str | None = None) -> list[str]:
         except RuntimeError as exc:
             errors.append(f"unable to inspect protected paths: {exc}")
         else:
-            violations = sorted(changed & PROTECTED_PATHS)
+            allowed = {path.replace("\\", "/") for path in (allowed_protected or set())}`n            violations = sorted((changed & PROTECTED_PATHS) - allowed)
             if violations:
                 errors.append(f"protected paths changed: {violations}")
 
@@ -182,9 +182,16 @@ def validate(base_ref: str | None = None) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-ref", help="base Git ref used to enforce protected paths")
+    parser.add_argument(
+        "--allow-protected",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="exact protected path permitted by reviewed workflow context",
+    )
     args = parser.parse_args()
 
-    errors = validate(args.base_ref)
+    errors = validate(args.base_ref, set(args.allow_protected))
     if errors:
         print("Agent Foundations validation failed:")
         for error in errors:

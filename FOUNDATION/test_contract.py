@@ -16,13 +16,13 @@ SPEC.loader.exec_module(validator)
 
 class ParsingTests(unittest.TestCase):
     def test_claim_blocks_preserve_boundaries(self) -> None:
-        text = "# T\n## AF-MEM-001 — A\nbody\n## AF-MEM-002 — B\nnext\n"
+        text = "# T\n## AF-MEM-001 ? A\nbody\n## AF-MEM-002 ? B\nnext\n"
         blocks = validator.claim_blocks(text)
         self.assertEqual([claim_id for claim_id, _ in blocks], ["AF-MEM-001", "AF-MEM-002"])
         self.assertNotIn("AF-MEM-002", blocks[0][1])
 
     def test_registered_sources(self) -> None:
-        text = "# Sources\n## S01 — One\n## S18 — Last\n"
+        text = "# Sources\n## S01 ? One\n## S18 ? Last\n"
         self.assertEqual(validator.registered_sources(text), {"S01", "S18"})
 
     def test_action_reference_parser(self) -> None:
