@@ -172,7 +172,7 @@ def validate(base_ref: str | None = None, allowed_protected: set[str] | None = N
         except RuntimeError as exc:
             errors.append(f"unable to inspect protected paths: {exc}")
         else:
-            allowed = {path.replace("\", "/") for path in (allowed_protected or set())}
+            allowed = {path.replace("\\", "/") for path in (allowed_protected or set())}
             violations = sorted((changed & PROTECTED_PATHS) - allowed)
             if violations:
                 errors.append(f"protected paths changed: {violations}")
