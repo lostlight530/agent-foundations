@@ -12,17 +12,19 @@ SPEC = importlib.util.spec_from_file_location("foundation_validator", MODULE_PAT
 assert SPEC and SPEC.loader
 validator = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(validator)
+README_PATH = MODULE_PATH.parents[1] / "README.md"
+README_TEXT = README_PATH.read_text(encoding="utf-8")
 
 
 class ParsingTests(unittest.TestCase):
     def test_claim_blocks_preserve_boundaries(self) -> None:
-        text = "# T\n## AF-MEM-001 ? A\nbody\n## AF-MEM-002 ? B\nnext\n"
+        text = "# T\n## AF-MEM-001 — A\nbody\n## AF-MEM-002 — B\nnext\n"
         blocks = validator.claim_blocks(text)
         self.assertEqual([claim_id for claim_id, _ in blocks], ["AF-MEM-001", "AF-MEM-002"])
         self.assertNotIn("AF-MEM-002", blocks[0][1])
 
     def test_registered_sources(self) -> None:
-        text = "# Sources\n## S01 ? One\n## S18 ? Last\n"
+        text = "# Sources\n## S01 — One\n## S18 — Last\n"
         self.assertEqual(validator.registered_sources(text), {"S01", "S18"})
 
     def test_action_reference_parser(self) -> None:
@@ -68,6 +70,74 @@ class ProtectedPathTests(unittest.TestCase):
             errors = validator.validate("origin/main")
         self.assertFalse(any(error.startswith("protected paths changed") for error in errors))
 
+class ReadmeNarrativeTests(unittest.TestCase):
+    def test_obsolete_guarantees_and_monthly_claims_are_absent(self) -> None:
+        forbidden = (
+            "fully deterministic",
+            "deterministic behavioral guarantees",
+            "guarantee convergence",
+            "guarantees convergence",
+            "inevitable convergence",
+            "officially deployed",
+            "theoretically immune",
+            "monthly strategic blueprint",
+            "this month, industry",
+            "完全确定性",
+            "确定性行为保证",
+            "保证收敛",
+            "必然稳定",
+            "正式部署的 decdpo",
+            "理论免疫",
+            "月度理论防线",
+            "本月业内",
+        )
+        lowered = README_TEXT.casefold()
+        for phrase in forbidden:
+            with self.subTest(phrase=phrase):
+                self.assertNotIn(phrase.casefold(), lowered)
+
+    def test_verified_core_links_follow_index_reading_order(self) -> None:
+        paths = (
+            "FOUNDATION/EVIDENCE.md",
+            "FOUNDATION/ARCHITECTURE.md",
+            "FOUNDATION/MEMORY.md",
+            "FOUNDATION/TOOLS.md",
+            "FOUNDATION/COLLABORATION.md",
+            "FOUNDATION/SOURCES.md",
+            "FOUNDATION/PROVENANCE.md",
+        )
+        positions = [README_TEXT.index(f"({path})") for path in paths]
+        self.assertEqual(positions, sorted(positions))
+
+    def test_bilingual_sections_share_evidence_and_status_axes(self) -> None:
+        english, chinese = README_TEXT.split("## 中文", maxsplit=1)
+        shared_tokens = (
+            "E0_REPOSITORY_TEST",
+            "E1_PRIMARY_STANDARD",
+            "E2_PEER_REVIEWED",
+            "E3_REPRODUCIBLE_PREPRINT",
+            "E4_PREPRINT",
+            "E5_BACKGROUND",
+            "E6_UNVERIFIED",
+            "DIRECT_REQUIREMENT",
+            "DESIGN_ANALOGY",
+            "CANDIDATE_MECHANISM",
+            "COUNTEREVIDENCE",
+            "OUT_OF_SCOPE",
+            "NOT_IMPLEMENTED",
+            "REFERENCE_ONLY",
+            "PARTIAL_PROTOTYPE",
+            "IMPLEMENTED",
+            "NOT_TESTED",
+            "STATIC_CHECKED",
+            "EXPERIMENTALLY_TESTED",
+            "REPRODUCED",
+            "EXTERNALLY_REVIEWED",
+        )
+        for token in shared_tokens:
+            with self.subTest(token=token):
+                self.assertIn(token, english)
+                self.assertIn(token, chinese)
 
 if __name__ == "__main__":
     unittest.main()
