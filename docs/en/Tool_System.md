@@ -248,3 +248,24 @@ Imagine a race car driver (the agent) zooming around a track filled with unexpec
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
+
+### Tool Deployment Strategy in Calibrated Stackelberg Games
+
+- **System Container:** Tool System
+- **Frontier Source:** "Calibrated Stackelberg Games: Learning Optimal Commitments Against Calibrated Agents", Nika Haghtalab, Chara Podimata, Kunhe Yang. https://arxiv.org/abs/2306.02704v2.
+- **Original Problem:** How can a principal (or an agent deploying tools) learn an optimal sequence of commitments when the interacting agent does not play a myopic best response to the exact strategy, but instead uses a calibrated forecasting algorithm to predict the principal's actions based on historical observations?
+- **Core Assumptions:** The responding agent is $(\epsilon,\Pi)$-adaptively calibrated with a convergence rate $r_\delta(t) = O(t^{-\beta})$. The best response polytope associated with the optimal action is strictly regular (it contains an interior ball of radius $\eta$).
+- **Mathematical Mechanism:**
+  - *Core Update Formula* (Principal's Utility Upper Bound): $\frac{1}{T}\sum_{t \in [T]} U_P(h_t, y_t) \leq V^\star + U_{\max} |\mathcal{A}_P| |\mathcal{A}_A| ( r_\delta(T) + \epsilon )$ (for deterministic tie-breaking).
+  - *Mathematical Update Rule* (Explore-Then-Commit Regret Bound): $\mathbb{E}\left[\frac{1}{T}\sum_{t \in [T]} U_P(h_t,y_t)\right] \geq V^\star - O\left(|\mathcal{A}_A|^{\frac{1}{14}} m \eta^{-\frac{13}{14}} T^{-\frac{1}{14\beta}} + \dots \right)$.
+- **Convergence or Bound:** The expected average utility of the principal under the Explore-Then-Commit algorithm is strictly bounded from below, converging to at least the Stackelberg value $V^\star$ as $T \to \infty$. The finite-time regret is bounded by $O(T^{-\frac{1}{14\beta}})$.
+- **Applicable Scope:** Multi-agent environments or tool deployment scenarios where the opposing entities observe past actions and use calibrated learning to predict future tool usage, rather than knowing the exact probabilistic commitment beforehand.
+- **Limitations:** The theoretical bound strongly depends on the regularity of the best-response polytope ($\eta > 0$). The polynomial convergence rate can be very slow in practice depending on the calibration rate $\beta$.
+- **Agent Architecture Mapping:** This theory can conceptually support the Tool System by modeling tool selection as a sequence of commitments. It provides a theoretical bound on the utility an agent can guarantee when using tools in an environment with other calibrated learning entities.
+- **Beginner Analogy:** Imagine you run a store (the agent) offering daily discounts (tools). Customers (other entities) don't know your exact future strategy but track your past discounts to make calibrated predictions. The theorem calculates the maximum guaranteed profit you can make over time against these predicting customers by carefully exploring different discount strategies before committing to the best one.
+
+**Evidence Status:**
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT

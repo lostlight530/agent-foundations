@@ -234,3 +234,24 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
+
+### 校准斯塔克尔伯格博弈中的工具部署策略
+
+- **System Container:** Tool System
+- **Frontier Source:** "Calibrated Stackelberg Games: Learning Optimal Commitments Against Calibrated Agents", Nika Haghtalab, Chara Podimata, Kunhe Yang. https://arxiv.org/abs/2306.02704v2.
+- **Original Problem:** 当交互目标不针对确切策略做出短视的最优反应，而是使用校准预测算法基于历史观察来预测主体的行动时，主体（或部署工具的 Agent）如何学习最优的承诺序列？
+- **Core Assumptions:** 响应目标是 $(\epsilon,\Pi)$-自适应校准的，其收敛速率为 $r_\delta(t) = O(t^{-\beta})$。与最优动作相关的最佳反应多面体是严格正则的（其内部包含一个半径为 $\eta$ 的球）。
+- **Mathematical Mechanism:**
+  - *核心更新公式* (主体效用上界): $\frac{1}{T}\sum_{t \in [T]} U_P(h_t, y_t) \leq V^\star + U_{\max} |\mathcal{A}_P| |\mathcal{A}_A| ( r_\delta(T) + \epsilon )$ (在确定性打破平局的情况下)。
+  - *数学更新规则* (探索-承诺算法的遗憾界): $\mathbb{E}\left[\frac{1}{T}\sum_{t \in [T]} U_P(h_t,y_t)\right] \geq V^\star - O\left(|\mathcal{A}_A|^{\frac{1}{14}} m \eta^{-\frac{13}{14}} T^{-\frac{1}{14\beta}} + \dots \right)$。
+- **Convergence or Bound:** 在“探索-然后-承诺”算法下，主体的预期平均效用受到严格的下界约束，当 $T \to \infty$ 时至少收敛于斯塔克尔伯格值 $V^\star$。有限时间内的遗憾被界定为 $O(T^{-\frac{1}{14\beta}})$。
+- **Applicable Scope:** 多智能体环境或工具部署场景，在这些场景中，对抗实体观察过去的行动并使用校准学习来预测未来的工具使用，而不是预先知道确切的概率承诺。
+- **Limitations:** 理论边界强烈依赖于最佳反应多面体的正则性假设（$\eta > 0$）。在实际应用中，多项式收敛速度可能会非常慢，这取决于校准速率 $\beta$。
+- **Agent Architecture Mapping:** 该理论可以为 Tool System 提供概念层面的支持，将工具选择建模为一系列承诺。它为主体在使用工具应对具有校准学习能力的实体时能够保证的效用提供了一个理论边界。
+- **Beginner Analogy:** 想象你经营一家商店（Agent），每天提供折扣（工具）。顾客（其他实体）不知道你确切的未来策略，但会追踪你过去的折扣来做出校准预测。该定理计算了通过在承诺最佳折扣策略之前仔细探索不同的策略，随着时间的推移，你能在这些进行预测的顾客面前保证获得的最大利润。
+
+**Evidence Status:**
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT
