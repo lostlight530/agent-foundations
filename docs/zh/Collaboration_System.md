@@ -1583,3 +1583,47 @@ $$
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
 - **Notes:** SELECTION_BIAS_OBSERVED (基于历史频率平衡选择 Collaboration System)。
+
+### 异构策略智能体间的协作均值估计 (Collaborative Mean Estimation Among Heterogeneous Strategic Agents)
+
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Collaborative Mean Estimation Among Heterogeneous Strategic Agents: Individual Rationality, Fairness, and Truthful Contribution
+  - **Authors:** Alex Clinton, Yiding Chen, Xiaojin Zhu, Kirthevasan Kandasamy
+  - **URL:** http://arxiv.org/abs/2407.15881v3
+  - **Version:** v3
+  - **Date:** 2024-07-20
+  - **Selection Reason:** 为异构智能体协作估计参数提供了严格的机制设计，包含真实贡献的收敛界和纳什均衡分析，可直接应用于安全的多智能体协调。
+  - **Extracted Location:** Abstract, Theorem 2 (Theorem \ref{thm:main}), Algorithm 1 (Compute-$n$-Approx), Algorithm 2 ($\mathcal{M}$), 以及 Appendix B (Definition of $G_{i,k}(\alpha_{i,k})$) 提取自 LaTeX 源码。
+- **Original Problem:** $m$ 个智能体如何通过从正态分布中采样来协作估计向量 $\mu \in \mathbb{R}^d$，通过共享数据以降低成本和估计误差，同时确保个体理性（IR）和公平的结果，并防止数据伪造或不收集等策略性行为。
+- **Core Assumptions:**
+  - 智能体旨在通过从单变量正态分布 $\mathcal{N}(\mu_k, \sigma^2)$ 中采样来估计向量 $\mu \in \mathbb{R}^d$。
+  - 智能体 $i$ 从分布 $k$ 采样的成本为 $c_{i,k}$。
+  - 问题实例必须满足特定条件，即智能体为每个分布收集的数据不超过其单独行动时的收集量，并且接收到的数据至少等于其单独收集量。
+- **Mathematical Mechanism (算法伪代码):**
+  - **Algorithm (Compute-$n$-Approx & Multi-Arm Mechanism $\mathcal{M}$):**
+    ```
+    输入: 收集方案 n (最优社会惩罚收集)
+    Compute-n-Approx: 找到一个可强制执行的近似方案 n'，确保没有任何智能体单干的惩罚过度大于其合作时的惩罚。
+    机制 M:
+        智能体选择策略，收集数据，并提交给 M。
+        如果实例满足有利的杠杆条件:
+            使用破坏过程 (corruption process) 验证数据。
+            使用系数 \alpha_{i,k} > \sqrt{n_{i,k}} 计算被破坏的数据，其中 G_{i,k}(\alpha_{i,k}) = 0。
+        否则:
+            成本最低的智能体收集符合个体理性的数据量，并返回样本均值。
+    ```
+  - **核心更新公式 (Corruption Coefficient Equation):**
+    $$ G_{i,k}(\alpha_{i,k}) := \frac{4\alpha_{i,k}}{\sqrt{T_k}}\left(\frac{4\alpha_{i,k}^2 T_k}{Z_{i,k}' n_{i,k}} - 1 - c_{i,k}\frac{16\alpha_{i,k}^2 T_k n_{i,k}}{\sigma^2 Z_{i,k}'}\right) - \exp\left(\frac{T_k}{8\alpha_{i,k}^2}\right)\left(\frac{4\alpha_{i,k}^2}{T_k}\left(\frac{T_k}{n_{i,k}}+1\right)-1\right)\sqrt{2\pi}\text{Erfc}\left(\sqrt{\frac{T_k}{8\alpha_{i,k}^2}}\right) = 0 $$
+- **Convergence Bound (行为界):**
+  - 在最坏情况下，该机制实现了最小社会惩罚（智能体估计误差和收集成本之和）的 $\mathcal{O}(\sqrt{m})$ 近似，在有利条件下实现了 $\mathcal{O}(1)$ 近似。
+  - 该机制和最优策略配置 $(\mathcal{M}, s^*)$ 是纳什激励兼容（NIC）、个体理性（IR）且具有 $\sqrt{m}$ 效率的。
+- **Applicability:** 适用于智能体具有异构成本且可能采取策略性行为的去中心化协作数据收集场景。
+- **Limitations:** 该机制无法保证智能体真实报告的占优策略均衡；无法针对其他智能体的每种策略配置都保证个体理性（IR）；并且在任何纳什均衡中都无法避免最坏情况下 $\Omega(\sqrt{m})$ 的稳定代价。
+- **Agent Architecture Mapping:** 可在 Collaboration System 中支持安全的数据共享协议，通过减轻策略性伪造并激励自利的子智能体进行诚实的数据贡献。
+- **Beginner Analogy:** 想象多家公司试图估计各种商品的平均市场价格。每家公司都要花钱进行市场调查。如果它们共享调查结果，大家都能省钱并获得更准确的估计。然而，某家公司可能会谎报调查结果，或者干脆不干活直接拿别人的数据。这个数学规则建立了一个系统，保证每家公司出于自身最大利益，都会做其应有份额的真实调查并诚实地分享，从而确保所有人都能达到最佳利益。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

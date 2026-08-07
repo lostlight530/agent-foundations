@@ -1747,3 +1747,47 @@ Imagine a fleet of autonomous delivery robots navigating a complex warehouse. Th
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
 - **Notes:** SELECTION_BIAS_OBSERVED (Collaboration System chosen based on historical frequency balance).
+
+### Collaborative Mean Estimation Among Heterogeneous Strategic Agents
+
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Collaborative Mean Estimation Among Heterogeneous Strategic Agents: Individual Rationality, Fairness, and Truthful Contribution
+  - **Authors:** Alex Clinton, Yiding Chen, Xiaojin Zhu, Kirthevasan Kandasamy
+  - **URL:** http://arxiv.org/abs/2407.15881v3
+  - **Version:** v3
+  - **Date:** 2024-07-20
+  - **Selection Reason:** Provides a rigorous mechanism design for heterogeneous agents to collaboratively estimate parameters, complete with convergence bounds and Nash Equilibrium analysis for truthful contributions, directly applicable to secure multi-agent coordination.
+  - **Extracted Location:** Abstract, Theorem 2 (Theorem \ref{thm:main}), Algorithm 1 (Compute-$n$-Approx), Algorithm 2 ($\mathcal{M}$), and Appendix B (Definition of $G_{i,k}(\alpha_{i,k})$) from LaTeX Source.
+- **Original Problem:** How $m$ agents can collaboratively estimate a vector $\mu \in \mathbb{R}^d$ by sampling from normal distributions, sharing data to reduce costs and estimation errors, while ensuring individual rationality (IR) and fair outcomes, and preventing strategic behaviors like data fabrication or non-collection.
+- **Core Assumptions:**
+  - Agents aim to estimate a vector $\mu \in \mathbb{R}^d$ by sampling from univariate normal distributions $\mathcal{N}(\mu_k, \sigma^2)$.
+  - Agent $i$ incurs a cost $c_{i,k}$ to sample from distribution $k$.
+  - Problem instances must satisfy conditions where agents collect no more data for each distribution than they would individually, and receive at least as much data as they would collect individually.
+- **Mathematical Mechanism (算法伪代码):**
+  - **Algorithm (Compute-$n$-Approx & Multi-Arm Mechanism $\mathcal{M}$):**
+    ```
+    Input: Collection scheme n (optimal social penalty collection)
+    Compute-n-Approx: Finds an enforceable approximation n' where no agent's working-alone penalty is excessively larger than their cooperative penalty.
+    Mechanism M:
+        Agents select strategies, collect data, and submit to M.
+        If the instance satisfies the favorable leverage condition:
+            Validate data using a corruption process.
+            Calculate corrupted data using coefficients \alpha_{i,k} > \sqrt{n_{i,k}} where G_{i,k}(\alpha_{i,k}) = 0.
+        Else:
+            Lowest-cost agents collect individually rational amounts, and sample means are returned.
+    ```
+  - **核心更新公式 (Corruption Coefficient Equation):**
+    $$ G_{i,k}(\alpha_{i,k}) := \frac{4\alpha_{i,k}}{\sqrt{T_k}}\left(\frac{4\alpha_{i,k}^2 T_k}{Z_{i,k}' n_{i,k}} - 1 - c_{i,k}\frac{16\alpha_{i,k}^2 T_k n_{i,k}}{\sigma^2 Z_{i,k}'}\right) - \exp\left(\frac{T_k}{8\alpha_{i,k}^2}\right)\left(\frac{4\alpha_{i,k}^2}{T_k}\left(\frac{T_k}{n_{i,k}}+1\right)-1\right)\sqrt{2\pi}\text{Erfc}\left(\sqrt{\frac{T_k}{8\alpha_{i,k}^2}}\right) = 0 $$
+- **Convergence Bound (行为界):**
+  - The mechanism achieves an $\mathcal{O}(\sqrt{m})$-approximation to the minimum social penalty (sum of agents' estimation errors and collection costs) in the worst case, and an $\mathcal{O}(1)$-approximation under favorable conditions.
+  - The mechanism and optimal strategy profile $(\mathcal{M}, s^*)$ is Nash Incentive Compatible (NIC), Individually Rational (IR), and $\sqrt{m}$-efficient.
+- **Applicability:** Applicable to decentralized, collaborative data gathering where agents have heterogeneous costs and might act strategically.
+- **Limitations:** The mechanism cannot guarantee a dominant strategy equilibrium where agents report truthfully; it cannot be IR for every strategy profile of other agents; and it cannot avoid a worst-case $\Omega(\sqrt{m})$ price of stability in any Nash Equilibrium.
+- **Agent Architecture Mapping:** Can support secure data-sharing protocols within the Collaboration System by mitigating strategic fabrication and incentivizing honest data contribution among self-interested sub-agents.
+- **Beginner Analogy:** Imagine multiple companies trying to estimate the average market price of various goods. Each company pays to survey the market. If they share their survey results, everyone saves money and gets a better estimate. However, a company might lie about their survey or just not do the work while taking others' data. This mathematical rule creates a system that guarantees it's in every company's best self-interest to do their fair share of real surveys and share them honestly, ensuring everyone benefits optimally.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
