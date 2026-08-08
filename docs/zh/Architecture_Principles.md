@@ -668,3 +668,63 @@ $$ \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-
 
 **For Beginners (初学者类比)**:
 想象你在探索一个巨大的未知迷宫。你不会盲目乱走，而是将所见所闻记录在日记（记忆缓冲区）中。在迈出下一步之前，你会根据日记在脑海中模拟未来的可能路径，并特别倾向于走向那些在日记中完全空白（高度不确定）的路径。你走一步，更新日记，然后再次思考。数学理论保证了你走“错路”（遗憾）的数量增长非常缓慢（$\sqrt{T}$），因为你在系统性地将未知转化为已知。
+
+
+### 评估验证的随时有效自适应停止 (AV-AIVAT)
+
+**System Container**: Architecture Principles
+**Frontier Source**: AV-AIVAT: 74x Cheaper Agent Evaluation with Certified Anytime-Valid Stopping in Imperfect-Information Games (Boning Li, Yu Chen, Longbo Huang)
+**URL**: https://arxiv.org/abs/2408.06362v1
+**Version & Date**: v1, 2024-08-06
+**Selection Rationale**: 提供了一种具有结构性边界约束且经过认证的随时有效自适应停止规则，适用于高方差不完全信息环境中连续的 Agent 评估。
+
+**Original Problem**: 决定两个 Agent 哪个更强意味着需要不断进行对局直到实力因素超越运气因素，而每场对局都有成本。固定预算的评估要么过度支付测试成本，要么在结论明确前过早停止。使用普通置信区间进行简单的提前停止会使声明的置信水平失效。
+
+**Core Assumptions**:
+1. 当前评估步骤（对局）使用的价值函数是可预测的（在观察到对局之前固定）。
+2. 在合格的机会节点与受评估 Agent 的决策节点上的条件动作核（Action Kernel）是已知的。
+3. 评估流观测值具有声明的结构性边界。
+
+**Mathematical Mechanism**:
+该机制将动作启发式价值评估工具（AIVAT）与持续监控的置信序列（CS）相结合。通过减去实现的延续价值，并加上在已知动作核上的条件期望，对随机轨迹总和进行校正。
+
+*数学更新规则* (节点级 AIVAT 校正):
+$$
+C_t = \sum_{h\in H_c} \mathbf{1}\{h \text{ reached in hand } t\} \left(\mathbb{E}_{a\sim p_h}[v_t(h \cdot a)] - v_t(h \cdot a_h)\right)
+$$
+
+*数学更新规则* (AsympCS 半宽):
+$$
+\text{hw}^{\mathrm A}_t = \widehat\sigma_t \sqrt{\frac{2(t\rho^2+1)}{t^2\rho^2} \log\left(\frac{\sqrt{t\rho^2+1}}{\alpha}\right)}
+$$
+
+*算法伪代码* (AV-AIVAT 协议来源转录):
+```
+REQUIRE: level \alpha, first eligible look b, locked CS settings, initial value function v_1; independently justified B_Y for exact EB-CS mode
+FOR t = 1, 2, ... (stop at any eligible time)
+  before each correction action, record its conditional kernel p_{t,h} and choose S_{t,h} without observing that action
+  play hand t; observe payoff X_t and trajectory \omega_t
+  Y_t \leftarrow X_t + \sum_{h \in H_c} S_{t,h} I_{t,h} \bigl( \sum_a p_{t,h}(a) v_t(h\cdot a) - v_t(h\cdot A_{t,h}) \bigr)
+  at t\ge b, update locked AsympCS on Y_{1:t} (asymptotic screen)
+  if B_Y is independently justified, update EB-CS (exact certificate)
+  optionally refit v_{t+1} on data through hand t (v_t already fixed hand t)
+END FOR
+ENSURE: report both applicable intervals at the data-dependent stopping time
+```
+
+**Convergence or Behavioral Bound**:
+在鞅差分 Lindeberg 条件和平均条件方差条件下，AsympCS（渐近置信序列）端点几乎必然与精确置信序列渐近等价。精确的经验 Bernstein 置信序列 (EB-CS) 在绝对结构边界 $B_Y$ 成立的前提下，可保证有效的时间一致边界。
+
+**Applicable Scope**: 适用于部署在不完全信息环境中的 Agent 的序贯评估，特别是在交互结果方差大且评估存在计算或财务成本的情况下。
+
+**Limitations**:
+AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法用作校正点。精确的有限样本 EB-CS 认证需要对校正后的收益边界提供独立证明的结构性界限。
+
+**Beginner Analogy**: 想象你在盲测两种配方哪个更好，但每次测试需要花费100美元。与其盲目地承诺进行100次测试（花费10000美元），或在一种配方看起来稍微好一点时立刻停止（由于运气而得出错误结论的风险很大），AV-AIVAT 给你提供了一个持续运行的、科学严谨的“置信分数”。它允许你在获得统计学上无可辩驳的证据的那一刻立即停止测试，在数学上保证你不仅仅是运气好的同时，省下了不必要的测试成本。
+
+**Architecture Mapping**: CONCEPTUAL_MAPPING. 可以在概念上支持系统级别的持续 Agent 评估，方法是实施结构上安全的自适应停止限制，从而避免随意的固定预算约束。
+
+**Implementation Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
+**Test Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
+
+**Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
