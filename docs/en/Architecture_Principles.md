@@ -668,3 +668,63 @@ At each epoch $k$, using memory $\mathcal{D}_{t_k}$, plan $(\pi_t, V_t)\leftarro
 
 **For Beginners**:
 Imagine you are exploring a massive, unknown maze. Instead of wandering randomly, you keep a diary (memory buffer) of what you've seen. Before taking a step, you mentally simulate possible futures based on your diary, specifically favoring paths where your diary is completely blank (high uncertainty). You walk one step, update the diary, and think again. The math guarantees that the number of "bad steps" (regret) you take grows very slowly ($\sqrt{T}$), because you systematically turn your uncertainty into knowledge.
+
+
+### Certified Anytime-Valid Stopping for Evaluation (AV-AIVAT)
+
+**System Container**: Architecture Principles
+**Frontier Source**: AV-AIVAT: 74x Cheaper Agent Evaluation with Certified Anytime-Valid Stopping in Imperfect-Information Games (Boning Li, Yu Chen, Longbo Huang)
+**URL**: https://arxiv.org/abs/2408.06362v1
+**Version & Date**: v1, 2024-08-06
+**Selection Rationale**: Provides a certified anytime-valid adaptive stopping rule with structural boundary constraints for continuous agent evaluation in high-variance imperfect-information environments.
+
+**Original Problem**: Deciding which of two agents is stronger means playing games until skill outweighs luck, and every game is costly. Fixed-budget evaluations either overpay or stop prematurely. Naive optional stopping with ordinary confidence intervals invalidates the stated confidence level.
+
+**Core Assumptions**:
+1. The value function used on the current evaluation step (hand) is predictable (fixed before the hand is observed).
+2. The conditional action kernel at eligible chance and evaluated-agent decision nodes is known.
+3. The evaluation stream observations possess a declared structural bound.
+
+**Mathematical Mechanism**:
+The mechanism combines the Action-Informed Value Assessment Tool (AIVAT) with continuously monitored Confidence Sequences (CS). The random trajectory sum is corrected by subtracting the realized continuation value and adding its conditional expectation over the known action kernel.
+
+*Mathematical update rule* (Nodewise AIVAT Correction):
+$$
+C_t = \sum_{h\in H_c} \mathbf{1}\{h \text{ reached in hand } t\} \left(\mathbb{E}_{a\sim p_h}[v_t(h \cdot a)] - v_t(h \cdot a_h)\right)
+$$
+
+*Mathematical update rule* (AsympCS Half-width):
+$$
+\text{hw}^{\mathrm A}_t = \widehat\sigma_t \sqrt{\frac{2(t\rho^2+1)}{t^2\rho^2} \log\left(\frac{\sqrt{t\rho^2+1}}{\alpha}\right)}
+$$
+
+*Algorithm pseudocode* (AV-AIVAT Protocol Source Transcription):
+```
+REQUIRE: level \alpha, first eligible look b, locked CS settings, initial value function v_1; independently justified B_Y for exact EB-CS mode
+FOR t = 1, 2, ... (stop at any eligible time)
+  before each correction action, record its conditional kernel p_{t,h} and choose S_{t,h} without observing that action
+  play hand t; observe payoff X_t and trajectory \omega_t
+  Y_t \leftarrow X_t + \sum_{h \in H_c} S_{t,h} I_{t,h} \bigl( \sum_a p_{t,h}(a) v_t(h\cdot a) - v_t(h\cdot A_{t,h}) \bigr)
+  at t\ge b, update locked AsympCS on Y_{1:t} (asymptotic screen)
+  if B_Y is independently justified, update EB-CS (exact certificate)
+  optionally refit v_{t+1} on data through hand t (v_t already fixed hand t)
+END FOR
+ENSURE: report both applicable intervals at the data-dependent stopping time
+```
+
+**Convergence or Behavioral Bound**:
+Under the martingale-difference Lindeberg and averaged conditional-variance conditions, the AsympCS endpoints are almost surely asymptotically equivalent to those of an exact confidence sequence. The exact Empirical-Bernstein Confidence Sequence (EB-CS) guarantees valid time-uniform bounds provided the absolute structural bound $B_Y$ holds.
+
+**Applicable Scope**: Sequential evaluation of deployed agents in imperfect-information environments where interaction outcomes have high variance and evaluation is computationally or financially costly.
+
+**Limitations**:
+AIVAT relies strictly on known action distributions; unknown opponent decision nodes cannot serve as correction points. The exact finite-sample EB-CS certification requires an independently justified structural bound on corrected payoffs.
+
+**Beginner Analogy**: Imagine you're taste-testing two recipes to see which is better, but each taste test costs $100. Instead of blindly committing to 100 tests (costing $10,000) or stopping as soon as one seems slightly better (risking a wrong conclusion due to luck), AV-AIVAT gives you a running, scientifically sound "confidence score". It lets you stop the moment you have statistically undeniable proof, saving you money on unnecessary tests while mathematically guaranteeing you didn't just get lucky.
+
+**Architecture Mapping**: CONCEPTUAL_MAPPING. Can conceptually support continuous agent evaluation by enforcing structurally safe adaptive stopping limits, thus avoiding arbitrary fixed-budget constraints.
+
+**Implementation Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
+**Test Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
+
+**Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
