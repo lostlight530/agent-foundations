@@ -1634,3 +1634,48 @@ def flexible_gradient_tracking_step(x_k, y_k, Z_1_nc, Z_2_nc, alpha):
 
 ⚠️ 缺失来源 (Missing Sources):
 - 依然存在 MISSING_SOURCE，特别是在 Robust Compressed Push-Pull (RCPP) Method 和 基于 KL 性质的去中心化梯度追踪机制的代码实现部分。
+
+
+### 基于超图的Epsilon探索多智能体Thompson采样的频率主义遗憾界限
+
+**系统容器:** 协作系统 (Collaboration System)
+**前沿来源:** "Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs", Tianyuan Jin, Hao-Lun Hsu, William Chang, Pan Xu, arXiv:2312.15549v1, 2023-12. (来源: LaTeX Source)
+**集成月份:** 2026-08
+
+#### 1. 原始问题
+在被形式化为多智能体多臂老虎机 (MAMAB) 问题的多智能体协作环境中，智能体被分解为重叠的组（超边）。现有的方法如多智能体 Thompson 采样 (MATS) 依赖于贝叶斯遗憾分析，该分析测量的是先验分布上的平均性能。然而，标准的 MATS 在协调过程中计算复杂度很高。要在不使其陷入难以处理的联合臂依赖性的前提下，为在稀疏协调超图上运行的 MATS 推导出一个频率主义遗憾界限（以保护系统免受最坏情况环境分布的影响），过去一直是一个尚未解决的挑战。
+
+#### 2. 数学机制
+$\epsilon$-探索多智能体 Thompson 采样 ($\epsilon$-\texttt{MATS}) 变体通过仅以 $\epsilon$ 的概率从后验分布中采样，并以 $1-\epsilon$ 的概率基于经验局部均值采取贪婪行动，有选择地限制了计算探索负载。
+
+*核心更新公式 (Regret Bound Formula):*
+$$ R(T) = \tilde{O}\left( \sqrt{(C/\epsilon)^\rho A_{\text{local}} T} \right) $$
+其中 $\rho$ 表示重叠组（超边）的数量，$A_{\text{local}}$ 是所有组中局部臂的总数，$T$ 是时间范围，而 $C$ 是一个通用常数。$\tilde{O}$ 符号隐藏了常数和对数因子。
+
+*收敛界 (Minimax Lower Bound):*
+$$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
+该下界表明，当超图足够稀疏时，$\epsilon$-\texttt{MATS} 在关于局部臂大小和视野的方面达到了极小化极大最优（直到常数和对数项）。
+
+#### 3. 核心假设
+* 局部独立性：每个局部臂的奖励从它们各自的次高斯分布中独立抽取。
+* 线性组可加性：全局联合奖励假定恰好等于由超边定义的未观测到的局部组奖励之和。
+* 有界支撑：奖励均值被严格限制在每个局部臂的固定有界范围内。
+
+#### 4. 适用范围
+该数学界限适用于依赖于因子化奖励协调空间（超图）下的 Thompson 采样的多智能体强化学习群体。当总联合行动空间 $A_{\text{global}}$ 呈指数级庞大，但实际局部臂的数量 $A_{\text{local}}$ 保持较小时，它高度相关，能确保在稀疏环境中的次线性频率主义保证。
+
+#### 5. 理论局限
+该界限对超边数量 $\rho$ 的依赖是指数级的（$\mathcal{O}(C^\rho)$）。因此，在 $\rho$ 接近智能体数量的密集超图中，频率主义上限会变得极为松散。只有在具有足够重叠稀疏性的系统中，它才严格可行地作为一种改进方案。此外，分析联合臂依赖关系所需的解耦机制假设的是静态图拓扑，而不是动态形成的联盟。
+
+#### 6. 架构映射
+* 多智能体动作评估器：$\epsilon$-\texttt{MATS} 策略可被用作直接动作选择算法，在密集 MAB 编排器中取代详尽的纯贪婪或 $\epsilon$-贪婪选择器。
+* 拓扑监视器：在为给定群体授权 Thompson 采样之前，将映射协调密度检查；如果 $\rho$ 超过了 $(C/\epsilon)^\rho$ 的缺点掩盖因子学习优势的阈值，则系统退化为独立学习者范式。
+
+#### 7. 证据与状态
+* **Paper Evidence Status:** PAPER_ONLY
+* **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+* **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+* **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 8. 初学者类比
+想象一个庞大的餐厅厨房，多名厨师（智能体）协作制作复杂的套餐（联合臂）。通过测试每一种组合来找到最佳套餐是不可能的。多智能体 Thompson 采样允许在特定工位（超边）工作的厨师测试他们的局部菜肴变体并将它们组合起来。$\epsilon$-MATS 是一种策略，即厨师在 90% 的时间里坚持使用他们已知的最佳食材，只在 10% 的时间里尝试疯狂的新组合。该公式保证，即使在绝对最坏的情况下，他们寻找最佳套餐所浪费的时间，也只与局部食材的数量 ($A_{\text{local}}$) 成比例，而与可能产生的大量套餐数量无关——前提是厨师们并没有全都挤在完全相同的工位上（稀疏超图）。
