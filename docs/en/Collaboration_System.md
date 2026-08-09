@@ -1798,3 +1798,48 @@ Imagine a fleet of autonomous delivery robots navigating a complex warehouse. Th
 
 ⚠️ 缺失来源 (Missing Sources):
 - MISSING_SOURCE exists for the Robust Compressed Push-Pull (RCPP) Method and KL Property code implementations, which remain unfulfilled.
+
+
+### Frequentist Regret Bounds for Epsilon-Exploring Multi-Agent Thompson Sampling on Hypergraphs
+
+**System Container:** Collaboration System
+**Frontier Source:** "Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs", Tianyuan Jin, Hao-Lun Hsu, William Chang, Pan Xu, arXiv:2312.15549v1, 2023-12. (Source: LaTeX Source)
+**Integration Date:** 2026-08
+
+#### 1. The Original Problem
+In multi-agent collaborative environments formalized as multi-agent multi-armed bandit (MAMAB) problems, agents are factored into overlapping groups (hyperedges). Existing approaches like Multi-Agent Thompson Sampling (MATS) rely on Bayesian regret analysis, which measures average performance over prior distributions. However, standard MATS operates with high computational complexity during coordination. Deriving a frequentist regret bound, which protects the system against worst-case environmental distributions, for MATS acting over a sparse coordination hypergraph without collapsing to intractable joint-arm dependence was an open challenge.
+
+#### 2. Mathematical Mechanism
+The $\epsilon$-exploring Multi-Agent Thompson Sampling ($\epsilon$-\texttt{MATS}) variant selectively bounds computational exploration load by sampling the posterior only with probability $\epsilon$ and acting greedily based on empirical local means with probability $1-\epsilon$.
+
+*核心更新公式 (Regret Bound Formula):*
+$$ R(T) = \tilde{O}\left( \sqrt{(C/\epsilon)^\rho A_{\text{local}} T} \right) $$
+where $\rho$ denotes the number of overlapping groups (hyperedges), $A_{\text{local}}$ is the total number of local arms across all groups, $T$ is the time horizon, and $C$ is a universal constant. The $\tilde{O}$ notation hides constant and logarithmic factors.
+
+*收敛界 (Minimax Lower Bound):*
+$$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
+This lower bound demonstrates that $\epsilon$-\texttt{MATS} achieves minimax optimality up to constant and logarithmic terms regarding local arm size and horizon when the hypergraph is sufficiently sparse.
+
+#### 3. Core Assumptions
+* Local Independence: Rewards for each local arm are drawn independently from their respective subgaussian distributions.
+* Linear Group Additivity: The global joint reward is assumed to be exactly the sum of the unobserved local group rewards defined by the hyperedges.
+* Bounded Support: Reward means are strictly constrained within a fixed bound range per local arm.
+
+#### 4. Applicability & Scope
+This mathematical bounding applies to multi-agent RL swarms relying on Thompson sampling under factored reward coordination spaces (hypergraphs). It is highly relevant when the total joint action space $A_{\text{global}}$ is exponentially large, but the number of actual local arms $A_{\text{local}}$ remains small, ensuring sublinear frequentist guarantees in sparse settings.
+
+#### 5. Theoretical Limitations
+The bound's dependence on the hyperedge count $\rho$ is exponential ($\mathcal{O}(C^\rho)$). Thus, the frequentist upper bound becomes overwhelmingly loose in dense hypergraphs where $\rho$ approaches the number of agents. It is strictly viable as an improvement only in systems with sufficient overlapping sparsity. Furthermore, the decoupling mechanism required to analyze joint-arm dependencies assumes static graph topology rather than dynamically forming coalitions.
+
+#### 6. Architecture Mapping
+* Multi-Agent Action Evaluator: The $\epsilon$-\texttt{MATS} strategy can be utilized as a direct action-selection algorithm replacing exhaustive pure-greedy or $\epsilon$-greedy selectors in dense MAB orchestrators.
+* Topology Monitor: Before authorizing Thompson Sampling for a given swarm, a coordination density check is mapped; if $\rho$ exceeds the threshold where $(C/\epsilon)^\rho$ overshadows the benefit of factored learning, the system degrades to independent learner paradigms.
+
+#### 7. Evidence & Status
+* **Paper Evidence Status:** PAPER_ONLY
+* **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+* **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+* **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 8. Beginner's Analogy
+Imagine a massive restaurant kitchen where multiple chefs (agents) collaborate to make complex combo meals (joint arms). Finding the best combo by testing every single combination is impossible. Multi-Agent Thompson sampling allows chefs working at specific stations (hyperedges) to test out their local dish variations and combine them. $\epsilon$-MATS is a strategy where chefs stick to their known best ingredients 90% of the time, and only try wild new combinations 10% of the time. The formula guarantees that even in the absolute worst-case scenario, the time they waste learning the optimal combo scales only with the number of local ingredients ($A_{\text{local}}$), not the massive number of possible combo meals, as long as the chefs aren't all crowded at the exact same stations (sparse hypergraph).
