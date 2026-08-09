@@ -208,6 +208,56 @@ Deterministic Convergence Mechanism: 该研究严格证明了一种去中心化�
 
 ###
 
+### 全局约束的去中心化优化 (Globally-Constrained Decentralized Optimization)
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: Globally-Constrained Decentralized Optimization with Variable Coupling (arXiv:2407.10770v4)
+Deterministic Convergence Mechanism: 提出的去中心化原始-对偶算法通过在数学上限制 $K$ 步内的累积误差来确保确定性收敛：$\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$。通过使用闭式对偶边界 $\bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})$ 进行严格的梯度跟踪，全局目标在无需中心化控制的情况下自然达到稳定。
+
+### 基于相对距离定位的多目标包围与神经网络反同步控制
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
+Deterministic Convergence Mechanism: 该研究通过构建代价函数 $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ 并结合神经网络反同步控制，使得多智能体在追捕非合作目标时能保证最终误差收敛到有界范围内，即 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$。这种确定性的边界约束保证了分布式协同系统不会发生结构性发散。
+
+### Understanding the Influence of Digraphs on Decentralized Optimization
+🔬 选型依据与学术脉络
+System Container: Collaboration System
+Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
+Deterministic Convergence Mechanism: 由 $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ 约束的硬性拓扑收敛下界，以及通过 $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$ 映射的去中心化追踪器更新。
+
+### Non-Smooth Convex Decentralized Optimization over Time-Varying Networks
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
+Deterministic Convergence Mechanism: 在时变网络环境下建立了理论通信复杂度下界，该复杂度与网络条件数 $\chi$ 成正比，而不是固定网络下的 $\sqrt{\chi}$。对于强凸非平滑情况，最优复杂度下界显式建模为 $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$。
+
+### Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees
+🔬 选型依据与学术脉络
+System Container: Collaboration
+Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
+Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
+Assumptions: 收敛性条件依赖于特定的图连通性、有界的数据异质性、有界的梯度噪声、合适的学习率以及特定的模型条件。
+Scope: 适用于节点零星可用的理论去中心化联邦学习场景。
+Implementation Status: 暂无代码库实现。当前仅为概念映射。
+
+### 基于随机线性规划的平均回报多智能体强化学习收敛率
+🔬 选型依据与学术脉络
+- System Container: Collaboration System
+- Frontier Source: https://arxiv.org/abs/2110.12929 (Convergence Rates of Average-Reward Multi-agent Reinforcement Learning via Randomized Linear Programming)
+- Original Problem: 现有的基于一致性协议的多智能体随机优化方法分析依赖于有限方差条件，而当对偶梯度评估对随机梯度估计造成无界噪声时，这一条件可能不成立。鉴于最小最大目标的结构，需要对原变量和对偶变量中的一致性误差进行联合处理。
+- Core Assumptions: 网络强连通性参数 $B$、状态空间 $\mathcal{S}$、动作空间 $\mathcal{A}$、混合时间 $t_{mix}^*$、恒定步长 $\beta$，以及占用测度的时间平均序列。
+- Mathematical Mechanism: 采用了元随机多智能体原对偶（M-RMAPD）算法。利用占用测度的时间平均序列和步长选择 $\beta=\mathcal{\widetilde{\mathcal{O}}}\left(\sqrt{\frac{\mathcal{E}_{0}}{{ \sqrt{n} |\mathcal{S}||\mathcal{A}| \tilde{t}^2_{mix}D(\Gamma, \rho)}T}}\right)$，对偶间隙被约束。
+- Convergence Bound: 以 $1-\delta$ 的概率达到 $\lambda_{\widetilde\pi} \geq \lambda^*-\epsilon$ 所需的总样本数为 $T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)$。
+- Scope: 建立在网络连通图模型上的多智能体随机优化和强化学习问题。
+- Limitations: 需要网络强连通性参数 $B$。样本复杂性高度依赖于状态和动作空间的基数，在连续或无限大的域中可能会爆炸。
+
+🏗️ Agent Architecture Mapping & Evidence
+- Paper Evidence Status: PAPER_ONLY
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+- Repository Test Status: EVIDENCE_INSUFFICIENT
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
 ### Code for
 
@@ -1018,6 +1068,104 @@ def update_adaptive_lyapunov_bound(x_tilde, e, W_3, m, epsilon_1, N, beta_bar, e
     return V_dot_bound, bounded_error
 ```
 
+### 全局约束的去中心化优化 (Globally-Constrained Decentralized Optimization)
+```python
+# 去中心化投影原始-对偶更新步骤 (Decentralized Projected Primal-Dual Step)
+# 变量基于 arXiv:2407.10770v4 边界约束
+
+def decentralized_primal_dual_step(y_k, lambda_star, u_1_star, S_0, S_K, k):
+    '''
+    执行有界的原始-对偶步骤，保证确定性收敛。
+    收敛条件: sum(f(y^k) - f(y*)) <= S^0 - S^K
+    '''
+    # 计算源自论文闭式最优对偶变量的边界约束：
+    # \bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})
+
+    # 在实践中，智能体更新其局部变量 y_k，同时遵守严格的误差边界：
+    # Error \leq S^0 / k
+    error_bound = S_0 / k
+
+    # 局部更新在此处进行，遵守对偶边界
+    y_k_next = y_k - error_bound # 遵守边界的简化说明性步骤
+
+    return y_k_next
+```
+
+### 基于相对距离定位的多目标包围与神经网络反同步控制
+```python
+def antisynchronization_control_step(
+    e_i_k: float,
+    beta: float,
+    delta: float,
+    k: int
+) -> float:
+    """
+    计算第 i 个智能体在第 k 步的误差演化边界。
+    基于: \lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta
+    并且误差衰减遵循: ||\boldsymbol{e}_{i}(k+1)||^{2}\leq(3(1+\beta)^{2})^{k+1}||\boldsymbol{e}_{i}(0)||^{2}+\hat{\delta}
+    """
+    # 模拟系统衰减系数 (系统要求 3(1+beta)^2 < 1 以保证收敛)
+    decay_factor = (3 * (1 + beta)**2) ** (k + 1)
+
+    # 当前步的误差平方上界估计
+    error_bound_squared = decay_factor * (e_i_k ** 2) + delta
+
+    return error_bound_squared
+```
+
+### Understanding the Influence of Digraphs on Decentralized Optimization
+```python
+def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
+    # Calculates the local tracker update on the directed graph
+    # Derived directly from the extracted convergence tracker equation:
+    # \displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}
+
+    # Calculate difference in local gradients
+    grad_diff = grad_F_w_next - grad_F_w_k
+
+    # Update tracker vector mapped through the network weight matrix W
+    y_next = W @ (y_k + grad_diff)
+
+    return y_next
+```
+
+### Non-Smooth Convex Decentralized Optimization over Time-Varying Networks
+```python
+# Extracted structural updates for optimal non-smooth decentralization
+def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
+    # 变量提取自：
+    # y^{k}, z^{k}, \overline{y}^{k}, \overline{z}^{k}, \alpha_{k}
+    y_under_k = alpha_k * y_k + (1 - alpha_k) * y_bar_k
+    z_under_k = alpha_k * z_k + (1 - alpha_k) * z_bar_k
+
+    # 梯度计算基于： g_{y}^{k}=\nabla_{y}G(\underline{y}^{k},\underline{z}^{k})
+    # 梯度计算基于： g_{z}^{k}=\nabla_{z}G(\underline{y}^{k},\underline{z}^{k})
+    g_y_k = compute_grad_y(y_under_k, z_under_k)
+    g_z_k = compute_grad_z(y_under_k, z_under_k)
+
+    # 结合动量 m^{k} 的 Gossip 矩阵通信步骤
+    # \hat{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})(g_{z}^{k}+m^{k})
+    # \tilde{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})g_{z}^{k}
+    g_z_hat_k = apply_gossip(W_k, g_z_k + m_k)
+    g_z_tilde_k = apply_gossip(W_k, g_z_k)
+
+    # 原始对偶更新
+    # z^{k+1}=z^{k}-\eta_{z}^{k}\hat{g}_{z}^{k}
+    z_next = z_k - eta_z * g_z_hat_k
+    # \overline{z}^{k+1}=\underline{z}^{k}-\theta_{z}^{k}\tilde{g}_{z}^{k}
+    z_bar_next = z_under_k - theta_z * g_z_tilde_k
+
+    return z_next, z_bar_next
+```
+
+### Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees
+\mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
+
+### 基于随机线性规划的平均回报多智能体强化学习收敛率
+$$
+T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)
+$$
+
 ## 4. 全局防线：对单点故障与系统崩溃的数学级免疫
 
 在当前业内多智能体框架频繁暴露出“中心服务器单点故障（SPOF）”导致全网瘫痪丑闻的背景下，我们的协作系统提供了一种在数学和物理层面被严格证明的防御机制。
@@ -1335,186 +1483,23 @@ def flexible_gradient_tracking_step(x_k, y_k, Z_1_nc, Z_2_nc, alpha):
 
 想象一下很多家分店（节点 $\mathbf{x}_k$）一起决定每天的菜价（优化目标）。如果每家店只看自己当天的客流量调整价格，全网价格会波动很大（方差大）。Gradient Tracking 就像是不仅看自己的客流，还记录并且交流全网的趋势（$\mathbf{y}_k$）。每个分店不仅参考周围分店的价格进行加权混合（$\textbf{Z}_{1}^{n_{c}}\textbf{x}_{k}$），还会根据周围分店传递的趋势进行联合调整（$\alpha\,\textbf{Z}_{2}^{n_{c}}\textbf{y}_{k}$）。这样即使没有总店，大家也能保证价格稳定并逼近最优解，数学上保证了单点故障不会导致整个连锁系统崩溃。
 
-
-📝 [Daily Research Chunk] 动态理论深潜：全局约束的去中心化优化 (Globally-Constrained Decentralized Optimization)
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: Globally-Constrained Decentralized Optimization with Variable Coupling (arXiv:2407.10770v4)
-Deterministic Convergence Mechanism: 提出的去中心化原始-对偶算法通过在数学上限制 $K$ 步内的累积误差来确保确定性收敛：$\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$。通过使用闭式对偶边界 $\bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})$ 进行严格的梯度跟踪，全局目标在无需中心化控制的情况下自然达到稳定。
-
-💻 核心更新公式 (Core Update Equation)
-```python
-# 去中心化投影原始-对偶更新步骤 (Decentralized Projected Primal-Dual Step)
-# 变量基于 arXiv:2407.10770v4 边界约束
-
-def decentralized_primal_dual_step(y_k, lambda_star, u_1_star, S_0, S_K, k):
-    '''
-    执行有界的原始-对偶步骤，保证确定性收敛。
-    收敛条件: sum(f(y^k) - f(y*)) <= S^0 - S^K
-    '''
-    # 计算源自论文闭式最优对偶变量的边界约束：
-    # \bar{\mathbf{u}}_{1}^{\star}=-(\bar{A}^{T}\bar{A})^{-1}\bar{A}^{T}(\nabla_{\mathbf{x}}\mathbf{f}(\mathbf{y}^{\star})+\nabla_{\mathbf{x}}\mathbf{G}(\mathbf{y}^{\star})\bm{\lambda}^{\star})
-
-    # 在实践中，智能体更新其局部变量 y_k，同时遵守严格的误差边界：
-    # Error \leq S^0 / k
-    error_bound = S_0 / k
-
-    # 局部更新在此处进行，遵守对偶边界
-    y_k_next = y_k - error_bound # 遵守边界的简化说明性步骤
-
-    return y_k_next
-```
-
-💡 0基础业务通俗类比 (For Beginners)
+### 全局约束的去中心化优化 (Globally-Constrained Decentralized Optimization) 通俗类比 (Analogy)
 想象一个大型的小组项目（去中心化网络），每个人都在负责不同的部分，但有一个严格的总预算（全局约束）。与其让一个经理追踪所有的开销（这会造成瓶颈），不如每个人计算一个“预算压力分数”（$\bar{\mathbf{u}}_{1}^{\star}$）并仅与他们相邻的同伴分享。因为数学定理严格限制了总累积误差（$\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$），整个团队的花费自然会保持在预算之内，而永远不需要一个中心化的会计师。
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
-📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
-
-
-📝 [Daily Research Chunk] 动态理论深潜：基于相对距离定位的多目标包围与神经网络反同步控制
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: https://arxiv.org/abs/2411.07590 (Multiple noncooperative targets encirclement by relative distance-based positioning and neural antisynchronization control)
-Deterministic Convergence Mechanism: 该研究通过构建代价函数 $J(k)=\frac{1}{2}\Big{\{}\Delta\psi(k)-\boldsymbol{p}_{12}^{T}(k)\hat{\boldsymbol{h}}(k)\Big{\}}^{2}$ 并结合神经网络反同步控制，使得多智能体在追捕非合作目标时能保证最终误差收敛到有界范围内，即 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$。这种确定性的边界约束保证了分布式协同系统不会发生结构性发散。
-
-💻 核心更新公式 (Core Update Equation)
-```python
-def antisynchronization_control_step(
-    e_i_k: float,
-    beta: float,
-    delta: float,
-    k: int
-) -> float:
-    """
-    计算第 i 个智能体在第 k 步的误差演化边界。
-    基于: \lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta
-    并且误差衰减遵循: ||\boldsymbol{e}_{i}(k+1)||^{2}\leq(3(1+\beta)^{2})^{k+1}||\boldsymbol{e}_{i}(0)||^{2}+\hat{\delta}
-    """
-    # 模拟系统衰减系数 (系统要求 3(1+beta)^2 < 1 以保证收敛)
-    decay_factor = (3 * (1 + beta)**2) ** (k + 1)
-
-    # 当前步的误差平方上界估计
-    error_bound_squared = decay_factor * (e_i_k ** 2) + delta
-
-    return error_bound_squared
-```
-
-💡 0基础业务通俗类比 (For Beginners)
+### 基于相对距离定位的多目标包围与神经网络反同步控制 通俗类比 (Analogy)
 想象两架无人机在夜间追捕一群四处逃窜的野兔。因为没有GPS（目标非合作且无法直接定位），无人机只能靠彼此之间的相对距离和雷达探测到的野兔距离来推算。反同步控制（antisynchronization control）就像是给这两架无人机设定了一个“镜像包围圈”规则：当无人机A向左移动时，无人机B会自动向右对称移动，将野兔群死死卡在中心。数学公式 $\lim_{k\rightarrow\infty}||\boldsymbol{e}_{i}(k+1)||^{2}\leq\delta$ 严格保证了无论野兔怎么跑，两架无人机的包围网误差最终都会被压缩在一个极小的固定范围（$\delta$）内，确保猎物绝对无法逃脱，从而实现了无中心化雷达下的确定性协作收敛。
 
-📝 [Daily Research Chunk] 动态理论深潜：Understanding the Influence of Digraphs on Decentralized Optimization
-
-🔬 选型依据与学术脉络
-System Container: Collaboration System
-Frontier Source: https://arxiv.org/abs/2312.04928v2 (Understanding the Influence of Digraphs on Decentralized Optimization: Effective Metrics, Lower Bound, and Optimal Algorithm)
-Deterministic Convergence Mechanism: 由 $\displaystyle\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]=\Omega\left(\frac{\sigma\sqrt{L\Delta}}{\sqrt{nK}}+\frac{(1+\ln(\kappa_{\pi}))L\Delta}{(1-\beta_{\pi})K}\right),$ 约束的硬性拓扑收敛下界，以及通过 $\displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}$ 映射的去中心化追踪器更新。
-
-💻 核心更新公式 (Core Update Equation)
-```python
-def directed_decentralized_tracker_update(W, y_k, grad_F_w_next, grad_F_w_k):
-    # Calculates the local tracker update on the directed graph
-    # Derived directly from the extracted convergence tracker equation:
-    # \displaystyle=W({\mathbf{y}}^{(k)}+\nabla F({\mathbf{w}}^{(k+1)};\bm{\xi}^{(k+1)})-\nabla F({\mathbf{w}}^{(k)};\bm{\xi}^{(k)}))\vspace{-10mm}
-
-    # Calculate difference in local gradients
-    grad_diff = grad_F_w_next - grad_F_w_k
-
-    # Update tracker vector mapped through the network weight matrix W
-    y_next = W @ (y_k + grad_diff)
-
-    return y_next
-```
-
-💡 0基础业务通俗类比 (For Beginners)
+### Understanding the Influence of Digraphs on Decentralized Optimization 通俗类比 (Analogy)
 想象一个巨大的物流网络，卡车只能在单行道（有向图）上行驶。即使没有中央调度员下达全局指令，每个区域仓库也会纯粹根据从其直接邻居（$W$）接收到的单向交货以及自身供需（$\nabla F$）的局部变化来调整其库存目标（$y$）。收敛下界方程在数学上保证了，尽管存在严格的单行道限制且缺乏中央通信，整个全球网络的供需不匹配（$\mathbb{E}[\|\nabla f(x^{(K)})\|_{2}^{2}]$）也必然会在可预测的时间范围内缩小到绝对极小值，从而以确定性的方式强制实现去中心化和谐。
 
-
-📝 [Daily Research Chunk] 动态理论深潜：Non-Smooth Convex Decentralized Optimization over Time-Varying Networks
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: https://arxiv.org/abs/2405.18031v1 (Lower Bounds and Optimal Algorithms for Non-Smooth Convex Decentralized Optimization over Time-Varying Networks)
-Deterministic Convergence Mechanism: 在时变网络环境下建立了理论通信复杂度下界，该复杂度与网络条件数 $\chi$ 成正比，而不是固定网络下的 $\sqrt{\chi}$。对于强凸非平滑情况，最优复杂度下界显式建模为 $\Omega\left({\color[rgb]{0,0,1}\definecolor[named]{pgfstrokecolor}{rgb}{0,0,1}\chi}MR/\epsilon\right)$。
-
-💻 核心更新公式 (Core Update Equation)
-```python
-# Extracted structural updates for optimal non-smooth decentralization
-def optimal_decentralized_update(y_k, z_k, y_bar_k, z_bar_k, alpha_k, m_k, W_k, eta_y, eta_z, theta_z):
-    # 变量提取自：
-    # y^{k}, z^{k}, \overline{y}^{k}, \overline{z}^{k}, \alpha_{k}
-    y_under_k = alpha_k * y_k + (1 - alpha_k) * y_bar_k
-    z_under_k = alpha_k * z_k + (1 - alpha_k) * z_bar_k
-
-    # 梯度计算基于： g_{y}^{k}=\nabla_{y}G(\underline{y}^{k},\underline{z}^{k})
-    # 梯度计算基于： g_{z}^{k}=\nabla_{z}G(\underline{y}^{k},\underline{z}^{k})
-    g_y_k = compute_grad_y(y_under_k, z_under_k)
-    g_z_k = compute_grad_z(y_under_k, z_under_k)
-
-    # 结合动量 m^{k} 的 Gossip 矩阵通信步骤
-    # \hat{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})(g_{z}^{k}+m^{k})
-    # \tilde{g}_{z}^{k}=(\mathbf{W}_{k}\otimes\mathbf{I}_{d})g_{z}^{k}
-    g_z_hat_k = apply_gossip(W_k, g_z_k + m_k)
-    g_z_tilde_k = apply_gossip(W_k, g_z_k)
-
-    # 原始对偶更新
-    # z^{k+1}=z^{k}-\eta_{z}^{k}\hat{g}_{z}^{k}
-    z_next = z_k - eta_z * g_z_hat_k
-    # \overline{z}^{k+1}=\underline{z}^{k}-\theta_{z}^{k}\tilde{g}_{z}^{k}
-    z_bar_next = z_under_k - theta_z * g_z_tilde_k
-
-    return z_next, z_bar_next
-```
-
-💡 0基础业务通俗类比 (For Beginners)
+### Non-Smooth Convex Decentralized Optimization over Time-Varying Networks 通俗类比 (Analogy)
 想象你在管理一个庞大的供应链（去中心化网络），仓库之间的路线和运力每天都在变化（时变网络）。与其试图找到一条完美的平滑路线，不如承认瓶颈是坑坑洼洼的（非平滑）。数学下界告诉我们，为了对齐库存，仓库之间绝对必须交换的最小消息数量。通过使用带有动量的专门统筹算法（Algorithm 1），系统保证所有仓库最终都能同步库存水平，而不需要中央总部的干预。这种同步的代价严格地与网络中最差瓶颈的严重程度（$\chi$）挂钩。
 
-📝 [Daily Research Chunk] 动态理论深潜：Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees
-
-🔬 选型依据与学术脉络
-System Container: Collaboration
-Frontier Source: https://arxiv.org/abs/2402.03448v4 (Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees)
-Deterministic Convergence Mechanism: \mathcal{O}{(\ln{k}/\sqrt{k})}
-Assumptions: 收敛性条件依赖于特定的图连通性、有界的数据异质性、有界的梯度噪声、合适的学习率以及特定的模型条件。
-Scope: 适用于节点零星可用的理论去中心化联邦学习场景。
-Implementation Status: 暂无代码库实现。当前仅为概念映射。
-
-💻 核心更新公式 (Core Update Equation)
-\mathbf{\bar{\theta}}^{(k+1)}=\mathbf{\bar{\theta}}^{(k)}-\alpha^{(k)}\overline{\mathbf{g}v}^{(k)},
-
-💡 0基础业务通俗类比 (For Beginners)
+### Decentralized Sporadic Federated Learning: A Unified Algorithmic Framework with Convergence Guarantees 通俗类比 (Analogy)
 想象一个厨师团队（节点）共同开发一份大师级食谱。有些厨师偶尔会休息或失去与厨房的联系（零星可用性）。与其强迫每个人等到所有厨师都在场，不如让活跃的厨师定期混合他们当前的平均食谱（\mathbf{\bar{\theta}}^{(k)}），并加入他们平均的活跃本地改进（\overline{\mathbf{g}v}^{(k)}）。在关于厨房连通性和厨师烹饪差异程度的特定前提下，整体食谱的质量会以 \mathcal{O}{(\ln{k}/\sqrt{k})} 的可预测理论速度稳步接近大师标准。这展示了系统对某些可预测通信中断的鲁棒性，但并不构成一般意义上的绝对免疫。
 
-
-📝 [Daily Research Chunk] 动态理论深潜：基于随机线性规划的平均回报多智能体强化学习收敛率
-
-🔬 选型依据与学术脉络
-- System Container: Collaboration System
-- Frontier Source: https://arxiv.org/abs/2110.12929 (Convergence Rates of Average-Reward Multi-agent Reinforcement Learning via Randomized Linear Programming)
-- Original Problem: 现有的基于一致性协议的多智能体随机优化方法分析依赖于有限方差条件，而当对偶梯度评估对随机梯度估计造成无界噪声时，这一条件可能不成立。鉴于最小最大目标的结构，需要对原变量和对偶变量中的一致性误差进行联合处理。
-- Core Assumptions: 网络强连通性参数 $B$、状态空间 $\mathcal{S}$、动作空间 $\mathcal{A}$、混合时间 $t_{mix}^*$、恒定步长 $\beta$，以及占用测度的时间平均序列。
-- Mathematical Mechanism: 采用了元随机多智能体原对偶（M-RMAPD）算法。利用占用测度的时间平均序列和步长选择 $\beta=\mathcal{\widetilde{\mathcal{O}}}\left(\sqrt{\frac{\mathcal{E}_{0}}{{ \sqrt{n} |\mathcal{S}||\mathcal{A}| \tilde{t}^2_{mix}D(\Gamma, \rho)}T}}\right)$，对偶间隙被约束。
-- Convergence Bound: 以 $1-\delta$ 的概率达到 $\lambda_{\widetilde\pi} \geq \lambda^*-\epsilon$ 所需的总样本数为 $T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)$。
-- Scope: 建立在网络连通图模型上的多智能体随机优化和强化学习问题。
-- Limitations: 需要网络强连通性参数 $B$。样本复杂性高度依赖于状态和动作空间的基数，在连续或无限大的域中可能会爆炸。
-
-🏗️ Agent Architecture Mapping & Evidence
-- Paper Evidence Status: PAPER_ONLY
-- Architecture Mapping Status: CONCEPTUAL_MAPPING
-- Repository Implementation Status: EVIDENCE_INSUFFICIENT
-- Repository Test Status: EVIDENCE_INSUFFICIENT
-
-💻 数学更新规则 (Core Update Equation)
-$$
-T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)
-$$
-
-💡 0基础业务通俗类比 (For Beginners)
+### 基于随机线性规划的平均回报多智能体强化学习收敛率 通俗类比 (Analogy)
 想象一个自动送货机器人车队在一个复杂的仓库中穿梭。它们需要共同找到最佳路线（策略），而没有一个发号施令的中央服务器。由于它们只与直接相邻的节点通信，且只定期通信，很难知道它们是否真的在变好。该理论证明了一个数学“速度极限”：它准确地告诉我们需要多少次练习（样本数，记为 $T$），才能确保有 99% 的把握保证它们的平均送货速度近乎完美。它在数学上纳入了信息通过网络传播的速度（$t_{mix}$）以及存在的地点/动作的数量（$|S||A|$）。
-
 
 ### 针对极大单调算子之和的分布式近似校正算法 (Distributed Proximal-Correction Algorithm)
 
@@ -1627,3 +1612,25 @@ $$
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
+
+📂 动态演进映射 (Dynamic Evolution Mapping):
+- 已将累积的6个每日研究块（包含全局约束原始-对偶优化、基于相对距离的目标包围、有向图追踪器、非平滑时变下界、零星联邦学习和平均回报多智能体强化学习）集成到核心理论、源码解析及通俗类比章节。
+
+🕵️ 跨方向范式冲突审计 (Cross-Domain Paradigm Conflict Audit):
+1. **全局约束的去中心化优化**: COMPATIBLE (兼容)。遵循确定性有界累积误差 ($\sum_{k=1}^{K}(\mathbf{f}(\mathbf{y}^{k})-\mathbf{f}(\mathbf{y}^{\star}))\leq S^{0}-S^{K}$)，无需中心协调，符合系统假设。
+2. **基于相对距离定位的多目标包围**: COMPATIBLE (兼容)。基于相对距离的有界误差 $\delta$ 匹配无全局雷达或中央控制器的环境假设。
+3. **有向图对去中心化优化的影响**: COMPATIBLE (兼容)。有向图收敛追踪依赖局部变量映射，不存在中心瓶颈。
+4. **时变网络上非平滑凸去中心化优化**: COMPATIBLE (兼容)。通过条件数 $\chi$ 约束的拓扑最优复杂度严格限制了通信开销。
+5. **去中心化零星联邦学习**: COMPATIBLE (兼容)。展示了对间歇性连接具有鲁棒性的次线性收敛，未假设永久在线。
+6. **平均回报多智能体强化学习**: COMPATIBLE (兼容)。收敛界映射严格依赖连通性变量 $B$，未违背去中心化约束。
+
+📜 来源迁移记录 (Source Migration Record):
+- 所有 arXiv 来源、收敛界限以及实现状态均已迁移至核心机制。
+
+✅ 双语对齐状态 (Bilingual Alignment Status):
+- SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS. 标题已本地化，假设与公式已同步对齐。
+
+⚠️ 缺失来源 (Missing Sources):
+- 依然存在 MISSING_SOURCE，特别是在 Robust Compressed Push-Pull (RCPP) Method 和 基于 KL 性质的去中心化梯度追踪机制的代码实现部分。
