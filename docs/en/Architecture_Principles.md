@@ -728,3 +728,28 @@ AIVAT relies strictly on known action distributions; unknown opponent decision n
 **Test Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
 
 **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+
+### Convergence of Bounded Agents: Behavior and Performance Minimal Definitions
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** On the Convergence of Bounded Agents (David Abel, André Barreto, Hado van Hasselt, Benjamin Van Roy, Doina Precup, Satinder Singh, arXiv:2307.11044v1)
+- **URL:** http://arxiv.org/abs/2307.11044v1
+- **Publication Date:** 2023-07-20
+- **Selection Reason:** Provides fundamental definitions and mathematical bounds for the convergence of resource-constrained (bounded) agents in general non-stationary environments, highly relevant to bounded LLM agents.
+- **Original Problem:** Standard definitions of reinforcement learning convergence emphasize the environment's state. When evaluating bounded agents facing general environments (like POMDPs or non-stationary interactions), the concept of convergence is unclear. A new formal framework is required that centers convergence on the agent's internal state regarding both behavior size and performance distortion.
+- **Core Assumptions:** The agent operates with bounded representational capacity (finitely many internal states). The agent and environment interact indefinitely, producing histories, and the agent maps past interaction histories into its bounded state space.
+- **Mathematical Mechanism:**
+  - **Minimal Size from time $t$** (核心更新公式):
+    $$c_t(\agent, \environment) =  \min \{n \in \mathbb{N} : \forall_{h \in \rhistories_{t:\infty}} \exists_{\agent_n \in \agents_n} \forall_{h' \in \rsuffhistories}\ \agent(hh') = \agent_n(hh')\}$$
+  - **Distortion from time $t$** (核心更新公式):
+    $$\delta_t(\agent,\environment) = \sup_{(h,h') \in \historiesastate_t} |\valuef(\agent, \environment \mid h) - \valuef(\agent, \environment \mid hh')|$$
+  - **Limiting Size** (数学更新规则): $c_{\infty}(\agent, \environment) = \lim_{t \to \infty} c_t(\agent, \environment)$
+  - **Limiting Distortion** (数学更新规则): $\delta_\infty(\agent, \environment) = \lim_{t \to \infty} \delta_t(\agent, \environment)$
+- **Applicability Scope:** General agent-environment pairs, particularly beneficial for evaluating bounded learning agents (e.g., resource-constrained LLM agents) beyond standard episodic MDPs to determine when an agent has structurally stopped changing its performance output relative to its internal memory.
+- **Limitations:** The definitions focus strictly on objective behavioral and performance limits based on bounded states and omit notions of convergence based around epistemic uncertainty. The properties hold conceptually, but measuring these exact limits empirically for arbitrary large environments is an open challenge.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine you're learning to cook. Behavior convergence is like asking: "Can I fit all my recipes onto 5 index cards and never need to write a new one?" (Minimal Size). Performance convergence is asking: "If I read the same index card next year, will the meal taste exactly the same, or will the kitchen have secretly changed ingredients on me?" (Distortion). Bounded agents are considered "converged" when their internal index cards stop growing and the results tied to those cards stop fluctuating.
