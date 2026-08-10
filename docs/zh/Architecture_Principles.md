@@ -728,3 +728,28 @@ AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法�
 **Test Status**: EVIDENCE_INSUFFICIENT (Agent Foundations Repository)
 
 **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+
+### 受界智能体收敛性：行为与性能最小化定义 (Convergence of Bounded Agents)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** On the Convergence of Bounded Agents (David Abel, André Barreto, Hado van Hasselt, Benjamin Van Roy, Doina Precup, Satinder Singh, arXiv:2307.11044v1)
+- **URL:** http://arxiv.org/abs/2307.11044v1
+- **发布时间:** 2023-07-20
+- **选择理由:** 为一般非平稳环境中受界（资源受限）智能体的收敛性提供了基础定义和数学边界，与受界大模型（LLM）智能体高度相关。
+- **原始问题:** 标准的强化学习收敛定义依赖于环境状态。当受界（资源受限的）智能体面对一般环境（如部分可观测或非平稳环境）时，基于环境的收敛概念变得模糊。必须提供一个以智能体内部状态为中心的新形式化框架，分别从“行为规模”和“性能畸变”两个维度界定收敛。
+- **核心假设:** 智能体具有有界的表示能力（内部状态数量有限）。智能体与环境无限期地交互产生历史，智能体将过去的交互历史映射到其有界的状态空间中。
+- **数学机制:**
+  - **从时间 $t$ 开始的最小规模** (核心更新公式):
+    $$c_t(\agent, \environment) =  \min \{n \in \mathbb{N} : \forall_{h \in \rhistories_{t:\infty}} \exists_{\agent_n \in \agents_n} \forall_{h' \in \rsuffhistories}\ \agent(hh') = \agent_n(hh')\}$$
+  - **从时间 $t$ 开始的畸变** (核心更新公式):
+    $$\delta_t(\agent,\environment) = \sup_{(h,h') \in \historiesastate_t} |\valuef(\agent, \environment \mid h) - \valuef(\agent, \environment \mid hh')|$$
+  - **极限规模** (数学更新规则): $c_{\infty}(\agent, \environment) = \lim_{t \to \infty} c_t(\agent, \environment)$
+  - **极限畸变** (数学更新规则): $\delta_\infty(\agent, \environment) = \lim_{t \to \infty} \delta_t(\agent, \environment)$
+- **适用范围:** 一般的智能体-环境对，特别适用于评估超越标准幕式马尔可夫决策过程（MDP）的受界学习智能体（例如资源受限的 LLM 智能体），用于确定智能体何时在结构上相对于其内部记忆停止改变其性能输出。
+- **局限性:** 这些定义严格基于有界状态下的客观行为和性能极限，忽略了围绕认知不确定性（epistemic uncertainty）的收敛概念。尽管这些性质在概念上成立，但对任意庞大环境凭经验测量这些精确极限仍然是一个挑战。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象你在学做饭。行为收敛就像在问：“我能把所有的食谱都写在 5 张卡片上，并且以后永远不需要写新卡片吗？”（最小规模）。性能收敛是在问：“如果我明年看同一张卡片做饭，味道会完全一样吗？还是说厨房偷偷换了调料导致味道变了？”（畸变）。当受界智能体内部的“食谱卡片”不再增加，且与这些卡片绑定的做饭结果不再波动时，我们就认为它“收敛”了。
