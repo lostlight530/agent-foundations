@@ -1679,3 +1679,23 @@ $$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
 
 #### 8. 初学者类比
 想象一个庞大的餐厅厨房，多名厨师（智能体）协作制作复杂的套餐（联合臂）。通过测试每一种组合来找到最佳套餐是不可能的。多智能体 Thompson 采样允许在特定工位（超边）工作的厨师测试他们的局部菜肴变体并将它们组合起来。$\epsilon$-MATS 是一种策略，即厨师在 90% 的时间里坚持使用他们已知的最佳食材，只在 10% 的时间里尝试疯狂的新组合。该公式保证，即使在绝对最坏的情况下，他们寻找最佳套餐所浪费的时间，也只与局部食材的数量 ($A_{\text{local}}$) 成比例，而与可能产生的大量套餐数量无关——前提是厨师们并没有全都挤在完全相同的工位上（稀疏超图）。
+
+
+### 多智能体强化学习的变分策略传播 (Variational Policy Propagation)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** [Variational Policy Propagation for Multi-agent Reinforcement Learning](http://arxiv.org/abs/2004.08883v4), v4, Published: 2020-04-19T15:42:55Z, Authors: Chao Qu, Hui Li, Chang Liu, Junwu Xiong, James Zhang, Wei Chu, Weiqiang Wang, Yuan Qi, Le Song.
+- **Original Problem:** 协作多智能体强化学习（MARL）中呈指数级增长的联合动作空间和非平稳性阻碍了直接学习全局联合策略。
+- **Core Assumption:** 假设奖励函数可以基于局部图拓扑进行分解。具体而言，$r_i(s, \mathbf{a}) = r_i(s, a_i, a_{\mathcal{N}_i})$，这意味着智能体 $i$ 的奖励仅取决于其自身的动作及其直接邻居 $\mathcal{N}_i$ 的动作。
+- **Mathematical Mechanism / Core Equation:**
+  - **核心更新公式 (Core Update Formula):** 概率强化学习中的最优策略具有马尔可夫随机场 (MRF) 的形式：$\pi^*(\mathbf{a}^t|s^t) = \frac{1}{Z}\exp\left(\sum_{i=1}^N \psi_i(s^t, a_i^t, a_{\mathcal{N}_i}^t)\right)$。
+  - **数学更新规则 (Mathematical Update Rule):** 平均场不动点更新推导为：$q_i(a_i|s) \propto \exp \int \prod_{j \neq i} q_j(a_j|s) \log \pi(\mathbf{a}|s)d\mathbf{a}$。
+- **Convergence or Behavioral Bound:** 收敛性依赖于核嵌入近似，未展开的变分推断能够收敛到局部最优。核嵌入的经验均值具有理论上的收敛保证，但在深度神经网络的泛化误差方面缺乏严格的理论界限。
+- **Applicable Scope:** 适用于智能体具有局部依赖拓扑结构（如交通信号控制、局部导航）且奖励可以在结构上分解的协作多智能体环境。
+- **Limitations:** 平均场近似可能只能收敛到局部最优。由于使用深度神经网络近似算子，其泛化误差缺乏严格的理论限制。
+- **Agent Architecture Mapping:**
+  - **Architecture Mapping Status:** `CONCEPTUAL_MAPPING`
+  - 该理论指导了去中心化智能体协作架构如何基于局部拓扑结构设计消息传递机制（通过神经网络嵌入的信念传播），从而避免在编排器中运行庞大且低效的集中式联合策略求解器。
+- **Repository Implementation Status:** `EVIDENCE_INSUFFICIENT`
+- **Repository Test Status:** `EVIDENCE_INSUFFICIENT`
+- **Beginner Analogy:** 想象一群交警在合作疏导全城的交通拥堵。如果所有100名交警都听从一个中央指挥官同时下达具体指令，这会极其复杂；相反，如果每位交警只关注自己所在的十字路口，并与相邻路口的交警沟通，根据邻居的行动来调整自己的红绿灯，通过这种局部的调整，整个城市的交通最终会变得顺畅，而无需中央指挥官计算所有的可能性。
