@@ -1843,3 +1843,23 @@ The bound's dependence on the hyperedge count $\rho$ is exponential ($\mathcal{O
 
 #### 8. Beginner's Analogy
 Imagine a massive restaurant kitchen where multiple chefs (agents) collaborate to make complex combo meals (joint arms). Finding the best combo by testing every single combination is impossible. Multi-Agent Thompson sampling allows chefs working at specific stations (hyperedges) to test out their local dish variations and combine them. $\epsilon$-MATS is a strategy where chefs stick to their known best ingredients 90% of the time, and only try wild new combinations 10% of the time. The formula guarantees that even in the absolute worst-case scenario, the time they waste learning the optimal combo scales only with the number of local ingredients ($A_{\text{local}}$), not the massive number of possible combo meals, as long as the chefs aren't all crowded at the exact same stations (sparse hypergraph).
+
+
+### Variational Policy Propagation for Multi-Agent Reinforcement Learning
+
+- **System Container:** Collaboration System
+- **Frontier Source:** [Variational Policy Propagation for Multi-agent Reinforcement Learning](http://arxiv.org/abs/2004.08883v4), v4, Published: 2020-04-19T15:42:55Z, Authors: Chao Qu, Hui Li, Chang Liu, Junwu Xiong, James Zhang, Wei Chu, Weiqiang Wang, Yuan Qi, Le Song.
+- **Original Problem:** The exponentially large joint action space and non-stationarity in collaborative MARL when scaling to many agents hinder learning a joint policy directly.
+- **Core Assumption:** The reward function is decomposable based on a local graph topology. Specifically, $r_i(s, \mathbf{a}) = r_i(s, a_i, a_{\mathcal{N}_i})$, implying agent $i$'s reward only depends on its own action and the actions of its direct neighbors $\mathcal{N}_i$.
+- **Mathematical Mechanism / Core Equation:**
+  - **核心更新公式 (Core Update Formula):** The optimal policy in probabilistic RL has the form of a Markov Random Field (MRF): $\pi^*(\mathbf{a}^t|s^t) = \frac{1}{Z}\exp\left(\sum_{i=1}^N \psi_i(s^t, a_i^t, a_{\mathcal{N}_i}^t)\right)$.
+  - **数学更新规则 (Mathematical Update Rule):** The mean-field fixed point update is derived as: $q_i(a_i|s) \propto \exp \int \prod_{j \neq i} q_j(a_j|s) \log \pi(\mathbf{a}|s)d\mathbf{a}$.
+- **Convergence or Behavioral Bound:** Convergence relies on kernel embedding approximations where the unrolled variational inference converges to a local optimum. The empirical mean of the kernel embedding has convergence guarantees, though deep neural network generalization bounds are not strictly provided.
+- **Applicable Scope:** Collaborative multi-agent environments where agents have local dependency topologies (e.g., traffic signal control, local navigation) and the reward can be structurally factored.
+- **Limitations:** The mean-field approximation might only converge to a local optimum. The generalization error of the deep neural network approximations for the operators lacks strict theoretical error bounds.
+- **Agent Architecture Mapping:**
+  - **Architecture Mapping Status:** `CONCEPTUAL_MAPPING`
+  - Informs how decentralized agent collaboration architectures can structure message passing (via neural embedded belief propagation) based on local topologies, avoiding the need for a full centralized joint policy solver in the orchestrator.
+- **Repository Implementation Status:** `EVIDENCE_INSUFFICIENT`
+- **Repository Test Status:** `EVIDENCE_INSUFFICIENT`
+- **Beginner Analogy:** Imagine a group of traffic police officers working together to clear a city-wide traffic jam. Instead of everyone calling a central boss who tells all 100 officers what to do at the exact same time (which is too complicated), each officer only looks at their own intersection and talks to the officers at the neighboring intersections. They adjust their traffic lights based on what their immediate neighbors are doing. By doing this locally, the whole city's traffic eventually flows smoothly without a central boss needing to calculate every possible combination.
