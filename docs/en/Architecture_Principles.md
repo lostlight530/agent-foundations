@@ -753,3 +753,24 @@ AIVAT relies strictly on known action distributions; unknown opponent decision n
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine you're learning to cook. Behavior convergence is like asking: "Can I fit all my recipes onto 5 index cards and never need to write a new one?" (Minimal Size). Performance convergence is asking: "If I read the same index card next year, will the meal taste exactly the same, or will the kitchen have secretly changed ingredients on me?" (Distortion). Bounded agents are considered "converged" when their internal index cards stop growing and the results tied to those cards stop fluctuating.
+
+
+
+
+### No-Regret Learning and Extrapolation in Harmonic Games
+* **System Container:** Architecture Principles
+* **Frontier Source:** No-regret learning in harmonic games: Extrapolation in the face of conflicting interests, Davide Legacci, Panayotis Mertikopoulos, Christos H. Papadimitriou, Georgios Piliouras, Bary S. R. Pradelski, arXiv v1 (2024-12-28), URL: https://arxiv.org/abs/2412.20203v1
+* **Original Problem:** Standard implementation of Follow-the-Regularized-Leader (FTRL) algorithm spirals out to a non-terminating cycle of best-responses in harmonic games, presenting non-convergent behavior.
+* **Core Assumptions:**
+  - The game is harmonic, meaning player interests are conflicting.
+  - The learning rate satisfies a specific upper bound depending on the Lipschitz modulus of the payoff fields.
+* **Mathematical Mechanism:**
+  - **Individual Regret Bound:** In a harmonic game, if each player follows an extrapolated FTRL (FTRL+) algorithm, the individual regret is bounded by a constant $\mathcal{O}(1)$. Specifically:
+    $$ \max_{\beta_i\in\mathcal{A}_i} \sum_{t=1}^T \left[ u_i(\beta_i; x_{-i,t}) - u_i(x_t) \right] \leq \frac{\Delta_i}{\eta_i} + \frac{2 L_i}{N + 2} \sum_{j=1}^N \frac{\Delta_j}{\eta_j L_j} $$
+* **Applicable Scope:** Multi-agent continuous and discrete time decision processes and regularized learning algorithms in harmonic (zero-sum-like) games.
+* **Limitations:** The $\mathcal{O}(1)$ bound relies on specific extrapolated update structures (such as optimistic or extra-gradient FTRL) and learning rate conditions, which might be restrictive.
+* **Architecture Mapping:** CONCEPTUAL_MAPPING. Informs the architectural principle of robust multi-agent learning, suggesting that standard gradient-based learning might cycle, and look-ahead or extrapolated dynamics are required for convergence in highly conflicting (harmonic) multi-agent environments.
+* **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+* **Repository Test Status:** EVIDENCE_INSUFFICIENT
+* **Beginner Analogy:** Imagine two people playing rock-paper-scissors repeatedly, always trying to directly counter what the other just did. Standard learning makes them chase each other in endless circles without ever settling. "Extrapolated" learning means they start predicting the other person's *next* step based on the pattern, allowing them to finally reach a stable tie or equilibrium where neither regrets their choices.
+* **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE

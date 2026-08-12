@@ -753,3 +753,24 @@ AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法�
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **初学者类比:** 想象你在学做饭。行为收敛就像在问：“我能把所有的食谱都写在 5 张卡片上，并且以后永远不需要写新卡片吗？”（最小规模）。性能收敛是在问：“如果我明年看同一张卡片做饭，味道会完全一样吗？还是说厨房偷偷换了调料导致味道变了？”（畸变）。当受界智能体内部的“食谱卡片”不再增加，且与这些卡片绑定的做饭结果不再波动时，我们就认为它“收敛”了。
+
+
+
+
+### 调和博弈中的无遗憾学习与外推
+* **System Container:** Architecture Principles
+* **Frontier Source:** No-regret learning in harmonic games: Extrapolation in the face of conflicting interests, Davide Legacci, Panayotis Mertikopoulos, Christos H. Papadimitriou, Georgios Piliouras, Bary S. R. Pradelski, arXiv v1 (2024-12-28), URL: https://arxiv.org/abs/2412.20203v1
+* **原始问题:** 在调和博弈中，标准实现的“跟随正则化领导者 (FTRL)”算法会陷入无休止的最佳响应循环，表现出不收敛的行为。
+* **核心假设:**
+  - 博弈是调和的，即参与者的利益冲突。
+  - 学习率满足一个特定的上限，该上限取决于收益场 (payoff fields) 的李普希茨模数 (Lipschitz modulus)。
+* **数学机制:**
+  - **个体遗憾界限 (Individual Regret Bound):** 在调和博弈中，如果每个玩家都遵循外推的 FTRL (FTRL+) 算法，个体遗憾将受制于常数 $\mathcal{O}(1)$。具体为：
+    $$ \max_{\beta_i\in\mathcal{A}_i} \sum_{t=1}^T \left[ u_i(\beta_i; x_{-i,t}) - u_i(x_t) \right] \leq \frac{\Delta_i}{\eta_i} + \frac{2 L_i}{N + 2} \sum_{j=1}^N \frac{\Delta_j}{\eta_j L_j} $$
+* **适用范围:** 多智能体连续和离散时间决策过程以及调和（类似零和）博弈中的正则化学习算法。
+* **局限性:** $\mathcal{O}(1)$ 界限依赖于特定的外推更新结构（如乐观的或超梯度的 FTRL）和学习率条件，这可能具有限制性。
+* **架构映射 (Agent 架构映射):** CONCEPTUAL_MAPPING. 告知了鲁棒多智能体学习的架构原则，表明标准的基于梯度的学习可能会陷入循环，在高度冲突（调和）的多智能体环境中，需要使用前瞻性或外推动态来实现收敛。
+* **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+* **Repository Test Status:** EVIDENCE_INSUFFICIENT
+* **初学者类比:** 想象两个人反复玩石头剪刀布，总是试图直接反击对方刚才出的招。标准的学习方法会让他们陷入无休止的兜圈子，永远无法安定下来。“外推”学习意味着他们开始根据模式预测对方的*下一步*，从而最终达到一个稳定的平局或平衡点，两人都不后悔自己的选择。
+* **证据状态:** VERIFIED_FROM_LATEX_SOURCE
