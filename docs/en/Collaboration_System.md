@@ -1863,3 +1863,26 @@ Imagine a massive restaurant kitchen where multiple chefs (agents) collaborate t
 - **Repository Implementation Status:** `EVIDENCE_INSUFFICIENT`
 - **Repository Test Status:** `EVIDENCE_INSUFFICIENT`
 - **Beginner Analogy:** Imagine a group of traffic police officers working together to clear a city-wide traffic jam. Instead of everyone calling a central boss who tells all 100 officers what to do at the exact same time (which is too complicated), each officer only looks at their own intersection and talks to the officers at the neighboring intersections. They adjust their traffic lights based on what their immediate neighbors are doing. By doing this locally, the whole city's traffic eventually flows smoothly without a central boss needing to calculate every possible combination.
+
+### Fairness and Efficiency Compatibility under Subadditive Valuations
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Compatibility of Fairness and Nash Welfare under Subadditive Valuations* (arXiv:2407.12461v4, July 17, 2024)
+- **Original Paper Problem:** The paper addresses the problem of fairly dividing indivisible goods among agents with subadditive valuations while maximizing the Nash Social Welfare (NSW), aiming to resolve the theoretical tension between fairness (e.g., envy-freeness up to one good, EF1) and efficiency (Pareto optimality or maximizing NSW).
+- **Core Assumption:** Agents possess subadditive valuations for the indivisible goods, meaning the value of a union of two disjoint sets of goods is at most the sum of their individual values ($v_i(S \cup T) \leq v_i(S) + v_i(T)$ for $S \cap T = \emptyset$).
+- **Mathematical Mechanism:** The framework demonstrates that every fair division instance with subadditive valuations admits a partial EFX (envy-free up to any good) allocation or a complete EF1 allocation that guarantees a Nash Social Welfare of at least half of the optimal.
+- **Formulas / Pseudocode:**
+  - **核心更新公式 (Core Update Formula):** The lower bound for the approximated Nash Social Welfare ($NSW(\mathcal{A})$) for an EF1 allocation $\mathcal{A}$ compared to the optimal allocation $\mathcal{A}^*$ is given by:
+    $NSW(\mathcal{A}) \geq \frac{1}{2} NSW(\mathcal{A}^*)$
+- **Convergence / Behavioral Bound:** An algorithm can compute an EF1 allocation with NSW at least $\frac{1}{e^{2/e}} \approx \frac{1}{2.08}$ times the optimal in polynomial time using value-oracles.
+- **Applicable Scope:** Multi-agent resource allocation scenarios where resources are indivisible and agent preferences (valuations) are subadditive, avoiding excessive combinatorial explosion.
+- **Limitations:** The theoretical $1/2$ bound is tight; no allocation can guarantee a factor better than $1/2$ of the optimal NSW even under simpler additive valuations for all arbitrary cases. The polynomial-time algorithm provides an approximation of $1/2.08$, not the exact $1/2$ existential bound.
+- **Agent Architecture Mapping:** Can conceptually support resource allocation modules in the Collaboration System where multiple agents must share constrained computational resources (e.g., memory, bandwidth) fairly without severely degrading overall system throughput (efficiency).
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine dividing a set of diverse tools among workers where getting two tools isn't necessarily twice as useful as one (subadditive). The theory proves you can always find a way to distribute the tools so that almost no one is jealous of another's pile (EF1), while ensuring the overall productivity of the team is at least half of what the absolute best, but possibly highly unfair, distribution would achieve.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
