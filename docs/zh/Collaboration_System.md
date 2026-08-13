@@ -1699,3 +1699,26 @@ $$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
 - **Repository Implementation Status:** `EVIDENCE_INSUFFICIENT`
 - **Repository Test Status:** `EVIDENCE_INSUFFICIENT`
 - **Beginner Analogy:** 想象一群交警在合作疏导全城的交通拥堵。如果所有100名交警都听从一个中央指挥官同时下达具体指令，这会极其复杂；相反，如果每位交警只关注自己所在的十字路口，并与相邻路口的交警沟通，根据邻居的行动来调整自己的红绿灯，通过这种局部的调整，整个城市的交通最终会变得顺畅，而无需中央指挥官计算所有的可能性。
+
+### 次可加估值下的公平性与效率兼容性
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Compatibility of Fairness and Nash Welfare under Subadditive Valuations* (arXiv:2407.12461v4, 2024年7月17日)
+- **原始论文问题:** 该论文解决在代理对不可分割物品具有次可加估值时，如何公平分配物品并最大化纳什社会福利（NSW）的问题，旨在解决公平性（如最多相差一个物品的无嫉妒性，EF1）与效率（帕累托最优或最大化NSW）之间的理论冲突。
+- **核心假设:** 代理对不可分割物品具有次可加估值，即两个不相交物品集合的联合价值最多等于它们各自价值的总和（$v_i(S \cup T) \leq v_i(S) + v_i(T)$ 对于 $S \cap T = \emptyset$）。
+- **数学机制:** 该框架证明了每一个具有次可加估值的公平分配实例，都允许存在一个部分EFX（最多相差任何一个物品的无嫉妒）分配或一个完整的EF1分配，且保证其纳什社会福利至少为最优值的二分之一。
+- **公式与代码分类:**
+  - **核心更新公式:** 对于EF1分配 $\mathcal{A}$，其纳什社会福利（$NSW(\mathcal{A})$）相对于最优分配 $\mathcal{A}^*$ 的下界由以下公式给出：
+    $NSW(\mathcal{A}) \geq \frac{1}{2} NSW(\mathcal{A}^*)$
+- **收敛与行为边界:** 存在一个多项式时间算法，可以使用价值预言机计算出一个EF1分配，其NSW至少为最优分配的 $\frac{1}{e^{2/e}} \approx \frac{1}{2.08}$ 倍。
+- **适用范围:** 适用于资源不可分割且代理偏好（估值）为次可加的多代理资源分配场景，能避免过度的组合爆炸。
+- **局限性:** 理论上的 $1/2$ 边界是紧的；即使在更简单的加性估值下，对于所有任意情况，没有分配能保证比最优NSW的 $1/2$ 更好的因子。多项式时间算法提供的是 $1/2.08$ 的近似值，而不是确切的 $1/2$ 存在性边界。
+- **Agent 架构映射:** 在概念上可以支持协作系统中的资源分配模块，当多个Agent必须公平地共享受限的计算资源（如内存、带宽）时，能在不严重降低整体系统吞吐量（效率）的情况下进行分配，为设计候选方案。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT
+- **仓库测试状态:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象一下在工人之间分配一组不同的工具，其中获得两个工具不一定比一个工具有两倍的用处（次可加）。该理论证明，你总是可以找到一种分配工具的方法，使得几乎没有人嫉妒别人的工具堆（EF1），同时确保团队的整体生产力至少是绝对最佳（但可能极不公平）分配方式下生产力的一半。
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
