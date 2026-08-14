@@ -234,3 +234,26 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
+
+### Daily Research Chunk
+**MAC-SQL: A Multi-Agent Collaborative Framework for Text-to-SQL**
+- **Authors**: Bing Wang et al.
+- **URL**: http://arxiv.org/abs/2312.11242v6
+- **Date**: 2023-12-18
+- **System Container**: Tool System
+- **Original Problem**: 基于大语言模型的 Text-to-SQL 方法在处理包含巨大数据库和需要多步推理的复杂用户问题时，性能会出现显著下降，且通常忽略了 LLM 利用外部工具和模型协作的重要意义。
+- **Core Assumption**: 假设通过利用可访问外部工具（如 Schema 选择器和修正器）的协作智能体，将逐 token 生成过程分解为子问题，可以有效缩小生成误差空间并减少误差传播。
+- **Mathematical Mechanism**:
+  核心更新公式: Decomposer Sequential Generation Probability
+  ```latex
+  P_{\mathcal{M}}(\mathcal{Y} | \mathcal{Q}, \mathcal{S}^{'}, \mathcal{K}) = \prod_{j=1}^{L} P_{\mathcal{M}}(\mathcal{Y}^{j} | \mathcal{Y}^{<j}; \mathcal{Q}^{j}, \mathcal{S}^{'}, \mathcal{K})
+  ```
+  其中 $\mathcal{Q}^{j}$ 和 $\mathcal{Y}^{j}$ 是在给定前序生成的子 SQL $\mathcal{Y}^{<j}$、过滤后的最小数据库 Schema $\mathcal{S}^{'}$ 以及知识 $\mathcal{K}$ 的条件下，LLM 生成的第 $j$ 个子问题和子 SQL，而 $L$ 是子问题的总数。
+- **Convergence / Boundary**: 逐 token 的误差累积界限在理论上受到了将问题显式分解为 $L$ 个子问题的约束。这意味着，相较于没有经过 Schema 过滤（$\mathcal{S}^{'}$）而直接进行单步的整体查询生成，在分解后的每一步中联合概率分布空间都被有效缩减了。
+- **Applicability**: 涉及超大数据库 Schema 且需要复杂多步逻辑推理的 Text-to-SQL 任务。
+- **Limitations**: 理论性能边界依然根本上取决于底层基础大语言模型（$\mathcal{M}$）的内在能力，并且高度依赖能否正确检索和过滤出最小 Schema $\mathcal{S}^{'}$ 而不错误地丢弃必要的数据表。
+- **Agent Architecture Mapping**: DESIGN_CANDIDATE
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy**: 想象一个专家团队正在建造一台复杂的机器。如果不让一个人光靠记忆一次性构建所有部件（这会导致极其严重的错误堆积），而是将任务拆解：一位架构师负责逐步设计蓝图（Decomposer），另一位工程师只去仓库提取恰好所需的精确零件（Selector），最后还有一位质检员去修复哪怕最细微的组装瑕疵（Refiner）。
+- **Paper Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
