@@ -1886,3 +1886,38 @@ Imagine a massive restaurant kitchen where multiple chefs (agents) collaborate t
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### Reputation-Based Validator Selection for Robust Consensus
+
+**System Container:** Collaboration System
+**Frontier Source:** "Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit" by Mengfan Xu, Diego Klabjan (arXiv:2402.04417v2, Submitted 2024-02-06)
+
+**Original Problem:**
+Balancing decentralization with efficiency in a fully decentralized Multi-Agent System where malicious actors may attempt to poison information or disrupt consensus.
+
+**Core Assumptions:**
+1. Cost is constant (distance-based cost where applicable).
+2. Malicious participants perform existential forgery on signatures of honest participants with an adaptive chosen message attack, but they are bounded (Assumption 1 holds).
+3. The total number of honest participants forms a sufficient majority.
+
+**Mathematical Mechanism:**
+Validator selection is based on a reputation score system $RS_i^t = G(U_i^t)$ where $G$ is any monotonicity-preserving function. The accuracy of the information provided by participant $i$ is quantified by the core update formula:
+$$U_i^t = \sum_{j=1}^{K}-(\bar{\mu}_j^i(t) - \Tilde{\mu}_j(t))^2 - \epsilon^2(\overset{\Delta}{\mu}_j^i(t)- \Tilde{\mu}_j(t))^2)^2$$
+(Mathematical Update Rule)
+
+**Convergence / Regret Bound:**
+With this consensus mechanism, the system maintains theoretical efficiency and safety against poisoning, governed by the regret bound:
+$$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\frac{4C_1\log T}{\Delta_i^2}\right] + \frac{\pi^2}{3}\right) + |M_H|Kl^{1-T}$$
+(Convergence Bound)
+
+**Scope & Limitations:**
+The guarantees are bounded to the presence of a sufficient burn-in period $L$. The assumption on strict error margin ($\epsilon$-safe zone) dictates the strictness of the convergence limits.
+
+**Architecture Mapping & Implementation Status:**
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+**Beginner Analogy:**
+Imagine a town council (the agents) trying to guess the number of jellybeans in a jar (the bandit arms). Instead of every single citizen arguing (which takes forever), they elect representatives (validators). However, they only elect representatives who have a proven track record of guessing accurately in the past (reputation score). If a representative starts lying to sabotage the group, their reputation drops, and they are quickly ignored in future votes, ensuring the council still arrives at the right guess quickly and safely.

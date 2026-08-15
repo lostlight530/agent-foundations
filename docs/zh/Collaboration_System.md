@@ -1722,3 +1722,38 @@ $$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### 基于信誉的验证者选择机制以实现鲁棒共识
+
+**System Container:** Collaboration System
+**Frontier Source:** "Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit" 作者: Mengfan Xu, Diego Klabjan (arXiv:2402.04417v2, 提交于 2024-02-06)
+
+**原始问题:**
+在完全去中心化的多智能体系统中，如何在可能存在恶意破坏者试图污染信息或破坏共识的情况下，平衡去中心化程度与共识效率。
+
+**核心假设:**
+1. 成本是恒定的（在适用情况下为基于距离的成本）。
+2. 恶意参与者可能会通过自适应的选择消息攻击对诚实参与者的签名进行伪造，但其能力受限（符合假设 1）。
+3. 诚实参与者的总数占据足够的多数。
+
+**数学机制:**
+验证者的选择基于信誉评分系统 $RS_i^t = G(U_i^t)$，其中 $G$ 是任何保单调性的函数。参与者 $i$ 提供信息的准确性通过以下核心更新公式量化：
+$$U_i^t = \sum_{j=1}^{K}-(\bar{\mu}_j^i(t) - \Tilde{\mu}_j(t))^2 - \epsilon^2(\overset{\Delta}{\mu}_j^i(t)- \Tilde{\mu}_j(t))^2)^2$$
+（数学更新规则）
+
+**收敛与行为边界:**
+借助这种共识机制，系统能够保持理论上的效率以及抵御投毒攻击的安全性，由以下遗憾界进行限制：
+$$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\frac{4C_1\log T}{\Delta_i^2}\right] + \frac{\pi^2}{3}\right) + |M_H|Kl^{1-T}$$
+（收敛界）
+
+**适用范围与局限:**
+理论保证受限于是否拥有足够长的预热期 (burn-in period) $L$。关于严格误差范围（$\epsilon$-安全区）的假设决定了收敛极限的严格程度。
+
+**架构映射与实现状态:**
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+**初学者类比:**
+想象一个镇议会（智能体）试图猜测罐子里有多少糖豆（多臂老虎机问题）。为了避免所有镇民无休止地争吵（这太没效率了），他们选出了代表（验证者）。然而，他们只选那些过去猜测得非常准确的人作为代表（信誉评分）。如果某个代表为了破坏大家的目标开始撒谎，他的信誉就会下降，在未来的投票中很快就会被忽略，从而确保议会能够快速且安全地得出正确的猜测。
