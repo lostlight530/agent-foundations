@@ -774,3 +774,47 @@ AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法�
 * **Repository Test Status:** EVIDENCE_INSUFFICIENT
 * **初学者类比:** 想象两个人反复玩石头剪刀布，总是试图直接反击对方刚才出的招。标准的学习方法会让他们陷入无休止的兜圈子，永远无法安定下来。“外推”学习意味着他们开始根据模式预测对方的*下一步*，从而最终达到一个稳定的平局或平衡点，两人都不后悔自己的选择。
 * **证据状态:** VERIFIED_FROM_LATEX_SOURCE
+
+### 多智能体汤普森采样在稀疏超图上的有限时间频率论后悔界 (Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs)
+
+**System Container**: Architecture Principles
+**Frontier Source**: Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs (http://arxiv.org/abs/2312.15549v1)
+
+#### 1. 论文原始问题
+当多个智能体在多臂老虎机（MAB）环境中以稀疏超图结构协作时，每组智能体（超边）产生一个局部奖励，总奖励是这些局部奖励的总和。先前的多智能体汤普森采样（MATS）算法确立了贝叶斯后悔界，但在多智能体设定下推导频率论后悔界一直是一个悬而未决的问题。频率论后悔界对于在确定性或非贝叶斯环境中保证最坏情况性能至关重要。
+
+#### 2. 核心假设
+- 该问题被建模为具有 $\rho$ 个重叠组的超图上的多智能体多臂老虎机 (MAMAB)。
+- 联合动作的奖励完全是每个超边局部奖励的总和。
+- 假设超图相对稀疏（即 $\rho$ 较小或为常数）。
+
+#### 3. 数学机制
+$\epsilon$-探索多智能体汤普森采样 ($\epsilon$-MATS) 算法引入了显式的探索概率 $\epsilon$。
+频率论后悔界保证了最坏情况的上限。
+
+**收敛界**:
+$$
+R_{T} \leq C_2\Delta_{\max}+ C_2\rho \sqrt{\left((C_2/\epsilon)^{\rho}+K \right) T\log^2 (TK)}
+$$
+其中 $T$ 是时间范围，$K$ 是局部动作空间大小，$\rho$ 是组的数量，$\epsilon$ 是探索参数，$C_2$ 是一个通用常数。
+
+#### 4. 适用范围
+- 适用于智能体形成稀疏依赖结构（超图）的多智能体系统架构。
+- 对于智能体具有局部重叠状态但共享全局奖励的分布式决策和最优路由非常有用。
+
+#### 5. 局限
+- 该界限通过 $(C_2/\epsilon)^{\rho}$ 呈指数依赖于组的数量 $\rho$。因此，如果超图密集连接（$\rho$ 很大），该界限会显著退化。
+- 依赖于全局奖励是局部奖励线性相加的假设。
+
+#### 6. Agent 架构映射
+**映射状态**: DESIGN_CANDIDATE
+这种理论上的后悔界可以通过正式限制稀疏拓扑上分布式智能体系统的最坏情况探索成本（后悔），在概念上支持架构原则。它为去中心化的多智能体采样提供了理论依据，而无需依赖单一的中心化探索。
+
+#### 7. 证据状态
+- **Paper Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status**: DESIGN_CANDIDATE
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+
+#### 8. 初学者类比
+想象一个厨师团队（智能体）在不同但部分重叠的厨房工作站（组/超边）工作。如果他们只根据过去的成功经验来猜测做什么菜（汤普森采样），有时他们可能会陷入糟糕的日常套路中。频率论后悔界是一个数学保证，即如果他们在一小部分时间（$\epsilon$）内尝试完全新的东西，随着时间的推移，他们最坏情况下的错误将被严格限制，前提是他们没有太多重叠的工作站（稀疏超图）。

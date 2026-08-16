@@ -774,3 +774,47 @@ AIVAT relies strictly on known action distributions; unknown opponent decision n
 * **Repository Test Status:** EVIDENCE_INSUFFICIENT
 * **Beginner Analogy:** Imagine two people playing rock-paper-scissors repeatedly, always trying to directly counter what the other just did. Standard learning makes them chase each other in endless circles without ever settling. "Extrapolated" learning means they start predicting the other person's *next* step based on the pattern, allowing them to finally reach a stable tie or equilibrium where neither regrets their choices.
 * **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+### Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
+
+**System Container**: Architecture Principles
+**Frontier Source**: Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs (http://arxiv.org/abs/2312.15549v1)
+
+#### 1. The Original Problem
+When multiple agents collaborate in a multi-armed bandit (MAB) setting structured as a sparse hypergraph, each group of agents (hyperedge) yields a local reward, and the total reward is the sum of these local rewards. Previous Multi-Agent Thompson Sampling (MATS) algorithms established Bayesian regret bounds, but it remained an open problem to derive a strict frequentist regret bound, which is necessary for guaranteeing worst-case performance bounds in deterministic or non-Bayesian environments.
+
+#### 2. Core Assumptions
+- The problem is modeled as a multi-agent multi-armed bandit (MAMAB) on a hypergraph with $\rho$ overlapping groups.
+- The reward of a joint arm is exactly the sum of the local rewards of each hyperedge.
+- The hypergraph is relatively sparse (i.e., $\rho$ is small or constant).
+
+#### 3. Mathematical Mechanism
+The $\epsilon$-exploring Multi-Agent Thompson Sampling ($\epsilon$-MATS) algorithm introduces an explicit exploration probability $\epsilon$.
+The frequentist regret bound guarantees a worst-case upper bound.
+
+**收敛界 (Convergence Bound)**:
+$$
+R_{T} \leq C_2\Delta_{\max}+ C_2\rho \sqrt{\left((C_2/\epsilon)^{\rho}+K \right) T\log^2 (TK)}
+$$
+where $T$ is the time horizon, $K$ is the local arm size, $\rho$ is the number of groups, $\epsilon$ is the exploration parameter, and $C_2$ is a universal constant.
+
+#### 4. Applicability & Scope
+- Applicable to multi-agent architectures where agents form sparse dependency structures (hypergraphs).
+- Useful for distributed decision-making and optimal routing where agents have local overlapping states but global reward.
+
+#### 5. Theoretical Limitations
+- The bound depends exponentially on the number of groups $\rho$ via $(C_2/\epsilon)^{\rho}$. Thus, if the hypergraph is densely connected (large $\rho$), the bound degrades significantly.
+- Relies on the assumption that global reward is linearly additive from local rewards.
+
+#### 6. Architecture Mapping
+**Mapping Status**: DESIGN_CANDIDATE
+This theoretical regret bound can conceptually support the Architecture Principles by formally bounding the worst-case exploration cost (regret) of distributed agent systems on sparse topologies. It justifies decentralized multi-agent sampling without relying on single central exploration.
+
+#### 7. Evidence & Status
+- **Paper Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status**: DESIGN_CANDIDATE
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+
+#### 8. Beginner's Analogy
+Imagine a team of chefs (agents) working in different, partially overlapping kitchen stations (groups/hyperedges). If they just guess what to cook based on past success (Thompson Sampling), sometimes they might get stuck in a bad routine. The frequentist regret bound is a mathematical guarantee that if they try something completely new a small fraction of the time ($\epsilon$), their worst-case mistakes over time are strictly limited, provided they don't have too many overlapping stations (sparse hypergraph).
