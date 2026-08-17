@@ -1757,3 +1757,26 @@ $$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\
 
 **初学者类比:**
 想象一个镇议会（智能体）试图猜测罐子里有多少糖豆（多臂老虎机问题）。为了避免所有镇民无休止地争吵（这太没效率了），他们选出了代表（验证者）。然而，他们只选那些过去猜测得非常准确的人作为代表（信誉评分）。如果某个代表为了破坏大家的目标开始撒谎，他的信誉就会下降，在未来的投票中很快就会被忽略，从而确保议会能够快速且安全地得出正确的猜测。
+
+### 针对网联自动驾驶汽车的基于轨迹采样的多智能体概率集成
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles* (arXiv:2312.13910v3, 2023-12-21)
+- **原始论文问题:** 无模型强化学习（MFRL）在网联自动驾驶汽车（CAVs）的决策中需要大量且往往难以获取的数据，而基于模型的强化学习（MBRL）由于缺乏多智能体间的通信，其渐进性能表现不佳。
+- **核心假设:** 智能体可以在有限的通信范围 $d$ 内交换信息。为了理解样本效率，离散化误差可忽略不计。将群组遗憾界限一致地以 $r_{\max}$ 进行缩放，这不影响学习智能体间通信所带来的贡献。
+- **数学机制 / Core Equation:**
+  - **收敛界 (Convergence Bound):** 有限通信范围下的多智能体群组遗憾上限由以下公式限定：
+    $$ \operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log_2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)} $$
+- **适用范围:** 适用于多智能体强化学习（MARL）场景，在这些场景中，智能体（如自动驾驶汽车）在不确定的环境中运行，但可以通过有限范围的通信图共享转移数据，从而共同构建集成的动力学模型。
+- **局限性:** 该定理仅推导了最坏情况下的群组遗憾界限。显著扩大的通信范围会呈指数级增加通信开销。该集成方法同样面临由训练数据稀缺引起的分布外（OOD）挑战，这可能导致学习不稳定。
+- **Agent 架构映射:**
+  - **Architecture Mapping Status:** `CONCEPTUAL_MAPPING`
+  - 该框架和遗憾界限理论上能为 Collaboration System 中的去中心化通信模块设计提供支持。通过局部共享预测模型和样本转移数据，它在不需要集中控制的情况下，显著提高了整个群组的学习效率并限制了整体错误率。
+- **仓库实现状态:** `EVIDENCE_INSUFFICIENT`
+- **仓库测试状态:** `EVIDENCE_INSUFFICIENT`
+- **初学者类比:** 想象一支在新建城市中行驶的自动驾驶车队。如果每辆车完全独立学习，它会犯很多错误且耗时漫长。如果它们都持续向一个中央服务器汇报，网络就会过载。这项研究在数学上证明了一个折中方案：如果车辆仅与附近的车辆分享它们局部的学习经验，整个车队的学习速度会快得多。这个复杂的公式保证了，即便在最坏的情况下，这种“与邻居聊天”的策略相比单打独斗也能显著减少群体犯错的总数。
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

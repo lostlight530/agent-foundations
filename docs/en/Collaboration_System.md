@@ -1921,3 +1921,26 @@ The guarantees are bounded to the presence of a sufficient burn-in period $L$. T
 
 **Beginner Analogy:**
 Imagine a town council (the agents) trying to guess the number of jellybeans in a jar (the bandit arms). Instead of every single citizen arguing (which takes forever), they elect representatives (validators). However, they only elect representatives who have a proven track record of guessing accurately in the past (reputation score). If a representative starts lying to sabotage the group, their reputation drops, and they are quickly ignored in future votes, ensuring the council still arrives at the right guess quickly and safely.
+
+### Multi-Agent Probabilistic Ensembles with Trajectory Sampling for CAVs
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles* (arXiv:2312.13910v3, 2023-12-21)
+- **Original Problem:** Model-Free RL (MFRL) requires an infeasible amount of data for the decision-making of connected autonomous vehicles (CAVs), whereas Model-Based RL (MBRL) suffers in asymptotic performance due to the lack of multi-agent communication.
+- **Core Assumption:** Agents can exchange information within a limited communication range $d$. The discretization error is negligible for understanding sample efficiency. It unanimously scales the group regret bound by $r_{\max}$, which does not affect learning the contributing impact from inter-agent communications.
+- **Mathematical Mechanism / Core Equation:**
+  - **收敛界 (Convergence Bound):** The multi-agent group regret with limited communication range is upper bounded by:
+    $$ \operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log_2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)} $$
+- **Applicable Scope:** Multi-agent reinforcement learning (MARL) settings where agents (like autonomous vehicles) operate in an uncertain environment but can share transition data via limited-range communication graphs to collectively build ensemble dynamics models.
+- **Limitations:** The theorem only derives the worst-case group regret bound. A significantly higher communication range exponentially increases the communication overhead. The ensemble approach also confronts significant out-of-distribution (OOD) challenges from scarce training data, which can lead to learning instability.
+- **Agent Architecture Mapping:**
+  - **Architecture Mapping Status:** `CONCEPTUAL_MAPPING`
+  - The framework and regret bound conceptually support decentralized communication modules in the Collaboration System. By sharing predictive models and sample transitions locally, it significantly improves learning efficiency and bounds the mistakes for the entire group without requiring centralized control.
+- **Repository Implementation Status:** `EVIDENCE_INSUFFICIENT`
+- **Repository Test Status:** `EVIDENCE_INSUFFICIENT`
+- **Beginner Analogy:** Imagine a fleet of self-driving cars navigating a newly built city. If each car learns completely on its own, it makes many mistakes and takes a long time. If they all report to a central server constantly, the network becomes overloaded. This research mathematically proves a middle ground: if the cars just share their local learning experiences with other nearby cars, the entire fleet learns much faster. The complicated formula guarantees that even in the worst-case scenario, this "chatting with neighbors" significantly reduces the total number of mistakes the group makes compared to learning alone.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
