@@ -8,7 +8,7 @@
 >
 > Purpose: extend `docs/AUGUST_2026_SOURCE_ERRATA.md` with W33 corrections while preserving the original Jules-generated bilingual research history
 
-This file is a newer primary-source correction for W33. Where it conflicts with bibliographic metadata, evidence-strength wording, or weekly provenance introduced during W33, this file takes precedence.
+This file is a newer primary-source correction for W33. Where it conflicts with bibliographic metadata, evidence-strength wording, theorem interpretation, or weekly provenance introduced during W33, this file takes precedence.
 
 本文件延续已有 August Errata 的原则：保留历史生成内容，不静默改写；只对经一手来源核验的字段和明确越界的证据语义进行后验校准。
 
@@ -38,6 +38,7 @@ Calibrated interpretation:
 - requested version: `v4`
 - v4 date: `2022-01-29`
 - `2020-04-19` is the v1 submission date and must not be presented as the v4 publication/submission date
+- the paper supports the local-neighbor reward assumption and proves an MRF form for the joint policy under its conditions
 - architecture mapping remains `CONCEPTUAL_MAPPING`
 - repository implementation/test remain `EVIDENCE_INSUFFICIENT`
 
@@ -45,7 +46,7 @@ Primary source: https://arxiv.org/abs/2004.08883
 
 ---
 
-## W33-ERRATA-02 — Fairness paper v4 version/date pairing
+## W33-ERRATA-02 — Fairness paper v4 version/date pairing and computational-bound scope
 
 Affected W33 research chunk:
 
@@ -63,12 +64,25 @@ Primary arXiv history distinguishes:
 - v1: 2024-07-17
 - v4: 2025-11-07
 
+The W33 chunk also states that a polynomial-time algorithm computes an EF1 allocation with NSW at least approximately `1/2.08` times the **optimal** allocation.
+
+That is too strong even under the stronger coefficient shown in the current arXiv abstract: the transformation guarantee is stated relative to an arbitrary **input allocation** `A~`, not directly relative to the unknown optimal allocation.
+
+A second issue exists inside the current primary arXiv v4 surfaces themselves:
+
+- the current arXiv abstract states a transformation factor of `1/e^(2/e) ≈ 1/2.08` relative to the input allocation
+- the currently rendered arXiv full-text Theorem 1.3 states `1/3` relative to the input allocation
+
+Because these two primary-source surfaces conflict, this audit does not choose one coefficient on the author's behalf.
+
 Calibrated interpretation:
 
 - `2024-07-17` is the v1 date, not the v4 date
 - v4 should be associated with `2025-11-07`
-- the paper-level fairness / Nash-welfare claims remain scoped to the paper and its assumptions
-- the `1/2` existential guarantee and the polynomial-time `1/e^(2/e) ≈ 1/2.08` approximation must not be collapsed into a repository capability claim
+- the universal existence theorem for a complete EF1 allocation with NSW at least `1/2` of optimal is supported by the current primary paper
+- the polynomial-time transformation guarantee is relative to an arbitrary input allocation, not directly `1/2.08 of optimal`
+- the exact current v4 transformation coefficient is `PRIMARY_SOURCE_INTERNAL_CONFLICT_REQUIRES_TEX_REVERIFICATION`
+- the historical `Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE` is therefore too strong for this specific computational-bound sentence until the TeX source and theorem statement are reconciled
 - repository implementation/test remain `EVIDENCE_INSUFFICIENT`
 
 Primary source: https://arxiv.org/abs/2407.12461
@@ -118,7 +132,8 @@ The historical W33 wording then describes token-by-token error accumulation as b
 Calibration:
 
 - the equation supports the paper's decomposed sequential-generation formulation
-- it is not, by itself, a theorem proving a numerical error-accumulation bound
+- the primary paper clearly supports the Decomposer + Selector + Refiner multi-agent mechanism and reports empirical execution-accuracy results
+- the equation is not, by itself, a theorem proving a numerical error-accumulation bound
 - it is not a convergence theorem for Agent Foundations
 - claims that decomposition reduces practical difficulty or error propagation should be attributed to the MAC-SQL design rationale and empirical results unless a specific formal theorem is cited
 - `Agent Architecture Mapping: DESIGN_CANDIDATE` is retained
@@ -151,11 +166,14 @@ Primary arXiv history distinguishes:
 - v1: 2024-02-06
 - v2: 2024-07-25
 
-Calibrated interpretation:
+The primary abstract supports the broad paper-level claims that the framework uses validators, digital-signature-based consensus, secure multi-party computation, UCB-style learning, and proves honest-participant regret bounded by `O(log T)` under stated assumptions.
+
+Calibration:
 
 - `2024-02-06` is the v1 date, not the v2 date
 - v2 should be associated with `2024-07-25`
-- theoretical regret/security statements remain bounded by the paper's model and assumptions
+- the paper's security and regret statements remain conditional on its model and assumptions
+- the exact long formulas transcribed into the W33 chunk are not independently re-certified by this erratum merely because the paper identity and abstract-level result are valid
 - architecture mapping remains conceptual unless separately implemented
 - repository implementation/test remain `EVIDENCE_INSUFFICIENT`
 
@@ -217,6 +235,29 @@ This erratum does not silently rewrite the earlier prose; it prevents the W33 co
 
 ---
 
+## W33-ERRATA-08 — provenance tooling existed but was not enforced as a gate
+
+PR #110 introduced `FOUNDATION/arxiv_probe.py` specifically to verify arXiv identity, version, and version-specific date.
+
+Nevertheless, subsequent W33 research chunks repeatedly paired an explicit later version with a v1 date:
+
+- PR #111: `2004.08883v4` + v1 date
+- PR #113: `2407.12461v4` + v1 date
+- PR #114: `2312.11242v6` + v1 date
+- PR #115: `2402.04417v2` + v1 date
+
+This is a process-control failure rather than four unrelated bibliographic accidents.
+
+Future provenance rule:
+
+- if an arXiv citation contains explicit `vN`, the version-specific date must be verified against the submission history before the chunk may claim `VERIFIED_FROM_LATEX_SOURCE` or equivalent strong provenance
+- if only the base identifier is used, distinguish `v1 submitted`, `current version`, and `last revised` rather than collapsing them into a generic `Date`
+- a probe/tool existing in the repository does not count as validation evidence unless its output or equivalent primary-source evidence is actually incorporated into the research record
+
+Recommended gate label: `VERSION_DATE_PAIR_VERIFIED`
+
+---
+
 ## W33 items checked without a same-class correction in this audit
 
 The W33 review also inspected the identity/evidence boundaries of the following research additions and found no same-class correction requiring an erratum here:
@@ -225,7 +266,9 @@ The W33 review also inspected the identity/evidence boundaries of the following 
 - `arXiv:2412.20203v1` — No-regret learning in harmonic games
 - `arXiv:2312.15549v1` — Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
 
-This statement is deliberately narrow. It does not claim every analogy, architecture mapping, or copied formula has been independently re-proven by this repository.
+For these items, the primary abstracts support the core research framing used by the W33 chunks: bounded-agent convergence definitions; FTRL cycling versus extrapolated FTRL convergence with `O(1)` regret in harmonic games; and sublinear frequentist regret for epsilon-MATS on sufficiently sparse hypergraphs.
+
+This statement is deliberately narrow. It does not claim every analogy, architecture mapping, or copied long-form equation has been independently re-proven by this repository.
 
 ---
 
@@ -236,6 +279,7 @@ This statement is deliberately narrow. It does not claim every analogy, architec
 - This file extends and, for W33 conflicts, supersedes older generated metadata: `YES`
 - Paper claims promoted to repository implementation: `NO`
 - Missing theorem or error bound invented: `NO`
+- Primary-source internal conflict silently resolved: `NO`
 - CI / GitHub Actions modified: `NO`
 - Tests rerun for this errata task: `NO`
 - Core research-route change authorized by this errata: `NO`
@@ -244,7 +288,10 @@ This statement is deliberately narrow. It does not claim every analogy, architec
 
 - bibliographic identity: `CALIBRATED`
 - version-specific dates: `CORRECTED_WHERE_PRIMARY_HISTORY_CONFLICTED`
+- fairness computational-bound claim: `SCOPED_TO_INPUT_ALLOCATION; EXACT_V4_COEFFICIENT_REQUIRES_TEX_REVERIFICATION`
 - MAC-SQL formal-bound language: `DOWNGRADED_TO_PAPER_MECHANISM_AND_EMPIRICAL_DESIGN_RATIONALE`
+- robust-bandit abstract-level result: `PRIMARY_SOURCE_SUPPORTED; LONG_FORMULA_NOT_RECERTIFIED_BY_THIS_ERRATUM`
 - July/W33 weekly provenance mixing: `EXPLICITLY_RECONCILED`
+- provenance tool enforcement: `PROCESS_GAP_IDENTIFIED`
 - repository implementation boundary: `PRESERVED`
 - repository test boundary: `PRESERVED`
