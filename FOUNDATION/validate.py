@@ -121,8 +121,8 @@ def validate(base_ref: str | None = None, allowed_protected: set[str] | None = N
 
     source_path = FOUNDATION / "SOURCES.md"
     sources = registered_sources(source_path.read_text(encoding="utf-8")) if source_path.is_file() else set()
-    if sources and sources != {f"S{number:02d}" for number in range(1, 19)}:
-        errors.append("source registry must contain the contiguous range S01-S18")
+    if sources and sources != {f"S{number:02d}" for number in range(1, 27)}:
+        errors.append("source registry must contain the contiguous range S01-S26")
 
     all_claim_ids: list[str] = []
     for path in DOMAIN_FILES:

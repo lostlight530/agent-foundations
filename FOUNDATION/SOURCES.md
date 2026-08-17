@@ -200,3 +200,12 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.15549
 - Use: epsilon-exploring MATS, sublinear worst-case frequentist regret in the studied MAMAB hypergraph setting, and matching lower-bound interpretation up to constants/log terms when sufficiently sparse.
 - Verification boundary: the regret guarantee remains tied to the paper’s hypergraph, reward-additivity, exploration, and sparsity assumptions; it does not transfer automatically to generic agent architectures.
+
+## S26 — Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.13910v3
+- Version date: 2023-12-21
+- Authors: Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
+- URL: https://arxiv.org/abs/2312.13910
+- Use: group regret bounds for multi-agent model-based RL under limited communication range.
