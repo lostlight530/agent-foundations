@@ -1,5 +1,15 @@
 # Reproducibility and AI Use / 可复现性与 AI 使用
 
+## Jules automation boundary / 与 Jules 自动化的边界
+
+This provenance policy governs the independently maintained `FOUNDATION/**` verified core and reviewer-side maintenance outside the Jules SOP automation stream.
+
+It is not a Jules task prompt, Jules repository-memory entry, or `AGENTS.md` instruction. It does not change the existing Jules Daily/Weekly/Monthly automation. Jules-generated material may be checked against this policy after generation, but such a review must not be represented as proof that Jules consumed or followed the policy during generation.
+
+本溯源策略服务于 Jules SOP 自动化之外、独立维护的 `FOUNDATION/**` 可验证核心与评审侧维护。它不是 Jules 任务提示词、Jules 仓库记忆或 `AGENTS.md` 指令，也不会修改现有 Jules Daily/Weekly/Monthly 自动化。Jules 生成的内容可以在事后按本策略核验，但不得因此声称 Jules 在生成阶段读取或遵循了本策略。
+
+This maintenance intentionally does not create or modify `AGENTS.md`, Jules prompts, or Jules repository memory.
+
 ## Reproducibility target / 可复现目标
 
 This is a documentary foundation. A reviewer must be able to locate each Claim ID, recover its primary source and exact cited version, distinguish external findings from repository implementation, identify what proposition/theorem was actually verified, and rerun deterministic repository checks where executable artifacts exist.
@@ -26,7 +36,7 @@ It does not prove semantic truth, mathematical correctness, translation quality,
 
 ## Source identity workflow / 来源身份流程
 
-For every material arXiv source:
+For every material arXiv source reviewed by the verified core:
 
 1. normalize the base identifier
 2. record the exact cited `vN` when a version is specified
@@ -42,7 +52,9 @@ python FOUNDATION/arxiv_probe.py <arxiv-id-or-url>
 python FOUNDATION/arxiv_probe.py <arxiv-id-or-url> --expect-version N --expect-date YYYY-MM-DD
 ```
 
-An explicit `vN` citation should not enter a verified research chunk without `VERSION_DATE_PAIR_VERIFIED` or an explicit `VERSION_DATE_NOT_VERIFIED` limitation.
+An explicit `vN` citation should not enter the independently verified core without `VERSION_DATE_PAIR_VERIFIED` or an explicit `VERSION_DATE_NOT_VERIFIED` limitation.
+
+This is a reviewer-side gate. It is not a claim that Jules automatically runs `arxiv_probe.py` or applies the same gate in its SOP task unless its own task instructions explicitly require that behavior.
 
 The base arXiv page's first-submission date is not a substitute for the date of a later cited version.
 
@@ -50,7 +62,7 @@ The base arXiv page's first-submission date is not a substitute for the date of 
 
 Identity verification and claim verification are separate steps.
 
-For each material proposition, record the strongest surface actually checked:
+For each material proposition reviewed by this core, record the strongest surface actually checked:
 
 - abstract only → `ABSTRACT_SUPPORTED`
 - primary full text → `FULL_TEXT_SUPPORTED`
@@ -66,7 +78,7 @@ When a long equation is copied, verify punctuation, indices, powers, parentheses
 
 If primary surfaces disagree — for example abstract vs rendered theorem text, different versions, or HTML vs TeX — preserve the conflict.
 
-Required behavior:
+Required reviewer behavior:
 
 - record the conflicting surfaces and versions
 - mark `PRIMARY_SOURCE_CONFLICT`
@@ -85,13 +97,15 @@ Research period is part of provenance.
 - a July sync heading must not absorb August/W33 findings without an explicit new-period marker
 - errata/reconciliation may supersede interpretation without erasing the original historical artifact
 
+These are independent audit and verified-core rules; they do not alter Jules task cadence or prompts.
+
 ## AI use / AI 使用
 
-AI systems may assist with source discovery, drafting, translation, consistency checks, and validator code. AI output is never evidence. Material statements are checked against primary sources and retain source-specific assumptions, evaluated systems, configurations, metrics, exact version, and limits.
+AI systems may assist with source discovery, drafting, translation, consistency checks, and validator code in this independent maintenance layer. AI output is never evidence. Material statements are checked against primary sources and retain source-specific assumptions, evaluated systems, configurations, metrics, exact version, and limits.
 
-AI 系统可以辅助来源发现、起草、翻译、一致性检查和验证器代码。AI 输出不构成证据。实质性陈述必须对照一手来源，并保留来源特定的假设、被测系统、配置、指标、准确版本和局限。
+AI 系统可以在这一独立维护层辅助来源发现、起草、翻译、一致性检查和验证器代码。AI 输出不构成证据。实质性陈述必须对照一手来源，并保留来源特定的假设、被测系统、配置、指标、准确版本和局限。
 
-AI assistance must not:
+AI-assisted review must not:
 
 - infer a later-version date from v1
 - upgrade an abstract claim into a theorem
@@ -100,9 +114,11 @@ AI assistance must not:
 - convert paper guarantees into repository guarantees
 - hide an unresolved source conflict by selecting the most convenient value
 
+These constraints govern this independent review layer and are not assertions about the internal behavior of Jules automation.
+
 ## Correction model / 修正模型
 
-For the verified core and the SOP-generated research stream:
+For the verified core and for post-hoc review of the SOP-generated research stream:
 
 - existing generated documents are inputs, not authority
 - unsupported claims are removed or explicitly downgraded in the verified core
@@ -111,6 +127,8 @@ For the verified core and the SOP-generated research stream:
 - newer primary-source evidence supersedes conflicting secondary summaries
 - no credentials, private prompts, personal memory, or hidden reasoning traces are committed
 - maintainer review remains required before merge
+
+This correction model is external to the Jules task loop unless the Jules task itself is separately configured to adopt it.
 
 ## Documentation-only maintenance / 纯文档维护
 
