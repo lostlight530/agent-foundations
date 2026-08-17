@@ -14,6 +14,16 @@ The repository is a theory and evidence base. It is not an implemented autonomou
 
 本仓库是理论与证据库，不是已实现的自治智能体运行时。公式、论文摘要、伪代码和架构类比，在出现可执行产物及仓库测试前均只属于参考材料。
 
+## Jules automation boundary / 与 Jules 自动化的边界
+
+`FOUNDATION/**` is an independent verified-core and reviewer-governance layer outside the existing Jules Daily/Weekly/Monthly SOP automation stream.
+
+`FOUNDATION/**` 不是 Jules 的任务提示词、仓库记忆或自动化规则文件，也不自动修改现有 Jules 任务的行为。它用于在 Jules 产物生成后进行独立核验、证据校准、架构判断与长期知识维护。
+
+A Jules-generated research chunk may later be checked against this core, but that does not mean Jules consumed or followed these rules during generation. This maintenance intentionally does not create or modify `AGENTS.md`, Jules task prompts, or Jules repository memory.
+
+Jules 自动生成的研究块可以在事后由本核心进行核验，但这不表示 Jules 在生成时读取或遵循了这些规则。本维护明确不创建或修改 `AGENTS.md`、Jules 任务提示词或 Jules 仓库记忆。
+
 ## Reading order / 阅读顺序
 
 1. [EVIDENCE.md](./EVIDENCE.md) — claim, source-identity, theorem, and evidence contract / 声明、来源身份、定理与证据契约
@@ -53,6 +63,10 @@ Helper: [arxiv_probe.py](./arxiv_probe.py) verifies arXiv identity and submissio
 - 机制公式在没有对应定理提供边界前，不得升级为形式化误差/收敛界。
 - 一手来源内部冲突必须保留为冲突，不按方便程度静默选值。
 - Weekly 编织必须保留原研究周期；移动文本不能改写时间溯源。
+
+These invariants govern the independent verified core and reviewer-side maintenance. They are not assertions that Jules automation enforces the same invariants during generation.
+
+这些不变量约束独立可验证核心和评审侧维护，不代表 Jules 自动化在生成阶段已经执行同一组约束。
 
 ## Repository status / 仓库状态
 
