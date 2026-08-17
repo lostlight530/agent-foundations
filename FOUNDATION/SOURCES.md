@@ -1,8 +1,10 @@
 # Primary Source Registry / 一手来源登记
 
-Access boundary: 2026-08-05. Registry presence means “eligible to cite”, not “repository capability”.
+Access boundary: 2026-08-17. Registry presence means “eligible to cite”, not “repository capability”.
 
-访问边界：2026-08-05。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+访问边界：2026-08-17。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+
+For an explicit arXiv `vN`, the version/date pair below is part of source identity. If a later audit finds a conflict, record the conflict rather than silently replacing history.
 
 ## S01 — NIST AI 600-1
 
@@ -130,3 +132,71 @@ Access boundary: 2026-08-05. Registry presence means “eligible to cite”, not
 - Version: 1.2, approved
 - URL: https://slsa.dev/spec/v1.2/
 - Use: software supply-chain provenance and incremental assurance; not an AI-behavior standard.
+
+## S19 — On the Convergence of Bounded Agents
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2307.11044v1
+- Version date: 2023-07-20
+- URL: https://arxiv.org/abs/2307.11044
+- Use: two bounded-agent convergence definitions centered on minimal future behavioral state size and performance change relative to internal-state change; not a proof of convergence for general LLM agents.
+- Verification boundary: paper identity and abstract-level propositions are primary-source supported; formulas/theorems require separate full-text verification.
+
+## S20 — Variational Policy Propagation for Multi-agent Reinforcement Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2004.08883v4
+- Version date: 2022-01-29
+- v1 date: 2020-04-19
+- URL: https://arxiv.org/abs/2004.08883
+- Use: collaborative MARL, MRF-form joint policy under the paper’s conditions, and variational-inference-based policy layers; architecture mapping remains conceptual.
+- Verification boundary: v4/date pairing is primary-source verified; exact formulas and assumptions require theorem/formula-level checks before strong transcription labels.
+
+## S21 — No-regret learning in harmonic games
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2412.20203v1
+- Version date: 2024-12-28
+- URL: https://arxiv.org/abs/2412.20203
+- Use: vanilla FTRL non-convergence/cycling phenomena in harmonic games and extrapolated FTRL convergence with at-most `O(1)` regret under the paper’s conditions.
+- Verification boundary: these are harmonic-game results, not a general multi-agent or LLM-agent convergence guarantee.
+
+## S22 — Compatibility of Fairness and Nash Welfare under Subadditive Valuations
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2407.12461v4
+- Version date: 2025-11-07
+- v1 date: 2024-07-17
+- URL: https://arxiv.org/abs/2407.12461
+- Use: existence of partial EFX and complete EF1 allocations with `1/2`-of-optimal NSW guarantees under subadditive valuations; the abstract also describes a polynomial transformation from an arbitrary input allocation.
+- Conflict note: during the 2026-08-17 audit, the current arXiv abstract and rendered full-text theorem surface were not treated as automatically interchangeable for the exact polynomial-transformation coefficient. Preserve `PRIMARY_SOURCE_CONFLICT` until versioned TeX/PDF re-verification resolves any discrepancy.
+- Verification boundary: do not state the transformation factor as directly relative to optimal unless the theorem used actually provides that relation.
+
+## S23 — MAC-SQL
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2312.11242v6; COLING 2025 (Oral)
+- Version date: 2025-03-18
+- v1 date: 2023-12-18
+- URL: https://arxiv.org/abs/2312.11242
+- Use: multi-agent Text-to-SQL decomposition with Decomposer, Selector, and Refiner roles plus reported empirical execution accuracy.
+- Verification boundary: the sequential-generation factorization is a paper mechanism; it is not by itself a formal convergence or numerical error-accumulation bound.
+
+## S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2402.04417v2
+- Version date: 2024-07-25
+- v1 date: 2024-02-06
+- URL: https://arxiv.org/abs/2402.04417
+- Use: decentralized MAMAB with malicious participants, validators, signatures, secure multiparty computation, UCB-style coordination, and paper-reported logarithmic regret under stated assumptions.
+- Verification boundary: paper-level result is supported; long transcribed equations require separate `FORMULA_TRANSCRIPTION_VERIFIED` status before being treated as exact.
+
+## S25 — Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2312.15549v1; AAAI 2024
+- Version date: 2023-12-24
+- URL: https://arxiv.org/abs/2312.15549
+- Use: epsilon-exploring MATS, sublinear worst-case frequentist regret in the studied MAMAB hypergraph setting, and matching lower-bound interpretation up to constants/log terms when sufficiently sparse.
+- Verification boundary: the regret guarantee remains tied to the paper’s hypergraph, reward-additivity, exploration, and sparsity assumptions; it does not transfer automatically to generic agent architectures.
