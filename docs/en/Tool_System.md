@@ -276,3 +276,24 @@ Imagine a team of specialists building a complex machine. Instead of one person 
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): COMPATIBLE. The MAC-SQL decomposition aligns with the existing constraints, as it bounds the error space by breaking down monolithic generation into smaller, verifiable sub-tasks. It does not conflict with Memory, Architecture, or Collaboration assumptions. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
 来源迁移记录: Successfully migrated MAC-SQL Daily Research Chunk.
 双语对齐状态: SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
+
+### Optimal Regret Bounds for Collaborative Learning in Bandits
+
+- **System Container:** Tool System
+- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
+- **URL:** http://arxiv.org/abs/2312.09674v1
+- **Publication Date:** 2023-12-15
+- **Selection Reason:** Addresses the challenge of optimal collaborative regret minimization in general multi-agent multi-armed bandit scenarios using bounded communication, yielding an $\mathcal{O}(\log(T))$ bound via the CExp$^2$ algorithm.
+- **Original Problem:** In collaborative multi-agent multi-armed bandit settings where actual rewards are mixed from local observations of multiple agents, minimizing regret requires effective communication. Without communication, trivial linear regret is inevitable. While near-optimal sample complexities for best arm identification are known, the question of optimal collaborative regret bounds requiring few expected communication rounds remained open.
+- **Core Assumptions:** The system consists of $M$ agents interacting with $K$ arms, communicating through a central controller. An agent's observed local reward is distinct from their actual mixed reward (a weighted average of local rewards over all agents governed by a weight matrix $W \in [0,1]^{M \times M}$). The lower bound relies on normally distributed rewards and is constrained by mixed gaps $\Delta'_{k,m}$.
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): The regret performance of the CExp$^2$ algorithm satisfies for all $T \geq T_0$:
+    $$ \mathcal{R}(T) =\mathcal{O}\left(c^*\log(T) +\frac{(\Delta'_{\max})^2}{\Delta'_{\min}}(\log\log(T))^4\right) $$
+    where $c^*$ is the complexity term representing the value of regret divided by $\log(T)$ for the optimum allocation of the arm plays, guaranteeing sufficiently small confidence intervals for all mean mixed rewards.
+- **Applicability Scope:** Bounded multi-agent learning environments, specifically generalized federated learning or distributed tool-execution architectures where local agent feedback must be aggregated via a central controller into a unified behavioral policy with minimal communication overhead.
+- **Limitations:** The bound relies on the assumptions of the specific collaborative model including normally distributed rewards and a static weight matrix for mixed rewards. The performance requires the oracle $\mathcal{P}(\Delta)$ for resource allocation and the exact knowledge/approximation of gap bounds ($\Delta'_{\min}$, $\Delta'_{\max}$).
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of researchers (agents) testing different tools (arms) across different labs. If they don't talk, they might all waste time testing bad tools (linear regret). The optimal collaborative algorithm (CExp$^2$) ensures that by communicating just a few times through a central server, they can learn the best overall tool together. Their combined wasted effort (regret) only grows very slowly (logarithmically) over time compared to if they magically knew the best tool from the start.
