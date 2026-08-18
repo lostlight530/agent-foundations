@@ -209,3 +209,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Authors: Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
 - URL: https://arxiv.org/abs/2312.13910
 - Use: group regret bounds for multi-agent model-based RL under limited communication range.
+
+## S27 — Optimal Regret Bounds for Collaborative Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.09674v1
+- Version date: 2023-12-15
+- Authors: Amitis Shidani, Sattar Vakili
+- URL: https://arxiv.org/abs/2312.09674
+- Use: CExp$^2$ algorithm, mixed reward collaborative bandit problem formulation, and optimal $\mathcal{O}(\log(T))$ regret bound under bounded expected communication rounds.
+- Verification boundary: The bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.

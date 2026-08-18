@@ -262,3 +262,24 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): COMPATIBLE (兼容)。MAC-SQL 任务分解与现有约束条件一致，通过将整体生成拆分为可验证的小任务来限制错误空间。其与记忆、架构和协作假设不冲突。未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
 来源迁移记录: 已成功迁移 MAC-SQL Daily Research Chunk。
 双语对齐状态: SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
+
+### 赌博机协同学习的最优遗憾界
+
+- **System Container:** Tool System
+- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
+- **URL:** http://arxiv.org/abs/2312.09674v1
+- **Publication Date:** 2023-12-15
+- **Selection Reason:** 解决了使用有限通信的通用多智能体多臂老虎机场景中最佳协作遗憾最小化的挑战，通过 CExp$^2$ 算法产生了 $\mathcal{O}(\log(T))$ 界。
+- **Original Problem:** 在实际奖励由多个智能体的本地观察混合而成的协作多智能体多臂老虎机设置中，最小化遗憾需要有效的通信。没有通信，不可避免地会产生微不足道的线性遗憾。虽然已知最佳手臂识别的接近最佳样本复杂性，但需要很少预期通信轮次的最佳协作遗憾界的问题仍然悬而未决。
+- **Core Assumptions:** 该系统由 $M$ 个与 $K$ 个手臂交互的智能体组成，通过中央控制器进行通信。智能体观察到的本地奖励不同于他们的实际混合奖励（由权重矩阵 $W \in [0,1]^{M \times M}$ 控制的所有智能体的本地奖励的加权平均值）。下界依赖于正态分布的奖励，并受混合差距 $\Delta'_{k,m}$ 的限制。
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): CExp$^2$ 算法的遗憾性能满足所有 $T \geq T_0$：
+    $$ \mathcal{R}(T) =\mathcal{O}\left(c^*\log(T) +\frac{(\Delta'_{\max})^2}{\Delta'_{\min}}(\log\log(T))^4\right) $$
+    其中 $c^*$ 是表示遗憾值除以最佳手臂分配的 $\log(T)$ 的复杂性项，它保证了所有平均混合奖励的足够小的置信区间。
+- **Applicability Scope:** 有界多智能体学习环境，特别是广义联邦学习或分布式工具执行架构，其中本地智能体反馈必须通过中央控制器聚合成统一的行为策略，同时将通信开销降至最低。
+- **Limitations:** 该界依赖于特定协作模型的假设，包括正态分布的奖励和混合奖励的静态权重矩阵。其性能需要针对资源分配的预言机 $\mathcal{P}(\Delta)$ 和差距界 ($\Delta'_{\min}$, $\Delta'_{\max}$) 的确切知识/近似值。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一群研究人员（智能体）在不同的实验室测试不同的工具（手臂）。如果他们不交流，他们可能都会把时间浪费在测试糟糕的工具上（线性遗憾）。最优协作算法（CExp$^2$）确保通过中央服务器进行几次通信，他们可以一起学习整体最佳工具。与如果他们从一开始就奇迹般地知道最好的工具相比，他们浪费的总努力（遗憾）随着时间的推移只会增长得非常慢（对数）。
