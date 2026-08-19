@@ -1780,3 +1780,26 @@ $$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### 异步网络下分布式优化的 ADMM-Tracking 梯度法
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *ADMM-Tracking Gradient for Distributed Optimization over Asynchronous and Unreliable Networks* (arXiv:2309.14142v3, 2023年9月25日)
+- **原始论文问题:** 在多智能体系统中的共识优化问题中，异步更新和不可靠通信（数据包丢失）等实际挑战会降低标准梯度追踪（GT）算法的性能，因为标准 GT 算法依赖于边缘稳定的动态平均共识。
+- **核心假设:** 局部成本函数是强凸的，网络通信可能是异步的且存在数据包丢失，但在平均水平上仍保持充分连通。
+- **数学机制:** 将梯度追踪中标准的动态平均共识模块替换为基于 ADMM 的动态共识协议。该协议被构建为一个在线二次优化问题，从而对加性误差和异步更新具备鲁棒性。
+- **公式与代码分类:**
+  - **核心更新公式:** 在第 $t$ 次迭代中，智能体 $i$ 的局部估计值 $\x_i$ 利用重构的共识变量 $\y_i$ 和 $\s_i$（通过 ADMM 计算）进行更新：
+    $$ \x_i^{t+1} = \x_i^t + \gamma(\y_i^t - \x_i^t) - \gamma \alpha \s_i^t $$
+- **收敛与行为边界:** 在异步智能体和数据包丢失的情况下，该鲁棒算法能保持线性收敛到精确解，并且对于一般性的加性误差具有输入到状态稳定性（ISS）。
+- **适用范围:** 在不可靠无线通信和异构计算速度下执行优化任务的分布式多智能体系统，如传感器网络或机器人集群。
+- **局限性:** 主要是针对强凸成本进行的评估。它要求本地智能体运行辅助的 ADMM 共识步骤，与标准的去中心化梯度下降相比，这可能会引入额外的本地内存状态或通信开销。
+- **Agent 架构映射:** 在概念上可以支持 Collaboration System 中鲁棒的去中心化共识机制，确保集群的意见在消息丢失或智能体不同步时不会发散，为设计候选方案。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT
+- **仓库测试状态:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象一组正在绘制森林地图的童子军。如果他们使用有时会丢失消息的对讲机（不可靠的通信），标准的制图策略可能会出现严重偏差，导致每个人画出的地图都不一样。这种新方法就像一种更具弹性的无线电协议：即使有人丢失了消息或者报告晚了，他们用来平均坐标的数学规则也会自动自我修正，确保最终每个人的地图仍然完美吻合。
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
