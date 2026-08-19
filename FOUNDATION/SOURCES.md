@@ -219,3 +219,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.09674
 - Use: CExp$^2$ algorithm, mixed reward collaborative bandit problem formulation, and optimal $\mathcal{O}(\log(T))$ regret bound under bounded expected communication rounds.
 - Verification boundary: The bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.
+
+
+## S28 — ADMM-Tracking Gradient for Distributed Optimization
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2309.14142v3
+- Version date: 2023-09-25
+- URL: https://arxiv.org/abs/2309.14142
+- Use: Decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
+- Verification boundary: Guaranteed under strongly convex costs; requires ADMM dynamic consensus which may increase local computation relative to vanilla gradient tracking.

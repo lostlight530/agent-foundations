@@ -1944,3 +1944,26 @@ Imagine a town council (the agents) trying to guess the number of jellybeans in 
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### ADMM-Tracking Gradient for Distributed Optimization over Asynchronous Networks
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *ADMM-Tracking Gradient for Distributed Optimization over Asynchronous and Unreliable Networks* (arXiv:2309.14142v3, September 25, 2023)
+- **Original Paper Problem:** Consensus optimization in multi-agent systems where practical challenges like asynchronous updates and unreliable communications (packet losses) degrade the performance of standard Gradient Tracking (GT) algorithms, which rely on a marginally stable dynamic average consensus.
+- **Core Assumption:** The local cost functions are strongly convex, and the network communication might be asynchronous with packet losses, but remains sufficiently connected on average.
+- **Mathematical Mechanism:** Replaces the standard dynamic average consensus block in Gradient Tracking with an ADMM-based dynamic consensus protocol, which is formulated as an online quadratic problem, offering robustness to additive errors and asynchronous updates.
+- **Formulas / Pseudocode:**
+  - **核心更新公式 (Core Update Formula):** The local estimate $\x_i$ at iteration $t$ is updated using reconstructed consensus variables $\y_i$ and $\s_i$ (computed via ADMM):
+    $$ \x_i^{t+1} = \x_i^t + \gamma(\y_i^t - \x_i^t) - \gamma \alpha \s_i^t $$
+- **Convergence / Behavioral Bound:** The proposed robust algorithm preserves linear convergence to the exact solution in the case of asynchronous agents and packet losses, and it is Input-to-State Stable (ISS) with respect to generic additive errors.
+- **Applicable Scope:** Distributed multi-agent systems, like sensor networks or robotic swarms, running optimization tasks under unreliable wireless communications and heterogeneous computational speeds.
+- **Limitations:** Evaluated primarily under strongly convex costs. It requires local agents to run an auxiliary ADMM consensus step, which may introduce additional local memory states or communication overhead compared to standard decentralized gradient descent.
+- **Agent Architecture Mapping:** Can conceptually support robust decentralized consensus mechanisms in the Collaboration System, ensuring swarm agreement does not diverge when messages drop or agents fall out of sync.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a team of scouts trying to map a forest. If they use walkie-talkies that sometimes drop messages (unreliable communication), a standard mapping strategy might drift so far that everyone draws a different map. This new approach acts like a more resilient radio protocol: even if someone drops a message or radios in late, the mathematical rules they follow to average their coordinates automatically self-correct, ensuring everyone's map still perfectly matches in the end.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
