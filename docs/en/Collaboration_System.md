@@ -1967,3 +1967,57 @@ Imagine a town council (the agents) trying to guess the number of jellybeans in 
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## AF-COLLAB-002: Robust Multi-Agent Bandits with Heavy-Tailed Rewards
+
+**State / 状态:** Active Research
+**Evidence / 证据:** S29
+**Mapping / 映射:** CONCEPTUAL_MAPPING
+**Implementation / 实现:** EVIDENCE_INSUFFICIENT
+**Validation / 验证:** EVIDENCE_INSUFFICIENT
+**Sources / 来源:** S29
+
+### Source Detail
+- **Title:** Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
+- **Authors:** Daphne Feng, Ricardo Parada, Lily Jiang, Sophia Yi, William Chang
+- **URL:** https://arxiv.org/abs/2608.10529
+- **Version:** v1
+- **Date:** 2026-08-11
+- **Selection Reason:** Introduces mRUCB-Intervals algorithm managing heavy-tailed rewards in multi-agent bandits without direct communication, mapping to decentralized collaboration strategies under uncertainty.
+
+### Original Problem
+In decentralized multi-agent sequential decision making under heavy-tailed reward distributions, where moments are finite only up to $1+\varepsilon$ with $\varepsilon \in (0, 1]$, how can agents coordinate action selection when their individual actions are observable but reward observations are independent and unshared?
+
+### Core Assumptions
+- The reward distribution has bounded centered moments of order $1+\varepsilon$: $\mathbb{E}[|X_a - \mu_a|^{1+\varepsilon}] \le v$.
+- The number of agents $M$ and individual arms $K$ are finite.
+- Players can observe the realized joint action but not the individual rewards of other players (Information Asymmetry Problem B).
+
+### Mathematical Mechanism
+The algorithm relies on the robust upper confidence bound (RUCB) using a truncated mean estimator. The confidence radius for a joint arm $\bm{a}$ is:
+
+核心更新公式
+```math
+\alpha_{\bm{a}}(t) = v^{\frac{1}{1+\varepsilon}}\left(\frac{c\log(T^\gamma)}{n_{\bm{a}}(t)}\right)^{\frac{\varepsilon}{1+\varepsilon}}
+```
+
+### Bounding/Convergence
+If all players follow the mRUCB-Intervals algorithm, the expected regret is bounded by:
+
+数学更新规则
+```math
+R_T \le c\gamma 4^{\frac{1+\varepsilon}{\varepsilon}}v^{\frac{1}{\varepsilon}}\log(T)\sum_{\bm{a}\neq\bm{a}^\star}\Delta_{\bm{a}}^{-1/\varepsilon} + \sum_{\bm{a}\neq\bm{a}^\star}\Delta_{\bm{a}} + (K^M-1)\Delta_{\max} + O(1)
+```
+
+### Scope and limits / 范围与局限
+- **Scope:** Multi-agent continuous and discrete action selection in decentralized systems facing heavy-tailed noise, applicable when cross-agent action observation is permissible but direct reward sharing is blocked.
+- **Limits:** The bound heavily relies on the global horizon $T$, and scaling is exponential with respect to the number of agents and individual arms ($K^M$). Miscoordination must be perfectly detectable through interval discrepancies.
+
+### Architecture Mapping
+- **System Container:** Collaboration System
+- **Mapping:** This mathematical mechanism can conceptually support decentralized agent coordination layers, offering a design candidate for implicitly signaling coordination without a central communication hub, substituting explicit message-passing with action-based signaling.
+
+### Beginner Analogy
+Imagine a team of chefs trying to bake the perfect cake. They can see what ingredients each other adds (actions are observed), but they can't taste each other's batter (rewards are unobserved). Sometimes the ingredients are wildly unpredictable in quality (heavy-tailed rewards). By keeping track of their own success rates and deliberately adding a weird ingredient to signal when they are confident a recipe is bad, they can eventually coordinate on the best overall recipe without ever talking to each other.
+
+---
