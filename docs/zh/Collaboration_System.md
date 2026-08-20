@@ -1803,3 +1803,57 @@ $$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## AF-COLLAB-002: 具有重尾奖励的鲁棒多智能体赌博机
+
+**State / 状态:** Active Research
+**Evidence / 证据:** S29
+**Mapping / 映射:** CONCEPTUAL_MAPPING
+**Implementation / 实现:** EVIDENCE_INSUFFICIENT
+**Validation / 验证:** EVIDENCE_INSUFFICIENT
+**Sources / 来源:** S29
+
+### 来源详情
+- **Title:** Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
+- **Authors:** Daphne Feng, Ricardo Parada, Lily Jiang, Sophia Yi, William Chang
+- **URL:** https://arxiv.org/abs/2608.10529
+- **Version:** v1
+- **Date:** 2026-08-11
+- **Selection Reason:** 引入了管理无直接通信下重尾奖励多智能体赌博机的 mRUCB-Intervals 算法，可映射到不确定性下的去中心化协作策略。
+
+### 原始问题
+在重尾奖励分布下的去中心化多智能体序列决策中（其中心矩仅在 $1+\varepsilon$ 阶有界，$\varepsilon \in (0, 1]$），当智能体的个体动作可观测但奖励观测独立且不共享时，智能体应如何协调动作选择？
+
+### 核心假设
+- 奖励分布的 $1+\varepsilon$ 阶中心矩有界：$\mathbb{E}[|X_a - \mu_a|^{1+\varepsilon}] \le v$。
+- 智能体数量 $M$ 和个体臂数量 $K$ 有限。
+- 参与者可以观测到实现的联合动作，但无法观测其他参与者的个体奖励（信息不对称问题 B）。
+
+### 数学机制
+该算法依赖于使用截断均值估计器的鲁棒置信上限（RUCB）。联合臂 $\bm{a}$ 的置信半径为：
+
+核心更新公式
+```math
+\alpha_{\bm{a}}(t) = v^{\frac{1}{1+\varepsilon}}\left(\frac{c\log(T^\gamma)}{n_{\bm{a}}(t)}\right)^{\frac{\varepsilon}{1+\varepsilon}}
+```
+
+### 收敛界
+如果所有参与者均遵循 mRUCB-Intervals 算法，预期遗憾值受限于：
+
+数学更新规则
+```math
+R_T \le c\gamma 4^{\frac{1+\varepsilon}{\varepsilon}}v^{\frac{1}{\varepsilon}}\log(T)\sum_{\bm{a}\neq\bm{a}^\star}\Delta_{\bm{a}}^{-1/\varepsilon} + \sum_{\bm{a}\neq\bm{a}^\star}\Delta_{\bm{a}} + (K^M-1)\Delta_{\max} + O(1)
+```
+
+### Scope and limits / 范围与局限
+- **范围:** 适用于面临重尾噪声的去中心化系统中的多智能体连续与离散动作选择，当跨智能体动作观测被允许但直接奖励共享被阻断时。
+- **局限:** 该界限严重依赖于全局时间视界 $T$，且相对于智能体和个体臂的数量（$K^M$）呈指数级扩展。协调失误必须能够通过区间差异被完美检测。
+
+### 架构映射
+- **系统容器:** Collaboration System
+- **映射:** 这种数学机制在理论上可以支持去中心化的智能体协调层，提供了一种在没有中央通信枢纽的情况下进行隐式信号协调的设计候选方案，用基于动作的信号替代显式消息传递。
+
+### 初学者类比
+想象一个厨师团队试图烤出完美的蛋糕。他们能看到彼此添加了什么配料（动作可观测），但尝不到彼此的面糊（奖励不可观测）。有时配料的质量极其难以预测（重尾奖励）。通过记录他们自己的成功率，并故意添加一种奇怪的配料来发出信号，表明他们确信某个食谱很糟糕，他们最终可以在互不交谈的情况下协调出最好的整体食谱。
+
+---

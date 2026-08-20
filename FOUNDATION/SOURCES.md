@@ -229,3 +229,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2309.14142
 - Use: Decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
 - Verification boundary: Guaranteed under strongly convex costs; requires ADMM dynamic consensus which may increase local computation relative to vanilla gradient tracking.
+
+## S29 — Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.10529v1
+- Version date: 2026-08-11
+- Authors: Daphne Feng, Ricardo Parada, Lily Jiang, Sophia Yi, William Chang
+- URL: https://arxiv.org/abs/2608.10529
+- Use: mRUCB-Intervals algorithm for decentralized action selection with observable actions but independent heavy-tailed rewards.
+- Verification boundary: Bound holds under bounded $1+\varepsilon$ moment condition and heavily depends on horizon $T$ and exponential scaling in terms of number of agents and actions.
