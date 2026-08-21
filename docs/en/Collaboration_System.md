@@ -2021,3 +2021,23 @@ R_T \le c\gamma 4^{\frac{1+\varepsilon}{\varepsilon}}v^{\frac{1}{\varepsilon}}\l
 Imagine a team of chefs trying to bake the perfect cake. They can see what ingredients each other adds (actions are observed), but they can't taste each other's batter (rewards are unobserved). Sometimes the ingredients are wildly unpredictable in quality (heavy-tailed rewards). By keeping track of their own success rates and deliberately adding a weird ingredient to signal when they are confident a recipe is bad, they can eventually coordinate on the best overall recipe without ever talking to each other.
 
 ---
+
+### Preconditioned Hidden Gradient Descent (PHGD)
+System Container: Collaboration System
+Frontier Source: arXiv:2312.16609v1 (Iosif Sakos et al., 2023)
+Original Problem: Modern multi-agent machine learning applications can be formulated as non-cooperative games. Despite a highly non-convex loss landscape, algorithms sometimes converge to a Nash equilibrium in practice due to a "hidden" convex/monotone structure. Standard Gradient Descent fails to consistently exploit this hidden structure for general representation maps, converging very slowly or not at all if the map couples agents' parameters in complex ways.
+Core Assumption: The game admits a latent monotone structure, with representation maps lacking critical points. Furthermore, the abstract preconditioning mechanism strictly operates under two conditions: `asm:loss` (gradients have bounded second moments and Lipschitz smoothness) and `asm:map` (singular values of the Jacobian of the representation map $\latemap$ are bounded from above and below).
+Mathematical Mechanism:
+核心更新公式:
+$\dot\control_{\play} = -\pmat_{\play}(\control_{\play}) \controlvecfield_{\play}(\control)$
+数学更新规则:
+$\next[\control][\play] = \curr[\control][\play] - \curr[\step] \curr[\pmat][\play] \curr[\signal][\play]$
+By adapting the preconditioning matrix inversely to the local Jacobian mapping, the algorithm provably satisfies a strict Lyapunov target property to safely descend the hidden energy landscape towards a Nash equilibrium.
+Convergence Bound: In hidden merely monotone games, $\exof{\gap(\bar\curr)} = \bigoh(\log\run/\sqrt{\run})$. In hidden strongly monotone games, $\exof{\err(\curr)} = \bigoh(1/\run)$.
+Applicability Scope: Cooperative or adversarial multi-agent networks modeled by non-convex or non-concave games bounded through representation layers (e.g. sigmoid mappings or complex MLPs) onto latent monotone spaces.
+Limitations: Subject to two important limitations: the first is that the averaged state $\bar\curr$ cannot be efficiently computed for general representation maps; second, even if it could, the $\bigoh(\log\run/\sqrt{\run})$ convergence rate is relatively slow without strong monotonicity constraints.
+Agent Architecture Mapping: DESIGN_CANDIDATE. This provides a mathematically bounded candidate for organizing decentralized multi-agent interaction logic: an agent's individual behavioral updates can maintain systemic stability even if their local observation maps are non-convex, provided they apply a structurally aware preconditioning inverse over their gradient updates.
+Implementation Status: EVIDENCE_INSUFFICIENT
+Test Status: EVIDENCE_INSUFFICIENT
+Analogy for PHGD: Imagine several blindfolded people (agents) trying to find the lowest point in a bumpy, complex mountain range (non-convex control landscape). If they just walk downhill locally, they might get stuck in random ditches or run into each other forever. However, underneath the bumpy surface, the mountain is actually shaped like a smooth, simple bowl (hidden monotone structure). By using a specialized compass (the Preconditioner matrix) that mathematically undoes the surface distortion, they can walk as if they are navigating the smooth bowl, guaranteeing they eventually meet at the absolute bottom (Nash equilibrium) instead of wandering aimlessly.
+Evidence Status: CONCEPTUAL_MAPPING

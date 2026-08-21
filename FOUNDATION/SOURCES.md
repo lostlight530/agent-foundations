@@ -239,3 +239,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2608.10529
 - Use: mRUCB-Intervals algorithm for decentralized action selection with observable actions but independent heavy-tailed rewards.
 - Verification boundary: Bound holds under bounded $1+\varepsilon$ moment condition and heavily depends on horizon $T$ and exponential scaling in terms of number of agents and actions.
+
+## S30 — Exploiting hidden structures in non-convex games for convergence to Nash equilibrium
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.16609v1
+- Version date: 2023-12-27
+- Authors: Iosif Sakos, Emmanouil-Vasileios Vlatakis-Gkaragkounis, Panayotis Mertikopoulos, Georgios Piliouras
+- URL: https://arxiv.org/abs/2312.16609
+- Use: Preconditioned Hidden Gradient Descent (PHGD) algorithm and theoretical convergence bounds in hidden non-convex multi-agent games under monotone assumptions bounded by representation maps.
+- Verification boundary: Guarantees depend strictly on the game admitting a latent monotone structure, with representation maps lacking critical points and gradients meeting Lipschitz smoothness and bounded second moment requirements. It does not generalize unconditionally to all non-convex learning topologies.
