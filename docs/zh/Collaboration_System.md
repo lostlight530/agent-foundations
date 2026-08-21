@@ -1857,3 +1857,23 @@ R_T \le c\gamma 4^{\frac{1+\varepsilon}{\varepsilon}}v^{\frac{1}{\varepsilon}}\l
 想象一个厨师团队试图烤出完美的蛋糕。他们能看到彼此添加了什么配料（动作可观测），但尝不到彼此的面糊（奖励不可观测）。有时配料的质量极其难以预测（重尾奖励）。通过记录他们自己的成功率，并故意添加一种奇怪的配料来发出信号，表明他们确信某个食谱很糟糕，他们最终可以在互不交谈的情况下协调出最好的整体食谱。
 
 ---
+
+### 预处理隐式梯度下降（PHGD）
+System Container: Collaboration System
+Frontier Source: arXiv:2312.16609v1 (Iosif Sakos et al., 2023)
+Original Problem: 现代多智能体机器学习应用可以被形式化为非合作博弈。尽管损失地形高度非凸，但由于存在“隐藏”的凸/单调结构，算法在实践中往往能收敛至纳什均衡。当表示映射（representation maps）以复杂方式耦合智能体参数时，标准的梯度下降无法稳定利用这种隐藏结构，导致收敛极其缓慢或根本不收敛。
+Core Assumption: 博弈具有潜在的单调结构，并且表示映射没有临界点。此外，该抽象预处理机制严格受限于两个条件：`asm:loss`（梯度具有有界二阶矩和李普希茨平滑性）和`asm:map`（表示映射 $\latemap$ 雅可比矩阵的奇异值有上下界）。
+Mathematical Mechanism:
+核心更新公式:
+$\dot\control_{\play} = -\pmat_{\play}(\control_{\play}) \controlvecfield_{\play}(\control)$
+数学更新规则:
+$\next[\control][\play] = \curr[\control][\play] - \curr[\step] \curr[\pmat][\play] \curr[\signal][\play]$
+通过利用局部雅可比映射的逆来调整预处理矩阵，该算法可证明满足严格的李雅普诺夫（Lyapunov）目标属性，从而在隐藏的能量地形中安全下降至纳什均衡。
+Convergence Bound: 在潜在单调博弈中，$\exof{\gap(\bar\curr)} = \bigoh(\log\run/\sqrt{\run})$。在潜在强单调博弈中，$\exof{\err(\curr)} = \bigoh(1/\run)$。
+Applicability Scope: 协作或对抗性的多智能体网络，通过表示层（如 sigmoid 映射或复杂的多层感知机）映射到潜在单调空间的非凸或非凹博弈模型。
+Limitations: 受到两个重要局限：首先是平均状态 $\bar\curr$ 在一般表示映射下无法被有效计算；其次，即使能够计算，在缺乏强单调性约束的情况下，$\bigoh(\log\run/\sqrt{\run})$ 的收敛速度相对较慢。
+Agent Architecture Mapping: DESIGN_CANDIDATE。这为组织去中心化多智能体交互逻辑提供了一个具有数学边界的候选方案：即使智能体的局部观测映射是非凸的，只要它们在其梯度更新上应用具有结构意识的预处理逆操作，其各自的行为更新仍然能维持系统级稳定性。
+Implementation Status: EVIDENCE_INSUFFICIENT
+Test Status: EVIDENCE_INSUFFICIENT
+Analogy for PHGD: 想象几位蒙眼的人（智能体）试图在崎岖复杂的山脉（非凸控制地形）中找到最低点。如果他们只是在局部往下走，可能会永远卡在随机的沟壑中或相互碰撞。然而，在崎岖的地表下，这座山实际上呈现出一个平滑的简单碗状（隐藏的单调结构）。通过使用一种专门的指南针（预处理矩阵）在数学上消除地表扭曲，他们可以像在平滑的碗面上一样导航，保证最终能在一个绝对谷底（纳什均衡）相遇，而不是漫无目的地徘徊。
+Evidence Status: CONCEPTUAL_MAPPING
