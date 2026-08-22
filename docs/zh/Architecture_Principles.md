@@ -818,3 +818,29 @@ $$
 
 #### 8. 初学者类比
 想象一个厨师团队（智能体）在不同但部分重叠的厨房工作站（组/超边）工作。如果他们只根据过去的成功经验来猜测做什么菜（汤普森采样），有时他们可能会陷入糟糕的日常套路中。频率论后悔界是一个数学保证，即如果他们在一小部分时间（$\epsilon$）内尝试完全新的东西，随着时间的推移，他们最坏情况下的错误将被严格限制，前提是他们没有太多重叠的工作站（稀疏超图）。
+
+
+### 在未知约束下的上下文博弈中的多智能体学习 (Multi-Agent Learning in Contextual Games under Unknown Constraints)
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** http://arxiv.org/abs/2310.14685v2
+- **Publication Date:** 2023-10-23
+- **Selection Reason:** 为在报酬和操作约束均先验未知的非平稳（上下文）多智能体环境中学习最优策略提供了数学框架，解决了在开放环境中安全执行多智能体任务的基础性挑战。
+- **Original Problem:** 在学习玩重复上下文博弈时，智能体的行动必须属于可行集。然而，在受约束的多智能体强化学习中，这些可行集通常是未知动态的函数，本身也是未知的。这使得学习过程复杂化，因为智能体在尝试之前不知道某个行动是否有效。
+- **Core Assumptions:**
+  - **可行性假设 (Feasibility assumption):** 事后存在一个最优的可行策略，该策略严格满足所有未知约束并具有一定的余量（类似于斯莱特条件）。
+  - **正则性假设 (Regularity assumption):** 未知的报酬和约束函数存在于具有有界范数的再生核希尔伯特空间 (RKHS) 中，这意味着相似的上下文会产生相似的报酬和约束行为。
+  - **反馈假设 (Feedback assumption):** 智能体观察到报酬和约束的带有噪声的老虎机反馈 (bandit feedback)。
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): 该算法 (c.z.AdaNormalGP) 以高概率实现依赖于核的次线性遗憾上界：
+    $$R^T=\mathcal{O}\bigg((L_r L_p)^{\frac{d}{d+2}} T^{\frac{d}{d+2}} \bigg(\sum_{z\in\mathcal{C}} (R^{T_z}(\mathcal{E}))^2\bigg)^{\frac{1}{d+2}}+\sqrt{T\log(2/\delta)}+\beta_0^T\sqrt{T\gamma_0^T}\bigg)$$
+  - **Cumulative Constraint Violation Bound** (收敛界): 违反约束的时间平均总和收敛到零（无违规属性）：
+    $$\mathcal{V}_{m}^T=\mathcal{O}\bigg(\beta_m^T\sqrt{T\gamma_m^T}\bigg),\hspace{0.3cm}\forall m\in[M]$$
+- **Applicability Scope:** 多智能体强化学习、重复博弈或分布式决策，其中行动约束取决于环境、涉及安全关键，并且直到运行时才已知。
+- **Limitations:** 次线性边界严重依赖于核的最大信息增益 ($\gamma^T$)，并且要求报酬和约束空间均有平滑变化。如果不能满足合适的相似性假设，高度不相交或混乱的环境可能会降低学习效率。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Architecture Mapping:** CONCEPTUAL_MAPPING. 通过引入机制让智能体主动建模并遵守动态操作约束（通过高斯过程或相关模型），而无需预先定义的静态安全集，可以概念上支持多智能体架构设计在面对新上下文时避免硬故障。
+- **Beginner Analogy:** 想象一下你在一个陌生的国家学习开一辆新车。你不仅不知道最快的路线（未知的报酬），也不知道当地的交通规则（未知的约束）。每次你开车（一个上下文），你都试图在不违反规则的情况下更快地到达目的地。数学公式保证，随着时间的推移，你的违规次数将降至接近零，因为你了解了约束的模式，尽管你一开始完全是在靠猜。
