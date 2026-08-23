@@ -818,3 +818,29 @@ This theoretical regret bound can conceptually support the Architecture Principl
 
 #### 8. Beginner's Analogy
 Imagine a team of chefs (agents) working in different, partially overlapping kitchen stations (groups/hyperedges). If they just guess what to cook based on past success (Thompson Sampling), sometimes they might get stuck in a bad routine. The frequentist regret bound is a mathematical guarantee that if they try something completely new a small fraction of the time ($\epsilon$), their worst-case mistakes over time are strictly limited, provided they don't have too many overlapping stations (sparse hypergraph).
+
+
+### Multi-Agent Learning in Contextual Games under Unknown Constraints
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** http://arxiv.org/abs/2310.14685v2
+- **Publication Date:** 2023-10-23
+- **Selection Reason:** Provides a mathematical framework for learning optimal policies in non-stationary (contextual) multi-agent environments where both rewards and operational constraints are a priori unknown, addressing the fundamental challenge of safe multi-agent execution in open environments.
+- **Original Problem:** When learning to play repeated contextual games, agents' actions must belong to feasible sets. However, in constrained multi-agent reinforcement learning, these feasible sets are often a function of unknown dynamics and are themselves unknown, complicating the learning process as agents do not know if an action is valid before trying it.
+- **Core Assumptions:**
+  - **Feasibility assumption:** There exists an optimal feasible policy in hindsight that strictly satisfies all unknown constraints with some slack (an analogue to Slater's condition).
+  - **Regularity assumption:** The unknown reward and constraint functions reside in a Reproducing Kernel Hilbert Space (RKHS) with bounded norms, meaning similar contexts yield similar rewards and constraint behaviors.
+  - **Feedback assumption:** Agents observe noisy bandit feedback for both rewards and constraints.
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): The algorithm (c.z.AdaNormalGP) achieves a kernel-dependent sublinear regret upper bound with high probability:
+    $$R^T=\mathcal{O}\bigg((L_r L_p)^{\frac{d}{d+2}} T^{\frac{d}{d+2}} \bigg(\sum_{z\in\mathcal{C}} (R^{T_z}(\mathcal{E}))^2\bigg)^{\frac{1}{d+2}}+\sqrt{T\log(2/\delta)}+\beta_0^T\sqrt{T\gamma_0^T}\bigg)$$
+  - **Cumulative Constraint Violation Bound** (收敛界): The time-averaged sum of constraint violations converges to zero (no-violation property):
+    $$\mathcal{V}_{m}^T=\mathcal{O}\bigg(\beta_m^T\sqrt{T\gamma_m^T}\bigg),\hspace{0.3cm}\forall m\in[M]$$
+- **Applicability Scope:** Multi-agent reinforcement learning, repeated games, or distributed decision-making where constraints on actions are environment-dependent, safety-critical, and unknown until runtime.
+- **Limitations:** The sublinear bounds depend heavily on the maximum information gain ($\gamma^T$) of the kernel and require smooth variations in both the reward and constraint spaces. Highly disjoint or chaotic environments might degrade learning efficiency if suitable similarity assumptions aren't met.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Architecture Mapping:** CONCEPTUAL_MAPPING. Can conceptually support robust multi-agent architecture designs by introducing mechanisms for agents to proactively model and respect dynamic operational constraints (via Gaussian Processes or related models) without needing a pre-defined static safe set, avoiding hard failures in novel contexts.
+- **Beginner Analogy:** Imagine you're learning to drive a new car in an unfamiliar country. Not only do you not know the fastest routes (unknown rewards), but you also don't know the local traffic rules (unknown constraints). Every time you drive (a context), you try to reach your destination faster while avoiding breaking rules. The math guarantees that over time, your rule violations will drop to near zero because you learn the patterns of the constraints, even though you started out completely guessing.

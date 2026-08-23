@@ -249,3 +249,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.16609
 - Use: Preconditioned Hidden Gradient Descent (PHGD) algorithm and theoretical convergence bounds in hidden non-convex multi-agent games under monotone assumptions bounded by representation maps.
 - Verification boundary: Guarantees depend strictly on the game admitting a latent monotone structure, with representation maps lacking critical points and gradients meeting Lipschitz smoothness and bounded second moment requirements. It does not generalize unconditionally to all non-convex learning topologies.
+
+## S31 — Multi-Agent Learning in Contextual Games under Unknown Constraints
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.14685v2
+- Version date: 2023-10-23
+- v1 date: 2023-10-23
+- URL: https://arxiv.org/abs/2310.14685
+- Use: No-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
+- Verification boundary: Guarantees depend strictly on the existence of an optimal feasible policy with some slack and smoothness properties of the reward and constraint spaces in RKHS.
