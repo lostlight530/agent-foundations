@@ -1,25 +1,49 @@
-# 🗺️ [Monthly Strategic Blueprint] 月度理论防线加固与路线图大换血 2024-05
+# Monthly Strategic Blueprint — Current
 
-## ⚡ 外部黑盒翻车案例审计与免疫证明
-**Failure Scan:**
-In recent multi-modal agent testing frameworks and real-world enterprise deployments, probabilistic foundation models exhibit severe path-dependence failures. A major observed collapse mode involves agent "cascading hallucination" where a small contextual error in deep planning causes the agent to fall into infinite tool execution loops (Scale-driven collapse). These models fail to recognize state repetition because their autoregressive nature lacks a deterministic cutoff boundary.
+Current evidence window: **2026-08-01 through 2026-08-23**  
+Status: **PROVISIONAL — natural month still open**  
+Authoritative stage record: [`../monthly/2026-08-through-23-strategic-blueprint.md`](../monthly/2026-08-through-23-strategic-blueprint.md)
 
-**Current Route Defense Assessment:**
-The deterministic agent architecture remains fully immune to these cascading failures.
-- The **Tool System** employs *Causal Minimal Tool Filtering (CMTF)* and the newly integrated *Constraint-Guided Verification*, which mathematically caps tool execution depth and enforces strict constraints, preemptively severing any infinite loop.
-- The **Architecture Principles** apply *Gradient Entropy Monitors* and *Training-Free Adaptive Stopping (TASR)*, acting as a "brake pad" that halts thought generation when entropy rises unexpectedly.
-- The **Memory System** ensures safe representations via *Covariance bounds*, preventing noisy hallucinations from propagating into the persistent semantic slice.
+## Current position
 
-## 🔄 核心研究方向修正与下月 Roadmap
-**Direction Deprecation or Replacement Assessment:**
-- *Centralized Federated Learning* continues to be entirely deprecated in favor of *Decentralized Distributed Optimization (DecDPO)* and high-dimensional gradient tracking mechanisms.
-- All probabilistic thresholding for tool routing is deprecated in favor of *Symbolic Policy Distillation* and *Constraint-Guided Verification*.
+Agent Foundations is a **theory and evidence architecture**, not an implemented autonomous-agent runtime.
 
-**Blueprint Expansion:**
-- Expand mathematical foundations for DecDPO in highly dynamic and Byzantine-fault environments.
-- Deepen research into continuous-time memory retrieval optimization to enhance semantic slice synchronization bounds without adding network overhead.
+The August research stream strengthens source provenance, theorem-scope control, bilingual research weaving, reviewer-side evidence contracts, and architecture vocabulary. It does not justify claims of mathematical immunity, deterministic cognition, universal safety, or universal convergence.
 
-**Next Month Evolution Roadmap:**
-- **Week 1-2:** Focus Daily Chunks on Byzantine-resilient consensus algorithms within the Collaboration System.
-- **Week 3:** Advance the Architecture Principles container by integrating new theories on differential equation limits for state-space models.
-- **Week 4:** Evaluate the necessity of a fifth container dedicated exclusively to "Physical Environment Alignment (Embodied AI Constraints)" or merge it into the Architecture Principles based on upcoming mathematical bounds.
+## Architecture priorities
+
+1. **Explicit state scope** — distinguish task lifecycle, session state, cross-session memory, protocol context, execution attempt, and external authoritative state before making persistence or continuity claims.
+2. **Trajectory and outcome separation** — traces/transcripts describe execution history; outcomes describe resulting state; graders assess selected properties. None substitutes for the others.
+3. **Evidence before implementation** — external standards, SDKs, papers, and equations remain `REFERENCE_ONLY`, `DESIGN_CANDIDATE`, or another bounded evidence state until executable repository artifacts and tests exist.
+4. **Source identity before theorem promotion** — exact paper/version/date, assumptions, theorem surface, and formula role remain separate verification steps.
+5. **Historical correction without erasure** — explicit errata and verified-core records supersede conflicting interpretation while preserving the fact that the original research chunk was generated.
+
+## Current external reference delta
+
+- MCP 2026-07-28: stateless protocol-core reference for the named protocol version; no local MCP implementation.
+- A2A v1.0: Agent Card, stateful Task, Context, Message/Artifact, streaming and extension reference; no local A2A endpoint.
+- OpenAI Agents SDK tracing: trace/span observability reference; no local SDK integration.
+- Anthropic 2026 agent-eval guidance: task/trial/grader/transcript/outcome/harness decomposition reference.
+- Google ADK: Session / current-session State / cross-session Memory scope reference.
+
+See `FOUNDATION/SOURCES_2026_08_24.md` for primary-source boundaries.
+
+## Directions explicitly not justified
+
+The current evidence does **not** justify:
+
+- “fully immune” or “100% mathematically immune” agent architecture claims
+- absolute elimination of infinite loops or hallucination propagation
+- blanket deprecation of centralized coordination
+- blanket deprecation of probabilistic routing
+- treating a paper theorem as a universal agent theorem
+- introducing a fifth system container without a durable cross-source architecture need
+
+## Remainder-of-month roadmap
+
+- continue Daily research with exact source/version and theorem boundaries
+- continue Weekly bilingual weaving with conflict audit and temporal provenance
+- keep all new mechanisms at evidence-appropriate status
+- let the scheduled full-month lifecycle decide durable direction changes after August closes
+
+No runtime, Jules automation, CI/Actions, frontend, or deployment change is implied by this document.
