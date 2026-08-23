@@ -860,3 +860,34 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
   - Successfully migrated 2310.14685v2 chunk.
 - 双语对齐状态
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+## AF-ARCH-017: Exponential Convergence in Strongly Monotone Mirror Play
+
+**Frontier Source:** On the Variational Interpretation of Mirror Play in Monotone Games (2024)
+
+**Original Problem:** Characterizing the finite-time convergence efficiency and equilibrium paths of multi-agent mirror play (MP) learning dynamics in strongly monotone non-cooperative games.
+
+**Mathematical Mechanism:** The formulation leverages a mirror differential game (MDG) framework using Bregman divergences as distance functions. When the game $\mathcal{G}$ is $\mu$-strongly monotone with respect to $D_{\phi}(\cdot, \cdot)$ (where $\phi$ is the aggregated mirror map), the closed-loop system is exponentially stable as $T \to \infty$.
+
+**Core Update Formula:**
+Exponential stability under strongly monotone game:
+$V (x(t)) \leq e^{ - \mu t} V(x_0)$
+
+**Assumptions:**
+- The multi-agent game is $\mu$-strongly monotone with respect to the aggregated mirror map.
+- The mirror maps used are Legendre functions (proper, closed, convex, and differentiable over domain).
+- The strategy space and gradients follow Lipschitz smoothness and bounded variations.
+
+**For Beginners: Practical Analogies:**
+Imagine multiple delivery companies (agents) trying to optimize their routes without sharing full plans (a non-cooperative game). If the traffic conditions have a "strongly competitive but stable" property (strong monotonicity), and each company uses a consistent way to measure routing costs (mirror maps), they will quickly settle into optimal routes (exponential convergence). If the traffic rules change wildly, this rapid settling is no longer guaranteed.
+
+**State / 状态:**
+- **Evidence / 证据:** PAPER_ONLY
+- **Mapping / 映射:** DESIGN_CANDIDATE
+- **Implementation / 实现:** EVIDENCE_INSUFFICIENT
+- **Validation / 验证:** NOT_TESTED
+- **Sources / 来源:** S32
+
+**Scope and limits / 范围与局限:**
+The exponential convergence rate strictly requires the underlying game to be strongly monotone with respect to the specific aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings, arbitrary game topologies, or environments with unpredictable stochastic feedback outside the bounded variances analyzed in the paper.
