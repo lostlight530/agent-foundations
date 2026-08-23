@@ -259,3 +259,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2310.14685
 - Use: No-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
 - Verification boundary: Guarantees depend strictly on the existence of an optimal feasible policy with some slack and smoothness properties of the reward and constraint spaces in RKHS.
+
+## S32 — On the Variational Interpretation of Mirror Play in Monotone Games
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2403.15636v1
+- Version date: 2024-03-22
+- Authors: Yunian Pan, Tao Li, Quanyan Zhu
+- URL: https://arxiv.org/abs/2403.15636
+- Use: Variational interpretation of mirror play in monotone games, finite-time quantification of closed-loop equilibrium path, and exponential convergence when the game is strongly monotone.
+- Verification boundary: Guarantees depend strictly on the game being strongly monotone with respect to the aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings.
