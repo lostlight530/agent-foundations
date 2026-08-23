@@ -89,3 +89,33 @@
 **ZH.** 发布声明应标识被测代码树、配置、夹具、命令、预算、指标、原始结果和评审决定。本目录验证器只建立文档结构，不复现外部实验。
 
 **Scope and limits / 范围与局限:** Supply-chain provenance and behavioral evidence are complementary, not interchangeable. / 供应链来源与行为证据互补但不可互换。
+
+## AF-ARCH-007 — State scope must be explicit / 状态作用域必须显式
+
+- **State / 状态:** `SUPPORTED`
+- **Evidence / 证据:** `E1_PRIMARY_STANDARD`
+- **Mapping / 映射:** `DESIGN_REQUIREMENT`
+- **Implementation / 实现:** `REFERENCE_ONLY`
+- **Validation / 验证:** `DOCUMENT_REVIEW_ONLY`
+- **Sources / 来源:** S34, S37 in `SOURCES_2026_08_24.md`
+
+**EN.** Session history, task lifecycle, current-session state, cross-session memory, protocol context, and external authoritative state are different scopes. Architecture records should name the scope and identity before claiming persistence, continuity, or ownership.
+
+**ZH.** 会话历史、任务生命周期、当前会话状态、跨会话记忆、协议上下文与外部权威状态属于不同作用域。任何持久化、连续性或所有权声明，都应先明确状态作用域与身份。
+
+**Scope and limits / 范围与局限:** A2A and Google ADK provide concrete external data-model examples. This repository does not implement either runtime. / A2A 与 Google ADK 只是外部数据模型参照，本仓并未实现对应运行时。
+
+## AF-ARCH-008 — Trajectory and outcome are complementary evidence / 轨迹与结果是互补证据
+
+- **State / 状态:** `SUPPORTED`
+- **Evidence / 证据:** `E1_PRIMARY_STANDARD`
+- **Mapping / 映射:** `DIRECT_REQUIREMENT`
+- **Implementation / 实现:** `REFERENCE_ONLY`
+- **Validation / 验证:** `DOCUMENT_REVIEW_ONLY`
+- **Sources / 来源:** S35, S36 in `SOURCES_2026_08_24.md`
+
+**EN.** A trace or transcript describes how an execution unfolded; an outcome describes the resulting environment or artifact state; graders interpret selected properties of one or both. None of these should silently substitute for the others.
+
+**ZH.** Trace 或 transcript 描述执行过程，outcome 描述最终环境或产物状态，grader 对其中部分属性进行判断。三者不能静默互相替代。
+
+**Scope and limits / 范围与局限:** OpenAI Agents SDK tracing and Anthropic's agent-eval decomposition are external reference patterns. They do not prove that a particular trace is complete or that an outcome is correct. / OpenAI Agents SDK tracing 与 Anthropic agent eval 分解是外部参考模式，并不证明某条轨迹必然完整或某个结果必然正确。
