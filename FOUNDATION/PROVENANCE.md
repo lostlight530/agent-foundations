@@ -1,74 +1,99 @@
 # Reproducibility and AI Use / 可复现性与 AI 使用
 
-## Jules automation boundary / 与 Jules 自动化的边界
+This provenance policy applies to the public `FOUNDATION/**` evidence core and committed research records.
 
-This provenance policy governs the independently maintained `FOUNDATION/**` verified core and reviewer-side maintenance outside the Jules SOP automation stream.
-
-It is not a Jules task prompt, Jules repository-memory entry, or `AGENTS.md` instruction. It does not change the existing Jules Daily/Weekly/Monthly automation. Jules-generated material may be checked against this policy after generation, but such a review must not be represented as proof that Jules consumed or followed the policy during generation.
-
-本溯源策略服务于 Jules SOP 自动化之外、独立维护的 `FOUNDATION/**` 可验证核心与评审侧维护。它不是 Jules 任务提示词、Jules 仓库记忆或 `AGENTS.md` 指令，也不会修改现有 Jules Daily/Weekly/Monthly 自动化。Jules 生成的内容可以在事后按本策略核验，但不得因此声称 Jules 在生成阶段读取或遵循了本策略。
-
-This maintenance intentionally does not create or modify `AGENTS.md`, Jules prompts, or Jules repository memory.
+It documents source identity, exact-version provenance, claim verification, temporal provenance, and public AI-use boundaries. It does not publish private prompts, hidden reasoning, private memory, confidential context, or unpublished future control strategy.
 
 ## Reproducibility target / 可复现目标
 
-This is a documentary foundation. A reviewer must be able to locate each Claim ID, recover its primary source and exact cited version, distinguish external findings from repository implementation, identify what proposition/theorem was actually verified, and rerun deterministic repository checks where executable artifacts exist.
+A reviewer should be able to:
 
-本目录属于文档型基础体系。评审者必须能够定位每个 Claim ID、恢复其一手来源与准确引用版本、区分外部发现与仓库实现、识别真正核验过的命题/定理，并在存在可执行产物时重新运行确定性仓库检查。
+- locate each structured Claim ID
+- recover its registered primary source
+- identify the exact cited source version when a version matters
+- distinguish external findings from repository implementation
+- identify what proposition/theorem/formula was actually checked
+- inspect the deterministic repository helper that supports a structural/provenance statement where such a helper exists
 
-Reproduction candidates include Python 3.12 or 3.14, Git, and no third-party Python packages. A Python version becomes a **verified compatibility environment only when the relevant command/test was actually executed for the reviewed revision and the result was retained**. This policy does not imply a CI matrix or that either version was run for a documentation-only change.
+本目录属于文档型基础体系。可复现的目标是恢复“声明—来源—版本—证据状态—实现状态”链条，而不是把文档存在本身当成真实性证明。
 
-可复现候选环境包括 Python 3.12 或 3.14、Git，并且不依赖第三方 Python 包。只有当相关命令/测试确实在被审核版本上执行且结果被保留时，某个 Python 版本才能被表述为**已验证兼容环境**。本策略不意味着存在 CI 矩阵，也不意味着纯文档变更已经运行这些版本。
+Python compatibility is revision-specific. A Python version becomes a verified environment only when relevant executable behavior was actually run under that version and the result was retained for the reviewed revision.
 
-Possible reviewer commands, when executable validation is in scope:
+## Repository helpers / 仓库辅助工具
 
-```bash
-python FOUNDATION/validate.py
-python -m unittest FOUNDATION/test_contract.py -v
-python FOUNDATION/validate.py --base-ref origin/main
-```
+### `FOUNDATION/validate.py`
 
-Listing a command is a reproduction path, not evidence that the command ran. Execution evidence must record the actual command, revision/environment, result, and untested boundary.
+The validator checks documentary/core properties including:
 
-The validator checks required files, claim metadata, unique IDs, registered source references, JSON Schema structure, restricted overclaims, complete GitHub Action SHA pinning, and protected paths when a base ref is supplied.
+- required core files
+- claim metadata
+- unique Claim IDs
+- registered source references
+- claim-schema structure
+- restricted absolute-overclaim phrases
+- declared protected-path comparison when a base reference is explicitly supplied
 
-验证器检查必需文件、声明元数据、唯一 ID、已登记来源引用、JSON Schema 结构、受限过度声明、GitHub Action 完整 SHA 固定，以及提供基准引用时的保护路径。
+It is a structural repository validator.
 
-It does not prove semantic truth, mathematical correctness, translation quality, source-version identity, formula transcription, theorem interpretation, external experimental reproduction, or that any CI/workflow executed unless those items are independently checked and recorded.
+It does **not** prove:
 
-它不能自动证明语义真伪、数学正确性、翻译质量、来源版本身份、公式抄录、定理解释、外部实验复现，也不能自动证明任何 CI/workflow 已执行；这些项目必须独立核验并记录。
+- semantic truth
+- theorem correctness
+- formula transcription accuracy
+- translation equivalence
+- source-version identity
+- experimental reproduction
+- external deployment behavior
+- autonomous-agent capability
+
+### `FOUNDATION/arxiv_probe.py`
+
+The arXiv probe supports bibliographic identity checks against primary arXiv metadata/submission history.
+
+It can support:
+
+- normalized arXiv identifier
+- exact cited `vN`
+- version/date pairing
+- title/author identity where needed for disambiguation
+
+It does not prove theorem semantics or experimental validity.
 
 ## Source identity workflow / 来源身份流程
 
-For every material arXiv source reviewed by the verified core:
+For every material arXiv source entering the verified core:
 
 1. normalize the base identifier
 2. record the exact cited `vN` when a version is specified
-3. inspect primary arXiv metadata and submission history
+3. inspect primary arXiv metadata/submission history
 4. pair `vN` with the date belonging to that version
-5. record title and authors when needed to disambiguate identity
-6. only then use the source for claim verification
+5. record title/authors when needed to disambiguate identity
+6. only then use that source identity for downstream claim verification
 
-Use:
+An explicit `vN` citation should not be treated as exact-version verified without either:
 
-```bash
-python FOUNDATION/arxiv_probe.py <arxiv-id-or-url>
-python FOUNDATION/arxiv_probe.py <arxiv-id-or-url> --expect-version N --expect-date YYYY-MM-DD
-```
+- `VERSION_DATE_PAIR_VERIFIED`
+- or an explicit `VERSION_DATE_NOT_VERIFIED` limitation
 
-An explicit `vN` citation should not enter the independently verified core without `VERSION_DATE_PAIR_VERIFIED` or an explicit `VERSION_DATE_NOT_VERIFIED` limitation.
+The base page's first-submission date is not a substitute for the date of a later cited version.
 
-This is a reviewer-side gate. It is not a claim that Jules automatically runs `arxiv_probe.py` or applies the same gate in its SOP task unless its own task instructions explicitly require that behavior.
+### August reference failures
 
-The base arXiv page's first-submission date is not a substitute for the date of a later cited version.
+The W33/W34 audit found exact-version provenance errors in historical generated research where later-version identifiers were paired with corresponding v1 dates.
 
-The W33 and W34 August audits are reference failures for this rule: later-version identifiers were paired with v1 dates in generated Jules research even after reviewer-side provenance tooling existed. That recurrence is evidence of control-plane separation, not evidence that Jules consumed the reviewer gate.
+Current corrected examples include:
+
+- S26 `2312.13910v3` → v3 date `2024-07-17`, not v1 date `2023-12-21`
+- S28 `2309.14142v3` → v3 date `2025-02-04`, not v1 date `2023-09-25`
+- S31 `2310.14685v2` → v2 date `2024-01-14`, not v1 date `2023-10-23`
+
+Historical research remains visible, while current exact-version identity follows the corrected primary-source record.
 
 ## Claim verification workflow / 声明核验流程
 
 Identity verification and claim verification are separate steps.
 
-For each material proposition reviewed by this core, record the strongest surface actually checked:
+For each material proposition, record the strongest surface actually checked:
 
 - abstract only → `ABSTRACT_SUPPORTED`
 - primary full text → `FULL_TEXT_SUPPORTED`
@@ -76,41 +101,72 @@ For each material proposition reviewed by this core, record the strongest surfac
 - exact equation/notation → `FORMULA_TRANSCRIPTION_VERIFIED`
 - assumptions/conditions → `ASSUMPTIONS_VERIFIED`
 
-Do not use `VERIFIED_FROM_LATEX_SOURCE` merely because a TeX-source link exists or a retrieval script succeeded. The relevant theorem/formula and its assumptions must actually be inspected.
+Do not use a strong verification label merely because a source file or TeX archive was reachable.
 
-When a long equation is copied, verify punctuation, indices, powers, parentheses, summation ranges, and variable definitions. If this audit was not performed, use a narrower status such as `PAPER_LEVEL_RESULT_SUPPORTED / LONG_FORMULA_NOT_RECERTIFIED`.
+The relevant theorem/formula and its assumptions must actually be inspected for theorem/formula-level status.
+
+When a long equation is copied, verify the parts that materially determine its meaning, including indices, powers, parentheses, summation ranges, variable definitions, and relevant conditions.
+
+If this was not done, keep a narrower status such as:
+
+`PAPER_LEVEL_RESULT_SUPPORTED / LONG_FORMULA_NOT_RECERTIFIED`.
 
 ## Handling primary-source disagreement / 处理一手来源冲突
 
-If primary surfaces disagree — for example abstract vs rendered theorem text, different versions, or HTML vs TeX — preserve the conflict.
+If primary surfaces disagree — for example abstract versus theorem text, different versions, or rendered text versus TeX — preserve the conflict.
 
-Required reviewer behavior:
+Required interpretation:
 
 - record the conflicting surfaces and versions
 - mark `PRIMARY_SOURCE_CONFLICT`
-- do not guess which coefficient/theorem wording is authoritative
+- do not guess which value/wording is authoritative
 - narrow downstream claims to what all checked surfaces support
-- reverify from versioned TeX/PDF or an author correction before restoring the stronger claim
+- restore the stronger claim only after stronger version-specific evidence resolves the conflict
 
-A primary-source conflict is not a reason to delete the research record; it is a reason to lower claim strength and improve provenance.
+A primary-source conflict is not a reason to delete the historical research record. It is a reason to lower claim strength and improve provenance.
 
 ## Temporal provenance / 时间溯源
 
 Research period is part of provenance.
 
-- a W33 research chunk remains a W33 observation after weekly weaving
-- moving content into an older section does not make it evidence from that older period
-- a July sync heading must not absorb August/W33 findings without an explicit new-period marker
-- errata/reconciliation may supersede interpretation without erasing the original historical artifact
-- Daily/Weekly generated history and later GPT/independent-review corrections remain separate provenance layers
+- a W33 research chunk remains a W33 observation after later weaving or relocation
+- moving text into an older section does not make it evidence from that older period
+- a July section must not silently absorb August findings as if they existed in July
+- errata/reconciliation may supersede current interpretation without erasing the original historical artifact
+- source check time, source publication/version time, research logical period, and later correction time remain separate fields when they differ
 
-These are independent audit and verified-core rules; they do not alter Jules task cadence or prompts.
+If an observation timestamp precedes the material source event/version date recorded for that same claim, use a temporal conflict state until stronger history resolves it.
+
+## Generated research and verified core / 生成研究与可验证核心
+
+Generated bilingual research is historical input to the repository knowledge base, not authority by itself.
+
+The verified core may:
+
+- retain a generated claim as supported
+- narrow its scope
+- downgrade its source/evidence class
+- correct version/date metadata
+- mark a source-claim mismatch
+- preserve a primary-source conflict
+- retire a claim from current interpretation
+
+A correction changes current interpretation, not the historical fact that the original artifact existed.
 
 ## AI use / AI 使用
 
-AI systems may assist with source discovery, drafting, translation, consistency checks, and validator code in this independent maintenance layer. AI output is never evidence. Material statements are checked against primary sources and retain source-specific assumptions, evaluated systems, configurations, metrics, exact version, and limits.
+AI systems may assist with source discovery, drafting, translation, consistency checks, and repository helper development.
 
-AI 系统可以在这一独立维护层辅助来源发现、起草、翻译、一致性检查和验证器代码。AI 输出不构成证据。实质性陈述必须对照一手来源，并保留来源特定的假设、被测系统、配置、指标、准确版本和局限。
+AI output is never evidence by itself.
+
+Material statements retain source-specific:
+
+- assumptions
+- evaluated systems
+- configurations
+- metrics
+- exact version identity where material
+- limitations
 
 AI-assisted review must not:
 
@@ -118,27 +174,26 @@ AI-assisted review must not:
 - upgrade an abstract claim into a theorem
 - upgrade a mechanism equation into a convergence/error bound without the theorem
 - convert empirical results into mathematical guarantees
-- convert paper guarantees into repository guarantees
-- hide an unresolved source conflict by selecting the most convenient value
-
-These constraints govern this independent review layer and are not assertions about the internal behavior of Jules automation.
+- convert external guarantees into repository guarantees
+- hide unresolved source conflicts by selecting the most convenient value
 
 ## Correction model / 修正模型
 
-For the verified core and for post-hoc review of the SOP-generated research stream:
+For the verified core and historical research:
 
-- existing generated documents are inputs, not authority
-- unsupported claims are removed or explicitly downgraded in the verified core
-- historical generated artifacts may remain visible when useful as execution history
-- material historical errors are corrected with explicit errata/reconciliation and precedence, not silent retroactive perfection
-- newer primary-source evidence supersedes conflicting secondary summaries
-- no credentials, private prompts, personal memory, or hidden reasoning traces are committed
-- maintainer review remains required before merge
+- generated documents are evidence inputs, not authority
+- unsupported claims are removed from current verified-core authority or explicitly downgraded
+- historical artifacts remain visible when useful as provenance/execution history
+- material historical errors are corrected with explicit errata/reconciliation and precedence
+- newer/stronger primary-source evidence supersedes conflicting secondary summaries for current interpretation
+- credentials, private prompts, private memory, hidden reasoning traces, confidential context, and unpublished future strategy are not committed as provenance records
 
-This correction model is external to the Jules task loop unless the Jules task itself is separately configured to adopt it.
+## Public evidence boundary / 公开证据边界
 
-## Documentation-only maintenance / 纯文档维护
+A public provenance record should expose enough information to reconstruct and critique a claim without exposing private reasoning process.
 
-A provenance/evidence-only change may intentionally avoid runtime tests when executable behavior is untouched. In that case the change must state `tests not run — documentation/evidence only` rather than implying validation occurred.
+The desired public object is:
 
-This exception does not permit implementation claims without tests; it only prevents documentation maintenance from fabricating irrelevant runtime evidence.
+`CLAIM + SOURCE_IDENTITY + VERSION + CHECKED_SURFACE + SCOPE + LIMITATION + CURRENT_STATUS`
+
+not private chain-of-thought or internal control strategy.
