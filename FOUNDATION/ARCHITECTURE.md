@@ -13,7 +13,7 @@
 
 **ZH.** 被评估的智能体是完整配置系统：模型、指令、工具、权限、记忆、控制循环、防护、重试、预算、环境和评分过程。仅凭模型名称不足以复现或比较智能体结果。
 
-**Scope and limits / 范围与局限:** This is an evaluation and documentation boundary. The repository does not contain an agent runtime. / 这是评估与文档边界；本仓不包含智能体运行时。
+**Scope and limits / 范围与局限:** This is an evaluation/documentation boundary. The repository does not contain an agent runtime. / 这是评估与文档边界；本仓不包含智能体运行时。
 
 ## AF-ARCH-002 — Deterministic shell, stochastic component / 确定性外壳与随机组件
 
@@ -28,7 +28,7 @@
 
 **ZH.** 确定性验证、Schema、权限、预算、幂等键和状态迁移可以约束智能体，但不会使底层模型变成确定性系统。正确工程表述是“在强制接口上约束行为”，而不是“确定性认知”。
 
-**Scope and limits / 范围与局限:** Constraints cover only modeled paths and correctly enforced controls. / 约束只覆盖已建模路径和正确执行的控制。
+**Scope and limits / 范围与局限:** This is a proposed architecture principle only; Agent Foundations does not implement the described runtime controls. / 这只是候选架构原则；Agent Foundations 未实现这些运行时控制。
 
 ## AF-ARCH-003 — Theorem scope is not agent scope / 定理适用域不等于智能体适用域
 
@@ -58,7 +58,7 @@
 
 **ZH.** 可执行评估器、轨迹检查和独立评审可以增强证据，但其覆盖率、误报、漏报、污染、奖励投机和评估意识仍属于结果的一部分。
 
-**Scope and limits / 范围与局限:** Passing a finite evaluator establishes only the tested properties. / 通过有限评估器只证明被测试的属性。
+**Scope and limits / 范围与局限:** Passing a finite evaluator establishes only the tested properties; this repository's own validator is structural and documentary, not an agent evaluator. / 通过有限评估器只证明被检查属性；本仓自身 validator 属于结构/文档检查器，并不是智能体评估器。
 
 ## AF-ARCH-005 — Constitutions are governed policies / 宪法是受治理的策略
 
@@ -73,7 +73,7 @@
 
 **ZH.** 自然语言宪法和策略可以塑造行为，但遵循程度必须通过实证评估，且需要持续修订。策略生成与策略遵循是不同能力。
 
-**Scope and limits / 范围与局限:** A document is neither a runtime guard nor a safety proof. / 文档既不是运行时防护，也不是安全证明。
+**Scope and limits / 范围与局限:** A document is neither a runtime guard nor a safety proof; this repository does not implement a constitution-execution engine. / 文档既不是运行时防护，也不是安全证明；本仓没有实现宪法执行引擎。
 
 ## AF-ARCH-006 — Release claims require reconstructable records / 发布声明需要可重建记录
 
@@ -84,65 +84,30 @@
 - **Validation / 验证:** `STATIC_CHECKED`
 - **Sources / 来源:** S01, S03, S18
 
-**EN.** A release claim should identify the tested tree, configuration, fixtures, commands, budgets, metrics, raw results, and reviewer decision. This directory’s validator establishes documentary structure but does not reproduce external experiments.
+**EN.** A release claim should identify the relevant tree/revision, configuration, fixtures or evidence inputs, commands/results where they actually exist, metrics, and limitations. The repository's current partial prototype is its structured evidence/document core, not a release orchestrator.
 
-**ZH.** 发布声明应标识被测代码树、配置、夹具、命令、预算、指标、原始结果和评审决定。本目录验证器只建立文档结构，不复现外部实验。
+**ZH.** 发布声明应标识相关代码树/版本、配置、夹具或证据输入，以及真实存在时的命令/结果、指标与局限。本仓当前的部分原型是结构化证据/文档核心，而不是发布编排器。
 
-**Scope and limits / 范围与局限:** The partial prototype is the repository's evidence/document contract (`claim.schema.json`, source registry, validator, provenance records), not a release-orchestration or agent-runtime implementation. / 当前部分原型是仓库内的证据/文档契约，而不是发布编排器或智能体运行时。
+**Scope and limits / 范围与局限:** `claim.schema.json`, domain claim documents, source registry, provenance records, validator, and arXiv helper support documentary reconstruction only; they do not reproduce external experiments or execute an agent runtime. / `claim.schema.json`、领域声明、来源登记、溯源记录、validator 与 arXiv helper 只支持文档型重建，不复现外部实验，也不执行智能体运行时。
 
-## AF-ARCH-007 — State scope must be explicit / 状态作用域必须显式
+## Repository realization / 本仓真实实现
 
-- **State / 状态:** `SUPPORTED`
-- **Evidence / 证据:** `E1_PRIMARY_STANDARD`
-- **Mapping / 映射:** `DESIGN_REQUIREMENT`
-- **Implementation / 实现:** `REFERENCE_ONLY`
-- **Validation / 验证:** `DOCUMENT_REVIEW_ONLY`
-- **Sources / 来源:** S34, S37 in `SOURCES_2026_08_24.md`
+The six architecture claims above are theory/evidence statements. Agent Foundations itself is implemented primarily as documentary and provenance infrastructure.
 
-**EN.** Session history, task lifecycle, current-session state, cross-session memory, protocol context, and external authoritative state are different scopes. Architecture records should name the scope and identity before claiming persistence, continuity, or ownership.
-
-**ZH.** 会话历史、任务生命周期、当前会话状态、跨会话记忆、协议上下文与外部权威状态属于不同作用域。任何持久化、连续性或所有权声明，都应先明确状态作用域与身份。
-
-**Scope and limits / 范围与局限:** A2A and Google ADK provide concrete external data-model examples. This repository does not implement either runtime. / A2A 与 Google ADK 只是外部数据模型参照，本仓并未实现对应运行时。
-
-## AF-ARCH-008 — Trajectory and outcome are complementary evidence / 轨迹与结果是互补证据
-
-- **State / 状态:** `SUPPORTED`
-- **Evidence / 证据:** `E5_BACKGROUND`
-- **Mapping / 映射:** `DIRECT_REQUIREMENT`
-- **Implementation / 实现:** `REFERENCE_ONLY`
-- **Validation / 验证:** `DOCUMENT_REVIEW_ONLY`
-- **Sources / 来源:** S35 (`E1_PRIMARY_STANDARD`) and S36 (`E5_BACKGROUND`) in `SOURCES_2026_08_24.md`
-
-**EN.** A trace or transcript describes how an execution unfolded; an outcome describes the resulting environment or artifact state; graders interpret selected properties of one or both. None of these should silently substitute for the others.
-
-**ZH.** Trace 或 transcript 描述执行过程，outcome 描述最终环境或产物状态，grader 对其中部分属性进行判断。三者不能静默互相替代。
-
-**Scope and limits / 范围与局限:** OpenAI Agents SDK tracing supplies a first-party SDK trace/span reference, while Anthropic's task/trial/grader/trajectory/outcome/harness decomposition is first-party engineering guidance rather than a formal standard. The combined architecture claim therefore keeps the lower `E5_BACKGROUND` evidence class instead of inheriting the strongest source class. Neither source proves that a particular trace is complete or that an outcome is correct. / OpenAI Agents SDK tracing 提供一方 SDK 的 trace/span 参照；Anthropic 的 task/trial/grader/trajectory/outcome/harness 分解属于一方工程指导而非正式标准。因此组合后的架构声明保留较低的 `E5_BACKGROUND` 证据等级，而不继承其中最强来源等级。两者都不能证明某条轨迹必然完整或某个结果必然正确。
-
-## Repository realization / 本仓实现映射
-
-The architecture claims above describe agent-system principles, but the repository's **implemented** architecture is documentary/evidence infrastructure rather than an agent runtime.
-
-Current implemented support surfaces include:
-
-| Repository artifact | Actual function | Does not establish |
+| Repository surface | Actual repository function | Evidence boundary |
 |---|---|---|
-| `claim.schema.json` | machine-readable claim-state/evidence/mapping/implementation/validation schema | agent state machine or runtime policy |
-| `validate.py` | deterministic checks for required core files, claim metadata/IDs, registered sources, restricted overclaims, and declared repository boundaries | semantic truth, theorem correctness, agent behavior |
-| `arxiv_probe.py` | arXiv identity and version/date provenance helper | theorem/formula correctness |
-| `SOURCES*.md` | source registry and exact-version identity records | implementation of sourced mechanisms |
-| `EVIDENCE.md` | claim/evidence interpretation contract | executable evaluator |
-| `PROVENANCE.md` | source/version/temporal provenance contract | automated truth oracle |
-| `docs/AUGUST_2026_W33_ERRATA.md`, `W34_ERRATA.md` | explicit historical corrections | retroactive rewriting of original research |
-| `FOUNDATION/specs/**` | design candidates | implemented runtime capability |
+| `ARCHITECTURE.md`, `MEMORY.md`, `TOOLS.md`, `COLLABORATION.md` | structured domain claim maps with stable Claim IDs and explicit implementation states | claims remain bounded by their source/evidence fields |
+| `claim.schema.json` | machine-readable claim-record vocabulary/enums | schema validity is structural, not semantic truth |
+| `validate.py` | required-file, Claim-ID/metadata, S01–S32 source-reference, restricted-overclaim, action-reference and protected-path checks | does not verify theorem meaning, formula accuracy, source-version identity, or agent behavior |
+| `arxiv_probe.py` | arXiv identity and submission-history version/date helper | bibliographic identity only; does not verify theorem semantics |
+| `SOURCES.md` | canonical S01–S32 source registry | source registration does not imply implementation |
+| `EVIDENCE.md`, `PROVENANCE.md`, `REVIEW.md` | public claim/evidence/provenance/review semantics | documentary interpretation only |
+| August errata | explicit corrections to historical generated research | correction does not rewrite original generation history |
 
-Therefore the strongest repository-wide architecture statement is:
+Current repository-wide implementation classification:
 
-`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
+`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`
 
-Not:
+not:
 
 `IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
-
-The public architecture record deliberately exposes evidence outcomes, source identity, implementation status, and limitations. It does not expose private prompts, hidden reasoning, confidential context, or unpublished future control strategy.
