@@ -1,5 +1,13 @@
 # Tool System / 工具系统
 
+## Repository realization boundary / 本仓实现边界
+
+Agent Foundations does **not** implement an agent tool runtime, permission broker, sandbox, monitor service, replay engine, approval service, or idempotent side-effect control layer.
+
+The claims below are research/evidence maps. `SUPPORTED` describes source support within scope; it does not mean the repository implements the mechanism.
+
+本仓没有实现 Agent tool runtime、permission broker、sandbox、monitor service、replay engine、approval service 或幂等副作用控制层。下列 Claim 属于研究/证据映射，`SUPPORTED` 只描述有边界的来源支持，并不表示本仓已经实现对应机制。
+
 ## AF-TOOL-001 — Authority is explicit and per action / 权限按动作明确授予
 
 - **State / 状态:** `SUPPORTED`
@@ -13,7 +21,7 @@
 
 **ZH.** 工具可用不等于获得授权。每个有后果的动作都需要认证参与者、允许操作、受限目标、已验证参数、最小权限和可审计结果。
 
-**Scope and limits / 范围与局限:** Authorization controls known interfaces; compromised dependencies and hidden side effects remain separate risks. / 授权只控制已知接口；依赖被攻陷和隐藏副作用属于独立风险。
+**Scope and limits / 范围与局限:** This is a proposed control requirement; Agent Foundations has no tool-authorization runtime. / 这是候选控制要求；Agent Foundations 没有工具授权运行时。
 
 ## AF-TOOL-002 — Untrusted content never becomes instruction / 不可信内容不得成为指令
 
@@ -28,7 +36,7 @@
 
 **ZH.** 网页、文档、工具输出、检索记忆和智能体间消息都是数据。控制层必须阻止它们静默改变目标、权限、目标地址或审批要求。
 
-**Scope and limits / 范围与局限:** Classification and isolation reduce prompt-injection risk but require adversarial testing. / 分类和隔离可降低 Prompt 注入风险，但必须进行对抗测试。
+**Scope and limits / 范围与局限:** Agent Foundations does not implement such a control layer or adversarial isolation runtime. / Agent Foundations 没有实现对应控制层或对抗隔离运行时。
 
 ## AF-TOOL-003 — Plans are inspectable state / 计划是可检查状态
 
@@ -43,7 +51,7 @@
 
 **ZH.** 外显计划比不透明内部规划更利于监督、局部修正和恢复执行，但计划仍是提案，不能替代状态观测和权限检查。
 
-**Scope and limits / 范围与局限:** Plover evaluates GUI workflows; this repository does not implement that interface. / Plover 评估的是 GUI 工作流，本仓不实现该界面。
+**Scope and limits / 范围与局限:** Plover evaluates GUI workflows; this repository does not implement that interface or a plan-state runtime. / Plover 评估 GUI 工作流；本仓没有实现该界面或计划状态运行时。
 
 ## AF-TOOL-004 — Debugging is a closed loop / 调试是闭环
 
@@ -58,7 +66,7 @@
 
 **ZH.** 有效可观测性应连接检测、因果归因、恢复和重跑，并保留原始轨迹与干预。只有日志而没有归因和回放，不足以处理长时程失败。
 
-**Scope and limits / 范围与局限:** AgentDebugX results are external and model-dependent. / AgentDebugX 结果属于外部实现并依赖所测模型。
+**Scope and limits / 范围与局限:** AgentDebugX results are external/model-dependent; this repository has no debugging/replay runtime. / AgentDebugX 结果属于外部实现并依赖所测模型；本仓没有 debugging/replay runtime。
 
 ## AF-TOOL-005 — Monitors are guarded components / 监控器自身也需要防护
 
@@ -73,7 +81,7 @@
 
 **ZH.** 监控器增加了一层控制，但也具有观测边界、攻击面、延迟、阈值和错误率。高影响动作在监控置信不足时需要失败关闭或人工复核。
 
-**Scope and limits / 范围与局限:** Human review also has capacity and consistency limits. / 人工评审同样存在容量和一致性限制。
+**Scope and limits / 范围与局限:** Agent Foundations has no monitor service; this is a bounded architecture requirement, not a local control guarantee. / Agent Foundations 没有 monitor service；这是有边界的架构要求，不是本地控制保证。
 
 ## AF-TOOL-006 — Side effects are idempotent and bounded / 副作用必须幂等且受限
 
@@ -88,4 +96,4 @@
 
 **ZH.** 变更型工具应在可行时提供预演，使用幂等键，核验解析后的目标，记录变更前后状态，并提供经过测试的补偿或回滚路径。
 
-**Scope and limits / 范围与局限:** Some physical or external actions are not fully reversible and require stronger pre-authorization. / 部分物理或外部动作无法完全回滚，因此需要更严格的事前授权。
+**Scope and limits / 范围与局限:** This is a proposed side-effect contract; Agent Foundations has no side-effect execution layer. / 这是候选副作用契约；Agent Foundations 没有副作用执行层。

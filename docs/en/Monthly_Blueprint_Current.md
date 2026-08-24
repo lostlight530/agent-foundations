@@ -1,25 +1,57 @@
-# 🗺️ [Monthly Strategic Blueprint] 月度理论防线加固与路线图大换血 2024-05
+# Monthly Strategic Blueprint — Current
 
-## ⚡ 外部黑盒翻车案例审计与免疫证明
-**Failure Scan:**
-In recent multi-modal agent testing frameworks and real-world enterprise deployments, probabilistic foundation models exhibit severe path-dependence failures. A major observed collapse mode involves agent "cascading hallucination" where a small contextual error in deep planning causes the agent to fall into infinite tool execution loops (Scale-driven collapse). These models fail to recognize state repetition because their autoregressive nature lacks a deterministic cutoff boundary.
+Current evidence window: **2026-08-01 through 2026-08-23**  
+Status: **PROVISIONAL — natural month still open**  
+Authoritative stage record: [`../monthly/2026-08-through-23-strategic-blueprint.md`](../monthly/2026-08-through-23-strategic-blueprint.md)
 
-**Current Route Defense Assessment:**
-The deterministic agent architecture remains fully immune to these cascading failures.
-- The **Tool System** employs *Causal Minimal Tool Filtering (CMTF)* and the newly integrated *Constraint-Guided Verification*, which mathematically caps tool execution depth and enforces strict constraints, preemptively severing any infinite loop.
-- The **Architecture Principles** apply *Gradient Entropy Monitors* and *Training-Free Adaptive Stopping (TASR)*, acting as a "brake pad" that halts thought generation when entropy rises unexpectedly.
-- The **Memory System** ensures safe representations via *Covariance bounds*, preventing noisy hallucinations from propagating into the persistent semantic slice.
+## Current position
 
-## 🔄 核心研究方向修正与下月 Roadmap
-**Direction Deprecation or Replacement Assessment:**
-- *Centralized Federated Learning* continues to be entirely deprecated in favor of *Decentralized Distributed Optimization (DecDPO)* and high-dimensional gradient tracking mechanisms.
-- All probabilistic thresholding for tool routing is deprecated in favor of *Symbolic Policy Distillation* and *Constraint-Guided Verification*.
+Agent Foundations is a **theory, evidence, and documentary architecture repository**, not an implemented autonomous-agent runtime.
 
-**Blueprint Expansion:**
-- Expand mathematical foundations for DecDPO in highly dynamic and Byzantine-fault environments.
-- Deepen research into continuous-time memory retrieval optimization to enhance semantic slice synchronization bounds without adding network overhead.
+The August stage strengthened source provenance, theorem-scope discipline, bilingual research history, explicit errata, and structured evidence records. It does not justify claims of mathematical immunity, deterministic cognition, universal safety, or universal convergence.
 
-**Next Month Evolution Roadmap:**
-- **Week 1-2:** Focus Daily Chunks on Byzantine-resilient consensus algorithms within the Collaboration System.
-- **Week 3:** Advance the Architecture Principles container by integrating new theories on differential equation limits for state-space models.
-- **Week 4:** Evaluate the necessity of a fifth container dedicated exclusively to "Physical Environment Alignment (Embodied AI Constraints)" or merge it into the Architecture Principles based on upcoming mathematical bounds.
+## Verified-core boundary
+
+The current verified core is anchored to:
+
+- four domain claim maps: Architecture, Memory, Tools, Collaboration
+- canonical source registry `S01–S32` in `FOUNDATION/SOURCES.md`
+- claim vocabulary in `FOUNDATION/claim.schema.json`
+- documentary/structural checks in `FOUNDATION/validate.py`
+- arXiv identity/version-date support in `FOUNDATION/arxiv_probe.py`
+- evidence, provenance, review, and explicit errata records
+
+`validate.py` is a structural/documentary validator. Its presence does not establish theorem correctness, source truth, formula accuracy, experimental reproduction, or agent behavior.
+
+## Current evidence conclusions
+
+- exact source identity is separate from theorem/claim verification
+- an arXiv v1 submission date is not the date of every later cited version
+- source registration does not imply repository implementation
+- a mechanism equation is not a formal repository error/convergence bound
+- a paper theorem does not become a general LLM-agent theorem
+- `STATIC_CHECKED` on a reference claim is not a runtime experiment
+- historical generated research remains historical evidence when later errata narrow its current interpretation
+
+## Domain implementation state
+
+- **Architecture:** documentary/evidence map; no agent runtime
+- **Memory:** no memory runtime, vector store, retrieval service, compaction engine, or cross-session memory service
+- **Tools:** no tool runtime, permission broker, sandbox, monitor, replay engine, or side-effect control layer
+- **Collaboration:** no multi-agent transport, consensus runtime, task arbiter, role router, or trajectory-capture service
+
+## Explicitly unsupported conclusions
+
+Current evidence does not support:
+
+- fully immune / 100% mathematically immune agent architectures
+- deterministic cognition
+- universal convergence or safety guarantees
+- blanket conclusions that centralized coordination or probabilistic routing are obsolete
+- local implementation claims derived only from external papers, standards, SDKs, or analogies
+
+## Month boundary
+
+This is not the final August Monthly Strategic Blueprint. The natural month remained open at the evidence cutoff, so evidence after 2026-08-23 is not synthesized into this stage record.
+
+Formal state: `MONTH_OPEN`.

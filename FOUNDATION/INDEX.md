@@ -1,108 +1,139 @@
 # Agent Foundations — Verified Core / 可验证核心
 
-Status: independent maintained foundation  
-Publication: repository-only; not copied into the existing Pages site
+Status: repository documentary/evidence core
 
 ## Purpose / 目的
 
-This directory is the compact, independently maintained core of Agent Foundations. It separates evidence, architecture decisions, source provenance, and repository status from the existing SOP-generated research stream.
+`FOUNDATION/**` is the compact evidence and architecture core of Agent Foundations.
 
-本目录是 Agent Foundations 的紧凑、独立维护核心。它把证据、架构判断、来源溯源和仓库实现状态与现有 SOP 自动生成研究流分离。
+The repository is primarily a theory, evidence, and documentary architecture base. It is **not** an implemented autonomous-agent runtime.
 
-The repository is a theory and evidence base. It is not an implemented autonomous-agent runtime. Equations, paper summaries, pseudocode, and architecture analogies remain references until an executable artifact and repository test exist.
+External equations, papers, protocol mappings, pseudocode, and architecture analogies remain external/reference claims unless a concrete repository artifact implements the behavior.
 
-本仓库是理论与证据库，不是已实现的自治智能体运行时。公式、论文摘要、伪代码和架构类比，在出现可执行产物及仓库测试前均只属于参考材料。
+## Repository realization map / 仓库真实结构映射
 
-## Jules automation boundary / 与 Jules 自动化的边界
+### 1. Domain claim maps / 领域声明
 
-`FOUNDATION/**` is an independent verified-core and reviewer-governance layer outside the existing Jules Daily/Weekly/Monthly SOP automation stream.
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — architecture/evaluation boundaries
+- [MEMORY.md](./MEMORY.md) — memory research and lifecycle claims
+- [TOOLS.md](./TOOLS.md) — tool/control/observability claims
+- [COLLABORATION.md](./COLLABORATION.md) — multi-agent coordination claims
 
-`FOUNDATION/**` 不是 Jules 的任务提示词、仓库记忆或自动化规则文件，也不自动修改现有 Jules 任务的行为。它用于在 Jules 产物生成后进行独立核验、证据校准、架构判断与长期知识维护。
+These files use stable IDs:
 
-A Jules-generated research chunk may later be corrected or checked against this core, but that does not mean Jules consumed or followed these rules during generation. This maintenance intentionally does not create or modify `AGENTS.md`, Jules task prompts, Jules repository memory, GPT/cloud task controls, GitHub Actions, or CI.
+- `AF-ARCH-*`
+- `AF-MEM-*`
+- `AF-TOOL-*`
+- `AF-COLLAB-*`
 
-Jules 自动生成的研究块可以在事后被本核心纠正或核验，但这不表示 Jules 在生成时读取或遵循了这些规则。本维护明确不创建或修改 `AGENTS.md`、Jules 任务提示词、Jules 仓库记忆、GPT/云端任务控制、GitHub Actions 或 CI。
+Each claim separately declares state, evidence class, mapping, implementation status, validation status, sources, and scope/limits.
 
-## Research correction authority / 研究纠正权威
+### 2. Canonical source registry / 来源登记
 
-Generated `docs/en/**` and `docs/zh/**` files preserve the research history and may contain wording or metadata that was later calibrated. Keeping that history does not make every historical sentence authoritative.
+[SOURCES.md](./SOURCES.md) is the canonical source registry and currently contains the contiguous range `S01–S32`.
 
-自动生成的 `docs/en/**` 与 `docs/zh/**` 保留研究历史，其中可能存在后来已经被校准的措辞或元数据。保留历史不等于历史中的每一句话继续具有最终权威。
+A source being registered does not establish theorem correctness, formula accuracy, experimental reproduction, or repository implementation.
 
-For affected W33 material, read the evidence in this order:
+### 3. Claim vocabulary / Claim 词汇契约
 
-1. [`docs/AUGUST_2026_W33_ERRATA.md`](../docs/AUGUST_2026_W33_ERRATA.md) for explicit corrections to version/date pairs, theorem strength, formula interpretation, and weekly provenance
-2. [`SOURCES.md`](./SOURCES.md) for exact primary-source identity and version-specific provenance
-3. [`EVIDENCE.md`](./EVIDENCE.md) and [`PROVENANCE.md`](./PROVENANCE.md) for claim/evidence semantics
-4. the original generated bilingual chunk for historical context and the research path that produced it
+[claim.schema.json](./claim.schema.json) defines the machine-readable claim vocabulary:
 
-对于受影响的 W33 材料，读取顺序为：先看 W33 勘误，再看准确来源登记和证据/溯源契约，最后回到原自动生成双语研究块理解历史上下文。
+- Claim ID pattern
+- state
+- evidence class
+- mapping type
+- implementation status
+- validation status
+- source IDs
+- scope
+- limitations
 
-Where an original generated chunk conflicts with an explicit erratum or verified-core source record, the corrected evidence interpretation supersedes the conflicting claim or metadata **without erasing the fact that the original chunk was generated**.
+The schema and the Markdown domain files are related documentary surfaces. Schema validity does not prove claim semantics.
 
-当原生成研究块与显式勘误或可验证核心来源记录冲突时，以校准后的证据解释为准；这只纠正声明或元数据，不抹去原研究块曾真实生成这一历史事实。
+### 4. Repository validator / 仓库验证器
 
-This authority rule applies to committed repository artifacts only. It is not evidence that Jules or any GPT/cloud producer consumed the correction during generation.
+`validate.py` currently checks:
 
-该权威规则只作用于已提交的仓库材料，不表示 Jules 或任何 GPT/云端生产者在生成阶段读取了这些纠正。
+- required verified-core files
+- claim-block presence
+- stable and unique Claim IDs
+- required metadata labels
+- references against canonical `S01–S32`
+- a restricted list of absolute-overclaim phrases
+- external action references for full-SHA form in existing workflow files
+- protected-path changes when an explicit comparison base is supplied
+- basic properties of `claim.schema.json` itself
+
+Important boundary:
+
+`validate.py` does **not** parse every Markdown claim into a JSON object and enforce every `claim.schema.json` enum or semantic relationship.
+
+It also does not verify theorem meaning, formula transcription, source-version identity, translation equivalence, experimental reproduction, or agent behavior.
+
+Therefore:
+
+`STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
+
+### 5. arXiv provenance helper / arXiv 溯源辅助
+
+[arxiv_probe.py](./arxiv_probe.py) supports arXiv identity and submission-history version/date checks.
+
+It supports bibliographic provenance only. It does not certify theorem content, formulas, experimental validity, or architecture mappings.
+
+### 6. Evidence, provenance, and review semantics / 证据、溯源与审核语义
+
+- [EVIDENCE.md](./EVIDENCE.md) — claim/evidence/source/implementation semantics
+- [PROVENANCE.md](./PROVENANCE.md) — exact-version and temporal provenance
+- [REVIEW.md](./REVIEW.md) — public review-state vocabulary
+
+These are documentary interpretation surfaces, not execution engines.
+
+### 7. Historical generated research / 历史研究
+
+`docs/en/**` and `docs/zh/**` preserve the broader bilingual research history.
+
+Historical text remains evidence of what was generated/recorded at that time. Later errata can narrow its current interpretation without pretending the historical wording never existed.
+
+### 8. Explicit August corrections / 8 月显式纠错
+
+- [`../docs/AUGUST_2026_W33_ERRATA.md`](../docs/AUGUST_2026_W33_ERRATA.md)
+- [`../docs/AUGUST_2026_W34_ERRATA.md`](../docs/AUGUST_2026_W34_ERRATA.md)
+- [`../docs/monthly/2026-08-through-23-strategic-blueprint.md`](../docs/monthly/2026-08-through-23-strategic-blueprint.md)
+
+These records correct source/version or evidence interpretation while preserving historical research artifacts.
+
+## Current authority precedence / 当前解释优先级
+
+When historical generated research conflicts with a stronger explicit correction:
+
+1. explicit erratum for the affected claim/source field
+2. current exact source identity in `SOURCES.md`
+3. `EVIDENCE.md`, `PROVENANCE.md`, and `REVIEW.md` for evidence semantics
+4. domain claim maps for bounded architecture interpretation
+5. original generated bilingual material for historical context
+
+This precedence changes current interpretation only.
 
 ## Reading order / 阅读顺序
 
-1. [EVIDENCE.md](./EVIDENCE.md) — claim, source-identity, theorem, and evidence contract / 声明、来源身份、定理与证据契约
-2. [ARCHITECTURE.md](./ARCHITECTURE.md) — system boundary and evaluation / 系统边界与评估
-3. [MEMORY.md](./MEMORY.md) — memory lifecycle and limits / 记忆生命周期与边界
-4. [TOOLS.md](./TOOLS.md) — tool authority, observability, recovery / 工具权限、可观测性与恢复
-5. [COLLABORATION.md](./COLLABORATION.md) — multi-agent coordination and failure propagation / 多智能体协作与故障传播
-6. [SOURCES.md](./SOURCES.md) — primary-source registry with explicit version identities / 带准确版本身份的一手来源登记
-7. [PROVENANCE.md](./PROVENANCE.md) — reproducibility, arXiv version gates, temporal provenance, and AI-use disclosure / 可复现性、arXiv 版本门、时间溯源与 AI 使用披露
-8. [REVIEW.md](./REVIEW.md) — independent post-hoc review states, global-practice alignment, and privacy boundary / 独立事后审核状态、全球实践对齐与隐私边界
+1. [EVIDENCE.md](./EVIDENCE.md)
+2. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [MEMORY.md](./MEMORY.md)
+4. [TOOLS.md](./TOOLS.md)
+5. [COLLABORATION.md](./COLLABORATION.md)
+6. [SOURCES.md](./SOURCES.md)
+7. [PROVENANCE.md](./PROVENANCE.md)
+8. [REVIEW.md](./REVIEW.md)
+9. August errata/stage synthesis when historical reconciliation is relevant
 
-Helper: [arxiv_probe.py](./arxiv_probe.py) verifies arXiv identity and submission-history version/date pairs. It assists provenance; it does not prove theorem semantics.
+## Repository-wide implementation classification / 仓库实现定位
 
-辅助工具：[arxiv_probe.py](./arxiv_probe.py) 用于核验 arXiv 身份与版本/日期配对。它辅助溯源，不证明定理语义。
+The strongest supported repository-wide implementation statement is:
 
-## Invariants / 不变量
+`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
 
-- Every material statement has one stable Claim ID.
-- English and Chinese text share the same Claim ID and evidence state.
-- External results never count as repository implementation.
-- Mathematical results retain their original assumptions and domain.
-- Safety and convergence statements remain scoped and falsifiable.
-- Generated content is input to review, never authority by itself.
-- Explicit errata and verified-core source records may correct committed generated research without rewriting its generation history.
-- An explicit arXiv `vN` is not verified until the cited version and its date are paired from primary submission history.
-- Source identity verification and theorem/formula verification are separate steps.
-- A mechanism equation is not promoted to a formal error/convergence bound without the theorem that supplies the bound.
-- Primary-source disagreements are preserved as conflicts, not silently resolved by convenience.
-- Weekly weaving preserves the original research period; moving text does not rewrite temporal provenance.
-- Independent review remains non-operative and must not modify Jules/GPT automation, GitHub Actions, CI, deployment, repository memory, or runtime behavior.
-- Public review records expose evidence outcomes and bounded rationales, not private prompts, private memory, hidden reasoning, or confidential context.
+Not:
 
-- 每项实质性陈述都具有稳定的 Claim ID。
-- 中英文共享同一 Claim ID 与证据状态。
-- 外部研究结果不等同于本仓实现。
-- 数学结果必须保留原始假设和适用域。
-- 安全与收敛表述必须有边界且可证伪。
-- 自动生成内容只是审核输入，本身不自动成为权威。
-- 显式勘误与可验证核心来源记录可以纠正已提交的自动生成研究，但不改写其生成历史。
-- 明确引用 arXiv `vN` 时，必须从一手 submission history 核验该版本及对应日期后才视为版本身份已验证。
-- 来源身份核验与定理/公式核验是两个独立步骤。
-- 机制公式在没有对应定理提供边界前，不得升级为形式化误差/收敛界。
-- 一手来源内部冲突必须保留为冲突，不按方便程度静默选值。
-- Weekly 编织必须保留原研究周期；移动文本不能改写时间溯源。
-- 独立审核保持非执行性，不修改 Jules/GPT 自动化、GitHub Actions、CI、部署、仓库记忆或运行时行为。
-- 公开审核记录只暴露证据结论与有界理由，不公开私有提示、私有记忆、隐藏推理或机密上下文。
+`IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
 
-These invariants govern the independent verified core and reviewer-side maintenance. They are not assertions that Jules automation enforces the same invariants during generation.
-
-这些不变量约束独立可验证核心和评审侧维护，不代表 Jules 自动化在生成阶段已经执行同一组约束。
-
-## Repository status / 仓库状态
-
-The four domain documents are specifications and evidence maps. Their default implementation state is `NOT_IMPLEMENTED` or `REFERENCE_ONLY`. A future runtime may satisfy these contracts, but this repository does not claim that it already does.
-
-四个领域文档是规范与证据映射。其默认实现状态为 `NOT_IMPLEMENTED` 或 `REFERENCE_ONLY`。未来运行时可以实现这些契约，但本仓不声称已经实现。
-
-## Documentation-only maintenance / 纯文档维护
-
-Evidence/provenance/review-only changes may state `tests not run — documentation/evidence only` when executable behavior is untouched. This never upgrades implementation or validation status; it only avoids fabricating irrelevant runtime evidence for documentary maintenance.
+Formal August monthly closure remains open in the current partial-month stage record.

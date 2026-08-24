@@ -1,5 +1,13 @@
 # Memory System / 记忆系统
 
+## Repository realization boundary / 本仓实现边界
+
+Agent Foundations does **not** implement an agent-memory runtime, vector store, retrieval service, compaction engine, consolidation service, retention engine, or cross-session memory service.
+
+The claims below are research/evidence maps. Their implementation and validation fields describe the local repository state; external literature does not upgrade those fields automatically.
+
+本仓没有实现 Agent memory runtime、vector store、retrieval service、compaction engine、consolidation service、retention engine 或 cross-session memory service。下列 Claim 属于研究/证据映射，本地实现与验证状态以明确字段为准。
+
 ## AF-MEM-001 — Memory is a lifecycle / 记忆是生命周期
 
 - **State / 状态:** `SUPPORTED`
@@ -28,7 +36,7 @@
 
 **ZH.** PM-Bench 表明，即便最强测试配置在延迟意图任务上仍存在显著失败。不能从上下文长度、可用检索或单个基准分数推断可靠记忆。
 
-**Scope and limits / 范围与局限:** The numerical result belongs to the paper’s models, configurations, and metric. / 数值结果只属于论文所测模型、配置和指标。
+**Scope and limits / 范围与局限:** The numerical result belongs to the paper’s models, configurations, and metric. `STATIC_CHECKED` here is documentary/source review only. / 数值结果只属于论文所测模型、配置和指标；此处 `STATIC_CHECKED` 仅指文档/来源核对。
 
 ## AF-MEM-003 — Provenance precedes persistence / 持久化之前先有来源
 
@@ -43,7 +51,7 @@
 
 **ZH.** 记忆记录在持久化或影响高权限动作前，应携带来源、参与者、时间、作用域、置信度、变换历史、保留规则和撤销状态。
 
-**Scope and limits / 范围与局限:** Metadata improves auditability but cannot establish semantic correctness by itself. / 元数据提高可审计性，但不能单独证明语义正确。
+**Scope and limits / 范围与局限:** This is a proposed memory-record contract. Agent Foundations does not implement the persistence layer. / 这是候选记忆记录契约；Agent Foundations 没有实现对应持久化层。
 
 ## AF-MEM-004 — Compaction requires fidelity checks / 压缩需要保真检查
 
@@ -58,7 +66,7 @@
 
 **ZH.** 若关键约束、未决决定、证据链接和延迟意图没有通过明确检查，压缩就是有损变换。仅减少 Token 不代表成功。
 
-**Scope and limits / 范围与局限:** Fidelity metrics must be task-specific and include omission failures. / 保真指标必须针对任务，并覆盖遗漏失败。
+**Scope and limits / 范围与局限:** This repository has no compaction implementation or task-specific fidelity benchmark. / 本仓没有压缩实现，也没有对应任务级保真 benchmark。
 
 ## AF-MEM-005 — Versioning enables correction, not correctness / 版本化支持纠错而非自动正确
 
@@ -73,4 +81,4 @@
 
 **ZH.** 追加式修订、明确替代、回滚和删除墓碑使记忆变更可检查，但不会自动决定哪个版本为真；仍需验证和权限规则。
 
-**Scope and limits / 范围与局限:** Privacy and deletion obligations may require physical removal beyond a logical tombstone. / 隐私和删除义务可能要求超越逻辑墓碑的物理移除。
+**Scope and limits / 范围与局限:** This is a proposed lifecycle principle; Agent Foundations has no memory-versioning runtime. / 这是候选生命周期原则；Agent Foundations 没有 memory-versioning runtime。
