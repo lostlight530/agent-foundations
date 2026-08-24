@@ -1,6 +1,6 @@
-# Verified-Core Review States / 可验证核心审核状态
+# Public Evidence Review States / 公开证据审核状态
 
-Status: public documentary review vocabulary
+Status: documentary review vocabulary
 
 ## Purpose / 目的
 
@@ -11,9 +11,9 @@ It describes evidence disposition only. It does not execute repository behavior 
 ## Review states / 审核状态
 
 1. `REVIEW_PENDING`
-   - material has entered review
+   - material is awaiting evidence review
 2. `SOURCE_IDENTITY_VERIFIED`
-   - the cited source identity/version is established where material
+   - material source identity and exact cited version are verified where material
 3. `CLAIM_SURFACE_VERIFIED`
    - the strongest inspected source surface is identified and bounded
 4. `PRIMARY_SOURCE_CONFLICT`
@@ -23,27 +23,27 @@ It describes evidence disposition only. It does not execute repository behavior 
 6. `MAPPING_SCOPED`
    - external evidence is classified as requirement, analogy, candidate mechanism, counterevidence, or out of scope
 7. `IMPLEMENTATION_SEPARATED`
-   - external result and local implementation/validation status are explicitly distinct
+   - external evidence and repository implementation status are explicitly separated
 8. `CALIBRATION_REQUIRED`
-   - historical material remains useful but interpretation/provenance requires correction
+   - historical material remains useful but requires explicit correction or narrowing
 9. `CALIBRATED`
-   - an explicit erratum/reconciliation records the current bounded interpretation
+   - an explicit erratum/reconciliation records the corrected current interpretation
 10. `ACCEPTED_FOR_VERIFIED_CORE`
-   - the proposition fits the current public evidence contract
+   - the bounded proposition fits the current documentary evidence contract
 
-These are documentary states, not confidence scores.
+These states describe the public evidence record. They are not confidence scores and do not expose private reasoning.
 
-## Review sequence / 审核顺序
+## Supported review paths / 支持的审核路径
 
-A normal review can move through:
+A straightforward supported claim can move through:
 
-`REVIEW_PENDING → SOURCE_IDENTITY_VERIFIED → CLAIM_SURFACE_VERIFIED → MAPPING_SCOPED → IMPLEMENTATION_SEPARATED → ACCEPTED_FOR_VERIFIED_CORE`
+`REVIEW_PENDING → SOURCE_IDENTITY_VERIFIED → CLAIM_SURFACE_VERIFIED → MAPPING_SCOPED → IMPLEMENTATION_SEPARATED → ACCEPTED_FOR_VERIFIED_CORE`.
 
-A correction can move through:
+A historical correction may use:
 
-`REVIEW_PENDING → SOURCE_IDENTITY_VERIFIED → CLAIM_SURFACE_VERIFIED → CALIBRATION_REQUIRED → CALIBRATED → MAPPING_SCOPED → IMPLEMENTATION_SEPARATED`
+`CALIBRATION_REQUIRED → CALIBRATED`.
 
-A conflict can stop at:
+A primary-source disagreement can stop at:
 
 `PRIMARY_SOURCE_CONFLICT`.
 
@@ -55,54 +55,40 @@ No state transition makes an external result an implementation unless a concrete
 
 ## Review checks / 审核检查
 
-When relevant, verify that:
+When material, review checks should preserve these distinctions:
 
-- explicit arXiv `vN` citations use the date belonging to that version
-- source identity is not confused with theorem/equation verification
-- abstract support is not promoted into theorem support
-- a mechanism equation is not promoted into a convergence/error bound without the supplying theorem
-- unverified long formulas remain bounded paper-level evidence
-- primary-source disagreements remain unresolved until stronger evidence resolves them
-- mathematical results retain their assumptions, comparator, domain, quantifiers, and version
-- external results are not upgraded into local implementation claims
-- `DESIGN_ANALOGY`, `CANDIDATE_MECHANISM`, `REFERENCE_ONLY`, `NOT_IMPLEMENTED`, and other status axes remain distinct
-- bilingual research does not strengthen a claim merely through translation
-- later weaving/errata does not rewrite the originating research period
+- exact arXiv `vN` identity vs base arXiv identity
+- version/date identity vs theorem/formula verification
+- abstract support vs theorem support
+- mechanism equation vs formal error/convergence bound
+- external result vs repository implementation
+- paper assumptions/domain vs generic LLM-agent claims
+- original historical research period vs later document placement
+- source registration vs claim support
+- `STATIC_CHECKED` documentary review vs runtime/experimental validation
 
-## Repository evidence surfaces / 仓库证据面
+## Authority map / 权威映射
 
-- `EVIDENCE.md` — claim/evidence vocabulary and validator boundary
-- `SOURCES.md` — canonical S01–S32 source identities
-- `PROVENANCE.md` — source/version and historical provenance semantics
-- four domain claim maps — architecture/memory/tools/collaboration propositions
-- `claim.schema.json` — machine-readable claim vocabulary
-- `validate.py` — structural/documentary validator
-- `arxiv_probe.py` — bibliographic identity/version helper
-- August errata — explicit historical corrections
+- `FOUNDATION/EVIDENCE.md` — claim/evidence/implementation semantics
+- `FOUNDATION/SOURCES.md` — canonical `S01–S32` source identities
+- `FOUNDATION/PROVENANCE.md` — exact-version and temporal provenance
+- domain claim maps — bounded architecture/memory/tool/collaboration claims
+- explicit August errata — current correction records for affected historical research
+- original bilingual research — historical context
 
-These surfaces complement one another. None is a semantic truth oracle.
-
-## Current August calibration examples / 当前 8 月校准示例
-
-The W33/W34 errata demonstrate several review states in practice:
-
-- explicit later-version citations paired with v1 dates → source-version calibration required
-- corrected version/date pairs → `CALIBRATED`
-- mechanism equation presented too strongly as a formal bound → claim strength narrowed
-- conflict between primary source surfaces → preserved as `PRIMARY_SOURCE_CONFLICT`
-- source identity corrected without claiming the paper mechanism is implemented locally
+An audit finding may narrow or contest an interpretation. It must not invent implementation, reproduction, theorem support, source agreement, or test success.
 
 ## Minimal public review record / 最小公开审核记录
 
-A durable review record may contain:
+A durable public review record may include:
 
 - Claim ID or artifact
-- current review state
+- review state
 - public source identity/version
 - strongest checked source surface
 - supported proposition and assumptions
-- mapping state
-- implementation/validation state
+- mapping status
+- implementation/validation status
 - missing or conflicting evidence
 - erratum pointer when applicable
 - final bounded disposition
