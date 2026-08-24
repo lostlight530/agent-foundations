@@ -88,7 +88,7 @@
 
 **ZH.** 发布声明应标识被测代码树、配置、夹具、命令、预算、指标、原始结果和评审决定。本目录验证器只建立文档结构，不复现外部实验。
 
-**Scope and limits / 范围与局限:** Supply-chain provenance and behavioral evidence are complementary, not interchangeable. / 供应链来源与行为证据互补但不可互换。
+**Scope and limits / 范围与局限:** The partial prototype is the repository's evidence/document contract (`claim.schema.json`, source registry, validator, provenance records), not a release-orchestration or agent-runtime implementation. / 当前部分原型是仓库内的证据/文档契约，而不是发布编排器或智能体运行时。
 
 ## AF-ARCH-007 — State scope must be explicit / 状态作用域必须显式
 
@@ -119,3 +119,30 @@
 **ZH.** Trace 或 transcript 描述执行过程，outcome 描述最终环境或产物状态，grader 对其中部分属性进行判断。三者不能静默互相替代。
 
 **Scope and limits / 范围与局限:** OpenAI Agents SDK tracing supplies a first-party SDK trace/span reference, while Anthropic's task/trial/grader/trajectory/outcome/harness decomposition is first-party engineering guidance rather than a formal standard. The combined architecture claim therefore keeps the lower `E5_BACKGROUND` evidence class instead of inheriting the strongest source class. Neither source proves that a particular trace is complete or that an outcome is correct. / OpenAI Agents SDK tracing 提供一方 SDK 的 trace/span 参照；Anthropic 的 task/trial/grader/trajectory/outcome/harness 分解属于一方工程指导而非正式标准。因此组合后的架构声明保留较低的 `E5_BACKGROUND` 证据等级，而不继承其中最强来源等级。两者都不能证明某条轨迹必然完整或某个结果必然正确。
+
+## Repository realization / 本仓实现映射
+
+The architecture claims above describe agent-system principles, but the repository's **implemented** architecture is documentary/evidence infrastructure rather than an agent runtime.
+
+Current implemented support surfaces include:
+
+| Repository artifact | Actual function | Does not establish |
+|---|---|---|
+| `claim.schema.json` | machine-readable claim-state/evidence/mapping/implementation/validation schema | agent state machine or runtime policy |
+| `validate.py` | deterministic checks for required core files, claim metadata/IDs, registered sources, restricted overclaims, and declared repository boundaries | semantic truth, theorem correctness, agent behavior |
+| `arxiv_probe.py` | arXiv identity and version/date provenance helper | theorem/formula correctness |
+| `SOURCES*.md` | source registry and exact-version identity records | implementation of sourced mechanisms |
+| `EVIDENCE.md` | claim/evidence interpretation contract | executable evaluator |
+| `PROVENANCE.md` | source/version/temporal provenance contract | automated truth oracle |
+| `docs/AUGUST_2026_W33_ERRATA.md`, `W34_ERRATA.md` | explicit historical corrections | retroactive rewriting of original research |
+| `FOUNDATION/specs/**` | design candidates | implemented runtime capability |
+
+Therefore the strongest repository-wide architecture statement is:
+
+`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
+
+Not:
+
+`IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
+
+The public architecture record deliberately exposes evidence outcomes, source identity, implementation status, and limitations. It does not expose private prompts, hidden reasoning, confidential context, or unpublished future control strategy.
