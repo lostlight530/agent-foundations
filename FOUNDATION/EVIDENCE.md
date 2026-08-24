@@ -11,16 +11,16 @@ It is a documentary evidence contract. It is not an agent runtime, evaluator, so
 
 ## Claim states / 声明状态
 
-Current `claim.schema.json` vocabulary:
+Current schema vocabulary:
 
-- `OBSERVED` — directly observed in a named repository artifact/result
-- `SUPPORTED` — supported within named evidence and assumptions
-- `PROPOSED` — proposed repository/research direction, not established implementation
-- `HYPOTHESIS` — falsifiable research proposition
-- `CONTESTED` — credible evidence supports competing conclusions
-- `RETIRED` — preserved as a superseded position
+- `OBSERVED`
+- `SUPPORTED`
+- `PROPOSED`
+- `HYPOTHESIS`
+- `CONTESTED`
+- `RETIRED`
 
-`SUPPORTED` is always bounded by the cited system, data, assumptions, metric, version, and evidence surface.
+`SUPPORTED` means supported only within the cited system, assumptions, data, configuration, metric, and source version.
 
 ## Evidence levels / 证据等级
 
@@ -36,9 +36,9 @@ Current schema vocabulary:
 
 An evidence class describes the evidence object. It does not automatically determine implementation status.
 
-External evidence can support or bound a proposition without creating a local implementation.
+A repository capability claim needs direct local implementation evidence; an external paper, standard, SDK, or system card cannot create a local capability by citation.
 
-## Mapping vocabulary / 映射词汇
+## Mapping states / 映射状态
 
 Current schema vocabulary:
 
@@ -48,9 +48,9 @@ Current schema vocabulary:
 - `COUNTEREVIDENCE`
 - `OUT_OF_SCOPE`
 
-A mapping records how an external result is used in this documentary foundation. It does not execute the mapped mechanism.
+A mapping describes how external evidence is interpreted locally. It is not an implementation state.
 
-## Implementation states / 实现状态
+## Implementation status / 实现状态
 
 Current schema vocabulary:
 
@@ -59,11 +59,11 @@ Current schema vocabulary:
 - `PARTIAL_PROTOTYPE`
 - `IMPLEMENTED`
 
-`IMPLEMENTED` requires an identifiable repository artifact that actually performs the claimed behavior.
+`IMPLEMENTED` requires a concrete repository artifact implementing the claimed behavior.
 
-A paper, equation, protocol description, or architecture analogy is not implementation evidence.
+A documentary schema, validator, source registry, or research summary cannot by itself upgrade an agent-runtime concept to `IMPLEMENTED`.
 
-## Validation states / 验证状态
+## Validation status / 验证状态
 
 Current schema vocabulary:
 
@@ -73,36 +73,36 @@ Current schema vocabulary:
 - `REPRODUCED`
 - `EXTERNALLY_REVIEWED`
 
-These labels describe the strongest recorded validation state for the claim; they do not erase the claim's scope or limitations.
+Validation status is separate from claim state and implementation status.
 
-## Source registry / 来源登记
+For this repository, `STATIC_CHECKED` on a documentary/reference claim must not be read as a runtime experiment.
 
-The canonical registry recognized by the current repository validator is [SOURCES.md](./SOURCES.md), containing `S01–S32`.
+`EXPERIMENTALLY_TESTED` requires retained evidence for the actual tested artifact/configuration/result.
 
-For a material source preserve, where applicable:
+## Source identity / 来源身份
 
-- stable identifier or canonical URL
-- exact cited version/revision
-- date belonging to that version/revision
-- title/authors or issuer when identity could be ambiguous
-- retrieval/check context
+The canonical source registry is:
 
-For explicit arXiv `vN` citations, the version-specific date comes from primary submission history rather than automatically reusing the v1 date.
+`S01–S32` in [SOURCES.md](./SOURCES.md).
 
-## Source identity != claim support / 来源身份不等于声明支持
+A material source record should preserve:
 
-Keep separate:
+- stable identifier/canonical URL
+- exact version/revision when material
+- date belonging to that version
+- title/authors or issuer when identity is ambiguous
+- source/check provenance sufficient to distinguish later correction from original research history
 
-1. source identity
-2. exact source version
-3. strongest source surface actually inspected
-4. proposition supported by that surface
-5. local architecture mapping
-6. local implementation state
+For explicit arXiv `vN` citations:
 
-A successful fetch or correct citation does not prove the theorem interpretation or every downstream architecture claim.
+- `VERSION_DATE_PAIR_VERIFIED` means the exact version/date pair was checked against primary submission history
+- `VERSION_DATE_NOT_VERIFIED` means it was not
 
-Recommended claim-surface labels include:
+A v1 date must not be silently reused for a later cited version.
+
+## Claim-surface evidence / 声明表面证据
+
+Useful source-surface labels include:
 
 - `ABSTRACT_SUPPORTED`
 - `FULL_TEXT_SUPPORTED`
@@ -110,70 +110,68 @@ Recommended claim-surface labels include:
 - `FORMULA_TRANSCRIPTION_VERIFIED`
 - `ASSUMPTIONS_VERIFIED`
 
-A long formula that was not independently checked remains bounded paper-level evidence.
+A reachable source, downloaded TeX archive, parser output, or summary does not automatically establish theorem/formula-level verification.
 
-## Mathematical discipline / 数学纪律
+A theorem/bound retains its assumptions, comparator, domain, quantifiers, and version.
 
-A theorem or formal bound retains its original:
-
-- assumptions
-- quantified domain
-- comparator/objective
-- model class
-- version
-
-A mechanism equation or probability factorization is not itself a convergence/error bound unless a theorem or derivation supplies that bound.
-
-An external mathematical result does not become an Agent Foundations runtime guarantee.
+A mechanism equation or factorization is not a formal error/convergence bound unless a theorem/derivation actually supplies that bound.
 
 ## Primary-source conflict / 一手来源冲突
 
-When primary surfaces disagree, preserve the disagreement as `PRIMARY_SOURCE_CONFLICT` or `CONTESTED` rather than selecting a convenient value.
+When checked primary surfaces disagree:
 
-A stronger claim returns only after stronger evidence resolves the conflict.
+- retain the disagreement
+- use `PRIMARY_SOURCE_CONFLICT`
+- narrow downstream interpretation to what the checked surfaces jointly support
+- do not silently choose the convenient value
 
-## Temporal provenance / 时间溯源
+## Repository validator boundary / 仓库 validator 边界
 
-Research period and source version are part of provenance.
+`FOUNDATION/validate.py` currently checks structural/documentary properties including:
 
-- moving/weaving a research chunk does not change when the underlying observation occurred
-- a later erratum can correct current interpretation without pretending the corrected metadata existed in the original generated artifact
-- exact-version corrections remain explicit historical corrections
-
-## Actual validator boundary / 当前 validator 边界
-
-`FOUNDATION/validate.py` currently checks documentary structure including:
-
-- required verified-core files
-- claim headings and required metadata labels
+- required core files
+- Claim block/metadata presence
 - unique Claim IDs
-- source references against S01–S32
-- contiguous S01–S32 source registry
+- registered references against canonical `S01–S32`
 - restricted absolute-overclaim phrases
-- selected repository path/reference rules
+- external action-reference pin form in existing workflow files
+- protected-path changes when an explicit comparison base is supplied
+- basic properties of `claim.schema.json`
 
-Important limitation:
+It does **not** serialize every Markdown Claim into a JSON object and enforce every schema enum/semantic relationship.
 
-`validate.py` does **not** parse each Markdown claim into `claim.schema.json` and does not automatically validate every enum value or semantic proposition against that JSON Schema.
-
-`test_contract.py` checks selected parser/schema/protected-path/README invariants, but the existence of that file is not evidence that any command ran for a documentation change.
+It also does not verify source-version identity, theorem meaning, formula accuracy, translation equivalence, experimental reproduction, or agent behavior.
 
 Therefore:
 
 `STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
 
+## Historical and temporal interpretation / 历史与时间解释
+
+Historical generated research remains point-in-time evidence.
+
+Keep separate:
+
+- historical research period
+- source publication/version date
+- source check time
+- later correction date
+
+A later erratum can supersede current interpretation without pretending the corrected fact was present in the original generated chunk.
+
 ## Minimum public claim record / 最小公开声明记录
 
 A domain claim should retain:
 
-- Claim ID
+- stable Claim ID
 - state
 - evidence class
 - mapping
-- implementation state
-- validation state
+- implementation status
+- validation status
 - registered source IDs
 - supported proposition
-- scope/limitations
+- scope/assumptions
+- limitations
 
-These fields keep theory, evidence, implementation, and validation from collapsing into one status.
+Schema/document structure improves consistency. It does not prove the proposition itself.
