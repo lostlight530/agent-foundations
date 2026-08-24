@@ -6,44 +6,52 @@ Authoritative stage record: [`../monthly/2026-08-through-23-strategic-blueprint.
 
 ## Current position
 
-Agent Foundations is a **theory and evidence architecture**, not an implemented autonomous-agent runtime.
+Agent Foundations is a **theory, evidence, and documentary architecture repository**, not an implemented autonomous-agent runtime.
 
-The August research stream strengthens source provenance, theorem-scope control, bilingual research weaving, reviewer-side evidence contracts, and architecture vocabulary. It does not justify claims of mathematical immunity, deterministic cognition, universal safety, or universal convergence.
+The August stage strengthened source provenance, theorem-scope discipline, bilingual research history, explicit errata, and structured evidence records. It does not justify claims of mathematical immunity, deterministic cognition, universal safety, or universal convergence.
 
-## Architecture priorities
+## Verified-core boundary
 
-1. **Explicit state scope** — distinguish task lifecycle, session state, cross-session memory, protocol context, execution attempt, and external authoritative state before making persistence or continuity claims.
-2. **Trajectory and outcome separation** — traces/transcripts describe execution history; outcomes describe resulting state; graders assess selected properties. None substitutes for the others.
-3. **Evidence before implementation** — external standards, SDKs, papers, and equations remain `REFERENCE_ONLY`, `DESIGN_CANDIDATE`, or another bounded evidence state until executable repository artifacts and tests exist.
-4. **Source identity before theorem promotion** — exact paper/version/date, assumptions, theorem surface, and formula role remain separate verification steps.
-5. **Historical correction without erasure** — explicit errata and verified-core records supersede conflicting interpretation while preserving the fact that the original research chunk was generated.
+The current verified core is anchored to:
 
-## Current external reference delta
+- four domain claim maps: Architecture, Memory, Tools, Collaboration
+- canonical source registry `S01–S32` in `FOUNDATION/SOURCES.md`
+- claim vocabulary in `FOUNDATION/claim.schema.json`
+- documentary/structural checks in `FOUNDATION/validate.py`
+- arXiv identity/version-date support in `FOUNDATION/arxiv_probe.py`
+- evidence, provenance, review, and explicit errata records
 
-- MCP 2026-07-28: stateless protocol-core reference for the named protocol version; no local MCP implementation.
-- A2A v1.0: Agent Card, stateful Task, Context, Message/Artifact, streaming and extension reference; no local A2A endpoint.
-- OpenAI Agents SDK tracing: trace/span observability reference; no local SDK integration.
-- Anthropic 2026 agent-eval guidance: task/trial/grader/transcript/outcome/harness decomposition reference.
-- Google ADK: Session / current-session State / cross-session Memory scope reference.
+`validate.py` is a structural/documentary validator. Its presence does not establish theorem correctness, source truth, formula accuracy, experimental reproduction, or agent behavior.
 
-See `FOUNDATION/SOURCES_2026_08_24.md` for primary-source boundaries.
+## Current evidence conclusions
 
-## Directions explicitly not justified
+- exact source identity is separate from theorem/claim verification
+- an arXiv v1 submission date is not the date of every later cited version
+- source registration does not imply repository implementation
+- a mechanism equation is not a formal repository error/convergence bound
+- a paper theorem does not become a general LLM-agent theorem
+- `STATIC_CHECKED` on a reference claim is not a runtime experiment
+- historical generated research remains historical evidence when later errata narrow its current interpretation
 
-The current evidence does **not** justify:
+## Domain implementation state
 
-- “fully immune” or “100% mathematically immune” agent architecture claims
-- absolute elimination of infinite loops or hallucination propagation
-- blanket deprecation of centralized coordination
-- blanket deprecation of probabilistic routing
-- treating a paper theorem as a universal agent theorem
-- introducing a fifth system container without a durable cross-source architecture need
+- **Architecture:** documentary/evidence map; no agent runtime
+- **Memory:** no memory runtime, vector store, retrieval service, compaction engine, or cross-session memory service
+- **Tools:** no tool runtime, permission broker, sandbox, monitor, replay engine, or side-effect control layer
+- **Collaboration:** no multi-agent transport, consensus runtime, task arbiter, role router, or trajectory-capture service
 
-## Remainder-of-month roadmap
+## Explicitly unsupported conclusions
 
-- continue Daily research with exact source/version and theorem boundaries
-- continue Weekly bilingual weaving with conflict audit and temporal provenance
-- keep all new mechanisms at evidence-appropriate status
-- let the scheduled full-month lifecycle decide durable direction changes after August closes
+Current evidence does not support:
 
-No runtime, Jules automation, CI/Actions, frontend, or deployment change is implied by this document.
+- fully immune / 100% mathematically immune agent architectures
+- deterministic cognition
+- universal convergence or safety guarantees
+- blanket conclusions that centralized coordination or probabilistic routing are obsolete
+- local implementation claims derived only from external papers, standards, SDKs, or analogies
+
+## Month boundary
+
+This is not the final August Monthly Strategic Blueprint. The natural month remained open at the evidence cutoff, so evidence after 2026-08-23 is not synthesized into this stage record.
+
+Formal state: `MONTH_OPEN`.
