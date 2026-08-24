@@ -1,177 +1,138 @@
 # Agent Foundations — 2026-08-01 through 2026-08-23 Strategic Blueprint
 
 Status: `PROVISIONAL_STAGE_BLUEPRINT`
+
 Formal month closure: `OPEN`
+
 Evidence cutoff: 2026-08-23 Asia/Shanghai
-Maintenance review date: 2026-08-24
 
-## Executive state / 阶段状态
+## 1. Current repository posture
 
-**EN.** The August research stream materially strengthened source provenance, theorem-scope discipline, bilingual weaving, and reviewer-side evidence contracts. It has **not** produced an implemented autonomous-agent runtime. The correct current posture is a theory/evidence architecture with executable documentary validation and explicit implementation boundaries.
+The August research stage strengthened source provenance, theorem-scope discipline, bilingual research history, and explicit correction records.
 
-**ZH.** 8 月研究流显著加强了来源溯源、定理适用域、中英双语编织和评审侧证据契约，但**没有**因此产生一个已实现的自治智能体运行时。当前正确定位仍是理论/证据架构，配套可执行的文档验证，同时明确实现边界。
+It did **not** produce an implemented autonomous-agent runtime.
 
-## 1. August ownership and control-plane map
+Current implementation posture:
 
-Agent Foundations does not use an Axiom/Reflective-style one-file-per-day `RESEARCH/daily` ledger. Its native August SOP writes into large bilingual system containers and source registries.
+`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
 
-### Jules-native research stream
+The implemented repository core is concentrated in:
 
-The August Jules Daily stream:
+- four structured domain claim maps
+- canonical S01–S32 source registry
+- `claim.schema.json` vocabulary
+- `validate.py` structural/documentary checks
+- `arxiv_probe.py` bibliographic version/date helper
+- provenance/evidence/review documents
+- explicit August errata
 
-- appends or weaves research into the four bilingual system containers: Architecture Principles, Memory System, Tool System, Collaboration System
-- updates source-registry / source-range support where required
-- preserves a generated research-history surface rather than a reviewer-certified evidence core
+## 2. Native August research structure
 
-The August Jules Weekly stream performs system-document cascade and conflict-audit work. Repository history supports Weekly cascade activity on:
+Agent Foundations does not use an Axiom/Reflective-style one-file-per-day research ledger.
+
+August research is woven into the bilingual domain containers:
+
+- Architecture Principles
+- Memory System
+- Tool System
+- Collaboration System
+
+Repository history contains Weekly cascade activity on:
 
 - 2026-08-09
 - 2026-08-16
 - 2026-08-23
 
-No separate 2026-08-02 Weekly artifact is fabricated by this audit.
+No synthetic 2026-08-02 Weekly artifact is introduced by this stage audit.
 
-### Independent GPT / reviewer / verified-core layer
+Historical generated research remains historical evidence even when later errata narrow its current interpretation.
 
-The following are post-hoc or independently maintained controls, not proof that Jules consumed them during generation:
+## 3. W33/W34 source-identity reconciliation
 
-- `docs/AUGUST_2026_SOURCE_ERRATA.md`
-- `docs/AUGUST_2026_W33_ERRATA.md`
-- `docs/AUGUST_2026_W34_ERRATA.md`
-- `FOUNDATION/**` verified-core evidence / provenance / architecture records
-- reviewer-side provenance tooling such as `FOUNDATION/arxiv_probe.py`
+Primary arXiv submission histories exposed repeated exact-version date defects in historical generated August research:
 
-Interpretation: `CONTROL_PLANES_DISTINCT`.
-
-A correction can supersede the current interpretation of a Jules-generated claim or source identity without rewriting the fact that the original generated artifact existed.
-
-## 2. Daily → Weekly state
-
-- Daily research continued to update the four bilingual system containers and source registry.
-- W33 required explicit source/version/theorem errata instead of silently rewriting historical research.
-- W34 continued the bilingual cascade and conflict-audit model.
-- The 2026-08-23 daily research remained `DESIGN_CANDIDATE` where it mapped a paper result into architecture, preserving assumptions and limitations.
-- W34 also exposed a recurrent exact-version provenance defect that the Jules Weekly conflict audit did not independently catch.
-
-Interpretation: `RESEARCH_ACTIVE / IMPLEMENTATION_NOT_IMPLIED / PROVENANCE_RECONCILIATION_REQUIRED`.
-
-## 3. W34 source-identity reconciliation
-
-Primary arXiv submission histories were rechecked after the Jules-native W34 stream. Three exact-version dates in generated August material used the corresponding v1 publication date instead of the cited later-version date:
-
-| Source | Generated / persisted pair | Correct exact-version pair | August surface | Current status |
+| Source | Historical pair | Correct exact-version pair | August surface | Current status |
 |---|---|---|---|---|
 | S26 `arXiv:2312.13910v3` | v3 + 2023-12-21 | v3 + **2024-07-17** | 2026-08-17 Daily | `VERSION_DATE_INVALID_IN_GENERATED_CHUNK` |
 | S28 `arXiv:2309.14142v3` | v3 + 2023-09-25 | v3 + **2025-02-04** | 2026-08-19 Daily | `VERSION_DATE_INVALID_IN_GENERATED_CHUNK` |
 | S31 `arXiv:2310.14685v2` | v2 + 2023-10-23 | v2 + **2024-01-14** | 2026-08-22 Daily + 2026-08-23 Weekly weave | `VERSION_DATE_INVALID_IN_DAILY_AND_WEEKLY_WEAVE` |
 
-The S31 recurrence is especially important: the 2026-08-23 Jules Weekly cascade repeated the wrong exact-version date despite generated wording that described the material as verified from source. Therefore the Weekly conflict audit cannot be treated as independent proof of exact `vN` provenance.
+S31 is especially important because the wrong exact-version date was repeated into the Weekly weave.
 
-W33 reviewer-side policy and `arxiv_probe.py` already existed, but the Jules stream later repeated the same defect class. The correct conclusion is:
+Current interpretation:
 
-`PROVENANCE_PROCESS_GAP_PERSISTED_IN_JULES_STREAM`
+- Weekly restatement did not independently verify the exact version/date pair
+- original bilingual research remains visible as historical material
+- current source identity follows corrected `FOUNDATION/SOURCES.md`
+- W33/W34 errata record the explicit correction
 
-not:
+The same version/date dimension was also checked for S27, S29, S30, and S32 without finding this specific defect. That narrow result does not certify every theorem, formula, analogy, or architecture mapping.
 
-`JULES_COMPLIED_WITH_VERIFIED_CORE`.
+## 4. Verified-core contract after reconciliation
 
-The original generated bilingual chunks are preserved. Current source identity is corrected in `FOUNDATION/SOURCES.md`, and the explicit W34 correction record is `docs/AUGUST_2026_W34_ERRATA.md`.
+The verified core currently uses:
 
-The same version/date dimension was rechecked for S27, S29, S30, and S32 without finding this specific defect. That does not certify every theorem, formula, analogy, or implementation mapping in those chunks.
+- domain Claim IDs: `AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, `AF-COLLAB-*`
+- canonical source registry: `S01–S32`
+- claim state / evidence / mapping / implementation / validation vocabulary from `claim.schema.json`
+- structural/documentary checks from `validate.py`
+- exact arXiv identity/version/date support from `arxiv_probe.py`
 
-## 4. Verified-core evolution
+Important boundary:
 
-The independent `FOUNDATION/**` layer now carries:
+`validate.py` does not parse every Markdown claim into JSON and enforce every schema enum/semantic rule.
 
-- source identity and version/date provenance
-- theorem/formula scope boundaries
-- evidence-state semantics
-- independent review states
-- architecture / memory / tools / collaboration reference maps
-- AI-use and privacy boundaries
+Therefore:
 
-August 24 maintenance adds or tightens explicit architecture/evidence principles derived from the 1–23 evidence stage and current primary references:
+`STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
 
-1. `AF-ARCH-007`: state scope must be explicit
-2. `AF-ARCH-008`: trajectory and outcome are complementary evidence surfaces; mixed-source claims use the weaker applicable evidence class rather than inheriting the strongest source class
+## 5. Domain architecture status
 
-These are `REFERENCE_ONLY`, not runtime features.
+### Architecture
 
-## 5. Current global architecture calibration
+The architecture claim map remains primarily theory/evidence. The only partial prototype claim concerns documentary evidence/reconstruction infrastructure, not an agent runtime.
 
-### MCP 2026-07-28
+### Memory
 
-The current MCP specification has a stateless protocol core for that version, with optional discovery, MRTR, routable headers, extensions, and related authorization/deprecation changes.
+No agent memory runtime, vector store, retrieval service, compaction engine, or cross-session memory service is implemented.
 
-Local mapping: protocol-state design reference only. Protocol statelessness must not be promoted into a claim that an application has no durable/session state.
+### Tools
 
-### A2A v1.0
+No agent tool runtime, permission broker, sandbox, monitor, replay engine, idempotent side-effect layer, or approval service is implemented.
 
-A2A v1.0 provides a stable agent-to-agent interoperability model with Agent Cards, stateful Tasks, Messages, Artifacts, Context, streaming, and extensions.
+### Collaboration
 
-Local mapping: task/context identity reference only.
+No multi-agent transport, consensus runtime, task arbiter, role router, or trajectory-capture service is implemented.
 
-### OpenAI Agents SDK tracing
+These non-implementation boundaries are part of the current architecture, not missing evidence to be filled by inference.
 
-The SDK models end-to-end traces containing operation spans and exposes explicit tracing/sensitive-data controls.
+## 6. Evidence semantics established by August
 
-Local mapping: observability/evidence decomposition reference only. A trace is evidence of recorded execution structure, not proof that the outcome is correct.
-
-### Anthropic agent evals
-
-Anthropic distinguishes task, trial, grader, transcript/trajectory, outcome, evaluation harness, and agent harness.
-
-Local mapping: evaluation-claim decomposition reference only.
-
-### Google ADK context model
-
-ADK distinguishes current Session, session State, and searchable cross-session Memory.
-
-Local mapping: state-scope and persistence vocabulary reference only.
-
-Primary-source records: `FOUNDATION/SOURCES_2026_08_24.md` S33–S37.
-
-## 6. Architecture roadmap
-
-### Keep
-
-- four domain containers: Architecture Principles, Memory System, Tool System, Collaboration System
-- bilingual parity
-- theorem assumptions adjacent to reused results
-- source/version identity as an independent verification step
-- conceptual mapping separated from implementation status
-- original generated history separated from post-hoc reviewer correction
-
-### Strengthen
-
-- explicit task/session/context/memory identity in future architecture mappings
-- trace/trajectory versus outcome versus grader evidence separation
-- time/version provenance when Weekly weaving moves a Daily chunk
-- reconciliation records when historical wording is superseded
-- exact-version (`vN` + version-date) checks before source identity is promoted in reviewer-side verified-core
-
-### Do not promote yet
-
-- deterministic-agent claims
-- universal immunity / safety claims
-- universal convergence bounds
-- universal deprecation of centralized coordination or probabilistic routing
-- MCP/A2A/ADK/OpenAI-SDK integrations
-- a fifth system container solely because a topical paper exists
-- a reviewer-side policy into a claim that Jules automatically enforced that policy
-
-All remain evidence-dependent design questions.
+- exact source identity != theorem/claim verification
+- first-submission date != every later arXiv version date
+- source registration != local implementation
+- mechanism equation != formal error/convergence bound
+- paper theorem != generic LLM-agent guarantee
+- generated research != verified-core authority by itself
+- Weekly restatement != independent source verification
+- `STATIC_CHECKED` on a reference claim != local runtime experiment
+- schema/validator structure != semantic truth
+- explicit erratum can change current interpretation without rewriting historical generation
 
 ## 7. Formal monthly boundary
 
-This is not the final August Monthly Strategic Blueprint. The natural month is still open at the evidence cutoff. The audit deliberately does not invent 2026-08-24 through 2026-08-31 Daily/Weekly research where it is not part of this stage record, and it does not create a final Monthly closure before the natural month ends.
+This stage covers evidence through 2026-08-23 only.
 
-Final monthly synthesis should evaluate the remaining actual Daily/Weekly evidence before declaring direction changes, durable deprecations, or month-complete provenance status.
+The natural month remained open at the cutoff, so this document is not a final August seal and does not synthesize 2026-08-24 through 2026-08-31 evidence that is outside this record.
 
-Formal state: `MONTH_OPEN`.
+Formal state:
 
-## 8. Maintenance boundary
+`MONTH_OPEN`.
 
-No Jules Daily/Weekly/Monthly prompt, repository memory, scheduler, GPT/cloud task control, GitHub Action, CI, merge gate, frontend, deployment, runtime, or dependency is changed by this stage blueprint.
+## 8. Current stage conclusion
 
-Tests not run — documentation/evidence only.
+The strongest supported summary is:
+
+`RESEARCH_HISTORY_PRESERVED / EXACT_VERSION_PROVENANCE_CALIBRATED / VERIFIED_CORE_ALIGNED_TO_S01_S32_DOCUMENTARY_ARCHITECTURE / MONTH_OPEN`
+
+This conclusion does not imply an implemented agent runtime, complete external experiment reproduction, or final August closure.
