@@ -21,38 +21,49 @@ The goal is reconstruction of the claim/evidence chain, not treating document ex
 
 ### `FOUNDATION/validate.py`
 
-The current validator checks structural/documentary properties including:
+The current validator is a structural/documentary checker.
 
-- required core files
-- required metadata labels in domain claim blocks
+It checks:
+
+- required verified-core files
+- claim-block presence
+- required metadata labels
 - unique Claim IDs
-- source references against the canonical S01–S32 registry
-- contiguous S01–S32 source headings
-- basic `claim.schema.json` file properties such as declared Draft 2020-12 and closed top-level properties
+- registered source references against canonical `S01–S32`
 - restricted absolute-overclaim phrases
-- selected repository reference/path rules
+- full-SHA form of external action references in existing workflow files
+- declared protected-path changes when a comparison base is supplied
+- basic `claim.schema.json` file properties
 
-Important limitation:
+It does **not** convert every Markdown Claim into a JSON object and validate all claim fields against the schema enums.
 
-`validate.py` does **not** transform Markdown claim blocks into JSON and validate each block against every `claim.schema.json` enum/property rule.
+It also does not prove:
 
-It also does not establish source-version correctness, theorem semantics, formula accuracy, translation equivalence, or agent behavior.
-
-### `FOUNDATION/test_contract.py`
-
-This file contains selected parser/schema/protected-path/README contract tests for the validator helpers.
-
-Its presence describes repository test coverage design. It is not evidence that those tests were executed for a particular documentation revision.
+- semantic truth
+- theorem correctness
+- formula transcription accuracy
+- translation equivalence
+- source-version identity
+- experimental reproduction
+- external deployment behavior
+- autonomous-agent capability
 
 ### `FOUNDATION/arxiv_probe.py`
 
-The arXiv helper supports bibliographic identity and submission-history checks, including exact version/date pairing.
+The arXiv helper supports bibliographic identity checks against primary arXiv metadata/submission history.
 
-It does not verify theorem meaning, equation transcription, experimental validity, or local implementation.
+It can support:
 
-## Canonical source registry / 规范来源登记
+- normalized arXiv identifier
+- exact cited `vN`
+- version/date pairing
+- title/author identity where needed for disambiguation
 
-The current verified-core registry recognized by `validate.py` is:
+It does not prove theorem semantics or experimental validity.
+
+## Canonical source registry / canonical 来源登记
+
+The current verified-core source registry is the contiguous range:
 
 `S01–S32` in [SOURCES.md](./SOURCES.md).
 
@@ -63,27 +74,34 @@ A registered source is eligible documentary evidence. Registration does not impl
 For a material arXiv source:
 
 1. normalize the base identifier
-2. record explicit `vN` when cited
-3. inspect primary arXiv metadata/submission history
-4. pair that version with the date belonging to it
-5. preserve title/authors where needed for identity
-6. only then use that exact version identity in a stronger downstream claim
+2. record the exact cited `vN` when a version is specified
+3. inspect primary arXiv submission history
+4. pair that `vN` with the date belonging to the cited version
+5. record title/authors when needed to disambiguate identity
+6. only then use that exact-version identity in downstream claim interpretation
 
-The first-submission date is not automatically the date of a later version.
+The first-submission date is not a substitute for the date of every later version.
 
-### August corrected examples
+Use:
 
-- S26 `2312.13910v3` → v3 date `2024-07-17`
-- S28 `2309.14142v3` → v3 date `2025-02-04`
-- S31 `2310.14685v2` → v2 date `2024-01-14`
+- `VERSION_DATE_PAIR_VERIFIED` when the exact pair is supported
+- `VERSION_DATE_NOT_VERIFIED` when it is not
 
-The original generated research remains historical evidence; current source identity follows the corrected record.
+### August reference failures
 
-## Source identity and claim verification / 来源身份与声明核验
+Current explicit corrections include:
 
-Identity verification and proposition verification are separate.
+- S26 `2312.13910v3` → v3 date `2024-07-17`, not v1 date `2023-12-21`
+- S28 `2309.14142v3` → v3 date `2025-02-04`, not v1 date `2023-09-25`
+- S31 `2310.14685v2` → v2 date `2024-01-14`, not v1 date `2023-10-23`
 
-Useful public claim-surface states include:
+The historical records remain visible; current source identity follows the corrected primary-source record and explicit errata.
+
+## Claim-surface provenance / 声明表面溯源
+
+Source identity verification and claim verification are separate.
+
+Useful source-surface states include:
 
 - `ABSTRACT_SUPPORTED`
 - `FULL_TEXT_SUPPORTED`
@@ -91,13 +109,17 @@ Useful public claim-surface states include:
 - `FORMULA_TRANSCRIPTION_VERIFIED`
 - `ASSUMPTIONS_VERIFIED`
 
-A source file, TeX archive, or page being reachable does not establish theorem/formula-level verification.
+A successful fetch, TeX download, parser result, or source registration does not automatically establish one of these stronger states.
 
-A mechanism equation is not a formal convergence/error bound unless the relevant theorem/derivation supplies such a bound.
+A theorem/bound retains its assumptions, comparator, domain, quantifiers, and source version.
 
-Long formulas not independently checked remain bounded paper-level evidence.
+A mechanism equation or probability factorization is not a convergence/error bound unless a theorem or derivation supplies that bound.
 
-## Primary-source disagreement / 一手来源冲突
+Long formulas that were not independently checked remain paper-level evidence, for example:
+
+`PAPER_LEVEL_RESULT_SUPPORTED / LONG_FORMULA_NOT_RECERTIFIED`.
+
+## Primary-source conflict / 一手来源冲突
 
 When checked primary surfaces disagree:
 
@@ -106,18 +128,24 @@ When checked primary surfaces disagree:
 - do not select a convenient value without stronger evidence
 - narrow downstream interpretation to the common supported core
 
-A conflict is a provenance state, not a reason to erase the historical research record.
+A primary-source conflict lowers claim strength; it does not require erasing the historical research artifact.
 
 ## Temporal provenance / 时间溯源
 
-Research period, source version/date, and later correction time remain distinct.
+Research period and evidence time remain part of provenance.
 
-- later weaving does not backdate a research observation
-- moving text does not change its originating period
-- an erratum changes current interpretation, not the original historical timestamp
-- if persisted observation time precedes the material source event/version time, record a temporal conflict until stronger history resolves it
+Keep separate when relevant:
 
-## Historical generated research / 历史生成研究
+- source publication/version date
+- source check time
+- historical research period
+- later correction time
+
+Moving a W33 research chunk into another location does not turn it into July evidence.
+
+A later erratum can change current interpretation without pretending the correction existed at the earlier research time.
+
+## Generated research and current interpretation / 生成研究与当前解释
 
 Generated bilingual research is a historical evidence input, not final authority by itself.
 
@@ -125,20 +153,24 @@ Current verified-core interpretation may:
 
 - retain a claim
 - narrow its scope
-- downgrade evidence/source strength
-- correct version/date identity
-- mark a source-claim mismatch
-- preserve a source conflict
-- retire a claim from current authority
+- downgrade evidence strength
+- correct version/date metadata
+- record a source-claim mismatch
+- preserve a primary-source conflict
+- retire an unsupported stronger interpretation
 
-These corrections preserve the original artifact as historical provenance.
+A correction changes current interpretation, not the historical fact that the original artifact existed.
 
-## AI-use boundary / AI 使用边界
+## AI-assisted evidence work / AI 辅助证据工作
 
-AI-assisted drafting, translation, discovery, or consistency checking does not count as evidence by itself.
+AI systems may assist with source discovery, drafting, translation, and consistency checking.
 
-Material claims remain tied to public source identity, checked surface, assumptions, implementation state, and limitations.
+AI output is not evidence by itself.
 
-The public provenance object is therefore:
+Material statements remain tied to public source identity, checked source surface, assumptions, scope, implementation state, and limitations.
+
+## Public provenance object / 公开溯源对象
+
+The target public object is:
 
 `CLAIM + SOURCE_IDENTITY + VERSION + CHECKED_SURFACE + SCOPE + LIMITATION + CURRENT_STATUS`.
