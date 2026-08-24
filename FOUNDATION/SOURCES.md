@@ -205,10 +205,12 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2312.13910v3
-- Version date: 2023-12-21
+- Version date: 2024-07-17
+- v1 date: 2023-12-21
 - Authors: Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
 - URL: https://arxiv.org/abs/2312.13910
 - Use: group regret bounds for multi-agent model-based RL under limited communication range.
+- Verification boundary: exact v3/date identity corrected by the 2026-08-24 W34 post-hoc audit; theorem/formula scope remains independently reviewable.
 
 ## S27 — Optimal Regret Bounds for Collaborative Learning
 
@@ -220,15 +222,15 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Use: CExp$^2$ algorithm, mixed reward collaborative bandit problem formulation, and optimal $\mathcal{O}(\log(T))$ regret bound under bounded expected communication rounds.
 - Verification boundary: The bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.
 
-
 ## S28 — ADMM-Tracking Gradient for Distributed Optimization
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2309.14142v3
-- Version date: 2023-09-25
+- Version date: 2025-02-04
+- v1 date: 2023-09-25
 - URL: https://arxiv.org/abs/2309.14142
 - Use: Decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
-- Verification boundary: Guaranteed under strongly convex costs; requires ADMM dynamic consensus which may increase local computation relative to vanilla gradient tracking.
+- Verification boundary: exact v3/date identity corrected by the 2026-08-24 W34 post-hoc audit. The convergence result remains bounded by the paper's strongly convex setting and ADMM-based consensus assumptions.
 
 ## S29 — Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
 
@@ -254,11 +256,11 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2310.14685v2
-- Version date: 2023-10-23
+- Version date: 2024-01-14
 - v1 date: 2023-10-23
 - URL: https://arxiv.org/abs/2310.14685
 - Use: No-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
-- Verification boundary: Guarantees depend strictly on the existence of an optimal feasible policy with some slack and smoothness properties of the reward and constraint spaces in RKHS.
+- Verification boundary: exact v2/date identity corrected by the 2026-08-24 W34 post-hoc audit. Guarantees depend strictly on the existence of an optimal feasible policy with some slack and smoothness properties of the reward and constraint spaces in RKHS.
 
 ## S32 — On the Variational Interpretation of Mirror Play in Monotone Games
 
