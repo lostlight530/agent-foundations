@@ -43,7 +43,7 @@
 
 **ZH.** RAFA 的遗憾界和 CHMAS 的收敛结果只在各自形式模型与假设下成立，不能证明任意 LLM 智能体部署的收敛性、安全性或样本效率。
 
-**Scope and limits / 范围与局限:** Exact assumptions must accompany any reused formula or bound. / 复用任何公式或边界时必须同时保留精确假设。
+**Scope and limits / 范围与局限:** Exact assumptions must accompany any reused formula or bound. `STATIC_CHECKED` here is documentary/source review, not a local runtime experiment. / 复用公式或边界必须保留精确假设；此处 `STATIC_CHECKED` 仅指文档/来源核对，不是本地运行时实验。
 
 ## AF-ARCH-004 — Evaluators create evidence, not truth / 评估器产生证据而非真理
 
@@ -58,7 +58,7 @@
 
 **ZH.** 可执行评估器、轨迹检查和独立评审可以增强证据，但其覆盖率、误报、漏报、污染、奖励投机和评估意识仍属于结果的一部分。
 
-**Scope and limits / 范围与局限:** Passing a finite evaluator establishes only the tested properties; this repository's own validator is structural and documentary, not an agent evaluator. / 通过有限评估器只证明被检查属性；本仓自身 validator 属于结构/文档检查器，并不是智能体评估器。
+**Scope and limits / 范围与局限:** Passing a finite evaluator establishes only the tested properties; this repository's validator is structural/documentary, not an agent evaluator. / 通过有限评估器只证明被检查属性；本仓自身 validator 属于结构/文档检查器，并不是智能体评估器。
 
 ## AF-ARCH-005 — Constitutions are governed policies / 宪法是受治理的策略
 
