@@ -1,12 +1,12 @@
 # Agent Foundations — Verified Core / 可验证核心
 
-Status: repository evidence and architecture core
+Status: repository documentary/evidence core
 
 ## Purpose / 目的
 
-`FOUNDATION/**` is the compact documentary architecture, evidence, source, and provenance core of Agent Foundations.
+`FOUNDATION/**` is the compact evidence and architecture core of Agent Foundations.
 
-It is not an autonomous-agent runtime.
+The repository is primarily a theory, evidence, and documentary architecture base. It is **not** an implemented autonomous-agent runtime.
 
 External equations, papers, protocol mappings, pseudocode, and architecture analogies remain external/reference claims unless a concrete repository artifact implements the behavior.
 
@@ -30,25 +30,21 @@ Each claim separately declares state, evidence class, mapping, implementation st
 
 ### 2. Canonical source registry / 来源登记
 
-[SOURCES.md](./SOURCES.md) is the canonical source registry currently recognized by the repository validator.
+[SOURCES.md](./SOURCES.md) is the canonical source registry and currently contains the contiguous range `S01–S32`.
 
-Current contract:
+A source being registered does not establish theorem correctness, formula accuracy, experimental reproduction, or repository implementation.
 
-`S01–S32`.
+### 3. Claim vocabulary / Claim 词汇契约
 
-The registry includes corrected exact-version dates for affected August sources. Source registration does not mean the sourced mechanism is implemented locally.
+[claim.schema.json](./claim.schema.json) defines the machine-readable claim vocabulary:
 
-### 3. Claim vocabulary / 声明词汇
-
-`claim.schema.json` defines the machine-readable vocabulary for:
-
-- claim ID
-- claim state
+- Claim ID pattern
+- state
 - evidence class
 - mapping type
-- implementation state
-- validation state
-- sources
+- implementation status
+- validation status
+- source IDs
 - scope
 - limitations
 
@@ -59,30 +55,30 @@ The schema and the Markdown domain files are related documentary surfaces. Schem
 `validate.py` currently checks:
 
 - required verified-core files
-- claim headings and required metadata labels
-- unique Claim IDs
-- source references against the canonical S01–S32 registry
-- the contiguous S01–S32 source range
-- restricted absolute-overclaim phrases
-- action references where the repository workflow directory is present
-- protected-path changes when a base ref is supplied
+- claim-block presence
+- stable and unique Claim IDs
+- required metadata labels
+- references against canonical `S01–S32`
+- a restricted list of absolute-overclaim phrases
+- external action references for full-SHA form in existing workflow files
+- protected-path changes when an explicit comparison base is supplied
+- basic properties of `claim.schema.json` itself
 
-Its scope is structural/documentary.
+Important boundary:
 
-It does **not** verify:
+`validate.py` does **not** parse every Markdown claim into a JSON object and enforce every `claim.schema.json` enum or semantic relationship.
 
-- source-version identity
-- theorem correctness
-- equation transcription
-- translation equivalence
-- external experiment reproduction
-- runtime agent capability
+It also does not verify theorem meaning, formula transcription, source-version identity, translation equivalence, experimental reproduction, or agent behavior.
+
+Therefore:
+
+`STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
 
 ### 5. arXiv provenance helper / arXiv 溯源辅助
 
-[arxiv_probe.py](./arxiv_probe.py) verifies arXiv identity and submission-history version/date pairs.
+[arxiv_probe.py](./arxiv_probe.py) supports arXiv identity and submission-history version/date checks.
 
-It supports bibliographic provenance only. It does not certify theorem content or architecture mappings.
+It supports bibliographic provenance only. It does not certify theorem content, formulas, experimental validity, or architecture mappings.
 
 ### 6. Evidence, provenance, and review semantics / 证据、溯源与审核语义
 
@@ -90,59 +86,54 @@ It supports bibliographic provenance only. It does not certify theorem content o
 - [PROVENANCE.md](./PROVENANCE.md) — exact-version and temporal provenance
 - [REVIEW.md](./REVIEW.md) — public review-state vocabulary
 
-These files can narrow current interpretation but do not execute agent behavior.
+These are documentary interpretation surfaces, not execution engines.
 
-### 7. Historical research and correction / 历史研究与纠正
+### 7. Historical generated research / 历史研究
 
-`docs/en/**` and `docs/zh/**` preserve the bilingual research stream.
+`docs/en/**` and `docs/zh/**` preserve the broader bilingual research history.
 
-Explicit August corrections include:
+Historical text remains evidence of what was generated/recorded at that time. Later errata can narrow its current interpretation without pretending the historical wording never existed.
+
+### 8. Explicit August corrections / 8 月显式纠错
 
 - [`../docs/AUGUST_2026_W33_ERRATA.md`](../docs/AUGUST_2026_W33_ERRATA.md)
 - [`../docs/AUGUST_2026_W34_ERRATA.md`](../docs/AUGUST_2026_W34_ERRATA.md)
 - [`../docs/monthly/2026-08-through-23-strategic-blueprint.md`](../docs/monthly/2026-08-through-23-strategic-blueprint.md)
 
-A correction supersedes the conflicting current interpretation without pretending the original generated text was originally correct.
+These records correct source/version or evidence interpretation while preserving historical research artifacts.
 
-### 8. Presentation surface / 展示层
+## Current authority precedence / 当前解释优先级
 
-`index.html` is a presentation surface. It does not determine verified-core implementation state or evidence strength.
+When historical generated research conflicts with a stronger explicit correction:
 
-## Interpretation precedence / 解释优先级
+1. explicit erratum for the affected claim/source field
+2. current exact source identity in `SOURCES.md`
+3. `EVIDENCE.md`, `PROVENANCE.md`, and `REVIEW.md` for evidence semantics
+4. domain claim maps for bounded architecture interpretation
+5. original generated bilingual material for historical context
 
-For an affected historical claim:
+This precedence changes current interpretation only.
 
-1. explicit erratum for that claim/source metadata
-2. current canonical source identity in `SOURCES.md`
-3. `EVIDENCE.md`, `PROVENANCE.md`, and `REVIEW.md`
-4. bounded domain claim map
-5. original generated research for historical context
+## Reading order / 阅读顺序
 
-This is interpretation precedence, not runtime execution precedence.
+1. [EVIDENCE.md](./EVIDENCE.md)
+2. [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. [MEMORY.md](./MEMORY.md)
+4. [TOOLS.md](./TOOLS.md)
+5. [COLLABORATION.md](./COLLABORATION.md)
+6. [SOURCES.md](./SOURCES.md)
+7. [PROVENANCE.md](./PROVENANCE.md)
+8. [REVIEW.md](./REVIEW.md)
+9. August errata/stage synthesis when historical reconciliation is relevant
 
-## Core invariants / 核心不变量
+## Repository-wide implementation classification / 仓库实现定位
 
-- external research never automatically becomes repository implementation
-- mathematical results retain their assumptions/domain
-- source identity and claim support are separate
-- source identity and theorem/formula verification are separate
-- explicit arXiv versions use the date belonging to the cited version
-- mechanism equations are not promoted into formal bounds without the supplying theorem
-- unresolved primary-source conflicts remain conflicts
-- historical period/provenance is not rewritten by later weaving
-- implementation state and evidence state remain distinct
-- the validator's structural checks are not semantic truth checks
-
-## Repository status / 仓库状态
-
-The strongest current implementation description is:
+The strongest supported repository-wide implementation statement is:
 
 `DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
 
-The domain documents contain many `REFERENCE_ONLY`, `NOT_IMPLEMENTED`, and `PROPOSED` concepts by design.
+Not:
 
-Formal August month closure remains open until the natural month closes.
+`IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
 
-Current stage synthesis:
-
-[`../docs/monthly/2026-08-through-23-strategic-blueprint.md`](../docs/monthly/2026-08-through-23-strategic-blueprint.md)
+Formal August monthly closure remains open in the current partial-month stage record.
