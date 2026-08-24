@@ -12,7 +12,7 @@ This file records source-identity, theorem-scope, formula-scope, and temporal-pr
 
 Where it conflicts with bibliographic metadata, evidence-strength wording, theorem interpretation, or period attribution in the historical research, this erratum controls the **current interpretation** while preserving the original artifact as history.
 
-本文件只记录可公开核验的来源、版本、定理范围与时间溯源事实，不公开私有提示、隐藏推理、未来控制策略或未发布的自动化设计。
+本文件只记录可公开核验的来源、版本、定理范围与时间溯源事实。
 
 ---
 
@@ -271,7 +271,7 @@ This does not certify every analogy, architecture mapping, long-form equation, o
 For the affected W33 material:
 
 1. this erratum controls the explicit W33 corrections
-2. current `FOUNDATION/SOURCES*.md` controls exact source identity where registered
+2. current `FOUNDATION/SOURCES.md` controls exact source identity where registered
 3. `FOUNDATION/PROVENANCE.md` controls source/version semantics
 4. original bilingual research remains historical context
 
