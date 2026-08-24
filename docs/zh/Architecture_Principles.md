@@ -891,3 +891,41 @@ $V (x(t)) \leq e^{ - \mu t} V(x_0)$
 
 **Scope and limits / 范围与局限:**
 指数收敛率严格要求底层博弈相对于特定的聚合镜像映射是强单调的。它在理论上不能无条件推广到非单调的多智能体环境、任意博弈拓扑结构，或超出了论文所分析的方差范围的具有不可预测随机反馈的环境。
+
+<!-- DAILY_RESEARCH_CHUNK -->
+### 重尾噪声下的分布式随机优化 (Distributed Stochastic Optimization under Heavy-Tailed Noises)
+
+**System Container:** 架构原则 (Architecture Principles)
+**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
+
+**原始问题 (Original Problem):**
+智能体在重尾梯度噪声下执行分布式优化，这种噪声违反了标准的有界方差假设。典型的例子包括具有无限方差的帕累托分布噪声，这使得现有的分布式随机优化算法失效，或过度依赖集中式服务器。
+
+**核心假设 (Core Assumptions):**
+1. 强连通的通信图（双随机权重矩阵）。
+2. 目标函数是连续可微且凸的。
+3. 约束集是非空、闭合且凸的，并且在其上的梯度是有界的。
+
+**数学机制 (Mathematical Mechanism - 数学更新规则):**
+共识平均和梯度裁剪步长的结合。智能体 $i$ 的分布式更新律为：
+$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
+其中 $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$，裁剪后的梯度估计量为 $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$。
+
+**收敛边界 (Convergence Bounds):**
+如果梯度下降步长 $\alpha_k$ 和梯度裁剪步长 $\tau_k$ 满足特定条件（例如，$\sum \alpha_k = \infty$，$\sum \alpha_k^2 \tau_k^{2} < \infty$），该算法在概率为1的情况下保证收敛到最优解。
+
+**适用范围 (Applicability):**
+在不依赖集中式服务器进行协调的情况下，遇到重尾梯度噪声（如帕累托分布）的多智能体系统。
+
+**局限 (Limitations):**
+假设约束集上的梯度是有界的。收敛保证是概率性的，并与强凸设置紧密相关。
+
+**架构映射 (Architecture Mapping):**
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+**初学者类比 (Practical Analogies):**
+就像一个探险小队，有些成员偶尔会给出极其离谱的错误方向（重尾噪声）。通过同意忽略过于极端的建议（梯度裁剪），并定期与邻居平均他们的位置（共识），小队最终仍能汇聚到正确的宝藏位置。
+<!-- DAILY_RESEARCH_CHUNK -->

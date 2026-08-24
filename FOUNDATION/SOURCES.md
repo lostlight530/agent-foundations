@@ -271,3 +271,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2403.15636
 - Use: Variational interpretation of mirror play in monotone games, finite-time quantification of closed-loop equilibrium path, and exponential convergence when the game is strongly monotone.
 - Verification boundary: Guarantees depend strictly on the game being strongly monotone with respect to the aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings.
+
+## S33 — Distributed Stochastic Optimization under Heavy-Tailed Noises
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.15847v3
+- Version date: 2023-12-26
+- Authors: Chao Sun, Huiming Zhang, Bo Chen, Li Yu
+- URL: https://arxiv.org/abs/2312.15847
+- Use: distributed optimization algorithm using consensus averaging and gradient clipping step sizes under heavy-tailed noises; convergence to the optimal solution with probability 1.
+- Verification boundary: Guarantees depend strictly on a strongly connected communication graph, convex objective function, and bounded gradients over the constraint set. It does not generalize unconditionally to all non-convex multi-agent systems without centralized servers.
