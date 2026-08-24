@@ -108,14 +108,14 @@
 ## AF-ARCH-008 — Trajectory and outcome are complementary evidence / 轨迹与结果是互补证据
 
 - **State / 状态:** `SUPPORTED`
-- **Evidence / 证据:** `E1_PRIMARY_STANDARD`
+- **Evidence / 证据:** `E5_BACKGROUND`
 - **Mapping / 映射:** `DIRECT_REQUIREMENT`
 - **Implementation / 实现:** `REFERENCE_ONLY`
 - **Validation / 验证:** `DOCUMENT_REVIEW_ONLY`
-- **Sources / 来源:** S35, S36 in `SOURCES_2026_08_24.md`
+- **Sources / 来源:** S35 (`E1_PRIMARY_STANDARD`) and S36 (`E5_BACKGROUND`) in `SOURCES_2026_08_24.md`
 
 **EN.** A trace or transcript describes how an execution unfolded; an outcome describes the resulting environment or artifact state; graders interpret selected properties of one or both. None of these should silently substitute for the others.
 
 **ZH.** Trace 或 transcript 描述执行过程，outcome 描述最终环境或产物状态，grader 对其中部分属性进行判断。三者不能静默互相替代。
 
-**Scope and limits / 范围与局限:** OpenAI Agents SDK tracing and Anthropic's agent-eval decomposition are external reference patterns. They do not prove that a particular trace is complete or that an outcome is correct. / OpenAI Agents SDK tracing 与 Anthropic agent eval 分解是外部参考模式，并不证明某条轨迹必然完整或某个结果必然正确。
+**Scope and limits / 范围与局限:** OpenAI Agents SDK tracing supplies a first-party SDK trace/span reference, while Anthropic's task/trial/grader/trajectory/outcome/harness decomposition is first-party engineering guidance rather than a formal standard. The combined architecture claim therefore keeps the lower `E5_BACKGROUND` evidence class instead of inheriting the strongest source class. Neither source proves that a particular trace is complete or that an outcome is correct. / OpenAI Agents SDK tracing 提供一方 SDK 的 trace/span 参照；Anthropic 的 task/trial/grader/trajectory/outcome/harness 分解属于一方工程指导而非正式标准。因此组合后的架构声明保留较低的 `E5_BACKGROUND` 证据等级，而不继承其中最强来源等级。两者都不能证明某条轨迹必然完整或某个结果必然正确。
