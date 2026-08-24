@@ -31,7 +31,7 @@ Generated `docs/en/**` and `docs/zh/**` files preserve research history and may 
 
 For affected August material, use the following precedence when sources conflict:
 
-1. explicit August errata for the affected claim
+1. explicit August errata for the affected claim, including W33 and W34 correction records
 2. `SOURCES.md` plus current source supplements for exact source/version identity
 3. `EVIDENCE.md`, `PROVENANCE.md`, and `REVIEW.md` for claim semantics
 4. `ARCHITECTURE.md` / domain maps for bounded repository interpretation
@@ -39,7 +39,7 @@ For affected August material, use the following precedence when sources conflict
 
 对于受影响的 8 月材料，来源或解释冲突时按以下优先级读取：
 
-1. 针对该声明的显式 8 月勘误
+1. 针对该声明的显式 8 月勘误，包括 W33 与 W34 纠正记录
 2. `SOURCES.md` 与当前来源增量，用于准确来源/版本身份
 3. `EVIDENCE.md`、`PROVENANCE.md` 与 `REVIEW.md`，用于声明与证据语义
 4. `ARCHITECTURE.md` / 各领域映射，用于有边界的仓库解释
@@ -60,11 +60,13 @@ This authority rule applies to committed repository artifacts only. It is not ev
 3. [MEMORY.md](./MEMORY.md) — memory lifecycle and limits / 记忆生命周期与边界
 4. [TOOLS.md](./TOOLS.md) — tool authority, observability, recovery / 工具权限、可观测性与恢复
 5. [COLLABORATION.md](./COLLABORATION.md) — multi-agent coordination and failure propagation / 多智能体协作与故障传播
-6. [SOURCES.md](./SOURCES.md) — historical primary-source registry S01–S32 / 历史一手来源登记 S01–S32
+6. [SOURCES.md](./SOURCES.md) — historical primary-source registry S01–S32, including corrected exact-version dates for S26/S28/S31 / 历史一手来源登记 S01–S32，并包含 S26/S28/S31 当前已纠正的精确版本日期
 7. [SOURCES_2026_08_24.md](./SOURCES_2026_08_24.md) — current protocol/SDK/evaluation source delta S33–S37 / 当前协议、SDK 与评估来源增量 S33–S37
 8. [PROVENANCE.md](./PROVENANCE.md) — reproducibility, arXiv version gates, temporal provenance, and AI-use disclosure / 可复现性、arXiv 版本门、时间溯源与 AI 使用披露
 9. [REVIEW.md](./REVIEW.md) — independent post-hoc review states and privacy boundary / 独立事后审核状态与隐私边界
-10. [specs/2026-08-24-state-observability-boundary-design.md](./specs/2026-08-24-state-observability-boundary-design.md) — non-implemented architecture design candidate / 未实现的架构设计候选
+10. [`../docs/AUGUST_2026_W33_ERRATA.md`](../docs/AUGUST_2026_W33_ERRATA.md) — W33 post-hoc source/theorem reconciliation / W33 事后来源与定理纠正
+11. [`../docs/AUGUST_2026_W34_ERRATA.md`](../docs/AUGUST_2026_W34_ERRATA.md) — W34 exact-version provenance recurrence and correction / W34 精确版本溯源复发与纠正
+12. [specs/2026-08-24-state-observability-boundary-design.md](./specs/2026-08-24-state-observability-boundary-design.md) — non-implemented architecture design candidate / 未实现的架构设计候选
 
 Stage synthesis / 阶段综合：[`../docs/monthly/2026-08-through-23-strategic-blueprint.md`](../docs/monthly/2026-08-through-23-strategic-blueprint.md)
 
@@ -86,6 +88,8 @@ Helper: [arxiv_probe.py](./arxiv_probe.py) verifies arXiv identity and submissio
 - A mechanism equation is not promoted to a formal error/convergence bound without the theorem that supplies the bound.
 - Primary-source disagreements are preserved as conflicts, not silently resolved by convenience.
 - Weekly weaving preserves the original research period; moving text does not rewrite temporal provenance.
+- A Weekly conflict audit does not independently certify Daily source identity unless the exact source/version check is itself evidenced.
+- Reviewer-side policy or tooling does not imply that Jules consumed or enforced that control during generation.
 - Session, task, context, memory, attempt, and external-state scopes are not collapsed into one unqualified `state` claim.
 - Trace/transcript, outcome, grader result, and reviewer decision remain separate evidence surfaces.
 - Independent review remains non-operative and must not modify Jules/GPT automation, GitHub Actions, CI, deployment, repository memory, or runtime behavior.
@@ -103,6 +107,8 @@ Helper: [arxiv_probe.py](./arxiv_probe.py) verifies arXiv identity and submissio
 - 机制公式在没有对应定理提供边界前，不得升级为形式化误差界或收敛界。
 - 一手来源内部冲突必须保留为冲突，不能按方便程度静默选值。
 - Weekly 编织必须保留原研究周期；移动文本不能改写时间溯源。
+- Weekly 冲突审计只有在精确来源/版本核验本身有证据时，才能独立证明 Daily 的来源身份已验证。
+- reviewer 侧规则或工具存在，不代表 Jules 在生成阶段读取或执行了该控制。
 - Session、Task、Context、Memory、执行 Attempt 与外部权威状态不能被压成一个没有限定的 `state` 声明。
 - Trace/transcript、Outcome、Grader 结果与 Reviewer 决策必须保持为不同证据面。
 - 独立审核保持非执行性，不修改 Jules/GPT 自动化、GitHub Actions、CI、部署、仓库记忆或运行时行为。
@@ -118,15 +124,15 @@ The four domain documents are specifications and evidence maps. Their default im
 
 四个领域文档是规范与证据映射。其默认实现状态为 `NOT_IMPLEMENTED` 或 `REFERENCE_ONLY`。未来运行时可以实现这些契约，但本仓不声称当前已经实现。
 
-AF-ARCH-007 and AF-ARCH-008 add explicit state-scope and trajectory/outcome evidence boundaries using current primary standards as references. They do not add MCP, A2A, ADK, or OpenAI SDK dependencies.
+AF-ARCH-007 and AF-ARCH-008 add explicit state-scope and trajectory/outcome evidence boundaries using current sources as references. AF-ARCH-008 is deliberately calibrated to the weaker applicable evidence class where a combined claim uses both a formal SDK reference and first-party engineering guidance. These records do not add MCP, A2A, ADK, or OpenAI SDK dependencies.
 
-AF-ARCH-007 与 AF-ARCH-008 使用当前一手标准作为参照，补充了显式的状态作用域边界，以及 trajectory/outcome 证据边界。它们不会因此引入 MCP、A2A、ADK 或 OpenAI SDK 依赖。
+AF-ARCH-007 与 AF-ARCH-008 使用当前来源作为参照，补充显式状态作用域边界以及 trajectory/outcome 证据边界。AF-ARCH-008 在组合声明同时依赖正式 SDK 资料与一方工程指导时，刻意采用适用的较弱证据等级，而不是继承最强来源等级。这些记录不会因此引入 MCP、A2A、ADK 或 OpenAI SDK 依赖。
 
 ## Current monthly navigation / 当前月度入口
 
-`docs/en/Monthly_Blueprint_Current.md` and `docs/zh/Monthly_Blueprint_Current.md` now point to the 2026-08-01 through 2026-08-23 provisional stage rather than the obsolete 2024-05 narrative. The formal August monthly lifecycle remains open until the natural month closes.
+`docs/en/Monthly_Blueprint_Current.md` and `docs/zh/Monthly_Blueprint_Current.md` point to the 2026-08-01 through 2026-08-23 provisional stage rather than the obsolete 2024-05 narrative. The stage synthesis now records the W34 source-version reconciliation and explicit Jules-versus-reviewer ownership boundary. The formal August monthly lifecycle remains open until the natural month closes.
 
-`docs/en/Monthly_Blueprint_Current.md` 与 `docs/zh/Monthly_Blueprint_Current.md` 当前指向 2026-08-01 至 2026-08-23 的 provisional 阶段，而不再让过时的 2024-05 叙事冒充 Current。正式 8 月月度生命周期仍保持 `OPEN`，直到自然月真正闭合。
+`docs/en/Monthly_Blueprint_Current.md` 与 `docs/zh/Monthly_Blueprint_Current.md` 当前指向 2026-08-01 至 2026-08-23 的 provisional 阶段，而不再让过时的 2024-05 叙事冒充 Current。阶段综合现已记录 W34 来源版本纠正，并明确 Jules 与 reviewer 的控制平面边界。正式 8 月月度生命周期仍保持 `OPEN`，直到自然月真正闭合。
 
 ## Documentation-only maintenance / 纯文档维护
 
