@@ -16,9 +16,11 @@ This is a documentary foundation. A reviewer must be able to locate each Claim I
 
 本目录属于文档型基础体系。评审者必须能够定位每个 Claim ID、恢复其一手来源与准确引用版本、区分外部发现与仓库实现、识别真正核验过的命题/定理，并在存在可执行产物时重新运行确定性仓库检查。
 
-Supported environment: Python 3.12 or 3.14, Git, and no third-party Python packages.
+Reproduction candidates include Python 3.12 or 3.14, Git, and no third-party Python packages. A Python version becomes a **verified compatibility environment only when the relevant command/test was actually executed for the reviewed revision and the result was retained**. This policy does not imply a CI matrix or that either version was run for a documentation-only change.
 
-支持环境：Python 3.12 或 3.14、Git，不依赖第三方 Python 包。
+可复现候选环境包括 Python 3.12 或 3.14、Git，并且不依赖第三方 Python 包。只有当相关命令/测试确实在被审核版本上执行且结果被保留时，某个 Python 版本才能被表述为**已验证兼容环境**。本策略不意味着存在 CI 矩阵，也不意味着纯文档变更已经运行这些版本。
+
+Possible reviewer commands, when executable validation is in scope:
 
 ```bash
 python FOUNDATION/validate.py
@@ -26,13 +28,15 @@ python -m unittest FOUNDATION/test_contract.py -v
 python FOUNDATION/validate.py --base-ref origin/main
 ```
 
+Listing a command is a reproduction path, not evidence that the command ran. Execution evidence must record the actual command, revision/environment, result, and untested boundary.
+
 The validator checks required files, claim metadata, unique IDs, registered source references, JSON Schema structure, restricted overclaims, complete GitHub Action SHA pinning, and protected paths when a base ref is supplied.
 
 验证器检查必需文件、声明元数据、唯一 ID、已登记来源引用、JSON Schema 结构、受限过度声明、GitHub Action 完整 SHA 固定，以及提供基准引用时的保护路径。
 
-It does not prove semantic truth, mathematical correctness, translation quality, source-version identity, formula transcription, theorem interpretation, or external experimental reproduction unless those items are independently checked and recorded.
+It does not prove semantic truth, mathematical correctness, translation quality, source-version identity, formula transcription, theorem interpretation, external experimental reproduction, or that any CI/workflow executed unless those items are independently checked and recorded.
 
-它不能自动证明语义真伪、数学正确性、翻译质量、来源版本身份、公式抄录、定理解释或外部实验复现；这些项目必须独立核验并记录。
+它不能自动证明语义真伪、数学正确性、翻译质量、来源版本身份、公式抄录、定理解释、外部实验复现，也不能自动证明任何 CI/workflow 已执行；这些项目必须独立核验并记录。
 
 ## Source identity workflow / 来源身份流程
 
@@ -57,6 +61,8 @@ An explicit `vN` citation should not enter the independently verified core witho
 This is a reviewer-side gate. It is not a claim that Jules automatically runs `arxiv_probe.py` or applies the same gate in its SOP task unless its own task instructions explicitly require that behavior.
 
 The base arXiv page's first-submission date is not a substitute for the date of a later cited version.
+
+The W33 and W34 August audits are reference failures for this rule: later-version identifiers were paired with v1 dates in generated Jules research even after reviewer-side provenance tooling existed. That recurrence is evidence of control-plane separation, not evidence that Jules consumed the reviewer gate.
 
 ## Claim verification workflow / 声明核验流程
 
@@ -96,6 +102,7 @@ Research period is part of provenance.
 - moving content into an older section does not make it evidence from that older period
 - a July sync heading must not absorb August/W33 findings without an explicit new-period marker
 - errata/reconciliation may supersede interpretation without erasing the original historical artifact
+- Daily/Weekly generated history and later GPT/independent-review corrections remain separate provenance layers
 
 These are independent audit and verified-core rules; they do not alter Jules task cadence or prompts.
 
