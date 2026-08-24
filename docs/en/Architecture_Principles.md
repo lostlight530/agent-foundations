@@ -891,3 +891,41 @@ Imagine multiple delivery companies (agents) trying to optimize their routes wit
 
 **Scope and limits / 范围与局限:**
 The exponential convergence rate strictly requires the underlying game to be strongly monotone with respect to the specific aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings, arbitrary game topologies, or environments with unpredictable stochastic feedback outside the bounded variances analyzed in the paper.
+
+<!-- DAILY_RESEARCH_CHUNK -->
+### Distributed Stochastic Optimization under Heavy-Tailed Noises
+
+**System Container:** Architecture Principles
+**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
+
+**Original Problem:**
+Agents perform distributed optimization under heavy-tailed gradient noises, which violate standard bounded variance assumptions. Typical examples include Pareto distribution noise with infinite variance, rendering existing distributed stochastic optimization algorithms ineffective or overly reliant on centralized servers.
+
+**Core Assumptions:**
+1. Strongly connected communication graph (doubly stochastic weight matrix).
+2. The objective function is continuously differentiable and convex.
+3. The constraint set is nonempty, closed, and convex, with bounded gradients over it.
+
+**Mathematical Mechanism (Distributed Update Rule):**
+Combination of consensus averaging and gradient clipping step sizes. The distributed updating law for agent $i$ is:
+$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
+where $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$, and the clipped gradient estimator is $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$.
+
+**Convergence Bounds:**
+The algorithm ensures convergence to the optimal solution with probability 1 if the gradient descent step-size $\alpha_k$ and the gradient clipping step-size $\tau_k$ satisfy certain conditions (e.g., $\sum \alpha_k = \infty$, $\sum \alpha_k^2 \tau_k^{2} < \infty$).
+
+**Applicability:**
+Multi-agent systems encountering heavy-tailed gradient noises (e.g., Pareto distribution) without relying on a centralized server for coordination.
+
+**Limitations:**
+Assumes the gradient over the constraint set is bounded. The convergence guarantees are probabilistic and tied to the strongly convex setting.
+
+**Architecture Mapping:**
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+**For Beginners: Practical Analogies:**
+Like a team of explorers where some members occasionally give wildly incorrect directions (heavy-tailed noise). By agreeing to ignore overly extreme advice (gradient clipping) and regularly averaging their positions with neighbors (consensus), the team eventually converges on the correct treasure location.
+<!-- DAILY_RESEARCH_CHUNK -->
