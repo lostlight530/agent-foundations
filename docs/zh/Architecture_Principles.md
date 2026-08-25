@@ -929,3 +929,22 @@ $$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\r
 **初学者类比 (Practical Analogies):**
 就像一个探险小队，有些成员偶尔会给出极其离谱的错误方向（重尾噪声）。通过同意忽略过于极端的建议（梯度裁剪），并定期与邻居平均他们的位置（共识），小队最终仍能汇聚到正确的宝藏位置。
 <!-- DAILY_RESEARCH_CHUNK -->
+
+<!-- DAILY_RESEARCH_CHUNK -->
+### 竞争网络中 Q-Learning 动态的稳定性边界
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
+- **Problem Context:** 在非严格零和博弈的竞争性网络中，多智能体学习经常出现发散或混沌行为，这引发了关于系统扩展极限的疑问。
+- **Core Assumptions:** 竞争博弈通过服从正态分布的巨大收益矩阵建模，假设智能体之间存在负的收益相关性（$\Gamma < 0$），并在行动数量 $n \rightarrow \infty$ 的热力学极限下进行评估。
+- **Mathematical Mechanism (数学更新规则):** Q-Learning 有效动态中不稳定性出现的条件由下式约束：
+  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
+  其中 $N_0$ 是每个智能体的邻居数量，$T$ 是探索率，$\bar{x}$ 是平均动作概率的不动点，$\chi$ 对时间上的有效响应进行积分。
+- **Convergence / Behavior Bound:** 推导的稳定性边界表明，稳定收敛的条件严格取决于局部邻域大小（$N_0$）和博弈的竞争相关性（$\Gamma$），而完全独立于网络中智能体的总数（$N$）。
+- **Scope & Applicability:** 适用于在固定度连接和对称竞争交互下，使用类似 Q-Learning 的探索-利用平衡机制的互联智能体网络。
+- **Limitations:** 该推导严重依赖于无限动作极限和随机矩阵理论假设（高斯收益），这可能无法完美反映高度结构化、动作有限的现实世界 LLM 智能体竞争博弈。
+- **Agent Architecture Mapping (架构映射状态):** CONCEPTUAL_MAPPING。它在概念上支持去中心化多智能体拓扑的设计：通过限制每个智能体的直接竞争交互数量（$N_0$），而不是限制全局系统规模来维持稳定。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners (初学者类比):** 想象市场中有一群相互竞争的交易员。他们策略的混乱和不可预测性并不取决于世界上共有多少交易员，而仅仅取决于每个交易员直接关注多少个竞争对手。只要每个交易员只盯着固定的一小部分对手，市场就可以无限扩张而保持稳定。
+- **Evidence Status:** PAPER_ONLY
