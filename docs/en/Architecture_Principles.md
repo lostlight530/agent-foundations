@@ -929,3 +929,22 @@ Assumes the gradient over the constraint set is bounded. The convergence guarant
 **For Beginners: Practical Analogies:**
 Like a team of explorers where some members occasionally give wildly incorrect directions (heavy-tailed noise). By agreeing to ignore overly extreme advice (gradient clipping) and regularly averaging their positions with neighbors (consensus), the team eventually converges on the correct treasure location.
 <!-- DAILY_RESEARCH_CHUNK -->
+
+<!-- DAILY_RESEARCH_CHUNK -->
+### Stability Boundary of Q-Learning Dynamics in Competitive Networks
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
+- **Problem Context:** Multi-agent learning in competitive network games often diverges or exhibits chaotic behavior outside of strictly zero-sum settings, raising questions about scaling limits.
+- **Core Assumptions:** The competitive game is modeled via large payoff matrices drawn from a normal distribution with negative payoff correlation between agents ($\Gamma < 0$), evaluated in the thermodynamic limit where the number of actions $n \rightarrow \infty$.
+- **Mathematical Mechanism (Mathematical Update Rule):** The onset of instability in the effective dynamics of Q-Learning is governed by the condition:
+  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
+  where $N_0$ is the number of neighbors per agent, $T$ is the exploration rate, $\bar{x}$ is the fixed point of the average action probability, and $\chi$ integrates the effective response over time.
+- **Convergence / Behavior Bound:** The derived stability boundary demonstrates that the condition for stable convergence is strictly a function of the local neighborhood size ($N_0$) and the game's competitive correlation ($\Gamma$), completely independent of the total number of agents ($N$) in the network.
+- **Scope & Applicability:** Applies to interconnected agent networks using Q-Learning-like exploration-exploitation balancing under fixed-degree connectivity and symmetric competitive interactions.
+- **Limitations:** The derivation relies heavily on the infinite-action limit and random matrix theory assumptions (Gaussian payoffs), which may not perfectly reflect highly structured, finite-action real-world LLM agent competitive games.
+- **Agent Architecture Mapping (Architecture Status):** CONCEPTUAL_MAPPING. It can conceptually support the design of decentralized multi-agent topologies by bounding the number of direct competitive interactions ($N_0$) per agent rather than restricting the global system size.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners (Practical Analogy):** Imagine a group of competing traders in a market. The chaos and unpredictability of their strategies don't depend on how many total traders exist in the world, but solely on how many direct competitors each trader monitors. As long as each trader only watches a small fixed number of rivals, the market can grow infinitely large while remaining stable.
+- **Evidence Status:** PAPER_ONLY

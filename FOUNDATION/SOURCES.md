@@ -281,3 +281,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.15847
 - Use: distributed optimization algorithm using consensus averaging and gradient clipping step sizes under heavy-tailed noises; convergence to the optimal solution with probability 1.
 - Verification boundary: Guarantees depend strictly on a strongly connected communication graph, convex objective function, and bounded gradients over the constraint set. It does not generalize unconditionally to all non-convex multi-agent systems without centralized servers.
+
+## S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.11943v1
+- Version date: 2023-12-19
+- Authors: Aamal Hussain, Francesco Belardinelli
+- URL: https://arxiv.org/abs/2312.11943
+- Use: sufficient condition for the onset of instability of Q-Learning dynamics in competitive network games, demonstrating stability dependence on network connectivity rather than total agent count.
+- Verification boundary: Guarantees depend strictly on the Gaussian competitive game parameterization (correlation $\Gamma < 0$) and the large matrix thermodynamic limit ($n \rightarrow \infty$). It does not scale to generalized cooperative topologies or arbitrary non-stationary environments.
