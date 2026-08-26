@@ -291,3 +291,13 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.11943
 - Use: sufficient condition for the onset of instability of Q-Learning dynamics in competitive network games, demonstrating stability dependence on network connectivity rather than total agent count.
 - Verification boundary: Guarantees depend strictly on the Gaussian competitive game parameterization (correlation $\Gamma < 0$) and the large matrix thermodynamic limit ($n \rightarrow \infty$). It does not scale to generalized cooperative topologies or arbitrary non-stationary environments.
+
+## S35 — Distributed Optimization via Kernelized Multi-armed Bandits
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.04719v1
+- Version date: 2023-12-07
+- Authors: Kanishk Gujral, Senthilnath J
+- URL: https://arxiv.org/abs/2312.04719
+- Use: sub-linear regret bounds for kernelized decentralized global optimization, leveraging a running consensus of local Upper Confidence Bounds to maintain data privacy.
+- Verification boundary: Convergence bounds depend tightly on the RKHS norm constraint and the second largest eigenvalue of the network's Perron matrix. The multi-stage delayed approach incurs static action phases, scaling boundedly only under synchronized stage progression.
