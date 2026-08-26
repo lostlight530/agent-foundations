@@ -1877,3 +1877,28 @@ Implementation Status: EVIDENCE_INSUFFICIENT
 Test Status: EVIDENCE_INSUFFICIENT
 Analogy for PHGD: 想象几位蒙眼的人（智能体）试图在崎岖复杂的山脉（非凸控制地形）中找到最低点。如果他们只是在局部往下走，可能会永远卡在随机的沟壑中或相互碰撞。然而，在崎岖的地表下，这座山实际上呈现出一个平滑的简单碗状（隐藏的单调结构）。通过使用一种专门的指南针（预处理矩阵）在数学上消除地表扭曲，他们可以像在平滑的碗面上一样导航，保证最终能在一个绝对谷底（纳什均衡）相遇，而不是漫无目的地徘徊。
 Evidence Status: CONCEPTUAL_MAPPING
+
+<!-- DAILY_RESEARCH_CHUNK -->
+### 基于核化多臂老虎机的分布式优化
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
+- **原始论文问题:** 去中心化网络中的全局优化问题，其中局部奖励函数是非凸的、未知的且评估成本高昂，要求智能体在不共享其私有局部函数、估计值或动作的情况下，仅使用带噪声的老虎机反馈来协作最大化局部函数的平均值。
+- **核心假设:** 每个智能体的局部未知目标函数在再生核希尔伯特空间（RKHS）中具有较小的有界范数，并且通信图是连通的。
+- **数学机制:** 多智能体 IGP-UCB（MA-IGP-UCB）算法利用通信网络上的运行共识来估计核化函数的全局置信上限，从而通过图的 Perron 矩阵的谱特性有效地限制累积遗憾。
+- **公式与代码分类:**
+  - **收敛界:** 对于完全连通图，该算法以高概率实现 $\oo^{*}(\sqrt{T}(B\sqrt{\gamma_T}+\gamma_T))$ 的遗憾界。对于一般连通图，累积遗憾受限于：
+    $$ R(T) \leq 4\beta_T \left(N+ \frac{2(N-1)N|\lambda_2|}{1-|\lambda_2|}\right) \sqrt{4T\lambda\gamma_T} + \frac{N(N-1)B|\lambda_2|^{2}}{1-|\lambda_2|} + 4B $$
+    其中 $\lambda_2$ 是图 $\mathcal{G}$ 的 Perron 矩阵的第二大特征值（绝对值）。
+- **适用范围:** 需要在任意连通图上进行全局函数优化的分布式机器学习和传感器网络，其中本地智能体不能或不愿共享私有局部观测和动作。
+- **局限性:** 由于通信延迟，单步算法的遗憾界与 $N^2$ 的缩放关系较差。多阶段延迟扩展（MAD-IGP-UCB）将其降低到 $N$，但代价是智能体在各个阶段固定动作，从而在延迟区间内产生恒定遗憾。
+- **Agent 架构映射:** CONCEPTUAL_MAPPING。为 Collaboration System 提供了一种机制，多个智能体可以完全通过交换其局部代理模型的置信上限来优化共享的全局任务，从而避免集中式数据池化。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT
+- **仓库测试状态:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象一组厨师试图共同完善一份食谱。每位厨师只能接触到几个当地的品尝者（他们的私人奖励）。他们不分享秘密配方，也不告诉大家当地品尝者的评价（这侵犯了隐私），而只分享他们对食谱好坏的数学“置信度得分”。通过不断地平均这些得分，整个团队最终锁定了世界上最好的食谱。
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+<!-- DAILY_RESEARCH_CHUNK -->
