@@ -459,3 +459,29 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）。如果你学到了新的一课，你只更新这四本桌上书籍的分数。这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉。
+
+
+### Daily Research Chunk: RAFA 后验采样遗憾界 (RAFA Posterior Sampling Regret Bound)
+
+- **系统容器 (System Container)**: Memory System
+- **前沿来源 (Frontier Source)**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
+- **原始问题 (Original Problem)**: 如何将大型语言模型 (LLM) 的推理能力转化为现实世界中的行动，同时提供可证明的样本效率保证并最小化与环境的交互次数，仍然是一个挑战。
+- **核心假设 (Core Assumptions)**:
+  - 假设 1 (方差界): 状态-动作空间上贝尔曼算子的方差是有界的。
+  - 假设 2 (带有后验采样机制的 LLM): 存在一种机制 $\texttt{LLM+PS}$，将记忆缓冲区 $\mathcal{D}$ 映射到转移核和奖励函数，使得给定 $\mathcal{D}$ 的条件下的自举样本是真实数据生成参数的独立同分布近似。
+- **数学机制 (Mathematical Mechanism)**:
+  Agent 使用一个 $\epsilon$-最优规划器在从后验分布采样的模型上进行规划，并通过记录在记忆缓冲区 $\mathcal{D}$ 中的交互来更新模型。模型更新的切换条件取决于后验熵的下降 $H_{t_k} - H_t > \log 2$。
+
+  **定理 (贝叶斯遗憾 - Bayesian Regret):**
+  $$
+  \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
+  $$
+- **收敛性与边界强度 (Convergence / Bound Strength)**: 贝叶斯遗憾界受限于 $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$，并且不依赖于集中性系数，这表明后验采样机制成功绕过了悲观的覆盖要求。
+- **适用范围 (Applicability)**: 运行在交互式环境中的 LLM Agent（如具身智能、工具使用场景），在这些场景中，探索的成本很高，且样本效率至关重要。
+- **局限性 (Limitations)**: 该遗憾界严重依赖于 LLM 能够近似精确后验采样的假设（例如，通过自举法），并且在复杂状态空间中，$\epsilon$-最优规划器的计算成本可能很高。
+- **架构映射状态 (Architecture Mapping Status)**: DESIGN_CANDIDATE
+- **仓库实现状态 (Repository Implementation Status)**: EVIDENCE_INSUFFICIENT
+- **仓库测试状态 (Repository Test Status)**: EVIDENCE_INSUFFICIENT
+- **初学者类比 (For Beginners: Practical Analogies)**:
+  想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
+- **证据状态 (Evidence Status)**: PAPER_ONLY

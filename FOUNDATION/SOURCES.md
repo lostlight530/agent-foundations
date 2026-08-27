@@ -301,3 +301,7 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - URL: https://arxiv.org/abs/2312.04719
 - Use: sub-linear regret bounds for kernelized decentralized global optimization, leveraging a running consensus of local Upper Confidence Bounds to maintain data privacy.
 - Verification boundary: Convergence bounds depend tightly on the RKHS norm constraint and the second largest eigenvalue of the network's Perron matrix. The multi-stage delayed approach incurs static action phases, scaling boundedly only under synchronized stage progression.
+
+## S36 — Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency
+- Authors: Zhihan Liu, Hao Hu, Shenao Zhang, Hongyi Guo, Shuqi Ke, Boyi Liu, Zhaoran Wang
+- Verification boundary: The regret bound depends strongly on the LLM's capacity to approximate exact posterior sampling conditioned on the history buffer. Without exact approximation, performance guarantees gracefully decay based on sampling error.
