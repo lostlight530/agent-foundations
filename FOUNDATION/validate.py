@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic contract checks for the independent Agent Foundations core."""
+"""Deterministic documentary contract checks for the Agent Foundations verified core."""
 
 from __future__ import annotations
 
@@ -8,8 +8,9 @@ import json
 import re
 import subprocess
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
+from urllib.parse import urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 FOUNDATION = ROOT / "FOUNDATION"
@@ -43,6 +44,9 @@ PROTECTED_PATHS = {
 CLAIM_HEADING_RE = re.compile(r"^## (AF-(?:ARCH|COLLAB|MEM|TOOL)-\d{3})\b", re.MULTILINE)
 SOURCE_HEADING_RE = re.compile(r"^## (S\d{2})\b", re.MULTILINE)
 SOURCE_REF_RE = re.compile(r"\bS\d{2}\b")
+SOURCE_IDENTIFIER_RE = re.compile(r"^\s*-\s*Identifier:\s*(.+?)\s*$", re.MULTILINE)
+SOURCE_URL_RE = re.compile(r"^\s*-\s*URL:\s*(\S+)\s*$", re.MULTILINE)
+ARXIV_ID_RE = re.compile(r"(?:arxiv:|arxiv\.org/abs/)(\d{4}\.\d{4,5})(?:v\d+)?", re.IGNORECASE)
 USES_RE = re.compile(r"^\s*-?\s*uses:\s*([^\s#]+)", re.MULTILINE)
 FULL_SHA_RE = re.compile(r"^[^@\s]+@[0-9a-f]{40}$")
 
@@ -78,8 +82,47 @@ def claim_blocks(text: str) -> list[tuple[str, str]]:
     return blocks
 
 
+def source_blocks(text: str) -> list[tuple[str, str]]:
+    matches = list(SOURCE_HEADING_RE.finditer(text))
+    blocks: list[tuple[str, str]] = []
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        blocks.append((match.group(1), text[match.start():end]))
+    return blocks
+
+
 def registered_sources(text: str) -> set[str]:
     return set(SOURCE_HEADING_RE.findall(text))
+
+
+def _normalized_url(url: str) -> str:
+    parsed = urlsplit(url.strip())
+    path = parsed.path.rstrip("/") or "/"
+    return urlunsplit((parsed.scheme.casefold(), parsed.netloc.casefold(), path, parsed.query, ""))
+
+
+def canonical_source_keys(block: str) -> set[str]:
+    """Return stable documentary identity keys for one source block.
+
+    arXiv versions collapse to the base paper ID so a later vN or daily revisit cannot be
+    re-registered under a second Sxx identifier. Non-arXiv sources fall back to normalized
+    Identifier and URL surfaces.
+    """
+    keys: set[str] = set()
+
+    arxiv_matches = {match.casefold() for match in ARXIV_ID_RE.findall(block)}
+    if arxiv_matches:
+        return {f"arxiv:{identifier}" for identifier in arxiv_matches}
+
+    for identifier in SOURCE_IDENTIFIER_RE.findall(block):
+        value = identifier.strip().casefold()
+        if value:
+            keys.add(f"identifier:{value}")
+
+    for url in SOURCE_URL_RE.findall(block):
+        keys.add(f"url:{_normalized_url(url)}")
+
+    return keys
 
 
 def action_references(text: str) -> list[str]:
@@ -120,20 +163,47 @@ def validate(base_ref: str | None = None, allowed_protected: set[str] | None = N
                 errors.append("claim schema must reject unknown top-level properties")
 
     source_path = FOUNDATION / "SOURCES.md"
-    sources = registered_sources(source_path.read_text(encoding="utf-8")) if source_path.is_file() else set()
-    if sources and sources != {f"S{number:02d}" for number in range(1, 37)}:
-        errors.append("source registry must contain the contiguous range S01-S36")
+    source_text = source_path.read_text(encoding="utf-8") if source_path.is_file() else ""
+    sources = registered_sources(source_text)
+    blocks = source_blocks(source_text)
+
+    if sources:
+        numeric_ids = sorted(int(source_id[1:]) for source_id in sources)
+        expected_ids = list(range(1, numeric_ids[-1] + 1))
+        if numeric_ids != expected_ids:
+            errors.append(
+                "source registry IDs must form one contiguous range from S01 through "
+                f"S{numeric_ids[-1]:02d}"
+            )
+
+    source_key_owners: dict[str, list[str]] = defaultdict(list)
+    for source_id, block in blocks:
+        keys = canonical_source_keys(block)
+        if not keys:
+            errors.append(f"{source_id} has no canonical Identifier or URL identity")
+            continue
+        for key in keys:
+            source_key_owners[key].append(source_id)
+
+    duplicate_identities = {
+        key: sorted(set(owners))
+        for key, owners in source_key_owners.items()
+        if len(set(owners)) > 1
+    }
+    if duplicate_identities:
+        for key, owners in sorted(duplicate_identities.items()):
+            errors.append(f"duplicate canonical source identity {key}: {owners}")
 
     all_claim_ids: list[str] = []
     for path in DOMAIN_FILES:
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8")
-        blocks = claim_blocks(text)
-        if not blocks:
+        claim_parts = claim_blocks(text)
+        if not claim_parts:
             errors.append(f"no claim blocks in {path.relative_to(ROOT).as_posix()}")
             continue
-        for claim_id, block in blocks:
+        for claim_id, block in claim_parts:
             all_claim_ids.append(claim_id)
             for label in REQUIRED_METADATA:
                 if label not in block:
@@ -199,7 +269,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("Agent Foundations validation passed.")
+    print("Agent Foundations documentary validation passed.")
     return 0
 
 
