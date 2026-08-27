@@ -1,10 +1,16 @@
 # Primary Source Registry / 一手来源登记
 
-Access boundary: 2026-08-17. Registry presence means “eligible to cite”, not “repository capability”.
+Current calibration: 2026-08-27. Registry presence means “eligible to cite”, not “repository capability”.
 
-访问边界：2026-08-17。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+当前校准：2026-08-27。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
 
-For an explicit arXiv `vN`, the version/date pair below is part of source identity. If a later audit finds a conflict, record the conflict rather than silently replacing history.
+Canonical rules:
+
+- source IDs are contiguous and documentary identifiers, not a daily counter
+- one canonical source identity must not be registered under multiple `Sxx` IDs
+- for arXiv, the base arXiv identifier is the canonical paper identity; a later revisit/version does not create a new source ID
+- explicit `vN` and its version date are provenance fields and must be checked separately when material
+- registration does not establish theorem correctness, formula accuracy, experimental reproduction, or repository implementation
 
 ## S01 — NIST AI 600-1
 
@@ -74,8 +80,10 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 
 - Type: `E2_PEER_REVIEWED`
 - Identifier: arXiv:2309.17382v3; ICML 2024
+- Authors: Zhihan Liu, Hao Hu, Shenao Zhang, Hongyi Guo, Shuqi Ke, Boyi Liu, Zhaoran Wang
 - URL: https://arxiv.org/abs/2309.17382
-- Use: regret result under the paper’s Bayesian adaptive MDP and planner assumptions; not a universal agent-convergence result.
+- Use: regret result under the paper’s Bayesian adaptive MDP, posterior-sampling, and planner assumptions; not a universal agent-convergence result.
+- August 2026 note: the 2026-08-27 Memory-System Daily Research Chunk is a later revisit of this existing canonical source. It does not create a new source identity.
 
 ## S11 — CHMAS
 
@@ -220,7 +228,7 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Authors: Amitis Shidani, Sattar Vakili
 - URL: https://arxiv.org/abs/2312.09674
 - Use: CExp$^2$ algorithm, mixed reward collaborative bandit problem formulation, and optimal $\mathcal{O}(\log(T))$ regret bound under bounded expected communication rounds.
-- Verification boundary: The bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.
+- Verification boundary: the bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.
 
 ## S28 — ADMM-Tracking Gradient for Distributed Optimization
 
@@ -229,7 +237,7 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Version date: 2025-02-04
 - v1 date: 2023-09-25
 - URL: https://arxiv.org/abs/2309.14142
-- Use: Decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
+- Use: decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
 - Verification boundary: exact v3/date identity corrected by the 2026-08-24 W34 post-hoc audit. The convergence result remains bounded by the paper's strongly convex setting and ADMM-based consensus assumptions.
 
 ## S29 — Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
@@ -240,7 +248,7 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Authors: Daphne Feng, Ricardo Parada, Lily Jiang, Sophia Yi, William Chang
 - URL: https://arxiv.org/abs/2608.10529
 - Use: mRUCB-Intervals algorithm for decentralized action selection with observable actions but independent heavy-tailed rewards.
-- Verification boundary: Bound holds under bounded $1+\varepsilon$ moment condition and heavily depends on horizon $T$ and exponential scaling in terms of number of agents and actions.
+- Verification boundary: the bound holds under a bounded $1+\varepsilon$ moment condition and remains tied to the studied horizon/agent/action regime.
 
 ## S30 — Exploiting hidden structures in non-convex games for convergence to Nash equilibrium
 
@@ -250,7 +258,7 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Authors: Iosif Sakos, Emmanouil-Vasileios Vlatakis-Gkaragkounis, Panayotis Mertikopoulos, Georgios Piliouras
 - URL: https://arxiv.org/abs/2312.16609
 - Use: Preconditioned Hidden Gradient Descent (PHGD) algorithm and theoretical convergence bounds in hidden non-convex multi-agent games under monotone assumptions bounded by representation maps.
-- Verification boundary: Guarantees depend strictly on the game admitting a latent monotone structure, with representation maps lacking critical points and gradients meeting Lipschitz smoothness and bounded second moment requirements. It does not generalize unconditionally to all non-convex learning topologies.
+- Verification boundary: guarantees depend strictly on latent monotone structure, non-critical representation maps, smoothness, and bounded second moments; they do not generalize unconditionally to all non-convex learning topologies.
 
 ## S31 — Multi-Agent Learning in Contextual Games under Unknown Constraints
 
@@ -259,8 +267,8 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Version date: 2024-01-14
 - v1 date: 2023-10-23
 - URL: https://arxiv.org/abs/2310.14685
-- Use: No-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
-- Verification boundary: exact v2/date identity corrected by the 2026-08-24 W34 post-hoc audit. Guarantees depend strictly on the existence of an optimal feasible policy with some slack and smoothness properties of the reward and constraint spaces in RKHS.
+- Use: no-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
+- Verification boundary: exact v2/date identity corrected by the 2026-08-24 W34 post-hoc audit. Guarantees depend on the paper’s feasibility/slack and RKHS assumptions.
 
 ## S32 — On the Variational Interpretation of Mirror Play in Monotone Games
 
@@ -269,18 +277,19 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Version date: 2024-03-22
 - Authors: Yunian Pan, Tao Li, Quanyan Zhu
 - URL: https://arxiv.org/abs/2403.15636
-- Use: Variational interpretation of mirror play in monotone games, finite-time quantification of closed-loop equilibrium path, and exponential convergence when the game is strongly monotone.
-- Verification boundary: Guarantees depend strictly on the game being strongly monotone with respect to the aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings.
+- Use: variational interpretation of mirror play in monotone games, finite-time quantification of closed-loop equilibrium paths, and exponential convergence when the game is strongly monotone.
+- Verification boundary: guarantees depend strictly on strong monotonicity with respect to the aggregated mirror map; they do not generalize unconditionally to non-monotone multi-agent settings.
 
 ## S33 — Distributed Stochastic Optimization under Heavy-Tailed Noises
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2312.15847v3
-- Version date: 2023-12-26
+- Source identity date: 2023-12-26 (base arXiv record first submission)
+- Exact v3 date: `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS`
 - Authors: Chao Sun, Huiming Zhang, Bo Chen, Li Yu
 - URL: https://arxiv.org/abs/2312.15847
-- Use: distributed optimization algorithm using consensus averaging and gradient clipping step sizes under heavy-tailed noises; convergence to the optimal solution with probability 1.
-- Verification boundary: Guarantees depend strictly on a strongly connected communication graph, convex objective function, and bounded gradients over the constraint set. It does not generalize unconditionally to all non-convex multi-agent systems without centralized servers.
+- Use: distributed optimization without a centralized server under heavy-tailed gradient noise, combining neighbor consensus with gradient clipping / stochastic subgradient projection and a paper-level almost-sure convergence result under stated conditions.
+- Verification boundary: source identity, authors, problem statement, and abstract-level convergence proposition are primary-source supported. Exact v3 submission date and long formula transcription remain separate provenance checks.
 
 ## S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos
 
@@ -289,19 +298,24 @@ For an explicit arXiv `vN`, the version/date pair below is part of source identi
 - Version date: 2023-12-19
 - Authors: Aamal Hussain, Francesco Belardinelli
 - URL: https://arxiv.org/abs/2312.11943
-- Use: sufficient condition for the onset of instability of Q-Learning dynamics in competitive network games, demonstrating stability dependence on network connectivity rather than total agent count.
-- Verification boundary: Guarantees depend strictly on the Gaussian competitive game parameterization (correlation $\Gamma < 0$) and the large matrix thermodynamic limit ($n \rightarrow \infty$). It does not scale to generalized cooperative topologies or arbitrary non-stationary environments.
+- Use: stability analysis of multi-agent learning in competitive network games, including conditions under which connectivity/local interaction structure affects instability onset in the studied model.
+- Verification boundary: conclusions remain tied to the paper’s competitive-game parameterization and asymptotic/statistical assumptions; they are not a universal stability law for arbitrary multi-agent or LLM-agent systems.
 
 ## S35 — Distributed Optimization via Kernelized Multi-armed Bandits
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2312.04719v1
 - Version date: 2023-12-07
-- Authors: Kanishk Gujral, Senthilnath J
+- Authors: Ayush Rai, Shaoshuai Mou
 - URL: https://arxiv.org/abs/2312.04719
-- Use: sub-linear regret bounds for kernelized decentralized global optimization, leveraging a running consensus of local Upper Confidence Bounds to maintain data privacy.
-- Verification boundary: Convergence bounds depend tightly on the RKHS norm constraint and the second largest eigenvalue of the network's Perron matrix. The multi-stage delayed approach incurs static action phases, scaling boundedly only under synchronized stage progression.
+- Use: decentralized kernelized multi-armed-bandit formulation for distributed global optimization, including MA-IGP-UCB and delayed extension results under the paper’s RKHS/network assumptions.
+- Verification boundary: the regret bounds and privacy/communication trade-offs remain paper-specific; they do not establish a repository implementation or generalized multi-agent convergence guarantee.
 
-## S36 — Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency
-- Authors: Zhihan Liu, Hao Hu, Shenao Zhang, Hongyi Guo, Shuqi Ke, Boyi Liu, Zhaoran Wang
-- Verification boundary: The regret bound depends strongly on the LLM's capacity to approximate exact posterior sampling conditioned on the history buffer. Without exact approximation, performance guarantees gracefully decay based on sampling error.
+## August 24–27 registry reconciliation
+
+- S33, S34, and S35 are retained as distinct canonical sources after source-identity review.
+- S35 historical generated research originally carried incorrect author names; current canonical authors are `Ayush Rai, Shaoshuai Mou`.
+- the source that had been introduced as `S36` on 2026-08-27 is RAFA (`arXiv:2309.17382`), already canonical as S10. It is therefore **not** retained as a second source ID.
+- the 2026-08-27 bilingual Memory-System research chunk remains historical evidence of a later RAFA revisit; current source identity resolves to S10.
+
+Current canonical registry range: `S01–S35`.
