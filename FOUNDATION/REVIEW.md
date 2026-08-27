@@ -1,79 +1,96 @@
 # Public Evidence Review States / 公开证据审核状态
 
-Status: documentary review vocabulary
+Status: documentary review vocabulary  
+Current calibration: 2026-08-27
 
 ## Purpose / 目的
 
-This file records public review states for Agent Foundations claims and historical research corrections.
+This file records public review states for Agent Foundations claims, source identities, and historical research corrections.
 
 It describes evidence disposition only. It does not execute repository behavior or create implementation capability.
 
 ## Review states / 审核状态
 
 1. `REVIEW_PENDING`
-   - material is awaiting evidence review
 2. `SOURCE_IDENTITY_VERIFIED`
-   - material source identity and exact cited version are verified where material
 3. `CLAIM_SURFACE_VERIFIED`
-   - the strongest inspected source surface is identified and bounded
 4. `PRIMARY_SOURCE_CONFLICT`
-   - checked primary surfaces disagree
 5. `INSUFFICIENT_EVIDENCE`
-   - available evidence cannot support the requested claim strength
 6. `MAPPING_SCOPED`
-   - external evidence is classified as requirement, analogy, candidate mechanism, counterevidence, or out of scope
 7. `IMPLEMENTATION_SEPARATED`
-   - external evidence and repository implementation status are explicitly separated
 8. `CALIBRATION_REQUIRED`
-   - historical material remains useful but requires explicit correction or narrowing
 9. `CALIBRATED`
-   - an explicit erratum/reconciliation records the corrected current interpretation
 10. `ACCEPTED_FOR_VERIFIED_CORE`
-   - the bounded proposition fits the current documentary evidence contract
 
-These states describe the public evidence record. They are not confidence scores and do not expose private reasoning.
+These states are not confidence scores and do not expose private reasoning.
+
+## Source-registration review / 来源登记审核
+
+Before assigning a new `Sxx` ID:
+
+1. normalize the external source identity
+2. check the existing canonical registry
+3. for arXiv, compare the **base paper ID**, not only the cited `vN`
+4. if the source already exists, reuse the existing S ID and record the new version/revisit as provenance
+5. only genuinely new identities receive a new contiguous S ID
+6. verify title/authors/version metadata to the strongest source surface available
+7. keep paper results separate from repository implementation
+
+A later Daily Research Chunk does not receive a new source ID merely because it is new research activity.
+
+Reference disposition from 2026-08-27:
+
+- S33: retained as new canonical source
+- S34: retained as new canonical source
+- S35: retained, with author metadata corrected
+- attempted S36: not retained; duplicate of existing S10 RAFA
 
 ## Supported review paths / 支持的审核路径
 
-A straightforward supported claim can move through:
+Straightforward claim:
 
 `REVIEW_PENDING → SOURCE_IDENTITY_VERIFIED → CLAIM_SURFACE_VERIFIED → MAPPING_SCOPED → IMPLEMENTATION_SEPARATED → ACCEPTED_FOR_VERIFIED_CORE`.
 
-A historical correction may use:
+Historical correction:
 
 `CALIBRATION_REQUIRED → CALIBRATED`.
 
-A primary-source disagreement can stop at:
+Primary-source disagreement:
 
 `PRIMARY_SOURCE_CONFLICT`.
 
-An evidence-limited claim can stop at:
+Evidence-limited claim:
 
 `INSUFFICIENT_EVIDENCE`.
 
-No state transition makes an external result an implementation unless a concrete repository artifact independently establishes implementation.
+A repeated/revisited source can stop at:
+
+`SOURCE_IDENTITY_VERIFIED → EXISTING_CANONICAL_SOURCE_REUSED`.
+
+`EXISTING_CANONICAL_SOURCE_REUSED` is a documentary disposition phrase, not a new schema enum.
 
 ## Review checks / 审核检查
 
-When material, review checks should preserve these distinctions:
+When material, preserve these distinctions:
 
-- exact arXiv `vN` identity vs base arXiv identity
+- canonical source identity vs Daily research event
+- base arXiv identity vs explicit `vN`
 - version/date identity vs theorem/formula verification
 - abstract support vs theorem support
 - mechanism equation vs formal error/convergence bound
 - external result vs repository implementation
 - paper assumptions/domain vs generic LLM-agent claims
-- original historical research period vs later document placement
+- original historical research period vs later correction
 - source registration vs claim support
 - `STATIC_CHECKED` documentary review vs runtime/experimental validation
 
 ## Authority map / 权威映射
 
-- `FOUNDATION/EVIDENCE.md` — claim/evidence/implementation semantics
-- `FOUNDATION/SOURCES.md` — canonical `S01–S32` source identities
-- `FOUNDATION/PROVENANCE.md` — exact-version and temporal provenance
+- `FOUNDATION/EVIDENCE.md` — evidence and source-identity semantics
+- `FOUNDATION/SOURCES.md` — canonical `S01–S35` source identities
+- `FOUNDATION/PROVENANCE.md` — exact-version, duplicate-identity, and temporal provenance
 - domain claim maps — bounded architecture/memory/tool/collaboration claims
-- explicit August errata — current correction records for affected historical research
+- explicit August errata/reconciliations — current corrections
 - original bilingual research — historical context
 
 An audit finding may narrow or contest an interpretation. It must not invent implementation, reproduction, theorem support, source agreement, or test success.
@@ -82,15 +99,16 @@ An audit finding may narrow or contest an interpretation. It must not invent imp
 
 A durable public review record may include:
 
-- Claim ID or artifact
+- Claim ID or historical artifact
 - review state
+- canonical source ID
 - public source identity/version
 - strongest checked source surface
 - supported proposition and assumptions
 - mapping status
 - implementation/validation status
 - missing or conflicting evidence
-- erratum pointer when applicable
+- erratum/reconciliation pointer
 - final bounded disposition
 
-The review record should contain only information necessary to understand and audit the public evidence decision.
+Formal August monthly closure remains `OPEN` at the 2026-08-27 cutoff.
