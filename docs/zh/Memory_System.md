@@ -487,3 +487,26 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **初学者类比 (For Beginners: Practical Analogies)**:
   想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
 - **证据状态 (Evidence Status)**: PAPER_ONLY
+
+### Daily Research Chunk: Near Optimal Memory-Regret Tradeoff for Online Learning
+
+- **技术点名称**: 在线学习中的近似最优内存与后悔值权衡
+- **System Container**: Memory System
+- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
+- **论文原始问题**: 确定在线学习智能体使用的空间（内存）与对抗自适应对手时可实现的后悔值（regret）之间的基本权衡。
+- **核心假设**:
+  - 智能体面临一个能够观察算法过去选择的自适应对手。
+  - 在线学习问题包含 $n$ 个专家和 $T$ 天的序列，且 $T$ 相对于可用空间 $S$ 是有界的。
+- **数学机制**:
+  一种内存高效算法，在自适应对手环境中使用分组乘法权重更新（MWU），结合子采样的 $\texttt{RandomExpert}$ 块和观察到的 $\texttt{LongExpert}$ 池。
+
+  **收敛界 (后悔值保证):**
+  在面对自适应对手时，该算法使用最多 $S$ 的空间可实现 $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ 的后悔值。
+- **收敛或行为边界**: 下界证明了大致需要并足以使用 $\mathcal{O}(\sqrt{n}/\epsilon)$ 的空间来针对自适应对手获得 $\epsilon T$ 的后悔值。次线性空间 $\tilde{O}(\sqrt{n})$ 足以获得 $o(T)$ 的后悔值。
+- **适用范围**: 资源受限环境下的内存受限强化学习和在线决策智能体的设计。
+- **局限**: 空间下界依赖于通信复杂性中的直积定理（direct-product theorems），并严格适用于全反馈专家问题，未必适用于多臂老虎机（bandit）环境。
+- **Agent 架构映射**: CONCEPTUAL_MAPPING
+- **仓库实现状态**: EVIDENCE_INSUFFICIENT
+- **测试状态**: EVIDENCE_INSUFFICIENT
+- **初学者类比**: 想象一下，你试图从数千名股票顾问中挑选最好的一位。如果你有无限的记忆力，你可以记住他们做过的每一个预测。如果你几乎没有记忆力，对手（市场）就可以轻易地欺骗你。这项研究表明，你至少需要记住一定数量（大约是顾问数量的平方根）的顾问记录，才能在不被完全愚弄的情况下做出良好的整体选择。
+- **证据状态**: PAPER_ONLY

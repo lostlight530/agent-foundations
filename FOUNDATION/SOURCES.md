@@ -318,4 +318,15 @@ Canonical rules:
 - the source that had been introduced as `S36` on 2026-08-27 is RAFA, already canonical as S10. It is therefore **not** retained as a second source ID. The stable identifier remains recorded only in the S10 source block so registry parsers do not misassign it to S35.
 - the 2026-08-27 bilingual Memory-System research chunk remains historical evidence of a later RAFA revisit; current source identity resolves to S10.
 
-Current canonical registry range: `S01–S35`.
+
+## S36 — Near Optimal Memory-Regret Tradeoff for Online Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2303.01673v2
+- Version date: 2023-03-03
+- Authors: Binghui Peng, Aviad Rubinstein
+- URL: https://arxiv.org/abs/2303.01673
+- Use: provided the memory-regret tradeoff lower bound against an adaptive adversary $\mathcal{O}(\sqrt{n}/\epsilon)$ space for $\epsilon T$ regret.
+- Verification boundary: bounds depend on full feedback multi-expert assumptions and theoretical space limits, not a generalized multi-agent reinforcement learning guarantee.
+
+Current canonical registry range: `S01–S36`.

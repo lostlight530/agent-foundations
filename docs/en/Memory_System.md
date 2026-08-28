@@ -487,3 +487,27 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 - **For Beginners**: Practical Analogies
   Imagine you are exploring a maze. Instead of trying every single path randomly, you use your memory (the buffer) to imagine different possible maps of the maze (posterior sampling). You choose the map that makes you most uncertain (highest entropy) to explore next, ensuring you only take new steps when you actually learn something significant about the maze's layout.
 - **Evidence Status**: PAPER_ONLY
+
+### Daily Research Chunk: Near Optimal Memory-Regret Tradeoff for Online Learning
+
+- **Technical Point Name**: Near Optimal Memory-Regret Tradeoff in Online Learning
+- **System Container**: Memory System
+- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
+- **Original Problem**: Identifying the fundamental trade-off between the space (memory) used by an online learning agent and the achievable regret against adaptive adversaries.
+- **Core Assumptions**:
+  - The agent faces an adaptive adversary who observes past experts chosen by the algorithm.
+  - The online learning problem involves $n$ experts and a sequence of $T$ days, with $T$ bounded relative to available space $S$.
+- **Mathematical Mechanism**:
+  A memory-efficient algorithm using grouped Multiplicative Weights Update (MWU) against an adaptive adversary, coupled with a sub-sampled $\texttt{RandomExpert}$ block and an observed $\texttt{LongExpert}$ pool.
+
+  **Theorem (Regret Guarantee):**
+  The algorithm achieves $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ regret using up to $S$ space against an adaptive adversary.
+- **Convergence / Bound Strength**: The lower bound proves that roughly $\mathcal{O}(\sqrt{n}/\epsilon)$ space is both necessary and sufficient for obtaining $\epsilon T$ regret against an adaptive adversary. Sub-linear space $\tilde{O}(\sqrt{n})$ is sufficient for $o(T)$ regret.
+- **Applicability**: Design of memory-constrained reinforcement learning and online decision-making agents operating in adversarial environments with strict resource constraints.
+- **Limitations**: The space lower bounds rely on direct-product theorems from communication complexity and apply strictly to full-feedback experts problems, not necessarily bandit settings.
+- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **For Beginners**: Practical Analogies
+  Imagine trying to pick the best stock advisor out of thousands. If you have infinite memory, you can remember every prediction they ever made. If you have almost no memory, an adversary (the market) can trick you easily. This research shows you need to remember at least a specific small number (around the square root) of the advisors' records to still make good overall choices without being completely fooled.
+- **Evidence Status**: PAPER_ONLY
