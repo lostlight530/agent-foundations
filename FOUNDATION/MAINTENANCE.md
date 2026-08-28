@@ -1,6 +1,7 @@
 # Agent Foundations maintenance contract / 长期维护契约
 
-Status: `CANONICAL_PUBLIC_MAINTENANCE_CONTRACT`  
+Status: `CANONICAL_PUBLIC_MAINTENANCE_CONTRACT`
+
 Effective: 2026-08-28
 
 ## Research cadence and admission

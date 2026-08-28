@@ -1,7 +1,9 @@
 # August 2026 evidence ledger — 01 through 27
 
-Status: `PROVISIONAL_27_DAY_LEDGER`  
-Cutoff: 2026-08-27 Asia/Shanghai  
+Status: `PROVISIONAL_27_DAY_LEDGER`
+
+Cutoff: 2026-08-27 Asia/Shanghai
+
 Monthly status: `MONTH_OPEN`
 
 The SHAs identify original daily research commits. Absence means no daily research commit was identified for that logical date; it is not backfilled. Generated research success does not imply verified-core admission.
