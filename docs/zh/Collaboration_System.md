@@ -1,5 +1,7 @@
 # 智能体协作系统：基于完全去中心化图谱优化 (DecDPO) 的分布式收敛
 
+> **当前五轴校准 — 2026-08-28。** 历史生成标签继续可见；`CONCEPTUAL_MAPPING` 当前解释为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 解释为 `REFERENCE_ONLY`，测试字段解释为 `NOT_TESTED`。Evidence Level 与 Source Surface 独立判定。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**
@@ -1880,6 +1882,8 @@ Evidence Status: CONCEPTUAL_MAPPING
 
 <!-- DAILY_RESEARCH_CHUNK -->
 ### 基于核化多臂老虎机的分布式优化
+
+> **当前五轴解释（2026-08-28）：** Claim State `SUPPORTED`；Evidence Level `E4_PREPRINT`；Source Surface `ABSTRACT_SUPPORTED`；Mapping State `DESIGN_ANALOGY`；Implementation State `REFERENCE_ONLY`；Validation State `NOT_TESTED`；Canonical Source `S35`。作者为 Ayush Rai、Shaoshuai Mou，来源身份为 arXiv:2312.04719v1。本批注未重新认证下方历史公式/定理转录；RKHS 范数、连通网络、遗憾与通信假设仍限于论文范围，不声明仓库实现或复现。
 
 - **System Container:** Collaboration System
 - **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)

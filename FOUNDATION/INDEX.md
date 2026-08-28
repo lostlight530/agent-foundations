@@ -3,6 +3,12 @@
 Status: repository documentary/evidence core  
 Current calibration: 2026-08-27
 
+Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)
+
+August 1–27 evidence ledger: [../docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md](../docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md)
+
+Full public-document audit: [2026-08-28-DOCUMENT-AUDIT.md](./2026-08-28-DOCUMENT-AUDIT.md)
+
 ## Purpose / 目的
 
 `FOUNDATION/**` is the compact evidence and architecture core of Agent Foundations.

@@ -1,5 +1,7 @@
 # 智能体核心架构原则与梯度熵理论 (Architecture Principles & Gradient Entropy)
 
+> **当前五轴校准 — 2026-08-28。** 历史生成块原文保留。所有块中的 `CONCEPTUAL_MAPPING` 当前解释为 `Mapping State: DESIGN_ANALOGY`；实现字段的 `EVIDENCE_INSUFFICIENT` 在未指向仓库实现路径时解释为 `Implementation State: REFERENCE_ONLY`；测试字段解释为 `Validation State: NOT_TESTED`。旧标签本身不决定 Evidence Level。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 ### Weaved Integrations

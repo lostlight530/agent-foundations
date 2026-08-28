@@ -1,5 +1,7 @@
 # Tool System: Policy Optimization & Value Alignment via NLP RL
 
+> **Current five-axis calibration — 2026-08-28.** Historical `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` text is preserved as generated output and currently resolves to `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`. It is not evidence of a deployed tool-control plane. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
+
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**

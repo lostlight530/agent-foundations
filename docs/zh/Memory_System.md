@@ -1,5 +1,7 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
+> **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；`CONCEPTUAL_MAPPING` 当前映射为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 映射为 `REFERENCE_ONLY`，测试字段映射为 `NOT_TESTED`。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**

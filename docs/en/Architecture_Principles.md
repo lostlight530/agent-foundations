@@ -1,5 +1,7 @@
 # Architecture Principles & Gradient Entropy
 
+> **Current five-axis calibration — 2026-08-28.** Historical generated blocks are preserved. In every such block, `CONCEPTUAL_MAPPING` means `Mapping State: DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` means `Implementation State: REFERENCE_ONLY` unless a repository path is named; test `EVIDENCE_INSUFFICIENT` means `Validation State: NOT_TESTED`. These labels do not assign an Evidence Level. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
+
 ## 0. Introduction & Core Quick Look (For Beginners)
 
 ### Weaved Integrations
