@@ -19,6 +19,8 @@ The independently maintained `FOUNDATION/` core separates evidence records and a
 5. [Collaboration system](FOUNDATION/COLLABORATION.md) — coordination and failure propagation.
 6. [Source registry](FOUNDATION/SOURCES.md) — primary-source records.
 7. [Provenance](FOUNDATION/PROVENANCE.md) — reproducibility and AI-use disclosure.
+8. [Maintenance contract](FOUNDATION/MAINTENANCE.md) — evidence cadence, five-axis admission, correction, and bilingual consistency.
+9. [August 1–27 evidence ledger](docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md) — commit-backed provisional daily/weekly map; `MONTH_OPEN`.
 
 Each material statement in the core has a stable Claim ID. English and Chinese text for a claim share that ID and the same evidence state.
 
@@ -82,6 +84,8 @@ This repository contains no autonomous-agent runtime, deployed memory system, to
 5. [协作系统](FOUNDATION/COLLABORATION.md) — 协调与故障传播。
 6. [来源登记](FOUNDATION/SOURCES.md) — 一手来源记录。
 7. [来源与复现](FOUNDATION/PROVENANCE.md) — 可复现性与 AI 使用披露。
+8. [长期维护契约](FOUNDATION/MAINTENANCE.md) — 证据周期、五轴准入、纠错与中英文一致性。
+9. [8 月 1–27 日证据总账](docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md) — 基于提交的临时日/周映射；`MONTH_OPEN`。
 
 核心中的每项实质性陈述都有稳定的 Claim ID。同一声明的中英文共享该 ID 与相同证据状态。
 
