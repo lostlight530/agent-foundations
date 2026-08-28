@@ -1,5 +1,7 @@
 # 智能体工具系统：基于 NLP 强化学习的策略优化与价值对齐 (Tool System)
 
+> **当前五轴校准 — 2026-08-28。** 历史 `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` 原文作为生成记录保留，当前统一解释为 `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`，不构成已部署工具控制面的证据。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**

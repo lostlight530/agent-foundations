@@ -1,5 +1,7 @@
 # Memory System: Representation Learning via SimCLR & Unsupervised Learning
 
+> **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` maps to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` maps to `REFERENCE_ONLY`; test status maps to `NOT_TESTED`. Paper support, mapping relevance, repository implementation, and validation remain independent. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
+
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**

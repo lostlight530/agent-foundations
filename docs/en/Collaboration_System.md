@@ -1,5 +1,7 @@
 # Collaboration System: Distributed Convergence via Pure Decentralized Spectral Graph Optimization (DecDPO)
 
+> **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` currently resolves to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` to `REFERENCE_ONLY`; test `EVIDENCE_INSUFFICIENT` to `NOT_TESTED`. Evidence Level and Source Surface are assigned separately. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
+
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**
@@ -2044,6 +2046,8 @@ Evidence Status: CONCEPTUAL_MAPPING
 
 <!-- DAILY_RESEARCH_CHUNK -->
 ### Distributed Optimization via Kernelized Multi-armed Bandits
+
+> **Canonical five-axis interpretation (2026-08-28):** Claim State `SUPPORTED`; Evidence Level `E4_PREPRINT`; Source Surface `ABSTRACT_SUPPORTED`; Mapping State `DESIGN_ANALOGY`; Implementation State `REFERENCE_ONLY`; Validation State `NOT_TESTED`; Canonical Source `S35`. Authors: Ayush Rai and Shaoshuai Mou; identity: arXiv:2312.04719v1. The historical formula/theorem text below was not re-certified by this annotation. RKHS norm, connected-network, regret, and communication assumptions remain paper-scoped; no repository implementation or reproduction is claimed.
 
 - **System Container:** Collaboration System
 - **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
