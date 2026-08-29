@@ -1906,3 +1906,27 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 <!-- DAILY_RESEARCH_CHUNK -->
+
+### 稀疏超图上的多智能体 Thompson 采样 (Multi-Agent Thompson Sampling on Sparse Hypergraphs)
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
+  - **Authors:** Tingwei Jin, Haolun Wu, et al.
+  - **URL:** https://arxiv.org/abs/2312.15549
+  - **Version:** v1
+  - **Date:** 2023-12-24T21:41:01Z
+  - **Selection Reason:** This paper investigates Multi-Agent Thompson Sampling (MATS) on sparse hypergraphs, directly addressing the coordination of multi-agent multi-armed bandits. It provides a frequentist regret bound, bounding the worst-case performance when agents must collaborate to select joint actions across overlapping groups. This aligns with the Collaboration System by establishing coordination architectures and bounds without relying on unbounded communication or brute-force joint exploration.
+- **原始问题:** 协调多个智能体时，联合动作空间呈指数增长，计算上具有挑战性。在这种多智能体协调超图下推导 Thompson 采样的频率论（最坏情况）遗憾界仍然是一个未解决的问题。
+- **核心假设:** 每个超边的奖励是局部有界的。智能体被分解为稀疏的重叠组，形成一个协调超图，其中联合奖励是局部奖励的总和。
+- **数学机制:** 引入了 $\epsilon$-\texttt{MATS}，以概率 $\epsilon$ 执行局部多智能体 Thompson 采样探索，否则执行贪心利用，将全局协调映射到局部结构依赖中。
+- **收敛与行为边界:**
+  - 遗憾下界 (Regret Lower Bound):
+    $$R_n(\pi, \nu_\mu) = \Omega\Big(\sqrt{\frac{A_{\text{loc}}  T}{\rho}} \Big)$$
+    其中 $A_{\text{loc}}$ 是局部臂的总数，$\rho$ 是组数。当图稀疏时，频率论遗憾界随时间和局部臂数量呈亚线性缩放，避免了指数级的联合臂空间。
+- **适用范围:** 分布式协调拓扑，具有超图结构的协作强化学习，受限智能体组。
+- **局限性:** 提出的 epsilon-exploring MATS 实现了最坏情况下的遗憾界，但如果超图组高度连接（不稀疏），则仍然具有指数级依赖。它需要已知的图结构。
+- **架构映射:** 支持协作系统 (Collaboration System) 的智能体间决策拓扑，为构建有界的协作子集提供了一个设计候选方案，而不是要求所有智能体在单个全局密集共识图上对齐。
+- **实现状态:** EVIDENCE_INSUFFICIENT
+- **测试状态:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象一个有 20 个厨师的大型餐厅厨房。与其强迫 20 个人同时就每道菜达成一致（这会花费无尽的时间），不如根据菜单将他们分成小且重叠的团队。每个团队优化自己的局部食谱。这在数学上限制了厨房可能出现的最坏情况，只要团队保持相对独立（稀疏），就能保证最坏情况下的效率。
+- **证据状态:** PAPER_ONLY

@@ -2070,3 +2070,27 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 <!-- DAILY_RESEARCH_CHUNK -->
+
+### Multi-Agent Thompson Sampling on Sparse Hypergraphs
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
+  - **Authors:** Tingwei Jin, Haolun Wu, et al.
+  - **URL:** https://arxiv.org/abs/2312.15549
+  - **Version:** v1
+  - **Date:** 2023-12-24T21:41:01Z
+  - **Selection Reason:** This paper investigates Multi-Agent Thompson Sampling (MATS) on sparse hypergraphs, directly addressing the coordination of multi-agent multi-armed bandits. It provides a frequentist regret bound, bounding the worst-case performance when agents must collaborate to select joint actions across overlapping groups. This aligns with the Collaboration System by establishing coordination architectures and bounds without relying on unbounded communication or brute-force joint exploration.
+- **Original Problem:** Coordinating multiple agents where the joint action space grows exponentially is computationally challenging. Deriving a frequentist (worst-case) regret bound for Thompson Sampling under such multi-agent coordination hypergraphs remained an open problem.
+- **Core Assumptions:** Rewards for each hyperedge are locally bounded. Agents are factored into sparse overlapping groups, forming a coordination hypergraph where the joint reward is the sum of local rewards.
+- **Mathematical Mechanism:** Introduces $\epsilon$-\texttt{MATS}, performing local Multi-Agent Thompson Sampling exploration with probability $\epsilon$ and greedy exploitation otherwise, mapping global coordination into localized structural dependencies.
+- **Convergence / Behavioral Bound:**
+  - Regret Lower Bound:
+    $$R_n(\pi, \nu_\mu) = \Omega\Big(\sqrt{\frac{A_{\text{loc}}  T}{\rho}} \Big)$$
+    Where $A_{\text{loc}}$ is the total number of local arms and $\rho$ is the number of groups. The frequentist regret bound scales sublinearly with time and local arm size, avoiding the exponential joint arm space when the graph is sparse.
+- **Applicable Scope:** Distributed coordination topologies, hypergraph-structured collaborative reinforcement learning, constrained agent groups.
+- **Limitations:** The proposed epsilon-exploring MATS achieves a worst-case regret bound that still has exponential dependencies if the hypergraph groups are highly connected (not sparse). It requires known graph structures.
+- **Architecture Mapping:** Supports the Collaboration System's inter-agent decision topologies, providing a design candidate for structuring bounded collaboration subsets rather than requiring all agents to align on a single global dense consensus graph.
+- **Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy:** Imagine a massive restaurant kitchen with 20 chefs. Instead of forcing all 20 to agree on every single dish simultaneously (which takes forever), they are divided into small, overlapping teams based on the menu. Each team optimizes their own local recipes. This mathematically bounds how badly the kitchen can fail, ensuring worst-case efficiency as long as the teams remain relatively independent (sparse).
+- **Evidence Status:** PAPER_ONLY
