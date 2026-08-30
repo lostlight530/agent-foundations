@@ -957,3 +957,28 @@ Imagine multiple delivery companies (agents) trying to optimize their routes wit
 **Scope and limits / 范围与局限:**
 The exponential convergence rate strictly requires the underlying game to be strongly monotone with respect to the specific aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings, arbitrary game topologies, or environments with unpredictable stochastic feedback outside the bounded variances analyzed in the paper.
 
+
+### Joint Lyapunov Certificates for K-Agent Generative AI Governance
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
+- **URL:** http://arxiv.org/abs/2608.09087v1
+- **Publication Date:** 2026-08-10
+- **Selection Reason:** Addresses emergent ensemble-level drift in multi-agent systems sharing a meta-learning coupling, providing the critical coupling threshold via Lyapunov analysis to ensure joint stability.
+- **Original Problem:** Per-agent Lyapunov analysis is provably insufficient when multiple agents share a meta-learning coupling $\gamma$ through an interaction matrix $A$; individual agents can satisfy their declared stability bounds while the joint system is in a regime of emergent ensemble-level drift.
+- **Core Assumptions:**
+  - Linear dynamics and homogeneity across agents: each agent's loss is strictly an isotropic quadratic $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$ (with the same self-decay rate $\alpha_{\mathrm{self}}$ for all agents).
+  - The coupling is linear in $\W$ with additive, state-independent noise, forming a linear multivariate Ornstein-Uhlenbeck process.
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Infinitesimal Generator of joint Lyapunov function $V(\W)$):
+    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
+  - **Exact Critical Coupling Threshold:**
+    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (where $\lambda_{\min}(A)$ is the most negative eigenvalue of $A$).
+- **Convergence or Behavioral Bound:** The system remains mean-square stable and the joint drift operator is positive-stable if and only if $\gamma < \gamma^*(A)$.
+- **Applicability Scope:** Bounded multi-agent learning environments sharing a meta-learning parameter (e.g., shared embedding layer, RLHF reward signal, joint fine-tuning objective) governed by the linear SDE dynamics.
+- **Limitations:** The exact threshold and noise floor formulas rely strictly on linearity, isotropic quadratic losses minimized at the origin, and homogeneous decay across agents. They do not survive unchanged for non-convex, anisotropic, or agent-heterogeneous loss landscapes found in real large generative models; $\alpha_{\mathrm{self}}$ must be locally estimated.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine multiple ships (AI agents) in a fleet navigating independently but tethered together by a shared rope (the coupling). If each captain only checks their own ship's stability (single-agent validation), they might miss that the tension in the shared rope is dragging the entire fleet off course (ensemble-level drift). The Joint Lyapunov Certificate is like a fleet-wide tension sensor that mathematically calculates the maximum safe rope strength ($\gamma^*$) based on how the ships are connected, ensuring the whole fleet remains stable.
