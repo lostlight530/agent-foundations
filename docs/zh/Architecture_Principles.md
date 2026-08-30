@@ -957,3 +957,28 @@ $V (x(t)) \leq e^{ - \mu t} V(x_0)$
 **Scope and limits / 范围与局限:**
 指数收敛率严格要求底层博弈相对于特定的聚合镜像映射是强单调的。它在理论上不能无条件推广到非单调的多智能体环境、任意博弈拓扑结构，或超出了论文所分析的方差范围的具有不可预测随机反馈的环境。
 
+
+### K-Agent 生成式 AI 治理的联合 Lyapunov 证书 (Joint Lyapunov Certificates for K-Agent Generative AI Governance)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
+- **URL:** http://arxiv.org/abs/2608.09087v1
+- **Publication Date:** 2026-08-10
+- **Selection Reason:** 解决了共享元学习耦合的多智能体系统中的突发系综级漂移问题，通过 Lyapunov 分析提供临界耦合阈值以确保联合稳定性。
+- **Original Problem:** 当多个智能体通过交互矩阵 $A$ 共享元学习耦合 $\gamma$ 时，单智能体的 Lyapunov 分析被证明是不充分的；单个智能体可能满足其声明的稳定性边界，而整个联合系统却处于突发的系综级漂移状态。
+- **Core Assumptions:**
+  - 智能体间的线性动态和同质性：每个智能体的损失严格为各向同性二次函数 $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$（所有智能体具有相同的自衰减率 $\alpha_{\mathrm{self}}$）。
+  - 在 $\W$ 中的耦合是线性的，伴有加性、状态无关的噪声，形成一个线性多元 Ornstein-Uhlenbeck 过程。
+- **Mathematical Mechanism:**
+  - **核心更新公式** (联合 Lyapunov 函数 $V(\W)$ 的无穷小生成元):
+    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
+  - **精确临界耦合阈值:**
+    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (其中 $\lambda_{\min}(A)$ 是 $A$ 的最负特征值)。
+- **Convergence or Behavioral Bound:** 当且仅当 $\gamma < \gamma^*(A)$ 时，系统保持均方稳定，且联合漂移算子是正稳定的。
+- **Applicability Scope:** 受限于由线性 SDE 动态支配、共享元学习参数（例如共享嵌入层、RLHF 奖励信号、联合微调目标）的有界多智能体学习环境。
+- **Limitations:** 精确的阈值和噪声底面公式严格依赖于线性、在原点最小化的各向同性二次损失以及智能体间的同质衰减。它们不能原封不动地适用于真实大型生成模型中发现的非凸、各向异性或智能体异质的损失情况；$\alpha_{\mathrm{self}}$ 必须在局部进行估计。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象舰队中的多艘船（AI智能体）独立航行，但被一根共享的绳子（耦合）拴在一起。如果每位船长只检查自己船的稳定性（单智能体验证），他们可能会忽略共享绳子上的张力正将整个舰队拖离航线（系综级漂移）。联合 Lyapunov 证书就像一个舰队级的张力传感器，它通过数学计算基于船只连接方式的最大安全绳索强度（$\gamma^*$），从而确保整个舰队保持稳定。
