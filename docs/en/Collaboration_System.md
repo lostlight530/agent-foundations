@@ -26,6 +26,30 @@ In DecDPO, agents are arranged in a peer-to-peer network topology (an undirected
 
 ## 2. Core Mechanisms: Convergence on the Spectral Graph
 
+### Distributed Optimization via Kernelized Multi-armed Bandits
+
+> **Canonical five-axis interpretation (2026-08-28):** Claim State `SUPPORTED`; Evidence Level `E4_PREPRINT`; Source Surface `ABSTRACT_SUPPORTED`; Mapping State `DESIGN_ANALOGY`; Implementation State `REFERENCE_ONLY`; Validation State `NOT_TESTED`; Canonical Source `S35`. Authors: Ayush Rai and Shaoshuai Mou; identity: arXiv:2312.04719v1. The historical formula/theorem text below was not re-certified by this annotation. RKHS norm, connected-network, regret, and communication assumptions remain paper-scoped; no repository implementation or reproduction is claimed.
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
+- **Original Paper Problem:** The problem of global optimization in decentralized networks where local reward functions are non-convex, unknown, and expensive to evaluate, requiring agents to cooperatively maximize an average of local functions using only noisy bandit feedback without sharing their private local functions, estimates, or actions.
+- **Core Assumption:** Each agent's local unknown objective function has a small bounded norm in a reproducing kernel Hilbert space (RKHS) and the communication graph is connected.
+- **Mathematical Mechanism:** The Multi-agent IGP-UCB (MA-IGP-UCB) algorithm utilizes a running consensus over the communication network to estimate the global upper confidence bound of the kernelized function, effectively bounding the cumulative regret through spectral properties of the graph's Perron matrix.
+- **Formulas / Pseudocode:**
+  - **Convergence Bound:** For a completely connected graph, the algorithm achieves a regret bound of $\tilde{\mathcal{O}}(\sqrt{T}(B\sqrt{\gamma_T}+\gamma_T))$ with high probability. For general connected graphs, the cumulative regret is bounded by:
+    $$ R(T) \leq 4\beta_T \left(N+ \frac{2(N-1)N|\lambda_2|}{1-|\lambda_2|}\right) \sqrt{4T\lambda\gamma_T} + \frac{N(N-1)B|\lambda_2|^{2}}{1-|\lambda_2|} + 4B $$
+    where $\lambda_2$ is the second largest eigenvalue (in absolute value) of the Perron matrix of graph $\mathcal{G}$.
+- **Applicable Scope:** Distributed machine learning and sensor networks requiring global function optimization over an arbitrary connected graph where local agents cannot or will not share private local observations and actions.
+- **Limitations:** The single-step algorithm's regret bound scales poorly with $N^2$ due to communication delays. The multi-stage delayed extension (MAD-IGP-UCB) reduces this to $N$ but at the cost of agents fixing actions during stages, generating constant regret during the delay interval.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. Provides a mechanism for the Collaboration System where multiple agents can optimize a shared global task purely through exchanging Upper Confidence Bounds of their local surrogate models, avoiding central data pooling.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
 ### Weaved Integrations
 
 System Container: Collaboration System
@@ -1348,6 +1372,9 @@ We do not scale to gamble on probabilities. We forge absolute deterministic resi
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
 
+### Analogy for Distributed Optimization via Kernelized Multi-armed Bandits
+Imagine a team of chefs trying to perfect a recipe together. Each chef only has access to a few local tasters (their private reward). Instead of sharing their secret ingredients or telling everyone what their local tasters said (which violates privacy), they only share their mathematical "confidence score" about how good the recipe is. By repeatedly averaging just these scores, the entire team zeroes in on the world's best recipe.
+
 ### Weaved Integrations
 
 Imagine a large franchise (a decentralized network) trying to agree on a universal store layout (the global optimization problem) without a central boss. Instead of arguing endlessly, each store creates a draft based on their local needs and neighbors' inputs (the primal variable $X^{\nu}$) while simultaneously tracking how much the "consensus trend" is shifting (the dual variable $Y^{\nu}$).
@@ -1801,7 +1828,6 @@ Imagine a fleet of autonomous delivery robots navigating a complex warehouse. Th
 ⚠️ 缺失来源 (Missing Sources):
 - MISSING_SOURCE exists for the Robust Compressed Push-Pull (RCPP) Method and KL Property code implementations, which remain unfulfilled.
 
-
 ### Frequentist Regret Bounds for Epsilon-Exploring Multi-Agent Thompson Sampling on Hypergraphs
 
 **System Container:** Collaboration System
@@ -1845,7 +1871,6 @@ The bound's dependence on the hyperedge count $\rho$ is exponential ($\mathcal{O
 
 #### 8. Beginner's Analogy
 Imagine a massive restaurant kitchen where multiple chefs (agents) collaborate to make complex combo meals (joint arms). Finding the best combo by testing every single combination is impossible. Multi-Agent Thompson sampling allows chefs working at specific stations (hyperedges) to test out their local dish variations and combine them. $\epsilon$-MATS is a strategy where chefs stick to their known best ingredients 90% of the time, and only try wild new combinations 10% of the time. The formula guarantees that even in the absolute worst-case scenario, the time they waste learning the optimal combo scales only with the number of local ingredients ($A_{\text{local}}$), not the massive number of possible combo meals, as long as the chefs aren't all crowded at the exact same stations (sparse hypergraph).
-
 
 ### Variational Policy Propagation for Multi-Agent Reinforcement Learning
 
@@ -2044,33 +2069,6 @@ Test Status: EVIDENCE_INSUFFICIENT
 Analogy for PHGD: Imagine several blindfolded people (agents) trying to find the lowest point in a bumpy, complex mountain range (non-convex control landscape). If they just walk downhill locally, they might get stuck in random ditches or run into each other forever. However, underneath the bumpy surface, the mountain is actually shaped like a smooth, simple bowl (hidden monotone structure). By using a specialized compass (the Preconditioner matrix) that mathematically undoes the surface distortion, they can walk as if they are navigating the smooth bowl, guaranteeing they eventually meet at the absolute bottom (Nash equilibrium) instead of wandering aimlessly.
 Evidence Status: CONCEPTUAL_MAPPING
 
-<!-- DAILY_RESEARCH_CHUNK -->
-### Distributed Optimization via Kernelized Multi-armed Bandits
-
-> **Canonical five-axis interpretation (2026-08-28):** Claim State `SUPPORTED`; Evidence Level `E4_PREPRINT`; Source Surface `ABSTRACT_SUPPORTED`; Mapping State `DESIGN_ANALOGY`; Implementation State `REFERENCE_ONLY`; Validation State `NOT_TESTED`; Canonical Source `S35`. Authors: Ayush Rai and Shaoshuai Mou; identity: arXiv:2312.04719v1. The historical formula/theorem text below was not re-certified by this annotation. RKHS norm, connected-network, regret, and communication assumptions remain paper-scoped; no repository implementation or reproduction is claimed.
-
-- **System Container:** Collaboration System
-- **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
-- **Original Paper Problem:** The problem of global optimization in decentralized networks where local reward functions are non-convex, unknown, and expensive to evaluate, requiring agents to cooperatively maximize an average of local functions using only noisy bandit feedback without sharing their private local functions, estimates, or actions.
-- **Core Assumption:** Each agent's local unknown objective function has a small bounded norm in a reproducing kernel Hilbert space (RKHS) and the communication graph is connected.
-- **Mathematical Mechanism:** The Multi-agent IGP-UCB (MA-IGP-UCB) algorithm utilizes a running consensus over the communication network to estimate the global upper confidence bound of the kernelized function, effectively bounding the cumulative regret through spectral properties of the graph's Perron matrix.
-- **Formulas / Pseudocode:**
-  - **收敛界 (Convergence Bound):** For a completely connected graph, the algorithm achieves a regret bound of $\oo^{*}(\sqrt{T}(B\sqrt{\gamma_T}+\gamma_T))$ with high probability. For general connected graphs, the cumulative regret is bounded by:
-    $$ R(T) \leq 4\beta_T \left(N+ \frac{2(N-1)N|\lambda_2|}{1-|\lambda_2|}\right) \sqrt{4T\lambda\gamma_T} + \frac{N(N-1)B|\lambda_2|^{2}}{1-|\lambda_2|} + 4B $$
-    where $\lambda_2$ is the second largest eigenvalue (in absolute value) of the Perron matrix of graph $\mathcal{G}$.
-- **Applicable Scope:** Distributed machine learning and sensor networks requiring global function optimization over an arbitrary connected graph where local agents cannot or will not share private local observations and actions.
-- **Limitations:** The single-step algorithm's regret bound scales poorly with $N^2$ due to communication delays. The multi-stage delayed extension (MAD-IGP-UCB) reduces this to $N$ but at the cost of agents fixing actions during stages, generating constant regret during the delay interval.
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. Provides a mechanism for the Collaboration System where multiple agents can optimize a shared global task purely through exchanging Upper Confidence Bounds of their local surrogate models, avoiding central data pooling.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a team of chefs trying to perfect a recipe together. Each chef only has access to a few local tasters (their private reward). Instead of sharing their secret ingredients or telling everyone what their local tasters said (which violates privacy), they only share their mathematical "confidence score" about how good the recipe is. By repeatedly averaging just these scores, the entire team zeroes in on the world's best recipe.
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-<!-- DAILY_RESEARCH_CHUNK -->
-
 ### Multi-Agent Thompson Sampling on Sparse Hypergraphs
 - **System Container:** Collaboration System
 - **Frontier Source:**
@@ -2094,3 +2092,17 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Test Status:** EVIDENCE_INSUFFICIENT
 - **For Beginners: Practical Analogy:** Imagine a massive restaurant kitchen with 20 chefs. Instead of forcing all 20 to agree on every single dish simultaneously (which takes forever), they are divided into small, overlapping teams based on the menu. Each team optimizes their own local recipes. This mathematically bounds how badly the kitchen can fail, ensuring worst-case efficiency as long as the teams remain relatively independent (sparse).
 - **Evidence Status:** PAPER_ONLY
+
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Wove "Distributed Optimization via Kernelized Multi-armed Bandits" into Core Theory and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped kernelized multi-armed bandit distributed consensus to privacy-preserving decentralized exploration.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - Kernelized Multi-armed Bandits: COMPATIBLE. The multi-agent confidence bound averaging without data sharing aligns perfectly with Collaboration System's decentralized privacy goals and does not conflict with Memory or Architecture Principles.
+- 来源迁移记录 (Source migration record)
+  - Successfully migrated 2312.04719v1 (Kernelized Bandits). Note: Daily chunk "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS

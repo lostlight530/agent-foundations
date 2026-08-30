@@ -25,6 +25,31 @@
 ---
 
 ## 2. 核心机制：在谱间隙 (Spectral Gap) 上的收敛
+
+### 基于核化多臂老虎机的分布式优化
+
+> **当前五轴解释（2026-08-28）：** Claim State `SUPPORTED`；Evidence Level `E4_PREPRINT`；Source Surface `ABSTRACT_SUPPORTED`；Mapping State `DESIGN_ANALOGY`；Implementation State `REFERENCE_ONLY`；Validation State `NOT_TESTED`；Canonical Source `S35`。作者为 Ayush Rai、Shaoshuai Mou，来源身份为 arXiv:2312.04719v1。本批注未重新认证下方历史公式/定理转录；RKHS 范数、连通网络、遗憾与通信假设仍限于论文范围，不声明仓库实现或复现。
+
+- **System Container:** Collaboration System
+- **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
+- **原始论文问题:** 去中心化网络中的全局优化问题，其中局部奖励函数是非凸的、未知的且评估成本高昂，要求智能体在不共享其私有局部函数、估计值或动作的情况下，仅使用带噪声的老虎机反馈来协作最大化局部函数的平均值。
+- **核心假设:** 每个智能体的局部未知目标函数在再生核希尔伯特空间（RKHS）中具有较小的有界范数，并且通信图是连通的。
+- **数学机制:** 多智能体 IGP-UCB（MA-IGP-UCB）算法利用通信网络上的运行共识来估计核化函数的全局置信上限，从而通过图的 Perron 矩阵的谱特性有效地限制累积遗憾。
+- **公式与代码分类:**
+  - **收敛界:** 对于完全连通图，该算法以高概率实现 $\tilde{\mathcal{O}}(\sqrt{T}(B\sqrt{\gamma_T}+\gamma_T))$ 的遗憾界。对于一般连通图，累积遗憾受限于：
+    $$ R(T) \leq 4\beta_T \left(N+ \frac{2(N-1)N|\lambda_2|}{1-|\lambda_2|}\right) \sqrt{4T\lambda\gamma_T} + \frac{N(N-1)B|\lambda_2|^{2}}{1-|\lambda_2|} + 4B $$
+    其中 $\lambda_2$ 是图 $\mathcal{G}$ 的 Perron 矩阵的第二大特征值（绝对值）。
+- **适用范围:** 需要在任意连通图上进行全局函数优化的分布式机器学习和传感器网络，其中本地智能体不能或不愿共享私有局部观测和动作。
+- **局限性:** 由于通信延迟，单步算法的遗憾界与 $N^2$ 的缩放关系较差。多阶段延迟扩展（MAD-IGP-UCB）将其降低到 $N$，但代价是智能体在各个阶段固定动作，从而在延迟区间内产生恒定遗憾。
+- **Agent 架构映射:** CONCEPTUAL_MAPPING。为 Collaboration System 提供了一种机制，多个智能体可以完全通过交换其局部代理模型的置信上限来优化共享的全局任务，从而避免集中式数据池化。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT
+- **仓库测试状态:** EVIDENCE_INSUFFICIENT
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
 ### 去中心化随机梯度追踪 (DSGT)
 "High-Probability Convergence in Decentralized Stochastic Optimization with Gradient Tracking" (arXiv:2605.00281v1)。选择该理论是因为它为没有中心节点的去中心化网络提供了极其严谨的收敛边界证明，彻底摒弃了概率黑盒。
 论文证明了去中心化随机梯度追踪（DSGT）算法能实现高概率收敛，误差项 $X_t$ 超出阈值的概率被严格约束：$\mathbb{P}\bigg(X_{t}>\frac{\log(\nicefrac{{1}}{{\delta}})}{t^{\beta}}\bigg)\leq\delta$。消除异构数据偏差的核心在于追踪变量的数学更新规则：
@@ -1182,6 +1207,9 @@ $$
 
 ## 5. 0基础业务通俗类比 (For Beginners)
 
+### 基于核化多臂老虎机的分布式优化类比 (For Beginners)
+想象一组厨师试图共同完善一份食谱。每位厨师只能接触到几个当地的品尝者（他们的私人奖励）。他们不分享秘密配方，也不告诉大家当地品尝者的评价（这侵犯了隐私），而只分享他们对食谱好坏的数学“置信度得分”。通过不断地平均这些得分，整个团队最终锁定了世界上最好的食谱。
+
 ### Weaved Integrations
 
 想象一个大型连锁企业（去中心化网络）试图在没有中央总部的情况下统一门店布局（全局优化问题）。各个门店不仅根据本地需求和邻居反馈来更新草图（主变量 $X^{\nu}$），还会同时追踪整个网络的“共识趋势”是如何变化的（对偶变量 $Y^{\nu}$）。
@@ -1637,7 +1665,6 @@ def flexible_gradient_tracking_step(x_k, y_k, Z_1_nc, Z_2_nc, alpha):
 ⚠️ 缺失来源 (Missing Sources):
 - 依然存在 MISSING_SOURCE，特别是在 Robust Compressed Push-Pull (RCPP) Method 和 基于 KL 性质的去中心化梯度追踪机制的代码实现部分。
 
-
 ### 基于超图的Epsilon探索多智能体Thompson采样的频率主义遗憾界限
 
 **系统容器:** 协作系统 (Collaboration System)
@@ -1681,7 +1708,6 @@ $$ \Omega\left(\frac{\sqrt{A_{\text{local}} T}}{\rho}\right) $$
 
 #### 8. 初学者类比
 想象一个庞大的餐厅厨房，多名厨师（智能体）协作制作复杂的套餐（联合臂）。通过测试每一种组合来找到最佳套餐是不可能的。多智能体 Thompson 采样允许在特定工位（超边）工作的厨师测试他们的局部菜肴变体并将它们组合起来。$\epsilon$-MATS 是一种策略，即厨师在 90% 的时间里坚持使用他们已知的最佳食材，只在 10% 的时间里尝试疯狂的新组合。该公式保证，即使在绝对最坏的情况下，他们寻找最佳套餐所浪费的时间，也只与局部食材的数量 ($A_{\text{local}}$) 成比例，而与可能产生的大量套餐数量无关——前提是厨师们并没有全都挤在完全相同的工位上（稀疏超图）。
-
 
 ### 多智能体强化学习的变分策略传播 (Variational Policy Propagation)
 
@@ -1880,33 +1906,6 @@ Test Status: EVIDENCE_INSUFFICIENT
 Analogy for PHGD: 想象几位蒙眼的人（智能体）试图在崎岖复杂的山脉（非凸控制地形）中找到最低点。如果他们只是在局部往下走，可能会永远卡在随机的沟壑中或相互碰撞。然而，在崎岖的地表下，这座山实际上呈现出一个平滑的简单碗状（隐藏的单调结构）。通过使用一种专门的指南针（预处理矩阵）在数学上消除地表扭曲，他们可以像在平滑的碗面上一样导航，保证最终能在一个绝对谷底（纳什均衡）相遇，而不是漫无目的地徘徊。
 Evidence Status: CONCEPTUAL_MAPPING
 
-<!-- DAILY_RESEARCH_CHUNK -->
-### 基于核化多臂老虎机的分布式优化
-
-> **当前五轴解释（2026-08-28）：** Claim State `SUPPORTED`；Evidence Level `E4_PREPRINT`；Source Surface `ABSTRACT_SUPPORTED`；Mapping State `DESIGN_ANALOGY`；Implementation State `REFERENCE_ONLY`；Validation State `NOT_TESTED`；Canonical Source `S35`。作者为 Ayush Rai、Shaoshuai Mou，来源身份为 arXiv:2312.04719v1。本批注未重新认证下方历史公式/定理转录；RKHS 范数、连通网络、遗憾与通信假设仍限于论文范围，不声明仓库实现或复现。
-
-- **System Container:** Collaboration System
-- **Frontier Source:** *Distributed Optimization via Kernelized Multi-armed Bandits* (arXiv:2312.04719v1, 2023-12-07)
-- **原始论文问题:** 去中心化网络中的全局优化问题，其中局部奖励函数是非凸的、未知的且评估成本高昂，要求智能体在不共享其私有局部函数、估计值或动作的情况下，仅使用带噪声的老虎机反馈来协作最大化局部函数的平均值。
-- **核心假设:** 每个智能体的局部未知目标函数在再生核希尔伯特空间（RKHS）中具有较小的有界范数，并且通信图是连通的。
-- **数学机制:** 多智能体 IGP-UCB（MA-IGP-UCB）算法利用通信网络上的运行共识来估计核化函数的全局置信上限，从而通过图的 Perron 矩阵的谱特性有效地限制累积遗憾。
-- **公式与代码分类:**
-  - **收敛界:** 对于完全连通图，该算法以高概率实现 $\oo^{*}(\sqrt{T}(B\sqrt{\gamma_T}+\gamma_T))$ 的遗憾界。对于一般连通图，累积遗憾受限于：
-    $$ R(T) \leq 4\beta_T \left(N+ \frac{2(N-1)N|\lambda_2|}{1-|\lambda_2|}\right) \sqrt{4T\lambda\gamma_T} + \frac{N(N-1)B|\lambda_2|^{2}}{1-|\lambda_2|} + 4B $$
-    其中 $\lambda_2$ 是图 $\mathcal{G}$ 的 Perron 矩阵的第二大特征值（绝对值）。
-- **适用范围:** 需要在任意连通图上进行全局函数优化的分布式机器学习和传感器网络，其中本地智能体不能或不愿共享私有局部观测和动作。
-- **局限性:** 由于通信延迟，单步算法的遗憾界与 $N^2$ 的缩放关系较差。多阶段延迟扩展（MAD-IGP-UCB）将其降低到 $N$，但代价是智能体在各个阶段固定动作，从而在延迟区间内产生恒定遗憾。
-- **Agent 架构映射:** CONCEPTUAL_MAPPING。为 Collaboration System 提供了一种机制，多个智能体可以完全通过交换其局部代理模型的置信上限来优化共享的全局任务，从而避免集中式数据池化。
-- **仓库实现状态:** EVIDENCE_INSUFFICIENT
-- **仓库测试状态:** EVIDENCE_INSUFFICIENT
-- **初学者类比:** 想象一组厨师试图共同完善一份食谱。每位厨师只能接触到几个当地的品尝者（他们的私人奖励）。他们不分享秘密配方，也不告诉大家当地品尝者的评价（这侵犯了隐私），而只分享他们对食谱好坏的数学“置信度得分”。通过不断地平均这些得分，整个团队最终锁定了世界上最好的食谱。
-- **证据状态:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-<!-- DAILY_RESEARCH_CHUNK -->
-
 ### 稀疏超图上的多智能体 Thompson 采样 (Multi-Agent Thompson Sampling on Sparse Hypergraphs)
 - **System Container:** Collaboration System
 - **Frontier Source:**
@@ -1930,3 +1929,17 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **测试状态:** EVIDENCE_INSUFFICIENT
 - **初学者类比:** 想象一个有 20 个厨师的大型餐厅厨房。与其强迫 20 个人同时就每道菜达成一致（这会花费无尽的时间），不如根据菜单将他们分成小且重叠的团队。每个团队优化自己的局部食谱。这在数学上限制了厨房可能出现的最坏情况，只要团队保持相对独立（稀疏），就能保证最坏情况下的效率。
 - **证据状态:** PAPER_ONLY
+
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 编织了“基于核化多臂老虎机的分布式优化”理论与类比。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将核化多臂老虎机的分布式共识映射到保护隐私的去中心化探索中。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - 核化多臂老虎机理论：COMPATIBLE（兼容）。不共享数据的多智能体置信上界平均机制与协作系统去中心化隐私目标完全一致，且不与记忆或架构原则冲突。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移了 2312.04719v1 (核化老虎机)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
