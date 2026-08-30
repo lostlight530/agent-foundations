@@ -2,6 +2,8 @@
 
 > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` currently resolves to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` to `REFERENCE_ONLY`; test `EVIDENCE_INSUFFICIENT` to `NOT_TESTED`. Evidence Level and Source Surface are assigned separately. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
+> **2026-08-31 source-identity calibration:** the 08-29 epsilon-MATS chunk resolves to existing canonical source S25 (arXiv:2312.15549v1, AAAI 2024). It is inherited documentary use, not a new source and not independent corroboration.
+
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**

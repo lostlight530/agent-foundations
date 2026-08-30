@@ -2,6 +2,8 @@
 
 > **Current five-axis calibration — 2026-08-28.** Historical generated blocks are preserved. In every such block, `CONCEPTUAL_MAPPING` means `Mapping State: DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` means `Implementation State: REFERENCE_ONLY` unless a repository path is named; test `EVIDENCE_INSUFFICIENT` means `Validation State: NOT_TESTED`. These labels do not assign an Evidence Level. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
+> **2026-08-31 current disposition for the 08-30 Joint Lyapunov chunk:** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`. Official arXiv identity and abstract were checked; formula transcription and numerical/cryptographic claims were not independently re-certified here.
+
 ## 0. Introduction & Core Quick Look (For Beginners)
 
 ### Analogy for Distributed Stochastic Optimization under Heavy-Tailed Noises

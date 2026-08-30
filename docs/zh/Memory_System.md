@@ -2,6 +2,8 @@
 
 > **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；`CONCEPTUAL_MAPPING` 当前映射为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 映射为 `REFERENCE_ONLY`，测试字段映射为 `NOT_TESTED`。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
+> **2026-08-31 对 S36 的当前定性：** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`。arXiv:2303.01673v2 的修订日期为 2023-03-09；本轮没有独立重新认证历史研究块中的精确公式转录。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**

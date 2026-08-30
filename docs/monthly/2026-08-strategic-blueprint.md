@@ -1,72 +1,56 @@
-# Monthly Strategic Blueprint & Paradigm Audit (2026-08)
+# Monthly Strategic Blueprint & Paradigm Audit — 2026-08 through day 30
 
-## Coverage Window
-2026-08-01 to 2026-08-31
+> **Post-hoc calibration — 2026-08-31**
+>
+> - Original record: `PRESERVED_BY_GIT_HISTORY`
+> - Original execution state: `COMPLETED`
+> - Current disposition: `SUPERSEDED_FOR_CURRENT_INTERPRETATION / PROVISIONAL_30_DAY_SYNTHESIS`
+> - Reason: the generated file covered the future date 08-31, marked the month complete, and labelled all containers “normal” without a container-health runtime or retained evaluation corpus.
+> - Evidence boundary: documentary research commits through 08-30; no 08-31 evidence and no runtime validation.
+> - Canonical authority: [`2026-08-through-30-strategic-blueprint.md`](2026-08-through-30-strategic-blueprint.md)
+> - Execution replayed for this annotation: `NO`
 
-## Month Status
-COMPLETED: Paradigm conflict audit and external failure evaluation finalized for August 2026.
+## Coverage
 
-## Verified Sources
-No verified external failure case found
+- Evidence window: 2026-08-01 through 2026-08-30
+- Logical dates: 30
+- Daily research commits identified: 29
+- Missing Daily date: 08-06
+- Canonical source range: `S01–S37`
+- Month status: `MONTH_OPEN`
+- Report status: `PROVISIONAL`
 
-## Failure Cases
-No verified external failure case found
+## Four-domain review
 
-## 四容器覆盖
+| Domain | Documentary research state | Repository implementation | Repository validation |
+| --- | --- | --- | --- |
+| Memory | source mappings retained, including S36 | `REFERENCE_ONLY` | `NOT_TESTED` |
+| Tools | source mappings retained | `REFERENCE_ONLY` | `NOT_TESTED` |
+| Collaboration | S25 revisit deduplicated | `REFERENCE_ONLY` | `NOT_TESTED` |
+| Architecture | S37 registered at abstract scope | `REFERENCE_ONLY` | `NOT_TESTED` |
 
-- **Memory**:
-  - 表征约束: 正常
-  - 异常检测: 正常
-  - 语义验证: 正常
-  - 记忆污染: 正常
-  - 灾难性遗忘: 正常
+Container health is `NOT_EVALUATED`; “normal” is not a valid replacement for five-axis state.
 
-- **Tool**:
-  - 因果路由: 正常
-  - 策略蒸馏: 正常
-  - 工具边界: 正常
-  - 执行深度: 正常
-  - 隐式错误: 正常
+## Failure and conflict evidence
 
-- **Collaboration**:
-  - 去中心化拓扑: 正常
-  - 谱收敛: 正常
-  - 局部邻居通信: 正常
-  - SPOF: 正常
-  - Non-IID 条件: 正常
+- No bounded, reproducible external-failure search corpus was retained by the original Monthly task.
+- “No verified external failure case found” therefore means `NO_RETAINED_VERIFIED_CASE`, not absence of external failures.
+- Selection bias toward Architecture/Collaboration remains a documentary observation; exact full-month container counts are `NOT_RECOMPUTED` here.
+- Duplicate citations do not create independent support.
 
-- **Architecture Principles**:
-  - 梯度熵: 正常
-  - Lyapunov 稳定性: 正常
-  - NTK / FIM 边界: 正常
-  - 自适应停止: 正常
-  - 模式崩溃与结构发散: 正常
+## Source changes on days 28–30
 
-## 实现与测试状态
-No relevant implementation or testing updates derived from failure cases this month.
+- S36: arXiv:2303.01673v2; version date corrected to 2023-03-09.
+- 08-29 MATS revisit: resolves to S25.
+- S37: arXiv:2608.09087v1; abstract-supported, design analogy, reference-only, not tested.
 
-## 未覆盖风险
-No new risks uncovered as no verified external failures were found.
+## Decision state
 
-## 路线保留、降级或替换
-- **保留**: Multi-agent decentralized optimization routes.
-- **保留**: Tool causality mapping routes.
+- Fifth container justified: `NO_EVIDENCE_IDENTIFIED`
+- Runtime route retained/promoted: `NONE`
+- Verified-core documentary source additions: S36 and S37
+- Natural-month closure: `NOT_AUTHORIZED`
 
-## 第五容器决策
-No fifth container justified.
+## Verdict
 
-## 下月研究 Roadmap
-- Address the observed SELECTION_BIAS_OBSERVED (heavy Collaboration/Architecture focus this month) by rotating theoretical extraction towards Memory and Tool system constraints.
-
-## Container Distribution
-| Container | Chunks | Unique Sources | Implemented | Tested | Open Gaps |
-|---|---|---|---|---|---|
-| Memory | 1 | 1 | 0 | 0 | 0 |
-| Tool | 1 | 1 | 0 | 0 | 0 |
-| Collaboration | 3 | 3 | 0 | 0 | 0 |
-| Architecture | 3 | 3 | 0 | 0 | 0 |
-*Note: SELECTION_BIAS_OBSERVED towards Collaboration and Architecture.*
-
-## Provenance Table
-| Source ID | Source Type | Affected Container | Verification Status |
-|-----------|-------------|--------------------|---------------------|
+`30_DAY_DOCUMENTARY_SYNTHESIS_COMPLETE_WITH_S01_S37_DEDUPLICATED_FIVE_AXIS_BOUNDARIES_AND_MONTH_OPEN`

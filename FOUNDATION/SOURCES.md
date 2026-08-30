@@ -1,8 +1,8 @@
 # Primary Source Registry / 一手来源登记
 
-Current calibration: 2026-08-27. Registry presence means “eligible to cite”, not “repository capability”.
+Current calibration: 2026-08-30. Registry presence means “eligible to cite”, not “repository capability”.
 
-当前校准：2026-08-27。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+当前校准：2026-08-30。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
 
 Canonical rules:
 
@@ -323,10 +323,20 @@ Canonical rules:
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2303.01673v2
-- Version date: 2023-03-03
+- Version date: 2023-03-09
 - Authors: Binghui Peng, Aviad Rubinstein
 - URL: https://arxiv.org/abs/2303.01673
 - Use: provided the memory-regret tradeoff lower bound against an adaptive adversary $\mathcal{O}(\sqrt{n}/\epsilon)$ space for $\epsilon T$ regret.
 - Verification boundary: bounds depend on full feedback multi-expert assumptions and theoretical space limits, not a generalized multi-agent reinforcement learning guarantee.
 
-Current canonical registry range: `S01–S36`.
+## S37 — Joint Lyapunov Certificates for K-Agent Generative AI Governance
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.09087v1
+- Version date: 2026-08-10
+- Authors: Sriram Nagaraj
+- URL: https://arxiv.org/abs/2608.09087
+- Use: abstract-supported joint Lyapunov analysis, critical-coupling, noise-floor, and zero-knowledge-attestation claims under the paper's linear, homogeneous, state-independent-noise assumptions.
+- Verification boundary: checked against official arXiv identity and abstract on 2026-08-31; exact formula transcription, numerical studies, cryptographic construction, repository implementation, and reproduction were not independently re-certified in this pass.
+
+Current canonical registry range: `S01–S37`.

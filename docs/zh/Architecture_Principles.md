@@ -2,6 +2,8 @@
 
 > **当前五轴校准 — 2026-08-28。** 历史生成块原文保留。所有块中的 `CONCEPTUAL_MAPPING` 当前解释为 `Mapping State: DESIGN_ANALOGY`；实现字段的 `EVIDENCE_INSUFFICIENT` 在未指向仓库实现路径时解释为 `Implementation State: REFERENCE_ONLY`；测试字段解释为 `Validation State: NOT_TESTED`。旧标签本身不决定 Evidence Level。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
+> **2026-08-31 对 08-30 Joint Lyapunov 研究块的当前定性：** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`。本轮核对了 arXiv 官方身份与摘要，没有独立重新认证公式转录、数值实验或密码学构造。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 ### 重尾噪声下的分布式随机优化类比 (Practical Analogies)
