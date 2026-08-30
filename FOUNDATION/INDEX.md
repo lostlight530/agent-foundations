@@ -1,11 +1,11 @@
 # Agent Foundations — Verified Core / 可验证核心
 
 Status: repository documentary/evidence core  
-Current calibration: 2026-08-27
+Current calibration: 2026-08-30
 
 Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)
 
-August 1–27 evidence ledger: [../docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md](../docs/AUGUST_2026_01_27_EVIDENCE_LEDGER.md)
+August 1–30 evidence ledger: [../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md](../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md)
 
 Full public-document audit: [2026-08-28-DOCUMENT-AUDIT.md](./2026-08-28-DOCUMENT-AUDIT.md)
 
@@ -30,11 +30,11 @@ Stable claim IDs use `AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, and `AF-COLLAB-*`.
 
 ### 2. Canonical source registry / 来源登记
 
-[SOURCES.md](./SOURCES.md) is the canonical source registry and currently contains the contiguous range `S01–S35`.
+[SOURCES.md](./SOURCES.md) is the canonical source registry and currently contains the contiguous range `S01–S37`.
 
 Source IDs are identities, not a daily counter. The same canonical source must not be re-registered under another ID merely because a later research chunk revisits it or cites another version.
 
-August reference case: the 2026-08-27 RAFA revisit resolves to existing S10; attempted S36 is not retained as a second identity.
+August reference cases: the 2026-08-27 RAFA revisit resolves to S10; the 2026-08-29 MATS revisit resolves to S25. S36 and S37 are distinct new identities.
 
 ### 3. Claim vocabulary / Claim 词汇契约
 
@@ -87,6 +87,8 @@ Historical Daily Research Chunks remain evidence of what was generated/recorded 
 - [`../docs/AUGUST_2026_W34_ERRATA.md`](../docs/AUGUST_2026_W34_ERRATA.md)
 - [`../docs/AUGUST_2026_24_27_RECONCILIATION.md`](../docs/AUGUST_2026_24_27_RECONCILIATION.md)
 - [`../docs/monthly/2026-08-through-27-strategic-blueprint.md`](../docs/monthly/2026-08-through-27-strategic-blueprint.md)
+- [`../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md`](../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md)
+- [`../docs/monthly/2026-08-through-30-strategic-blueprint.md`](../docs/monthly/2026-08-through-30-strategic-blueprint.md)
 
 ## Current authority precedence / 当前解释优先级
 
@@ -122,4 +124,4 @@ Not:
 
 `IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
 
-Formal August monthly closure remains `OPEN` at the 2026-08-27 cutoff.
+Formal August monthly closure remains `OPEN` at the 2026-08-30 cutoff.

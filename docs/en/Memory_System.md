@@ -2,6 +2,8 @@
 
 > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` maps to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` maps to `REFERENCE_ONLY`; test status maps to `NOT_TESTED`. Paper support, mapping relevance, repository implementation, and validation remain independent. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
+> **2026-08-31 current disposition for S36:** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`. arXiv:2303.01673v2 was revised 2023-03-09; exact formula transcription in the historical block was not independently re-certified in this pass.
+
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**

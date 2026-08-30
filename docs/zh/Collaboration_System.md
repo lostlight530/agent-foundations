@@ -2,6 +2,8 @@
 
 > **当前五轴校准 — 2026-08-28。** 历史生成标签继续可见；`CONCEPTUAL_MAPPING` 当前解释为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 解释为 `REFERENCE_ONLY`，测试字段解释为 `NOT_TESTED`。Evidence Level 与 Source Surface 独立判定。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
+> **2026-08-31 来源身份校准：** 08-29 的 epsilon-MATS 研究块统一解析到已有 canonical source S25（arXiv:2312.15549v1，AAAI 2024）。这是文档继承，不是新来源，也不是独立佐证。
+
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**
