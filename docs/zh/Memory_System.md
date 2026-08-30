@@ -24,6 +24,51 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 ---
 
 ## 2. 核心机制：记忆压缩与异常捕捉 (Core Mechanisms)
+
+### RAFA 后验采样遗憾界 (RAFA Posterior Sampling Regret Bound)
+
+- **系统容器 (System Container)**: Memory System
+- **前沿来源 (Frontier Source)**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
+- **原始问题 (Original Problem)**: 如何将大型语言模型 (LLM) 的推理能力转化为现实世界中的行动，同时提供可证明的样本效率保证并最小化与环境的交互次数，仍然是一个挑战。
+- **核心假设 (Core Assumptions)**:
+  - 假设 1 (方差界): 状态-动作空间上贝尔曼算子的方差是有界的。
+  - 假设 2 (带有后验采样机制的 LLM): 存在一种机制 $\texttt{LLM+PS}$，将记忆缓冲区 $\mathcal{D}$ 映射到转移核和奖励函数，使得给定 $\mathcal{D}$ 的条件下的自举样本是真实数据生成参数的独立同分布近似。
+- **数学机制 (Mathematical Mechanism)**:
+  Agent 使用一个 $\epsilon$-最优规划器在从后验分布采样的模型上进行规划，并通过记录在记忆缓冲区 $\mathcal{D}$ 中的交互来更新模型。模型更新的切换条件取决于后验熵的下降 $H_{t_k} - H_t > \log 2$。
+
+  **定理 (贝叶斯遗憾 - Bayesian Regret):**
+  $$
+  \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
+  $$
+- **收敛性与边界强度 (Convergence / Bound Strength)**: 贝叶斯遗憾界受限于 $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$，并且不依赖于集中性系数，这表明后验采样机制成功绕过了悲观的覆盖要求。
+- **适用范围 (Applicability)**: 运行在交互式环境中的 LLM Agent（如具身智能、工具使用场景），在这些场景中，探索的成本很高，且样本效率至关重要。
+- **局限性 (Limitations)**: 该遗憾界严重依赖于 LLM 能够近似精确后验采样的假设（例如，通过自举法），并且在复杂状态空间中，$\epsilon$-最优规划器的计算成本可能很高。
+- **架构映射状态 (Architecture Mapping Status)**: DESIGN_CANDIDATE
+- **仓库实现状态 (Repository Implementation Status)**: EVIDENCE_INSUFFICIENT
+- **仓库测试状态 (Repository Test Status)**: EVIDENCE_INSUFFICIENT
+- **证据状态 (Evidence Status)**: PAPER_ONLY
+
+### 在线学习中的近似最优内存与后悔值权衡 (Near Optimal Memory-Regret Tradeoff)
+
+- **System Container**: Memory System
+- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
+- **论文原始问题**: 确定在线学习智能体使用的空间（内存）与对抗自适应对手时可实现的后悔值（regret）之间的基本权衡。
+- **核心假设**:
+  - 智能体面临一个能够观察算法过去选择的自适应对手。
+  - 在线学习问题包含 $n$ 个专家和 $T$ 天的序列，且 $T$ 相对于可用空间 $S$ 是有界的。
+- **数学机制**:
+  一种内存高效算法，在自适应对手环境中使用分组乘法权重更新（MWU），结合子采样的 $\texttt{RandomExpert}$ 块和观察到的 $\texttt{LongExpert}$ 池。
+
+  **收敛界 (后悔值保证):**
+  在面对自适应对手时，该算法使用最多 $S$ 的空间可实现 $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ 的后悔值。
+- **收敛或行为边界**: 下界证明了大致需要并足以使用 $\mathcal{O}(\sqrt{n}/\epsilon)$ 的空间来针对自适应对手获得 $\epsilon T$ 的后悔值。次线性空间 $\tilde{O}(\sqrt{n})$ 足以获得 $o(T)$ 的后悔值。
+- **适用范围**: 资源受限环境下的内存受限强化学习和在线决策智能体的设计。
+- **局限**: 空间下界依赖于通信复杂性中的直积定理（direct-product theorems），并严格适用于全反馈专家问题，未必适用于多臂老虎机（bandit）环境。
+- **Agent 架构映射**: CONCEPTUAL_MAPPING
+- **仓库实现状态**: EVIDENCE_INSUFFICIENT
+- **测试状态**: EVIDENCE_INSUFFICIENT
+- **证据状态**: PAPER_ONLY
+
 ### 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
 arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
 DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
@@ -331,6 +376,12 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 ## 5. 0基础业务通俗类比 (For Beginners)
 
+### RAFA 后验采样遗憾界类比 (Practical Analogies)
+想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
+
+### 近似最优内存与后悔值权衡类比 (Practical Analogies)
+想象一下，你试图从数千名股票顾问中挑选最好的一位。如果你有无限的记忆力，你可以记住他们做过的每一个预测。如果你几乎没有记忆力，对手（市场）就可以轻易地欺骗你。这项研究表明，你至少需要记住一定数量（大约是顾问数量的平方根）的顾问记录，才能在不被完全愚弄的情况下做出良好的整体选择。
+
 ### Weaved Integrations
 
 想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）。传统的AI方法只是随机洗牌（添加噪声）。我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道。每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测。
@@ -433,7 +484,6 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 
 想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）。传统的AI方法只是随机洗牌（添加噪声）。我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道。每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测。
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
@@ -462,51 +512,19 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）。如果你学到了新的一课，你只更新这四本桌上书籍的分数。这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉。
 
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
 
-### Daily Research Chunk: RAFA 后验采样遗憾界 (RAFA Posterior Sampling Regret Bound)
-
-- **系统容器 (System Container)**: Memory System
-- **前沿来源 (Frontier Source)**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
-- **原始问题 (Original Problem)**: 如何将大型语言模型 (LLM) 的推理能力转化为现实世界中的行动，同时提供可证明的样本效率保证并最小化与环境的交互次数，仍然是一个挑战。
-- **核心假设 (Core Assumptions)**:
-  - 假设 1 (方差界): 状态-动作空间上贝尔曼算子的方差是有界的。
-  - 假设 2 (带有后验采样机制的 LLM): 存在一种机制 $\texttt{LLM+PS}$，将记忆缓冲区 $\mathcal{D}$ 映射到转移核和奖励函数，使得给定 $\mathcal{D}$ 的条件下的自举样本是真实数据生成参数的独立同分布近似。
-- **数学机制 (Mathematical Mechanism)**:
-  Agent 使用一个 $\epsilon$-最优规划器在从后验分布采样的模型上进行规划，并通过记录在记忆缓冲区 $\mathcal{D}$ 中的交互来更新模型。模型更新的切换条件取决于后验熵的下降 $H_{t_k} - H_t > \log 2$。
-
-  **定理 (贝叶斯遗憾 - Bayesian Regret):**
-  $$
-  \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
-  $$
-- **收敛性与边界强度 (Convergence / Bound Strength)**: 贝叶斯遗憾界受限于 $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$，并且不依赖于集中性系数，这表明后验采样机制成功绕过了悲观的覆盖要求。
-- **适用范围 (Applicability)**: 运行在交互式环境中的 LLM Agent（如具身智能、工具使用场景），在这些场景中，探索的成本很高，且样本效率至关重要。
-- **局限性 (Limitations)**: 该遗憾界严重依赖于 LLM 能够近似精确后验采样的假设（例如，通过自举法），并且在复杂状态空间中，$\epsilon$-最优规划器的计算成本可能很高。
-- **架构映射状态 (Architecture Mapping Status)**: DESIGN_CANDIDATE
-- **仓库实现状态 (Repository Implementation Status)**: EVIDENCE_INSUFFICIENT
-- **仓库测试状态 (Repository Test Status)**: EVIDENCE_INSUFFICIENT
-- **初学者类比 (For Beginners: Practical Analogies)**:
-  想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
-- **证据状态 (Evidence Status)**: PAPER_ONLY
-
-### Daily Research Chunk: Near Optimal Memory-Regret Tradeoff for Online Learning
-
-- **技术点名称**: 在线学习中的近似最优内存与后悔值权衡
-- **System Container**: Memory System
-- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
-- **论文原始问题**: 确定在线学习智能体使用的空间（内存）与对抗自适应对手时可实现的后悔值（regret）之间的基本权衡。
-- **核心假设**:
-  - 智能体面临一个能够观察算法过去选择的自适应对手。
-  - 在线学习问题包含 $n$ 个专家和 $T$ 天的序列，且 $T$ 相对于可用空间 $S$ 是有界的。
-- **数学机制**:
-  一种内存高效算法，在自适应对手环境中使用分组乘法权重更新（MWU），结合子采样的 $\texttt{RandomExpert}$ 块和观察到的 $\texttt{LongExpert}$ 池。
-
-  **收敛界 (后悔值保证):**
-  在面对自适应对手时，该算法使用最多 $S$ 的空间可实现 $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ 的后悔值。
-- **收敛或行为边界**: 下界证明了大致需要并足以使用 $\mathcal{O}(\sqrt{n}/\epsilon)$ 的空间来针对自适应对手获得 $\epsilon T$ 的后悔值。次线性空间 $\tilde{O}(\sqrt{n})$ 足以获得 $o(T)$ 的后悔值。
-- **适用范围**: 资源受限环境下的内存受限强化学习和在线决策智能体的设计。
-- **局限**: 空间下界依赖于通信复杂性中的直积定理（direct-product theorems），并严格适用于全反馈专家问题，未必适用于多臂老虎机（bandit）环境。
-- **Agent 架构映射**: CONCEPTUAL_MAPPING
-- **仓库实现状态**: EVIDENCE_INSUFFICIENT
-- **测试状态**: EVIDENCE_INSUFFICIENT
-- **初学者类比**: 想象一下，你试图从数千名股票顾问中挑选最好的一位。如果你有无限的记忆力，你可以记住他们做过的每一个预测。如果你几乎没有记忆力，对手（市场）就可以轻易地欺骗你。这项研究表明，你至少需要记住一定数量（大约是顾问数量的平方根）的顾问记录，才能在不被完全愚弄的情况下做出良好的整体选择。
-- **证据状态**: PAPER_ONLY
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 编织了“RAFA 后验采样遗憾界”理论与类比。
+  - 编织了“近似最优内存与后悔值权衡”理论与类比。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将 RAFA 后验采样映射到基于记忆的熵下降界限。
+  - 将内存-后悔值权衡空间要求映射到有界内存架构约束。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - RAFA 后验采样理论：COMPATIBLE（兼容）。依赖熵下降来更新模型严格利用了系统记忆能力，且未与架构或工具执行假设冲突。
+  - 内存-后悔值权衡理论：COMPATIBLE（兼容）。将次线性内存下界形式化严格符合资源受限的去中心化原则，并不违背协作假设。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移了 2309.17382 (RAFA) 和 2303.01673 (内存-后悔值权衡)。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS

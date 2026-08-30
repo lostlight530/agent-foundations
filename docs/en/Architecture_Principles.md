@@ -4,6 +4,12 @@
 
 ## 0. Introduction & Core Quick Look (For Beginners)
 
+### Analogy for Distributed Stochastic Optimization under Heavy-Tailed Noises
+Like a team of explorers where some members occasionally give wildly incorrect directions (heavy-tailed noise). By agreeing to ignore overly extreme advice (gradient clipping) and regularly averaging their positions with neighbors (consensus), the team eventually converges on the correct treasure location.
+
+### Analogy for Stability Boundary of Q-Learning Dynamics in Competitive Networks
+Imagine a group of competing traders in a market. The chaos and unpredictability of their strategies don't depend on how many total traders exist in the world, but solely on how many direct competitors each trader monitors. As long as each trader only watches a small fixed number of rivals, the market can grow infinitely large while remaining stable.
+
 ### Weaved Integrations
 
 Imagine driving a car on a bumpy road (observation noise). A standard AI driver might overcorrect a tiny bump by violently jerking the steering wheel, causing the car to swerve wildly out of control (chaotic divergence). The Lyapunov Exponent Regularization acts like a rigid mechanical stabilizer on the steering column. It mathematically calculates the exact limit (the Lyapunov bound) of how much a small bump is allowed to affect the car's trajectory, guaranteeing that no matter what tiny disturbances hit the wheels, the steering wheel remains firmly stable and deterministically on track.
@@ -55,6 +61,56 @@ Traditionally, the NTK (Neural Tangent Kernel) is considered the deterministic e
 * **Analogy**: Imagine you are teaching a child (the model) how to distinguish between apples and oranges (a classification problem). If they are already doing it perfectly, but you continue to teach them endlessly (infinite training time), their brain's neural connections (parameters) won't actually become more stable. Instead, the overexertion will cause a "split brain (divergence)". The latest theory tells us that we can use a thermometer called the "NTK minimum eigenvalue" to measure their brain temperature. Once we find that this temperature (eigenvalue) exceeds a dangerous number, we directly trigger a "protection mechanism" and let them rest (gradient truncation). This mathematically guarantees that their knowledge structure will not collapse.
 
 ## 2. Original Theory: Gradient Entropy
+
+### Distributed Stochastic Optimization under Heavy-Tailed Noises
+
+**System Container:** Architecture Principles
+**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
+
+**Original Problem:**
+Agents perform distributed optimization under heavy-tailed gradient noises, which violate standard bounded variance assumptions. Typical examples include Pareto distribution noise with infinite variance, rendering existing distributed stochastic optimization algorithms ineffective or overly reliant on centralized servers.
+
+**Core Assumptions:**
+1. Strongly connected communication graph (doubly stochastic weight matrix).
+2. The objective function is continuously differentiable and convex.
+3. The constraint set is nonempty, closed, and convex, with bounded gradients over it.
+
+**Mathematical Mechanism (Distributed Update Rule):**
+Combination of consensus averaging and gradient clipping step sizes. The distributed updating law for agent $i$ is:
+$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
+where $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$, and the clipped gradient estimator is $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$.
+
+**Convergence Bounds:**
+The algorithm ensures convergence to the optimal solution with probability 1 if the gradient descent step-size $\alpha_k$ and the gradient clipping step-size $\tau_k$ satisfy certain conditions (e.g., $\sum \alpha_k = \infty$, $\sum \alpha_k^2 \tau_k^{2} < \infty$).
+
+**Applicability:**
+Multi-agent systems encountering heavy-tailed gradient noises (e.g., Pareto distribution) without relying on a centralized server for coordination.
+
+**Limitations:**
+Assumes the gradient over the constraint set is bounded. The convergence guarantees are probabilistic and tied to the strongly convex setting.
+
+**Architecture Mapping:**
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+### Stability Boundary of Q-Learning Dynamics in Competitive Networks
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
+- **Problem Context:** Multi-agent learning in competitive network games often diverges or exhibits chaotic behavior outside of strictly zero-sum settings, raising questions about scaling limits.
+- **Core Assumptions:** The competitive game is modeled via large payoff matrices drawn from a normal distribution with negative payoff correlation between agents ($\Gamma < 0$), evaluated in the thermodynamic limit where the number of actions $n \rightarrow \infty$.
+- **Mathematical Mechanism (Mathematical Update Rule):** The onset of instability in the effective dynamics of Q-Learning is governed by the condition:
+  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
+  where $N_0$ is the number of neighbors per agent, $T$ is the exploration rate, $\bar{x}$ is the fixed point of the average action probability, and $\chi$ integrates the effective response over time.
+- **Convergence / Behavior Bound:** The derived stability boundary demonstrates that the condition for stable convergence is strictly a function of the local neighborhood size ($N_0$) and the game's competitive correlation ($\Gamma$), completely independent of the total number of agents ($N$) in the network.
+- **Scope & Applicability:** Applies to interconnected agent networks using Q-Learning-like exploration-exploitation balancing under fixed-degree connectivity and symmetric competitive interactions.
+- **Limitations:** The derivation relies heavily on the infinite-action limit and random matrix theory assumptions (Gaussian payoffs), which may not perfectly reflect highly structured, finite-action real-world LLM agent competitive games.
+- **Agent Architecture Mapping (Architecture Status):** CONCEPTUAL_MAPPING. It can conceptually support the design of decentralized multi-agent topologies by bounding the number of direct competitive interactions ($N_0$) per agent rather than restricting the global system size.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY
 
 ### Weaved Integrations
 
@@ -615,7 +671,6 @@ Imagine a delivery drone navigating a city to a landing pad while avoiding no-fl
 
 Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm might run fast but occasionally trip and roll uphill, causing instability. The Abstract Lyapunov Optimizer acts like a mechanical ratchet attached to your climbing harness. For every step you take (`V(y_{n+1})-V(y_{n})\leq\lambda\eta_{n}\dot{V}(y_{n}),`), it physically guarantees the step is strictly downward by at least a calculated minimum amount, mathematically preventing you from ever moving backward, until you safely reach the bottom of the valley (`V(y^{*})=0`).
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
@@ -697,7 +752,6 @@ At each epoch $k$, using memory $\mathcal{D}_{t_k}$, plan $(\pi_t, V_t)\leftarro
 **For Beginners**:
 Imagine you are exploring a massive, unknown maze. Instead of wandering randomly, you keep a diary (memory buffer) of what you've seen. Before taking a step, you mentally simulate possible futures based on your diary, specifically favoring paths where your diary is completely blank (high uncertainty). You walk one step, update the diary, and think again. The math guarantees that the number of "bad steps" (regret) you take grows very slowly ($\sqrt{T}$), because you systematically turn your uncertainty into knowledge.
 
-
 ### Certified Anytime-Valid Stopping for Evaluation (AV-AIVAT)
 
 **System Container**: Architecture Principles
@@ -757,7 +811,6 @@ AIVAT relies strictly on known action distributions; unknown opponent decision n
 
 **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
 
-
 ### Convergence of Bounded Agents: Behavior and Performance Minimal Definitions
 
 - **System Container:** Architecture Principles
@@ -781,9 +834,6 @@ AIVAT relies strictly on known action distributions; unknown opponent decision n
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine you're learning to cook. Behavior convergence is like asking: "Can I fit all my recipes onto 5 index cards and never need to write a new one?" (Minimal Size). Performance convergence is asking: "If I read the same index card next year, will the meal taste exactly the same, or will the kitchen have secretly changed ingredients on me?" (Distortion). Bounded agents are considered "converged" when their internal index cards stop growing and the results tied to those cards stop fluctuating.
-
-
-
 
 ### No-Regret Learning and Extrapolation in Harmonic Games
 * **System Container:** Architecture Principles
@@ -847,9 +897,23 @@ This theoretical regret bound can conceptually support the Architecture Principl
 #### 8. Beginner's Analogy
 Imagine a team of chefs (agents) working in different, partially overlapping kitchen stations (groups/hyperedges). If they just guess what to cook based on past success (Thompson Sampling), sometimes they might get stuck in a bad routine. The frequentist regret bound is a mathematical guarantee that if they try something completely new a small fraction of the time ($\epsilon$), their worst-case mistakes over time are strictly limited, provided they don't have too many overlapping stations (sparse hypergraph).
 
-
-
 <!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Wove "Distributed Stochastic Optimization under Heavy-Tailed Noises" into Core Theory and Analogies.
+  - Wove "Stability Boundary of Q-Learning Dynamics in Competitive Networks" into Core Theory and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped heavy-tailed gradient clipping and consensus mechanisms to decentralized architecture principles.
+  - Mapped Q-Learning stability boundary (dependent on local neighborhood size rather than global size) to multi-agent competitive scaling limits.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - Heavy-Tailed Noises: COMPATIBLE. The mechanism aligns with Collaboration System's focus on decentralized tracking and does not conflict with Memory or Tool Execution assumptions.
+  - Q-Learning Stability: COMPATIBLE. Bounding local competitive interactions supports the decentralized topology principles without violating Tool, Memory, or general Collaboration assumptions.
+- 来源迁移记录 (Source migration record)
+  - Successfully migrated 2312.15847v3 (Heavy-Tailed Noises) and 2312.11943v1 (Q-Learning Stability) daily chunks.
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织
@@ -862,7 +926,6 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
   - Successfully migrated 2310.14685v2 chunk.
 - 双语对齐状态
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
 
 ## AF-ARCH-017: Exponential Convergence in Strongly Monotone Mirror Play
 
@@ -894,59 +957,3 @@ Imagine multiple delivery companies (agents) trying to optimize their routes wit
 **Scope and limits / 范围与局限:**
 The exponential convergence rate strictly requires the underlying game to be strongly monotone with respect to the specific aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings, arbitrary game topologies, or environments with unpredictable stochastic feedback outside the bounded variances analyzed in the paper.
 
-<!-- DAILY_RESEARCH_CHUNK -->
-### Distributed Stochastic Optimization under Heavy-Tailed Noises
-
-**System Container:** Architecture Principles
-**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
-
-**Original Problem:**
-Agents perform distributed optimization under heavy-tailed gradient noises, which violate standard bounded variance assumptions. Typical examples include Pareto distribution noise with infinite variance, rendering existing distributed stochastic optimization algorithms ineffective or overly reliant on centralized servers.
-
-**Core Assumptions:**
-1. Strongly connected communication graph (doubly stochastic weight matrix).
-2. The objective function is continuously differentiable and convex.
-3. The constraint set is nonempty, closed, and convex, with bounded gradients over it.
-
-**Mathematical Mechanism (Distributed Update Rule):**
-Combination of consensus averaging and gradient clipping step sizes. The distributed updating law for agent $i$ is:
-$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
-where $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$, and the clipped gradient estimator is $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$.
-
-**Convergence Bounds:**
-The algorithm ensures convergence to the optimal solution with probability 1 if the gradient descent step-size $\alpha_k$ and the gradient clipping step-size $\tau_k$ satisfy certain conditions (e.g., $\sum \alpha_k = \infty$, $\sum \alpha_k^2 \tau_k^{2} < \infty$).
-
-**Applicability:**
-Multi-agent systems encountering heavy-tailed gradient noises (e.g., Pareto distribution) without relying on a centralized server for coordination.
-
-**Limitations:**
-Assumes the gradient over the constraint set is bounded. The convergence guarantees are probabilistic and tied to the strongly convex setting.
-
-**Architecture Mapping:**
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-
-**For Beginners: Practical Analogies:**
-Like a team of explorers where some members occasionally give wildly incorrect directions (heavy-tailed noise). By agreeing to ignore overly extreme advice (gradient clipping) and regularly averaging their positions with neighbors (consensus), the team eventually converges on the correct treasure location.
-<!-- DAILY_RESEARCH_CHUNK -->
-
-<!-- DAILY_RESEARCH_CHUNK -->
-### Stability Boundary of Q-Learning Dynamics in Competitive Networks
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
-- **Problem Context:** Multi-agent learning in competitive network games often diverges or exhibits chaotic behavior outside of strictly zero-sum settings, raising questions about scaling limits.
-- **Core Assumptions:** The competitive game is modeled via large payoff matrices drawn from a normal distribution with negative payoff correlation between agents ($\Gamma < 0$), evaluated in the thermodynamic limit where the number of actions $n \rightarrow \infty$.
-- **Mathematical Mechanism (Mathematical Update Rule):** The onset of instability in the effective dynamics of Q-Learning is governed by the condition:
-  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
-  where $N_0$ is the number of neighbors per agent, $T$ is the exploration rate, $\bar{x}$ is the fixed point of the average action probability, and $\chi$ integrates the effective response over time.
-- **Convergence / Behavior Bound:** The derived stability boundary demonstrates that the condition for stable convergence is strictly a function of the local neighborhood size ($N_0$) and the game's competitive correlation ($\Gamma$), completely independent of the total number of agents ($N$) in the network.
-- **Scope & Applicability:** Applies to interconnected agent networks using Q-Learning-like exploration-exploitation balancing under fixed-degree connectivity and symmetric competitive interactions.
-- **Limitations:** The derivation relies heavily on the infinite-action limit and random matrix theory assumptions (Gaussian payoffs), which may not perfectly reflect highly structured, finite-action real-world LLM agent competitive games.
-- **Agent Architecture Mapping (Architecture Status):** CONCEPTUAL_MAPPING. It can conceptually support the design of decentralized multi-agent topologies by bounding the number of direct competitive interactions ($N_0$) per agent rather than restricting the global system size.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **For Beginners (Practical Analogy):** Imagine a group of competing traders in a market. The chaos and unpredictability of their strategies don't depend on how many total traders exist in the world, but solely on how many direct competitors each trader monitors. As long as each trader only watches a small fixed number of rivals, the market can grow infinitely large while remaining stable.
-- **Evidence Status:** PAPER_ONLY

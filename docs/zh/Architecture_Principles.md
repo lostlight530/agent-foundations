@@ -4,6 +4,12 @@
 
 ## 0. 导读与核心速览 (For Beginners)
 
+### 重尾噪声下的分布式随机优化类比 (Practical Analogies)
+就像一个探险小队，有些成员偶尔会给出极其离谱的错误方向（重尾噪声）。通过同意忽略过于极端的建议（梯度裁剪），并定期与邻居平均他们的位置（共识），小队最终仍能汇聚到正确的宝藏位置。
+
+### 竞争网络中 Q-Learning 动态的稳定性边界类比 (For Beginners)
+想象市场中有一群相互竞争的交易员。他们策略的混乱和不可预测性并不取决于世界上共有多少交易员，而仅仅取决于每个交易员直接关注多少个竞争对手。只要每个交易员只盯着固定的一小部分对手，市场就可以无限扩张而保持稳定。
+
 ### Weaved Integrations
 
 想象一下在颠簸的道路上开车（观测噪声）。标准的人工智能驾驶员可能会因为一颗小石子而剧烈猛打方向盘，导致汽车失控（混沌发散）。李雅普诺夫指数正则化就像是安装在转向柱上的一个刚性机械稳定器。它从数学上精确计算出一个微小的颠簸能够影响汽车轨迹的极限值（李雅普诺夫边界），从而保证无论车轮遇到多么微小的扰动，方向盘都能牢牢保持稳定，汽车始终能够确定性地沿着正确的轨道行驶。
@@ -53,6 +59,56 @@
 * **通俗类比**：想象你在教一个小孩（模型）如何区分苹果和橘子（分类问题）。如果他已经做得很完美了，但你还要不停地、无止境地去教他（无限训练时间），他的大脑神经连结（参数）其实不会越来越稳定，反而会因为过度用力而导致“脑裂（发散）”。最新的理论告诉我们，我们可以用一种叫“NTK最小特征值”的体温计去量他的大脑温度。一旦发现这个温度（特征值）大于一个危险数字，我们就直接触发“保护机制”，让他休息（梯度截断），这在数学上绝对保证了他的知识结构不会崩溃。
 
 ## 2. 独创理论：梯度熵 (Gradient Entropy)
+
+### 重尾噪声下的分布式随机优化 (Distributed Stochastic Optimization under Heavy-Tailed Noises)
+
+**System Container:** 架构原则 (Architecture Principles)
+**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
+
+**原始问题 (Original Problem):**
+智能体在重尾梯度噪声下执行分布式优化，这种噪声违反了标准的有界方差假设。典型的例子包括具有无限方差的帕累托分布噪声，这使得现有的分布式随机优化算法失效，或过度依赖集中式服务器。
+
+**核心假设 (Core Assumptions):**
+1. 强连通的通信图（双随机权重矩阵）。
+2. 目标函数是连续可微且凸的。
+3. 约束集是非空、闭合且凸的，并且在其上的梯度是有界的。
+
+**数学机制 (Mathematical Mechanism - 数学更新规则):**
+共识平均和梯度裁剪步长的结合。智能体 $i$ 的分布式更新律为：
+$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
+其中 $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$，裁剪后的梯度估计量为 $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$。
+
+**收敛边界 (Convergence Bounds):**
+如果梯度下降步长 $\alpha_k$ 和梯度裁剪步长 $\tau_k$ 满足特定条件（例如，$\sum \alpha_k = \infty$，$\sum \alpha_k^2 \tau_k^{2} < \infty$），该算法在概率为1的情况下保证收敛到最优解。
+
+**适用范围 (Applicability):**
+在不依赖集中式服务器进行协调的情况下，遇到重尾梯度噪声（如帕累托分布）的多智能体系统。
+
+**局限 (Limitations):**
+假设约束集上的梯度是有界的。收敛保证是概率性的，并与强凸设置紧密相关。
+
+**架构映射 (Architecture Mapping):**
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+### 竞争网络中 Q-Learning 动态的稳定性边界
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
+- **Problem Context:** 在非严格零和博弈的竞争性网络中，多智能体学习经常出现发散或混沌行为，这引发了关于系统扩展极限的疑问。
+- **Core Assumptions:** 竞争博弈通过服从正态分布的巨大收益矩阵建模，假设智能体之间存在负的收益相关性（$\Gamma < 0$），并在行动数量 $n \rightarrow \infty$ 的热力学极限下进行评估。
+- **Mathematical Mechanism (数学更新规则):** Q-Learning 有效动态中不稳定性出现的条件由下式约束：
+  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
+  其中 $N_0$ 是每个智能体的邻居数量，$T$ 是探索率，$\bar{x}$ 是平均动作概率的不动点，$\chi$ 对时间上的有效响应进行积分。
+- **Convergence / Behavior Bound:** 推导的稳定性边界表明，稳定收敛的条件严格取决于局部邻域大小（$N_0$）和博弈的竞争相关性（$\Gamma$），而完全独立于网络中智能体的总数（$N$）。
+- **Scope & Applicability:** 适用于在固定度连接和对称竞争交互下，使用类似 Q-Learning 的探索-利用平衡机制的互联智能体网络。
+- **Limitations:** 该推导严重依赖于无限动作极限和随机矩阵理论假设（高斯收益），这可能无法完美反映高度结构化、动作有限的现实世界 LLM 智能体竞争博弈。
+- **Agent Architecture Mapping (架构映射状态):** CONCEPTUAL_MAPPING。它在概念上支持去中心化多智能体拓扑的设计：通过限制每个智能体的直接竞争交互数量（$N_0$），而不是限制全局系统规模来维持稳定。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY
 
 ### Weaved Integrations
 
@@ -615,7 +671,6 @@ def lyapunov_exponent_regularized_step(L_theta, var_S, var_H, lambda_1, gamma):
 
 想象在崎岖的山上徒步下山（损失景观）。普通算法可能跑得很快，但偶尔会被绊倒甚至向上滚，导致不稳定。Abstract Lyapunov Optimizer 就像连接在攀岩安全带上的机械棘轮。你迈出的每一步（`V(y_{n+1})-V(y_{n})\leq\lambda\eta_{n}\dot{V}(y_{n}),`），它都在物理层面上保证这步严格向下至少达到一个计算好的最小幅度，在数学上阻止你倒退，直到你安全到达谷底（`V(y^{*})=0`）。
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
@@ -697,7 +752,6 @@ $$ \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-
 **For Beginners (初学者类比)**:
 想象你在探索一个巨大的未知迷宫。你不会盲目乱走，而是将所见所闻记录在日记（记忆缓冲区）中。在迈出下一步之前，你会根据日记在脑海中模拟未来的可能路径，并特别倾向于走向那些在日记中完全空白（高度不确定）的路径。你走一步，更新日记，然后再次思考。数学理论保证了你走“错路”（遗憾）的数量增长非常缓慢（$\sqrt{T}$），因为你在系统性地将未知转化为已知。
 
-
 ### 评估验证的随时有效自适应停止 (AV-AIVAT)
 
 **System Container**: Architecture Principles
@@ -757,7 +811,6 @@ AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法�
 
 **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
 
-
 ### 受界智能体收敛性：行为与性能最小化定义 (Convergence of Bounded Agents)
 
 - **System Container:** Architecture Principles
@@ -781,9 +834,6 @@ AIVAT 严格依赖于已知的动作分布；未知的对手决策节点无法�
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **初学者类比:** 想象你在学做饭。行为收敛就像在问：“我能把所有的食谱都写在 5 张卡片上，并且以后永远不需要写新卡片吗？”（最小规模）。性能收敛是在问：“如果我明年看同一张卡片做饭，味道会完全一样吗？还是说厨房偷偷换了调料导致味道变了？”（畸变）。当受界智能体内部的“食谱卡片”不再增加，且与这些卡片绑定的做饭结果不再波动时，我们就认为它“收敛”了。
-
-
-
 
 ### 调和博弈中的无遗憾学习与外推
 * **System Container:** Architecture Principles
@@ -847,9 +897,23 @@ $$
 #### 8. 初学者类比
 想象一个厨师团队（智能体）在不同但部分重叠的厨房工作站（组/超边）工作。如果他们只根据过去的成功经验来猜测做什么菜（汤普森采样），有时他们可能会陷入糟糕的日常套路中。频率论后悔界是一个数学保证，即如果他们在一小部分时间（$\epsilon$）内尝试完全新的东西，随着时间的推移，他们最坏情况下的错误将被严格限制，前提是他们没有太多重叠的工作站（稀疏超图）。
 
-
-
 <!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 编织了“重尾噪声下的分布式随机优化”理论与类比。
+  - 编织了“竞争网络中 Q-Learning 动态的稳定性边界”理论与类比。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将重尾梯度裁剪和共识机制映射到去中心化架构原则。
+  - 将 Q-Learning 的稳定性边界（依赖局部邻居大小而非全局规模）映射到多智能体竞争的扩展限制。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - 重尾噪声理论：COMPATIBLE（兼容）。该机制与协作系统对去中心化跟踪的关注一致，且不与记忆或工具执行假设冲突。
+  - Q-Learning 稳定性理论：COMPATIBLE（兼容）。限制局部竞争性交互支持去中心化拓扑原则，并未违反工具、记忆或一般协作假设。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移了 2312.15847v3 (重尾噪声) 和 2312.11943v1 (Q-Learning 稳定性) 的 daily chunk。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织
@@ -862,7 +926,6 @@ $$
   - 已成功迁移 2310.14685v2 chunk。
 - 双语对齐状态
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
 
 ## AF-ARCH-017: 强单调镜像博弈中的指数收敛
 
@@ -894,59 +957,3 @@ $V (x(t)) \leq e^{ - \mu t} V(x_0)$
 **Scope and limits / 范围与局限:**
 指数收敛率严格要求底层博弈相对于特定的聚合镜像映射是强单调的。它在理论上不能无条件推广到非单调的多智能体环境、任意博弈拓扑结构，或超出了论文所分析的方差范围的具有不可预测随机反馈的环境。
 
-<!-- DAILY_RESEARCH_CHUNK -->
-### 重尾噪声下的分布式随机优化 (Distributed Stochastic Optimization under Heavy-Tailed Noises)
-
-**System Container:** 架构原则 (Architecture Principles)
-**Frontier Source:** [arXiv:2312.15847v3] "Distributed Stochastic Optimization under Heavy-Tailed Noises" (Chao Sun, Huiming Zhang, Bo Chen, Li Yu)
-
-**原始问题 (Original Problem):**
-智能体在重尾梯度噪声下执行分布式优化，这种噪声违反了标准的有界方差假设。典型的例子包括具有无限方差的帕累托分布噪声，这使得现有的分布式随机优化算法失效，或过度依赖集中式服务器。
-
-**核心假设 (Core Assumptions):**
-1. 强连通的通信图（双随机权重矩阵）。
-2. 目标函数是连续可微且凸的。
-3. 约束集是非空、闭合且凸的，并且在其上的梯度是有界的。
-
-**数学机制 (Mathematical Mechanism - 数学更新规则):**
-共识平均和梯度裁剪步长的结合。智能体 $i$ 的分布式更新律为：
-$$x_{i, k+1}=\mathbb{P}_\Omega\left[v_{i,k}-{\alpha_{k}}\hat{g}_{i,k}(v_{i,k})\right]$$
-其中 $v_{i,k}=\sum_{j=1}^N [A]_{i, j} x_{j, k}$，裁剪后的梯度估计量为 $\hat{g}_{i,k}(v_{i,k})=\min\left\{1,\frac{{\tau_{k}}}{\Vert g_{i,k}(v_{i,k})\Vert }\right\}g_{i,k}(v_{i,k})$。
-
-**收敛边界 (Convergence Bounds):**
-如果梯度下降步长 $\alpha_k$ 和梯度裁剪步长 $\tau_k$ 满足特定条件（例如，$\sum \alpha_k = \infty$，$\sum \alpha_k^2 \tau_k^{2} < \infty$），该算法在概率为1的情况下保证收敛到最优解。
-
-**适用范围 (Applicability):**
-在不依赖集中式服务器进行协调的情况下，遇到重尾梯度噪声（如帕累托分布）的多智能体系统。
-
-**局限 (Limitations):**
-假设约束集上的梯度是有界的。收敛保证是概率性的，并与强凸设置紧密相关。
-
-**架构映射 (Architecture Mapping):**
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-
-**初学者类比 (Practical Analogies):**
-就像一个探险小队，有些成员偶尔会给出极其离谱的错误方向（重尾噪声）。通过同意忽略过于极端的建议（梯度裁剪），并定期与邻居平均他们的位置（共识），小队最终仍能汇聚到正确的宝藏位置。
-<!-- DAILY_RESEARCH_CHUNK -->
-
-<!-- DAILY_RESEARCH_CHUNK -->
-### 竞争网络中 Q-Learning 动态的稳定性边界
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos (arXiv:2312.11943v1)
-- **Problem Context:** 在非严格零和博弈的竞争性网络中，多智能体学习经常出现发散或混沌行为，这引发了关于系统扩展极限的疑问。
-- **Core Assumptions:** 竞争博弈通过服从正态分布的巨大收益矩阵建模，假设智能体之间存在负的收益相关性（$\Gamma < 0$），并在行动数量 $n \rightarrow \infty$ 的热力学极限下进行评估。
-- **Mathematical Mechanism (数学更新规则):** Q-Learning 有效动态中不稳定性出现的条件由下式约束：
-  $$ N_0^{-1} < \left\langle \frac{1}{\left| \frac{T}{\bar{x}} - N_0 \Gamma \chi \right|^2} \right\rangle_* $$
-  其中 $N_0$ 是每个智能体的邻居数量，$T$ 是探索率，$\bar{x}$ 是平均动作概率的不动点，$\chi$ 对时间上的有效响应进行积分。
-- **Convergence / Behavior Bound:** 推导的稳定性边界表明，稳定收敛的条件严格取决于局部邻域大小（$N_0$）和博弈的竞争相关性（$\Gamma$），而完全独立于网络中智能体的总数（$N$）。
-- **Scope & Applicability:** 适用于在固定度连接和对称竞争交互下，使用类似 Q-Learning 的探索-利用平衡机制的互联智能体网络。
-- **Limitations:** 该推导严重依赖于无限动作极限和随机矩阵理论假设（高斯收益），这可能无法完美反映高度结构化、动作有限的现实世界 LLM 智能体竞争博弈。
-- **Agent Architecture Mapping (架构映射状态):** CONCEPTUAL_MAPPING。它在概念上支持去中心化多智能体拓扑的设计：通过限制每个智能体的直接竞争交互数量（$N_0$），而不是限制全局系统规模来维持稳定。
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **For Beginners (初学者类比):** 想象市场中有一群相互竞争的交易员。他们策略的混乱和不可预测性并不取决于世界上共有多少交易员，而仅仅取决于每个交易员直接关注多少个竞争对手。只要每个交易员只盯着固定的一小部分对手，市场就可以无限扩张而保持稳定。
-- **Evidence Status:** PAPER_ONLY

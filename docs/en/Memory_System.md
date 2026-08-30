@@ -24,6 +24,51 @@ In the context of agent memory, this represents a brutal mathematical "dimension
 ---
 
 ## 2. Core Mechanisms: Memory Compression & Anomaly Capture
+
+### RAFA Posterior Sampling Regret Bound
+
+- **System Container**: Memory System
+- **Frontier Source**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
+- **Original Problem**: Translating the reasoning abilities of Large Language Models (LLMs) into actions in the real world with provable sample efficiency and minimal environmental interactions remains challenging.
+- **Core Assumptions**:
+  - Assumption 1 (Variance Bound): The variance of the Bellman operator over the state-action space is bounded.
+  - Assumption 2 (LLMs with Posterior Sampling Mechanism): There exists a mechanism $\texttt{LLM+PS}$ mapping the memory buffer $\mathcal{D}$ to the transition kernel and reward function, such that the bootstrapped samples are identically independent distributed approximations of the true data-generating parameters conditional on $\mathcal{D}$.
+- **Mathematical Mechanism**:
+  The agent plans using an $\epsilon$-optimal planner over models sampled from the posterior, updated via interactions recorded in the memory buffer $\mathcal{D}$. The switching condition for updating the model depends on the posterior entropy drop $H_{t_k} - H_t > \log 2$.
+
+  **Theorem (Bayesian Regret):**
+  $$
+  \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
+  $$
+- **Convergence / Bound Strength**: The Bayesian regret bound is bounded by $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$ without dependence on the concentrability coefficient, demonstrating that the posterior sampling mechanism successfully bypasses pessimistic coverage requirements.
+- **Applicability**: LLM agents operating in interactive environments (e.g., embodied AI, tool-use scenarios) where exploration is expensive and sample efficiency is critical.
+- **Limitations**: The bound heavily depends on the assumption that the LLM can approximate exact posterior sampling (e.g., via bootstrapping), and the computational cost of the $\epsilon$-optimal planner may be high in complex state spaces.
+- **Architecture Mapping Status**: DESIGN_CANDIDATE
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: PAPER_ONLY
+
+### Near Optimal Memory-Regret Tradeoff in Online Learning
+
+- **System Container**: Memory System
+- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
+- **Original Problem**: Identifying the fundamental trade-off between the space (memory) used by an online learning agent and the achievable regret against adaptive adversaries.
+- **Core Assumptions**:
+  - The agent faces an adaptive adversary who observes past experts chosen by the algorithm.
+  - The online learning problem involves $n$ experts and a sequence of $T$ days, with $T$ bounded relative to available space $S$.
+- **Mathematical Mechanism**:
+  A memory-efficient algorithm using grouped Multiplicative Weights Update (MWU) against an adaptive adversary, coupled with a sub-sampled $\texttt{RandomExpert}$ block and an observed $\texttt{LongExpert}$ pool.
+
+  **Theorem (Regret Guarantee):**
+  The algorithm achieves $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ regret using up to $S$ space against an adaptive adversary.
+- **Convergence / Bound Strength**: The lower bound proves that roughly $\mathcal{O}(\sqrt{n}/\epsilon)$ space is both necessary and sufficient for obtaining $\epsilon T$ regret against an adaptive adversary. Sub-linear space $\tilde{O}(\sqrt{n})$ is sufficient for $o(T)$ regret.
+- **Applicability**: Design of memory-constrained reinforcement learning and online decision-making agents operating in adversarial environments with strict resource constraints.
+- **Limitations**: The space lower bounds rely on direct-product theorems from communication complexity and apply strictly to full-feedback experts problems, not necessarily bandit settings.
+- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: PAPER_ONLY
+
 ### Deterministic Exponential Decay for Memory Survival based on Interaction Count
 - **Cutting-Edge Source**: arXiv:2606.03463v1 - Deterministic Memory Framework (DMF). This theory was chosen because it discards the black-box probabilistic truncation introduced by Large Language Models (LLMs). Instead, it proposes a fully deterministic, mathematically interpretable memory survival lifecycle management mechanism, drastically reducing the cost of long-term multi-turn conversational memory while guaranteeing strict traceability.
 DMF assigns a Survival Score $\Omega$ to each memory node. It uses an exponential decay law, taking the number of interactions $\Delta n$ (rather than physical wall-clock time) as the independent variable, to constrain the effective lifespan of memories. This proves the convergence of memory within a finite conversational capacity. The core equation is: $\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$. When the effective survival score $\Omega_{\mathrm{eff},i}$ decays below a hard threshold $\Omega_{\mathrm{kill}}$, the system performs a deterministic eviction ($\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$).
@@ -330,6 +375,12 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
 
+### Analogy for RAFA Posterior Sampling Regret Bound
+Imagine you are exploring a maze. Instead of trying every single path randomly, you use your memory (the buffer) to imagine different possible maps of the maze (posterior sampling). You choose the map that makes you most uncertain (highest entropy) to explore next, ensuring you only take new steps when you actually learn something significant about the maze's layout.
+
+### Analogy for Near Optimal Memory-Regret Tradeoff for Online Learning
+Imagine trying to pick the best stock advisor out of thousands. If you have infinite memory, you can remember every prediction they ever made. If you have almost no memory, an adversary (the market) can trick you easily. This research shows you need to remember at least a specific small number (around the square root) of the advisors' records to still make good overall choices without being completely fooled.
+
 ### Weaved Integrations
 
 Imagine a librarian trying to reorganize a messy pile of books (representing raw memory) to perfectly match an ideal sorting scheme (the target distribution $\rho^*$). Traditional AI approaches just randomly shuffle things (adding noise). Our system uses a mathematically proven "Wasserstein constraint" that acts like a strict rail track. Every single sorting move (time step $h$) guarantees the pile gets structurally closer to perfection by a precise calculated amount, ensuring a deterministic, flawless library without any random guesswork.
@@ -433,7 +484,6 @@ Imagine you are drawing a map from a moving car on a bumpy road. Standard memory
 
 Imagine a librarian trying to reorganize a messy pile of books (representing raw memory) to perfectly match an ideal sorting scheme (the target distribution $\rho^*$). Traditional AI approaches just randomly shuffle things (adding noise). Our system uses a mathematically proven "Wasserstein constraint" that acts like a strict rail track. Every single sorting move (time step $h$) guarantees the pile gets structurally closer to perfection by a precise calculated amount, ensuring a deterministic, flawless library without any random guesswork.
 
-
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
 📂 动态演进映射: Integrated all accumulated daily chunks into core theories.
 🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): No paradigm conflict detected. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
@@ -462,52 +512,19 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine organizing a massive library where instead of giving a unique score to every single book you read, you only keep four specific "best example" books on your desk (e.g., the shortest success, the first success after a failure, the most promising failure, and the most recent failure). If you learn a new lesson, you only update the score for these four desk books. This way, you don't waste time grading thousands of old books, and if a book on the desk gives you bad advice, it gets swapped out quickly.
 
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
 
-### Daily Research Chunk: RAFA Posterior Sampling Regret Bound
-
-- **System Container**: Memory System
-- **Frontier Source**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
-- **Original Problem**: Translating the reasoning abilities of Large Language Models (LLMs) into actions in the real world with provable sample efficiency and minimal environmental interactions remains challenging.
-- **Core Assumptions**:
-  - Assumption 1 (Variance Bound): The variance of the Bellman operator over the state-action space is bounded.
-  - Assumption 2 (LLMs with Posterior Sampling Mechanism): There exists a mechanism $\texttt{LLM+PS}$ mapping the memory buffer $\mathcal{D}$ to the transition kernel and reward function, such that the bootstrapped samples are identically independent distributed approximations of the true data-generating parameters conditional on $\mathcal{D}$.
-- **Mathematical Mechanism**:
-  The agent plans using an $\epsilon$-optimal planner over models sampled from the posterior, updated via interactions recorded in the memory buffer $\mathcal{D}$. The switching condition for updating the model depends on the posterior entropy drop $H_{t_k} - H_t > \log 2$.
-
-  **Theorem (Bayesian Regret):**
-  $$
-  \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
-  $$
-- **Convergence / Bound Strength**: The Bayesian regret bound is bounded by $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$ without dependence on the concentrability coefficient, demonstrating that the posterior sampling mechanism successfully bypasses pessimistic coverage requirements.
-- **Applicability**: LLM agents operating in interactive environments (e.g., embodied AI, tool-use scenarios) where exploration is expensive and sample efficiency is critical.
-- **Limitations**: The bound heavily depends on the assumption that the LLM can approximate exact posterior sampling (e.g., via bootstrapping), and the computational cost of the $\epsilon$-optimal planner may be high in complex state spaces.
-- **Architecture Mapping Status**: DESIGN_CANDIDATE
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Repository Test Status**: EVIDENCE_INSUFFICIENT
-- **For Beginners**: Practical Analogies
-  Imagine you are exploring a maze. Instead of trying every single path randomly, you use your memory (the buffer) to imagine different possible maps of the maze (posterior sampling). You choose the map that makes you most uncertain (highest entropy) to explore next, ensuring you only take new steps when you actually learn something significant about the maze's layout.
-- **Evidence Status**: PAPER_ONLY
-
-### Daily Research Chunk: Near Optimal Memory-Regret Tradeoff for Online Learning
-
-- **Technical Point Name**: Near Optimal Memory-Regret Tradeoff in Online Learning
-- **System Container**: Memory System
-- **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
-- **Original Problem**: Identifying the fundamental trade-off between the space (memory) used by an online learning agent and the achievable regret against adaptive adversaries.
-- **Core Assumptions**:
-  - The agent faces an adaptive adversary who observes past experts chosen by the algorithm.
-  - The online learning problem involves $n$ experts and a sequence of $T$ days, with $T$ bounded relative to available space $S$.
-- **Mathematical Mechanism**:
-  A memory-efficient algorithm using grouped Multiplicative Weights Update (MWU) against an adaptive adversary, coupled with a sub-sampled $\texttt{RandomExpert}$ block and an observed $\texttt{LongExpert}$ pool.
-
-  **Theorem (Regret Guarantee):**
-  The algorithm achieves $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ regret using up to $S$ space against an adaptive adversary.
-- **Convergence / Bound Strength**: The lower bound proves that roughly $\mathcal{O}(\sqrt{n}/\epsilon)$ space is both necessary and sufficient for obtaining $\epsilon T$ regret against an adaptive adversary. Sub-linear space $\tilde{O}(\sqrt{n})$ is sufficient for $o(T)$ regret.
-- **Applicability**: Design of memory-constrained reinforcement learning and online decision-making agents operating in adversarial environments with strict resource constraints.
-- **Limitations**: The space lower bounds rely on direct-product theorems from communication complexity and apply strictly to full-feedback experts problems, not necessarily bandit settings.
-- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Repository Test Status**: EVIDENCE_INSUFFICIENT
-- **For Beginners**: Practical Analogies
-  Imagine trying to pick the best stock advisor out of thousands. If you have infinite memory, you can remember every prediction they ever made. If you have almost no memory, an adversary (the market) can trick you easily. This research shows you need to remember at least a specific small number (around the square root) of the advisors' records to still make good overall choices without being completely fooled.
-- **Evidence Status**: PAPER_ONLY
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Wove "RAFA Posterior Sampling Regret Bound" into Core Theory and Analogies.
+  - Wove "Near Optimal Memory-Regret Tradeoff for Online Learning" into Core Theory and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped RAFA posterior sampling to memory-based entropy bounds.
+  - Mapped Memory-Regret tradeoff space requirements to bounded-memory architectural constraints.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - RAFA Posterior Sampling: COMPATIBLE. Relying on entropy drop for updating models strictly leverages Memory without conflicting with Architecture or Tool execution assumptions.
+  - Memory-Regret Tradeoff: COMPATIBLE. Formalizing sub-linear memory bounds strictly aligns with limited-resource decentralization principles and does not violate Collaboration assumptions.
+- 来源迁移记录 (Source migration record)
+  - Successfully migrated 2309.17382 (RAFA) and 2303.01673 (Memory-Regret Tradeoff).
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
