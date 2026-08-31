@@ -1,6 +1,7 @@
 # Evidence Contract / 证据契约
 
 Effective: 2026-08-27  
+Current calibration: 2026-09-01  
 Machine-readable vocabulary: [claim.schema.json](./claim.schema.json)
 
 ## Purpose / 目的
@@ -67,7 +68,7 @@ Historical generated chunks may contain older labels. Current canonical interpre
 
 The current canonical registry is the contiguous range:
 
-`S01–S35` in [SOURCES.md](./SOURCES.md).
+`S01–S38` in [SOURCES.md](./SOURCES.md).
 
 Source IDs are documentary identifiers, not a daily counter.
 
@@ -82,6 +83,8 @@ For arXiv, canonical identity is the **base arXiv paper identifier**. Therefore:
 - a changed title rendering or citation style is not a new source
 
 The August 27 RAFA revisit is the reference case: `arXiv:2309.17382` was already S10, so the later attempted S36 registration is retired as a duplicate identity while the historical research chunk remains preserved.
+
+The August 31 Independent NPG paper is a distinct base identity, `arXiv:2310.09727`, and is registered as S38 after targeted reconciliation.
 
 ### Version provenance
 
@@ -177,7 +180,9 @@ Weekly/monthly synthesis may aggregate and calibrate research history but must n
 - silently change historical research dates
 - manufacture future-day research
 
-At the 2026-08-27 cutoff the August month is still `OPEN`.
+At the 2026-08-27 cutoff the August month was still `OPEN`.
+
+Current natural-month authority after the 2026-09-01 reconciliation is `docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md`: August is closed with the 08-06 missing Daily date retained and W36 still open.
 
 ## Historical and temporal interpretation / 历史与时间解释
 

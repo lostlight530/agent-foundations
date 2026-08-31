@@ -1,6 +1,6 @@
 # Reproducibility and Provenance / 可复现性与溯源
 
-Current calibration: 2026-08-27
+Current calibration: 2026-09-01
 
 This file defines public source, version, claim-surface, temporal, and correction provenance for the Agent Foundations documentary core.
 
@@ -53,7 +53,7 @@ It does not prove theorem semantics or experimental validity.
 
 The current verified-core source registry is:
 
-`S01–S35` in [SOURCES.md](./SOURCES.md).
+`S01–S38` in [SOURCES.md](./SOURCES.md).
 
 A registered source is eligible documentary evidence. Registration does not imply local implementation.
 
@@ -71,11 +71,12 @@ Therefore:
 - a later Daily Research Chunk is a revisit, not a new source identity
 - a later citation with expanded author/title metadata is not a new source identity
 
-August reference case:
+August reference cases:
 
 - S10 already represents RAFA, `arXiv:2309.17382`
 - the 2026-08-27 research task attempted to append the same paper as S36
 - current canonical registry retires that duplicate identity; the historical Daily research chunk remains preserved and resolves to S10
+- the 2026-08-31 Independent NPG paper has distinct base identity `arXiv:2310.09727` and is therefore registered as S38
 
 ## Exact-version workflow / 精确版本流程
 
@@ -106,8 +107,9 @@ Retained corrections include:
 - S31 `2310.14685v2` → v2 date `2024-01-14`, not v1 date `2023-10-23`
 - S35 `2312.04719v1` → canonical authors `Ayush Rai, Shaoshuai Mou`; earlier generated author attribution is corrected by the 2026-08-27 reconciliation
 - attempted S36 → duplicate identity of S10 RAFA; no second canonical source ID retained
+- S38 `2310.09727v2` → v2 date `2023-10-27`; official NeurIPS proceedings confirm the NeurIPS 2023 Main Conference Track publication and author list
 
-S33 cites `2312.15847v3`; this pass rechecked base source identity/authors and keeps the exact v3 date as `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS` rather than guessing from a v1/base date.
+S33 cites `2312.15847v3`; the August source-identity review rechecked base source identity/authors and keeps the exact v3 date as `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS` rather than guessing from a v1/base date.
 
 ## Claim-surface provenance / 声明表面溯源
 
@@ -124,6 +126,8 @@ Useful source-surface states include:
 A successful fetch, TeX download, parser result, source registration, or author correction does not automatically establish stronger theorem/formula states.
 
 A theorem/bound retains assumptions, comparator, domain, quantifiers, and source version.
+
+For S38, the 2026-09-01 maintenance admission is bounded to independently checked bibliographic/venue/version identity and abstract-level proposition. The exact equations recorded by the historical 08-31 Daily chunk were `NOT_RECERTIFIED_IN_THIS_PASS`.
 
 ## Primary-source conflict / 一手来源冲突
 
@@ -170,5 +174,6 @@ Target public object:
 
 `CLAIM + CANONICAL_SOURCE_ID + SOURCE_VERSION + CHECKED_SURFACE + SCOPE + LIMITATION + CURRENT_STATUS`.
 
-Current August stage authority: `docs/monthly/2026-08-through-27-strategic-blueprint.md`.
-Formal August month status: `OPEN`.
+Current August authority: `docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md` plus targeted errata/reconciliations.
+Formal August natural-month status: `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED`.
+W36 status: `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`.

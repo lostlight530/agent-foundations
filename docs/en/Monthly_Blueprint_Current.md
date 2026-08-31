@@ -1,12 +1,14 @@
 # Monthly Strategic Blueprint — Current
 
-Current evidence window: **2026-08-01 through 2026-08-30**
+Current evidence window: **2026-08-01 through 2026-08-31**
 
-Status: **PROVISIONAL — natural month still open**
+Status: **FINAL NATURAL-MONTH DOCUMENTARY CLOSURE**
 
-Authoritative stage record: [`../monthly/2026-08-through-30-strategic-blueprint.md`](../monthly/2026-08-through-30-strategic-blueprint.md)
+Authoritative final ledger: [`../AUGUST_2026_01_31_EVIDENCE_LEDGER.md`](../AUGUST_2026_01_31_EVIDENCE_LEDGER.md)
 
-Day-level authority: [`../AUGUST_2026_01_30_EVIDENCE_LEDGER.md`](../AUGUST_2026_01_30_EVIDENCE_LEDGER.md)
+08-31 targeted reconciliation: [`../AUGUST_2026_31_RECONCILIATION.md`](../AUGUST_2026_31_RECONCILIATION.md)
+
+The earlier through-day-30 blueprint remains historical/provisional evidence and is not rewritten.
 
 ## Current position
 
@@ -14,16 +16,22 @@ Agent Foundations is a theory, evidence, provenance, and documentary architectur
 
 ## Verified-core boundary
 
-- canonical source registry: `S01–S37`
+- canonical source registry: `S01–S38`
 - 08-28 S36: memory/regret paper, corrected v2 date 2023-03-09
 - 08-29: MATS revisit resolves to existing S25
 - 08-30 S37: joint-Lyapunov paper at official-arXiv abstract scope
-- all three current mappings remain documentary; no runtime implementation or reproduction is established
+- 08-31 S38: Independent NPG for Markov Potential Games; NeurIPS 2023, current admission bounded to independently checked source/venue/version identity and abstract-level proposition
+- all current mappings remain documentary/reference-level; no repository runtime implementation or reproduction is established
 
 The five axes remain independent. `STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
 
-## Monthly correction
+## Calendar and missing-state boundary
 
-The original generated Monthly report's 08-31 coverage, `COMPLETED` state, and unqualified “normal” container labels are superseded. There is no repository container-health runtime, and 08-31 is outside the retained window.
+- Daily research commits identified: `30`
+- 08-06: `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED`
+- 08-31: retained as a W36 Daily research event
+- W36: `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`
 
-Formal state: `30_DAY_LEDGER_COMPLETE / MONTH_OPEN / CONTAINER_HEALTH_NOT_EVALUATED`.
+A natural-month closure does not backfill 08-06 and does not fabricate a W36 Weekly cascade.
+
+Formal state: `AUGUST_NATURAL_MONTH_CLOSED / 1_MISSING_DAILY_DATE_RETAINED / W36_OPEN / CONTAINER_HEALTH_NOT_EVALUATED`.
