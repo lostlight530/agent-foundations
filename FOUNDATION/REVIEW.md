@@ -1,7 +1,7 @@
 # Public Evidence Review States / 公开证据审核状态
 
 Status: documentary review vocabulary  
-Current calibration: 2026-08-27
+Current calibration: 2026-09-01
 
 ## Purpose / 目的
 
@@ -38,12 +38,16 @@ Before assigning a new `Sxx` ID:
 
 A later Daily Research Chunk does not receive a new source ID merely because it is new research activity.
 
-Reference disposition from 2026-08-27:
+Reference dispositions:
 
 - S33: retained as new canonical source
 - S34: retained as new canonical source
 - S35: retained, with author metadata corrected
-- attempted S36: not retained; duplicate of existing S10 RAFA
+- attempted S36 on 08-27: not retained; duplicate of existing S10 RAFA
+- S36 on 08-28: retained as the distinct memory-regret source
+- 08-29 revisit: resolves to S25
+- S37 on 08-30: retained as distinct joint-Lyapunov source
+- S38 on 08-31: retained as distinct Independent NPG source after source/venue/version reconciliation
 
 ## Supported review paths / 支持的审核路径
 
@@ -87,10 +91,11 @@ When material, preserve these distinctions:
 ## Authority map / 权威映射
 
 - `FOUNDATION/EVIDENCE.md` — evidence and source-identity semantics
-- `FOUNDATION/SOURCES.md` — canonical `S01–S35` source identities
+- `FOUNDATION/SOURCES.md` — canonical `S01–S38` source identities
 - `FOUNDATION/PROVENANCE.md` — exact-version, duplicate-identity, and temporal provenance
 - domain claim maps — bounded architecture/memory/tool/collaboration claims
 - explicit August errata/reconciliations — current corrections
+- `docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md` — final natural-month documentary ledger
 - original bilingual research — historical context
 
 An audit finding may narrow or contest an interpretation. It must not invent implementation, reproduction, theorem support, source agreement, or test success.
@@ -111,4 +116,4 @@ A durable public review record may include:
 - erratum/reconciliation pointer
 - final bounded disposition
 
-Formal August monthly closure remains `OPEN` at the 2026-08-27 cutoff.
+Formal August natural-month closure is `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED` after the 2026-09-01 reconciliation. W36 remains `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`.
