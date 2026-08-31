@@ -1945,3 +1945,29 @@ Evidence Status: CONCEPTUAL_MAPPING
   - 成功迁移了 2312.04719v1 (核化老虎机)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Daily Research Chunk: 马尔可夫势博弈的独立自然策略梯度
+
+- **Technical Point Name**: 马尔可夫势博弈的独立自然策略梯度 (Independent NPG for Markov Potential Games)
+- **System Container**: Collaboration System
+- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
+- **Original Problem**: 在多智能体强化学习（MARL）的马尔可夫势博弈（MPGs）中，智能体不共享全局奖励而是独立行动以最大化自身回报，这导致系统容易陷入不良驻点，实现独立策略梯度方法的快速全局收敛面临挑战。
+- **Core Assumption**: 博弈是具有孤立驻点的马尔可夫势博弈，并且当智能体接近某些纳什策略时，存在次优间隙的下界极限（$\delta^* > 0$）。该方法假设可以访问提供精确策略评估的预言机。
+- **Mathematical Mechanism**:
+  独立自然策略梯度（NPG）在第 $k$ 次迭代时针对智能体 $i$ 的策略更新如下：
+  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: 独立NPG方法在 $\mathcal{O}(1/\epsilon)$ 次迭代内达到 $\epsilon$-纳什均衡，具体而言，时间平均纳什均衡间隙受以下限制：
+  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
+  (收敛界)
+- **Applicable Scope**: 可建模为马尔可夫势博弈的多智能体强化学习问题，适用于智能体在没有集中协调更新的情况下进行独立和去中心化学习的场景。
+- **Limitations**: 理论界限依赖于次优间隙极限（$\delta^*$）、分布不匹配系数（$M$）以及动作空间的大小。它还依赖于边缘优势函数的精确评估，并且不保证收敛到全局最优，而是收敛到 $\epsilon$-纳什均衡。
+- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING。该理论在概念上可支持去中心化多智能体协作框架的设计，其中智能体根据局部观察独立优化其策略，在结构上规避了集中式训练的单点依赖和瓶颈，同时支持系统收敛到均衡状态。
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy**: 想象一个团队在清理一个大公园。与其有一个中心主管指挥每个人的具体行动，不如每个人根据局部区域改善的程度（他们的优势）独立决定如何清理自己的区域。尽管他们不共享总的“清洁度分数”，但因为他们的个人目标与整个公园的清洁度一致（势博弈），他们的独立努力理论上将稳定收敛，直到公园达到一个没有人能轻易进一步改善的稳定状态。
+- **Evidence Status**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
