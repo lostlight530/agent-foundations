@@ -1,8 +1,8 @@
 # Primary Source Registry / 一手来源登记
 
-Current calibration: 2026-08-30. Registry presence means “eligible to cite”, not “repository capability”.
+Current calibration: 2026-09-01. Registry presence means “eligible to cite”, not “repository capability”.
 
-当前校准：2026-08-30。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+当前校准：2026-09-01。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
 
 Canonical rules:
 
@@ -318,7 +318,6 @@ Canonical rules:
 - the source that had been introduced as `S36` on 2026-08-27 is RAFA, already canonical as S10. It is therefore **not** retained as a second source ID. The stable identifier remains recorded only in the S10 source block so registry parsers do not misassign it to S35.
 - the 2026-08-27 bilingual Memory-System research chunk remains historical evidence of a later RAFA revisit; current source identity resolves to S10.
 
-
 ## S36 — Near Optimal Memory-Regret Tradeoff for Online Learning
 
 - Type: `E4_PREPRINT`
@@ -339,4 +338,17 @@ Canonical rules:
 - Use: abstract-supported joint Lyapunov analysis, critical-coupling, noise-floor, and zero-knowledge-attestation claims under the paper's linear, homogeneous, state-independent-noise assumptions.
 - Verification boundary: checked against official arXiv identity and abstract on 2026-08-31; exact formula transcription, numerical studies, cryptographic construction, repository implementation, and reproduction were not independently re-certified in this pass.
 
-Current canonical registry range: `S01–S37`.
+## S38 — Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2310.09727v2; NeurIPS 2023 Main Conference Track
+- Version date: 2023-10-27
+- v1 date: 2023-10-15
+- Authors: Youbang Sun, Tao Liu, Ruida Zhou, P. R. Kumar, Shahin Shahrampour
+- URL: https://arxiv.org/abs/2310.09727
+- Proceedings: https://proceedings.neurips.cc/paper_files/paper/2023/hash/8936fa1691764912d9519e1b5673ea66-Abstract.html
+- DOI: 10.52202/075280-1907
+- Use: independent natural policy gradient in Markov potential games; the paper reports asymptotic attainment of an epsilon-Nash equilibrium within `O(1/epsilon)` iterations under its technical assumptions, including exact policy evaluation and the suboptimality-gap condition.
+- Verification boundary: source identity, v2 date, authors, peer-reviewed venue, and abstract-level proposition were independently checked during the 2026-09-01 reconciliation. Exact equation transcription in the historical 08-31 Daily chunk, repository implementation, and experimental reproduction were `NOT_RECERTIFIED_IN_THIS_PASS` / `REFERENCE_ONLY` / `NOT_TESTED` respectively.
+
+Current canonical registry range: `S01–S38`.
