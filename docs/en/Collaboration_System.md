@@ -2108,3 +2108,29 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Successfully migrated 2312.04719v1 (Kernelized Bandits). Note: Daily chunk "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Daily Research Chunk: Independent Natural Policy Gradient for Markov Potential Games
+
+- **Technical Point Name**: Independent NPG for Markov Potential Games
+- **System Container**: Collaboration System
+- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
+- **Original Problem**: The challenge of achieving fast global convergence for independent policy gradient methods in multi-agent reinforcement learning (MARL) within Markov Potential Games (MPGs), where agents do not share a global reward but act independently to maximize their own returns, leading to a risk of being trapped near undesirable stationary points.
+- **Core Assumption**: The game is a Markov Potential Game with isolated stationary points, and there exists a suboptimality gap lower bound limit ($\delta^* > 0$) as agents approach some Nash policies. The method has access to an oracle providing exact policy evaluation.
+- **Mathematical Mechanism**:
+  The independent NPG updates the policy at iteration $k$ for agent $i$ as follows:
+  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
+  (Mathematical Update Rule)
+- **Convergence / Behavioral Bound**: The independent NPG method reaches an $\epsilon$-Nash Equilibrium within $\mathcal{O}(1/\epsilon)$ iterations, specifically bounding the time-averaged NE-gap:
+  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
+  (Convergence Bound)
+- **Applicable Scope**: Multi-agent reinforcement learning problems that can be formulated as Markov Potential Games, where agents learn independently and decentralized without coordinating updates centrally.
+- **Limitations**: The theoretical bound depends on the suboptimality gap limit ($\delta^*$), the distribution mismatch coefficient ($M$), and the size of the action spaces. It also relies on the exact evaluation of the marginalized advantage function and does not guarantee convergence to the global optimum, but rather an $\epsilon$-Nash Equilibrium.
+- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING. This theory can conceptually support the design of decentralized multi-agent collaboration frameworks where agents independently optimize their policies based on local observations, structurally avoiding a single point of failure and bottleneck of centralized training while ensuring convergence to an equilibrium.
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy**: Imagine a team of people trying to clean up a large park. Instead of having a central boss directing every person's specific move, each person independently decides how to clean their local area based on how much better it looks (their advantage). Even though they don't share a total 'cleanliness score', because their individual goals align with the overall park's cleanliness (a potential game), their independent efforts will theoretically converge steadily until the park reaches a stable state where no one can easily improve things further.
+- **Evidence Status**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
