@@ -984,3 +984,74 @@ $V (x(t)) \leq e^{ - \mu t} V(x_0)$
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象舰队中的多艘船（AI智能体）独立航行，但被一根共享的绳子（耦合）拴在一起。如果每位船长只检查自己船的稳定性（单智能体验证），他们可能会忽略共享绳子上的张力正将整个舰队拖离航线（系综级漂移）。联合 Lyapunov 证书就像一个舰队级的张力传感器，它通过数学计算基于船只连接方式的最大安全绳索强度（$\gamma^*$），从而确保整个舰队保持稳定。
+
+
+## AF-ARCH-018: 分布式应急MPC中的Lyapunov式安全边界
+
+### System Container
+Architecture Principles
+
+### Frontier Source
+- **标题:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
+- **作者:** Max Studt, Georg Schildbach
+- **URL:** https://arxiv.org/abs/2608.30874
+- **日期:** 2026-08-31
+- **选择理由:** 在无需基于历史重构邻居状态的前提下，为非线性多智能体系统引入了状态依赖的回退机制，提供了递归可行性与Lyapunov式收敛保证。
+
+### 原始问题
+在基于纯状态信息、感知受限以及即插即用的多智能体控制中，现有的分布式应急模型预测控制（MPC）通常依赖过于保守的局部交互处理，或要求智能体精确重构邻居的几何特征。在有限感知距离下，这些要求往往无法实现。
+
+### 核心假设
+- 系统在纯状态信息和有限感知下运行。
+- 在智能体级别的回退区域（安全集）内，到达安全平衡点的应急机动始终可用。
+- 应急计划受到一个单调递减的局部标量界 $\hat J_i^{\mathrm c}(t)$ 的约束。
+
+### 数学机制 (Lyapunov式约束核心公式)
+为了保证收敛，对应急成本进行约束。令 $\ell_i^{\mathrm c}$ 为非负的应急阶段成本，定义最优应急成本为：
+```latex
+J_i^{\mathrm c}(t)
+:=
+\sum_{k=0}^{N_c-1}
+\ell_i^{\mathrm c}
+\left(
+x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
+u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
+\right)
++
+V_i^{\mathrm c}
+\left(
+\bar x_i^{\mathrm c}(t),
+x_i^{\mathrm{ref}}
+\right)
+```
+系统递归维护标量界 $\hat J_i^{\mathrm c}(t)$。在应用了共享的首个输入后，该界限按以下方式平移更新：
+```latex
+\hat J_i^{\mathrm c}(t^+)
+:=
+J_i^{\mathrm c,*}(t)
+-
+\ell_i^{\mathrm c}
+\left(
+x_i(t)-\bar x_i^{\mathrm c,*}(t),
+u_i(t)-\bar u_i^{\mathrm c,*}(t)
+\right)
+```
+该更新机制迫使应急成本表现为离散时间Lyapunov函数。
+
+### 收敛界与行为边界
+局部MPC强制约束 $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$。通过截尾平移论证（shifted-tail argument），确保了最优应急成本的单调递减，从而避免了碰撞并保证了递归可行性。
+
+### 适用范围
+适用于密集的分布式多智能体场景、去中心化避障以及严格缺乏精确邻居跟踪的即插即用环境。
+
+### 局限
+该公式并不能解决对抗性多智能体冲突；收敛保证依赖于预定义回退区域的存在以及成本界限约束的严格满足。
+
+### Agent 架构映射
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+### 初学者类比
+想象一群无人机在没有无线电通信的情况下穿过森林。如果无人机依赖记忆去推测其他无人机几秒前的位置，它最终会因为路径意外交叉而坠毁。相反，这个算法迫使每架无人机不断重新计算一个即时的“安全停车路径”（应急计划），并在数学上限制了停车所需的能量（成本）。只要这个“停车成本”不断下降，我们就可以从数学上保证整个机群能安全到达目的地而不会相互碰撞。

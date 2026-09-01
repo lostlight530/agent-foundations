@@ -984,3 +984,74 @@ The exponential convergence rate strictly requires the underlying game to be str
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine multiple ships (AI agents) in a fleet navigating independently but tethered together by a shared rope (the coupling). If each captain only checks their own ship's stability (single-agent validation), they might miss that the tension in the shared rope is dragging the entire fleet off course (ensemble-level drift). The Joint Lyapunov Certificate is like a fleet-wide tension sensor that mathematically calculates the maximum safe rope strength ($\gamma^*$) based on how the ships are connected, ensuring the whole fleet remains stable.
+
+
+## AF-ARCH-018: Lyapunov-Type Safety in Decentralized Contingency MPC
+
+### System Container
+Architecture Principles
+
+### Frontier Source
+- **Title:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
+- **Authors:** Max Studt, Georg Schildbach
+- **URL:** https://arxiv.org/abs/2608.30874
+- **Date:** 2026-08-31
+- **Selection Reason:** Introduces a state-dependent fallback mechanism providing recursive feasibility and Lyapunov-type convergence for nonlinear multi-agent systems without requiring history-dependent neighbor reconstructions.
+
+### Original Problem
+In multi-agent control under state-only information patterns with limited sensing and plug-and-play operations, existing decentralized contingency Model Predictive Control (MPC) often relies on conservative local interaction handling or requires agents to perfectly reconstruct neighbor geometry, which fundamentally breaks under finite sensing ranges.
+
+### Core Assumptions
+- The system operates under a state-only information pattern with limited sensing.
+- The contingency maneuver to a safe equilibrium must always be available inside agent-wise fallback regions (safe sets).
+- The contingency plan is constrained by a monotonically decreasing local scalar bound $\hat J_i^{\mathrm c}(t)$.
+
+### 数学机制 (Lyapunov-Type Constraint)
+To guarantee convergence, the contingency cost is constrained. Let $\ell_i^{\mathrm c}$ denote a nonnegative contingency stage cost. The optimal contingency cost is defined as:
+```latex
+J_i^{\mathrm c}(t)
+:=
+\sum_{k=0}^{N_c-1}
+\ell_i^{\mathrm c}
+\left(
+x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
+u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
+\right)
++
+V_i^{\mathrm c}
+\left(
+\bar x_i^{\mathrm c}(t),
+x_i^{\mathrm{ref}}
+\right)
+```
+A scalar bound $\hat J_i^{\mathrm c}(t)$ is maintained recursively. After the shared first input is applied, the bound is shifted:
+```latex
+\hat J_i^{\mathrm c}(t^+)
+:=
+J_i^{\mathrm c,*}(t)
+-
+\ell_i^{\mathrm c}
+\left(
+x_i(t)-\bar x_i^{\mathrm c,*}(t),
+u_i(t)-\bar u_i^{\mathrm c,*}(t)
+\right)
+```
+This forces the contingency cost to act as a discrete-time Lyapunov function.
+
+### Bounds and Convergence
+The local MPC enforces $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$. The shifted-tail argument yields a monotone decrease of the optimal contingency cost, preventing collision and ensuring recursive feasibility.
+
+### Application Scope
+Applicable to dense multi-agent settings, decentralized obstacle avoidance, and plug-and-play environments where exact neighbor tracking is strictly unavailable.
+
+### Limitations
+The formulation does not universally solve adversarial multi-agent conflicts; convergence guarantees depend on the existence of the predefined fallback regions and the strict satisfaction of the cost bound constraints.
+
+### Architecture Mapping
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+### For Beginners: Practical Analogy
+Imagine multiple drones flying through a forest without radio communication. If a drone relies on memory of where other drones were seconds ago, it will eventually crash because paths cross unexpectedly. Instead, this algorithm forces every drone to constantly recalculate an immediate "safe stopping path" (the contingency plan). It mathematically bounds the energy (cost) needed to stop. If this "stopping cost" constantly decreases, we can mathematically guarantee the entire swarm safely converges to their destinations without hitting each other.

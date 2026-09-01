@@ -351,4 +351,15 @@ Canonical rules:
 - Use: independent natural policy gradient in Markov potential games; the paper reports asymptotic attainment of an epsilon-Nash equilibrium within `O(1/epsilon)` iterations under its technical assumptions, including exact policy evaluation and the suboptimality-gap condition.
 - Verification boundary: source identity, v2 date, authors, peer-reviewed venue, and abstract-level proposition were independently checked during the 2026-09-01 reconciliation. Exact equation transcription in the historical 08-31 Daily chunk, repository implementation, and experimental reproduction were `NOT_RECERTIFIED_IN_THIS_PASS` / `REFERENCE_ONLY` / `NOT_TESTED` respectively.
 
-Current canonical registry range: `S01–S38`.
+
+## S39 — Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.30874v1
+- Version date: 2026-08-31
+- Authors: Max Studt, Georg Schildbach
+- URL: https://arxiv.org/abs/2608.30874
+- Use: memory-free, state-dependent safe-set interaction mechanism and Lyapunov-type convergence bounds for decentralized contingency MPC.
+- Verification boundary: explicitly assumes the contingency cost is bounded by a recursively maintained scalar bound $\hat J_i^{\mathrm c}(t)$ which monotonically decreases; does not universally guarantee safe fallback outside the localized control problem parameterization.
+
+Current canonical registry range: `S01–S39`.
