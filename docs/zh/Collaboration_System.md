@@ -1971,3 +1971,31 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### Daily Research Chunk: 基于拓扑的多智能体策略梯度 (TAPE)
+
+- **技术点名称**: 基于拓扑的多智能体策略梯度 (TAPE)
+- **System Container**: Collaboration System
+- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
+- **核心问题**: 现有最先进的多智能体策略梯度（MAPG）方法中的中心化评论家（Critic）存在中心化-去中心化不匹配（CDM）问题，即部分智能体的次优动作会干扰其他智能体的策略学习。若改用个体评论家又会严重限制智能体间的合作。
+- **核心假设**: 策略具有表格形式表达（用于策略改进定理），且智能体间存在一种策略更新时的通信/决策拓扑（如 Erdős–Rényi 随机图模型），相连的智能体在策略更新时形成联盟。
+- **数学机制**:
+  TAPE 方法使用联盟 $Q$ 值代替全局或个体 $Q$ 值来进行策略更新。对于确定性策略 $\pi$，确定性 TAPE 的更新梯度为：
+  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
+  其中 $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$，并且 $E_{ij}$ 是拓扑连接的指示函数。
+  (数学更新规则)
+- **收敛界 / 行为边界**: 在表格化表示下，随机 TAPE 更新可以单调提升目标函数：
+  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
+  此外，定理证明了与使用个体评论家（DOP）相比，随机 TAPE 的策略更新方差更大，其差值 $\Delta \propto p^2$（其中 $p$ 为图连接概率），这表明它能更有效地探索参数空间以寻找合作模式。
+  (收敛界)
+- **适用范围**: 需要智能体之间高度协同，但又面临个体误探索拖累整个团队学习进度的多智能体合作任务。适用于可由 Erdős–Rényi 拓扑建模的协作网络。
+- **局限性**: 连通概率参数 $p$ 需要仔细调节：$p$ 过大会增加探索多样性但也可能导致 CDM 问题重新出现。此外，拓扑在学习过程中是静态的，未实现自适应演化。
+- **Agent 架构映射**: CONCEPTUAL_MAPPING. 这种基于局部拓扑的联盟学习机制在概念上支持 Collaboration System，可用于设计去中心化的协作决策网络：智能体在局部邻域内协同，既避免了单点错误引发的大规模系统波动，又维持了合作效率。
+- **仓库实现状态**: EVIDENCE_INSUFFICIENT
+- **测试状态**: EVIDENCE_INSUFFICIENT
+- **初学者类比**: 想象一个庞大的交响乐团，如果所有人都在同一个频道听指挥，一旦一个人吹错一个音，指挥会把大家一起批评，这会让原本吹得好的乐手很迷茫（CDM 问题）。但如果大家都戴上降噪耳机只听自己的，乐团又会乱套。TAPE 的方法就像是把乐团分成几个小组（联盟），乐手在练习时只听自己小组的声音并根据小组表现调整。这样既避免了被远处那个吹错音的人影响，又能和身边的人保持良好合作。
+- **证据状态**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

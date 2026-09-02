@@ -362,4 +362,15 @@ Canonical rules:
 - Use: memory-free, state-dependent safe-set interaction mechanism and Lyapunov-type convergence bounds for decentralized contingency MPC.
 - Verification boundary: explicitly assumes the contingency cost is bounded by a recursively maintained scalar bound $\hat J_i^{\mathrm c}(t)$ which monotonically decreases; does not universally guarantee safe fallback outside the localized control problem parameterization.
 
-Current canonical registry range: `S01–S39`.
+
+## S40 — TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.15667v3
+- Version date: 2023-12-25
+- Authors: Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- URL: https://arxiv.org/abs/2312.15667
+- Use: topology-based policy gradient and cooperation mapping
+- Verification boundary: explicitly assumes Erdős–Rényi topology and tabular expressions for convergence guarantees.
+
+Current canonical registry range: `S01–S40`.

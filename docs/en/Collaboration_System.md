@@ -2134,3 +2134,31 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+### Daily Research Chunk: Topology-based multi-Agent Policy gradiEnt (TAPE)
+
+- **Technical Point Name**: Topology-based multi-Agent Policy gradiEnt (TAPE)
+- **System Container**: Collaboration System
+- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
+- **Original Problem**: Centralized critics in multi-agent policy gradient (MAPG) face the centralized-decentralized mismatch (CDM) issue, where sub-optimal actions by some agents negatively affect the learning of others. Using individual critics avoids this but severely limits cooperation among agents.
+- **Core Assumptions**: The policies have tabular expressions (for the policy improvement theorem), and agents can be modeled via a communication/decision topology (like an Erdős–Rényi random graph) where each agent forms a coalition with connected neighbors during policy updates.
+- **Mathematical Mechanism**:
+  TAPE updates the policy based on the coalition $Q$ value instead of the global or individual $Q$ values. For a deterministic policy $\pi$, the deterministic TAPE update gradient is:
+  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
+  where $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$, and $E_{ij}$ is the topology indicator.
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: Under tabular expressions, stochastic TAPE monotonically improves the objective function:
+  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
+  Furthermore, the variance of the parameter updates in stochastic TAPE is strictly greater than that of using individual critics (DOP), $\Delta \propto p^2$ (where $p$ is the graph density), which allows agents to better explore diverse cooperation patterns.
+  (收敛界)
+- **Applicable Scope**: Multi-agent cooperative tasks requiring coordination but facing risks of individual mis-exploration dragging down team learning. Applicable to networks modeled by Erdős–Rényi topology.
+- **Limitations**: The hyperparameter $p$ (connection probability) must be carefully tuned; higher values increase diversity in updates but also risk re-introducing the CDM issue. The topology is static during learning and not dynamically adaptive.
+- **Architecture Mapping**: CONCEPTUAL_MAPPING. The agent topology paradigm conceptually supports the Collaboration System by providing a mechanism for agents to learn localized cooperation policies (within a bounded neighborhood or coalition) to avoid large-scale systemic failures caused by individual agents' exploration errors.
+- **Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Test Status**: EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy**: Imagine a giant orchestra where every musician listens to everyone else. If one person plays a wrong note, the conductor yells at the whole group, confusing the players who did well (the CDM issue). Conversely, if everyone wears noise-canceling headphones and only listens to themselves, they can't play in sync. TAPE is like dividing the orchestra into small sections (coalitions). Musicians only listen to and adjust based on their local section's performance, avoiding the chaos of one bad player while still maintaining harmony.
+- **Evidence Status**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
