@@ -450,31 +450,31 @@ body.show-zh [lang="zh"] { display: block; }
     <span lang="zh">智能体理论基础</span>
   </h1>
   <div class="header-sub">
-    <span lang="en"><em>The four repositories dictate what the system does. This repository explains why it works.</em></span>
-    <span lang="zh"><em>四个仓库展示了系统在做什么，这个仓库揭示了系统为什么这样能工作</em></span>
+    <span lang="en"><em>The other repositories expose engineering artifacts. This repository records the evidence, assumptions and limits behind proposed designs.</em></span>
+    <span lang="zh"><em>其他仓库展示工程产物，本仓记录候选设计所依据的证据、假设与局限。</em></span>
   </div>
 </div>
 
 <!-- System Definition -->
 <div class="section">
   <div class="section-label">
-    <span lang="en">Deterministic Autonomous System</span>
-    <span lang="zh">确定性自治系统</span>
+    <span lang="en">Agent Systems Research and Evidence</span>
+    <span lang="zh">智能体系统研究与证据</span>
   </div>
   <div class="sys-def">
     <span lang="en">
-      <span class="term">Deterministic</span> — no probabilistic rules, all behavior = SQL graph queries + PageRank + regex + AST matching<br>
-      <span class="term">Autonomous</span> — GitHub Actions daily self-execution, system runs whether humans show up or not<br>
-      <span class="term">System</span> — not a tool, not a framework, not a library; a self-running closed loop<br><br>
-      <span class="term">Four Threads</span> <span class="arrow">→</span> Memory (4D temporal graph) + Network (harvester scanning 8 repos) + Evolution (AST self-mutation) + Rule-driven automation limit<br>
-      <span class="term">Zero Dependency</span> <span class="arrow">→</span> Python stdlib + SQLite + pure math, nothing else
+      <span class="term">Contracts</span> — explicit interfaces and reproducible fixtures can constrain named behavior; they do not make an underlying model deterministic<br>
+      <span class="term">Automation</span> — this repository deploys static Pages; Jules research generation and maintainer review are separate from deployment<br>
+      <span class="term">Repository</span> — a bilingual research and evidence base, not an implemented autonomous-agent runtime<br><br>
+      <span class="term">Four Domains</span> <span class="arrow">→</span> Architecture + Memory + Tools + Collaboration; mechanisms retain their claim-specific implementation and validation states<br>
+      <span class="term">Executable Evidence</span> <span class="arrow">→</span> Standard-library Python schema/contract checks validate documentary structure, not agent behavior
     </span>
     <span lang="zh">
-      <span class="term">确定</span>——无概率规则驱动，所有行为=SQL图查询+PageRank+正则+AST匹配<br>
-      <span class="term">自治</span>——GitHub Actions每日自跑，人到不到系统照活<br>
-      <span class="term">系统</span>——不是工具不是框架不是库，是自运行闭环<br><br>
-      <span class="term">四串</span> <span class="arrow">→</span> 记忆(4D时序图谱)+联网(harvester扫描8仓库)+进化(AST自变异)+规则驱动自动化极限<br>
-      <span class="term">零依赖</span> <span class="arrow">→</span> Python标准库+SQLite+纯数学，别无其他
+      <span class="term">契约</span>——明确接口与可复现夹具可以约束具体行为，但不使底层模型成为确定性系统<br>
+      <span class="term">自动化</span>——本仓部署静态 Pages；Jules 研究生成与维护者审查独立于部署<br>
+      <span class="term">仓库</span>——双语研究与证据基础，不是已实现的自治智能体运行时<br><br>
+      <span class="term">四域</span> <span class="arrow">→</span> 架构＋记忆＋工具＋协作；各机制保留具体声明的实现与验证状态<br>
+      <span class="term">可执行证据</span> <span class="arrow">→</span> Python 标准库 Schema 与契约检查验证文档结构，不证明智能体行为
     </span>
   </div>
   <div class="triple-view" style="margin-top:30px;">
@@ -483,17 +483,17 @@ body.show-zh [lang="zh"] { display: block; }
         <span lang="en">Five Warehouses</span><span lang="zh">五仓</span>
       </div>
       <div class="triple-card-body">
-        <span lang="en">Deployment — five phase-state repositories</span>
-        <span lang="zh">部署——五个相态仓库</span>
+        <span lang="en">Landscape — five repository roles, not one deployed runtime</span>
+        <span lang="zh">布局——五仓职责，不代表单个已部署运行时</span>
       </div>
     </div>
     <div class="triple-card">
       <div class="triple-card-title">
-        <span lang="en">Four Threads</span><span lang="zh">四串</span>
+        <span lang="en">Four Domains</span><span lang="zh">四域</span>
       </div>
       <div class="triple-card-body">
-        <span lang="en">Capability — memory, network, evolution, rule-driven</span>
-        <span lang="zh">能力——记忆、联网、进化、规则驱动</span>
+        <span lang="en">Research — architecture, memory, tools, collaboration</span>
+        <span lang="zh">研究——架构、记忆、工具、协作</span>
       </div>
     </div>
     <div class="triple-card">
@@ -515,15 +515,15 @@ body.show-zh [lang="zh"] { display: block; }
       <span lang="zh">证据合同</span>
     </div>
     <div style="display:flex; flex-wrap:wrap; gap:8px 16px; font-family:var(--font-mono); font-size:11px;">
-      <span style="color:#22c55e;">◉ OBSERVED</span>
-      <span style="color:#a78bfa;">◉ SUPPORTED</span>
-      <span style="color:#facc15;">◉ PROPOSED</span>
-      <span style="color:#94a3b8;">◉ HYPOTHESIS</span>
-      <span style="color:#f87171;">◉ CONESTED</span>
+      <span style="color:#22c55e;">◉ Claim State / 声明状态</span>
+      <span style="color:#a78bfa;">◉ Evidence Level / 证据等级</span>
+      <span style="color:#facc15;">◉ Mapping State / 映射状态</span>
+      <span style="color:#94a3b8;">◉ Implementation State / 实现状态</span>
+      <span style="color:#f87171;">◉ Validation State / 验证状态</span>
     </div>
     <p style="font-family:var(--font-ui); font-size:11px; color:var(--text-dim); margin-top:8px; line-height:1.5;">
-      <span lang="en">Every theoretical claim carries one of five evidence statuses. Claims without metadata remain unverified.</span>
-      <span lang="zh">每一个理论主张都带有五种证据状态之一。没有元数据的声明未经独立验证。</span>
+      <span lang="en">Five orthogonal axes are recorded independently, not five alternative evidence statuses. A supported paper may remain a design analogy, reference-only and not tested locally. Canonical vocabulary: <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/EVIDENCE.md">FOUNDATION/EVIDENCE.md</a>; allowed values: <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/claim.schema.json">claim.schema.json</a>. Missing metadata does not imply verification.</span>
+      <span lang="zh">五个正交轴分别记录，不是五种互斥证据状态。论文得到支持，仍可只是设计类比、仅供参考且未在本仓测试。以 FOUNDATION/EVIDENCE.md 和 claim.schema.json 的词汇为准；缺少元数据不能视为已验证。</span>
     </p>
   </div>
   <!-- Reading Contents -->
@@ -555,19 +555,19 @@ body.show-zh [lang="zh"] { display: block; }
   <div class="philosophy">
     <span lang="en">
       <strong>1. Paradigm Shift: From Prompt Engineering to Harness Engineering</strong><br>
-      We abandoned the fragile practice of entrusting system safety to lengthy Prompts. An agent is not a simple wrapper around an LLM, but an engineering system governed by machine laws. Agent = Model (Intelligence) + Harness (Control). Through mechanical constraints and progressive disclosure, we ended the context pollution and instruction drift caused by Prompts.<br><br>
+      Agent = Model + Harness is a design perspective. Explicit interfaces, permissions, stop conditions and retained evidence can make a named system more inspectable. This repository records these requirements; it does not demonstrate that prompts, context pollution or instruction drift have been eliminated.<br><br>
       <strong>2. Architecture Decoupling: From Execution to Encapsulation</strong><br>
-      End the schizophrenia of a single Agent acting as both PM and programmer. We upgraded raw Function Calling to L1-L4 progressive Skill encapsulation; adopting a Manager-SubAgent isolated pattern, exchanging data via shared file systems. This thoroughly cures long-context attention decay and memory hallucination.<br><br>
+      Skills, tool interfaces and manager/sub-agent topologies are candidate design mechanisms. Their tradeoffs depend on the task, communication contract and failure model. They are not deployed here and do not establish a cure for long-context errors or memory confusion.<br><br>
       <strong>3. Deterministic Governance: Confronting Native Risks</strong><br>
-      Face the inherent flaws of LLMs: hallucinations, stubbornness, and test inertia. Reject in-process shared memory, adhere to MCP-level process isolation; introduce mandatory CI architectural blocking and automated document gardeners (entropy management) to ensure reliable, sustainable convergence within absolute boundaries.
+      Least privilege, isolation, explicit review and fail-closed checks are requirements to evaluate in a concrete implementation. MCP alone does not create process isolation. This repository's Pages workflow is deployment, not a runtime-validation CI or a proof of convergence.
     </span>
     <span lang="zh">
       <strong>1. 范式转移：从“提示词工程”到系统驾驭 (Harness Engineering)</strong><br>
-      我们摒弃了将系统安全性寄托于冗长 Prompt 的脆弱做法智能体并非大模型的简单套壳，而是一个必须受制于机器法则的系统Agent = Model (智能) + Harness (管控)我们用机械化的层级约束与渐进式披露，终结了 Prompt 带来的上下文污染与指令漂移<br><br>
+      Agent = Model + Harness 是设计视角。明确接口、权限、停止条件与留存证据，可以使特定系统更可审查。本仓记录这些要求，不宣称已经消除提示词风险、上下文污染或指令漂移。<br><br>
       <strong>2. 架构解耦：从执行调用到能力封装 (Skill & Sub-Agent)</strong><br>
-      终结单一 Agent “既当产品经理又当程序员”的精神分裂我们将赤裸的 Function Calling 升级为 L1-L4 的 Skill 能力封装；采用 Manager-SubAgent 隔离模式，通过共享文件系统交换数据彻底根治长上下文带来的注意力衰减与记忆混淆<br><br>
+      Skills、工具接口和 Manager-SubAgent 拓扑是候选设计机制，取舍依赖任务、通信契约与故障模型。本仓未部署这些机制，也不宣称它们根治长上下文错误或记忆混淆。<br><br>
       <strong>3. 确定性治理：直面原生风险 (Deterministic Governance)</strong><br>
-      正视 LLM 的固有缺陷：幻觉、死不认错与测试惰性拒绝进程内共享内存，坚守 MCP 级别的进程隔离安全底线；引入强制的 CI 架构阻断与自动化文档园丁（熵管理），确保系统在绝对的边界内可靠、可持续地收敛
+      最小权限、隔离、明确审查与 fail-closed 检查，是需要在具体实现中评估的要求。MCP 本身不提供进程隔离。本仓 Pages 工作流负责部署，不是运行时验证 CI，也不证明收敛。
     </span>
   </div>
 </div>
@@ -585,7 +585,7 @@ body.show-zh [lang="zh"] { display: block; }
     </span>
     <span lang="zh">
       这个页面不是遥测面板，也不是连续体的最终镜面这里新增的职责，是把模型能力与系统行为之间缺失的一层单独抽出来：<strong>把 Harness 当成一等研究对象</strong>模型可以生成，但 Harness 决定什么可以被记忆、调用、拒绝、封存，以及继续向下流动<br><br>
-      在这个仓库里，Agent 不被视为聊天界面，而被视为受约束的动力系统它不与 Axiom-0 或 reflective-continuum 竞争；它给后两者提供可被形式化、可被观察的理论词汇
+      在这个仓库里，Agent 不被视为聊天界面，而被视为受约束的动力系统。它不与 Axiom-0 或 reflective-continuum 竞争；它给后两者提供可被形式化、可被观察的理论词汇。
     </span>
   </div>
   <div class="triple-view" style="margin-top:30px;">
@@ -627,14 +627,14 @@ body.show-zh [lang="zh"] { display: block; }
   </div>
   <div class="philosophy">
     <span lang="en">
-      We do not implement — <strong>we constrain</strong>. We define continuous energy functions and mathematical boundary conditions; the agent explores freely within a safe manifold<br><br>
-      We do not scale — <strong>we prove</strong>. We use convex optimization and Lyapunov stability to mathematically guarantee behavioral lower bounds<br><br>
-      We do not optimize — <strong>we guarantee convergence</strong>. Learning and decision-making are modeled as deterministic dynamical systems; the agent inevitably stabilizes at a well-defined minimum, immune to catastrophic forgetting
+      We distinguish — <strong>requirements from implementation</strong>. Energy functions and boundary conditions are research models whose assumptions and local mappings must be stated<br><br>
+      We preserve — <strong>the scope of each result</strong>. Convex optimization and Lyapunov arguments apply only to systems satisfying their formal hypotheses<br><br>
+      We require — <strong>implementation-specific validation</strong>. A paper's bound does not prove this repository's agent convergence, safety or resistance to catastrophic forgetting; this repository contains no such agent runtime
     </span>
     <span lang="zh">
-      我们不实现——<strong>我们约束</strong>我们定义连续的能量函数与数学边界条件，智能体在安全的流形空间内自由探索<br><br>
-      我们不扩展——<strong>我们证明</strong>我们运用凸优化和李雅普诺夫稳定性理论，从数学层面保证系统行为的下界<br><br>
-      我们不优化——<strong>我们保证收敛</strong>学习和决策建模为确定性动力系统，智能体必然稳定在定义明确的状态，免疫灾难性遗忘
+      我们区分——<strong>要求与实现</strong>。能量函数和边界条件是研究模型，必须明确其假设与本地映射。<br><br>
+      我们保留——<strong>每项结果的适用范围</strong>。凸优化和李雅普诺夫论证只适用于满足其形式假设的系统。<br><br>
+      我们要求——<strong>面向具体实现的验证</strong>。论文中的界不能证明本仓智能体收敛、安全或抵抗灾难性遗忘；本仓没有这样的智能体运行时。
     </span>
   </div>
 </div>
@@ -657,22 +657,22 @@ body.show-zh [lang="zh"] { display: block; }
       <tr>
         <td><span lang="en">SimCLR + VICReg + Unsupervised</span><span lang="zh">SimCLR + VICReg + 无监督</span></td>
         <td><span lang="en">Memory</span><span lang="zh">记忆</span></td>
-        <td><span lang="en">Latent space representation; contrastive features for episodic memory</span><span lang="zh">隐空间表征；对比特征实现事件级记忆</span></td>
+        <td><span lang="en">Reference mechanism for learned representations; no local memory implementation</span><span lang="zh">学习表征的参考机制；本仓未实现记忆运行时</span></td>
       </tr>
       <tr>
         <td><span lang="en">RL (NLP) — Reversed</span><span lang="zh">强化学习(NLP) — 逆向</span></td>
         <td><span lang="en">Tool</span><span lang="zh">工具</span></td>
-        <td><span lang="en">Probabilistic tool use → deterministic causal execution graph</span><span lang="zh">概率性工具使用→确定性因果执行图</span></td>
+        <td><span lang="en">Candidate tool-selection/control mapping; no local tool-control implementation</span><span lang="zh">工具选择与管控的候选映射；本仓未实现工具控制面</span></td>
       </tr>
       <tr>
         <td><span lang="en">Federated + Spatiotemporal</span><span lang="zh">联邦 + 时空</span></td>
         <td><span lang="en">Collaboration</span><span lang="zh">协作</span></td>
-        <td><span lang="en">Distributed convergence without central server</span><span lang="zh">无中心服务器的分布式收敛</span></td>
+        <td><span lang="en">External distributed-learning results under their own assumptions; no local protocol</span><span lang="zh">保留原始假设的外部分布式学习结果；本仓未实现对应协议</span></td>
       </tr>
       <tr>
         <td><span lang="en">Gradient Entropy (FIM/NTK)</span><span lang="zh">梯度熵(FIM/NTK)</span></td>
         <td><span lang="en">Architecture</span><span lang="zh">架构</span></td>
-        <td><span lang="en">Information dissipation metric; clamping bounds to prevent mode collapse</span><span lang="zh">信息耗散指标；锁定边界防止模式崩溃</span></td>
+        <td><span lang="en">Research analogy for optimization behavior; not a local stability guarantee</span><span lang="zh">优化行为的研究类比；不是本仓稳定性保证</span></td>
       </tr>
     </tbody>
   </table>
@@ -737,15 +737,16 @@ body.show-zh [lang="zh"] { display: block; }
 <!-- Engineering Timeline -->
 <div class="section">
   <div class="section-label">
-    <span lang="en">Engineering Timeline</span>
-    <span lang="zh">工程时间线</span>
+    <span lang="en">Historical Cross-Repository Timeline — not current implementation evidence</span>
+    <span lang="zh">跨仓历史时间线——不代表当前实现证据</span>
   </div>
+  <p><span lang="en">Shared project stage: 2026-02-12 → 2026-08-31 · 200 elapsed days. This measures the cross-repository project stage, not the age of each repository or uninterrupted automated execution.</span><span lang="zh">共同项目阶段：2026-02-12 → 2026-08-31 · 200 个经过日。这是跨仓项目阶段，不代表每个仓库的建仓时长或自动化连续运行天数。</span></p>
   <div class="timeline">
     <div class="timeline-item">
-      <div class="timeline-date">02/14</div>
+      <div class="timeline-date">02/12</div>
       <div class="timeline-event">
-        <span lang="en">Solid warehouse created — welcome-to-github online</span>
-        <span lang="zh">固态仓创建——welcome-to-github上线</span>
+        <span lang="en">Maintainer-defined homepage transition — welcome-to-github; not repository creation</span>
+        <span lang="zh">维护者确认的主页转型日——welcome-to-github；不是建仓日期</span>
       </div>
     </div>
     <div class="timeline-item">
@@ -811,21 +812,21 @@ body.show-zh [lang="zh"] { display: block; }
 <!-- Acknowledgments -->
 <div class="section">
   <div class="section-label">
-    <span lang="en">Acknowledgments</span>
-    <span lang="zh">致谢</span>
+    <span lang="en">Limits and Acknowledgments</span>
+    <span lang="zh">边界与致谢</span>
   </div>
   <ul class="ack-list">
     <li>
-      <span lang="en"><strong>Google Jules + Gemini 3.1 Pro</strong> — Full codebase generated on TPU, from protocol to kernel to reasoning engine</span>
-      <span lang="zh"><strong>Google Jules + Gemini 3.1 Pro</strong>——在TPU上推演生成的完整代码库，从协议到内核到推理引擎</span>
+      <span lang="en"><strong>Google Jules + Gemini</strong> — AI-assisted research and drafting; outputs require source checks and maintainer review, not presumed truth or verified hardware provenance</span>
+      <span lang="zh"><strong>Google Jules + Gemini</strong>——辅助研究与起草；输出需要来源核验和维护者审查，不自动构成真理或已验证的硬件来源</span>
     </li>
     <li>
-      <span lang="en"><strong>GitHub Actions</strong> — Autonomous daily execution, the system runs whether humans show up or not</span>
-      <span lang="zh"><strong>GitHub Actions</strong>——每日自运行，人到不到系统照活</span>
+      <span lang="en"><strong>GitHub Actions</strong> — Static Pages deployment in this repository; research-task execution and merge approval remain separate</span>
+      <span lang="zh"><strong>GitHub Actions</strong>——本仓用于静态 Pages 部署；研究任务执行和合并审批是独立环节</span>
     </li>
     <li>
-      <span lang="en"><strong>Academia and research institutions</strong> — For enabling theory to land in practice</span>
-      <span lang="zh"><strong>学术界和研究机构</strong>——让理论得以落地</span>
+      <span lang="en"><strong>Academia and research institutions</strong> — For source-specific research whose assumptions and limitations remain attached</span>
+      <span lang="zh"><strong>学术界和研究机构</strong>——提供须保留各自假设和局限的研究来源</span>
     </li>
     <li>
       <span lang="en"><strong>The open-source community</strong> and <strong>GitHub</strong></span>
@@ -837,8 +838,8 @@ body.show-zh [lang="zh"] { display: block; }
 <!-- Footer -->
 <div class="footer">
   <div class="footer-line">
-    <span lang="en"><em>They take the proof — the axiom cannot be copied</em></span>
-    <span lang="zh"><em>他们带走证明过程——公理不可复制</em></span>
+    <span lang="en"><em>Preserve evidence — distinguish support, implementation and validation</em></span>
+    <span lang="zh"><em>保留证据——区分支持、实现与验证</em></span>
   </div>
   <div class="footer-sig">lostLight · 2026</div>
 </div>
