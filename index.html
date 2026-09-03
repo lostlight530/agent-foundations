@@ -451,7 +451,7 @@ body.show-zh [lang="zh"] { display: block; }
   </h1>
   <div class="header-sub">
     <span lang="en"><em>The other repositories expose engineering artifacts. This repository records the evidence, assumptions and limits behind proposed designs.</em></span>
-    <span lang="zh"><em>其他仓库展示工程产物，本仓记录候选设计所依据的证据、假设与局限。</em></span>
+    <span lang="zh"><em>其他仓库展示工程产物，本仓记录候选设计所依据的证据、假设与局限</em></span>
   </div>
 </div>
 
@@ -523,7 +523,7 @@ body.show-zh [lang="zh"] { display: block; }
     </div>
     <p style="font-family:var(--font-ui); font-size:11px; color:var(--text-dim); margin-top:8px; line-height:1.5;">
       <span lang="en">Five orthogonal axes are recorded independently, not five alternative evidence statuses. A supported paper may remain a design analogy, reference-only and not tested locally. Canonical vocabulary: <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/EVIDENCE.md">FOUNDATION/EVIDENCE.md</a>; allowed values: <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/claim.schema.json">claim.schema.json</a>. Missing metadata does not imply verification.</span>
-      <span lang="zh">五个正交轴分别记录，不是五种互斥证据状态。论文得到支持，仍可只是设计类比、仅供参考且未在本仓测试。以 FOUNDATION/EVIDENCE.md 和 claim.schema.json 的词汇为准；缺少元数据不能视为已验证。</span>
+      <span lang="zh">五个正交轴分别记录，不是五种互斥证据状态；论文得到支持，仍可只是设计类比、仅供参考且未在本仓测试；以 FOUNDATION/EVIDENCE.md 和 claim.schema.json 的词汇为准；缺少元数据不能视为已验证</span>
     </p>
   </div>
   <!-- Reading Contents -->
@@ -563,11 +563,11 @@ body.show-zh [lang="zh"] { display: block; }
     </span>
     <span lang="zh">
       <strong>1. 范式转移：从“提示词工程”到系统驾驭 (Harness Engineering)</strong><br>
-      Agent = Model + Harness 是设计视角。明确接口、权限、停止条件与留存证据，可以使特定系统更可审查。本仓记录这些要求，不宣称已经消除提示词风险、上下文污染或指令漂移。<br><br>
+      Agent = Model + Harness 是设计视角；明确接口、权限、停止条件与留存证据，可以使特定系统更可审查；本仓记录这些要求，不宣称已经消除提示词风险、上下文污染或指令漂移<br><br>
       <strong>2. 架构解耦：从执行调用到能力封装 (Skill & Sub-Agent)</strong><br>
-      Skills、工具接口和 Manager-SubAgent 拓扑是候选设计机制，取舍依赖任务、通信契约与故障模型。本仓未部署这些机制，也不宣称它们根治长上下文错误或记忆混淆。<br><br>
+      Skills、工具接口和 Manager-SubAgent 拓扑是候选设计机制，取舍依赖任务、通信契约与故障模型；本仓未部署这些机制，也不宣称它们根治长上下文错误或记忆混淆<br><br>
       <strong>3. 确定性治理：直面原生风险 (Deterministic Governance)</strong><br>
-      最小权限、隔离、明确审查与 fail-closed 检查，是需要在具体实现中评估的要求。MCP 本身不提供进程隔离。本仓 Pages 工作流负责部署，不是运行时验证 CI，也不证明收敛。
+      最小权限、隔离、明确审查与 fail-closed 检查，是需要在具体实现中评估的要求；MCP 本身不提供进程隔离；本仓 Pages 工作流负责部署，不是运行时验证 CI，也不证明收敛
     </span>
   </div>
 </div>
@@ -585,7 +585,7 @@ body.show-zh [lang="zh"] { display: block; }
     </span>
     <span lang="zh">
       这个页面不是遥测面板，也不是连续体的最终镜面这里新增的职责，是把模型能力与系统行为之间缺失的一层单独抽出来：<strong>把 Harness 当成一等研究对象</strong>模型可以生成，但 Harness 决定什么可以被记忆、调用、拒绝、封存，以及继续向下流动<br><br>
-      在这个仓库里，Agent 不被视为聊天界面，而被视为受约束的动力系统。它不与 Axiom-0 或 reflective-continuum 竞争；它给后两者提供可被形式化、可被观察的理论词汇。
+      在这个仓库里，Agent 不被视为聊天界面，而被视为受约束的动力系统；它不与 Axiom-0 或 reflective-continuum 竞争；它给后两者提供可被形式化、可被观察的理论词汇
     </span>
   </div>
   <div class="triple-view" style="margin-top:30px;">
@@ -632,9 +632,9 @@ body.show-zh [lang="zh"] { display: block; }
       We require — <strong>implementation-specific validation</strong>. A paper's bound does not prove this repository's agent convergence, safety or resistance to catastrophic forgetting; this repository contains no such agent runtime
     </span>
     <span lang="zh">
-      我们区分——<strong>要求与实现</strong>。能量函数和边界条件是研究模型，必须明确其假设与本地映射。<br><br>
-      我们保留——<strong>每项结果的适用范围</strong>。凸优化和李雅普诺夫论证只适用于满足其形式假设的系统。<br><br>
-      我们要求——<strong>面向具体实现的验证</strong>。论文中的界不能证明本仓智能体收敛、安全或抵抗灾难性遗忘；本仓没有这样的智能体运行时。
+      我们区分——<strong>要求与实现</strong>；能量函数和边界条件是研究模型，必须明确其假设与本地映射<br><br>
+      我们保留——<strong>每项结果的适用范围</strong>；凸优化和李雅普诺夫论证只适用于满足其形式假设的系统<br><br>
+      我们要求——<strong>面向具体实现的验证</strong>；论文中的界不能证明本仓智能体收敛、安全或抵抗灾难性遗忘；本仓没有这样的智能体运行时
     </span>
   </div>
 </div>
@@ -740,7 +740,7 @@ body.show-zh [lang="zh"] { display: block; }
     <span lang="en">Historical Cross-Repository Timeline — not current implementation evidence</span>
     <span lang="zh">跨仓历史时间线——不代表当前实现证据</span>
   </div>
-  <p><span lang="en">Shared project stage: 2026-02-12 → 2026-08-31 · 200 elapsed days. This measures the cross-repository project stage, not the age of each repository or uninterrupted automated execution.</span><span lang="zh">共同项目阶段：2026-02-12 → 2026-08-31 · 200 个经过日。这是跨仓项目阶段，不代表每个仓库的建仓时长或自动化连续运行天数。</span></p>
+  <p><span lang="en">Shared project stage: 2026-02-12 → 2026-08-31 · 200 elapsed days. This measures the cross-repository project stage, not the age of each repository or uninterrupted automated execution.</span><span lang="zh">共同项目阶段：2026-02-12 → 2026-08-31 · 200 个经过日；这是跨仓项目阶段，不代表每个仓库的建仓时长或自动化连续运行天数</span></p>
   <div class="timeline">
     <div class="timeline-item">
       <div class="timeline-date">02/12</div>
