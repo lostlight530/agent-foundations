@@ -530,3 +530,28 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
   - Successfully migrated 2309.17382 (RAFA) and 2303.01673 (Memory-Regret Tradeoff).
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Sparse Memory Retrieval Dynamics
+- **System Container**: Memory System
+- **Frontier Source**:
+  - Title: On Sparse Modern Hopfield Model
+  - Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+  - Version: v2
+  - URL: http://arxiv.org/abs/2309.12673v2
+  - Published: 2023-09-22T07:32:45Z
+- **Original Problem**: The modern Hopfield model utilizes dense attention mechanisms for memory retrieval, which can be computationally intensive and may suffer from suboptimal retrieval error bounds due to a lack of sparsity.
+- **Core Assumptions**: Memory patterns are bounded and distributed such that the separation condition holds (e.g., all memory patterns being on a sphere of radius $m$: $\|\xi^\mu\|=m$).
+- **Mathematical Mechanism**:
+  The sparse Hopfield energy is defined using the convex conjugate of the negative Gini entropy (sparsemax):
+  $$\mathcal{H}(\mathbf{x}) = -\Psi^\star(\beta \mathbf{\Xi}^\top \mathbf{x}) + \frac{1}{2} \langle\mathbf{x},\mathbf{x}\rangle$$
+  The corresponding sparse retrieval dynamics (Theorem `coro:eps_sparse_dense`) provides a tighter, sparsity-dependent error bound:
+  $$\|\mathcal{T}(\mathbf{x})-\xi_\mu\| \le m+d^{1/2}m\beta \left[\kappa \left(\max_{\nu\in[M]}\langle\xi_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)}\right)+\frac{1}{\beta}\right]$$
+- **Convergence or Behavior Bound**: The iterative retrieval dynamics monotonically decreases the energy function, rapidly converging to local fixed points where memory patterns are stored. The retrieval error is demonstrably smaller than or equal to that of the dense modern Hopfield model.
+- **Applicability Scope**: High-dimensional continuous associative memory systems aiming to retrieve exactly matched items while filtering out noisy or irrelevant patterns using sparse attention.
+- **Limitations**: The memory capacity and exact convergence properties depend strictly on the initial condition and the distribution (well-separation) of the stored patterns. Real-world continuous streams may violate these distributional assumptions.
+- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy**: Imagine a librarian searching for a book based on a few keywords. A "dense" search might pull every book that shares even one keyword, making the final selection noisy. A "sparse" search strictly filters out the weak matches early, handing you only the most relevant books much faster.
+- **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)

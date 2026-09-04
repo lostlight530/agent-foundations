@@ -530,3 +530,28 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
   - 成功迁移了 2309.17382 (RAFA) 和 2303.01673 (内存-后悔值权衡)。
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### 稀疏记忆检索动力学
+- **System Container**: Memory System
+- **Frontier Source**:
+  - Title: On Sparse Modern Hopfield Model
+  - Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+  - Version: v2
+  - URL: http://arxiv.org/abs/2309.12673v2
+  - Published: 2023-09-22T07:32:45Z
+- **Original Problem**: 现代 Hopfield 模型采用密集的注意力机制进行记忆检索，这不仅计算量大，而且由于缺乏稀疏性，可能导致检索误差界并非最优。
+- **Core Assumptions**: 记忆模式是有界的且其分布满足分离条件（例如，所有记忆模式都位于半径为 $m$ 的球面上：$\|\xi^\mu\|=m$）。
+- **Mathematical Mechanism**:
+  稀疏 Hopfield 能量基于负 Gini 熵（sparsemax）的共轭凸函数定义：
+  $$\mathcal{H}(\mathbf{x}) = -\Psi^\star(\beta \mathbf{\Xi}^\top \mathbf{x}) + \frac{1}{2} \langle\mathbf{x},\mathbf{x}\rangle$$
+  对应的稀疏检索动力学（定理 `coro:eps_sparse_dense`）提供了一个更紧的、依赖于稀疏度的误差界：
+  $$\|\mathcal{T}(\mathbf{x})-\xi_\mu\| \le m+d^{1/2}m\beta \left[\kappa \left(\max_{\nu\in[M]}\langle\xi_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)}\right)+\frac{1}{\beta}\right]$$
+- **Convergence or Behavior Bound**: 迭代检索动力学单调降低能量函数，快速收敛到存储记忆模式的局部不动点。其检索误差在理论上被证明小于或等于密集现代 Hopfield 模型。
+- **Applicability Scope**: 旨在提取精确匹配项同时使用稀疏注意力过滤掉噪声或不相关模式的高维连续联想记忆系统。
+- **Limitations**: 记忆容量和精确收敛特性严格依赖于初始条件和存储模式的分布（良好分离条件）。现实世界中的连续数据流可能违反这些分布假设。
+- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy**: 想象一个图书管理员根据几个关键词找书。“密集”搜索可能会把哪怕只包含一个关键词的书都拿出来，导致最终结果充满干扰信息。而“稀疏”搜索会提前严格过滤掉弱相关项，更快地只把最相关的书递给你。
+- **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)
