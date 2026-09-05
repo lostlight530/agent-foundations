@@ -2189,3 +2189,32 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+
+### Replication-proof Bandit Mechanism Design with Bayesian Agents
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
+- **URL:** https://arxiv.org/abs/2312.16896
+- **Original Problem:** When multiple Bayesian agents participate in a bandit learning mechanism, they can strategically replicate their own arms to increase their chance of being selected and maximize their payoff, deceiving standard learning algorithms.
+- **Core Assumptions:**
+  - Bayesian agents only know the distribution from which their own arms' mean rewards are sampled.
+  - The set of arms belongs to a stochastically ordered family.
+  - Prior distributions have discrete support.
+- **Mathematical Mechanism (算法伪代码):** The paper proposes the Hierarchical ETC with Restarting ($\hbb$) algorithm:
+  - Input: Tie-breaking rule, agent set $\cN$, arm set $\cS_i$, restarting round $\tau = Mn$
+  - For $t=1,2,\ldots,M$:
+    - If $t = \tau+1$, reset statistics $\muhat_{i,a} \gets 0, n_{i,a} \gets 0$ for all arms.
+    - If $n_i < M$ for some $i \in \cN$, select agent $\hat{i} \gets i$. Else, select $\hat{i} \gets \argmax_{i \in \cN}\muhat_{i}$.
+    - If $n_{\hat{i},a} < m$ for some $a \in \cS_{\hat{i}}$, select arm $\hat{a} \gets a$. Else, $\hat{a} \gets \argmax_{a \in \cS_{\hat{i}}}\muhat_{\hat{i},a}$.
+    - Pull arm $\hat{a}$ of agent $\hat{i}$, obtain reward $R_t$, and update averages $\muhat_{\hat{i},\hat{a}}, \muhat_{\hat{i}}$ and counts $n_{\hat{i},\hat{a}}, n_{\hat{i}}$.
+- **Convergence Bounds:** The algorithm achieves a sublinear expected regret bound of $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ while guaranteeing that truthful registration of arms is a dominant strategy for any Bayesian agent (replication-proof).
+- **Scope of Application:** Multi-agent multi-armed bandit settings where self-interested agents submit options (arms) and the system must learn the optimal option without being manipulated by fake duplicates.
+- **Limitations:** The replication-proof guarantee assumes the arms belong to a stochastically ordered family and requires discrete support for priors in the specific analysis provided.
+- **Architecture Mapping:** This provides a theoretical mechanism for ensuring collaboration integrity. In a decentralized agent network, when agents propose candidate actions (arms) to a central coordinator, this mechanism prevents agents from spamming identical actions to unfairly dominate the system's execution pipeline.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a talent show where agents bring their best performers. If the judges randomly pick acts, an agent might bring 10 identical mediocre clones of their performer to increase their chances of winning. This algorithm organizes a strict two-stage audition (agent first, then performer) with periodic resets, mathematically proving that bringing clones will actually hurt an agent's chances, forcing everyone to just bring their single best performer.

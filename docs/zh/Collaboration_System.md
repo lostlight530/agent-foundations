@@ -2026,3 +2026,32 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+
+### 包含贝叶斯智能体的防复制老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
+- **URL:** https://arxiv.org/abs/2312.16896
+- **Original Problem:** 当多个贝叶斯智能体参与多臂老虎机学习机制时，它们可以在战略上复制自己的臂以增加被集中的几率并最大化回报，从而欺骗标准学习算法。
+- **Core Assumptions:**
+  - 贝叶斯智能体只知道自己臂的平均奖励分布。
+  - 臂集属于随机有序族。
+  - 先验分布具有离散支撑。
+- **Mathematical Mechanism (算法伪代码):** 论文提出带重启的层次ETC（$\hbb$）算法：
+  - 输入：打破平局的规则，智能体集合 $\cN$，臂集合 $\cS_i$，重启轮次 $\tau = Mn$
+  - 对于 $t=1,2,\ldots,M$：
+    - 如果 $t = \tau+1$，重置所有臂的统计量 $\muhat_{i,a} \gets 0, n_{i,a} \gets 0$。
+    - 如果对于某些 $i \in \cN$ 有 $n_i < M$，选择智能体 $\hat{i} \gets i$。否则，选择 $\hat{i} \gets \argmax_{i \in \cN}\muhat_{i}$。
+    - 如果对于某些 $a \in \cS_{\hat{i}}$ 有 $n_{\hat{i},a} < m$，选择臂 $\hat{a} \gets a$。否则，$\hat{a} \gets \argmax_{a \in \cS_{\hat{i}}}\muhat_{\hat{i},a}$。
+    - 拉动智能体 $\hat{i}$ 的臂 $\hat{a}$，获得奖励 $R_t$，并更新平均值 $\muhat_{\hat{i},\hat{a}}, \muhat_{\hat{i}}$ 和计数 $n_{\hat{i},\hat{a}}, n_{\hat{i}}$。
+- **Convergence Bounds:** 算法实现了 $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ 的次线性期望遗憾界，同时保证了真实注册臂是任何贝叶斯智能体的占优策略（防复制）。
+- **Scope of Application:** 多智能体多臂老虎机设置：自利的智能体提交选项（臂），系统必须学习最佳选项，而不会被虚假重复项操纵。
+- **Limitations:** 防复制保证假定臂属于随机有序族，并且在提供的特定分析中需要先验的离散支撑。
+- **Architecture Mapping:** 这为确保协作完整性提供了理论机制。在去中心化智能体网络中，当智能体向中央协调器提出候选动作（臂）时，该机制可防止智能体大量发送相同动作，从而不公平地主导系统的执行管道。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一个才艺表演，经纪人带来他们最好的表演者。如果评委随机挑选节目，经纪人可能会带来10个平庸表演者的完全相同的克隆人，以增加获胜的机会。这种算法组织了严格的两阶段海选（先是经纪人，然后是表演者）并定期重置，从数学上证明了带克隆人实际上会损害经纪人的机会，从而迫使每个人只带他们最好的一位表演者。
