@@ -373,4 +373,14 @@ Canonical rules:
 - Use: topology-based policy gradient and cooperation mapping
 - Verification boundary: explicitly assumes Erdős–Rényi topology and tabular expressions for convergence guarantees.
 
-Current canonical registry range: `S01–S40`.
+## S41 — Replication-proof Bandit Mechanism Design with Bayesian Agents
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.16896v2
+- Version date: 2023-12-28
+- Authors: Suho Shin, Seyed A. Esmaeili, MohammadTaghi Hajiaghayi
+- URL: https://arxiv.org/abs/2312.16896
+- Use: hierarchical exploration-then-commit framework and replication-proof equilibrium
+- Verification boundary: explicitly assumes stochastically ordered family of arms and discrete priors; ensures sublinear regret for truthful behavior.
+
+Current canonical registry range: `S01–S41`.
