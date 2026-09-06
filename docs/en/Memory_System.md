@@ -555,3 +555,31 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 - **Repository Test Status**: EVIDENCE_INSUFFICIENT
 - **Beginner Analogy**: Imagine a librarian searching for a book based on a few keywords. A "dense" search might pull every book that shares even one keyword, making the final selection noisy. A "sparse" search strictly filters out the weak matches early, handing you only the most relevant books much faster.
 - **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)
+
+### On Sparse Modern Hopfield Model
+- **System Container**: Memory System
+- **Frontier Source**: arXiv:2309.12673v2 (Version date: 2023-09-22, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu)
+- **Original Problem**: Dense modern Hopfield networks retrieve memories using dense attention mechanisms, which are susceptible to interference from noisy or completely irrelevant patterns, degrading retrieval capacity and accuracy.
+- **Mathematical Mechanism**:
+  A sparse continuous Hopfield network whose energy is formulated using the convex conjugate of the negative Gini entropy (sparsemax regularizer) rather than the standard log-sum-exp. The sparse retrieval dynamics take the form:
+  $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
+  where $\text{Sparsemax}$ enforces strict sparsity on the attention weights by thresholding negative activations: $[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$.
+- **Theoretical Bounds**:
+  - **Retrieval Error Bound**: The one-step sparse retrieval dynamics provides a tighter, sparsity-dependent error bound compared to its dense analog.
+  - **Memory Capacity**: It preserves the exponential memory capacity scaling properties of dense modern Hopfield models while explicitly ignoring non-supported patterns during convergence.
+- **Core Assumptions**:
+  - Relies on sparsemax being evaluated via an exact, finite thresholding procedure requiring sorting or sequential threshold derivation.
+  - Assumes stored patterns $\mathbf{\Xi}$ are appropriately bounded in norm for the retrieval bounds to hold.
+- **Applicability Scope**: High-dimensional associative memory buffers where accurate exact retrieval under high memory load and noise is strictly required, avoiding the interference found in standard dense softmax routing.
+- **Limitations**:
+  - Evaluating Sparsemax requires sorting operations ($O(M \log M)$), making it computationally more expensive per-step than standard Softmax for extremely large pattern sets without specialized hardware.
+- **Agent Architecture Mapping (CONCEPTUAL_MAPPING)**:
+  - Can conceptually inform the design of sparse retrieval mechanisms for long-term trajectory memory, truncating irrelevant past episodes entirely rather than assigning them vanishingly small weights.
+- **Repository Implementation Status**: `EVIDENCE_INSUFFICIENT`
+- **For Beginners**:
+  Imagine a detective looking through thousands of mugshots. A dense search engine tries to give a tiny fractional "match score" to every single face, which creates a huge, noisy mess. A sparse search engine acts like a strict filter: it instantly throws out 99% of the faces that don't match the description and only returns the top few exact candidates, giving a much clearer and sharper answer.
+- **Evidence Status**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

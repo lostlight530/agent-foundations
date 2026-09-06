@@ -555,3 +555,32 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **Repository Test Status**: EVIDENCE_INSUFFICIENT
 - **Beginner Analogy**: 想象一个图书管理员根据几个关键词找书。“密集”搜索可能会把哪怕只包含一个关键词的书都拿出来，导致最终结果充满干扰信息。而“稀疏”搜索会提前严格过滤掉弱相关项，更快地只把最相关的书递给你。
 - **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)
+
+### 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
+- **System Container**: Memory System
+- **Frontier Source**: arXiv:2309.12673v2 (Version date: 2023-09-22, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu)
+- **原始问题**: 密集的现代 Hopfield 网络使用密集的注意力机制来检索记忆，这容易受到噪声或完全不相关模式的干扰，从而降低检索容量和准确性。
+- **核心数学机制**:
+  一种稀疏的连续 Hopfield 网络，其能量函数并非使用标准的 log-sum-exp，而是基于负 Gini 熵（sparsemax 正则化器）的共轭凸函数来构建。稀疏检索动力学形式如下：
+  $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
+  其中，$\text{Sparsemax}$ 通过对负激活值进行阈值截断来强制注意力权重具备严格的稀疏性：$[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$。
+- **理论收敛边界**:
+  - **检索误差界限**: 与其密集的对应模型相比，单步稀疏检索动力学提供了更紧致的、依赖于稀疏度的误差界限。
+  - **记忆容量**: 它在保留密集的现代 Hopfield 模型指数级记忆容量缩放特性的同时，显式地在收敛过程中忽略非支撑（non-supported）模式。
+- **核心假设条件**:
+  - 依赖于通过精确的、有限的阈值截断过程（需要排序或顺序推导阈值）来评估 sparsemax。
+  - 假设存储模式 $\mathbf{\Xi}$ 在范数上有适当的界限，以保证检索界限成立。
+- **适用范围**:
+  适用于在面临高记忆负载和噪声时严格要求准确无误检索的高维联想记忆缓冲区，避免了标准密集 Softmax 路由中存在的干扰问题。
+- **理论局限性**:
+  - 评估 Sparsemax 需要排序操作（复杂度为 $O(M \log M)$），在没有专用硬件的情况下，对于极大规模的模式集，其单步计算成本比标准的 Softmax 更高。
+- **Agent 架构映射 (CONCEPTUAL_MAPPING)**:
+  - 理论上可以为长期轨迹记忆的稀疏检索机制设计提供概念指导，完全截断无关的过去片段，而不是给它们分配微乎其微的权重。
+- **仓库实现状态**: `EVIDENCE_INSUFFICIENT`
+- **初学者类比**:
+  想象一位侦探在翻看数千张嫌疑人照片。密集的搜索引擎试图给每一张脸都打一个微小的“匹配分数”，这会制造出一个巨大且嘈杂的烂摊子。而稀疏搜索引擎就像一个严格的过滤器：它瞬间扔掉 99% 与描述不符的照片，只返回最精确的几个候选人，从而给出一个清晰锐利得多的答案。
+- **证据状态**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

@@ -383,4 +383,15 @@ Canonical rules:
 - Use: hierarchical exploration-then-commit framework and replication-proof equilibrium
 - Verification boundary: explicitly assumes stochastically ordered family of arms and discrete priors; ensures sublinear regret for truthful behavior.
 
-Current canonical registry range: `S01–S41`.
+
+## S42 — On Sparse Modern Hopfield Model
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2309.12673v2
+- Version date: 2023-09-22
+- Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- URL: https://arxiv.org/abs/2309.12673
+- Use: sparsemax-based energy and retrieval dynamics for modern Hopfield networks
+- Verification boundary: bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns.
+
+Current canonical registry range: `S01–S42`.
