@@ -1,6 +1,6 @@
 # Jules source/content contract reconciliation — 2026-07-01 through 2026-09-06
 
-Status: `JULES_CONTENT_AND_SOURCE_LINEAGE_RECONCILIATION / TASK_DELIVERY_MERGE_SEPARATED / JULY_WEEKLY_MONTHLY_CHRONOLOGY_RECONCILED / AUGUST_ARTIFACT_GAP_AND_NATURAL_CLOSE_RECONCILED`
+Status: `JULES_CONTENT_AND_SOURCE_LINEAGE_RECONCILIATION / TASK_DELIVERY_MERGE_SEPARATED / JULY_WEEKLY_MONTHLY_CHRONOLOGY_RECONCILED / AUGUST_31_OF_31_DAILY_PROVENANCE_RECONCILED / NATURAL_CLOSE_RECONCILED`
 
 Review date: 2026-09-06
 Target agent: `Jules` only
@@ -140,23 +140,33 @@ The historical prose remains visible; this reconciliation narrows its current au
 
 ## August task/source/Monthly chronology
 
-### AF-HISTORY-05 — 08-06 recurring task exists, but repository delivery/execution artifact is not identified
+### AF-HISTORY-05 — 08-06 Jules Daily provenance recovered: PR #103 is the repository-visible task artifact
 
-Operator context confirms the recurring 2026-08-06 Daily task existed.
+An earlier search pass looked only for an exact `2026-08-06` date string and failed to recover the Daily research artifact. The dated cadence correction then identified a stronger repository identity signal and this content pass directly rechecked it.
 
-Repository-side searches performed in this pass found:
+PR #103 establishes:
 
-- no 08-06 Daily Research PR through the available PR search;
-- no current branch matching the 08-06 search term;
-- no commit matching the exact 2026-08-06 Daily search term.
+- title: `Add Calibrated Stackelberg Games theory to Tool System`;
+- created: 2026-08-06 12:05:52 UTC;
+- Jules automatic task marker: task `12113509405239491144`;
+- branch: `agent-foundations-tool-system-daily-chunk-12113509405239491144`;
+- head SHA: `6cf821e9a6aad5cca995c2af592a1b5af3a3e95c`;
+- merged: true, merge commit `1ce46e54a0e5321ca269e9d15050e18b9e27cd9a`;
+- changed files: `docs/en/Tool_System.md`, `docs/zh/Tool_System.md`;
+- source: arXiv:2306.02704v2, *Calibrated Stackelberg Games: Learning Optimal Commitments Against Calibrated Agents*;
+- evidence boundary: `VERIFIED_FROM_LATEX_SOURCE / CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` for repository implementation and testing.
 
-Existing final August ledgers likewise state that 30 Daily research commits were identified across 31 calendar dates and classify 08-06 as `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED`.
+Corrected disposition:
 
-Therefore the calibrated state is:
+`2026_08_06 = JULES_DAILY_TASK_IDENTIFIED / PR_IDENTIFIED / MERGED / TOOL_SYSTEM_RESEARCH_UNIT`
 
-`TASK_EXISTS / REPOSITORY_DELIVERY_OR_EXECUTION_ARTIFACT_NOT_IDENTIFIED / CURRENT_EXECUTION_STATUS_UNKNOWN`
+The older `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED` statement in the August ledger and in the initial 2026-09-06 cadence reconstruction is preserved as a historical search result but is superseded by the dated 2026-09-07 task/merge correction and direct PR #103 evidence.
 
-This supersedes wording that called 08-06 a “missing task”. It does not claim Jules failed to run; it states only what repository evidence currently proves.
+Current cadence consequence:
+
+`JULY_31_OF_31 + AUGUST_31_OF_31 + SEPTEMBER_6_OF_6 = 68_OF_68_JULES_DAILY_LOGICAL_DATES_IDENTIFIED`
+
+This is provenance coverage only. It does not imply 68 independent sources, 68 correct claims, 68 unique identities, 68 implementations or 68 reproductions.
 
 ### AF-HISTORY-06 — August source errata demonstrate correct append-only correction
 
@@ -178,15 +188,16 @@ Jules PR #139 on 08-30 generated `2026-08` Monthly Strategic Blueprint before th
 
 Subsequent current-governance work correctly separated the stages:
 
-- PR #141: 01–30 claim/evidence ledger with formal `MONTH_OPEN`, explicitly retaining the unresolved 08-06 repository artifact gap;
+- PR #141: 01–30 claim/evidence ledger with formal `MONTH_OPEN`; at that historical review point its search still classified 08-06 as `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED`;
 - PR #142: real 08-31 Daily Research Chunk;
-- PR #143: append-only final August evidence reconciliation after the 08-31 Daily, adding the 01–31 ledger and S38 while leaving historical generated Monthly files untouched.
+- PR #143: append-only final August evidence reconciliation after the 08-31 Daily, adding the 01–31 ledger and S38 while leaving historical generated Monthly files untouched;
+- dated 2026-09-07 cadence correction: supersedes the old 08-06 search result after recovering PR #103.
 
 Current classification:
 
-`08_30_MONTHLY_HISTORICAL_EARLY_RUN / 01_30_LEDGER_MONTH_OPEN_CORRECT / 08_31_DAILY_THEN_APPEND_ONLY_NATURAL_MONTH_RECONCILIATION_CORRECT`
+`08_30_MONTHLY_HISTORICAL_EARLY_RUN / 01_30_LEDGER_MONTH_OPEN_CORRECT / 08_31_DAILY_THEN_APPEND_ONLY_NATURAL_MONTH_RECONCILIATION_CORRECT / OLD_08_06_GAP_SUPERSEDED_BY_PR_103`
 
-The final documentary closure still retains `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED` for 08-06 rather than fabricating an execution record.
+The natural-month sequencing remains valid even though one historical ledger row has now been corrected by stronger repository provenance.
 
 ## W36 Weekly content/lifecycle reconciliation
 
@@ -245,8 +256,9 @@ Performed:
 - W27 Weekly PR #55 and W31-era combined PR #85 reviewed directly;
 - overlapping July Weekly PRs #72/#73/#76/#83 sampled for execution/duplicate-weave chronology;
 - July Monthly/composite PRs #66/#72/#85/#89/#91 reviewed for target label and natural-month timing;
-- August 08-06 repository PR/branch/commit search performed;
-- August source errata #108 and final ledger/reconciliation #141/#143 retained;
+- direct PR #103 metadata, Jules task marker, `daily-chunk` branch identity, merge state, source/content boundary and changed files reviewed;
+- dated 2026-09-07 cadence correction compared against the older 08-06 ledger search result;
+- August source errata #108 and final ledger/reconciliation #141/#143 retained with the later 08-06 correction explicitly applied;
 - August early Monthly #139 and post-08-31 closure sequence reviewed;
 - current registry checked for arXiv:2312.12676 and arXiv:2309.12673 identities.
 
@@ -260,4 +272,4 @@ Not performed:
 
 ## Current verdict
 
-`SEPTEMBER_DAILIES_ALL_JULES / W27_AND_W31_ERA_WEEKLY_EXECUTION_CONFIRMED / FIELD_COMPLETENESS_INCONSISTENT / 09_03_SOURCE_NOT_CURRENTLY_REGISTRY_ADMITTED / 09_06_IS_S42_REVISIT_NOT_NEW_EVIDENCE / W36_WEEKLY_PRECEDES_LATER_09_06_DAILY / JULY_MONTHLY_LABEL_AND_EARLY_RUNS_PRESERVED / AUGUST_08_06_TASK_EXISTS_BUT_REPOSITORY_ARTIFACT_NOT_IDENTIFIED / AUGUST_30_DAY_OPEN_TO_POST_08_31_APPEND_ONLY_CLOSE_CORRECT / SEPTEMBER_OPEN`
+`JULY_DAILY_31_OF_31_JULES / AUGUST_DAILY_31_OF_31_JULES_WITH_08_06_PR_103_RECOVERED / SEPTEMBER_01_06_DAILY_6_OF_6_JULES / COMBINED_68_OF_68_JULES_DAILY_LOGICAL_DATES_IDENTIFIED / W27_AND_W31_ERA_WEEKLY_EXECUTION_CONFIRMED / FIELD_COMPLETENESS_INCONSISTENT / 09_03_SOURCE_NOT_CURRENTLY_REGISTRY_ADMITTED / 09_06_IS_S42_REVISIT_NOT_NEW_EVIDENCE / W36_WEEKLY_PRECEDES_LATER_09_06_DAILY / JULY_MONTHLY_LABEL_AND_EARLY_RUNS_PRESERVED / AUGUST_30_DAY_OPEN_TO_POST_08_31_APPEND_ONLY_CLOSE_CORRECT_WITH_OLD_08_06_LEDGER_GAP_SUPERSEDED / SEPTEMBER_OPEN`
