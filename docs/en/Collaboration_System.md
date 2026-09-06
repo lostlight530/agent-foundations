@@ -314,6 +314,69 @@ Implementation Status: No repository implementation exists. This is a conceptual
 - Repository Implementation Status: EVIDENCE_INSUFFICIENT
 - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+### Independent Natural Policy Gradient for Markov Potential Games
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
+- **Original Problem**: The challenge of achieving fast global convergence for independent policy gradient methods in multi-agent reinforcement learning (MARL) within Markov Potential Games (MPGs), where agents do not share a global reward but act independently to maximize their own returns, leading to a risk of being trapped near undesirable stationary points.
+- **Core Assumption**: The game is a Markov Potential Game with isolated stationary points, and there exists a suboptimality gap lower bound limit ($\delta^* > 0$) as agents approach some Nash policies. The method has access to an oracle providing exact policy evaluation.
+- **Mathematical Mechanism**:
+  The independent NPG updates the policy at iteration $k$ for agent $i$ as follows:
+  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: The independent NPG method reaches an $\epsilon$-Nash equilibrium within $\mathcal{O}(1/\epsilon)$ iterations. Specifically, the time-averaged Nash equilibrium gap is bounded by:
+  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
+  (收敛界)
+- **Applicable Scope**: Multi-agent reinforcement learning problems that can be modeled as Markov Potential Games. Suitable for scenarios where agents must learn independently and decentralized without centrally coordinated updates.
+- **Limitations**: The theoretical bound depends on the suboptimality gap limit ($\delta^*$), the distribution mismatch coefficient ($M$), and the size of the action space. It also relies on the exact evaluation of the marginal advantage function and guarantees convergence to an $\epsilon$-Nash equilibrium rather than the global optimum.
+- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING. This theory conceptually supports the design of decentralized multi-agent collaboration frameworks where agents independently optimize their policies based on local observations, structurally avoiding the single-point dependency and bottleneck of centralized training while still enabling the system to converge to an equilibrium state.
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+### Topology-based multi-Agent Policy gradiEnt (TAPE)
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
+- **Original Problem**: Centralized critics in multi-agent policy gradient (MAPG) face the centralized-decentralized mismatch (CDM) issue, where sub-optimal actions by some agents negatively affect the learning of others. Using individual critics avoids this but severely limits cooperation among agents.
+- **Core Assumptions**: The policies have tabular expressions (for the policy improvement theorem), and agents can be modeled via a communication/decision topology (like an Erdős–Rényi random graph) where each agent forms a coalition with connected neighbors during policy updates.
+- **Mathematical Mechanism**:
+  TAPE updates the policy based on the coalition $Q$ value instead of the global or individual $Q$ values. For a deterministic policy $\pi$, the deterministic TAPE update gradient is:
+  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
+  where $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$, and $E_{ij}$ is the topology indicator.
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: Under tabular expressions, stochastic TAPE monotonically improves the objective function:
+  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
+  Furthermore, the variance of the parameter updates in stochastic TAPE is strictly greater than that of using individual critics (DOP), $\Delta \propto p^2$ (where $p$ is the graph density), which allows agents to better explore diverse cooperation patterns.
+  (收敛界)
+- **Applicable Scope**: Multi-agent cooperative tasks requiring coordination but facing risks of individual mis-exploration dragging down team learning. Applicable to networks modeled by Erdős–Rényi topology.
+- **Limitations**: The hyperparameter $p$ (connection probability) must be carefully tuned; higher values increase diversity in updates but also risk re-introducing the CDM issue. The topology is static during learning and not dynamically adaptive.
+- **Architecture Mapping**: CONCEPTUAL_MAPPING. The agent topology paradigm conceptually supports the Collaboration System by providing a mechanism for agents to learn localized cooperation policies (within a bounded neighborhood or coalition) to avoid large-scale systemic failures caused by individual agents' exploration errors.
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+### Combinatorial Volatile Gaussian Process Bandits
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [Bayesian Analysis of Combinatorial Gaussian Process Bandits](http://arxiv.org/abs/2312.12676v3), Nika et al., ICLR 2024.
+- **Original Problem**: The challenge of minimizing cumulative regret in multi-armed bandit settings where agents must select a subset (combinatorial super arm) of available continuous (infinite) or discrete volatile base arms, whose expected rewards follow a Gaussian Process.
+- **Core Assumptions**: The reward function is a sample from a Gaussian Process with known bounded variance $\varsigma^2$, the arm set $\mathcal{A}$ is finite (or for the infinite case, compact, convex, and Lipschitz-continuous for both mean and kernel), and the agent has access to a centralized controller/evaluator determining Bayesian updates.
+- **Mathematical Mechanism**:
+  The Gaussian Process Upper Confidence Bound (GP-UCB) selects arms by maximizing the acquisition function:
+  $$ U_t(\mathbf{a}) = \sum_{a \in \mathbf{a}} \left(\mu_{t-1}(a) + \sqrt{\beta_t}\sigma_{t-1}(a)\right) $$
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: For a finite base arm set $\mathcal{A}$, GP-UCB achieves a sublinear Bayesian regret bounded by:
+  $$ \text{BR}(T) \leq \frac{\pi^2}{6} + \sqrt{ 2 (\lambda^*_K + \varsigma^2) T K \beta_T  \gamma_{TK} } $$
+  where $\lambda^*_K$ is the maximum eigenvalue of the posterior covariance matrix, and $\gamma_{TK}$ is the maximum information gain.
+  (收敛界)
+- **Applicable Scope**: Collaborative or multi-agent selection processes where an agent or controller must select subsets of volatile tasks (e.g., continuous contexts or changing task sets) and learn their underlying continuous value structures.
+- **Limitations**: The bound guarantees depend heavily on the smoothness of the underlying reward function (the information gain term $\gamma_{TK}$ for the chosen kernel). The theoretical setting is centralized computation of posterior and acquisition functions, without fully decentralized multi-agent communication rounds.
+- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING. This theory can conceptually support task allocation modules within the Collaboration System by providing a mechanism to select combinations of agents or tasks while maintaining bounded regret against optimal continuous allocations.
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
 ## 3. Source Code Breakdown & Pseudocode
 
 ### Weaved Integrations
@@ -1360,6 +1423,31 @@ $$
 T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)
 $$
 
+### Code for Replication-proof Bandit Mechanism Design with Bayesian Agents
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
+- **URL:** https://arxiv.org/abs/2312.16896
+- **Original Problem:** When multiple Bayesian agents participate in a bandit learning mechanism, they can strategically replicate their own arms to increase their chance of being selected and maximize their payoff, deceiving standard learning algorithms.
+- **Core Assumptions:**
+  - Bayesian agents only know the distribution from which their own arms' mean rewards are sampled.
+  - The set of arms belongs to a stochastically ordered family.
+  - Prior distributions have discrete support.
+- **Mathematical Mechanism (算法伪代码):** The paper proposes the Hierarchical ETC with Restarting (H-ETC) algorithm:
+  - Input: Tie-breaking rule, agent set $\mathcal{N}$, arm set $\mathcal{S}_i$, restarting round $\tau = Mn$
+  - For $t=1,2,\ldots,M$:
+    - If $t = \tau+1$, reset statistics $\hat{\mu}_{i,a} \gets 0, n_{i,a} \gets 0$ for all arms.
+    - If $n_i < M$ for some $i \in \mathcal{N}$, select agent $\hat{i} \gets i$. Else, select $\hat{i} \gets \text{argmax}_{i \in \mathcal{N}}\hat{\mu}_{i}$.
+    - If $n_{\hat{i},a} < m$ for some $a \in \mathcal{S}_{\hat{i}}$, select arm $\hat{a} \gets a$. Else, $\hat{a} \gets \text{argmax}_{a \in \mathcal{S}_{\hat{i}}}\hat{\mu}_{\hat{i},a}$.
+    - Pull arm $\hat{a}$ of agent $\hat{i}$, obtain reward $R_t$, and update averages $\hat{\mu}_{\hat{i},\hat{a}}, \hat{\mu}_{\hat{i}}$ and counts $n_{\hat{i},\hat{a}}, n_{\hat{i}}$.
+- **Convergence Bounds:** The algorithm achieves a sublinear expected regret bound of $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ while guaranteeing that truthful registration of arms is a dominant strategy for any Bayesian agent (replication-proof).
+- **Scope of Application:** Multi-agent multi-armed bandit settings where self-interested agents submit options (arms) and the system must learn the optimal option without being manipulated by fake duplicates.
+- **Limitations:** The replication-proof guarantee assumes the arms belong to a stochastically ordered family and requires discrete support for priors in the specific analysis provided.
+- **Architecture Mapping:** CONCEPTUAL_MAPPING. This provides a theoretical mechanism for ensuring collaboration integrity. In a decentralized agent network, when agents propose candidate actions (arms) to a central coordinator, this mechanism prevents agents from spamming identical actions to unfairly dominate the system's execution pipeline.
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
 ## 4. The Global Defense: Mathematical Immunity to SPOF
 
 In the wake of industry scandals where central server failures paralyzed entire multi-agent networks, our collaboration system provides a mathematically proven defense mechanism.
@@ -1997,6 +2085,22 @@ Imagine a town council (the agents) trying to guess the number of jellybeans in 
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+### Analogy for Independent Natural Policy Gradient for Markov Potential Games
+
+Imagine a team cleaning a large park. Instead of having a central director dictate everyone's exact moves, each person independently decides how to clean their own area based on how much it improves their local section (their advantage). Even though they don't share a total "cleanliness score", because their individual goals align with the overall park's cleanliness (a potential game), their independent efforts will theoretically and steadily converge until the park reaches a stable state where no one can easily improve it further.
+
+### Analogy for Topology-based multi-Agent Policy gradiEnt (TAPE)
+
+Imagine a giant orchestra where every musician listens to everyone else. If one person plays a wrong note, the conductor yells at the whole group, confusing the players who did well (the CDM issue). Conversely, if everyone wears noise-canceling headphones and only listens to themselves, they can't play in sync. TAPE is like dividing the orchestra into small sections (coalitions). Musicians only listen to and adjust based on their local section's performance, avoiding the chaos of one bad player while still maintaining harmony.
+
+### Analogy for Combinatorial Volatile Gaussian Process Bandits
+
+Imagine a manager who needs to pick a specific team of experts (a combination) every day from a continuously changing pool of available freelancers (volatile arms). The manager uses their past experience (Gaussian Process) to estimate how well each person will do, plus an optimism factor (Upper Confidence Bound) to give new people a chance. This theory proves that over time, the manager's team performance will consistently approach the best possible team, with a mathematically bounded amount of total mistakes along the way.
+
+### Analogy for Replication-proof Bandit Mechanism Design with Bayesian Agents
+
+Imagine a talent show where agents bring their best performers. If the judges randomly pick acts, an agent might bring 10 identical mediocre clones of their performer to increase their chances of winning. This algorithm organizes a strict two-stage audition (agent first, then performer) with periodic resets, mathematically proving that bringing clones will actually hurt an agent's chances, forcing everyone to just bring their single best performer.
+
 ## AF-COLLAB-002: Robust Multi-Agent Bandits with Heavy-Tailed Rewards
 
 **State / 状态:** Active Research
@@ -2099,122 +2203,17 @@ Evidence Status: CONCEPTUAL_MAPPING
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - Wove "Distributed Optimization via Kernelized Multi-armed Bandits" into Core Theory and Analogies.
+  - Wove "Independent Natural Policy Gradient for Markov Potential Games", "Topology-based multi-Agent Policy gradiEnt (TAPE)", "Combinatorial Volatile Gaussian Process Bandits", and "Replication-proof Bandit Mechanism Design with Bayesian Agents" into Core Theory, Source Code Breakdown, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - Mapped kernelized multi-armed bandit distributed consensus to privacy-preserving decentralized exploration.
+  - Mapped TAPE to localized cooperation policies.
+  - Mapped Combinatorial Volatile GP Bandits to task allocation modules.
+  - Mapped Replication-proof Bandit Mechanism to collaboration integrity and preventing action spamming.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - Kernelized Multi-armed Bandits: COMPATIBLE. The multi-agent confidence bound averaging without data sharing aligns perfectly with Collaboration System's decentralized privacy goals and does not conflict with Memory or Architecture Principles.
+  - Independent NPG for Markov Potential Games: COMPATIBLE. Decentralized independent optimization perfectly aligns with the Collaboration System's goals of avoiding single-point bottlenecks and does not conflict with Memory or Tool Execution.
+  - TAPE: COMPATIBLE. The topology-based coalition learning mechanism supports bounded neighborhood cooperation without violating the Architecture Principles.
+  - Combinatorial Volatile Gaussian Process Bandits: COMPATIBLE. This conceptually supports task allocation bounds against optimal assignments without global communication conflicts.
+  - Replication-proof Bandit Mechanism: COMPATIBLE. The prevention of agent action spamming reinforces the Collaboration System's robustness without conflicting with other containers.
 - 来源迁移记录 (Source migration record)
-  - Successfully migrated 2312.04719v1 (Kernelized Bandits). Note: Daily chunk "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
+  - Successfully migrated 2310.09727v2 (Independent NPG), 2312.15667v3 (TAPE), 2312.12676v3 (Combinatorial Volatile GP Bandits), and 2312.16896v2 (Replication-proof Bandit Mechanism). Note: "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Daily Research Chunk: Independent Natural Policy Gradient for Markov Potential Games
-
-- **Technical Point Name**: Independent NPG for Markov Potential Games
-- **System Container**: Collaboration System
-- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
-- **Original Problem**: The challenge of achieving fast global convergence for independent policy gradient methods in multi-agent reinforcement learning (MARL) within Markov Potential Games (MPGs), where agents do not share a global reward but act independently to maximize their own returns, leading to a risk of being trapped near undesirable stationary points.
-- **Core Assumption**: The game is a Markov Potential Game with isolated stationary points, and there exists a suboptimality gap lower bound limit ($\delta^* > 0$) as agents approach some Nash policies. The method has access to an oracle providing exact policy evaluation.
-- **Mathematical Mechanism**:
-  The independent NPG updates the policy at iteration $k$ for agent $i$ as follows:
-  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
-  (Mathematical Update Rule)
-- **Convergence / Behavioral Bound**: The independent NPG method reaches an $\epsilon$-Nash Equilibrium within $\mathcal{O}(1/\epsilon)$ iterations, specifically bounding the time-averaged NE-gap:
-  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
-  (Convergence Bound)
-- **Applicable Scope**: Multi-agent reinforcement learning problems that can be formulated as Markov Potential Games, where agents learn independently and decentralized without coordinating updates centrally.
-- **Limitations**: The theoretical bound depends on the suboptimality gap limit ($\delta^*$), the distribution mismatch coefficient ($M$), and the size of the action spaces. It also relies on the exact evaluation of the marginalized advantage function and does not guarantee convergence to the global optimum, but rather an $\epsilon$-Nash Equilibrium.
-- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING. This theory can conceptually support the design of decentralized multi-agent collaboration frameworks where agents independently optimize their policies based on local observations, structurally avoiding a single point of failure and bottleneck of centralized training while ensuring convergence to an equilibrium.
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy**: Imagine a team of people trying to clean up a large park. Instead of having a central boss directing every person's specific move, each person independently decides how to clean their local area based on how much better it looks (their advantage). Even though they don't share a total 'cleanliness score', because their individual goals align with the overall park's cleanliness (a potential game), their independent efforts will theoretically converge steadily until the park reaches a stable state where no one can easily improve things further.
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-### Daily Research Chunk: Topology-based multi-Agent Policy gradiEnt (TAPE)
-
-- **Technical Point Name**: Topology-based multi-Agent Policy gradiEnt (TAPE)
-- **System Container**: Collaboration System
-- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
-- **Original Problem**: Centralized critics in multi-agent policy gradient (MAPG) face the centralized-decentralized mismatch (CDM) issue, where sub-optimal actions by some agents negatively affect the learning of others. Using individual critics avoids this but severely limits cooperation among agents.
-- **Core Assumptions**: The policies have tabular expressions (for the policy improvement theorem), and agents can be modeled via a communication/decision topology (like an Erdős–Rényi random graph) where each agent forms a coalition with connected neighbors during policy updates.
-- **Mathematical Mechanism**:
-  TAPE updates the policy based on the coalition $Q$ value instead of the global or individual $Q$ values. For a deterministic policy $\pi$, the deterministic TAPE update gradient is:
-  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
-  where $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$, and $E_{ij}$ is the topology indicator.
-  (数学更新规则)
-- **Convergence / Behavioral Bound**: Under tabular expressions, stochastic TAPE monotonically improves the objective function:
-  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
-  Furthermore, the variance of the parameter updates in stochastic TAPE is strictly greater than that of using individual critics (DOP), $\Delta \propto p^2$ (where $p$ is the graph density), which allows agents to better explore diverse cooperation patterns.
-  (收敛界)
-- **Applicable Scope**: Multi-agent cooperative tasks requiring coordination but facing risks of individual mis-exploration dragging down team learning. Applicable to networks modeled by Erdős–Rényi topology.
-- **Limitations**: The hyperparameter $p$ (connection probability) must be carefully tuned; higher values increase diversity in updates but also risk re-introducing the CDM issue. The topology is static during learning and not dynamically adaptive.
-- **Architecture Mapping**: CONCEPTUAL_MAPPING. The agent topology paradigm conceptually supports the Collaboration System by providing a mechanism for agents to learn localized cooperation policies (within a bounded neighborhood or coalition) to avoid large-scale systemic failures caused by individual agents' exploration errors.
-- **Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Test Status**: EVIDENCE_INSUFFICIENT
-- **For Beginners: Practical Analogy**: Imagine a giant orchestra where every musician listens to everyone else. If one person plays a wrong note, the conductor yells at the whole group, confusing the players who did well (the CDM issue). Conversely, if everyone wears noise-canceling headphones and only listens to themselves, they can't play in sync. TAPE is like dividing the orchestra into small sections (coalitions). Musicians only listen to and adjust based on their local section's performance, avoiding the chaos of one bad player while still maintaining harmony.
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-
-### Daily Research Chunk: Bayesian Analysis of Combinatorial Gaussian Process Bandits
-
-- **Technical Point Name**: Combinatorial Volatile Gaussian Process Bandits
-- **System Container**: Collaboration System
-- **Frontier Source**: [Bayesian Analysis of Combinatorial Gaussian Process Bandits](http://arxiv.org/abs/2312.12676v3), Nika et al., ICLR 2024.
-- **Original Problem**: The challenge of minimizing cumulative regret in multi-armed bandit settings where agents must select a subset (combinatorial super arm) of available continuous (infinite) or discrete volatile base arms, whose expected rewards follow a Gaussian Process.
-- **Core Assumptions**: The reward function is a sample from a Gaussian Process with known bounded variance $\varsigma^2$, the arm set $\mathcal{A}$ is finite (or for the infinite case, compact, convex, and Lipschitz-continuous for both mean and kernel), and the agent has access to a centralized controller/evaluator determining Bayesian updates.
-- **Mathematical Mechanism**:
-  The Gaussian Process Upper Confidence Bound (GP-UCB) selects arms by maximizing the acquisition function:
-  $$ U_t(\mathbf{a}) = \sum_{a \in \mathbf{a}} \left(\mu_{t-1}(a) + \sqrt{\beta_t}\sigma_{t-1}(a)\right) $$
-  (数学更新规则)
-- **Convergence / Behavioral Bound**: For a finite base arm set $\mathcal{A}$, GP-UCB achieves a sublinear Bayesian regret bounded by:
-  $$ \text{BR}(T) \leq \frac{\pi^2}{6} + \sqrt{ 2 (\lambda^*_K + \varsigma^2) T K \beta_T  \gamma_{TK} } $$
-  where $\lambda^*_K$ is the maximum eigenvalue of the posterior covariance matrix, and $\gamma_{TK}$ is the maximum information gain.
-  (收敛界)
-- **Applicable Scope**: Collaborative or multi-agent selection processes where an agent or controller must select subsets of volatile tasks (e.g., continuous contexts or changing task sets) and learn their underlying continuous value structures.
-- **Limitations**: The bound guarantees depend heavily on the smoothness of the underlying reward function (the information gain term $\gamma_{TK}$ for the chosen kernel). The theoretical setting is centralized computation of posterior and acquisition functions, without fully decentralized multi-agent communication rounds.
-- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING. This theory can conceptually support task allocation modules within the Collaboration System by providing a mechanism to select combinations of agents or tasks while maintaining bounded regret against optimal continuous allocations.
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy**: Imagine a manager who needs to pick a specific team of experts (a combination) every day from a continuously changing pool of available freelancers (volatile arms). The manager uses their past experience (Gaussian Process) to estimate how well each person will do, plus an optimism factor (Upper Confidence Bound) to give new people a chance. This theory proves that over time, the manager's team performance will consistently approach the best possible team, with a mathematically bounded amount of total mistakes along the way.
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-
-### Replication-proof Bandit Mechanism Design with Bayesian Agents
-
-- **System Container:** Collaboration System
-- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
-- **URL:** https://arxiv.org/abs/2312.16896
-- **Original Problem:** When multiple Bayesian agents participate in a bandit learning mechanism, they can strategically replicate their own arms to increase their chance of being selected and maximize their payoff, deceiving standard learning algorithms.
-- **Core Assumptions:**
-  - Bayesian agents only know the distribution from which their own arms' mean rewards are sampled.
-  - The set of arms belongs to a stochastically ordered family.
-  - Prior distributions have discrete support.
-- **Mathematical Mechanism (算法伪代码):** The paper proposes the Hierarchical ETC with Restarting ($\hbb$) algorithm:
-  - Input: Tie-breaking rule, agent set $\cN$, arm set $\cS_i$, restarting round $\tau = Mn$
-  - For $t=1,2,\ldots,M$:
-    - If $t = \tau+1$, reset statistics $\muhat_{i,a} \gets 0, n_{i,a} \gets 0$ for all arms.
-    - If $n_i < M$ for some $i \in \cN$, select agent $\hat{i} \gets i$. Else, select $\hat{i} \gets \argmax_{i \in \cN}\muhat_{i}$.
-    - If $n_{\hat{i},a} < m$ for some $a \in \cS_{\hat{i}}$, select arm $\hat{a} \gets a$. Else, $\hat{a} \gets \argmax_{a \in \cS_{\hat{i}}}\muhat_{\hat{i},a}$.
-    - Pull arm $\hat{a}$ of agent $\hat{i}$, obtain reward $R_t$, and update averages $\muhat_{\hat{i},\hat{a}}, \muhat_{\hat{i}}$ and counts $n_{\hat{i},\hat{a}}, n_{\hat{i}}$.
-- **Convergence Bounds:** The algorithm achieves a sublinear expected regret bound of $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ while guaranteeing that truthful registration of arms is a dominant strategy for any Bayesian agent (replication-proof).
-- **Scope of Application:** Multi-agent multi-armed bandit settings where self-interested agents submit options (arms) and the system must learn the optimal option without being manipulated by fake duplicates.
-- **Limitations:** The replication-proof guarantee assumes the arms belong to a stochastically ordered family and requires discrete support for priors in the specific analysis provided.
-- **Architecture Mapping:** This provides a theoretical mechanism for ensuring collaboration integrity. In a decentralized agent network, when agents propose candidate actions (arms) to a central coordinator, this mechanism prevents agents from spamming identical actions to unfairly dominate the system's execution pipeline.
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a talent show where agents bring their best performers. If the judges randomly pick acts, an agent might bring 10 identical mediocre clones of their performer to increase their chances of winning. This algorithm organizes a strict two-stage audition (agent first, then performer) with periodic resets, mathematically proving that bringing clones will actually hurt an agent's chances, forcing everyone to just bring their single best performer.

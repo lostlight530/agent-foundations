@@ -287,6 +287,69 @@ Implementation Status: 暂无代码库实现。当前仅为概念映射。
 - Repository Implementation Status: EVIDENCE_INSUFFICIENT
 - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+### 马尔可夫势博弈的独立自然策略梯度 (Independent NPG for Markov Potential Games)
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
+- **Original Problem**: 在多智能体强化学习（MARL）的马尔可夫势博弈（MPGs）中，智能体不共享全局奖励而是独立行动以最大化自身回报，这导致系统容易陷入不良驻点，实现独立策略梯度方法的快速全局收敛面临挑战。
+- **Core Assumption**: 博弈是具有孤立驻点的马尔可夫势博弈，并且当智能体接近某些纳什策略时，存在次优间隙的下界极限（$\delta^* > 0$）。该方法假设可以访问提供精确策略评估的预言机。
+- **Mathematical Mechanism**:
+  独立自然策略梯度（NPG）在第 $k$ 次迭代时针对智能体 $i$ 的策略更新如下：
+  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: 独立NPG方法在 $\mathcal{O}(1/\epsilon)$ 次迭代内达到 $\epsilon$-纳什均衡，具体而言，时间平均纳什均衡间隙受以下限制：
+  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
+  (收敛界)
+- **Applicable Scope**: 可建模为马尔可夫势博弈的多智能体强化学习问题，适用于智能体在没有集中协调更新的情况下进行独立和去中心化学习的场景。
+- **Limitations**: 理论界限依赖于次优间隙极限（$\delta^*$）、分布不匹配系数（$M$）以及动作空间的大小。它还依赖于边缘优势函数的精确评估，并且不保证收敛到全局最优，而是收敛到 $\epsilon$-纳什均衡。
+- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING。该理论在概念上可支持去中心化多智能体协作框架的设计，其中智能体根据局部观察独立优化其策略，在结构上规避了集中式训练的单点依赖和瓶颈，同时支持系统收敛到均衡状态。
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+### 基于拓扑的多智能体策略梯度 (TAPE)
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
+- **Original Problem**: 现有最先进的多智能体策略梯度（MAPG）方法中的中心化评论家（Critic）存在中心化-去中心化不匹配（CDM）问题，即部分智能体的次优动作会干扰其他智能体的策略学习。若改用个体评论家又会严重限制智能体间的合作。
+- **Core Assumptions**: 策略具有表格形式表达（用于策略改进定理），且智能体间存在一种策略更新时的通信/决策拓扑（如 Erdős–Rényi 随机图模型），相连的智能体在策略更新时形成联盟。
+- **Mathematical Mechanism**:
+  TAPE 方法使用联盟 $Q$ 值代替全局或个体 $Q$ 值来进行策略更新。对于确定性策略 $\pi$，确定性 TAPE 的更新梯度为：
+  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
+  其中 $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$，并且 $E_{ij}$ 是拓扑连接的指示函数。
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: 在表格化表示下，随机 TAPE 更新可以单调提升目标函数：
+  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
+  此外，定理证明了与使用个体评论家（DOP）相比，随机 TAPE 的策略更新方差更大，其差值 $\Delta \propto p^2$（其中 $p$ 为图连接概率），这表明它能更有效地探索参数空间以寻找合作模式。
+  (收敛界)
+- **Applicable Scope**: 需要智能体之间高度协同，但又面临个体误探索拖累整个团队学习进度的多智能体合作任务。适用于可由 Erdős–Rényi 拓扑建模的协作网络。
+- **Limitations**: 连通概率参数 $p$ 需要仔细调节：$p$ 过大会增加探索多样性但也可能导致 CDM 问题重新出现。此外，拓扑在学习过程中是静态的，未实现自适应演化。
+- **Architecture Mapping**: CONCEPTUAL_MAPPING. 这种基于局部拓扑的联盟学习机制在概念上支持 Collaboration System，可用于设计去中心化的协作决策网络：智能体在局部邻域内协同，既避免了单点错误引发的大规模系统波动，又维持了合作效率。
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
+### 组合变动高斯过程赌博机 (Combinatorial Volatile Gaussian Process Bandits)
+
+- **System Container**: Collaboration System
+- **Frontier Source**: [Bayesian Analysis of Combinatorial Gaussian Process Bandits](http://arxiv.org/abs/2312.12676v3), Nika et al., ICLR 2024.
+- **Original Problem**: 在多臂赌博机环境中，智能体必须从连续（无限）或离散的变动基础臂中选择一个子集（组合超级臂），且其预期奖励服从高斯过程，如何最小化累积遗憾是一个挑战。
+- **Core Assumptions**: 奖励函数是从已知有界方差 $\varsigma^2$ 的高斯过程中采样的，臂集 $\mathcal{A}$ 是有限的（或者对于无限情况，是紧凑的、凸的，且均值和核函数都是李普希茨连续的），并且智能体可以访问决定贝叶斯更新的集中控制器/评估器。
+- **Mathematical Mechanism**:
+  高斯过程上置信界 (GP-UCB) 通过最大化采集函数来选择臂：
+  $$ U_t(\mathbf{a}) = \sum_{a \in \mathbf{a}} \left(\mu_{t-1}(a) + \sqrt{\beta_t}\sigma_{t-1}(a)\right) $$
+  (数学更新规则)
+- **Convergence / Behavioral Bound**: 对于有限基础臂集 $\mathcal{A}$，GP-UCB 实现的次线性贝叶斯遗憾有界为：
+  $$ \text{BR}(T) \leq \frac{\pi^2}{6} + \sqrt{ 2 (\lambda^*_K + \varsigma^2) T K \beta_T  \gamma_{TK} } $$
+  其中 $\lambda^*_K$ 是后验协方差矩阵的最大特征值，$\gamma_{TK}$ 是最大信息增益。
+  (收敛界)
+- **Applicable Scope**: 协作或多智能体选择过程，其中智能体或控制器必须选择变动任务的子集（例如，连续的上下文或不断变化的任务集）并学习其潜在的连续价值结构。
+- **Limitations**: 边界保证严重依赖于基础奖励函数的平滑度（所选核函数的信息增益项 $\gamma_{TK}$）。理论设定是后验和采集函数的集中式计算，没有完全去中心化的多智能体通信轮次。
+- **Architecture Mapping**: CONCEPTUAL_MAPPING。这一理论在概念上可以支持 Collaboration System 中的任务分配模块，提供一种选择智能体或任务组合的机制，同时在对抗最优连续分配时保持有界遗憾。
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
 ### Code for
 
@@ -1195,6 +1258,31 @@ $$
 T=\Omega\left(\tau^2\tilde{t}_{mix}^2\frac{\sqrt{n}\mathcal{E}_{0} |\mathcal{S}||\mathcal{A}|D(\Gamma, \rho)}{\epsilon^2}\cdot\log\frac{1}{\delta}\right)
 $$
 
+### Code for 包含贝叶斯智能体的防复制老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
+- **URL:** https://arxiv.org/abs/2312.16896
+- **Original Problem:** 当多个贝叶斯智能体参与多臂老虎机学习机制时，它们可以在战略上复制自己的臂以增加被集中的几率并最大化回报，从而欺骗标准学习算法。
+- **Core Assumptions:**
+  - 贝叶斯智能体只知道自己臂的平均奖励分布。
+  - 臂集属于随机有序族。
+  - 先验分布具有离散支撑。
+- **Mathematical Mechanism (算法伪代码):** 论文提出带重启的层次ETC（H-ETC）算法：
+  - 输入：打破平局的规则，智能体集合 $\mathcal{N}$，臂集合 $\mathcal{S}_i$，重启轮次 $\tau = Mn$
+  - 对于 $t=1,2,\ldots,M$：
+    - 如果 $t = \tau+1$，重置所有臂的统计量 $\hat{\mu}_{i,a} \gets 0, n_{i,a} \gets 0$。
+    - 如果对于某些 $i \in \mathcal{N}$ 有 $n_i < M$，选择智能体 $\hat{i} \gets i$。否则，选择 $\hat{i} \gets \text{argmax}_{i \in \mathcal{N}}\hat{\mu}_{i}$。
+    - 如果对于某些 $a \in \mathcal{S}_{\hat{i}}$ 有 $n_{\hat{i},a} < m$，选择臂 $\hat{a} \gets a$。否则，$\hat{a} \gets \text{argmax}_{a \in \mathcal{S}_{\hat{i}}}\hat{\mu}_{\hat{i},a}$。
+    - 拉动智能体 $\hat{i}$ 的臂 $\hat{a}$，获得奖励 $R_t$，并更新平均值 $\hat{\mu}_{\hat{i},\hat{a}}, \hat{\mu}_{\hat{i}}$ 和计数 $n_{\hat{i},\hat{a}}, n_{\hat{i}}$。
+- **Convergence Bounds:** 算法实现了 $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ 的次线性期望遗憾界，同时保证了真实注册臂是任何贝叶斯智能体的占优策略（防复制）。
+- **Scope of Application:** 多智能体多臂老虎机设置：自利的智能体提交选项（臂），系统必须学习最佳选项，而不会被虚假重复项操纵。
+- **Limitations:** 防复制保证假定臂属于随机有序族，并且在提供的特定分析中需要先验的离散支撑。
+- **Architecture Mapping:** CONCEPTUAL_MAPPING。这为确保协作完整性提供了理论机制。在去中心化智能体网络中，当智能体向中央协调器提出候选动作（臂）时，该机制可防止智能体大量发送相同动作，从而不公平地主导系统的执行管道。
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
+
 ## 4. 全局防线：对单点故障与系统崩溃的数学级免疫
 
 在当前业内多智能体框架频繁暴露出“中心服务器单点故障（SPOF）”导致全网瘫痪丑闻的背景下，我们的协作系统提供了一种在数学和物理层面被严格证明的防御机制。
@@ -1834,6 +1922,22 @@ $$E[R_T|A] \leq (c+1)\cdot L + \sum_{m \in M_H}\sum_{k=1}^K\Delta_k\left(\left[\
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+### Analogy for 马尔可夫势博弈的独立自然策略梯度 (Independent NPG for Markov Potential Games)
+
+想象一个团队在清理一个大公园。与其有一个中心主管指挥每个人的具体行动，不如每个人根据局部区域改善的程度（他们的优势）独立决定如何清理自己的区域。尽管他们不共享总的“清洁度分数”，但因为他们的个人目标与整个公园的清洁度一致（势博弈），他们的独立努力理论上将稳定收敛，直到公园达到一个没有人能轻易进一步改善的稳定状态。
+
+### Analogy for 基于拓扑的多智能体策略梯度 (TAPE)
+
+想象一个庞大的交响乐团，如果所有人都在同一个频道听指挥，一旦一个人吹错一个音，指挥会把大家一起批评，这会让原本吹得好的乐手很迷茫（CDM 问题）。但如果大家都戴上降噪耳机只听自己的，乐团又会乱套。TAPE 的方法就像是把乐团分成几个小组（联盟），乐手在练习时只听自己小组的声音并根据小组表现调整。这样既避免了被远处那个吹错音的人影响，又能和身边的人保持良好合作。
+
+### Analogy for 组合高斯过程赌博机的贝叶斯分析 (Combinatorial Volatile Gaussian Process Bandits)
+
+想象一位经理，他每天需要从不断变化的可用自由职业者池（变动臂）中挑选一个特定的专家团队（组合）。经理利用过去的经验（高斯过程）来估计每个人的表现，加上乐观因素（上置信界）给新人一个机会。这个理论证明，随着时间的推移，经理的团队表现将始终逼近可能的最佳团队，并且在此过程中的总错误量在数学上是有界的。
+
+### Analogy for 包含贝叶斯智能体的防复制老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
+
+想象一个才艺表演，经纪人带来他们最好的表演者。如果评委随机挑选节目，经纪人可能会带来10个平庸表演者的完全相同的克隆人，以增加获胜的机会。这种算法组织了严格的两阶段海选（先是经纪人，然后是表演者）并定期重置，从数学上证明了带克隆人实际上会损害经纪人的机会，从而迫使每个人只带他们最好的一位表演者。
+
 ## AF-COLLAB-002: 具有重尾奖励的鲁棒多智能体赌博机
 
 **State / 状态:** Active Research
@@ -1936,122 +2040,17 @@ Evidence Status: CONCEPTUAL_MAPPING
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - 编织了“基于核化多臂老虎机的分布式优化”理论与类比。
+  - 编织了“马尔可夫势博弈的独立自然策略梯度”、“基于拓扑的多智能体策略梯度 (TAPE)”、“组合高斯过程赌博机的贝叶斯分析”以及“包含贝叶斯智能体的防复制老虎机机制设计”的理论、类比与源码分析。
 - 动态演进映射 (Dynamic evolution mapping)
-  - 将核化多臂老虎机的分布式共识映射到保护隐私的去中心化探索中。
+  - 将 TAPE 映射到局部邻域协同的协作策略。
+  - 将组合变动高斯过程赌博机映射到协作系统中的任务分配模块。
+  - 将防复制老虎机机制设计映射到确保协作完整性和防止智能体动作垃圾邮件。
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - 核化多臂老虎机理论：COMPATIBLE（兼容）。不共享数据的多智能体置信上界平均机制与协作系统去中心化隐私目标完全一致，且不与记忆或架构原则冲突。
+  - 马尔可夫势博弈的独立自然策略梯度：COMPATIBLE（兼容）。去中心化的独立优化完全符合协作系统避免单点瓶颈的目标，且不与记忆或工具执行冲突。
+  - TAPE：COMPATIBLE（兼容）。基于拓扑的联盟学习机制支持有界邻域合作，不违反架构原则。
+  - 组合变动高斯过程赌博机：COMPATIBLE（兼容）。在概念上支持任务分配边界对抗最优分配，且没有全局通信冲突。
+  - 防复制老虎机机制设计：COMPATIBLE（兼容）。防止智能体动作垃圾邮件增强了协作系统的鲁棒性，且不与其他容器冲突。
 - 来源迁移记录 (Source migration record)
-  - 成功迁移了 2312.04719v1 (核化老虎机)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
+  - 成功迁移了 2310.09727v2 (独立 NPG)、2312.15667v3 (TAPE)、2312.12676v3 (组合变动高斯过程赌博机) 和 2312.16896v2 (防复制老虎机机制)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Daily Research Chunk: 马尔可夫势博弈的独立自然策略梯度
-
-- **Technical Point Name**: 马尔可夫势博弈的独立自然策略梯度 (Independent NPG for Markov Potential Games)
-- **System Container**: Collaboration System
-- **Frontier Source**: [Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games](http://arxiv.org/abs/2310.09727v2), Sun et al., NeurIPS 2023.
-- **Original Problem**: 在多智能体强化学习（MARL）的马尔可夫势博弈（MPGs）中，智能体不共享全局奖励而是独立行动以最大化自身回报，这导致系统容易陷入不良驻点，实现独立策略梯度方法的快速全局收敛面临挑战。
-- **Core Assumption**: 博弈是具有孤立驻点的马尔可夫势博弈，并且当智能体接近某些纳什策略时，存在次优间隙的下界极限（$\delta^* > 0$）。该方法假设可以访问提供精确策略评估的预言机。
-- **Mathematical Mechanism**:
-  独立自然策略梯度（NPG）在第 $k$ 次迭代时针对智能体 $i$ 的策略更新如下：
-  $$ \pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left(\frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma}\right) $$
-  (数学更新规则)
-- **Convergence / Behavioral Bound**: 独立NPG方法在 $\mathcal{O}(1/\epsilon)$ 次迭代内达到 $\epsilon$-纳什均衡，具体而言，时间平均纳什均衡间隙受以下限制：
-  $$ \frac{1}{K}\sum^{K-1}_{k=0} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max} }{K (1-\gamma)} \left(1 + \frac{8nM^3 \max_i|\mathcal{A}_i|}{c \delta^* (1-\gamma)} + \frac{ K' }{2M}\right) $$
-  (收敛界)
-- **Applicable Scope**: 可建模为马尔可夫势博弈的多智能体强化学习问题，适用于智能体在没有集中协调更新的情况下进行独立和去中心化学习的场景。
-- **Limitations**: 理论界限依赖于次优间隙极限（$\delta^*$）、分布不匹配系数（$M$）以及动作空间的大小。它还依赖于边缘优势函数的精确评估，并且不保证收敛到全局最优，而是收敛到 $\epsilon$-纳什均衡。
-- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING。该理论在概念上可支持去中心化多智能体协作框架的设计，其中智能体根据局部观察独立优化其策略，在结构上规避了集中式训练的单点依赖和瓶颈，同时支持系统收敛到均衡状态。
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy**: 想象一个团队在清理一个大公园。与其有一个中心主管指挥每个人的具体行动，不如每个人根据局部区域改善的程度（他们的优势）独立决定如何清理自己的区域。尽管他们不共享总的“清洁度分数”，但因为他们的个人目标与整个公园的清洁度一致（势博弈），他们的独立努力理论上将稳定收敛，直到公园达到一个没有人能轻易进一步改善的稳定状态。
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-### Daily Research Chunk: 基于拓扑的多智能体策略梯度 (TAPE)
-
-- **技术点名称**: 基于拓扑的多智能体策略梯度 (TAPE)
-- **System Container**: Collaboration System
-- **Frontier Source**: [TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient](http://arxiv.org/abs/2312.15667v3), Lou et al., 2023.
-- **核心问题**: 现有最先进的多智能体策略梯度（MAPG）方法中的中心化评论家（Critic）存在中心化-去中心化不匹配（CDM）问题，即部分智能体的次优动作会干扰其他智能体的策略学习。若改用个体评论家又会严重限制智能体间的合作。
-- **核心假设**: 策略具有表格形式表达（用于策略改进定理），且智能体间存在一种策略更新时的通信/决策拓扑（如 Erdős–Rényi 随机图模型），相连的智能体在策略更新时形成联盟。
-- **数学机制**:
-  TAPE 方法使用联盟 $Q$ 值代替全局或个体 $Q$ 值来进行策略更新。对于确定性策略 $\pi$，确定性 TAPE 的更新梯度为：
-  $$ \nabla J_2(\theta)=\mathbb{E}_{\mathcal{D}}\left[\sum_i \nabla_{\theta_i}\pi_i(\tau_i)\nabla_{a_i}\hat{Q}_{\text{co}}^i(s,\bm{a})|_{a_i=\pi_i(\tau_i)}\right] $$
-  其中 $\hat{Q}_{\text{co}}^i(s,\bm{a})=f_{\text{mix}}\left(s,\mathds{1}[E_{i1}]\hat{Q}^{\phi_1}_1,\cdots,\mathds{1}[E_{i,n}]\hat{Q}^{\phi_{n}}_{n}\right)$，并且 $E_{ij}$ 是拓扑连接的指示函数。
-  (数学更新规则)
-- **收敛界 / 行为边界**: 在表格化表示下，随机 TAPE 更新可以单调提升目标函数：
-  $$ J(\hat{\bm{\pi}}) \geq J(\bm{\pi}) $$
-  此外，定理证明了与使用个体评论家（DOP）相比，随机 TAPE 的策略更新方差更大，其差值 $\Delta \propto p^2$（其中 $p$ 为图连接概率），这表明它能更有效地探索参数空间以寻找合作模式。
-  (收敛界)
-- **适用范围**: 需要智能体之间高度协同，但又面临个体误探索拖累整个团队学习进度的多智能体合作任务。适用于可由 Erdős–Rényi 拓扑建模的协作网络。
-- **局限性**: 连通概率参数 $p$ 需要仔细调节：$p$ 过大会增加探索多样性但也可能导致 CDM 问题重新出现。此外，拓扑在学习过程中是静态的，未实现自适应演化。
-- **Agent 架构映射**: CONCEPTUAL_MAPPING. 这种基于局部拓扑的联盟学习机制在概念上支持 Collaboration System，可用于设计去中心化的协作决策网络：智能体在局部邻域内协同，既避免了单点错误引发的大规模系统波动，又维持了合作效率。
-- **仓库实现状态**: EVIDENCE_INSUFFICIENT
-- **测试状态**: EVIDENCE_INSUFFICIENT
-- **初学者类比**: 想象一个庞大的交响乐团，如果所有人都在同一个频道听指挥，一旦一个人吹错一个音，指挥会把大家一起批评，这会让原本吹得好的乐手很迷茫（CDM 问题）。但如果大家都戴上降噪耳机只听自己的，乐团又会乱套。TAPE 的方法就像是把乐团分成几个小组（联盟），乐手在练习时只听自己小组的声音并根据小组表现调整。这样既避免了被远处那个吹错音的人影响，又能和身边的人保持良好合作。
-- **证据状态**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-
-### Daily Research Chunk: 组合高斯过程赌博机的贝叶斯分析
-
-- **Technical Point Name**: 组合变动高斯过程赌博机
-- **System Container**: Collaboration System
-- **Frontier Source**: [Bayesian Analysis of Combinatorial Gaussian Process Bandits](http://arxiv.org/abs/2312.12676v3), Nika et al., ICLR 2024.
-- **Original Problem**: 在多臂赌博机环境中，智能体必须从连续（无限）或离散的变动基础臂中选择一个子集（组合超级臂），且其预期奖励服从高斯过程，如何最小化累积遗憾是一个挑战。
-- **Core Assumptions**: 奖励函数是从已知有界方差 $\varsigma^2$ 的高斯过程中采样的，臂集 $\mathcal{A}$ 是有限的（或者对于无限情况，是紧凑的、凸的，且均值和核函数都是李普希茨连续的），并且智能体可以访问决定贝叶斯更新的集中控制器/评估器。
-- **Mathematical Mechanism**:
-  高斯过程上置信界 (GP-UCB) 通过最大化采集函数来选择臂：
-  $$ U_t(\mathbf{a}) = \sum_{a \in \mathbf{a}} \left(\mu_{t-1}(a) + \sqrt{\beta_t}\sigma_{t-1}(a)\right) $$
-  (数学更新规则)
-- **Convergence / Behavioral Bound**: 对于有限基础臂集 $\mathcal{A}$，GP-UCB 实现的次线性贝叶斯遗憾有界为：
-  $$ \text{BR}(T) \leq \frac{\pi^2}{6} + \sqrt{ 2 (\lambda^*_K + \varsigma^2) T K \beta_T  \gamma_{TK} } $$
-  其中 $\lambda^*_K$ 是后验协方差矩阵的最大特征值，$\gamma_{TK}$ 是最大信息增益。
-  (收敛界)
-- **Applicable Scope**: 协作或多智能体选择过程，其中智能体或控制器必须选择变动任务的子集（例如，连续的上下文或不断变化的任务集）并学习其潜在的连续价值结构。
-- **Limitations**: 边界保证严重依赖于基础奖励函数的平滑度（所选核函数的信息增益项 $\gamma_{TK}$）。理论设定是后验和采集函数的集中式计算，没有完全去中心化的多智能体通信轮次。
-- **Agent Architecture Mapping**: CONCEPTUAL_MAPPING。这一理论在概念上可以支持 Collaboration System 中的任务分配模块，提供一种选择智能体或任务组合的机制，同时在对抗最优连续分配时保持有界遗憾。
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy**: 想象一位经理，他每天需要从不断变化的可用自由职业者池（变动臂）中挑选一个特定的专家团队（组合）。经理利用过去的经验（高斯过程）来估计每个人的表现，加上乐观因素（上置信界）给新人一个机会。这个理论证明，随着时间的推移，经理的团队表现将始终逼近可能的最佳团队，并且在此过程中的总错误量在数学上是有界的。
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-
-### 包含贝叶斯智能体的防复制老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
-
-- **System Container:** Collaboration System
-- **Frontier Source:** Replication-proof Bandit Mechanism Design with Bayesian Agents (arXiv:2312.16896v2)
-- **URL:** https://arxiv.org/abs/2312.16896
-- **Original Problem:** 当多个贝叶斯智能体参与多臂老虎机学习机制时，它们可以在战略上复制自己的臂以增加被集中的几率并最大化回报，从而欺骗标准学习算法。
-- **Core Assumptions:**
-  - 贝叶斯智能体只知道自己臂的平均奖励分布。
-  - 臂集属于随机有序族。
-  - 先验分布具有离散支撑。
-- **Mathematical Mechanism (算法伪代码):** 论文提出带重启的层次ETC（$\hbb$）算法：
-  - 输入：打破平局的规则，智能体集合 $\cN$，臂集合 $\cS_i$，重启轮次 $\tau = Mn$
-  - 对于 $t=1,2,\ldots,M$：
-    - 如果 $t = \tau+1$，重置所有臂的统计量 $\muhat_{i,a} \gets 0, n_{i,a} \gets 0$。
-    - 如果对于某些 $i \in \cN$ 有 $n_i < M$，选择智能体 $\hat{i} \gets i$。否则，选择 $\hat{i} \gets \argmax_{i \in \cN}\muhat_{i}$。
-    - 如果对于某些 $a \in \cS_{\hat{i}}$ 有 $n_{\hat{i},a} < m$，选择臂 $\hat{a} \gets a$。否则，$\hat{a} \gets \argmax_{a \in \cS_{\hat{i}}}\muhat_{\hat{i},a}$。
-    - 拉动智能体 $\hat{i}$ 的臂 $\hat{a}$，获得奖励 $R_t$，并更新平均值 $\muhat_{\hat{i},\hat{a}}, \muhat_{\hat{i}}$ 和计数 $n_{\hat{i},\hat{a}}, n_{\hat{i}}$。
-- **Convergence Bounds:** 算法实现了 $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ 的次线性期望遗憾界，同时保证了真实注册臂是任何贝叶斯智能体的占优策略（防复制）。
-- **Scope of Application:** 多智能体多臂老虎机设置：自利的智能体提交选项（臂），系统必须学习最佳选项，而不会被虚假重复项操纵。
-- **Limitations:** 防复制保证假定臂属于随机有序族，并且在提供的特定分析中需要先验的离散支撑。
-- **Architecture Mapping:** 这为确保协作完整性提供了理论机制。在去中心化智能体网络中，当智能体向中央协调器提出候选动作（臂）时，该机制可防止智能体大量发送相同动作，从而不公平地主导系统的执行管道。
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象一个才艺表演，经纪人带来他们最好的表演者。如果评委随机挑选节目，经纪人可能会带来10个平庸表演者的完全相同的克隆人，以增加获胜的机会。这种算法组织了严格的两阶段海选（先是经纪人，然后是表演者）并定期重置，从数学上证明了带克隆人实际上会损害经纪人的机会，从而迫使每个人只带他们最好的一位表演者。
