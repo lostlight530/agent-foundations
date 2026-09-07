@@ -285,3 +285,25 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一群研究人员（智能体）在不同的实验室测试不同的工具（手臂）。如果他们不交流，他们可能都会把时间浪费在测试糟糕的工具上（线性遗憾）。最优协作算法（CExp$^2$）确保通过中央服务器进行几次通信，他们可以一起学习整体最佳工具。与如果他们从一开始就奇迹般地知道最好的工具相比，他们浪费的总努力（遗憾）随着时间的推移只会增长得非常慢（对数）。
+
+### 基于 A* 搜索的高效动作空间导航 (ToolChain*)
+
+- **System Container:** Tool System
+- **Frontier Source:** ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search (arXiv:2310.13227v1)
+- **URL:** https://arxiv.org/abs/2310.13227
+- **Publication Date:** 2023-10-20
+- **Selection Reason:** 解决了多步工具使用过程中动作空间组合爆炸的问题，提供了一种基于理论的 A* 搜索方法，通过动态边界成本来高效导航并修剪无效的 API 序列。
+- **Original Problem:** 基于大语言模型的 Agent 在通过 API 函数调用逐步生成解决方案计划时，面临着庞大的动作空间。现有的方法通常要么陷入局部最优的单向探索，要么因为穷举遍历导致极度低效。
+- **Core Assumptions:** 动作空间可以公式化为一个决策树，其中节点是 API 函数调用。到目标节点的总成本可以通过结合任务特定的启发式函数（从长期记忆中推导）和想象力得分（由大语言模型自我评估剩余步骤得出）来有效界定。
+- **Mathematical Mechanism:**
+  - **Future Cost Function** (数学更新规则): 节点 $n$ 的未来成本 $h(n)$ 通过几何平均数积分了任务特定的启发式函数 $h_{t,1}(n)$ 和大模型的想象力得分 $h_{t,2}(n)$：
+    $$h(n)=(1-h_{t,1}(n))^\beta\cdot(1-h_{t,2}(n))^{1-\beta}$$
+    其中 $\beta$ 是未来成本的权重。这有效地修剪了可能包含不正确动作的高成本分支，从而确定成本最低的有效路径。
+- **Convergence / Boundary:** 累积成本界定了搜索树的扩展；超过最低已验证路径成本的搜索分支会被数学上修剪，确保在 API 调用空间中进行高效导航而不会无限发散。
+- **Applicability Scope:** 需要多步 API 函数调用的复杂顺序决策环境，在这些环境中，穷举搜索在计算上是不可行的，而纯贪婪搜索容易失败。
+- **Limitations:** 任务特定的启发式函数在很大程度上依赖于长期记忆中参考数据的覆盖率和质量。想象力得分依赖于大语言模型准确估计路径可行性的能力，如果没有充分的校准，它仍然可能表现出过度自信。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象你正在一个巨大的迷宫（工具动作空间）中寻找出口。你没有选择走遍每一条路（太慢），也没有选择盲目前进（容易卡住），而是使用了一个智能指南针。这个指南针计算两件事：根据你研究过的过去地图，这条路看起来有多近（启发式）；以及你直觉上感觉离出口还有多少步（想象力）。通过将这两个提示相乘，你可以迅速忽略死胡同，找到最快的出口路径。

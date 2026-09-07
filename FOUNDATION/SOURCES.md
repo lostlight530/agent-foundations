@@ -394,4 +394,14 @@ Canonical rules:
 - Use: sparsemax-based energy and retrieval dynamics for modern Hopfield networks
 - Verification boundary: bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns.
 
-Current canonical registry range: `S01–S42`.
+## S43 — ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.13227v1
+- Version date: 2023-10-20
+- Authors: Yuchen Zhuang
+- URL: https://arxiv.org/abs/2310.13227
+- Use: Proposed ToolChain*, an efficient tree search-based planning algorithm incorporating A* search to prune high-cost invalid tool actions, bounding exploration space dynamically.
+- Verification boundary: Guarantees rely strictly on task-specific heuristic function quality from long-term memory and large language model self-consistency/imagination bounds, under specific multi-step API function call environments.
+
+Current canonical registry range: `S01–S43`.

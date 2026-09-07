@@ -299,3 +299,25 @@ Imagine a team of specialists building a complex machine. Instead of one person 
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine a group of researchers (agents) testing different tools (arms) across different labs. If they don't talk, they might all waste time testing bad tools (linear regret). The optimal collaborative algorithm (CExp$^2$) ensures that by communicating just a few times through a central server, they can learn the best overall tool together. Their combined wasted effort (regret) only grows very slowly (logarithmically) over time compared to if they magically knew the best tool from the start.
+
+### Efficient Action Space Navigation with A* Search (ToolChain*)
+
+- **System Container:** Tool System
+- **Frontier Source:** ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search (arXiv:2310.13227v1)
+- **URL:** https://arxiv.org/abs/2310.13227
+- **Publication Date:** 2023-10-20
+- **Selection Reason:** Addresses the combinatorial explosion of the action space during multi-step tool use, offering a theoretically grounded A* search method with dynamically bounded costs to efficiently navigate and prune invalid API sequences.
+- **Original Problem:** LLM-based agents generating solution plans step-by-step through API function calls face an expansive action space. Existing methods often struggle with either unidirectional exploration trapping them in local optima or exhaustive traversal leading to extreme inefficiency.
+- **Core Assumptions:** Action space can be formulated as a decision tree where nodes are API function calls. The total cost to a target can be effectively bounded by combining a task-specific heuristic (derived from long-term memory) and an imagination score (derived from the LLM's own self-evaluation of remaining steps).
+- **Mathematical Mechanism:**
+  - **Future Cost Function** (数学更新规则): The future cost $h(n)$ for a node $n$ integrates the task-specific heuristic function $h_{t,1}(n)$ and the Imagination Score by LLM $h_{t,2}(n)$ via a geometric mean:
+    $$h(n)=(1-h_{t,1}(n))^\beta\cdot(1-h_{t,2}(n))^{1-\beta}$$
+    where $\beta$ is the weight for future cost. This effectively prunes high-cost branches that may involve incorrect actions, identifying the lowest-cost valid path.
+- **Convergence / Boundary:** The cumulative cost bounds the expansion of the search tree; search branches exceeding the lowest validated path cost are mathematically pruned, ensuring efficient navigation without infinite divergence in the API call space.
+- **Applicability Scope:** Complex sequential decision-making environments requiring multi-step API function calls where exhaustive search is computationally infeasible and purely greedy search fails.
+- **Limitations:** The task-specific heuristic heavily depends on the coverage and quality of the reference data in the long-term memory. The imagination score relies on the LLM's capability to accurately estimate path viability, which can still exhibit overconfidence without sufficient calibration.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine you're looking for the exit in a massive maze (the tool action space). Instead of checking every single path (too slow) or just blindly running forward (getting stuck), you use a smart compass. The compass calculates two things: how close a path looks based on past maps you've studied (heuristic), and your gut feeling of how many steps are left (imagination). By multiplying these two hints together, you can quickly ignore the dead ends and find the shortest path out.
