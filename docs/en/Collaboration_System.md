@@ -2200,6 +2200,54 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Evidence Status:** PAPER_ONLY
 
 <!-- WEEKLY_SYNC_REPORT -->
+## AF-COLLAB-003: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+
+**State / 状态:** Active Research
+**Evidence / 证据:** S40
+**Mapping / 映射:** CONCEPTUAL_MAPPING
+**Implementation / 实现:** EVIDENCE_INSUFFICIENT
+**Validation / 验证:** EVIDENCE_INSUFFICIENT
+**Sources / 来源:** S40
+
+### Source Detail
+- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- **URL:** https://arxiv.org/abs/2312.15667
+- **Version:** v3
+- **Date:** 2023-12-25
+- **Selection Reason:** Introduces topology-aware policy gradient, addressing how decentralized agents coordinate through localized communication graphs instead of central control.
+
+### Original Problem
+In cooperative multi-agent systems, standard policy gradients treat all agents identically or rely on centralized critics, ignoring the natural or constrained communication topologies between agents. How can agents leverage the underlying communication graph (topology) to learn optimal cooperative policies efficiently without requiring full state visibility or unstructured all-to-all communication?
+
+### Core Assumptions
+- **Erdős–Rényi Topology:** The theoretical convergence guarantees explicitly assume the communication graph follows an Erdős–Rényi random graph structure.
+- **Tabular Expressions:** Convergence bounds are established assuming tabular representations for policies and value functions.
+- **Local Observability:** Agents can only observe their local state and communicate with their immediate neighbors in the topology.
+
+### Mathematical Mechanism (Topology-Aware Policy Gradient)
+The algorithm introduces a topology-aware policy gradient approach where each agent $i$'s policy update relies on messages from its neighbors $\mathcal{N}_i$. The objective function $J(\pi)$ is maximized using a decentralized gradient:
+$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
+where $Q^{\pi}_{i}$ is a local action-value function conditioned on the messages $m_{\mathcal{N}_i}$ received from neighboring agents in the topology graph.
+
+### Bounds and Convergence
+- **Convergence Guarantees:** Under tabular expressions and specific topological conditions (Erdős–Rényi), the decentralized policy gradient converges to a stationary point of the true objective.
+- **Topological Bottleneck:** The rate of convergence is bounded by the spectral properties (algebraic connectivity) of the communication graph.
+
+### Scope and limits / 范围与局限:
+- **Topology Restrictions:** The theoretical guarantees rely heavily on specific random graph models and tabular settings, which may not directly translate to arbitrary or highly dynamic deep neural network architectures.
+- **Message Overhead:** While it avoids centralized critics, the communication complexity still scales with neighborhood size and message dimensionality.
+
+### Architecture Mapping
+- **System Container:** Collaboration System
+- **Mapping Status:** `CONCEPTUAL_MAPPING`
+- **Architectural Implication:** Decentralized multi-agent systems should explicitly incorporate the communication topology into their learning and decision-making processes. Agents should weight their updates based on the structural importance of their neighbors rather than treating all peers equally.
+
+### 0-Foundation Business Analogies (For Beginners)
+Imagine a large corporation trying to launch a new product. If every employee tries to talk to everyone else (all-to-all communication), it's chaos. If they only listen to the CEO (centralized), local context is lost.
+TAPE suggests a structure where employees only communicate with their direct team members and adjacent departments (their "topology"). By learning to value the input from these specific neighbors, each department can adjust its strategy locally. The math proves that if the organizational chart is connected well enough, these local adjustments will eventually lead the entire company to a coordinated, optimal product launch without needing a central boss to micromanage every detail.
+
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
