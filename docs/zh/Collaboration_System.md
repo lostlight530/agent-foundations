@@ -2037,6 +2037,54 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **证据状态:** PAPER_ONLY
 
 <!-- WEEKLY_SYNC_REPORT -->
+## AF-COLLAB-003: 协作多智能体策略梯度中的拓扑感知
+
+**State / 状态:** Active Research
+**Evidence / 证据:** S40
+**Mapping / 映射:** CONCEPTUAL_MAPPING
+**Implementation / 实现:** EVIDENCE_INSUFFICIENT
+**Validation / 验证:** EVIDENCE_INSUFFICIENT
+**Sources / 来源:** S40
+
+### 来源详情
+- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- **URL:** https://arxiv.org/abs/2312.15667
+- **Version:** v3
+- **Date:** 2023-12-25
+- **Selection Reason:** 引入了拓扑感知的策略梯度，解决了去中心化智能体如何通过局部通信图而不是中央控制进行协调的问题。
+
+### 原始问题
+在协作多智能体系统中，标准的策略梯度要么同等对待所有智能体，要么依赖于中心化的评论家（critic），忽略了智能体之间自然存在或受限的通信拓扑。智能体如何利用底层的通信图（拓扑结构）来高效学习最优的协作策略，而不需要完整的状态可见性或无结构的全局通信？
+
+### 核心假设
+- **Erdős–Rényi 拓扑:** 理论上的收敛保证明确假设通信图遵循 Erdős–Rényi 随机图结构。
+- **表格表示 (Tabular Expressions):** 收敛界是在假设策略和价值函数采用表格表示的情况下建立的。
+- **局部可观察性:** 智能体只能观察其局部状态，并与拓扑图中的直接邻居进行通信。
+
+### 数学机制 (拓扑感知策略梯度)
+该算法引入了一种拓扑感知的策略梯度方法，其中每个智能体 $i$ 的策略更新依赖于来自其邻居 $\mathcal{N}_i$ 的消息。通过去中心化梯度最大化目标函数 $J(\pi)$：
+$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
+其中 $Q^{\pi}_{i}$ 是一个局部的动作价值函数，以从拓扑图中的相邻智能体收到的消息 $m_{\mathcal{N}_i}$ 为条件。
+
+### 边界与收敛
+- **收敛保证:** 在表格表示和特定的拓扑条件（Erdős–Rényi）下，去中心化的策略梯度收敛于真实目标的驻点。
+- **拓扑瓶颈:** 收敛速度受到通信图的谱特性（代数连通度）的限制。
+
+### Scope and limits / 范围与局限:
+- **拓扑限制:** 理论保证在很大程度上依赖于特定的随机图模型和表格设置，这可能无法直接转化为任意的或高度动态的深度神经网络架构。
+- **消息开销:** 虽然它避免了中心化的评论家，但通信复杂度仍然随着邻域大小和消息维度而增加。
+
+### 架构映射
+- **系统容器:** Collaboration System
+- **映射状态:** `CONCEPTUAL_MAPPING`
+- **架构意义:** 去中心化的多智能体架构应该将通信拓扑明确地纳入其学习和决策过程中。智能体应根据邻居的结构重要性来权衡其更新，而不是平等地对待所有对等方。
+
+### 0基础业务通俗类比 (For Beginners)
+想象一家大公司试图推出一款新产品。如果每个员工都试图与其他所有人交谈（全局通信），那将是一场混乱。如果他们只听从 CEO 的（中心化），就会失去局部背景。
+TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部门（他们的“拓扑”）进行沟通。通过学会重视这些特定邻居的意见，每个部门都可以在局部调整其策略。数学证明了如果组织架构连接得足够好，这些局部调整最终将引导整个公司实现协调一致、最优的产品发布，而不需要一个中央老板来微观管理每一个细节。
+
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
