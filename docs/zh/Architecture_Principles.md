@@ -1055,3 +1055,27 @@ u_i(t)-\bar u_i^{\mathrm c,*}(t)
 
 ### 初学者类比
 想象一群无人机在没有无线电通信的情况下穿过森林。如果无人机依赖记忆去推测其他无人机几秒前的位置，它最终会因为路径意外交叉而坠毁。相反，这个算法迫使每架无人机不断重新计算一个即时的“安全停车路径”（应急计划），并在数学上限制了停车所需的能量（成本）。只要这个“停车成本”不断下降，我们就可以从数学上保证整个机群能安全到达目的地而不会相互碰撞。
+
+### 未知约束下的上下文博弈中的多智能体学习 (Multi-Agent Learning in Contextual Games under Unknown Constraints)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** https://arxiv.org/abs/2310.14685
+- **Publication Date:** 2024-01-14
+- **Authors:** Anna M. Maddux, Maryam Kamgarpour
+- **Selection Reason:** 解决了在约束条件动态且先验未知的多智能体环境中确保安全性和合规性的挑战，提供了一种无遗憾、无违规的方法，这对健壮的智能体架构至关重要。
+- **Original Problem:** 参与重复上下文博弈的智能体必须选择属于可行集的行动，但可行集（约束）和奖励函数是先验未知的。
+- **Core Assumptions:** 未知的奖励和约束函数满足基于核的规律性（RKHS）假设。博弈具有有限或紧凑的上下文空间 $\mathcal{Z}$，并满足严格的可行性条件（斯莱特条件）。
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): c.z.AdaNormalGP 算法的受限遗憾界为：
+    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
+    累积约束违规的上限为：
+    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
+    其中 $\gamma_m^T$ 是第 $m$ 个约束函数的最大信息增益。
+- **Applicability Scope:** 多智能体强化学习（MARL）或去中心化系统，其中智能体必须在不事先了解环境动态的情况下，优化目标并遵守不断演变的、依赖于上下文的安全或资源约束。
+- **Limitations:** 保证依赖于 RKHS 假设和严格可行行动（松弛性）的存在。它需要能够估计最大信息增益，这在非常高维的空间中可能扩展性很差。
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一下，你在一个陌生的城市试图找到去上班的最佳路线（最大化奖励），但你不知道交通规则或哪些道路正在施工（未知约束）。你没有屡次被罚款，而是每天从类似的交通环境中学习。随着时间的推移，你的策略保证你能找到最佳路线，同时将总的交通违规次数增长控制得非常慢，以至于平均违规次数趋于零。

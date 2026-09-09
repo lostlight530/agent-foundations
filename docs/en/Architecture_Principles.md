@@ -1055,3 +1055,27 @@ The formulation does not universally solve adversarial multi-agent conflicts; co
 
 ### For Beginners: Practical Analogy
 Imagine multiple drones flying through a forest without radio communication. If a drone relies on memory of where other drones were seconds ago, it will eventually crash because paths cross unexpectedly. Instead, this algorithm forces every drone to constantly recalculate an immediate "safe stopping path" (the contingency plan). It mathematically bounds the energy (cost) needed to stop. If this "stopping cost" constantly decreases, we can mathematically guarantee the entire swarm safely converges to their destinations without hitting each other.
+
+### Multi-Agent Learning in Contextual Games under Unknown Constraints
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** https://arxiv.org/abs/2310.14685
+- **Publication Date:** 2024-01-14
+- **Authors:** Anna M. Maddux, Maryam Kamgarpour
+- **Selection Reason:** Addresses the challenge of ensuring safety and compliance in multi-agent environments where constraints are dynamic and unknown a priori, providing a no-regret, no-violation approach essential for robust agent architectures.
+- **Original Problem:** Agents playing a repeated contextual game must choose actions belonging to feasible sets, but the feasible sets (constraints) and reward functions are a priori unknown.
+- **Core Assumptions:** The unknown reward and constraint functions satisfy kernel-based regularity (RKHS) assumptions. The game has a finite or compact context space $\mathcal{Z}$, and strict feasibility conditions (Slater's condition) hold.
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): The constrained regret for the c.z.AdaNormalGP algorithm is bounded by:
+    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
+    and the cumulative constraint violations are upper bounded by:
+    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
+    where $\gamma_m^T$ is the maximum information gain for the $m$-th constraint function.
+- **Applicability Scope:** Multi-agent reinforcement learning (MARL) or decentralized systems where agents must optimize objectives subject to evolving, context-dependent safety or resource constraints without prior knowledge of the environment dynamics.
+- **Limitations:** The guarantees depend on the RKHS assumptions and the existence of strictly feasible actions (slackness). It requires the ability to estimate the maximum information gain, which can scale poorly in very high-dimensional spaces.
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine you're in a new city trying to find the best route to work (maximizing reward), but you don't know the traffic rules or which roads are under construction (unknown constraints). Instead of getting fined repeatedly, you learn from similar traffic contexts every day. Over time, your strategy guarantees you find the best route while keeping your total traffic violations growing so slowly that, on average, they approach zero.
