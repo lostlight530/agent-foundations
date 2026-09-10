@@ -307,3 +307,34 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象你正在一个巨大的迷宫（工具动作空间）中寻找出口。你没有选择走遍每一条路（太慢），也没有选择盲目前进（容易卡住），而是使用了一个智能指南针。这个指南针计算两件事：根据你研究过的过去地图，这条路看起来有多近（启发式）；以及你直觉上感觉离出口还有多少步（想象力）。通过将这两个提示相乘，你可以迅速忽略死胡同，找到最快的出口路径。
+
+
+### 基于 A* 搜索的动态动作空间裁剪
+
+- **System Container:** Tool System (工具系统)
+- **Frontier Source:** S43 (arXiv:2310.13227v1, *ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search*)
+- **Original Problem Formulation:** 在引入工具的大语言模型中，每一步潜在的 API 调用会将动作空间指数级扩大。单向探索容易使智能体陷入局部最优解或错误循环，而穷举遍历则效率极低。
+- **Core Assumptions:**
+  - API 动作空间可以被结构化为正式的决策树。
+  - 可以定义一个特定任务的成本函数预言机 $f(n) = g(n) + h(n)$ 来引导搜索，其中 $h(n)$ 使用长期记忆启发式和 LLM“想象”来估计到达目标的成本。
+  - 给定当前状态、API 定义和演示示例，LLM 能够生成潜在的独立同分布的下一步动作。
+- **Mathematical Mechanism:**
+  - **算法伪代码:** ToolChain* 导航
+    1. 使用根节点 $s_0$ 初始化决策树 $\mathcal{T}$。
+    2. 当未达到目标（或达到最大步数 $T$）时：
+       - 从边界 $\mathcal{F}$ 中选择节点 $n_{next} = \arg\min_{n \in \mathcal{F}(\mathcal{T})} f(n)$。
+       - 使用 LLM $\rho$ 扩展 $n_{next}$，生成候选动作 $\{a^{(i)}\}_{i=1}^k$。
+       - 将新状态节点追加到 $\mathcal{T}$ 中。
+       - 更新新边界节点的成本函数 $f$。
+  - **数学更新规则:**
+    - 未来成本 $h(n)$ 整合了基于长期记忆中词汇最接近动作的平均相对位置的启发式 $h_{t,1}(n)$，以及基于 LLM 设想路径中祖先比例得出的想象得分 $h_{t,2}(n)$：
+    $$h(n) = (1 - h_{t,1}(n))^\beta \cdot (1 - h_{t,2}(n))^{1-\beta}$$
+- **Convergence / Bound Behavior:** 通过利用 A* 公式，算法能够裁剪高成本分支。如果启发式函数是可采纳的（admissible），它将在结构上限制所需的探索空间，并帮助确定最低成本的有效路径，从而比穷举广度优先遍历减少搜索时间。
+- **Applicable Scope:** 多步 API 调用环境和顺序决策任务，其中动作可以被分层建模，且存在历史记忆以形成启发式。
+- **Theoretical Limitations:** 保证严格依赖于特定任务启发式函数的质量和可采纳性。如果长期记忆缺乏相关覆盖，或者 LLM 的想象得分存在系统性缺陷，搜索可能会退化为贪婪选择或 BFS，无法有效地找到最优解。
+- **Architecture Mapping Candidate:** CONCEPTUAL_MAPPING. A* API 搜索公式为在系统的外部模块交互层中实现有界的工具探索提供了一个概念设计。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginners' Analogy:** 想象你正在一个巨大的迷宫（API 调用的动作空间）中导航。你不是盲目地走过每一条走廊（穷举搜索），也不是只猜一条路然后被困住（单向探索），而是使用指南针（来自记忆的启发式）和一张你*认为*出口在哪里的地图（LLM 想象）在每个路口计算最短路径（A* 搜索），迅速排除错误的路线。
+- **Evidence Provenance:**
+  - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
