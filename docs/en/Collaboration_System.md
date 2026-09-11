@@ -2265,3 +2265,25 @@ TAPE suggests a structure where employees only communicate with their direct tea
   - Successfully migrated 2310.09727v2 (Independent NPG), 2312.15667v3 (TAPE), 2312.12676v3 (Combinatorial Volatile GP Bandits), and 2312.16896v2 (Replication-proof Bandit Mechanism). Note: "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+### Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
+- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- **Publication Date:** 2024-03-26
+- **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** The paper addresses multi-agent consensus resilience in the presence of intermittent failures and malicious attacks, where adversaries might strategically withhold transmission to stay undetected.
+- **Core Assumptions:**
+  1. Assumption 1 (`as_trust`): The expected value of malicious and legitimate transmissions received by a legitimate agent $i \in \mathcal{L}$ are constant and satisfy $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ and $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$, where $d-c_j > 0$ for all $j \in \mathcal{N}_i^m$.
+  2. The subgraph induced by the legitimate agents is connected.
+- **Mathematical Mechanism:** Legitimate agents maintain aggregate trust variables over an observation window $T_0$, establishing a growing separation between legitimate and malicious sources over time based on $\xi>0$ and $\gamma \in (0.5, 1)$.
+- **Convergence Bound (Theorem 1 - `thm_dev`):** Explicitly limits the maximum deviation from the nominal consensus. For a given confidence level $\delta > 0$ and $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$, the probability that the maximal deviation is strictly bounded by $\Delta_{\max} (T_0,\delta)$ is at least $1-\delta$, where $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$.
+- **Applicable Scope:** Multi-agent consensus settings requiring resilience against adversarial nodes attempting data injection while preserving connectivity among benign nodes.
+- **Limitations:** The error bounds assume a fixed minimal expected trust advantage over malicious agents, which may weaken if malicious nodes mimic legitimate distributions perfectly over short windows.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. Can conceptually support robust state synchronization across multiple agent instances using adaptive trust windows.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Beginner Analogy:** Imagine a group of people trying to agree on a direction. Some are secretly trying to mislead the group, but they can't lie constantly without getting caught. If the honest people wait long enough ($T_0$) to observe everyone's track record before fully committing, they can mathematically guarantee that they'll reach a near-perfect agreement, bounding the maximum possible distraction the liars can cause.

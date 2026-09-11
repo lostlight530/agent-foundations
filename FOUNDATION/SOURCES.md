@@ -404,4 +404,15 @@ Canonical rules:
 - Use: Proposed ToolChain*, an efficient tree search-based planning algorithm incorporating A* search to prune high-cost invalid tool actions, bounding exploration space dynamically.
 - Verification boundary: Guarantees rely strictly on task-specific heuristic function quality from long-term memory and large language model self-consistency/imagination bounds, under specific multi-step API function call environments.
 
-Current canonical registry range: `S01–S43`.
+
+## S44 — Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2403.17907v1
+- Version date: 2024-03-26
+- Authors: Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- URL: https://arxiv.org/abs/2403.17907
+- Use: Proposed adaptive consensus dynamics against intermittent attacks via a windowed trust metric
+- Verification boundary: Bound guarantees assume identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions (d - c_j > 0), and connected legitimate graph.
+
+Current canonical registry range: `S01–S44`.
