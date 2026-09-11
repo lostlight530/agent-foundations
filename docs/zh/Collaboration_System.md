@@ -2102,3 +2102,25 @@ TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部
   - 成功迁移了 2310.09727v2 (独立 NPG)、2312.15667v3 (TAPE)、2312.12676v3 (组合变动高斯过程赌博机) 和 2312.16896v2 (防复制老虎机机制)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+### 间歇性故障与恶意传输下的多智能体弹性共识（扩展版）
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
+- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- **Publication Date:** 2024-03-26
+- **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** 论文解决了在间歇性故障和恶意攻击（对手可能战略性地拒绝传输以保持未被检测）存在的情况下，多智能体共识的弹性问题。
+- **Core Assumptions:**
+  1. 假设1 (`as_trust`)：合法智能体 $i \in \mathcal{L}$ 接收到的恶意和合法传输的期望值是恒定的，满足 $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ 且 $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$，其中对于所有 $j \in \mathcal{N}_i^m$，有 $d-c_j > 0$。
+  2. 合法智能体诱导的子图是连通的。
+- **Mathematical Mechanism:** 合法智能体在观察窗口 $T_0$ 内维护聚合信任变量，基于 $\xi>0$ 和 $\gamma \in (0.5, 1)$ 随时间在合法和恶意源之间建立不断增长的分离度。
+- **Convergence Bound (Theorem 1 - `thm_dev`):** 明确限制了与名义共识的最大偏差。给定置信度水平 $\delta > 0$ 和 $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$，最大偏差严格受到 $\Delta_{\max} (T_0,\delta)$ 限制的概率至少为 $1-\delta$，其中 $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$。
+- **Applicable Scope:** 需要对尝试注入数据的对抗节点具有弹性，同时保持良性节点间连通性的多智能体共识环境。
+- **Limitations:** 误差界限假设对恶意智能体有固定的最小期望信任优势，如果恶意节点在短窗口内完美模仿合法分布，该优势可能会减弱。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING。在概念上可以通过自适应信任窗口支持多个智能体实例之间稳健的状态同步。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Beginner Analogy:** 想象一群人试图就一个方向达成一致。有些人暗中试图误导这群人，但他们无法在不被抓到的情况下不断撒谎。如果诚实的人等待足够长的时间（$T_0$），在完全承诺之前观察每个人的记录，他们可以在数学上保证达成近乎完美的协议，从而限制说谎者可能造成的最大干扰。
