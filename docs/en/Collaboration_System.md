@@ -2287,3 +2287,37 @@ TAPE suggests a structure where employees only communicate with their direct tea
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Beginner Analogy:** Imagine a group of people trying to agree on a direction. Some are secretly trying to mislead the group, but they can't lie constantly without getting caught. If the honest people wait long enough ($T_0$) to observe everyone's track record before fully committing, they can mathematically guarantee that they'll reach a near-perfect agreement, bounding the maximum possible distraction the liars can cause.
+
+
+### Discretized Distributed Optimization over Dynamic Digraphs
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
+- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- **Publication Date:** 2023-11-14
+- **URL:** https://arxiv.org/abs/2311.07939
+- **Original Problem:** Classic distributed multi-agent optimization assumes stationary connectivity and static weights (often requiring complex bi-stochastic matrices). When agents move or links fail, maintaining stochastic weights is computationally expensive and error-prone, causing the system to lose synchronization or fail to optimize.
+- **Core Assumptions:**
+  - The underlying dynamic network topology is weight-symmetric and balanced (WB condition).
+  - Strongly connected dynamic networks under switching topologies.
+  - The cost function is continuously differentiable and strongly convex.
+- **Mathematical Mechanism (核心更新公式):**
+  The discretized version of the continuous-time distributed optimization for agent $i$ at discrete time-step $k$ with step-size $\eta$ and tracking parameter $\alpha$ is:
+  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
+  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
+- **Convergence or Behavioral Bound:**
+  The distributed algorithm converges dynamically to the global optimizer as long as $\alpha$ satisfies an explicit upper bound based on the spectral norm and minimum eigenvalue of the unperturbed matrix, and the discrete time step $\eta$ satisfies $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$, ensuring all eigenvalues of the discrete system (other than the required ones at 1) are strictly inside the unit circle.
+- **Application Scope:**
+  Mobile multi-agent systems, volatile communication networks experiencing link removals (packet drops), distributed classification, and distributed support vector machines (D-SVM).
+- **Limitations:**
+  The theoretical guarantees strictly require the symmetric weight-balanced condition to hold even after link removals. It requires an appropriate choice of the step size $\eta$ and $\alpha$, as large values will move the eigenvalues outside the unit circle causing instability.
+- **Architecture Mapping:** DESIGN_CANDIDATE. The algorithm can conceptually support distributed learning over volatile multi-agent networks within the Collaboration System by removing the need for real-time stochastic weight redesigns.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy:**
+  Imagine a team of scouts mapping a large forest. They need to agree on a single global map, but they can only talk to nearby scouts. Sometimes their radios fail, or they move out of range (dynamic networks). Older methods required them to pause and carefully recalculate how much to trust everyone's voice every time a radio failed (bi-stochastic weights). This new method lets them just keep listening equally to those they can hear (weight-symmetric), ensuring they still all eventually draw the exact same optimal map, as long as they don't update their maps too fast (bounded step-size $\eta$).
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

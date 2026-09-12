@@ -2124,3 +2124,37 @@ TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Beginner Analogy:** 想象一群人试图就一个方向达成一致。有些人暗中试图误导这群人，但他们无法在不被抓到的情况下不断撒谎。如果诚实的人等待足够长的时间（$T_0$），在完全承诺之前观察每个人的记录，他们可以在数学上保证达成近乎完美的协议，从而限制说谎者可能造成的最大干扰。
+
+
+### 动态有向图上的离散分布式优化
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
+- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- **Publication Date:** 2023-11-14
+- **URL:** https://arxiv.org/abs/2311.07939
+- **Original Problem:** 经典的分布式多智能体优化假设连接是静态的且权重固定（通常需要复杂的双随机矩阵）。当智能体移动或链路故障时，维持随机权重计算成本高且容易出错，导致系统失去同步或无法优化。
+- **Core Assumptions:**
+  - 基础的动态网络拓扑是权重对称且平衡的（WB 条件）。
+  - 在切换拓扑下是强连通的动态网络。
+  - 代价函数是连续可微且强凸的。
+- **Mathematical Mechanism (核心更新公式):**
+  在离散时间步 $k$，步长为 $\eta$，跟踪参数为 $\alpha$ 时，智能体 $i$ 的连续时间分布式优化的离散化版本为：
+  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
+  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
+- **Convergence or Behavioral Bound:**
+  只要 $\alpha$ 满足基于未扰动矩阵的谱范数和最小特征值的明确上界，且离散时间步长 $\eta$ 满足 $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$（确保离散系统除必需的为 1 的特征值外，所有特征值严格位于单位圆内），该分布式算法将动态收敛至全局最优解。
+- **Application Scope:**
+  移动多智能体系统，经历链路移除（丢包）的易变通信网络，分布式分类以及分布式支持向量机（D-SVM）。
+- **Limitations:**
+  理论保证严格要求对称权重平衡条件即使在链路移除后依然成立。它需要适当选择步长 $\eta$ 和 $\alpha$，因为较大的值会将特征值移出单位圆外导致不稳定。
+- **Architecture Mapping:** DESIGN_CANDIDATE。该算法在理论上可以支持 Collaboration System 中易变多智能体网络上的分布式学习，因为它消除了实时重新设计随机权重的需求。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy:**
+  想象一队侦察兵在测绘一片大森林。他们需要就一张全局地图达成一致，但只能与附近的侦察兵交谈。有时他们的对讲机出现故障，或走出了通讯范围（动态网络）。旧方法要求他们每次对讲机故障时都要停下来，仔细重新计算每个人声音的信任度（双随机权重）。这种新方法让他们只需同等倾听能听到的人（权重对称），确保他们最终仍能画出完全相同的最佳地图，只要他们更新地图的速度不要太快（有界的步长 $\eta$）。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

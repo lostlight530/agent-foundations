@@ -415,4 +415,14 @@ Canonical rules:
 - Use: Proposed adaptive consensus dynamics against intermittent attacks via a windowed trust metric
 - Verification boundary: Bound guarantees assume identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions (d - c_j > 0), and connected legitimate graph.
 
-Current canonical registry range: `S01–S44`.
+
+## S45 — Discretized Distributed Optimization over Dynamic Digraphs
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2311.07939v2
+- Version date: 2023-11-14
+- Authors: Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- URL: https://arxiv.org/abs/2311.07939
+- Use: Proposed discretized distributed optimization over dynamic networks eliminating the need for real-time bi-stochastic weight redesigns under link removals.
+- Verification boundary: Guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced.
+
+Current canonical registry range: `S01–S45`.
