@@ -2331,3 +2331,50 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Discretized Distributed Optimization over Dynamic Digraphs
+- **System Container:** Collaboration System
+- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
+  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+  - **Publication Date:** 2023-11-14
+  - **URL:** https://arxiv.org/abs/2311.07939
+
+#### 1. The Original Problem
+The paper addresses the challenge of distributed optimization over time-varying directed graphs where link failures or switching topologies disrupt the bi-stochasticity of network weight matrices, a property required by most existing algorithms. It proposes a discretized model that eliminates the need for real-time weight redesign under link removals.
+
+#### 2. Mathematical Mechanism
+The core mechanism involves continuous-time and discretized networked dynamics with gradient tracking over weight-balanced (rather than bi-stochastic) digraphs.
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
+  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
+
+#### 3. Core Assumptions
+- **Cost Function:** The local cost functions $f_i$ are smooth, strictly convex, and have locally Lipschitz gradients.
+- **Network Connectivity:** The graph $\mc{G}$ is directed and strongly connected at every time $t$. The link weights are positive and strictly less than $1$.
+- **Weight-Balanced Design:** The weighted adjacency matrices $W$ and $A$ are weight-balanced rather than strictly bi-stochastic (i.e., row sums equal column sums, but not necessarily 1).
+
+#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+The framework guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced. The step-size $\alpha$ is bounded as:
+$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
+
+#### 5. Applicability & Scope
+The framework is applicable to dynamic networks experiencing link drops or switching topologies, guaranteeing convergence as long as the underlying graph remains strongly connected and weight-balanced at all times.
+
+#### 6. Theoretical Limitations
+The convergence guarantees rely strictly on the local cost functions being strictly convex and the network remaining strongly connected with weight-balanced matrices at every time instant. If these connectivity or balanced conditions fail momentarily, the bounds may not hold.
+
+#### 7. Architecture Mapping
+- **Mapping Status:** CONCEPTUAL_MAPPING
+- **Explanation:** The weight-balanced, gradient-tracking mechanism conceptually maps to decentralized learning and optimization protocols within a multi-agent system where agent connections drop dynamically. It informs the design of resilient update mechanisms that do not require perfect bi-stochastic synchronization after every topology change.
+
+#### 8. Evidence & Status
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 9. Beginner's Analogy
+Imagine a group of friends trying to agree on the exact center of a city by averaging their individual map locations. They can only communicate by calling a few specific friends (directed graph). Usually, if a phone line drops, everyone has to perfectly re-adjust how much they trust everyone else to ensure their averages don't drift (bi-stochastic redesign). This algorithm works differently: as long as everyone still receives as much information as they send out overall (weight-balanced), they can keep updating their estimates without needing a complete recalculation every time a call drops.

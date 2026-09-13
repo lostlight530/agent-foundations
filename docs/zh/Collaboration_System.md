@@ -2168,3 +2168,50 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Discretized Distributed Optimization over Dynamic Digraphs
+- **System Container:** Collaboration System
+- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
+  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+  - **Publication Date:** 2023-11-14
+  - **URL:** https://arxiv.org/abs/2311.07939
+
+#### 1. 原始问题
+该论文旨在解决时变有向图上的分布式优化问题，其中链路故障或切换拓扑会破坏网络权重矩阵的双随机性（这是大多数现有算法所需的属性）。它提出了一个离散化模型，消除了在链路移除下进行实时权重重新设计的需要。
+
+#### 2. 数学机制
+核心机制涉及在权重平衡（而非双随机）有向图上的连续时间和离散化网络动力学及梯度追踪。
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
+  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
+
+#### 3. 核心假设
+- **成本函数:** 局部成本函数 $f_i$ 是平滑的、严格凸的，且具有局部 Lipschitz 梯度。
+- **网络连通性:** 图 $\mc{G}$ 是有向的，且在每个时间 $t$ 都是强连通的。链路权重为正且严格小于 1。
+- **权重平衡设计:** 权重邻接矩阵 $W$ 和 $A$ 是权重平衡的，而非严格双随机的（即行和等于列和，但不一定等于 1）。
+
+#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+该框架在底层动态网络拓扑保持权重对称和平衡的假设下，保证了动态收敛优化。步长 $\alpha$ 的边界为：
+$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
+
+#### 5. 适用范围
+该框架适用于经历链路断开或拓扑切换的动态网络，只要底层图在所有时间保持强连通和权重平衡，即可保证收敛。
+
+#### 6. 理论局限
+收敛保证严格依赖于局部成本函数的严格凸性以及网络在每个时刻保持强连通和矩阵权重平衡。如果这些连通性或平衡条件瞬间失效，则边界可能不成立。
+
+#### 7. 架构映射
+- **映射状态:** CONCEPTUAL_MAPPING
+- **解释:** 权重平衡的梯度追踪机制在概念上映射为多智能体系统（其中智能体连接动态断开）内部的去中心化学习和优化协议。它为设计弹性更新机制提供了依据，该机制不需要在每次拓扑更改后进行完美的双随机同步。
+
+#### 8. 证据与状态
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 9. 初学者类比
+想象一群朋友试图通过平均他们个人的地图位置来商定城市的准确中心。他们只能通过给几个特定的朋友打电话来交流（有向图）。通常，如果电话线断开，每个人都必须完美地重新调整他们对其他人的信任程度，以确保他们的平均值不会偏移（双随机重新设计）。这个算法的工作方式不同：只要每个人接收到的信息量总体上等于发送出的信息量（权重平衡），他们就可以继续更新他们的估计，而不需要在每次电话断开时进行完整的重新计算。
