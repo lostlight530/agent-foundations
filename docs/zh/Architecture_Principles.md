@@ -62,6 +62,97 @@
 
 ## 2. 独创理论：梯度熵 (Gradient Entropy)
 
+### K-Agent 生成式 AI 治理的联合 Lyapunov 证书 (Joint Lyapunov Certificates for K-Agent Generative AI Governance)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
+- **URL:** http://arxiv.org/abs/2608.09087v1
+- **Publication Date:** 2026-08-10
+- **Selection Reason:** 解决了共享元学习耦合的多智能体系统中的突发系综级漂移问题，通过 Lyapunov 分析提供临界耦合阈值以确保联合稳定性。
+- **Original Problem:** 当多个智能体通过交互矩阵 $A$ 共享元学习耦合 $\gamma$ 时，单智能体的 Lyapunov 分析被证明是不充分的；单个智能体可能满足其声明的稳定性边界，而整个联合系统却处于突发的系综级漂移状态。
+- **Core Assumptions:**
+  - 智能体间的线性动态和同质性：每个智能体的损失严格为各向同性二次函数 $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$（所有智能体具有相同的自衰减率 $\alpha_{\mathrm{self}}$）。
+  - 在 $\W$ 中的耦合是线性的，伴有加性、状态无关的噪声，形成一个线性多元 Ornstein-Uhlenbeck 过程。
+- **Mathematical Mechanism:**
+  - **核心更新公式** (联合 Lyapunov 函数 $V(\W)$ 的无穷小生成元):
+    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
+  - **精确临界耦合阈值:**
+    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (其中 $\lambda_{\min}(A)$ 是 $A$ 的最负特征值)。
+- **Convergence or Behavioral Bound:** 当且仅当 $\gamma < \gamma^*(A)$ 时，系统保持均方稳定，且联合漂移算子是正稳定的。
+- **Applicability Scope:** 受限于由线性 SDE 动态支配、共享元学习参数（例如共享嵌入层、RLHF 奖励信号、联合微调目标）的有界多智能体学习环境。
+- **Limitations:** 精确的阈值和噪声底面公式严格依赖于线性、在原点最小化的各向同性二次损失以及智能体间的同质衰减。它们不能原封不动地适用于真实大型生成模型中发现的非凸、各向异性或智能体异质的损失情况；$\alpha_{\mathrm{self}}$ 必须在局部进行估计。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象舰队中的多艘船（AI智能体）独立航行，但被一根共享的绳子（耦合）拴在一起。如果每位船长只检查自己船的稳定性（单智能体验证），他们可能会忽略共享绳子上的张力正将整个舰队拖离航线（系综级漂移）。联合 Lyapunov 证书就像一个舰队级的张力传感器，它通过数学计算基于船只连接方式的最大安全绳索强度（$\gamma^*$），从而确保整个舰队保持稳定。
+
+
+## AF-ARCH-018: 分布式应急MPC中的Lyapunov式安全边界
+
+### System Container
+Architecture Principles
+
+### Frontier Source
+- **标题:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
+- **作者:** Max Studt, Georg Schildbach
+- **URL:** https://arxiv.org/abs/2608.30874
+- **日期:** 2026-08-31
+- **选择理由:** 在无需基于历史重构邻居状态的前提下，为非线性多智能体系统引入了状态依赖的回退机制，提供了递归可行性与Lyapunov式收敛保证。
+
+### 原始问题
+在基于纯状态信息、感知受限以及即插即用的多智能体控制中，现有的分布式应急模型预测控制（MPC）通常依赖过于保守的局部交互处理，或要求智能体精确重构邻居的几何特征。在有限感知距离下，这些要求往往无法实现。
+
+### 核心假设
+- 系统在纯状态信息和有限感知下运行。
+- 在智能体级别的回退区域（安全集）内，到达安全平衡点的应急机动始终可用。
+- 应急计划受到一个单调递减的局部标量界 $\hat J_i^{\mathrm c}(t)$ 的约束。
+
+
+
+### 收敛界与行为边界
+局部MPC强制约束 $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$。通过截尾平移论证（shifted-tail argument），确保了最优应急成本的单调递减，从而避免了碰撞并保证了递归可行性。
+
+### 适用范围
+适用于密集的分布式多智能体场景、去中心化避障以及严格缺乏精确邻居跟踪的即插即用环境。
+
+### 局限
+该公式并不能解决对抗性多智能体冲突；收敛保证依赖于预定义回退区域的存在以及成本界限约束的严格满足。
+
+### Agent 架构映射
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+
+
+### 未知约束下的上下文博弈中的多智能体学习 (Multi-Agent Learning in Contextual Games under Unknown Constraints)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** https://arxiv.org/abs/2310.14685
+- **Publication Date:** 2024-01-14
+- **Authors:** Anna M. Maddux, Maryam Kamgarpour
+- **Selection Reason:** 解决了在约束条件动态且先验未知的多智能体环境中确保安全性和合规性的挑战，提供了一种无遗憾、无违规的方法，这对健壮的智能体架构至关重要。
+- **Original Problem:** 参与重复上下文博弈的智能体必须选择属于可行集的行动，但可行集（约束）和奖励函数是先验未知的。
+- **Core Assumptions:** 未知的奖励和约束函数满足基于核的规律性（RKHS）假设。博弈具有有限或紧凑的上下文空间 $\mathcal{Z}$，并满足严格的可行性条件（斯莱特条件）。
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): c.z.AdaNormalGP 算法的受限遗憾界为：
+    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
+    累积约束违规的上限为：
+    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
+    其中 $\gamma_m^T$ 是第 $m$ 个约束函数的最大信息增益。
+- **Applicability Scope:** 多智能体强化学习（MARL）或去中心化系统，其中智能体必须在不事先了解环境动态的情况下，优化目标并遵守不断演变的、依赖于上下文的安全或资源约束。
+- **Limitations:** 保证依赖于 RKHS 假设和严格可行行动（松弛性）的存在。它需要能够估计最大信息增益，这在非常高维的空间中可能扩展性很差。
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一下，你在一个陌生的城市试图找到去上班的最佳路线（最大化奖励），但你不知道交通规则或哪些道路正在施工（未知约束）。你没有屡次被罚款，而是每天从类似的交通环境中学习。随着时间的推移，你的策略保证你能找到最佳路线，同时将总的交通违规次数增长控制得非常慢，以至于平均违规次数趋于零。
+
+
+
 ### 重尾噪声下的分布式随机优化 (Distributed Stochastic Optimization under Heavy-Tailed Noises)
 
 **System Container:** 架构原则 (Architecture Principles)
@@ -176,6 +267,41 @@ Deterministic Convergence Mechanism: 该研究将物理信息边界（Physics-In
 ###
 
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown & Pseudocode)
+
+### Mathematical Mechanism: 数学机制 (Lyapunov式约束核心公式)
+### 数学机制 (Lyapunov式约束核心公式)
+为了保证收敛，对应急成本进行约束。令 $\ell_i^{\mathrm c}$ 为非负的应急阶段成本，定义最优应急成本为：
+```latex
+J_i^{\mathrm c}(t)
+:=
+\sum_{k=0}^{N_c-1}
+\ell_i^{\mathrm c}
+\left(
+x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
+u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
+\right)
++
+V_i^{\mathrm c}
+\left(
+\bar x_i^{\mathrm c}(t),
+x_i^{\mathrm{ref}}
+\right)
+```
+系统递归维护标量界 $\hat J_i^{\mathrm c}(t)$。在应用了共享的首个输入后，该界限按以下方式平移更新：
+```latex
+\hat J_i^{\mathrm c}(t^+)
+:=
+J_i^{\mathrm c,*}(t)
+-
+\ell_i^{\mathrm c}
+\left(
+x_i(t)-\bar x_i^{\mathrm c,*}(t),
+u_i(t)-\bar u_i^{\mathrm c,*}(t)
+\right)
+```
+该更新机制迫使应急成本表现为离散时间Lyapunov函数。
+
+
 
 ### Weaved Integrations
 
@@ -470,6 +596,12 @@ def F_theta_pow(F_theta, N, x, u):
 所有的外部工具调用、庞大的多模态记忆提取和复杂的群体多智能体协同，表面上看起来是繁复的工程代码堆砌。但支撑这一切的底层根基，正是这些看似冰冷但绝对可靠的数学原则和**梯度熵理论**。这是我们区别于当今所有主流大模型黑盒调用架构的本质所在，也是构建真正通向 AGI（通用人工智能）的、绝对安全且确定性的智能体的唯一必由之路。
 
 ## 5. 宏观审计 (Macro Audit): “算力至上”的崩溃与梯度熵的终极防御
+
+### Analogy for 初学者类比
+### 初学者类比
+想象一群无人机在没有无线电通信的情况下穿过森林。如果无人机依赖记忆去推测其他无人机几秒前的位置，它最终会因为路径意外交叉而坠毁。相反，这个算法迫使每架无人机不断重新计算一个即时的“安全停车路径”（应急计划），并在数学上限制了停车所需的能量（成本）。只要这个“停车成本”不断下降，我们就可以从数学上保证整个机群能安全到达目的地而不会相互碰撞。
+
+
 ### Analogy for 免训练自适应停止机制 (TASR)
 给思考装上了“刹车片”。当发现最近两步想的东西一模一样，且置信度越过红线，直接强行拔电源停止思考，彻底根除了 AI 常见的死循环发散。
 
@@ -903,179 +1035,12 @@ $$
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - 编织了“重尾噪声下的分布式随机优化”理论与类比。
-  - 编织了“竞争网络中 Q-Learning 动态的稳定性边界”理论与类比。
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - 将重尾梯度裁剪和共识机制映射到去中心化架构原则。
-  - 将 Q-Learning 的稳定性边界（依赖局部邻居大小而非全局规模）映射到多智能体竞争的扩展限制。
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - 重尾噪声理论：COMPATIBLE（兼容）。该机制与协作系统对去中心化跟踪的关注一致，且不与记忆或工具执行假设冲突。
-  - Q-Learning 稳定性理论：COMPATIBLE（兼容）。限制局部竞争性交互支持去中心化拓扑原则，并未违反工具、记忆或一般协作假设。
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - 来源迁移记录 (Source migration record)
-  - 成功迁移了 2312.15847v3 (重尾噪声) 和 2312.11943v1 (Q-Learning 稳定性) 的 daily chunk。
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-## Weekly Document Cascade & Conflict Audit
-
-- 本周文档级联编织
-  - 已集成未知约束下的上下文博弈中的多智能体学习 (arXiv:2310.14685v2)。
-- 动态演进映射
-  - 增加了核依赖的次线性后悔界和约束违规界的理论映射。
-- 跨方向范式冲突审计
-  - COMPATIBLE (兼容)。未知约束建模与架构原则在开放环境中鲁棒执行的目标一致。它不与记忆、工具执行或协作假设冲突。
-- 来源迁移记录
-  - 已成功迁移 2310.14685v2 chunk。
-- 双语对齐状态
-  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-## AF-ARCH-017: 强单调镜像博弈中的指数收敛
-
-**前沿来源:** On the Variational Interpretation of Mirror Play in Monotone Games (2024)
-
-**原始问题:** 在强单调非合作博弈中，表征多智能体镜像博弈（Mirror Play, MP）学习动态的有限时间收敛效率与均衡路径。
-
-**数学机制:** 该理论利用基于Bregman散度作为距离函数的镜像微分博弈（MDG）框架。当博弈 $\mathcal{G}$ 关于 $D_{\phi}(\cdot, \cdot)$ （其中 $\phi$ 为聚合镜像映射）满足 $\mu$-强单调性时，闭环系统在 $T \to \infty$ 时呈现指数级稳定。
-
-**核心更新公式:**
-强单调博弈下的指数级稳定：
-$V (x(t)) \leq e^{ - \mu t} V(x_0)$
-
-**核心假设:**
-- 多智能体博弈关于聚合镜像映射具有 $\mu$-强单调性。
-- 使用的镜像映射为勒让德函数（在其定义域内满足纯正、闭合、凸且可微）。
-- 策略空间和梯度满足Lipschitz平滑性和有界变化条件。
-
-**初学者类比:**
-想象多家快递公司（智能体）在不共享完整计划的情况下（非合作博弈）试图优化各自的路线。如果交通状况具有“竞争激烈但稳定”的特性（强单调性），且每家公司都使用一致的方式来衡量路线成本（镜像映射），它们将迅速确定出最佳路线（指数收敛）。如果交通规则发生剧烈变化，这种快速收敛就不再有理论保证。
-
-**State / 状态:**
-- **Evidence / 证据:** PAPER_ONLY
-- **Mapping / 映射:** DESIGN_CANDIDATE
-- **Implementation / 实现:** EVIDENCE_INSUFFICIENT
-- **Validation / 验证:** NOT_TESTED
-- **Sources / 来源:** S32
-
-**Scope and limits / 范围与局限:**
-指数收敛率严格要求底层博弈相对于特定的聚合镜像映射是强单调的。它在理论上不能无条件推广到非单调的多智能体环境、任意博弈拓扑结构，或超出了论文所分析的方差范围的具有不可预测随机反馈的环境。
-
-
-### K-Agent 生成式 AI 治理的联合 Lyapunov 证书 (Joint Lyapunov Certificates for K-Agent Generative AI Governance)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
-- **URL:** http://arxiv.org/abs/2608.09087v1
-- **Publication Date:** 2026-08-10
-- **Selection Reason:** 解决了共享元学习耦合的多智能体系统中的突发系综级漂移问题，通过 Lyapunov 分析提供临界耦合阈值以确保联合稳定性。
-- **Original Problem:** 当多个智能体通过交互矩阵 $A$ 共享元学习耦合 $\gamma$ 时，单智能体的 Lyapunov 分析被证明是不充分的；单个智能体可能满足其声明的稳定性边界，而整个联合系统却处于突发的系综级漂移状态。
-- **Core Assumptions:**
-  - 智能体间的线性动态和同质性：每个智能体的损失严格为各向同性二次函数 $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$（所有智能体具有相同的自衰减率 $\alpha_{\mathrm{self}}$）。
-  - 在 $\W$ 中的耦合是线性的，伴有加性、状态无关的噪声，形成一个线性多元 Ornstein-Uhlenbeck 过程。
-- **Mathematical Mechanism:**
-  - **核心更新公式** (联合 Lyapunov 函数 $V(\W)$ 的无穷小生成元):
-    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
-  - **精确临界耦合阈值:**
-    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (其中 $\lambda_{\min}(A)$ 是 $A$ 的最负特征值)。
-- **Convergence or Behavioral Bound:** 当且仅当 $\gamma < \gamma^*(A)$ 时，系统保持均方稳定，且联合漂移算子是正稳定的。
-- **Applicability Scope:** 受限于由线性 SDE 动态支配、共享元学习参数（例如共享嵌入层、RLHF 奖励信号、联合微调目标）的有界多智能体学习环境。
-- **Limitations:** 精确的阈值和噪声底面公式严格依赖于线性、在原点最小化的各向同性二次损失以及智能体间的同质衰减。它们不能原封不动地适用于真实大型生成模型中发现的非凸、各向异性或智能体异质的损失情况；$\alpha_{\mathrm{self}}$ 必须在局部进行估计。
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象舰队中的多艘船（AI智能体）独立航行，但被一根共享的绳子（耦合）拴在一起。如果每位船长只检查自己船的稳定性（单智能体验证），他们可能会忽略共享绳子上的张力正将整个舰队拖离航线（系综级漂移）。联合 Lyapunov 证书就像一个舰队级的张力传感器，它通过数学计算基于船只连接方式的最大安全绳索强度（$\gamma^*$），从而确保整个舰队保持稳定。
-
-
-## AF-ARCH-018: 分布式应急MPC中的Lyapunov式安全边界
-
-### System Container
-Architecture Principles
-
-### Frontier Source
-- **标题:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
-- **作者:** Max Studt, Georg Schildbach
-- **URL:** https://arxiv.org/abs/2608.30874
-- **日期:** 2026-08-31
-- **选择理由:** 在无需基于历史重构邻居状态的前提下，为非线性多智能体系统引入了状态依赖的回退机制，提供了递归可行性与Lyapunov式收敛保证。
-
-### 原始问题
-在基于纯状态信息、感知受限以及即插即用的多智能体控制中，现有的分布式应急模型预测控制（MPC）通常依赖过于保守的局部交互处理，或要求智能体精确重构邻居的几何特征。在有限感知距离下，这些要求往往无法实现。
-
-### 核心假设
-- 系统在纯状态信息和有限感知下运行。
-- 在智能体级别的回退区域（安全集）内，到达安全平衡点的应急机动始终可用。
-- 应急计划受到一个单调递减的局部标量界 $\hat J_i^{\mathrm c}(t)$ 的约束。
-
-### 数学机制 (Lyapunov式约束核心公式)
-为了保证收敛，对应急成本进行约束。令 $\ell_i^{\mathrm c}$ 为非负的应急阶段成本，定义最优应急成本为：
-```latex
-J_i^{\mathrm c}(t)
-:=
-\sum_{k=0}^{N_c-1}
-\ell_i^{\mathrm c}
-\left(
-x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
-u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
-\right)
-+
-V_i^{\mathrm c}
-\left(
-\bar x_i^{\mathrm c}(t),
-x_i^{\mathrm{ref}}
-\right)
-```
-系统递归维护标量界 $\hat J_i^{\mathrm c}(t)$。在应用了共享的首个输入后，该界限按以下方式平移更新：
-```latex
-\hat J_i^{\mathrm c}(t^+)
-:=
-J_i^{\mathrm c,*}(t)
--
-\ell_i^{\mathrm c}
-\left(
-x_i(t)-\bar x_i^{\mathrm c,*}(t),
-u_i(t)-\bar u_i^{\mathrm c,*}(t)
-\right)
-```
-该更新机制迫使应急成本表现为离散时间Lyapunov函数。
-
-### 收敛界与行为边界
-局部MPC强制约束 $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$。通过截尾平移论证（shifted-tail argument），确保了最优应急成本的单调递减，从而避免了碰撞并保证了递归可行性。
-
-### 适用范围
-适用于密集的分布式多智能体场景、去中心化避障以及严格缺乏精确邻居跟踪的即插即用环境。
-
-### 局限
-该公式并不能解决对抗性多智能体冲突；收敛保证依赖于预定义回退区域的存在以及成本界限约束的严格满足。
-
-### Agent 架构映射
-- **Paper Evidence Status:** PAPER_ONLY
-- **Architecture Mapping Status:** DESIGN_CANDIDATE
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-### 初学者类比
-想象一群无人机在没有无线电通信的情况下穿过森林。如果无人机依赖记忆去推测其他无人机几秒前的位置，它最终会因为路径意外交叉而坠毁。相反，这个算法迫使每架无人机不断重新计算一个即时的“安全停车路径”（应急计划），并在数学上限制了停车所需的能量（成本）。只要这个“停车成本”不断下降，我们就可以从数学上保证整个机群能安全到达目的地而不会相互碰撞。
-
-### 未知约束下的上下文博弈中的多智能体学习 (Multi-Agent Learning in Contextual Games under Unknown Constraints)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
-- **URL:** https://arxiv.org/abs/2310.14685
-- **Publication Date:** 2024-01-14
-- **Authors:** Anna M. Maddux, Maryam Kamgarpour
-- **Selection Reason:** 解决了在约束条件动态且先验未知的多智能体环境中确保安全性和合规性的挑战，提供了一种无遗憾、无违规的方法，这对健壮的智能体架构至关重要。
-- **Original Problem:** 参与重复上下文博弈的智能体必须选择属于可行集的行动，但可行集（约束）和奖励函数是先验未知的。
-- **Core Assumptions:** 未知的奖励和约束函数满足基于核的规律性（RKHS）假设。博弈具有有限或紧凑的上下文空间 $\mathcal{Z}$，并满足严格的可行性条件（斯莱特条件）。
-- **Mathematical Mechanism:**
-  - **Regret Bound** (收敛界): c.z.AdaNormalGP 算法的受限遗憾界为：
-    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
-    累积约束违规的上限为：
-    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
-    其中 $\gamma_m^T$ 是第 $m$ 个约束函数的最大信息增益。
-- **Applicability Scope:** 多智能体强化学习（MARL）或去中心化系统，其中智能体必须在不事先了解环境动态的情况下，优化目标并遵守不断演变的、依赖于上下文的安全或资源约束。
-- **Limitations:** 保证依赖于 RKHS 假设和严格可行行动（松弛性）的存在。它需要能够估计最大信息增益，这在非常高维的空间中可能扩展性很差。
-- **Paper Evidence Status:** PAPER_ONLY
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象一下，你在一个陌生的城市试图找到去上班的最佳路线（最大化奖励），但你不知道交通规则或哪些道路正在施工（未知约束）。你没有屡次被罚款，而是每天从类似的交通环境中学习。随着时间的推移，你的策略保证你能找到最佳路线，同时将总的交通违规次数增长控制得非常慢，以至于平均违规次数趋于零。

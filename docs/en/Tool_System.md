@@ -22,7 +22,82 @@ Traditional LLM tool use relies heavily on "In-context Learning" and "Greedy Dec
 
 ---
 
-## 2. Core Mechanisms: From Trial & Error to Absolute Control
+## 2. Core Mechanisms
+
+### Optimal Regret Bounds for Collaborative Learning in Bandits
+
+- **System Container:** Tool System
+- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
+- **URL:** http://arxiv.org/abs/2312.09674v1
+- **Publication Date:** 2023-12-15
+- **Selection Reason:** Addresses the challenge of optimal collaborative regret minimization in general multi-agent multi-armed bandit scenarios using bounded communication, yielding an $\mathcal{O}(\log(T))$ bound via the CExp$^2$ algorithm.
+- **Original Problem:** In collaborative multi-agent multi-armed bandit settings where actual rewards are mixed from local observations of multiple agents, minimizing regret requires effective communication. Without communication, trivial linear regret is inevitable. While near-optimal sample complexities for best arm identification are known, the question of optimal collaborative regret bounds requiring few expected communication rounds remained open.
+- **Core Assumptions:** The system consists of $M$ agents interacting with $K$ arms, communicating through a central controller. An agent's observed local reward is distinct from their actual mixed reward (a weighted average of local rewards over all agents governed by a weight matrix $W \in [0,1]^{M \times M}$). The lower bound relies on normally distributed rewards and is constrained by mixed gaps $\Delta'_{k,m}$.
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): The regret performance of the CExp$^2$ algorithm satisfies for all $T \geq T_0$:
+    $$ \mathcal{R}(T) =\mathcal{O}\left(c^*\log(T) +\frac{(\Delta'_{\max})^2}{\Delta'_{\min}}(\log\log(T))^4\right) $$
+    where $c^*$ is the complexity term representing the value of regret divided by $\log(T)$ for the optimum allocation of the arm plays, guaranteeing sufficiently small confidence intervals for all mean mixed rewards.
+- **Applicability Scope:** Bounded multi-agent learning environments, specifically generalized federated learning or distributed tool-execution architectures where local agent feedback must be aggregated via a central controller into a unified behavioral policy with minimal communication overhead.
+- **Limitations:** The bound relies on the assumptions of the specific collaborative model including normally distributed rewards and a static weight matrix for mixed rewards. The performance requires the oracle $\mathcal{P}(\Delta)$ for resource allocation and the exact knowledge/approximation of gap bounds ($\Delta'_{\min}$, $\Delta'_{\max}$).
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of researchers (agents) testing different tools (arms) across different labs. If they don't talk, they might all waste time testing bad tools (linear regret). The optimal collaborative algorithm (CExp$^2$) ensures that by communicating just a few times through a central server, they can learn the best overall tool together. Their combined wasted effort (regret) only grows very slowly (logarithmically) over time compared to if they magically knew the best tool from the start.
+
+### Efficient Action Space Navigation with A* Search (ToolChain*)
+
+- **System Container:** Tool System
+- **Frontier Source:** ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search (arXiv:2310.13227v1)
+- **URL:** https://arxiv.org/abs/2310.13227
+- **Publication Date:** 2023-10-20
+- **Selection Reason:** Addresses the combinatorial explosion of the action space during multi-step tool use, offering a theoretically grounded A* search method with dynamically bounded costs to efficiently navigate and prune invalid API sequences.
+- **Original Problem:** LLM-based agents generating solution plans step-by-step through API function calls face an expansive action space. Existing methods often struggle with either unidirectional exploration trapping them in local optima or exhaustive traversal leading to extreme inefficiency.
+- **Core Assumptions:** Action space can be formulated as a decision tree where nodes are API function calls. The total cost to a target can be effectively bounded by combining a task-specific heuristic (derived from long-term memory) and an imagination score (derived from the LLM's own self-evaluation of remaining steps).
+- **Mathematical Mechanism:**
+  - **Future Cost Function** (数学更新规则): The future cost $h(n)$ for a node $n$ integrates the task-specific heuristic function $h_{t,1}(n)$ and the Imagination Score by LLM $h_{t,2}(n)$ via a geometric mean:
+    $$h(n)=(1-h_{t,1}(n))^\beta\cdot(1-h_{t,2}(n))^{1-\beta}$$
+    where $\beta$ is the weight for future cost. This effectively prunes high-cost branches that may involve incorrect actions, identifying the lowest-cost valid path.
+- **Convergence / Boundary:** The cumulative cost bounds the expansion of the search tree; search branches exceeding the lowest validated path cost are mathematically pruned, ensuring efficient navigation without infinite divergence in the API call space.
+- **Applicability Scope:** Complex sequential decision-making environments requiring multi-step API function calls where exhaustive search is computationally infeasible and purely greedy search fails.
+- **Limitations:** The task-specific heuristic heavily depends on the coverage and quality of the reference data in the long-term memory. The imagination score relies on the LLM's capability to accurately estimate path viability, which can still exhibit overconfidence without sufficient calibration.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine you're looking for the exit in a massive maze (the tool action space). Instead of checking every single path (too slow) or just blindly running forward (getting stuck), you use a smart compass. The compass calculates two things: how close a path looks based on past maps you've studied (heuristic), and your gut feeling of how many steps are left (imagination). By multiplying these two hints together, you can quickly ignore the dead ends and find the shortest path out.
+
+### Dynamic Action Space Pruning via A* Search
+
+- **System Container:** Tool System
+- **Frontier Source:** S43 (arXiv:2310.13227v1, *ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search*)
+- **Original Problem Formulation:** In tool-augmented large language models, the multitude of potential API function calls at each step expands the action space exponentially. Unidirectional exploration can trap the agent in locally optimal solutions or faulty loops, while exhaustive traversal is computationally inefficient.
+- **Core Assumptions:**
+  - The API action space can be structured as a formal decision tree.
+  - A task-specific cost function oracle $f(n) = g(n) + h(n)$ can be defined to guide the search, where $h(n)$ estimates the cost to the goal using long-term memory heuristics and LLM "imagination".
+  - The LLM can generate potential i.i.d. next-step actions given the current state, API definitions, and demonstration examples.
+- **Mathematical Mechanism:**
+  - **Algorithm Pseudocode:** ToolChain* Navigation
+    1. Initialize decision tree $\mathcal{T}$ with root node $s_0$.
+    2. While target not reached (or up to $T$ steps):
+       - Select node $n_{next} = \arg\min_{n \in \mathcal{F}(\mathcal{T})} f(n)$ from frontier $\mathcal{F}$.
+       - Expand $n_{next}$ using LLM $\rho$ to generate candidate actions $\{a^{(i)}\}_{i=1}^k$.
+       - Append new state nodes to $\mathcal{T}$.
+       - Update cost function $f$ for new frontier nodes.
+  - **Mathematical Update Rule:**
+    - Future cost $h(n)$ integrates a heuristic $h_{t,1}(n)$ based on average relative position of lexically closest actions in long-term memory, and an imagination score $h_{t,2}(n)$ derived from the ratio of ancestors in an LLM-envisioned path:
+    $$h(n) = (1 - h_{t,1}(n))^\beta \cdot (1 - h_{t,2}(n))^{1-\beta}$$
+- **Convergence / Bound Behavior:** By leveraging the A* formulation, the algorithm prunes high-cost branches. If the heuristic functions are admissible, it structurally bounds the required exploration and helps identify the lowest-cost valid path, reducing the search time compared to exhaustive breadth-first traversal.
+- **Applicable Scope:** Multi-step API function call environments and sequential decision-making tasks where actions can be modeled hierarchically and historical memory is available to form heuristics.
+- **Theoretical Limitations:** The guarantees depend strictly on the quality and admissibility of the task-specific heuristic functions. If long-term memory lacks relevant coverage or the LLM's imagination score is systematically flawed, the search may degrade to greedy selection or BFS, failing to find optimal solutions efficiently.
+- **Architecture Mapping Candidate:** CONCEPTUAL_MAPPING. The A* API search formulation offers a conceptual design for implementing bounded tool exploration within the system's external module interaction layer.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginners' Analogy:** Imagine you are navigating a massive maze (the action space of API calls). Instead of blindly walking down every corridor (exhaustive search) or just guessing one path and getting stuck (unidirectional exploration), you use a compass (heuristic from memory) and a map of where you *think* the exit is (LLM imagination) to calculate the shortest path (A* search) at every intersection, quickly pruning the wrong ways.
+- **Evidence Provenance:**
+  - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+: From Trial & Error to Absolute Control
 ### Causal Minimal Tool Filtering (CMTF) & Goal Inference
 arXiv:2606.16813v1 "GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents".
 Strictly locks posterior bounds with $g^{\star}=\arg\max_{g_{i}}p_{i}$ and $V_{t}=F(s_{t},g,T)$. Physically filters all divergent probabilistic paths.
@@ -273,82 +348,18 @@ Imagine a race car driver (the agent) zooming around a track filled with unexpec
 Imagine a team of specialists building a complex machine. Instead of one person trying to build everything at once from memory (which causes overwhelming errors), the task is broken down. One expert designs the step-by-step blueprint (Decomposer), another fetches only the exact parts needed (Selector), and an inspector fixes any immediate flaws (Refiner).
 
 
-🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
-📂 动态演进映射: Integrated all accumulated daily chunks into core theories. Completed for Tool_System.md (MAC-SQL). Added MAC-SQL collaborative tool routing theory, mathematical mechanism, and analogy.
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): COMPATIBLE. The MAC-SQL decomposition aligns with the existing constraints, as it bounds the error space by breaking down monolithic generation into smaller, verifiable sub-tasks. It does not conflict with Memory, Architecture, or Collaboration assumptions. All integrated theories strictly align with the deterministic convergence framework and bounding principles, supporting resilience against single points of failure (SPOF) and structural divergence without relying on central coordination. Bilingual alignment verified.
-来源迁移记录: Successfully migrated MAC-SQL Daily Research Chunk.
-双语对齐状态: SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
+🔗 [
 
-### Optimal Regret Bounds for Collaborative Learning in Bandits
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
 
-- **System Container:** Tool System
-- **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
-- **URL:** http://arxiv.org/abs/2312.09674v1
-- **Publication Date:** 2023-12-15
-- **Selection Reason:** Addresses the challenge of optimal collaborative regret minimization in general multi-agent multi-armed bandit scenarios using bounded communication, yielding an $\mathcal{O}(\log(T))$ bound via the CExp$^2$ algorithm.
-- **Original Problem:** In collaborative multi-agent multi-armed bandit settings where actual rewards are mixed from local observations of multiple agents, minimizing regret requires effective communication. Without communication, trivial linear regret is inevitable. While near-optimal sample complexities for best arm identification are known, the question of optimal collaborative regret bounds requiring few expected communication rounds remained open.
-- **Core Assumptions:** The system consists of $M$ agents interacting with $K$ arms, communicating through a central controller. An agent's observed local reward is distinct from their actual mixed reward (a weighted average of local rewards over all agents governed by a weight matrix $W \in [0,1]^{M \times M}$). The lower bound relies on normally distributed rewards and is constrained by mixed gaps $\Delta'_{k,m}$.
-- **Mathematical Mechanism:**
-  - **Regret Bound** (收敛界): The regret performance of the CExp$^2$ algorithm satisfies for all $T \geq T_0$:
-    $$ \mathcal{R}(T) =\mathcal{O}\left(c^*\log(T) +\frac{(\Delta'_{\max})^2}{\Delta'_{\min}}(\log\log(T))^4\right) $$
-    where $c^*$ is the complexity term representing the value of regret divided by $\log(T)$ for the optimum allocation of the arm plays, guaranteeing sufficiently small confidence intervals for all mean mixed rewards.
-- **Applicability Scope:** Bounded multi-agent learning environments, specifically generalized federated learning or distributed tool-execution architectures where local agent feedback must be aggregated via a central controller into a unified behavioral policy with minimal communication overhead.
-- **Limitations:** The bound relies on the assumptions of the specific collaborative model including normally distributed rewards and a static weight matrix for mixed rewards. The performance requires the oracle $\mathcal{P}(\Delta)$ for resource allocation and the exact knowledge/approximation of gap bounds ($\Delta'_{\min}$, $\Delta'_{\max}$).
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a group of researchers (agents) testing different tools (arms) across different labs. If they don't talk, they might all waste time testing bad tools (linear regret). The optimal collaborative algorithm (CExp$^2$) ensures that by communicating just a few times through a central server, they can learn the best overall tool together. Their combined wasted effort (regret) only grows very slowly (logarithmically) over time compared to if they magically knew the best tool from the start.
-
-### Efficient Action Space Navigation with A* Search (ToolChain*)
-
-- **System Container:** Tool System
-- **Frontier Source:** ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search (arXiv:2310.13227v1)
-- **URL:** https://arxiv.org/abs/2310.13227
-- **Publication Date:** 2023-10-20
-- **Selection Reason:** Addresses the combinatorial explosion of the action space during multi-step tool use, offering a theoretically grounded A* search method with dynamically bounded costs to efficiently navigate and prune invalid API sequences.
-- **Original Problem:** LLM-based agents generating solution plans step-by-step through API function calls face an expansive action space. Existing methods often struggle with either unidirectional exploration trapping them in local optima or exhaustive traversal leading to extreme inefficiency.
-- **Core Assumptions:** Action space can be formulated as a decision tree where nodes are API function calls. The total cost to a target can be effectively bounded by combining a task-specific heuristic (derived from long-term memory) and an imagination score (derived from the LLM's own self-evaluation of remaining steps).
-- **Mathematical Mechanism:**
-  - **Future Cost Function** (数学更新规则): The future cost $h(n)$ for a node $n$ integrates the task-specific heuristic function $h_{t,1}(n)$ and the Imagination Score by LLM $h_{t,2}(n)$ via a geometric mean:
-    $$h(n)=(1-h_{t,1}(n))^\beta\cdot(1-h_{t,2}(n))^{1-\beta}$$
-    where $\beta$ is the weight for future cost. This effectively prunes high-cost branches that may involve incorrect actions, identifying the lowest-cost valid path.
-- **Convergence / Boundary:** The cumulative cost bounds the expansion of the search tree; search branches exceeding the lowest validated path cost are mathematically pruned, ensuring efficient navigation without infinite divergence in the API call space.
-- **Applicability Scope:** Complex sequential decision-making environments requiring multi-step API function calls where exhaustive search is computationally infeasible and purely greedy search fails.
-- **Limitations:** The task-specific heuristic heavily depends on the coverage and quality of the reference data in the long-term memory. The imagination score relies on the LLM's capability to accurately estimate path viability, which can still exhibit overconfidence without sufficient calibration.
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** DESIGN_CANDIDATE
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine you're looking for the exit in a massive maze (the tool action space). Instead of checking every single path (too slow) or just blindly running forward (getting stuck), you use a smart compass. The compass calculates two things: how close a path looks based on past maps you've studied (heuristic), and your gut feeling of how many steps are left (imagination). By multiplying these two hints together, you can quickly ignore the dead ends and find the shortest path out.
-
-
-### Dynamic Action Space Pruning via A* Search
-
-- **System Container:** Tool System
-- **Frontier Source:** S43 (arXiv:2310.13227v1, *ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search*)
-- **Original Problem Formulation:** In tool-augmented large language models, the multitude of potential API function calls at each step expands the action space exponentially. Unidirectional exploration can trap the agent in locally optimal solutions or faulty loops, while exhaustive traversal is computationally inefficient.
-- **Core Assumptions:**
-  - The API action space can be structured as a formal decision tree.
-  - A task-specific cost function oracle $f(n) = g(n) + h(n)$ can be defined to guide the search, where $h(n)$ estimates the cost to the goal using long-term memory heuristics and LLM "imagination".
-  - The LLM can generate potential i.i.d. next-step actions given the current state, API definitions, and demonstration examples.
-- **Mathematical Mechanism:**
-  - **Algorithm Pseudocode:** ToolChain* Navigation
-    1. Initialize decision tree $\mathcal{T}$ with root node $s_0$.
-    2. While target not reached (or up to $T$ steps):
-       - Select node $n_{next} = \arg\min_{n \in \mathcal{F}(\mathcal{T})} f(n)$ from frontier $\mathcal{F}$.
-       - Expand $n_{next}$ using LLM $\rho$ to generate candidate actions $\{a^{(i)}\}_{i=1}^k$.
-       - Append new state nodes to $\mathcal{T}$.
-       - Update cost function $f$ for new frontier nodes.
-  - **Mathematical Update Rule:**
-    - Future cost $h(n)$ integrates a heuristic $h_{t,1}(n)$ based on average relative position of lexically closest actions in long-term memory, and an imagination score $h_{t,2}(n)$ derived from the ratio of ancestors in an LLM-envisioned path:
-    $$h(n) = (1 - h_{t,1}(n))^\beta \cdot (1 - h_{t,2}(n))^{1-\beta}$$
-- **Convergence / Bound Behavior:** By leveraging the A* formulation, the algorithm prunes high-cost branches. If the heuristic functions are admissible, it structurally bounds the required exploration and helps identify the lowest-cost valid path, reducing the search time compared to exhaustive breadth-first traversal.
-- **Applicable Scope:** Multi-step API function call environments and sequential decision-making tasks where actions can be modeled hierarchically and historical memory is available to form heuristics.
-- **Theoretical Limitations:** The guarantees depend strictly on the quality and admissibility of the task-specific heuristic functions. If long-term memory lacks relevant coverage or the LLM's imagination score is systematically flawed, the search may degrade to greedy selection or BFS, failing to find optimal solutions efficiently.
-- **Architecture Mapping Candidate:** CONCEPTUAL_MAPPING. The A* API search formulation offers a conceptual design for implementing bounded tool exploration within the system's external module interaction layer.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginners' Analogy:** Imagine you are navigating a massive maze (the action space of API calls). Instead of blindly walking down every corridor (exhaustive search) or just guessing one path and getting stuck (unidirectional exploration), you use a compass (heuristic from memory) and a map of where you *think* the exit is (LLM imagination) to calculate the shortest path (A* search) at every intersection, quickly pruning the wrong ways.
-- **Evidence Provenance:**
-  - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- 来源迁移记录 (Source migration record)
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS

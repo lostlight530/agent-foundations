@@ -64,6 +64,97 @@ Traditionally, the NTK (Neural Tangent Kernel) is considered the deterministic e
 
 ## 2. Original Theory: Gradient Entropy
 
+### Joint Lyapunov Certificates for K-Agent Generative AI Governance
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
+- **URL:** http://arxiv.org/abs/2608.09087v1
+- **Publication Date:** 2026-08-10
+- **Selection Reason:** Addresses emergent ensemble-level drift in multi-agent systems sharing a meta-learning coupling, providing the critical coupling threshold via Lyapunov analysis to ensure joint stability.
+- **Original Problem:** Per-agent Lyapunov analysis is provably insufficient when multiple agents share a meta-learning coupling $\gamma$ through an interaction matrix $A$; individual agents can satisfy their declared stability bounds while the joint system is in a regime of emergent ensemble-level drift.
+- **Core Assumptions:**
+  - Linear dynamics and homogeneity across agents: each agent's loss is strictly an isotropic quadratic $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$ (with the same self-decay rate $\alpha_{\mathrm{self}}$ for all agents).
+  - The coupling is linear in $\W$ with additive, state-independent noise, forming a linear multivariate Ornstein-Uhlenbeck process.
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Infinitesimal Generator of joint Lyapunov function $V(\W)$):
+    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
+  - **Exact Critical Coupling Threshold:**
+    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (where $\lambda_{\min}(A)$ is the most negative eigenvalue of $A$).
+- **Convergence or Behavioral Bound:** The system remains mean-square stable and the joint drift operator is positive-stable if and only if $\gamma < \gamma^*(A)$.
+- **Applicability Scope:** Bounded multi-agent learning environments sharing a meta-learning parameter (e.g., shared embedding layer, RLHF reward signal, joint fine-tuning objective) governed by the linear SDE dynamics.
+- **Limitations:** The exact threshold and noise floor formulas rely strictly on linearity, isotropic quadratic losses minimized at the origin, and homogeneous decay across agents. They do not survive unchanged for non-convex, anisotropic, or agent-heterogeneous loss landscapes found in real large generative models; $\alpha_{\mathrm{self}}$ must be locally estimated.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine multiple ships (AI agents) in a fleet navigating independently but tethered together by a shared rope (the coupling). If each captain only checks their own ship's stability (single-agent validation), they might miss that the tension in the shared rope is dragging the entire fleet off course (ensemble-level drift). The Joint Lyapunov Certificate is like a fleet-wide tension sensor that mathematically calculates the maximum safe rope strength ($\gamma^*$) based on how the ships are connected, ensuring the whole fleet remains stable.
+
+
+## AF-ARCH-018: Lyapunov-Type Safety in Decentralized Contingency MPC
+
+### System Container
+Architecture Principles
+
+### Frontier Source
+- **Title:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
+- **Authors:** Max Studt, Georg Schildbach
+- **URL:** https://arxiv.org/abs/2608.30874
+- **Date:** 2026-08-31
+- **Selection Reason:** Introduces a state-dependent fallback mechanism providing recursive feasibility and Lyapunov-type convergence for nonlinear multi-agent systems without requiring history-dependent neighbor reconstructions.
+
+### Original Problem
+In multi-agent control under state-only information patterns with limited sensing and plug-and-play operations, existing decentralized contingency Model Predictive Control (MPC) often relies on conservative local interaction handling or requires agents to perfectly reconstruct neighbor geometry, which fundamentally breaks under finite sensing ranges.
+
+### Core Assumptions
+- The system operates under a state-only information pattern with limited sensing.
+- The contingency maneuver to a safe equilibrium must always be available inside agent-wise fallback regions (safe sets).
+- The contingency plan is constrained by a monotonically decreasing local scalar bound $\hat J_i^{\mathrm c}(t)$.
+
+
+
+### Bounds and Convergence
+The local MPC enforces $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$. The shifted-tail argument yields a monotone decrease of the optimal contingency cost, preventing collision and ensuring recursive feasibility.
+
+### Application Scope
+Applicable to dense multi-agent settings, decentralized obstacle avoidance, and plug-and-play environments where exact neighbor tracking is strictly unavailable.
+
+### Limitations
+The formulation does not universally solve adversarial multi-agent conflicts; convergence guarantees depend on the existence of the predefined fallback regions and the strict satisfaction of the cost bound constraints.
+
+### Architecture Mapping
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+
+
+### Multi-Agent Learning in Contextual Games under Unknown Constraints
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
+- **URL:** https://arxiv.org/abs/2310.14685
+- **Publication Date:** 2024-01-14
+- **Authors:** Anna M. Maddux, Maryam Kamgarpour
+- **Selection Reason:** Addresses the challenge of ensuring safety and compliance in multi-agent environments where constraints are dynamic and unknown a priori, providing a no-regret, no-violation approach essential for robust agent architectures.
+- **Original Problem:** Agents playing a repeated contextual game must choose actions belonging to feasible sets, but the feasible sets (constraints) and reward functions are a priori unknown.
+- **Core Assumptions:** The unknown reward and constraint functions satisfy kernel-based regularity (RKHS) assumptions. The game has a finite or compact context space $\mathcal{Z}$, and strict feasibility conditions (Slater's condition) hold.
+- **Mathematical Mechanism:**
+  - **Regret Bound** (收敛界): The constrained regret for the c.z.AdaNormalGP algorithm is bounded by:
+    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
+    and the cumulative constraint violations are upper bounded by:
+    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
+    where $\gamma_m^T$ is the maximum information gain for the $m$-th constraint function.
+- **Applicability Scope:** Multi-agent reinforcement learning (MARL) or decentralized systems where agents must optimize objectives subject to evolving, context-dependent safety or resource constraints without prior knowledge of the environment dynamics.
+- **Limitations:** The guarantees depend on the RKHS assumptions and the existence of strictly feasible actions (slackness). It requires the ability to estimate the maximum information gain, which can scale poorly in very high-dimensional spaces.
+- **Paper Evidence Status:** PAPER_ONLY
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine you're in a new city trying to find the best route to work (maximizing reward), but you don't know the traffic rules or which roads are under construction (unknown constraints). Instead of getting fined repeatedly, you learn from similar traffic contexts every day. Over time, your strategy guarantees you find the best route while keeping your total traffic violations growing so slowly that, on average, they approach zero.
+
+
+
 ### Distributed Stochastic Optimization under Heavy-Tailed Noises
 
 **System Container:** Architecture Principles
@@ -177,6 +268,41 @@ Deterministic Convergence Mechanism: The paper applies Physics-Informed bounds i
 ###
 
 ## 3. Source Code Breakdown & Pseudocode
+
+### Mathematical Mechanism: 数学机制 (Lyapunov-Type Constraint)
+### 数学机制 (Lyapunov-Type Constraint)
+To guarantee convergence, the contingency cost is constrained. Let $\ell_i^{\mathrm c}$ denote a nonnegative contingency stage cost. The optimal contingency cost is defined as:
+```latex
+J_i^{\mathrm c}(t)
+:=
+\sum_{k=0}^{N_c-1}
+\ell_i^{\mathrm c}
+\left(
+x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
+u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
+\right)
++
+V_i^{\mathrm c}
+\left(
+\bar x_i^{\mathrm c}(t),
+x_i^{\mathrm{ref}}
+\right)
+```
+A scalar bound $\hat J_i^{\mathrm c}(t)$ is maintained recursively. After the shared first input is applied, the bound is shifted:
+```latex
+\hat J_i^{\mathrm c}(t^+)
+:=
+J_i^{\mathrm c,*}(t)
+-
+\ell_i^{\mathrm c}
+\left(
+x_i(t)-\bar x_i^{\mathrm c,*}(t),
+u_i(t)-\bar u_i^{\mathrm c,*}(t)
+\right)
+```
+This forces the contingency cost to act as a discrete-time Lyapunov function.
+
+
 
 ### Weaved Integrations
 
@@ -470,6 +596,12 @@ def F_theta_pow(F_theta, N, x, u):
 All the external tool calls, massive multi-modal memory extractions, and complex multi-agent collaborations might superficially look like a pile of engineering code. But the foundation supporting all of this rests upon these seemingly cold yet absolutely reliable mathematical principles and the **Gradient Entropy Theory**. This is our fundamental differentiator from today's mainstream LLM black-box architectures, and the only necessary path to building truly secure, deterministic agents paving the way to AGI.
 
 ## 5. Macro Audit: The Collapse of "Scale is All You Need" and the Ultimate Defense of Gradient Entropy
+
+### Analogy for For Beginners: Practical Analogy
+### For Beginners: Practical Analogy
+Imagine multiple drones flying through a forest without radio communication. If a drone relies on memory of where other drones were seconds ago, it will eventually crash because paths cross unexpectedly. Instead, this algorithm forces every drone to constantly recalculate an immediate "safe stopping path" (the contingency plan). It mathematically bounds the energy (cost) needed to stop. If this "stopping cost" constantly decreases, we can mathematically guarantee the entire swarm safely converges to their destinations without hitting each other.
+
+
 ### Analogy for Training-Free Adaptive Stopping (TASR)
 It installs "brake pads" on thinking. If the system realizes its current and previous thoughts are identical while passing a confidence redline, it unplugs itself. This completely cures infinite AI loops.
 
@@ -903,179 +1035,12 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - Wove "Distributed Stochastic Optimization under Heavy-Tailed Noises" into Core Theory and Analogies.
-  - Wove "Stability Boundary of Q-Learning Dynamics in Competitive Networks" into Core Theory and Analogies.
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - Mapped heavy-tailed gradient clipping and consensus mechanisms to decentralized architecture principles.
-  - Mapped Q-Learning stability boundary (dependent on local neighborhood size rather than global size) to multi-agent competitive scaling limits.
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - Heavy-Tailed Noises: COMPATIBLE. The mechanism aligns with Collaboration System's focus on decentralized tracking and does not conflict with Memory or Tool Execution assumptions.
-  - Q-Learning Stability: COMPATIBLE. Bounding local competitive interactions supports the decentralized topology principles without violating Tool, Memory, or general Collaboration assumptions.
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - 来源迁移记录 (Source migration record)
-  - Successfully migrated 2312.15847v3 (Heavy-Tailed Noises) and 2312.11943v1 (Q-Learning Stability) daily chunks.
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-## Weekly Document Cascade & Conflict Audit
-
-- 本周文档级联编织
-  - Integrated Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2).
-- 动态演进映射
-  - Added conceptual mapping for kernel-dependent sublinear regret and constraint violation bounds.
-- 跨方向范式冲突审计
-  - COMPATIBLE. The unknown constraint modeling aligns with the Architecture Principles' goal of robust execution in open environments. It does not conflict with Memory, Tool Execution, or Collaboration assumptions.
-- 来源迁移记录
-  - Successfully migrated 2310.14685v2 chunk.
-- 双语对齐状态
-  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-## AF-ARCH-017: Exponential Convergence in Strongly Monotone Mirror Play
-
-**Frontier Source:** On the Variational Interpretation of Mirror Play in Monotone Games (2024)
-
-**Original Problem:** Characterizing the finite-time convergence efficiency and equilibrium paths of multi-agent mirror play (MP) learning dynamics in strongly monotone non-cooperative games.
-
-**Mathematical Mechanism:** The formulation leverages a mirror differential game (MDG) framework using Bregman divergences as distance functions. When the game $\mathcal{G}$ is $\mu$-strongly monotone with respect to $D_{\phi}(\cdot, \cdot)$ (where $\phi$ is the aggregated mirror map), the closed-loop system is exponentially stable as $T \to \infty$.
-
-**Core Update Formula:**
-Exponential stability under strongly monotone game:
-$V (x(t)) \leq e^{ - \mu t} V(x_0)$
-
-**Assumptions:**
-- The multi-agent game is $\mu$-strongly monotone with respect to the aggregated mirror map.
-- The mirror maps used are Legendre functions (proper, closed, convex, and differentiable over domain).
-- The strategy space and gradients follow Lipschitz smoothness and bounded variations.
-
-**For Beginners: Practical Analogies:**
-Imagine multiple delivery companies (agents) trying to optimize their routes without sharing full plans (a non-cooperative game). If the traffic conditions have a "strongly competitive but stable" property (strong monotonicity), and each company uses a consistent way to measure routing costs (mirror maps), they will quickly settle into optimal routes (exponential convergence). If the traffic rules change wildly, this rapid settling is no longer guaranteed.
-
-**State / 状态:**
-- **Evidence / 证据:** PAPER_ONLY
-- **Mapping / 映射:** DESIGN_CANDIDATE
-- **Implementation / 实现:** EVIDENCE_INSUFFICIENT
-- **Validation / 验证:** NOT_TESTED
-- **Sources / 来源:** S32
-
-**Scope and limits / 范围与局限:**
-The exponential convergence rate strictly requires the underlying game to be strongly monotone with respect to the specific aggregated mirror map. It does not generalize unconditionally to non-monotone multi-agent settings, arbitrary game topologies, or environments with unpredictable stochastic feedback outside the bounded variances analyzed in the paper.
-
-
-### Joint Lyapunov Certificates for K-Agent Generative AI Governance
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Joint Lyapunov Certificates for K-Agent Generative AI Governance: Stochastic Stability, Emergent Ensemble Risk, and Zero-Knowledge Governance Attestation (arXiv:2608.09087v1)
-- **URL:** http://arxiv.org/abs/2608.09087v1
-- **Publication Date:** 2026-08-10
-- **Selection Reason:** Addresses emergent ensemble-level drift in multi-agent systems sharing a meta-learning coupling, providing the critical coupling threshold via Lyapunov analysis to ensure joint stability.
-- **Original Problem:** Per-agent Lyapunov analysis is provably insufficient when multiple agents share a meta-learning coupling $\gamma$ through an interaction matrix $A$; individual agents can satisfy their declared stability bounds while the joint system is in a regime of emergent ensemble-level drift.
-- **Core Assumptions:**
-  - Linear dynamics and homogeneity across agents: each agent's loss is strictly an isotropic quadratic $\loss_k(w) \;=\; \tfrac{1}{2}\,\alpha_{\mathrm{self}}\,\norm{w}^2$ (with the same self-decay rate $\alpha_{\mathrm{self}}$ for all agents).
-  - The coupling is linear in $\W$ with additive, state-independent noise, forming a linear multivariate Ornstein-Uhlenbeck process.
-- **Mathematical Mechanism:**
-  - **核心更新公式** (Infinitesimal Generator of joint Lyapunov function $V(\W)$):
-    $$ \Lgen V(\W) = -2\alpha_{\mathrm{self}} V(\W) + \gamma \sum_{k=1}^K \sum_{j=1}^K A_{kj} \ip{W^k}{\Phi - W^j} + \frac{1}{2} K d \sigma_0^2 $$
-  - **Exact Critical Coupling Threshold:**
-    $$ \gamma^*(A) = \alpha_{\mathrm{self}} / \abs{\lambda_{\min}(A)} $$ (where $\lambda_{\min}(A)$ is the most negative eigenvalue of $A$).
-- **Convergence or Behavioral Bound:** The system remains mean-square stable and the joint drift operator is positive-stable if and only if $\gamma < \gamma^*(A)$.
-- **Applicability Scope:** Bounded multi-agent learning environments sharing a meta-learning parameter (e.g., shared embedding layer, RLHF reward signal, joint fine-tuning objective) governed by the linear SDE dynamics.
-- **Limitations:** The exact threshold and noise floor formulas rely strictly on linearity, isotropic quadratic losses minimized at the origin, and homogeneous decay across agents. They do not survive unchanged for non-convex, anisotropic, or agent-heterogeneous loss landscapes found in real large generative models; $\alpha_{\mathrm{self}}$ must be locally estimated.
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine multiple ships (AI agents) in a fleet navigating independently but tethered together by a shared rope (the coupling). If each captain only checks their own ship's stability (single-agent validation), they might miss that the tension in the shared rope is dragging the entire fleet off course (ensemble-level drift). The Joint Lyapunov Certificate is like a fleet-wide tension sensor that mathematically calculates the maximum safe rope strength ($\gamma^*$) based on how the ships are connected, ensuring the whole fleet remains stable.
-
-
-## AF-ARCH-018: Lyapunov-Type Safety in Decentralized Contingency MPC
-
-### System Container
-Architecture Principles
-
-### Frontier Source
-- **Title:** Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems (arXiv:2608.30874v1)
-- **Authors:** Max Studt, Georg Schildbach
-- **URL:** https://arxiv.org/abs/2608.30874
-- **Date:** 2026-08-31
-- **Selection Reason:** Introduces a state-dependent fallback mechanism providing recursive feasibility and Lyapunov-type convergence for nonlinear multi-agent systems without requiring history-dependent neighbor reconstructions.
-
-### Original Problem
-In multi-agent control under state-only information patterns with limited sensing and plug-and-play operations, existing decentralized contingency Model Predictive Control (MPC) often relies on conservative local interaction handling or requires agents to perfectly reconstruct neighbor geometry, which fundamentally breaks under finite sensing ranges.
-
-### Core Assumptions
-- The system operates under a state-only information pattern with limited sensing.
-- The contingency maneuver to a safe equilibrium must always be available inside agent-wise fallback regions (safe sets).
-- The contingency plan is constrained by a monotonically decreasing local scalar bound $\hat J_i^{\mathrm c}(t)$.
-
-### 数学机制 (Lyapunov-Type Constraint)
-To guarantee convergence, the contingency cost is constrained. Let $\ell_i^{\mathrm c}$ denote a nonnegative contingency stage cost. The optimal contingency cost is defined as:
-```latex
-J_i^{\mathrm c}(t)
-:=
-\sum_{k=0}^{N_c-1}
-\ell_i^{\mathrm c}
-\left(
-x^{\mathrm c}_{i,(k|t)}-\bar x_i^{\mathrm c}(t),
-u^{\mathrm c}_{i,(k|t)}-\bar u_i^{\mathrm c}(t)
-\right)
-+
-V_i^{\mathrm c}
-\left(
-\bar x_i^{\mathrm c}(t),
-x_i^{\mathrm{ref}}
-\right)
-```
-A scalar bound $\hat J_i^{\mathrm c}(t)$ is maintained recursively. After the shared first input is applied, the bound is shifted:
-```latex
-\hat J_i^{\mathrm c}(t^+)
-:=
-J_i^{\mathrm c,*}(t)
--
-\ell_i^{\mathrm c}
-\left(
-x_i(t)-\bar x_i^{\mathrm c,*}(t),
-u_i(t)-\bar u_i^{\mathrm c,*}(t)
-\right)
-```
-This forces the contingency cost to act as a discrete-time Lyapunov function.
-
-### Bounds and Convergence
-The local MPC enforces $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$. The shifted-tail argument yields a monotone decrease of the optimal contingency cost, preventing collision and ensuring recursive feasibility.
-
-### Application Scope
-Applicable to dense multi-agent settings, decentralized obstacle avoidance, and plug-and-play environments where exact neighbor tracking is strictly unavailable.
-
-### Limitations
-The formulation does not universally solve adversarial multi-agent conflicts; convergence guarantees depend on the existence of the predefined fallback regions and the strict satisfaction of the cost bound constraints.
-
-### Architecture Mapping
-- **Paper Evidence Status:** PAPER_ONLY
-- **Architecture Mapping Status:** DESIGN_CANDIDATE
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-### For Beginners: Practical Analogy
-Imagine multiple drones flying through a forest without radio communication. If a drone relies on memory of where other drones were seconds ago, it will eventually crash because paths cross unexpectedly. Instead, this algorithm forces every drone to constantly recalculate an immediate "safe stopping path" (the contingency plan). It mathematically bounds the energy (cost) needed to stop. If this "stopping cost" constantly decreases, we can mathematically guarantee the entire swarm safely converges to their destinations without hitting each other.
-
-### Multi-Agent Learning in Contextual Games under Unknown Constraints
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Multi-Agent Learning in Contextual Games under Unknown Constraints (arXiv:2310.14685v2)
-- **URL:** https://arxiv.org/abs/2310.14685
-- **Publication Date:** 2024-01-14
-- **Authors:** Anna M. Maddux, Maryam Kamgarpour
-- **Selection Reason:** Addresses the challenge of ensuring safety and compliance in multi-agent environments where constraints are dynamic and unknown a priori, providing a no-regret, no-violation approach essential for robust agent architectures.
-- **Original Problem:** Agents playing a repeated contextual game must choose actions belonging to feasible sets, but the feasible sets (constraints) and reward functions are a priori unknown.
-- **Core Assumptions:** The unknown reward and constraint functions satisfy kernel-based regularity (RKHS) assumptions. The game has a finite or compact context space $\mathcal{Z}$, and strict feasibility conditions (Slater's condition) hold.
-- **Mathematical Mechanism:**
-  - **Regret Bound** (收敛界): The constrained regret for the c.z.AdaNormalGP algorithm is bounded by:
-    $$ R^T = \mathcal{O}\left(\sqrt{|\mathcal{Z}|T(\log(K)+\log(B)+\log(1+\log(K))} + \sqrt{T\log(2/\delta)} + \beta_0^T\sqrt{T\gamma_0^T}\right) $$
-    and the cumulative constraint violations are upper bounded by:
-    $$ \mathcal{V}_{m}^T = \mathcal{O}\left(\beta_m^T\sqrt{T\gamma_m^T}\right) $$
-    where $\gamma_m^T$ is the maximum information gain for the $m$-th constraint function.
-- **Applicability Scope:** Multi-agent reinforcement learning (MARL) or decentralized systems where agents must optimize objectives subject to evolving, context-dependent safety or resource constraints without prior knowledge of the environment dynamics.
-- **Limitations:** The guarantees depend on the RKHS assumptions and the existence of strictly feasible actions (slackness). It requires the ability to estimate the maximum information gain, which can scale poorly in very high-dimensional spaces.
-- **Paper Evidence Status:** PAPER_ONLY
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine you're in a new city trying to find the best route to work (maximizing reward), but you don't know the traffic rules or which roads are under construction (unknown constraints). Instead of getting fined repeatedly, you learn from similar traffic contexts every day. Over time, your strategy guarantees you find the best route while keeping your total traffic violations growing so slowly that, on average, they approach zero.
