@@ -26,7 +26,118 @@
 
 ---
 
-## 2. 核心机制：在谱间隙 (Spectral Gap) 上的收敛
+## 2. 核心机制
+
+### 来源详情
+- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- **URL:** https://arxiv.org/abs/2312.15667
+- **Version:** v3
+- **Date:** 2023-12-25
+- **Selection Reason:** 引入了拓扑感知的策略梯度，解决了去中心化智能体如何通过局部通信图而不是中央控制进行协调的问题。
+
+### 原始问题
+在协作多智能体系统中，标准的策略梯度要么同等对待所有智能体，要么依赖于中心化的评论家（critic），忽略了智能体之间自然存在或受限的通信拓扑。智能体如何利用底层的通信图（拓扑结构）来高效学习最优的协作策略，而不需要完整的状态可见性或无结构的全局通信？
+
+### 核心假设
+- **Erdős–Rényi 拓扑:** 理论上的收敛保证明确假设通信图遵循 Erdős–Rényi 随机图结构。
+- **表格表示 (Tabular Expressions):** 收敛界是在假设策略和价值函数采用表格表示的情况下建立的。
+- **局部可观察性:** 智能体只能观察其局部状态，并与拓扑图中的直接邻居进行通信。
+
+
+
+### 边界与收敛
+- **收敛保证:** 在表格表示和特定的拓扑条件（Erdős–Rényi）下，去中心化的策略梯度收敛于真实目标的驻点。
+- **拓扑瓶颈:** 收敛速度受到通信图的谱特性（代数连通度）的限制。
+
+### Scope and limits / 范围与局限:
+- **拓扑限制:** 理论保证在很大程度上依赖于特定的随机图模型和表格设置，这可能无法直接转化为任意的或高度动态的深度神经网络架构。
+- **消息开销:** 虽然它避免了中心化的评论家，但通信复杂度仍然随着邻域大小和消息维度而增加。
+
+### 架构映射
+- **系统容器:** Collaboration System
+- **映射状态:** `CONCEPTUAL_MAPPING`
+- **架构意义:** 去中心化的多智能体架构应该将通信拓扑明确地纳入其学习和决策过程中。智能体应根据邻居的结构重要性来权衡其更新，而不是平等地对待所有对等方。
+
+### 0基础业务通俗类比 (For Beginners)
+想象一家大公司试图推出一款新产品。如果每个员工都试图与其他所有人交谈（全局通信），那将是一场混乱。如果他们只听从 CEO 的（中心化），就会失去局部背景。
+TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部门（他们的“拓扑”）进行沟通。通过学会重视这些特定邻居的意见，每个部门都可以在局部调整其策略。数学证明了如果组织架构连接得足够好，这些局部调整最终将引导整个公司实现协调一致、最优的产品发布，而不需要一个中央老板来微观管理每一个细节。
+
+
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 编织了“马尔可夫势博弈的独立自然策略梯度”、“基于拓扑的多智能体策略梯度 (TAPE)”、“组合高斯过程赌博机的贝叶斯分析”以及“包含贝叶斯智能体的防复制老虎机机制设计”的理论、类比与源码分析。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将 TAPE 映射到局部邻域协同的协作策略。
+  - 将组合变动高斯过程赌博机映射到协作系统中的任务分配模块。
+  - 将防复制老虎机机制设计映射到确保协作完整性和防止智能体动作垃圾邮件。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - 马尔可夫势博弈的独立自然策略梯度：COMPATIBLE（兼容）。去中心化的独立优化完全符合协作系统避免单点瓶颈的目标，且不与记忆或工具执行冲突。
+  - TAPE：COMPATIBLE（兼容）。基于拓扑的联盟学习机制支持有界邻域合作，不违反架构原则。
+  - 组合变动高斯过程赌博机：COMPATIBLE（兼容）。在概念上支持任务分配边界对抗最优分配，且没有全局通信冲突。
+  - 防复制老虎机机制设计：COMPATIBLE（兼容）。防止智能体动作垃圾邮件增强了协作系统的鲁棒性，且不与其他容器冲突。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移了 2310.09727v2 (独立 NPG)、2312.15667v3 (TAPE)、2312.12676v3 (组合变动高斯过程赌博机) 和 2312.16896v2 (防复制老虎机机制)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+### 间歇性故障与恶意传输下的多智能体弹性共识（扩展版）
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
+- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- **Publication Date:** 2024-03-26
+- **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** 论文解决了在间歇性故障和恶意攻击（对手可能战略性地拒绝传输以保持未被检测）存在的情况下，多智能体共识的弹性问题。
+- **Core Assumptions:**
+  1. 假设1 (`as_trust`)：合法智能体 $i \in \mathcal{L}$ 接收到的恶意和合法传输的期望值是恒定的，满足 $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ 且 $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$，其中对于所有 $j \in \mathcal{N}_i^m$，有 $d-c_j > 0$。
+  2. 合法智能体诱导的子图是连通的。
+- **Mathematical Mechanism:** 合法智能体在观察窗口 $T_0$ 内维护聚合信任变量，基于 $\xi>0$ 和 $\gamma \in (0.5, 1)$ 随时间在合法和恶意源之间建立不断增长的分离度。
+- **Convergence Bound (Theorem 1 - `thm_dev`):** 明确限制了与名义共识的最大偏差。给定置信度水平 $\delta > 0$ 和 $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$，最大偏差严格受到 $\Delta_{\max} (T_0,\delta)$ 限制的概率至少为 $1-\delta$，其中 $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$。
+- **Applicable Scope:** 需要对尝试注入数据的对抗节点具有弹性，同时保持良性节点间连通性的多智能体共识环境。
+- **Limitations:** 误差界限假设对恶意智能体有固定的最小期望信任优势，如果恶意节点在短窗口内完美模仿合法分布，该优势可能会减弱。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING。在概念上可以通过自适应信任窗口支持多个智能体实例之间稳健的状态同步。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Beginner Analogy:** 想象一群人试图就一个方向达成一致。有些人暗中试图误导这群人，但他们无法在不被抓到的情况下不断撒谎。如果诚实的人等待足够长的时间（$T_0$），在完全承诺之前观察每个人的记录，他们可以在数学上保证达成近乎完美的协议，从而限制说谎者可能造成的最大干扰。
+
+### 动态有向图上的离散分布式优化
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
+- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- **Publication Date:** 2023-11-14
+- **URL:** https://arxiv.org/abs/2311.07939
+- **Original Problem:** 经典的分布式多智能体优化假设连接是静态的且权重固定（通常需要复杂的双随机矩阵）。当智能体移动或链路故障时，维持随机权重计算成本高且容易出错，导致系统失去同步或无法优化。
+- **Core Assumptions:**
+  - 基础的动态网络拓扑是权重对称且平衡的（WB 条件）。
+  - 在切换拓扑下是强连通的动态网络。
+  - 代价函数是连续可微且强凸的。
+- **Mathematical Mechanism (核心更新公式):**
+  在离散时间步 $k$，步长为 $\eta$，跟踪参数为 $\alpha$ 时，智能体 $i$ 的连续时间分布式优化的离散化版本为：
+  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
+  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
+- **Convergence or Behavioral Bound:**
+  只要 $\alpha$ 满足基于未扰动矩阵的谱范数和最小特征值的明确上界，且离散时间步长 $\eta$ 满足 $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$（确保离散系统除必需的为 1 的特征值外，所有特征值严格位于单位圆内），该分布式算法将动态收敛至全局最优解。
+- **Application Scope:**
+  移动多智能体系统，经历链路移除（丢包）的易变通信网络，分布式分类以及分布式支持向量机（D-SVM）。
+- **Limitations:**
+  理论保证严格要求对称权重平衡条件即使在链路移除后依然成立。它需要适当选择步长 $\eta$ 和 $\alpha$，因为较大的值会将特征值移出单位圆外导致不稳定。
+- **Architecture Mapping:** DESIGN_CANDIDATE。该算法在理论上可以支持 Collaboration System 中易变多智能体网络上的分布式学习，因为它消除了实时重新设计随机权重的需求。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy:**
+  想象一队侦察兵在测绘一片大森林。他们需要就一张全局地图达成一致，但只能与附近的侦察兵交谈。有时他们的对讲机出现故障，或走出了通讯范围（动态网络）。旧方法要求他们每次对讲机故障时都要停下来，仔细重新计算每个人声音的信任度（双随机权重）。这种新方法让他们只需同等倾听能听到的人（权重对称），确保他们最终仍能画出完全相同的最佳地图，只要他们更新地图的速度不要太快（有界的步长 $\eta$）。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+：在谱间隙 (Spectral Gap) 上的收敛
 
 ### 基于核化多臂老虎机的分布式优化
 
@@ -351,6 +462,14 @@ Implementation Status: 暂无代码库实现。当前仅为概念映射。
 - **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
 
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
+
+### Mathematical Mechanism: 数学机制 (拓扑感知策略梯度)
+### 数学机制 (拓扑感知策略梯度)
+该算法引入了一种拓扑感知的策略梯度方法，其中每个智能体 $i$ 的策略更新依赖于来自其邻居 $\mathcal{N}_i$ 的消息。通过去中心化梯度最大化目标函数 $J(\pi)$：
+$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
+其中 $Q^{\pi}_{i}$ 是一个局部的动作价值函数，以从拓扑图中的相邻智能体收到的消息 $m_{\mathcal{N}_i}$ 为条件。
+
+
 ### Code for
 
 ### Code for
@@ -2037,124 +2156,15 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **证据状态:** PAPER_ONLY
 
 <!-- WEEKLY_SYNC_REPORT -->
-## AF-COLLAB-003: 协作多智能体策略梯度中的拓扑感知
-
-**State / 状态:** Active Research
-**Evidence / 证据:** S40
-**Mapping / 映射:** CONCEPTUAL_MAPPING
-**Implementation / 实现:** EVIDENCE_INSUFFICIENT
-**Validation / 验证:** EVIDENCE_INSUFFICIENT
-**Sources / 来源:** S40
-
-### 来源详情
-- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
-- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
-- **URL:** https://arxiv.org/abs/2312.15667
-- **Version:** v3
-- **Date:** 2023-12-25
-- **Selection Reason:** 引入了拓扑感知的策略梯度，解决了去中心化智能体如何通过局部通信图而不是中央控制进行协调的问题。
-
-### 原始问题
-在协作多智能体系统中，标准的策略梯度要么同等对待所有智能体，要么依赖于中心化的评论家（critic），忽略了智能体之间自然存在或受限的通信拓扑。智能体如何利用底层的通信图（拓扑结构）来高效学习最优的协作策略，而不需要完整的状态可见性或无结构的全局通信？
-
-### 核心假设
-- **Erdős–Rényi 拓扑:** 理论上的收敛保证明确假设通信图遵循 Erdős–Rényi 随机图结构。
-- **表格表示 (Tabular Expressions):** 收敛界是在假设策略和价值函数采用表格表示的情况下建立的。
-- **局部可观察性:** 智能体只能观察其局部状态，并与拓扑图中的直接邻居进行通信。
-
-### 数学机制 (拓扑感知策略梯度)
-该算法引入了一种拓扑感知的策略梯度方法，其中每个智能体 $i$ 的策略更新依赖于来自其邻居 $\mathcal{N}_i$ 的消息。通过去中心化梯度最大化目标函数 $J(\pi)$：
-$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
-其中 $Q^{\pi}_{i}$ 是一个局部的动作价值函数，以从拓扑图中的相邻智能体收到的消息 $m_{\mathcal{N}_i}$ 为条件。
-
-### 边界与收敛
-- **收敛保证:** 在表格表示和特定的拓扑条件（Erdős–Rényi）下，去中心化的策略梯度收敛于真实目标的驻点。
-- **拓扑瓶颈:** 收敛速度受到通信图的谱特性（代数连通度）的限制。
-
-### Scope and limits / 范围与局限:
-- **拓扑限制:** 理论保证在很大程度上依赖于特定的随机图模型和表格设置，这可能无法直接转化为任意的或高度动态的深度神经网络架构。
-- **消息开销:** 虽然它避免了中心化的评论家，但通信复杂度仍然随着邻域大小和消息维度而增加。
-
-### 架构映射
-- **系统容器:** Collaboration System
-- **映射状态:** `CONCEPTUAL_MAPPING`
-- **架构意义:** 去中心化的多智能体架构应该将通信拓扑明确地纳入其学习和决策过程中。智能体应根据邻居的结构重要性来权衡其更新，而不是平等地对待所有对等方。
-
-### 0基础业务通俗类比 (For Beginners)
-想象一家大公司试图推出一款新产品。如果每个员工都试图与其他所有人交谈（全局通信），那将是一场混乱。如果他们只听从 CEO 的（中心化），就会失去局部背景。
-TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部门（他们的“拓扑”）进行沟通。通过学会重视这些特定邻居的意见，每个部门都可以在局部调整其策略。数学证明了如果组织架构连接得足够好，这些局部调整最终将引导整个公司实现协调一致、最优的产品发布，而不需要一个中央老板来微观管理每一个细节。
-
-
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - 编织了“马尔可夫势博弈的独立自然策略梯度”、“基于拓扑的多智能体策略梯度 (TAPE)”、“组合高斯过程赌博机的贝叶斯分析”以及“包含贝叶斯智能体的防复制老虎机机制设计”的理论、类比与源码分析。
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - 将 TAPE 映射到局部邻域协同的协作策略。
-  - 将组合变动高斯过程赌博机映射到协作系统中的任务分配模块。
-  - 将防复制老虎机机制设计映射到确保协作完整性和防止智能体动作垃圾邮件。
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - 马尔可夫势博弈的独立自然策略梯度：COMPATIBLE（兼容）。去中心化的独立优化完全符合协作系统避免单点瓶颈的目标，且不与记忆或工具执行冲突。
-  - TAPE：COMPATIBLE（兼容）。基于拓扑的联盟学习机制支持有界邻域合作，不违反架构原则。
-  - 组合变动高斯过程赌博机：COMPATIBLE（兼容）。在概念上支持任务分配边界对抗最优分配，且没有全局通信冲突。
-  - 防复制老虎机机制设计：COMPATIBLE（兼容）。防止智能体动作垃圾邮件增强了协作系统的鲁棒性，且不与其他容器冲突。
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - 来源迁移记录 (Source migration record)
-  - 成功迁移了 2310.09727v2 (独立 NPG)、2312.15667v3 (TAPE)、2312.12676v3 (组合变动高斯过程赌博机) 和 2312.16896v2 (防复制老虎机机制)。注意：由于 "稀疏超图上的多智能体 Thompson 采样" (arXiv:2312.15549v1) 的 Daily Chunk 与本文件中现有的来源记录重复，其包装器被移除，未进行冗余编织，以保持来源的唯一性（MISSING_SOURCE 作为重复项解决）。
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-### 间歇性故障与恶意传输下的多智能体弹性共识（扩展版）
-
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
-- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
-- **Publication Date:** 2024-03-26
-- **URL:** https://arxiv.org/abs/2403.17907
-- **Original Problem:** 论文解决了在间歇性故障和恶意攻击（对手可能战略性地拒绝传输以保持未被检测）存在的情况下，多智能体共识的弹性问题。
-- **Core Assumptions:**
-  1. 假设1 (`as_trust`)：合法智能体 $i \in \mathcal{L}$ 接收到的恶意和合法传输的期望值是恒定的，满足 $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ 且 $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$，其中对于所有 $j \in \mathcal{N}_i^m$，有 $d-c_j > 0$。
-  2. 合法智能体诱导的子图是连通的。
-- **Mathematical Mechanism:** 合法智能体在观察窗口 $T_0$ 内维护聚合信任变量，基于 $\xi>0$ 和 $\gamma \in (0.5, 1)$ 随时间在合法和恶意源之间建立不断增长的分离度。
-- **Convergence Bound (Theorem 1 - `thm_dev`):** 明确限制了与名义共识的最大偏差。给定置信度水平 $\delta > 0$ 和 $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$，最大偏差严格受到 $\Delta_{\max} (T_0,\delta)$ 限制的概率至少为 $1-\delta$，其中 $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$。
-- **Applicable Scope:** 需要对尝试注入数据的对抗节点具有弹性，同时保持良性节点间连通性的多智能体共识环境。
-- **Limitations:** 误差界限假设对恶意智能体有固定的最小期望信任优势，如果恶意节点在短窗口内完美模仿合法分布，该优势可能会减弱。
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING。在概念上可以通过自适应信任窗口支持多个智能体实例之间稳健的状态同步。
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Beginner Analogy:** 想象一群人试图就一个方向达成一致。有些人暗中试图误导这群人，但他们无法在不被抓到的情况下不断撒谎。如果诚实的人等待足够长的时间（$T_0$），在完全承诺之前观察每个人的记录，他们可以在数学上保证达成近乎完美的协议，从而限制说谎者可能造成的最大干扰。
-
-
-### 动态有向图上的离散分布式优化
-
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
-- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
-- **Publication Date:** 2023-11-14
-- **URL:** https://arxiv.org/abs/2311.07939
-- **Original Problem:** 经典的分布式多智能体优化假设连接是静态的且权重固定（通常需要复杂的双随机矩阵）。当智能体移动或链路故障时，维持随机权重计算成本高且容易出错，导致系统失去同步或无法优化。
-- **Core Assumptions:**
-  - 基础的动态网络拓扑是权重对称且平衡的（WB 条件）。
-  - 在切换拓扑下是强连通的动态网络。
-  - 代价函数是连续可微且强凸的。
-- **Mathematical Mechanism (核心更新公式):**
-  在离散时间步 $k$，步长为 $\eta$，跟踪参数为 $\alpha$ 时，智能体 $i$ 的连续时间分布式优化的离散化版本为：
-  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
-  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
-- **Convergence or Behavioral Bound:**
-  只要 $\alpha$ 满足基于未扰动矩阵的谱范数和最小特征值的明确上界，且离散时间步长 $\eta$ 满足 $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$（确保离散系统除必需的为 1 的特征值外，所有特征值严格位于单位圆内），该分布式算法将动态收敛至全局最优解。
-- **Application Scope:**
-  移动多智能体系统，经历链路移除（丢包）的易变通信网络，分布式分类以及分布式支持向量机（D-SVM）。
-- **Limitations:**
-  理论保证严格要求对称权重平衡条件即使在链路移除后依然成立。它需要适当选择步长 $\eta$ 和 $\alpha$，因为较大的值会将特征值移出单位圆外导致不稳定。
-- **Architecture Mapping:** DESIGN_CANDIDATE。该算法在理论上可以支持 Collaboration System 中易变多智能体网络上的分布式学习，因为它消除了实时重新设计随机权重的需求。
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **For Beginners: Practical Analogy:**
-  想象一队侦察兵在测绘一片大森林。他们需要就一张全局地图达成一致，但只能与附近的侦察兵交谈。有时他们的对讲机出现故障，或走出了通讯范围（动态网络）。旧方法要求他们每次对讲机故障时都要停下来，仔细重新计算每个人声音的信任度（双随机权重）。这种新方法让他们只需同等倾听能听到的人（权重对称），确保他们最终仍能画出完全相同的最佳地图，只要他们更新地图的速度不要太快（有界的步长 $\eta$）。
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: DESIGN_CANDIDATE
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT

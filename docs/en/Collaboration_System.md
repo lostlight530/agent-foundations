@@ -26,7 +26,118 @@ In DecDPO, agents are arranged in a peer-to-peer network topology (an undirected
 
 ---
 
-## 2. Core Mechanisms: Convergence on the Spectral Graph
+## 2. Core Mechanisms
+
+### Source Detail
+- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- **URL:** https://arxiv.org/abs/2312.15667
+- **Version:** v3
+- **Date:** 2023-12-25
+- **Selection Reason:** Introduces topology-aware policy gradient, addressing how decentralized agents coordinate through localized communication graphs instead of central control.
+
+### Original Problem
+In cooperative multi-agent systems, standard policy gradients treat all agents identically or rely on centralized critics, ignoring the natural or constrained communication topologies between agents. How can agents leverage the underlying communication graph (topology) to learn optimal cooperative policies efficiently without requiring full state visibility or unstructured all-to-all communication?
+
+### Core Assumptions
+- **Erdős–Rényi Topology:** The theoretical convergence guarantees explicitly assume the communication graph follows an Erdős–Rényi random graph structure.
+- **Tabular Expressions:** Convergence bounds are established assuming tabular representations for policies and value functions.
+- **Local Observability:** Agents can only observe their local state and communicate with their immediate neighbors in the topology.
+
+
+
+### Bounds and Convergence
+- **Convergence Guarantees:** Under tabular expressions and specific topological conditions (Erdős–Rényi), the decentralized policy gradient converges to a stationary point of the true objective.
+- **Topological Bottleneck:** The rate of convergence is bounded by the spectral properties (algebraic connectivity) of the communication graph.
+
+### Scope and limits / 范围与局限:
+- **Topology Restrictions:** The theoretical guarantees rely heavily on specific random graph models and tabular settings, which may not directly translate to arbitrary or highly dynamic deep neural network architectures.
+- **Message Overhead:** While it avoids centralized critics, the communication complexity still scales with neighborhood size and message dimensionality.
+
+### Architecture Mapping
+- **System Container:** Collaboration System
+- **Mapping Status:** `CONCEPTUAL_MAPPING`
+- **Architectural Implication:** Decentralized multi-agent systems should explicitly incorporate the communication topology into their learning and decision-making processes. Agents should weight their updates based on the structural importance of their neighbors rather than treating all peers equally.
+
+### 0-Foundation Business Analogies (For Beginners)
+Imagine a large corporation trying to launch a new product. If every employee tries to talk to everyone else (all-to-all communication), it's chaos. If they only listen to the CEO (centralized), local context is lost.
+TAPE suggests a structure where employees only communicate with their direct team members and adjacent departments (their "topology"). By learning to value the input from these specific neighbors, each department can adjust its strategy locally. The math proves that if the organizational chart is connected well enough, these local adjustments will eventually lead the entire company to a coordinated, optimal product launch without needing a central boss to micromanage every detail.
+
+
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Wove "Independent Natural Policy Gradient for Markov Potential Games", "Topology-based multi-Agent Policy gradiEnt (TAPE)", "Combinatorial Volatile Gaussian Process Bandits", and "Replication-proof Bandit Mechanism Design with Bayesian Agents" into Core Theory, Source Code Breakdown, and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped TAPE to localized cooperation policies.
+  - Mapped Combinatorial Volatile GP Bandits to task allocation modules.
+  - Mapped Replication-proof Bandit Mechanism to collaboration integrity and preventing action spamming.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - Independent NPG for Markov Potential Games: COMPATIBLE. Decentralized independent optimization perfectly aligns with the Collaboration System's goals of avoiding single-point bottlenecks and does not conflict with Memory or Tool Execution.
+  - TAPE: COMPATIBLE. The topology-based coalition learning mechanism supports bounded neighborhood cooperation without violating the Architecture Principles.
+  - Combinatorial Volatile Gaussian Process Bandits: COMPATIBLE. This conceptually supports task allocation bounds against optimal assignments without global communication conflicts.
+  - Replication-proof Bandit Mechanism: COMPATIBLE. The prevention of agent action spamming reinforces the Collaboration System's robustness without conflicting with other containers.
+- 来源迁移记录 (Source migration record)
+  - Successfully migrated 2310.09727v2 (Independent NPG), 2312.15667v3 (TAPE), 2312.12676v3 (Combinatorial Volatile GP Bandits), and 2312.16896v2 (Replication-proof Bandit Mechanism). Note: "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+### Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
+- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- **Publication Date:** 2024-03-26
+- **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** The paper addresses multi-agent consensus resilience in the presence of intermittent failures and malicious attacks, where adversaries might strategically withhold transmission to stay undetected.
+- **Core Assumptions:**
+  1. Assumption 1 (`as_trust`): The expected value of malicious and legitimate transmissions received by a legitimate agent $i \in \mathcal{L}$ are constant and satisfy $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ and $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$, where $d-c_j > 0$ for all $j \in \mathcal{N}_i^m$.
+  2. The subgraph induced by the legitimate agents is connected.
+- **Mathematical Mechanism:** Legitimate agents maintain aggregate trust variables over an observation window $T_0$, establishing a growing separation between legitimate and malicious sources over time based on $\xi>0$ and $\gamma \in (0.5, 1)$.
+- **Convergence Bound (Theorem 1 - `thm_dev`):** Explicitly limits the maximum deviation from the nominal consensus. For a given confidence level $\delta > 0$ and $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$, the probability that the maximal deviation is strictly bounded by $\Delta_{\max} (T_0,\delta)$ is at least $1-\delta$, where $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$.
+- **Applicable Scope:** Multi-agent consensus settings requiring resilience against adversarial nodes attempting data injection while preserving connectivity among benign nodes.
+- **Limitations:** The error bounds assume a fixed minimal expected trust advantage over malicious agents, which may weaken if malicious nodes mimic legitimate distributions perfectly over short windows.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. Can conceptually support robust state synchronization across multiple agent instances using adaptive trust windows.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Beginner Analogy:** Imagine a group of people trying to agree on a direction. Some are secretly trying to mislead the group, but they can't lie constantly without getting caught. If the honest people wait long enough ($T_0$) to observe everyone's track record before fully committing, they can mathematically guarantee that they'll reach a near-perfect agreement, bounding the maximum possible distraction the liars can cause.
+
+### Discretized Distributed Optimization over Dynamic Digraphs
+
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
+- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- **Publication Date:** 2023-11-14
+- **URL:** https://arxiv.org/abs/2311.07939
+- **Original Problem:** Classic distributed multi-agent optimization assumes stationary connectivity and static weights (often requiring complex bi-stochastic matrices). When agents move or links fail, maintaining stochastic weights is computationally expensive and error-prone, causing the system to lose synchronization or fail to optimize.
+- **Core Assumptions:**
+  - The underlying dynamic network topology is weight-symmetric and balanced (WB condition).
+  - Strongly connected dynamic networks under switching topologies.
+  - The cost function is continuously differentiable and strongly convex.
+- **Mathematical Mechanism (核心更新公式):**
+  The discretized version of the continuous-time distributed optimization for agent $i$ at discrete time-step $k$ with step-size $\eta$ and tracking parameter $\alpha$ is:
+  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
+  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
+- **Convergence or Behavioral Bound:**
+  The distributed algorithm converges dynamically to the global optimizer as long as $\alpha$ satisfies an explicit upper bound based on the spectral norm and minimum eigenvalue of the unperturbed matrix, and the discrete time step $\eta$ satisfies $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$, ensuring all eigenvalues of the discrete system (other than the required ones at 1) are strictly inside the unit circle.
+- **Application Scope:**
+  Mobile multi-agent systems, volatile communication networks experiencing link removals (packet drops), distributed classification, and distributed support vector machines (D-SVM).
+- **Limitations:**
+  The theoretical guarantees strictly require the symmetric weight-balanced condition to hold even after link removals. It requires an appropriate choice of the step size $\eta$ and $\alpha$, as large values will move the eigenvalues outside the unit circle causing instability.
+- **Architecture Mapping:** DESIGN_CANDIDATE. The algorithm can conceptually support distributed learning over volatile multi-agent networks within the Collaboration System by removing the need for real-time stochastic weight redesigns.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **For Beginners: Practical Analogy:**
+  Imagine a team of scouts mapping a large forest. They need to agree on a single global map, but they can only talk to nearby scouts. Sometimes their radios fail, or they move out of range (dynamic networks). Older methods required them to pause and carefully recalculate how much to trust everyone's voice every time a radio failed (bi-stochastic weights). This new method lets them just keep listening equally to those they can hear (weight-symmetric), ensuring they still all eventually draw the exact same optimal map, as long as they don't update their maps too fast (bounded step-size $\eta$).
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+: Convergence on the Spectral Graph
 
 ### Distributed Optimization via Kernelized Multi-armed Bandits
 
@@ -378,6 +489,14 @@ Implementation Status: No repository implementation exists. This is a conceptual
 - **Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
 
 ## 3. Source Code Breakdown & Pseudocode
+
+### Mathematical Mechanism: Mathematical Mechanism (Topology-Aware Policy Gradient)
+### Mathematical Mechanism (Topology-Aware Policy Gradient)
+The algorithm introduces a topology-aware policy gradient approach where each agent $i$'s policy update relies on messages from its neighbors $\mathcal{N}_i$. The objective function $J(\pi)$ is maximized using a decentralized gradient:
+$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
+where $Q^{\pi}_{i}$ is a local action-value function conditioned on the messages $m_{\mathcal{N}_i}$ received from neighboring agents in the topology graph.
+
+
 
 ### Weaved Integrations
 
@@ -2200,124 +2319,15 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Evidence Status:** PAPER_ONLY
 
 <!-- WEEKLY_SYNC_REPORT -->
-## AF-COLLAB-003: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
-
-**State / 状态:** Active Research
-**Evidence / 证据:** S40
-**Mapping / 映射:** CONCEPTUAL_MAPPING
-**Implementation / 实现:** EVIDENCE_INSUFFICIENT
-**Validation / 验证:** EVIDENCE_INSUFFICIENT
-**Sources / 来源:** S40
-
-### Source Detail
-- **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
-- **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
-- **URL:** https://arxiv.org/abs/2312.15667
-- **Version:** v3
-- **Date:** 2023-12-25
-- **Selection Reason:** Introduces topology-aware policy gradient, addressing how decentralized agents coordinate through localized communication graphs instead of central control.
-
-### Original Problem
-In cooperative multi-agent systems, standard policy gradients treat all agents identically or rely on centralized critics, ignoring the natural or constrained communication topologies between agents. How can agents leverage the underlying communication graph (topology) to learn optimal cooperative policies efficiently without requiring full state visibility or unstructured all-to-all communication?
-
-### Core Assumptions
-- **Erdős–Rényi Topology:** The theoretical convergence guarantees explicitly assume the communication graph follows an Erdős–Rényi random graph structure.
-- **Tabular Expressions:** Convergence bounds are established assuming tabular representations for policies and value functions.
-- **Local Observability:** Agents can only observe their local state and communicate with their immediate neighbors in the topology.
-
-### Mathematical Mechanism (Topology-Aware Policy Gradient)
-The algorithm introduces a topology-aware policy gradient approach where each agent $i$'s policy update relies on messages from its neighbors $\mathcal{N}_i$. The objective function $J(\pi)$ is maximized using a decentralized gradient:
-$$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
-where $Q^{\pi}_{i}$ is a local action-value function conditioned on the messages $m_{\mathcal{N}_i}$ received from neighboring agents in the topology graph.
-
-### Bounds and Convergence
-- **Convergence Guarantees:** Under tabular expressions and specific topological conditions (Erdős–Rényi), the decentralized policy gradient converges to a stationary point of the true objective.
-- **Topological Bottleneck:** The rate of convergence is bounded by the spectral properties (algebraic connectivity) of the communication graph.
-
-### Scope and limits / 范围与局限:
-- **Topology Restrictions:** The theoretical guarantees rely heavily on specific random graph models and tabular settings, which may not directly translate to arbitrary or highly dynamic deep neural network architectures.
-- **Message Overhead:** While it avoids centralized critics, the communication complexity still scales with neighborhood size and message dimensionality.
-
-### Architecture Mapping
-- **System Container:** Collaboration System
-- **Mapping Status:** `CONCEPTUAL_MAPPING`
-- **Architectural Implication:** Decentralized multi-agent systems should explicitly incorporate the communication topology into their learning and decision-making processes. Agents should weight their updates based on the structural importance of their neighbors rather than treating all peers equally.
-
-### 0-Foundation Business Analogies (For Beginners)
-Imagine a large corporation trying to launch a new product. If every employee tries to talk to everyone else (all-to-all communication), it's chaos. If they only listen to the CEO (centralized), local context is lost.
-TAPE suggests a structure where employees only communicate with their direct team members and adjacent departments (their "topology"). By learning to value the input from these specific neighbors, each department can adjust its strategy locally. The math proves that if the organizational chart is connected well enough, these local adjustments will eventually lead the entire company to a coordinated, optimal product launch without needing a central boss to micromanage every detail.
-
-
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - Wove "Independent Natural Policy Gradient for Markov Potential Games", "Topology-based multi-Agent Policy gradiEnt (TAPE)", "Combinatorial Volatile Gaussian Process Bandits", and "Replication-proof Bandit Mechanism Design with Bayesian Agents" into Core Theory, Source Code Breakdown, and Analogies.
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - Mapped TAPE to localized cooperation policies.
-  - Mapped Combinatorial Volatile GP Bandits to task allocation modules.
-  - Mapped Replication-proof Bandit Mechanism to collaboration integrity and preventing action spamming.
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - Independent NPG for Markov Potential Games: COMPATIBLE. Decentralized independent optimization perfectly aligns with the Collaboration System's goals of avoiding single-point bottlenecks and does not conflict with Memory or Tool Execution.
-  - TAPE: COMPATIBLE. The topology-based coalition learning mechanism supports bounded neighborhood cooperation without violating the Architecture Principles.
-  - Combinatorial Volatile Gaussian Process Bandits: COMPATIBLE. This conceptually supports task allocation bounds against optimal assignments without global communication conflicts.
-  - Replication-proof Bandit Mechanism: COMPATIBLE. The prevention of agent action spamming reinforces the Collaboration System's robustness without conflicting with other containers.
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - 来源迁移记录 (Source migration record)
-  - Successfully migrated 2310.09727v2 (Independent NPG), 2312.15667v3 (TAPE), 2312.12676v3 (Combinatorial Volatile GP Bandits), and 2312.16896v2 (Replication-proof Bandit Mechanism). Note: "Multi-Agent Thompson Sampling on Sparse Hypergraphs" (arXiv:2312.15549v1) was a duplicate of an existing source entry in this file and its wrapper was retired without redundant weaving to maintain source uniqueness (MISSING_SOURCE resolved as duplicate).
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-### Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)
-
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2403.17907v1, "Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)"
-- **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
-- **Publication Date:** 2024-03-26
-- **URL:** https://arxiv.org/abs/2403.17907
-- **Original Problem:** The paper addresses multi-agent consensus resilience in the presence of intermittent failures and malicious attacks, where adversaries might strategically withhold transmission to stay undetected.
-- **Core Assumptions:**
-  1. Assumption 1 (`as_trust`): The expected value of malicious and legitimate transmissions received by a legitimate agent $i \in \mathcal{L}$ are constant and satisfy $c_j = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^m$ and $d = \mathbb{E}(\alpha_{ij}(t)), j \in \mathcal{N}_i^\ell$, where $d-c_j > 0$ for all $j \in \mathcal{N}_i^m$.
-  2. The subgraph induced by the legitimate agents is connected.
-- **Mathematical Mechanism:** Legitimate agents maintain aggregate trust variables over an observation window $T_0$, establishing a growing separation between legitimate and malicious sources over time based on $\xi>0$ and $\gamma \in (0.5, 1)$.
-- **Convergence Bound (Theorem 1 - `thm_dev`):** Explicitly limits the maximum deviation from the nominal consensus. For a given confidence level $\delta > 0$ and $T_0 > (\frac{\xi}{\lambda})^{1/(1-\gamma)}$, the probability that the maximal deviation is strictly bounded by $\Delta_{\max} (T_0,\delta)$ is at least $1-\delta$, where $\Delta_{\max} (T_0,\delta)= 2(\frac{2\eta} {\delta} g_{\mathcal{L}}  (T_0)+ \frac{\eta} {\kappa \delta} g_{\mathcal{M}}(T_0))$.
-- **Applicable Scope:** Multi-agent consensus settings requiring resilience against adversarial nodes attempting data injection while preserving connectivity among benign nodes.
-- **Limitations:** The error bounds assume a fixed minimal expected trust advantage over malicious agents, which may weaken if malicious nodes mimic legitimate distributions perfectly over short windows.
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. Can conceptually support robust state synchronization across multiple agent instances using adaptive trust windows.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Beginner Analogy:** Imagine a group of people trying to agree on a direction. Some are secretly trying to mislead the group, but they can't lie constantly without getting caught. If the honest people wait long enough ($T_0$) to observe everyone's track record before fully committing, they can mathematically guarantee that they'll reach a near-perfect agreement, bounding the maximum possible distraction the liars can cause.
-
-
-### Discretized Distributed Optimization over Dynamic Digraphs
-
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2311.07939v2, "Discretized Distributed Optimization over Dynamic Digraphs"
-- **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
-- **Publication Date:** 2023-11-14
-- **URL:** https://arxiv.org/abs/2311.07939
-- **Original Problem:** Classic distributed multi-agent optimization assumes stationary connectivity and static weights (often requiring complex bi-stochastic matrices). When agents move or links fail, maintaining stochastic weights is computationally expensive and error-prone, causing the system to lose synchronization or fail to optimize.
-- **Core Assumptions:**
-  - The underlying dynamic network topology is weight-symmetric and balanced (WB condition).
-  - Strongly connected dynamic networks under switching topologies.
-  - The cost function is continuously differentiable and strongly convex.
-- **Mathematical Mechanism (核心更新公式):**
-  The discretized version of the continuous-time distributed optimization for agent $i$ at discrete time-step $k$ with step-size $\eta$ and tracking parameter $\alpha$ is:
-  $\mb{x}_i(k+1) = \mb{x}_i(k) - \eta \sum_{j=1}^{n} w^q_{ij}(\mb{x}_i(k)-\mb{x}_j(k))-\alpha \mb{y}_i(k)$
-  $\mb{y}_i(k+1) = \mb{y}_i(k) - \eta \sum_{j=1}^{n} a^q_{ij}(\mb{y}_i(k)-\mb{y}_j(k)) + \boldsymbol{\nabla} f_i(\mb{x}_i(k+1))-\boldsymbol{\nabla} f_i(\mb{x}_i(k))$
-- **Convergence or Behavioral Bound:**
-  The distributed algorithm converges dynamically to the global optimizer as long as $\alpha$ satisfies an explicit upper bound based on the spectral norm and minimum eigenvalue of the unperturbed matrix, and the discrete time step $\eta$ satisfies $\eta < \min_{2\leq i \leq 2n,1\leq j\leq m} \frac{2 |Re\{\lambda_{i,j}(\alpha)\}|}{|\lambda_{i,j}(\alpha)|^2}$, ensuring all eigenvalues of the discrete system (other than the required ones at 1) are strictly inside the unit circle.
-- **Application Scope:**
-  Mobile multi-agent systems, volatile communication networks experiencing link removals (packet drops), distributed classification, and distributed support vector machines (D-SVM).
-- **Limitations:**
-  The theoretical guarantees strictly require the symmetric weight-balanced condition to hold even after link removals. It requires an appropriate choice of the step size $\eta$ and $\alpha$, as large values will move the eigenvalues outside the unit circle causing instability.
-- **Architecture Mapping:** DESIGN_CANDIDATE. The algorithm can conceptually support distributed learning over volatile multi-agent networks within the Collaboration System by removing the need for real-time stochastic weight redesigns.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **For Beginners: Practical Analogy:**
-  Imagine a team of scouts mapping a large forest. They need to agree on a single global map, but they can only talk to nearby scouts. Sometimes their radios fail, or they move out of range (dynamic networks). Older methods required them to pause and carefully recalculate how much to trust everyone's voice every time a radio failed (bi-stochastic weights). This new method lets them just keep listening equally to those they can hear (weight-symmetric), ensuring they still all eventually draw the exact same optimal map, as long as they don't update their maps too fast (bounded step-size $\eta$).
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: DESIGN_CANDIDATE
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT

@@ -25,7 +25,51 @@ In the context of agent memory, this represents a brutal mathematical "dimension
 
 ---
 
-## 2. Core Mechanisms: Memory Compression & Anomaly Capture
+## 2. Core Mechanisms
+
+### Sparse Memory Retrieval Dynamics
+- **System Container**: Memory System
+- **Frontier Source**:
+  - Title: On Sparse Modern Hopfield Model
+  - Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+  - Version: v2
+  - URL: http://arxiv.org/abs/2309.12673v2
+  - Published: 2023-09-22T07:32:45Z
+- **Original Problem**: The modern Hopfield model utilizes dense attention mechanisms for memory retrieval, which can be computationally intensive and may suffer from suboptimal retrieval error bounds due to a lack of sparsity.
+- **Core Assumptions**: Memory patterns are bounded and distributed such that the separation condition holds (e.g., all memory patterns being on a sphere of radius $m$: $\|\xi^\mu\|=m$).
+- **Convergence or Behavior Bound**: The iterative retrieval dynamics monotonically decreases the energy function, rapidly converging to local fixed points where memory patterns are stored. The retrieval error is demonstrably smaller than or equal to that of the dense modern Hopfield model.
+- **Applicability Scope**: High-dimensional continuous associative memory systems aiming to retrieve exactly matched items while filtering out noisy or irrelevant patterns using sparse attention.
+- **Limitations**: The memory capacity and exact convergence properties depend strictly on the initial condition and the distribution (well-separation) of the stored patterns. Real-world continuous streams may violate these distributional assumptions.
+- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
+- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
+- **Repository Test Status**: EVIDENCE_INSUFFICIENT
+- **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)
+
+### On Sparse Modern Hopfield Model
+- **System Container**: Memory System
+- **Frontier Source**: arXiv:2309.12673v2 (Version date: 2023-09-22, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu)
+- **Original Problem**: Dense modern Hopfield networks retrieve memories using dense attention mechanisms, which are susceptible to interference from noisy or completely irrelevant patterns, degrading retrieval capacity and accuracy.
+- **Theoretical Bounds**:
+  - **Retrieval Error Bound**: The one-step sparse retrieval dynamics provides a tighter, sparsity-dependent error bound compared to its dense analog.
+  - **Memory Capacity**: It preserves the exponential memory capacity scaling properties of dense modern Hopfield models while explicitly ignoring non-supported patterns during convergence.
+- **Core Assumptions**:
+  - Relies on sparsemax being evaluated via an exact, finite thresholding procedure requiring sorting or sequential threshold derivation.
+  - Assumes stored patterns $\mathbf{\Xi}$ are appropriately bounded in norm for the retrieval bounds to hold.
+- **Applicability Scope**: High-dimensional associative memory buffers where accurate exact retrieval under high memory load and noise is strictly required, avoiding the interference found in standard dense softmax routing.
+- **Limitations**:
+  - Evaluating Sparsemax requires sorting operations ($O(M \log M)$), making it computationally more expensive per-step than standard Softmax for extremely large pattern sets without specialized hardware.
+- **Agent Architecture Mapping (CONCEPTUAL_MAPPING)**:
+  - Can conceptually inform the design of sparse retrieval mechanisms for long-term trajectory memory, truncating irrelevant past episodes entirely rather than assigning them vanishingly small weights.
+- **Repository Implementation Status**: `EVIDENCE_INSUFFICIENT`
+- **For Beginners**:
+  Imagine a detective looking through thousands of mugshots. A dense search engine tries to give a tiny fractional "match score" to every single face, which creates a huge, noisy mess. A sparse search engine acts like a strict filter: it instantly throws out 99% of the faces that don't match the description and only returns the top few exact candidates, giving a much clearer and sharper answer.
+- **Evidence Status**:
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+: Memory Compression & Anomaly Capture
 
 ### RAFA Posterior Sampling Regret Bound
 
@@ -124,6 +168,21 @@ Frontier Source: arXiv:2501.00237 (Wei Chen et al., 2025)
 Deterministic Convergence Mechanism: The paper leverages contrastive representation constraints to alleviate catastrophic forgetting by managing domain shift deterministically during incremental learning.
 
 ## 3. Why Unsupervised Learning?
+
+### Mathematical Mechanism: Sparse Memory Retrieval Dynamics
+- **Mathematical Mechanism**:
+  The sparse Hopfield energy is defined using the convex conjugate of the negative Gini entropy (sparsemax):
+  $$\mathcal{H}(\mathbf{x}) = -\Psi^\star(\beta \mathbf{\Xi}^\top \mathbf{x}) + \frac{1}{2} \langle\mathbf{x},\mathbf{x}\rangle$$
+  The corresponding sparse retrieval dynamics (Theorem `coro:eps_sparse_dense`) provides a tighter, sparsity-dependent error bound:
+  $$\|\mathcal{T}(\mathbf{x})-\xi_\mu\| \le m+d^{1/2}m\beta \left[\kappa \left(\max_{\nu\in[M]}\langle\xi_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)}\right)+\frac{1}{\beta}\right]$$
+
+### Mathematical Mechanism: On Sparse Modern Hopfield Model
+- **Mathematical Mechanism**:
+  A sparse continuous Hopfield network whose energy is formulated using the convex conjugate of the negative Gini entropy (sparsemax regularizer) rather than the standard log-sum-exp. The sparse retrieval dynamics take the form:
+  $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
+  where $\text{Sparsemax}$ enforces strict sparsity on the attention weights by thresholding negative activations: $[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$.
+
+
 
 In the long and lonely lifecycle of an agent, there can be no real-time, perfect human tutor labeling every action as "right" or "wrong." Unsupervised learning (especially contrastive learning) empowers the agent to "bootstrap" itself, automatically building a physically intuitive "World Model" purely from massive amounts of self-interaction.
 
@@ -377,6 +436,11 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 
 ## 5. 0-Foundation Business Analogies (For Beginners)
 
+### Analogy for Sparse Memory Retrieval Dynamics
+- **Beginner Analogy**: Imagine a librarian searching for a book based on a few keywords. A "dense" search might pull every book that shares even one keyword, making the final selection noisy. A "sparse" search strictly filters out the weak matches early, handing you only the most relevant books much faster.
+
+
+
 ### Analogy for RAFA Posterior Sampling Regret Bound
 Imagine you are exploring a maze. Instead of trying every single path randomly, you use your memory (the buffer) to imagine different possible maps of the maze (posterior sampling). You choose the map that makes you most uncertain (highest entropy) to explore next, ensuring you only take new steps when you actually learn something significant about the maze's layout.
 
@@ -518,68 +582,12 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - Wove "RAFA Posterior Sampling Regret Bound" into Core Theory and Analogies.
-  - Wove "Near Optimal Memory-Regret Tradeoff for Online Learning" into Core Theory and Analogies.
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
 - 动态演进映射 (Dynamic evolution mapping)
-  - Mapped RAFA posterior sampling to memory-based entropy bounds.
-  - Mapped Memory-Regret tradeoff space requirements to bounded-memory architectural constraints.
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - RAFA Posterior Sampling: COMPATIBLE. Relying on entropy drop for updating models strictly leverages Memory without conflicting with Architecture or Tool execution assumptions.
-  - Memory-Regret Tradeoff: COMPATIBLE. Formalizing sub-linear memory bounds strictly aligns with limited-resource decentralization principles and does not violate Collaboration assumptions.
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - 来源迁移记录 (Source migration record)
-  - Successfully migrated 2309.17382 (RAFA) and 2303.01673 (Memory-Regret Tradeoff).
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Sparse Memory Retrieval Dynamics
-- **System Container**: Memory System
-- **Frontier Source**:
-  - Title: On Sparse Modern Hopfield Model
-  - Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
-  - Version: v2
-  - URL: http://arxiv.org/abs/2309.12673v2
-  - Published: 2023-09-22T07:32:45Z
-- **Original Problem**: The modern Hopfield model utilizes dense attention mechanisms for memory retrieval, which can be computationally intensive and may suffer from suboptimal retrieval error bounds due to a lack of sparsity.
-- **Core Assumptions**: Memory patterns are bounded and distributed such that the separation condition holds (e.g., all memory patterns being on a sphere of radius $m$: $\|\xi^\mu\|=m$).
-- **Mathematical Mechanism**:
-  The sparse Hopfield energy is defined using the convex conjugate of the negative Gini entropy (sparsemax):
-  $$\mathcal{H}(\mathbf{x}) = -\Psi^\star(\beta \mathbf{\Xi}^\top \mathbf{x}) + \frac{1}{2} \langle\mathbf{x},\mathbf{x}\rangle$$
-  The corresponding sparse retrieval dynamics (Theorem `coro:eps_sparse_dense`) provides a tighter, sparsity-dependent error bound:
-  $$\|\mathcal{T}(\mathbf{x})-\xi_\mu\| \le m+d^{1/2}m\beta \left[\kappa \left(\max_{\nu\in[M]}\langle\xi_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)}\right)+\frac{1}{\beta}\right]$$
-- **Convergence or Behavior Bound**: The iterative retrieval dynamics monotonically decreases the energy function, rapidly converging to local fixed points where memory patterns are stored. The retrieval error is demonstrably smaller than or equal to that of the dense modern Hopfield model.
-- **Applicability Scope**: High-dimensional continuous associative memory systems aiming to retrieve exactly matched items while filtering out noisy or irrelevant patterns using sparse attention.
-- **Limitations**: The memory capacity and exact convergence properties depend strictly on the initial condition and the distribution (well-separation) of the stored patterns. Real-world continuous streams may violate these distributional assumptions.
-- **Architecture Mapping Status**: CONCEPTUAL_MAPPING
-- **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
-- **Repository Test Status**: EVIDENCE_INSUFFICIENT
-- **Beginner Analogy**: Imagine a librarian searching for a book based on a few keywords. A "dense" search might pull every book that shares even one keyword, making the final selection noisy. A "sparse" search strictly filters out the weak matches early, handing you only the most relevant books much faster.
-- **Evidence Status**: Verified from arXiv LaTeX Source (2theory.tex, 1preliminary.tex)
-
-### On Sparse Modern Hopfield Model
-- **System Container**: Memory System
-- **Frontier Source**: arXiv:2309.12673v2 (Version date: 2023-09-22, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu)
-- **Original Problem**: Dense modern Hopfield networks retrieve memories using dense attention mechanisms, which are susceptible to interference from noisy or completely irrelevant patterns, degrading retrieval capacity and accuracy.
-- **Mathematical Mechanism**:
-  A sparse continuous Hopfield network whose energy is formulated using the convex conjugate of the negative Gini entropy (sparsemax regularizer) rather than the standard log-sum-exp. The sparse retrieval dynamics take the form:
-  $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
-  where $\text{Sparsemax}$ enforces strict sparsity on the attention weights by thresholding negative activations: $[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$.
-- **Theoretical Bounds**:
-  - **Retrieval Error Bound**: The one-step sparse retrieval dynamics provides a tighter, sparsity-dependent error bound compared to its dense analog.
-  - **Memory Capacity**: It preserves the exponential memory capacity scaling properties of dense modern Hopfield models while explicitly ignoring non-supported patterns during convergence.
-- **Core Assumptions**:
-  - Relies on sparsemax being evaluated via an exact, finite thresholding procedure requiring sorting or sequential threshold derivation.
-  - Assumes stored patterns $\mathbf{\Xi}$ are appropriately bounded in norm for the retrieval bounds to hold.
-- **Applicability Scope**: High-dimensional associative memory buffers where accurate exact retrieval under high memory load and noise is strictly required, avoiding the interference found in standard dense softmax routing.
-- **Limitations**:
-  - Evaluating Sparsemax requires sorting operations ($O(M \log M)$), making it computationally more expensive per-step than standard Softmax for extremely large pattern sets without specialized hardware.
-- **Agent Architecture Mapping (CONCEPTUAL_MAPPING)**:
-  - Can conceptually inform the design of sparse retrieval mechanisms for long-term trajectory memory, truncating irrelevant past episodes entirely rather than assigning them vanishingly small weights.
-- **Repository Implementation Status**: `EVIDENCE_INSUFFICIENT`
-- **For Beginners**:
-  Imagine a detective looking through thousands of mugshots. A dense search engine tries to give a tiny fractional "match score" to every single face, which creates a huge, noisy mess. A sparse search engine acts like a strict filter: it instantly throws out 99% of the faces that don't match the description and only returns the top few exact candidates, giving a much clearer and sharper answer.
-- **Evidence Status**:
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
