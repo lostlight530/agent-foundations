@@ -2215,3 +2215,25 @@ $$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda
 
 #### 9. 初学者类比
 想象一群朋友试图通过平均他们个人的地图位置来商定城市的准确中心。他们只能通过给几个特定的朋友打电话来交流（有向图）。通常，如果电话线断开，每个人都必须完美地重新调整他们对其他人的信任程度，以确保他们的平均值不会偏移（双随机重新设计）。这个算法的工作方式不同：只要每个人接收到的信息量总体上等于发送出的信息量（权重平衡），他们就可以继续更新他们的估计，而不需要在每次电话断开时进行完整的重新计算。
+
+### 间歇性故障与恶意传输下的多智能体弹性共识
+- **System Container:** Collaboration System
+- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
+  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+  - **Publication Date:** 2024-03-26
+  - **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** 当合法智能体在无向网络中通信时受到间歇性故障或恶意传输的干扰，基于常数阈值的标准信任模型无法检测到这种间歇性的拜占庭活动，难以达成共识。
+- **Core Assumptions:**
+  - 合法传输具有相同的预期信任度，且严格高于恶意传输的预期信任度 ($d - c_j > 0$)。
+  - 潜在的合法图在整个时间上保持连通。
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Misclassification Probability Bound):
+    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
+- **Convergence or Behavior Bound:** 合法智能体几乎必定能通过几何衰减的误分类概率正确确定其信任邻域，保证在存在恶意智能体的情况下的共识收敛。
+- **Applicability Scope:** 弹性多智能体协调场景（如联邦学习或分布式集群控制），需要在不可靠或被主动破坏的传输环境中达成共识。
+- **Limitations:** 界限严重依赖于明确的期望差距 ($d - c_j > 0$) 不能趋近于零，如果恶意节点准确地模仿基线信任分布，该机制将失效。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一群朋友试图决定去哪里吃饭（共识）。群体中有一些人通过在随机时间大喊糟糕的想法来秘密试图破坏计划（间歇性攻击）。标准过滤失败是因为坏人在大部分时间表现正常。这个系统引入了滑动信任窗口：如果有人偶尔破坏计划，他们的信任分数会随着时间的推移成几何级数衰减，确保朋友们只听可靠的人的，并最终做出决定。
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE

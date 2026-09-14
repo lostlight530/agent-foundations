@@ -2378,3 +2378,25 @@ The convergence guarantees rely strictly on the local cost functions being stric
 
 #### 9. Beginner's Analogy
 Imagine a group of friends trying to agree on the exact center of a city by averaging their individual map locations. They can only communicate by calling a few specific friends (directed graph). Usually, if a phone line drops, everyone has to perfectly re-adjust how much they trust everyone else to ensure their averages don't drift (bi-stochastic redesign). This algorithm works differently: as long as everyone still receives as much information as they send out overall (weight-balanced), they can keep updating their estimates without needing a complete recalculation every time a call drops.
+
+### Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions
+- **System Container:** Collaboration System
+- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
+  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+  - **Publication Date:** 2024-03-26
+  - **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** Legitimate agents in an undirected network must reach consensus when subjected to intermittent faulty or malicious transmissions, where constant-threshold trust models fail to detect intermittent Byzantine activity.
+- **Core Assumptions:**
+  - Identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions ($d - c_j > 0$).
+  - The underlying legitimate graph remains continuously connected across time.
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Misclassification Probability Bound):
+    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
+- **Convergence or Behavior Bound:** Legitimate agents almost surely determine their trusted neighborhood correctly with geometrically decaying misclassification probabilities, guaranteeing consensus even in the presence of malicious agents.
+- **Applicability Scope:** Resilient multi-agent coordination scenarios (like federated learning or distributed fleet control) requiring consensus under unreliable or actively compromised transmission environments.
+- **Limitations:** The bounding relies heavily on the explicit expectation gap ($d - c_j > 0$) being bounded away from zero, failing if malicious nodes accurately mimic the baseline trust distribution.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of friends trying to decide where to eat (consensus). Some people in the group are secretly trying to ruin the plans by shouting random, bad ideas at random times (intermittent attacks). Standard filtering fails because the bad actors act normal most of the time. This system introduces a sliding trust window: if someone occasionally throws a wrench in the plans, their trust score geometrically decays over time, ensuring the friends only listen to the reliable ones and eventually make a decision.
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
