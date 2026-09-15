@@ -8,7 +8,6 @@ Not archived here:
 - Jules Daily Research, Weekly Cascade, or Monthly Strategic Blueprint task artifacts
 - active FOUNDATION contracts, source registry, evidence policy, specs, plans, schemas, checkers, or workflows
 - current external-maintenance procedure/templates
-- the current maintenance entry point `docs/SEPTEMBER_2026_01_13_RECONCILIATION.md`
 
 ## Archive classes
 
@@ -35,5 +34,12 @@ Not archived here:
 | Cross-period Jules cadence reconciliation | `05-maintenance-and-reconciliation/2026-09-06--jules-cadence-jul-01-sep-06--reconciliation.md` | `docs/JULES_CADENCE_2026-07-01_THROUGH_2026-09-06_RECONCILIATION.md` |
 | Jules content-contract reconciliation | `05-maintenance-and-reconciliation/2026-09-06--jules-content-contract-jul-01-sep-06--reconciliation.md` | `docs/JULES_CONTENT_CONTRACT_2026-07-01_THROUGH_2026-09-06_RECONCILIATION.md` |
 | September ten-day successor reconciliation | `05-maintenance-and-reconciliation/2026-09-10--sep-01-10--cadence-reconciliation.md` | `docs/JULES_CADENCE_2026-09-10_TEN_DAY_SUCCESSOR_RECONCILIATION.md` |
+| September 1-13 maintenance reconciliation | `05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` | no live `docs/SEPTEMBER_2026_01_13_RECONCILIATION.md` on current main |
+
+## Current recovery note
+
+As of 2026-09-15, `05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` is the latest completed independent maintenance record preserved in this archive. Its internal `CURRENT_MAINTENANCE_RECORD` label is the record's write-time role, not a live path under `docs/`.
+
+Current repository authority remains with the active `FOUNDATION/` evidence, provenance, review, source-registry, and maintenance contracts together with current repository evidence. The archive preserves point-in-time interpretation and does not replace those current surfaces.
 
 The old paths remain recoverable through Git history. The archive is historical storage, not current Jules task output, current repository authority, or the external-maintenance reference template.

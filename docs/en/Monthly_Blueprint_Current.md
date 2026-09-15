@@ -4,9 +4,9 @@ Current evidence window: **2026-08-01 through 2026-08-31**
 
 Status: **FINAL NATURAL-MONTH DOCUMENTARY CLOSURE**
 
-Authoritative final ledger: [`../AUGUST_2026_01_31_EVIDENCE_LEDGER.md`](../AUGUST_2026_01_31_EVIDENCE_LEDGER.md)
+Authoritative final ledger: [historical archive](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
 
-08-31 targeted reconciliation: [`../AUGUST_2026_31_RECONCILIATION.md`](../AUGUST_2026_31_RECONCILIATION.md)
+08-31 targeted reconciliation: [historical archive](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
 
 The earlier through-day-30 blueprint remains historical/provisional evidence and is not rewritten.
 

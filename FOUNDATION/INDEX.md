@@ -5,9 +5,9 @@ Current calibration: 2026-09-01
 
 Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)
 
-August 1–31 evidence ledger: [../docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md](../docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md)
+August 1–31 evidence ledger: [../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md](../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
 
-Full public-document audit: [2026-08-28-DOCUMENT-AUDIT.md](./2026-08-28-DOCUMENT-AUDIT.md)
+Full public-document audit: [../historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md](../historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md)
 
 ## Purpose / 目的
 
@@ -84,14 +84,14 @@ Historical Daily Research Chunks remain evidence of what was generated/recorded 
 
 ### 8. Explicit August corrections / 8 月显式纠错
 
-- [`../docs/AUGUST_2026_W33_ERRATA.md`](../docs/AUGUST_2026_W33_ERRATA.md)
-- [`../docs/AUGUST_2026_W34_ERRATA.md`](../docs/AUGUST_2026_W34_ERRATA.md)
-- [`../docs/AUGUST_2026_24_27_RECONCILIATION.md`](../docs/AUGUST_2026_24_27_RECONCILIATION.md)
+- [`../historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md`](../historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md)
+- [`../historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md`](../historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md)
+- [`../historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md`](../historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md)
 - [`../docs/monthly/2026-08-through-27-strategic-blueprint.md`](../docs/monthly/2026-08-through-27-strategic-blueprint.md)
-- [`../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md`](../docs/AUGUST_2026_01_30_EVIDENCE_LEDGER.md)
+- [`../historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md`](../historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md)
 - [`../docs/monthly/2026-08-through-30-strategic-blueprint.md`](../docs/monthly/2026-08-through-30-strategic-blueprint.md)
-- [`../docs/AUGUST_2026_31_RECONCILIATION.md`](../docs/AUGUST_2026_31_RECONCILIATION.md)
-- [`../docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md`](../docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md)
+- [`../historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md`](../historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
+- [`../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md`](../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
 
 ## Current authority precedence / 当前解释优先级
 
