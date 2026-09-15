@@ -67,13 +67,14 @@ Important boundary:
 
 [arxiv_probe.py](./arxiv_probe.py) supports bibliographic identity and submission-history checks. It does not certify theorem content or experiments.
 
-### 6. Evidence, provenance, and review semantics
+### 6. Evidence, provenance, review, and independent recovery semantics
 
 - [EVIDENCE.md](./EVIDENCE.md)
 - [PROVENANCE.md](./PROVENANCE.md)
 - [REVIEW.md](./REVIEW.md)
+- [independent-gpt/README.md](./independent-gpt/README.md) — public cold-start router for a memoryless independent reviewer; it does not outrank the foundation contracts above.
 
-These are documentary interpretation surfaces, not execution engines.
+These are documentary interpretation/recovery surfaces, not execution engines.
 
 ### 7. Historical generated research / 历史研究
 
@@ -114,7 +115,8 @@ This precedence changes current interpretation only.
 6. [SOURCES.md](./SOURCES.md)
 7. [PROVENANCE.md](./PROVENANCE.md)
 8. [REVIEW.md](./REVIEW.md)
-9. August reconciliation/stage synthesis when historical correction is relevant
+9. [independent-gpt/README.md](./independent-gpt/README.md) when performing memoryless external recovery/audit
+10. August reconciliation/stage synthesis when historical correction is relevant
 
 ## Repository-wide implementation classification
 
