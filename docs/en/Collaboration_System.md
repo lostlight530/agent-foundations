@@ -2318,6 +2318,26 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **For Beginners: Practical Analogy:** Imagine a massive restaurant kitchen with 20 chefs. Instead of forcing all 20 to agree on every single dish simultaneously (which takes forever), they are divided into small, overlapping teams based on the menu. Each team optimizes their own local recipes. This mathematically bounds how badly the kitchen can fail, ensuring worst-case efficiency as long as the teams remain relatively independent (sparse).
 - **Evidence Status:** PAPER_ONLY
 
+
+### Replication-proof Bandit Mechanism Design with Bayesian Agents
+- **System Container:** Collaboration System
+- **Frontier Source:** S41 (arXiv:2312.16896v2, *Replication-proof Bandit Mechanism Design with Bayesian Agents*)
+- **Original Problem:** Existing replication-proof bandit algorithms assume agents are fully informed about their own arms. In a Bayesian setting where agents only know the prior distribution of their arm's rewards, algorithms like UCB fail to be replication-proof. Agents are incentivized to replicate arms, destroying the exploration-exploitation balance and severely degrading the learning process.
+- **Core Assumptions:** Explicitly assumes a stochastically ordered family of arms and discrete support of prior distributions (e.g., minimum gap between optimal and suboptimal arms is known and strictly positive).
+- **Mathematical Mechanism:**
+  The algorithm achieves replication-proofness under the Random Permutation Regret (RP-Regret) metric. A single-agent bandit instance $\cI$ with $l$ arms's random permutation regret is defined as:
+  $$ \rpreg(\fA, T) = \Exu{\sigma \in \cP_l}{\reg_{I_{\sigma}}(\fA, T)} $$
+  The multi-agent setting utilizes a Hierarchical Exploration-Then-Commit with Restarting ($\hbb$) algorithm. It explicitly separates agent selection from arm selection and introduces a restarting round $\tau$ to remove cross-round dependencies in agents' posterior distributions.
+- **Convergence or behavior boundaries:** Assures replication-proofness (truthful reporting is the dominant strategy) and achieves sublinear regret $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ assuming the strict minimum gap assumption $\Delta$.
+- **Applicability Scope:** Multi-agent environments where agents have unknown prior distributions about their capabilities (arms) and might strategically replicate or obscure options to maximize individual selection probability over the system's global utility.
+- **Limitations:** The sublinear regret and equilibrium guarantees rely strictly on the arms coming from a stochastically ordered family with discrete priors. Continuous distributions, where the gap between means can be arbitrarily small, violate the minimum gap assumption and break the provided bounds.
+- **Agent Architecture Mapping:** Can conceptually support hierarchical decentralized routing mechanisms where node agents (or tool registries) must register their capabilities without duplicating identical tools to game the scheduler.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine multiple chefs submitting secret recipes to a restaurant's menu. If the restaurant uses a standard tasting algorithm (like UCB), a sneaky chef might submit the same average recipe 100 times under different names just to increase the chance it gets picked. The Hierarchical ETC algorithm fixes this by first randomly picking a chef, and then evaluating their recipes. The chefs quickly realize that submitting duplicates doesn't increase their chance of being picked as the chef, it just wastes their own evaluation time.
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 

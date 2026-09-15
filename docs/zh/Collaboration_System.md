@@ -2155,6 +2155,26 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **初学者类比:** 想象一个有 20 个厨师的大型餐厅厨房。与其强迫 20 个人同时就每道菜达成一致（这会花费无尽的时间），不如根据菜单将他们分成小且重叠的团队。每个团队优化自己的局部食谱。这在数学上限制了厨房可能出现的最坏情况，只要团队保持相对独立（稀疏），就能保证最坏情况下的效率。
 - **证据状态:** PAPER_ONLY
 
+
+### 贝叶斯智能体下防复制的老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
+- **System Container:** Collaboration System
+- **Frontier Source:** S41 (arXiv:2312.16896v2, *Replication-proof Bandit Mechanism Design with Bayesian Agents*)
+- **Original Problem:** 现有的防复制老虎机算法假设智能体完全了解自己的臂（arms）。在贝叶斯设置中，智能体只知道其臂奖励的先验分布，此时像 UCB 这样的算法无法做到防复制。智能体会受到激励去复制臂，从而破坏探索-利用平衡，并严重降低学习过程的效率。
+- **Core Assumptions:** 明确假设臂来自随机排序族，并且先验分布具有离散支撑集（例如，最优臂和次优臂之间的最小差距是已知的且严格为正）。
+- **Mathematical Mechanism:**
+  该算法在随机排列遗憾 (RP-Regret) 指标下实现了防复制性。一个具有 $l$ 个臂的单智能体老虎机实例 $\cI$ 的随机排列遗憾定义为：
+  $$ \rpreg(\fA, T) = \Exu{\sigma \in \cP_l}{\reg_{I_{\sigma}}(\fA, T)} $$
+  多智能体设置使用带有重启的层次化探索后提交（$\hbb$）算法。它显式地将智能体选择与臂选择分离，并引入一个重启轮次 $\tau$ 以消除智能体后验分布在跨轮次中的依赖。
+- **Convergence or behavior boundaries:** 确保了防复制性（真实报告是主导策略），并在严格的最小差距假设 $\Delta$ 下，实现了 $O(\frac{nL^3\sqrt{T \ln T}}{\Delta^3})$ 的次线性遗憾。
+- **Applicability Scope:** 多智能体环境，在该环境中，智能体对其能力（臂）具有未知的先验分布，并可能战略性地复制或隐藏选项，以牺牲系统的全局效用为代价来最大化个人的被选择概率。
+- **Limitations:** 次线性遗憾和均衡保证严格依赖于来自随机排序族的离散先验分布的臂。连续分布（均值差距可以任意小）违反了最小差距假设，并打破了提供的界限。
+- **Agent Architecture Mapping:** 可以在概念上支持分层去中心化路由机制，在这种机制中，节点智能体（或工具注册表）必须注册其能力，而不能复制相同的工具来操纵调度程序。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一下，多个厨师向餐厅菜单提交秘制食谱。如果餐厅使用标准的品尝算法（如 UCB），一个狡猾的厨师可能会将相同的普通食谱以不同的名字提交 100 次，只是为了增加它被选中的机会。层次化 ETC 算法通过首先随机挑选一个厨师，然后评估他们的食谱来解决这个问题。厨师们很快意识到，提交重复的食谱并不会增加他们被选为厨师的机会，这只会浪费他们自己的评估时间。
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
