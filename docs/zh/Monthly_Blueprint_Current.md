@@ -4,9 +4,9 @@
 
 状态：**FINAL NATURAL-MONTH DOCUMENTARY CLOSURE**
 
-最终权威总账：[`../AUGUST_2026_01_31_EVIDENCE_LEDGER.md`](../AUGUST_2026_01_31_EVIDENCE_LEDGER.md)
+最终权威总账：[历史归档](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
 
-08-31 定向 reconciliation：[`../AUGUST_2026_31_RECONCILIATION.md`](../AUGUST_2026_31_RECONCILIATION.md)
+08-31 定向 reconciliation：[历史归档](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
 
 此前 through-day-30 蓝图继续保留为历史/临时证据，不回写原记录。
 

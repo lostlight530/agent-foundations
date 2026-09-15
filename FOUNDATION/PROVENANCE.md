@@ -1,8 +1,16 @@
 # Reproducibility and Provenance / 可复现性与溯源
 
-Current calibration: 2026-09-01
+Current calibration: 2026-09-15
 
-This file defines public source, version, claim-surface, temporal, and correction provenance for the Agent Foundations documentary core.
+This file defines public source, version, claim-surface, temporal, correction, and AI-assistance provenance for the Agent Foundations documentary core.
+
+## AI-use disclosure / AI 使用披露
+
+AI assistance may be used for drafting, translation support, consistency checks, research organization, and candidate-source discovery. AI output is not automatically evidence and does not become a verified foundation claim by being generated, repeated, or incorporated into prose.
+
+Material conclusions still require the repository's declared claim/evidence chain and, where applicable, independently inspectable repository or public-source evidence. Human maintainer review remains the final merge and governance authority.
+
+This public disclosure does not require publication of private prompts, hidden chain-of-thought/reasoning, credentials, tokens, or other sensitive operator context. Process transparency is bounded to evidence and provenance that can be safely and independently inspected.
 
 ## Reproducibility target / 可复现目标
 
@@ -174,6 +182,6 @@ Target public object:
 
 `CLAIM + CANONICAL_SOURCE_ID + SOURCE_VERSION + CHECKED_SURFACE + SCOPE + LIMITATION + CURRENT_STATUS`.
 
-Current August authority: `docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md` plus targeted errata/reconciliations.
+Current August authority: `historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md` plus targeted errata/reconciliations.
 Formal August natural-month status: `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED`.
 W36 status: `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`.
