@@ -1,5 +1,7 @@
 # Agent Foundations / 智能体理论与证据基础
 
+[![DOI](https://zenodo.org/badge/1243630280.svg)](https://zenodo.org/badge/latestdoi/1243630280)
+
 Agent Foundations is a bilingual theory, evidence, and architecture-decision base for reasoning about agent systems. It is not an implemented autonomous-agent runtime. Claims in this repository are bounded by named evidence, assumptions, implementation status, and validation status.
 
 Agent Foundations 是用于研究智能体系统的双语理论、证据与架构决策基础，不是已实现的自治智能体运行时。本仓库的声明均受明确证据、假设、实现状态与验证状态约束。
