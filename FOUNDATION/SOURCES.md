@@ -427,3 +427,11 @@ Canonical rules:
 - Verification boundary: Guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced.
 
 Current canonical registry range: `S01–S45`.
+
+## [S46] Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+- **ID:** S46
+- **Type:** PAPER
+- **arXiv ID:** 2303.14023v1
+- **Version date:** 2023-03-24
+- **Title:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+- **Authors:** Jiahao Dai, Jing-Wen Yi, Li Chai

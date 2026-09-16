@@ -591,3 +591,60 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+
+- **System Container:** Memory System
+- **Frontier Source:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information (arXiv:2303.14023v1)
+- **Authors:** Jiahao Dai, Jing-Wen Yi, Li Chai
+- **URL:** http://arxiv.org/abs/2303.14023v1
+- **Publication Date:** 2023-03-24
+- **Theoretical Selection Reason:** It strictly formulates a multi-tap memory protocol to improve consensus convergence rate in multi-agent systems, translating empirical memory benefits into explicitly derived spectral properties and bounding conditions.
+
+#### 论文原始问题 (Original Problem)
+In standard memoryless control protocols for multi-agent systems, achieving fast convergence to consensus requires carefully tuned control parameters, often restricted by graph topology properties like the Fiedler value. The study investigates whether introducing an $M$-tap history of past velocities into the agent's control input can systematically accelerate the consensus convergence rate of second-order MASs.
+
+#### 核心假设 (Core Assumptions)
+1. **Second-Order Dynamics**: The continuous agent states (position and velocity) are governed by linear update steps where velocity is integrated into position over discrete sampling period $\tau$.
+2. **Fixed Topology**: The agent communication network is modeled as a fixed, undirected graph where the Laplacian matrix $\mathcal{L}$ properties are time-invariant.
+3. **Zero-Sum Memory Weights**: To ensure asymptotic consensus can actually be reached, the coefficients assigned to historical velocity terms must satisfy $\sum_{m=0}^M {\theta_m} = 0$.
+
+#### 数学机制 (Mathematical Mechanism)
+The control protocol utilizing an $M$-tap memory of past velocities for each agent $i$ is formulated as:
+$$
+{u_i}(k) = {\varepsilon _1}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({x_j}(k) \!-\! {x_i}(k)} ) \!+\! {\varepsilon _2}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({v_j}(k) \!-\! {v_i}(k)} ) + \sum\limits_{m = 0}^M {{\theta _m}{v_i}(k \!-\! m)}
+$$
+where ${\varepsilon_1}, {\varepsilon_2}$ are spatial coupling gains and ${\theta_m}$ are the temporal memory tap weights.
+
+The necessary condition for reaching consensus requires that the sum of the historical velocity coefficients must be zero:
+$$
+\sum\limits_{m = 0}^M {{\theta _m} = 0}
+$$
+
+#### 收敛或行为边界 (Convergence or behavior boundaries)
+If the memory weights satisfy the zero-sum condition, the consensus problem transforms into ensuring simultaneous stabilization across the decoupled subsystems in the graph spectrum domain. By choosing appropriate memory weights ${\theta_m}$, the dominant eigenvalue governing the system's spectral radius can be minimized, leading to a theoretically provable acceleration of the asymptotic convergence rate compared to memoryless protocols ($\theta_m = 0$).
+
+#### 适用范围 (Applicable Scope)
+- Systems modeling agents moving or updating parameters in continuous or discretized state spaces with second-order dynamics (momentum or explicit velocity terms).
+- Environments with synchronized update steps where past state memory ($M$ steps) is reliable and accessible.
+
+#### 局限 (Limitations)
+- Derivations rely on a fixed topology; dynamic or switching graphs where connections drop frequently are not explicitly covered.
+- As the memory depth $M$ increases, the computational and storage overhead scales linearly, and tuning the roots of higher-order characteristic equations becomes complex.
+- Non-linear agent dynamics or non-uniform delays across the network are excluded from this strict linear assumption model.
+
+#### Agent 架构映射 (Agent Architecture Mapping)
+In the **Memory System** architecture, this mathematical model introduces a structural constraint for velocity or momentum-based optimization scenarios (such as distributed learning consensus). When an agent leverages past gradients or state updates (a multi-tap memory buffer), a regularizing constraint analogous to $\sum {\theta_m} = 0$ must be conceptually enforced over the historical weights to prevent divergence. It implies that simply accumulating history is not unconditionally beneficial; the historical weighting function must be algebraically balanced.
+
+#### 仓库实现状态 (Repository Implementation Status)
+EVIDENCE_INSUFFICIENT
+
+#### 初学者类比 (Beginner Analogy)
+Imagine a group of drivers trying to match their speeds on a highway to form a convoy. If a driver only looks at the distance and speed of neighbors right now (memoryless), they might overreact and brake hard, causing oscillations. If they also remember their own acceleration patterns from the last few seconds (multi-tap memory) and blend that history in a balanced way (zero-sum weights), they can smooth out their reactions and merge into the convoy's speed much faster without overshooting.
+
+#### 证据状态 (Evidence Status)
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
