@@ -592,3 +592,60 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+
+- **System Container:** Memory System
+- **Frontier Source:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information (arXiv:2303.14023v1)
+- **Authors:** Jiahao Dai, Jing-Wen Yi, Li Chai
+- **URL:** http://arxiv.org/abs/2303.14023v1
+- **Publication Date:** 2023-03-24
+- **Theoretical Selection Reason:** 该论文严格构建了利用多阶历史记忆加速多智能体系统一致性收敛速度的协议，将经验性的“记忆优势”转化为了具有明确谱特性和边界条件的理论推导。
+
+#### 论文原始问题 (Original Problem)
+在标准的多智能体系统无记忆控制协议中，为了实现快速的一致性收敛，需要仔细调整控制参数，而这些参数往往受限于图拓扑特性（如 Fiedler 值）。本研究探讨了是否可以在智能体的控制输入中引入过去速度的 $M$ 阶历史记录（记忆），从而系统性地加速二阶多智能体系统的一致性收敛速度。
+
+#### 核心假设 (Core Assumptions)
+1. **二阶动力学 (Second-Order Dynamics)**: 连续的智能体状态（位置与速度）遵循线性更新机制，在离散采样周期 $\tau$ 内将速度积分至位置。
+2. **固定拓扑 (Fixed Topology)**: 智能体通信网络被建模为固定的无向图，拉普拉斯矩阵 $\mathcal{L}$ 的属性是不随时间变化的。
+3. **零和记忆权重 (Zero-Sum Memory Weights)**: 为确保实际能够渐近达到一致性，分配给历史速度项的系数必须满足 $\sum_{m=0}^M {\theta_m} = 0$。
+
+#### 数学机制 (Mathematical Mechanism)
+利用过去速度的 $M$ 阶记忆为每个智能体 $i$ 设计的控制协议公式化如下：
+$$
+{u_i}(k) = {\varepsilon _1}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({x_j}(k) \!-\! {x_i}(k)} ) \!+\! {\varepsilon _2}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({v_j}(k) \!-\! {v_i}(k)} ) + \sum\limits_{m = 0}^M {{\theta _m}{v_i}(k \!-\! m)}
+$$
+其中，${\varepsilon_1}, {\varepsilon_2}$ 是空间耦合增益，${\theta_m}$ 是时间维度上的记忆抽头权重。
+
+系统达到一致性的必要条件要求历史速度项系数之和必须为零：
+$$
+\sum\limits_{m = 0}^M {{\theta _m} = 0}
+$$
+
+#### 收敛或行为边界 (Convergence or behavior boundaries)
+如果记忆权重满足零和条件，一致性问题将转化为在图谱域中确保所有解耦子系统的同时镇定问题。通过选择适当的记忆权重 ${\theta_m}$，可以最小化主导系统谱半径的最大特征值，从而在理论上证明相较于无记忆协议（$\theta_m = 0$），可以显著加速渐近收敛速率。
+
+#### 适用范围 (Applicable Scope)
+- 智能体在具有二阶动力学（动量或显式速度项）的连续或离散化状态空间中移动或更新参数的系统。
+- 具有同步更新步调、且能够可靠存储与访问过去状态记忆（$M$ 步）的环境。
+
+#### 局限 (Limitations)
+- 推导依赖于固定拓扑假设；未明确涵盖连接频繁断开或建立的动态切换图结构。
+- 随着记忆深度 $M$ 的增加，计算和存储开销呈线性增长，且高阶特征方程的求根调优过程会变得极其复杂。
+- 该严格的线性假设模型排除了非线性智能体动力学或网络中存在不均匀通信延迟的情况。
+
+#### Agent 架构映射 (Agent Architecture Mapping)
+在 **Memory System** 架构中，该数学模型为基于速度或动量的优化场景（如分布式学习一致性）引入了一种结构性约束。当 Agent 利用过去的梯度或状态更新（一种多抽头记忆缓冲区）时，必须在概念上对历史权重强制执行类似于 $\sum {\theta_m} = 0$ 的正则化约束，以防止系统发散。这意味着仅仅简单地累积历史并不必然有益；历史权重函数必须在代数上保持平衡。
+
+#### 仓库实现状态 (Repository Implementation Status)
+EVIDENCE_INSUFFICIENT
+
+#### 初学者类比 (Beginner Analogy)
+想象一群司机试图在高速公路上统一车速以组成车队。如果一个司机只看当下邻近车辆的距离和速度（无记忆），他们可能会反应过度猛踩刹车，导致车速剧烈波动。如果他们还能记住自己过去几秒钟内的加速习惯（多阶记忆），并以一种平衡的方式（零和权重）综合参考这些历史经验，他们就能更平滑地调整反应，更快地融入车队速度，而不会频繁冲过头。
+
+#### 证据状态 (Evidence Status)
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
