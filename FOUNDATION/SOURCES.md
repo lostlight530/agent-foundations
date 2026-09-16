@@ -377,7 +377,8 @@ Canonical rules:
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2312.16896v2
-- Version date: 2023-12-28
+- Version date: 2025-01-31
+- v1 date: 2023-12-28
 - Authors: Suho Shin, Seyed A. Esmaeili, MohammadTaghi Hajiaghayi
 - URL: https://arxiv.org/abs/2312.16896
 - Use: hierarchical exploration-then-commit framework and replication-proof equilibrium
