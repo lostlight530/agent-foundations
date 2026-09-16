@@ -1,0 +1,23 @@
+{
+  "@context": "https://w3id.org/codemeta/3.1",
+  "@type": "SoftwareSourceCode",
+  "name": "Agent Foundations",
+  "description": "A bilingual theory, evidence, and architecture-decision foundation for reasoning about agent systems with explicit claim, implementation, and validation boundaries.",
+  "codeRepository": "https://github.com/lostlight530/agent-foundations",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "author": {
+    "@type": "Person",
+    "name": "lostlight530",
+    "url": "https://github.com/lostlight530"
+  },
+  "applicationCategory": "Research Software",
+  "isAccessibleForFree": true,
+  "keywords": [
+    "agent systems",
+    "research infrastructure",
+    "evidence",
+    "architecture decisions",
+    "provenance",
+    "reproducibility"
+  ]
+}
