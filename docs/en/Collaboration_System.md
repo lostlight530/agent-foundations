@@ -2420,3 +2420,24 @@ Imagine a group of friends trying to agree on the exact center of a city by aver
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine a group of friends trying to decide where to eat (consensus). Some people in the group are secretly trying to ruin the plans by shouting random, bad ideas at random times (intermittent attacks). Standard filtering fails because the bad actors act normal most of the time. This system introduces a sliding trust window: if someone occasionally throws a wrench in the plans, their trust score geometrically decays over time, ensuring the friends only listen to the reliable ones and eventually make a decision.
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+### Collusion in Self-Play Q-learning
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
+- **Original Problem:** Uncoordinated learning in multi-agent environments like the Iterated Prisoner's Dilemma often fails to achieve mutual cooperation, but empirical evidence shows self-play Q-learners can unexpectedly collude. Understanding the mathematical mechanism behind this convergence is necessary for predictable multi-agent training.
+- **Core Assumptions:**
+  - Agents employ self-play $\epsilon$-greedy Q-learning.
+  - The game is the Iterated Prisoner's Dilemma (IPD) with standard payoff structures favoring defection.
+- **Mathematical Mechanism:**
+  - **Core Update Formula:** The algorithm converges toward cooperative states through a sequence of phase transitions driven by Q-value updates. In the initial phase, the convergence of the defect action Q-value is bounded by $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$.
+- **Convergence Bound:**
+  - The convergence of the Q-values is linear in each phase, achieving convergence in $\bigo(1/\alpha)$ steps per phase, eventually guaranteeing convergence to a cooperative Pavlov-like policy under specific initialization bounds.
+- **Applicability Scope:** Independent multi-agent reinforcement learning (MARL) in general-sum games, where agents update local value functions without central coordination.
+- **Limitations:** The proof heavily relies on optimistic initialization and specific bounds on the learning rate and discount factor; it does not generalize to arbitrary adversarial general-sum games without the IPD payoff structure.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- Can conceptually support independent multi-agent self-play mechanisms where cooperative equilibria can be fostered purely through decentralized value updates and optimistic initialization, rather than explicit coordination protocols.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine two rival businesses setting prices without communicating. Normally, they both slash prices (defect) to steal customers, hurting both profits. However, if they both start out wildly optimistic about how much money they can make (optimistic initialization), their learning algorithms slowly realize that punishing the other's price cut while rewarding price matching eventually leads them to implicitly collude and keep prices high (cooperate).
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE

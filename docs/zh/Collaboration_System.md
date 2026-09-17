@@ -2257,3 +2257,24 @@ $$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一群朋友试图决定去哪里吃饭（共识）。群体中有一些人通过在随机时间大喊糟糕的想法来秘密试图破坏计划（间歇性攻击）。标准过滤失败是因为坏人在大部分时间表现正常。这个系统引入了滑动信任窗口：如果有人偶尔破坏计划，他们的信任分数会随着时间的推移成几何级数衰减，确保朋友们只听可靠的人的，并最终做出决定。
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+### 自我对弈 Q 学习中的共谋
+
+- **System Container (系统容器):** Collaboration System
+- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
+- **Original Problem (论文原始问题):** 在迭代囚徒困境等多智能体环境中，未协调的学习通常无法实现相互合作，但经验证据表明自我对弈 Q 学习者会出人意料地共谋。理解这种收敛背后的数学机制对于可预测的多智能体训练是必要的。
+- **Core Assumptions (核心假设):**
+  - 智能体采用自我对弈的 $\epsilon$-贪婪 Q 学习。
+  - 博弈是具有偏向背叛的标准收益结构的迭代囚徒困境 (IPD)。
+- **Mathematical Mechanism (数学机制):**
+  - **核心更新公式:** 算法通过 Q 值更新驱动的一系列相变收敛到合作状态。在初始阶段，背叛动作 Q 值的收敛界为 $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$。
+- **Convergence or behavior boundaries (收敛或行为边界):**
+  - **收敛界:** Q 值的收敛在每个阶段都是线性的，每个阶段在 $\bigo(1/\alpha)$ 步内实现收敛，最终在特定的初始化界限下保证收敛到类似 Pavlov 的合作策略。
+- **Applicability Scope (适用范围):** 一般和博弈中独立的多智能体强化学习 (MARL)，其中智能体在没有中心协调的情况下更新局部价值函数。
+- **Limitations (局限):** 证明严重依赖于乐观初始化以及对学习率和折扣因子的特定界限；如果没有 IPD 收益结构，它不能推广到任意对抗性一般和博弈。
+- **Agent Architecture Mapping (Agent 架构映射):** CONCEPTUAL_MAPPING
+- 在概念上可以支持独立的多智能体自我对弈机制，其中可以通过去中心化的价值更新和乐观初始化纯粹地培养合作均衡，而不是显式的协调协议。
+- **Repository Implementation Status (实现状态):** EVIDENCE_INSUFFICIENT
+- **Repository Test Status (测试状态):** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy (初学者类比):** 想象两家竞争企业在没有沟通的情况下定价。通常，他们都会大幅降价（背叛）来抢走客户，从而损害双方的利润。然而，如果他们一开始都对能赚多少钱抱有疯狂的乐观态度（乐观初始化），他们的学习算法会慢慢意识到，惩罚对方的降价同时奖励价格匹配，最终会导致他们隐性共谋并保持高价（合作）。
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
