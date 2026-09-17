@@ -1,13 +1,21 @@
 # Public Evidence Review States / 公开证据审核状态
 
 Status: documentary review vocabulary  
-Current calibration: 2026-09-01
+Current calibration: 2026-09-17
 
 ## Purpose / 目的
 
-This file records public review states for Agent Foundations claims, source identities, and historical research corrections.
+This file records public review states for Agent Foundations claims, source identities, verified-core admission, and historical research corrections.
 
-It describes evidence disposition only. It does not execute repository behavior or create implementation capability.
+It describes evidence disposition only. It does not execute repository behavior, create implementation capability, authorize a maintenance write, or prove what Jules/private producers consumed.
+
+`FOUNDATION/independent-gpt/README.md` has a different role: it governs memoryless maintenance recovery, concurrency, bounded repair, and Draft-PR delivery. Review state and maintenance action must not be collapsed.
+
+## Recovery prerequisite / 恢复前提
+
+Before assigning a current review state, recover the exact artifact/revision from current merged `main`. When maintenance or delivery state matters, also inspect relevant open pull requests, active maintenance branches, and revision-matched validation evidence.
+
+A stale clone, prior handoff SHA, later path presence, or model recollection cannot establish current or historical execution state by itself.
 
 ## Review states / 审核状态
 
@@ -22,32 +30,32 @@ It describes evidence disposition only. It does not execute repository behavior 
 9. `CALIBRATED`
 10. `ACCEPTED_FOR_VERIFIED_CORE`
 
-These states are not confidence scores and do not expose private reasoning.
+These states are not confidence scores, execution states, or maintenance-delivery states and do not expose private reasoning.
+
+Useful separation:
+
+```text
+review state != maintenance action
+CALIBRATED != repair delivered
+ACCEPTED_FOR_VERIFIED_CORE != merged
+STATIC_CHECKED != semantic truth
+```
 
 ## Source-registration review / 来源登记审核
 
 Before assigning a new `Sxx` ID:
 
-1. normalize the external source identity
-2. check the existing canonical registry
-3. for arXiv, compare the **base paper ID**, not only the cited `vN`
-4. if the source already exists, reuse the existing S ID and record the new version/revisit as provenance
-5. only genuinely new identities receive a new contiguous S ID
-6. verify title/authors/version metadata to the strongest source surface available
-7. keep paper results separate from repository implementation
+1. normalize the external source identity;
+2. check the existing canonical registry;
+3. for arXiv, compare the **base paper ID**, not only the cited `vN`;
+4. if the source already exists, reuse the existing S ID and record the new version/revisit as provenance;
+5. only genuinely new identities receive a new contiguous S ID;
+6. verify title/authors/version metadata to the strongest source surface available;
+7. keep paper results separate from repository implementation.
 
 A later Daily Research Chunk does not receive a new source ID merely because it is new research activity.
 
-Reference dispositions:
-
-- S33: retained as new canonical source
-- S34: retained as new canonical source
-- S35: retained, with author metadata corrected
-- attempted S36 on 08-27: not retained; duplicate of existing S10 RAFA
-- S36 on 08-28: retained as the distinct memory-regret source
-- 08-29 revisit: resolves to S25
-- S37 on 08-30: retained as distinct joint-Lyapunov source
-- S38 on 08-31: retained as distinct Independent NPG source after source/venue/version reconciliation
+Historical August reference dispositions remain point-in-time examples; they do not define September source counts by themselves.
 
 ## Supported review paths / 支持的审核路径
 
@@ -77,43 +85,86 @@ A repeated/revisited source can stop at:
 
 When material, preserve these distinctions:
 
-- canonical source identity vs Daily research event
-- base arXiv identity vs explicit `vN`
-- version/date identity vs theorem/formula verification
-- abstract support vs theorem support
-- mechanism equation vs formal error/convergence bound
-- external result vs repository implementation
-- paper assumptions/domain vs generic LLM-agent claims
-- original historical research period vs later correction
-- source registration vs claim support
-- `STATIC_CHECKED` documentary review vs runtime/experimental validation
+- canonical source identity vs Daily research event;
+- base arXiv identity vs explicit `vN`;
+- version/date identity vs theorem/formula verification;
+- abstract support vs theorem support;
+- mechanism equation vs formal error/convergence bound;
+- external result vs repository implementation;
+- paper assumptions/domain vs generic LLM-agent claims;
+- original historical research period vs later correction;
+- source registration vs claim support;
+- five-axis verified-core admission vs generation success;
+- `STATIC_CHECKED` documentary review vs runtime/experimental validation;
+- validator definition vs validator execution;
+- current path presence vs earlier producer execution.
+
+## History and correction discipline / 历史与纠错纪律
+
+Keep these statements separate:
+
+```text
+historical artifact != current state
+current path presence != earlier execution
+later success != earlier success
+correction != history rewrite
+unknown != inferred success
+```
+
+Historical `docs/**` research and archived audits remain point-in-time evidence. A review finding normally changes current interpretation or the owning current verified-core/maintenance source; it does not silently rewrite historical execution.
+
+When a historical artifact itself is the object under review, retain its producer/time identity and use an explicit erratum/reconciliation/retirement path rather than manufacturing missing evidence.
 
 ## Authority map / 权威映射
 
-- `FOUNDATION/EVIDENCE.md` — evidence and source-identity semantics
-- `FOUNDATION/SOURCES.md` — canonical `S01–S38` source identities
-- `FOUNDATION/PROVENANCE.md` — exact-version, duplicate-identity, and temporal provenance
-- domain claim maps — bounded architecture/memory/tool/collaboration claims
-- explicit August errata/reconciliations — current corrections
-- `docs/AUGUST_2026_01_31_EVIDENCE_LEDGER.md` — final natural-month documentary ledger
-- original bilingual research — historical context
+For verified-core claim interpretation:
 
-An audit finding may narrow or contest an interpretation. It must not invent implementation, reproduction, theorem support, source agreement, or test success.
+- targeted erratum/reconciliation for the affected source/claim;
+- `FOUNDATION/SOURCES.md` — canonical source identity;
+- `FOUNDATION/EVIDENCE.md` — evidence semantics;
+- `FOUNDATION/PROVENANCE.md` — version, producer, temporal, correction, and AI-use provenance;
+- this `REVIEW.md` — review disposition vocabulary;
+- domain verified-core claim maps;
+- historical `docs/**` material as point-in-time context.
+
+For maintenance/control-plane state, current merged `main`, `FOUNDATION/MAINTENANCE.md`, and `FOUNDATION/independent-gpt/README.md` govern recovery/delivery before historical audit records or prior handoffs.
+
+An audit finding may narrow or contest an interpretation. It must not invent implementation, reproduction, theorem support, source agreement, validation execution, or producer intent.
+
+## Relationship to maintenance repair / 与维护修复的关系
+
+Independent review can establish that a maintenance/control-plane defect or calibration need exists. Actual repair follows `FOUNDATION/MAINTENANCE.md` and `FOUNDATION/independent-gpt/README.md`.
+
+- no confirmed maintenance defect → `NO_CHANGE_REQUIRED`;
+- safe bounded repair → `REPAIR`;
+- overlapping live ownership → `COORDINATE`;
+- unrecoverable authority/state or unsafe delivery → `BLOCKED`.
+
+Review completion alone is not a reason to create an edit or PR.
 
 ## Minimal public review record / 最小公开审核记录
 
 A durable public review record may include:
 
-- Claim ID or historical artifact
-- review state
-- canonical source ID
-- public source identity/version
-- strongest checked source surface
-- supported proposition and assumptions
-- mapping status
-- implementation/validation status
-- missing or conflicting evidence
-- erratum/reconciliation pointer
-- final bounded disposition
+- Claim ID or historical artifact;
+- exact repository revision when material;
+- review state;
+- canonical source ID;
+- public source identity/version;
+- strongest checked source surface;
+- supported proposition and assumptions;
+- mapping status;
+- implementation/validation status;
+- missing or conflicting evidence;
+- erratum/reconciliation pointer;
+- validation actually executed and results;
+- validation not executed;
+- final bounded disposition.
 
-Formal August natural-month closure is `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED` after the 2026-09-01 reconciliation. W36 remains `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`.
+No private prompt, repository memory, hidden reasoning, credential, or unrelated operator context is required in this public record.
+
+## Period-status boundary / 周期状态边界
+
+Formal August natural-month closure remains the historical `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED` result recorded after the 2026-09-01 reconciliation. That historical closure does not define the current September week/month state; current cadence state must be recovered from current repository evidence.
+
+Final doctrine and merge authority remains with the maintainer.
