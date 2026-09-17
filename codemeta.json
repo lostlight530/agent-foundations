@@ -4,6 +4,8 @@
   "name": "Agent Foundations",
   "description": "A bilingual theory, evidence, and architecture-decision foundation for reasoning about agent systems with explicit claim, implementation, and validation boundaries.",
   "codeRepository": "https://github.com/lostlight530/agent-foundations",
+  "identifier": "https://doi.org/10.5281/zenodo.22791169",
+  "datePublished": "2026-09-16",
   "license": "https://spdx.org/licenses/MIT.html",
   "author": {
     "@type": "Person",
