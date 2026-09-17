@@ -2,7 +2,7 @@
 
 Current calibration: 2026-09-17
 
-This file defines public source, version, claim-surface, temporal, correction, producer, and AI-assistance provenance for the Agent Foundations documentary core.
+This file defines public source, version, claim-surface, temporal, correction, producer, software-publication, and AI-assistance provenance for the Agent Foundations documentary core.
 
 ## AI-use and producer disclosure / AI 使用与生产者披露
 
@@ -10,11 +10,9 @@ AI assistance may be used for drafting, translation support, consistency checks,
 
 Material conclusions still require the repository's declared claim/evidence chain and, where applicable, independently inspectable repository or public-source evidence. Human maintainer review remains the final merge and governance authority.
 
-Keep producer identity explicit when it matters. A Jules-generated artifact remains a Jules-produced repository artifact; an Independent GPT correction remains a later reviewer/maintenance action; a human merge remains a human-governed delivery decision. Later review does not retroactively change who produced the earlier artifact.
+Keep producer identity explicit when it matters. A generated artifact remains attached to its original producer; a later correction is a later review/maintenance action; a human merge is a human-governed delivery decision. Later review does not retroactively change who produced the earlier artifact.
 
-This public disclosure does not require publication or reconstruction of private prompts, Jules repository memory, hidden chain-of-thought/reasoning, credentials, tokens, personal data, or unrelated operator context. Process transparency is bounded to evidence and provenance that can be safely and independently inspected.
-
-The repository currently has no public `AGENTS.md`; do not infer one from private task controls or historical conversation context.
+This public disclosure does not require publication or reconstruction of private prompts, repository memory, hidden chain-of-thought/reasoning, credentials, tokens, personal data, or unrelated operator context. Process transparency is bounded to evidence and provenance that can be safely and independently inspected.
 
 ## Reproducibility target / 可复现目标
 
@@ -31,7 +29,30 @@ A public claim should make it possible to recover:
 - producer/revision identity when material;
 - current correction status when historical material was later calibrated.
 
-The goal is reconstruction of the claim/evidence chain, not treating document existence, generated text, or model agreement as truth.
+The goal is reconstruction of the claim/evidence chain, not treating document existence, generated text, model agreement, a DOI, or repository popularity as truth.
+
+## Repository publication provenance / 仓库出版溯源
+
+Agent Foundations has a public software publication at DOI `10.5281/zenodo.22791169`, with publication date 2026-09-16.
+
+This establishes an externally addressable archived publication identity for the repository. It does **not** establish:
+
+- that the DOI is an `Sxx` scientific source for an `AF-*` claim;
+- that every claim in the archived object is scientifically supported;
+- that a validator/test was executed for the archived object;
+- that an external experiment was reproduced;
+- that the archive is byte-identical or semantically equivalent to every later `main` revision;
+- an exact archive-to-Git-SHA mapping unless that mapping is explicitly retained and independently inspectable.
+
+Keep three identities separate:
+
+```text
+external scientific source identity (`Sxx`)
+!= repository software-publication identity (DOI)
+!= exact executable/document revision identity (Git SHA)
+```
+
+`CITATION.cff`, `codemeta.json`, and `RELEASE_POLICY.md` are the public repository-publication metadata surfaces. `SOURCES.md` remains the canonical external evidence-source registry.
 
 ## Repository helper boundaries / 仓库辅助工具边界
 
@@ -63,7 +84,7 @@ A single external source must not have multiple canonical `Sxx` identities.
 
 For arXiv, `arXiv:<base-id>` is the canonical paper identity. Therefore `v1`, `v2`, `v3`, and later revisits are provenance revisions of the same paper, not new source identities by themselves.
 
-Historical August duplicate/revisit cases remain useful point-in-time examples; current source identity must still be read from the present registry and relevant corrections.
+Historical duplicate/revisit cases remain useful point-in-time examples; current source identity must still be read from the present registry and relevant corrections.
 
 ## Exact-version workflow / 精确版本流程
 
@@ -94,7 +115,7 @@ Useful source-surface states include:
 - `FORMULA_TRANSCRIPTION_VERIFIED`
 - `ASSUMPTIONS_VERIFIED`
 
-A successful fetch, TeX download, parser result, source registration, author correction, validator run, or model summary does not automatically establish stronger theorem/formula states.
+A successful fetch, TeX download, parser result, source registration, author correction, validator run, model summary, or repository publication does not automatically establish stronger theorem/formula states.
 
 A theorem or bound retains assumptions, comparator, domain, quantifiers, and source version.
 
@@ -115,37 +136,43 @@ Keep separate when relevant:
 
 - source publication/version date;
 - source check time;
+- repository software-publication date;
 - historical research logical period;
 - generation/producer time;
+- Git revision time;
 - commit/merge time;
 - later correction time;
 - validator/checker execution time and revision;
 - current repository presence.
 
-A later erratum changes current interpretation without pretending the correction existed at the earlier research time. A current path does not prove an earlier execution. Later success does not prove or erase an earlier unobserved/failed run.
+A later erratum changes current interpretation without pretending the correction existed at the earlier research time. A current path does not prove an earlier execution. Later success does not prove or erase an earlier unobserved/failed run. A DOI publication date does not substitute for the exact revision and environment of a validation run.
 
-## Daily Research Chunk provenance
+## Generated research provenance
 
-Generated bilingual Daily Research Chunks are historical evidence inputs, not automatic canonical-source registrations.
+Generated bilingual research chunks are historical evidence inputs, not automatic canonical-source registrations.
 
 Current review may reuse an existing source ID, register a genuinely new source, correct authors/version metadata, narrow a theorem/claim, map historical wording to current vocabulary, or record `INSUFFICIENT_EVIDENCE` / `PRIMARY_SOURCE_CONFLICT` under the repository's admission rules.
 
-Daily task completion and canonical verified-core acceptance are separate events.
+Task completion and canonical verified-core acceptance are separate events.
 
-## Maintenance and Independent GPT provenance
+## Maintenance provenance
 
-A maintenance run should retain enough public delivery information to recover the exact base `main` revision, changed owning surfaces, aggregate diff boundary, checks actually run, checks not run, overlap state, and Draft-PR head.
+A maintenance run should retain enough public delivery information to recover the exact base `main` revision, changed owning surfaces, aggregate diff boundary, checks actually run, checks not run, overlap state, and delivery head when those facts are material.
 
-`FOUNDATION/REVIEW.md` records review disposition. `FOUNDATION/MAINTENANCE.md` owns maintenance policy. `FOUNDATION/independent-gpt/README.md` owns memoryless recovery/repair/delivery discipline. These roles do not imply that a historical producer consumed later governance text.
+`FOUNDATION/REVIEW.md` records review disposition. `FOUNDATION/MAINTENANCE.md` owns maintenance policy. The memoryless recovery guide owns its declared recovery/delivery discipline. These roles do not imply that a historical producer consumed later governance text.
 
-## Public provenance object / 公开溯源对象
+## Public provenance objects / 公开溯源对象
 
 Target claim object:
 
 `CLAIM + CANONICAL_SOURCE_ID + SOURCE_VERSION + CHECKED_SURFACE + SCOPE + LIMITATION + CURRENT_STATUS`.
 
-Target maintenance object when a repair is delivered:
+Target repository-publication object:
 
-`BASE_REVISION + OWNING_SURFACE + PRODUCER + EXECUTED_VALIDATION + UNEXECUTED_VALIDATION + AGGREGATE_DIFF + DELIVERY_HEAD`.
+`DOI + PUBLICATION_DATE + ARCHIVED_OBJECT + EXPLICIT_REVISION_MAPPING_WHEN_AVAILABLE`.
 
-Historical August closure and corrections remain point-in-time evidence; current September cadence/maintenance state must be recovered from current repository truth rather than copied from an old cutoff.
+Target revision-matched validation object:
+
+`GIT_REVISION + ENVIRONMENT + COMMAND + INPUT/FIXTURE + RESULT + UNTESTED_BOUNDARY`.
+
+These objects are intentionally distinct and must not inherit authority from one another.
