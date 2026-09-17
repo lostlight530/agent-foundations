@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Current research/evidence map for tool authority, untrusted-input handling, inspectable plans, debugging loops, monitoring, and bounded side effects
+> - **Authority:** Current repository-native tools subject authority for AF-TOOL claims
+> - **Current meaning:** Treat these as proposed or source-supported control requirements unless an explicit repository implementation state says otherwise
+> - **Evidence / implementation boundary:** No tool runtime, permission broker, sandbox, replay engine, approval service, monitor service, or side-effect control layer is implemented here
+> - **Cross-document relation:** Architecture supplies whole-system boundary; Collaboration covers inter-agent transport/authority; Memory covers durable state; evidence/provenance files bound source-derived claims
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Tool System / 工具系统
 
 ## Repository realization boundary / 本仓实现边界

@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Current research/evidence map for collaboration topology, attribution, message contracts, and typed consensus
+> - **Authority:** Current repository-native collaboration subject authority for AF-COLLAB claims
+> - **Current meaning:** Use each claim's explicit State/Evidence/Mapping/Implementation/Validation fields; conceptual mappings remain research guidance unless a concrete repository implementation exists
+> - **Evidence / implementation boundary:** No multi-agent transport, arbiter, consensus runtime, trajectory capture, or collaboration execution layer is implemented by this repository
+> - **Cross-document relation:** Architecture supplies system-level boundaries; Tools and Memory cover adjacent authority/state concerns; SOURCES/EVIDENCE/PROVENANCE bound every external result
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Collaboration System / 协作系统
 
 ## Repository realization boundary / 本仓实现边界

@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Current public review-state vocabulary and disposition contract for claims, source identities, verified-core admission, and historical correction
+> - **Authority:** Current review-disposition authority, distinct from maintenance/delivery policy
+> - **Current meaning:** Review states describe evidence disposition only; they neither authorize writes nor imply merge, runtime execution, or scientific truth
+> - **Evidence / implementation boundary:** CALIBRATED is not repaired, ACCEPTED_FOR_VERIFIED_CORE is not merged, STATIC_CHECKED is not semantic truth, and review completion is not a reason to edit
+> - **Cross-document relation:** SOURCES/EVIDENCE/PROVENANCE establish identity and semantics; domain claim maps carry claims; maintenance policy governs actual repair/delivery
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Public Evidence Review States / 公开证据审核状态
 
 Status: documentary review vocabulary  

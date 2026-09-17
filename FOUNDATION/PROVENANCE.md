@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Current provenance and reproducibility contract for sources, versions, claim surfaces, corrections, producers, software publication, and AI assistance
+> - **Authority:** Current provenance authority for reconstructing documentary claim/evidence chains
+> - **Current meaning:** Keep external scientific source identity, repository DOI, Git revision, producer identity, and revision-matched validation as separate objects
+> - **Evidence / implementation boundary:** A DOI, path, generated artifact, validator definition, or later correction does not prove historical execution, source truth, experimental reproduction, or exact archive-to-Git equivalence
+> - **Cross-document relation:** SOURCES supplies canonical identities; EVIDENCE supplies semantics; REVIEW supplies disposition; current Git main supplies repository-state truth
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Reproducibility and Provenance / 可复现性与溯源
 
 Current calibration: 2026-09-17

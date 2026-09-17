@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Canonical contiguous external-source identity registry for the Foundation verified core
+> - **Authority:** Owning authority for current Sxx identity, bibliographic identity, and per-source use/verification boundaries
+> - **Current meaning:** The active source range is the ordered contiguous S01 through the highest registered Sxx in this current file; historical count statements do not define the present ceiling
+> - **Evidence / implementation boundary:** Registration means eligible documentary evidence only; it does not establish claim truth, theorem correctness, local implementation, reproduction, or independent corroboration
+> - **Cross-document relation:** EVIDENCE defines how registered sources may support claims; PROVENANCE governs exact versions/check surfaces; REVIEW governs admission/reuse/correction
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Primary Source Registry / 一手来源登记
 
 Current calibration: 2026-09-01. Registry presence means “eligible to cite”, not “repository capability”.
@@ -426,12 +435,29 @@ Canonical rules:
 - Use: Proposed discretized distributed optimization over dynamic networks eliminating the need for real-time bi-stochastic weight redesigns under link removals.
 - Verification boundary: Guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced.
 
-Current canonical registry range: `S01–S45`.
 
-## [S46] Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
-- **ID:** S46
-- **Type:** PAPER
-- **arXiv ID:** 2303.14023v1
-- **Version date:** 2023-03-24
-- **Title:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
-- **Authors:** Jiahao Dai, Jing-Wen Yi, Li Chai
+## S46 — Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2303.14023v1
+- Version date: 2023-03-24
+- Authors: Jiahao Dai, Jing-Wen Yi, Li Chai
+- URL: https://arxiv.org/abs/2303.14023
+- Use: memory-assisted acceleration of consensus for second-order multi-agent systems, including one-tap and M-tap memory formulations under the paper's control/stability assumptions.
+- Verification boundary: source identity, authors, first-version date, and abstract-level proposition are primary-source supported. The result is specific to the paper's second-order consensus/formation-control model and does not establish a general agent-memory mechanism, LLM-agent memory property, or repository implementation.
+
+## S47 — Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.08484v3
+- Exact v3 date: `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS`
+- Authors: Quentin Bertrand, Juan Duque, Emilio Calvano, Gauthier Gidel
+- URL: https://arxiv.org/abs/2312.08484
+- Use: self-play epsilon-greedy Q-learning dynamics in the iterated prisoner's dilemma, including convergence toward a cooperative Pavlov / win-stay-lose-shift policy under the paper's stated assumptions.
+- Verification boundary: base source identity, authors, and paper-level proposition are primary-source supported. Exact v3 submission date and historical formula transcription were not re-certified in this pass. The result is bounded to the studied game, memory, initialization, learning-rate, discount/exploration assumptions and does not establish generic multi-agent collusion, repository implementation, or real-market behavior.
+
+## Registry-state rule
+
+The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
+
+Do not place a fixed historical upper-bound sentence in the middle of the registry. A later legitimate source addition changes registry state, not evidence vocabulary. Historical source counts belong to dated research/reconciliation records, not to this current registry authority.

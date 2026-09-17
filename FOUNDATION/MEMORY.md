@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Current research/evidence map for memory lifecycle, prospective-memory limits, provenance, compaction fidelity, and versioned correction
+> - **Authority:** Current repository-native memory subject authority for AF-MEM claims
+> - **Current meaning:** Interpret memory claims as bounded architecture requirements or external evidence maps, not as a declaration that Agent Foundations contains a memory runtime
+> - **Evidence / implementation boundary:** No vector store, retrieval service, compaction engine, retention engine, or cross-session memory implementation exists here
+> - **Cross-document relation:** Architecture provides system boundary; Tools covers action authority; Provenance/Evidence distinguish durable record identity from correctness
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Memory System / 记忆系统
 
 ## Repository realization boundary / 本仓实现边界

@@ -1,3 +1,12 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Role:** Verified-core architecture map for system boundaries, architecture claims, repository realization, and implementation-state separation
+> - **Authority:** Current repository-native architecture authority for AF-ARCH claims, subordinate to current repository truth where implementation facts are concerned
+> - **Current meaning:** Read the architecture claims as bounded research/evidence statements and the Repository realization section as the local implementation boundary; external literature never upgrades local implementation state automatically
+> - **Evidence / implementation boundary:** SUPPORTED or PROPOSED describes claim/evidence state, not an implemented autonomous-agent runtime; validator/schema/source presence is documentary infrastructure rather than runtime capability
+> - **Cross-document relation:** SOURCES owns canonical source identities; EVIDENCE owns evidence vocabulary; PROVENANCE owns source/version/temporal reconstruction; REVIEW owns review disposition
+> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+
 # Architecture Principles / 架构原则
 
 ## AF-ARCH-001 — System boundary / 系统边界
