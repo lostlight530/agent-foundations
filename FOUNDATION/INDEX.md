@@ -3,125 +3,108 @@
 Status: repository documentary/evidence core  
 Current calibration: 2026-09-17
 
-Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)  
-Independent review vocabulary: [REVIEW.md](./REVIEW.md)  
-Memoryless maintenance recovery: [independent-gpt/README.md](./independent-gpt/README.md)
+`FOUNDATION/**` is the long-lived theory, evidence, provenance, and architecture core of Agent Foundations. The repository is **not** an implemented autonomous-agent runtime.
 
-## Purpose / 目的
+The verified core exists to keep four things separable and inspectable:
 
-`FOUNDATION/**` is the compact evidence, provenance, review, and maintenance core of Agent Foundations.
-
-The repository is primarily a theory, evidence, and documentary architecture base. It is **not** an implemented autonomous-agent runtime.
+```text
+theory / architecture claim
++ external source identity
++ repository implementation state
++ repository validation state
+```
 
 External equations, papers, protocol mappings, pseudocode, and architecture analogies remain external/reference claims unless a concrete repository artifact implements the behavior.
 
-## Repository realization map / 仓库真实结构映射
+## Domain maps / 领域知识图
 
-### 1. Domain claim maps / 领域声明
+These files carry the repository's durable subject-matter claims:
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md)
-- [MEMORY.md](./MEMORY.md)
-- [TOOLS.md](./TOOLS.md)
-- [COLLABORATION.md](./COLLABORATION.md)
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — system boundary, evaluation, governed policies, theorem scope, release reconstruction.
+- [MEMORY.md](./MEMORY.md) — memory selection, provenance, retrieval, compaction, retention, correction, and deletion boundaries.
+- [TOOLS.md](./TOOLS.md) — per-action authority, tool input/output boundaries, observability, idempotency, recovery, and untrusted-input handling.
+- [COLLABORATION.md](./COLLABORATION.md) — coordination topology, failure propagation, message contracts, preserved trajectories, and consensus limits.
 
-Stable claim IDs use `AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, and `AF-COLLAB-*`.
+Stable Claim IDs use `AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, and `AF-COLLAB-*`.
 
-### 2. Canonical source registry / 来源登记
+A domain document may contain `SUPPORTED`, `PROPOSED`, or other claim states side by side. File presence is not a blanket endorsement of every mechanism described in the file.
 
-[SOURCES.md](./SOURCES.md) is the canonical source registry. The exact current source-ID range is recovered from current `main`; do not reuse an old audit cutoff as a current count.
+## Evidence and source core / 证据与来源核心
 
-Source IDs are identities, not a daily counter. The same canonical source must not be re-registered under another ID merely because a later research chunk revisits it or cites another version.
+- [EVIDENCE.md](./EVIDENCE.md) defines claim state, evidence level, mapping state, implementation state, validation state, and admission rules.
+- [SOURCES.md](./SOURCES.md) is the canonical `Sxx` external-source registry.
+- [PROVENANCE.md](./PROVENANCE.md) defines source/version/producer/revision/correction/publication provenance.
+- [claim.schema.json](./claim.schema.json) defines the machine-readable claim vocabulary.
 
-Historical duplicate/revisit cases remain point-in-time examples and do not replace current registry inspection.
+The exact current source-ID range is recovered from current `main`; an old audit cutoff must not be frozen into a current count.
 
-### 3. Claim vocabulary / Claim 词汇契约
+Keep these distinctions explicit:
 
-[claim.schema.json](./claim.schema.json) defines the machine-readable claim vocabulary for state, evidence class, mapping, implementation, validation, sources, scope, and limitations.
+```text
+source registered != claim supported
+claim supported != repository implementation
+repository implementation != validation complete
+repository publication DOI != external scientific source
+validator definition != validator execution
+```
 
-Schema structure does not prove claim semantics.
+## Repository validation helpers / 仓库验证辅助
 
-### 4. Repository validator / 仓库验证器
+`validate.py` checks structural/documentary properties declared by its implementation: required verified-core files, Claim IDs/metadata, source references, schema structure, restricted overclaim phrases, action-reference pin form, and protected paths when a comparison base is supplied.
 
-`validate.py` checks structural/documentary properties declared by the current implementation, including required verified-core files, Claim IDs/metadata, canonical source registration and references, restricted overclaim phrases, workflow action-reference pin form, protected paths with an explicit comparison base, and basic claim-schema properties.
+`arxiv_probe.py` supports bibliographic identity and submission-history checks.
 
-Important boundary:
+Neither helper proves theorem meaning, mathematical correctness, experimental reproduction, semantic truth, or autonomous-agent behavior.
 
-`validate.py` does **not** prove theorem meaning, formula transcription, exact version date, translation equivalence, experimental reproduction, semantic truth, or agent behavior.
+When validation is claimed, retain exact revision, command, environment, exit status, and relevant output. An unrun checker is `NOT_EXECUTED`.
 
-`STRUCTURAL_VALIDATOR_PRESENT != VALIDATOR_EXECUTED != CLAIM_SEMANTICS_VERIFIED`.
+## Review and maintenance layer / 评审与维护层
 
-When validation is claimed, retain the exact revision, command, environment, exit status, and relevant output. An unrun validator is `NOT_EXECUTED`.
+Repository knowledge and repository maintenance are related but distinct:
 
-### 5. arXiv provenance helper / arXiv 溯源辅助
+- [REVIEW.md](./REVIEW.md) — review disposition vocabulary; review state is not a repository mutation.
+- [MAINTENANCE.md](./MAINTENANCE.md) — public maintenance/control contract for the verified core.
+- [independent-gpt/README.md](./independent-gpt/README.md) — memoryless maintenance recovery and bounded delivery guidance.
 
-[arxiv_probe.py](./arxiv_probe.py) supports bibliographic identity and submission-history checks. It does not certify theorem content or experiments.
-
-### 6. Evidence, provenance, review, maintenance, and independent recovery
-
-- [EVIDENCE.md](./EVIDENCE.md) — evidence and five-axis admission semantics.
-- [PROVENANCE.md](./PROVENANCE.md) — source/version/producer/temporal/correction/AI-use provenance.
-- [REVIEW.md](./REVIEW.md) — non-operative review disposition states.
-- [MAINTENANCE.md](./MAINTENANCE.md) — canonical public maintenance/control-plane contract.
-- [independent-gpt/README.md](./independent-gpt/README.md) — public cold-start recovery, bounded repair, and Draft-PR delivery kernel.
-
-These roles are distinct:
+These files describe how the core is maintained. They do not redefine the scientific/theoretical meaning of the domain documents above.
 
 ```text
 research generation != verified-core admission
+verified-core admission != implementation
 review state != maintenance action
-validator definition != validator execution
-Independent GPT != private Jules task control
+maintenance action != scientific evidence
 ```
 
-### 7. Historical generated research / 历史研究
+## Generated and historical material / 生成与历史材料
 
-`docs/en/**` and `docs/zh/**` preserve the broader bilingual SOP-generated research stream.
+`docs/en/**` and `docs/zh/**` preserve the broader bilingual generated research stream. `historical-audits/**` preserves point-in-time corrections, reconciliations, document audits, and evidence/closure ledgers.
 
-Historical Daily Research Chunks remain evidence of what was generated/recorded at that time. Later reconciliation can correct source identity, author metadata, scope, or mapping without pretending the original text never existed.
+Those materials remain useful evidence inputs and historical records. They do not outrank the current canonical source registry and verified-core claim documents, and later correction does not pretend the original text never existed.
 
-Historical research is an evidence input to maintenance/review, not a default maintenance edit target.
+## Scholarly publication identity / 学术软件出版身份
 
-### 8. Historical corrections and ledgers / 历史纠错与总账
+Agent Foundations has a public software publication DOI: `10.5281/zenodo.22791169`, publication date 2026-09-16.
 
-`historical-audits/**` preserves point-in-time corrections, reconciliations, document audits, and period/evidence ledgers. Read the relevant record when historical interpretation matters, but recover current maintenance state from current merged `main` and current owning contracts.
+That DOI identifies an archived publication object. It is not an `Sxx` external source, does not independently support an `AF-*` claim, does not prove validator execution, and does not make a later `main` revision semantically identical to the archive.
+
+Use `CITATION.cff`, `codemeta.json`, and `RELEASE_POLICY.md` for repository publication/citation metadata; use `SOURCES.md` for external scientific/source identity.
 
 ## Current authority precedence / 当前解释优先级
 
-For verified-core claim interpretation, when historical generated research conflicts with stronger current evidence:
+For verified-core claim interpretation:
 
-1. explicit erratum/reconciliation for the affected source/claim;
-2. current canonical source identity in `SOURCES.md`;
-3. `EVIDENCE.md`, `PROVENANCE.md`, `REVIEW.md`;
-4. domain claim maps;
-5. original generated bilingual material for historical context.
+1. current repository implementation when an implementation claim is made;
+2. explicit current erratum/reconciliation for the affected source/claim;
+3. canonical source identity in `SOURCES.md` and exact checked source version/surface;
+4. `EVIDENCE.md` and `PROVENANCE.md` semantics;
+5. the owning domain claim document;
+6. generated/historical material for point-in-time context.
 
-For maintenance/control-plane state:
+For maintenance state, use current merged repository truth and the most specific current maintenance/review contract. Maintenance precedence changes current interpretation or delivery behavior only; it does not rewrite research history.
 
-```text
-current merged main / repository facts
-> most specific current owning contract
-> FOUNDATION/MAINTENANCE.md
-> verified revision-matched execution evidence
-> current review/provenance interpretation
-> historical audits / prior handoffs / model recollection
-```
+## Recommended reading order / 推荐阅读顺序
 
-This precedence changes current interpretation only; it does not rewrite history.
-
-## Maintenance recovery and delivery / 维护恢复与交付
-
-A maintenance reviewer starts from fresh `main`, inspects live PR/branch ownership, identifies the owning control surface, and uses:
-
-- `NO_CHANGE_REQUIRED` when no maintenance defect is confirmed;
-- `REPAIR` for a bounded owning-file repair;
-- `COORDINATE` for overlapping live ownership;
-- `BLOCKED` when authority/current state/safe delivery cannot be established.
-
-A justified repair records actual validation, marks unrun checks `NOT_EXECUTED`, reviews the aggregate `main...branch` diff, opens one Draft PR, and stops for maintainer review.
-
-Private Jules prompts, repository memory, credentials, or hidden reasoning are not reconstructed into public control files by default. This repository currently has no public `AGENTS.md`.
-
-## Reading order / 阅读顺序
+For the repository's subject matter:
 
 1. [EVIDENCE.md](./EVIDENCE.md)
 2. [ARCHITECTURE.md](./ARCHITECTURE.md)
@@ -130,21 +113,17 @@ Private Jules prompts, repository memory, credentials, or hidden reasoning are n
 5. [COLLABORATION.md](./COLLABORATION.md)
 6. [SOURCES.md](./SOURCES.md)
 7. [PROVENANCE.md](./PROVENANCE.md)
-8. [REVIEW.md](./REVIEW.md)
-9. [MAINTENANCE.md](./MAINTENANCE.md) for maintenance policy
-10. [independent-gpt/README.md](./independent-gpt/README.md) for memoryless maintenance recovery/delivery
-11. relevant historical corrections/ledgers only when their time window is needed
+
+For review/maintenance work, continue with [REVIEW.md](./REVIEW.md), [MAINTENANCE.md](./MAINTENANCE.md), and the independent recovery guide only as needed.
 
 ## Repository-wide implementation classification
 
 Strongest supported repository-wide statement:
 
-`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`.
+`DOCUMENTARY_AGENT_FOUNDATION_WITH_STRUCTURED_EVIDENCE_AND_PROVENANCE_SUPPORT`
 
 Not:
 
-`IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
+`IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`
 
-Historical period-closure labels remain authority for their own recorded windows. Current September cadence state must be recovered from current repository evidence rather than copied from an older cutoff.
-
-Final doctrine and merge authority remains with the maintainer.
+Historical period-closure labels remain authoritative only for their recorded windows. Current state is recovered from current repository truth, not copied from an older cutoff.

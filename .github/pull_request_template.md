@@ -1,55 +1,55 @@
-## Outcome and exact scope
-What changed, why, and what is explicitly out of scope?
+## Summary
 
-- Base `main` SHA:
-- Head SHA:
-- Owning `FOUNDATION/` surface / Claim IDs / logical period:
-- Overlapping PR/branch check:
+What problem does this change address, and what changed?
 
-## Change classification
-- [ ] verified-core claim/evidence/provenance change
-- [ ] maintenance / governance repair
-- [ ] validator / schema / machine-contract change
-- [ ] historical correction with explicit provenance
-- [ ] other bounded repository change
+## Change type
 
-## Evidence classification
-- [ ] Repository implementation evidence is identified where capability is claimed
-- [ ] Validation evidence is distinguished from implementation and theory
-- [ ] External evidence is cited as external evidence rather than repository execution
-- [ ] Producer identity is retained where material
-- [ ] Unknown, missing, non-canonical, or unvalidated state remains explicit
+- [ ] claim / evidence / source update
+- [ ] architecture / memory / tools / collaboration documentation
+- [ ] validator / schema / executable helper
+- [ ] bilingual consistency / documentation
+- [ ] repository infrastructure / metadata
+- [ ] maintenance / governance
 
-## Changed and deliberately unchanged boundaries
+## Affected core surfaces
 
-## Verification actually executed
-List exact commands/checkers, revision/environment, exit status, and relevant results. Do not treat validator definition or document inspection as execution.
+List the affected Claim IDs, source IDs, `FOUNDATION/` documents, executable checks, schemas, or public metadata. Note related surfaces intentionally left unchanged.
 
-## Verification not executed
-Use `NOT_EXECUTED` for relevant checks that were not run.
+## Evidence and status impact
 
-## History and provenance
-- [ ] Stable Claim IDs and canonical source identity are preserved or explicitly migrated
-- [ ] Historical records are not silently rewritten to make later knowledge appear earlier
-- [ ] Bilingual surfaces remain aligned where applicable
-- [ ] Review disposition is not presented as maintenance delivery or merge state
-- [ ] Private Jules prompts / repository memory / hidden reasoning / credentials were not exposed
+Describe any change to claim state, evidence level, mapping state, implementation state, or validation state.
 
-## Concurrency and delivery
-- [ ] Fresh `main` and live PR/branch ownership were rechecked before delivery
-- [ ] Aggregate `main...branch` diff was reviewed
-- [ ] No activity-only change was created where `NO_CHANGE_REQUIRED` was appropriate
-- [ ] No direct `main` write, force-push, or auto-merge is requested by this PR
+If external sources are involved, identify the canonical source identity, exact version/date when material, checked surface, supported proposition, and limitations.
+
+## Validation performed
+
+List exact commands/checks actually run and their observed results.
+
+## Known limits / validation not performed
+
+List material checks, source surfaces, translations, environments, or external experiments not examined or reproduced.
+
+## Provenance and historical impact
+
+State whether source identity, producer/revision identity, bilingual alignment, current correction status, or historical point-in-time interpretation changes.
 
 ## Security and privacy
-State relevant security/privacy impact and follow `SECURITY.md` for sensitive details.
+
+Describe security/privacy implications and follow `SECURITY.md` for sensitive reports.
+
+## Publication / metadata impact
+
+State whether README, citation metadata, release metadata, or public discovery surfaces must remain synchronized. Repository DOI metadata is not external scientific evidence for a Claim.
 
 ## Rollback
+
 Describe the smallest safe rollback.
 
-## Final review
-- [ ] Change is focused and reviewable
-- [ ] Repository-native evidence/provenance/maintenance boundaries are preserved
-- [ ] Checks not run are explicit
+## Review checklist
 
-Final doctrine and merge authority remains with the maintainer.
+- [ ] The diff is limited to the stated purpose.
+- [ ] Claim IDs and source identities remain stable or have an explicit migration.
+- [ ] Checks described as passing were actually executed.
+- [ ] Bilingual claim surfaces remain aligned where applicable.
+- [ ] Historical evidence was not silently rewritten to match later knowledge.
+- [ ] No credentials, private data, or unrelated generated/local state is included.
