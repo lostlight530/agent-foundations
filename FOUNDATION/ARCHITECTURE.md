@@ -98,9 +98,9 @@ The six architecture claims above are theory/evidence statements. Agent Foundati
 |---|---|---|
 | `ARCHITECTURE.md`, `MEMORY.md`, `TOOLS.md`, `COLLABORATION.md` | structured domain claim maps with stable Claim IDs and explicit implementation states | claims remain bounded by their source/evidence fields |
 | `claim.schema.json` | machine-readable claim-record vocabulary/enums | schema validity is structural, not semantic truth |
-| `validate.py` | required-file, Claim-ID/metadata, S01–S32 source-reference, restricted-overclaim, action-reference and protected-path checks | does not verify theorem meaning, formula accuracy, source-version identity, or agent behavior |
+| `validate.py` | required-file, Claim-ID/metadata, contiguous source-range/reference, restricted-overclaim, action-reference and protected-path checks | does not verify theorem meaning, formula accuracy, source-version identity, or agent behavior |
 | `arxiv_probe.py` | arXiv identity and submission-history version/date helper | bibliographic identity only; does not verify theorem semantics |
-| `SOURCES.md` | canonical S01–S32 source registry | source registration does not imply implementation |
+| `SOURCES.md` | canonical contiguous source registry; recover the current highest `Sxx` from this file rather than hard-coding a historical ceiling | source registration does not imply implementation |
 | `EVIDENCE.md`, `PROVENANCE.md`, `REVIEW.md` | public claim/evidence/provenance/review semantics | documentary interpretation only |
 | August errata | explicit corrections to historical generated research | correction does not rewrite original generation history |
 
