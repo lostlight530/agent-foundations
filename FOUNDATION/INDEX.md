@@ -1,17 +1,15 @@
 # Agent Foundations — Verified Core / 可验证核心
 
 Status: repository documentary/evidence core  
-Current calibration: 2026-09-01
+Current calibration: 2026-09-17
 
-Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)
-
-August 1–31 evidence ledger: [../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md](../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
-
-Full public-document audit: [../historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md](../historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md)
+Current maintenance authority: [MAINTENANCE.md](./MAINTENANCE.md)  
+Independent review vocabulary: [REVIEW.md](./REVIEW.md)  
+Memoryless maintenance recovery: [independent-gpt/README.md](./independent-gpt/README.md)
 
 ## Purpose / 目的
 
-`FOUNDATION/**` is the compact evidence and architecture core of Agent Foundations.
+`FOUNDATION/**` is the compact evidence, provenance, review, and maintenance core of Agent Foundations.
 
 The repository is primarily a theory, evidence, and documentary architecture base. It is **not** an implemented autonomous-agent runtime.
 
@@ -30,11 +28,11 @@ Stable claim IDs use `AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, and `AF-COLLAB-*`.
 
 ### 2. Canonical source registry / 来源登记
 
-[SOURCES.md](./SOURCES.md) is the canonical source registry and currently contains the contiguous range `S01–S38`.
+[SOURCES.md](./SOURCES.md) is the canonical source registry. The exact current source-ID range is recovered from current `main`; do not reuse an old audit cutoff as a current count.
 
 Source IDs are identities, not a daily counter. The same canonical source must not be re-registered under another ID merely because a later research chunk revisits it or cites another version.
 
-August reference cases: the 2026-08-27 RAFA revisit resolves to S10; the 2026-08-29 MATS revisit resolves to S25. S36, S37, and S38 are distinct new identities admitted by later source reconciliation.
+Historical duplicate/revisit cases remain point-in-time examples and do not replace current registry inspection.
 
 ### 3. Claim vocabulary / Claim 词汇契约
 
@@ -44,66 +42,84 @@ Schema structure does not prove claim semantics.
 
 ### 4. Repository validator / 仓库验证器
 
-`validate.py` currently checks structural/documentary properties including:
-
-- required verified-core files
-- stable/unique Claim IDs and required metadata labels
-- source IDs form a contiguous range from S01 through the current highest source ID
-- each registered source exposes a canonical Identifier or URL identity
-- duplicate canonical source identities are rejected, including arXiv version/revisit duplicates
-- Claim source references resolve to registered IDs
-- restricted absolute-overclaim phrases
-- existing workflow action-reference pin form
-- protected-path changes when an explicit comparison base is supplied
-- basic `claim.schema.json` properties
+`validate.py` checks structural/documentary properties declared by the current implementation, including required verified-core files, Claim IDs/metadata, canonical source registration and references, restricted overclaim phrases, workflow action-reference pin form, protected paths with an explicit comparison base, and basic claim-schema properties.
 
 Important boundary:
 
-`validate.py` does **not** parse every Markdown Claim into a JSON object and enforce all schema semantics. It also does not verify theorem meaning, formula transcription, exact version date, translation equivalence, experimental reproduction, or agent behavior.
+`validate.py` does **not** prove theorem meaning, formula transcription, exact version date, translation equivalence, experimental reproduction, semantic truth, or agent behavior.
 
-`STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
+`STRUCTURAL_VALIDATOR_PRESENT != VALIDATOR_EXECUTED != CLAIM_SEMANTICS_VERIFIED`.
+
+When validation is claimed, retain the exact revision, command, environment, exit status, and relevant output. An unrun validator is `NOT_EXECUTED`.
 
 ### 5. arXiv provenance helper / arXiv 溯源辅助
 
 [arxiv_probe.py](./arxiv_probe.py) supports bibliographic identity and submission-history checks. It does not certify theorem content or experiments.
 
-### 6. Evidence, provenance, review, and independent recovery semantics
+### 6. Evidence, provenance, review, maintenance, and independent recovery
 
-- [EVIDENCE.md](./EVIDENCE.md)
-- [PROVENANCE.md](./PROVENANCE.md)
-- [REVIEW.md](./REVIEW.md)
-- [independent-gpt/README.md](./independent-gpt/README.md) — public cold-start router for a memoryless independent reviewer; it does not outrank the foundation contracts above.
+- [EVIDENCE.md](./EVIDENCE.md) — evidence and five-axis admission semantics.
+- [PROVENANCE.md](./PROVENANCE.md) — source/version/producer/temporal/correction/AI-use provenance.
+- [REVIEW.md](./REVIEW.md) — non-operative review disposition states.
+- [MAINTENANCE.md](./MAINTENANCE.md) — canonical public maintenance/control-plane contract.
+- [independent-gpt/README.md](./independent-gpt/README.md) — public cold-start recovery, bounded repair, and Draft-PR delivery kernel.
 
-These are documentary interpretation/recovery surfaces, not execution engines.
+These roles are distinct:
+
+```text
+research generation != verified-core admission
+review state != maintenance action
+validator definition != validator execution
+Independent GPT != private Jules task control
+```
 
 ### 7. Historical generated research / 历史研究
 
-`docs/en/**` and `docs/zh/**` preserve broader bilingual research history.
+`docs/en/**` and `docs/zh/**` preserve the broader bilingual SOP-generated research stream.
 
 Historical Daily Research Chunks remain evidence of what was generated/recorded at that time. Later reconciliation can correct source identity, author metadata, scope, or mapping without pretending the original text never existed.
 
-### 8. Explicit August corrections / 8 月显式纠错
+Historical research is an evidence input to maintenance/review, not a default maintenance edit target.
 
-- [`../historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md`](../historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md)
-- [`../historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md`](../historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md)
-- [`../historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md`](../historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md)
-- [`../docs/monthly/2026-08-through-27-strategic-blueprint.md`](../docs/monthly/2026-08-through-27-strategic-blueprint.md)
-- [`../historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md`](../historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md)
-- [`../docs/monthly/2026-08-through-30-strategic-blueprint.md`](../docs/monthly/2026-08-through-30-strategic-blueprint.md)
-- [`../historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md`](../historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
-- [`../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md`](../historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
+### 8. Historical corrections and ledgers / 历史纠错与总账
+
+`historical-audits/**` preserves point-in-time corrections, reconciliations, document audits, and period/evidence ledgers. Read the relevant record when historical interpretation matters, but recover current maintenance state from current merged `main` and current owning contracts.
 
 ## Current authority precedence / 当前解释优先级
 
-When historical generated research conflicts with stronger current evidence:
+For verified-core claim interpretation, when historical generated research conflicts with stronger current evidence:
 
-1. explicit erratum/reconciliation for the affected source/claim
-2. current canonical source identity in `SOURCES.md`
-3. `EVIDENCE.md`, `PROVENANCE.md`, `REVIEW.md`
-4. domain claim maps
-5. original generated bilingual material for historical context
+1. explicit erratum/reconciliation for the affected source/claim;
+2. current canonical source identity in `SOURCES.md`;
+3. `EVIDENCE.md`, `PROVENANCE.md`, `REVIEW.md`;
+4. domain claim maps;
+5. original generated bilingual material for historical context.
 
-This precedence changes current interpretation only.
+For maintenance/control-plane state:
+
+```text
+current merged main / repository facts
+> most specific current owning contract
+> FOUNDATION/MAINTENANCE.md
+> verified revision-matched execution evidence
+> current review/provenance interpretation
+> historical audits / prior handoffs / model recollection
+```
+
+This precedence changes current interpretation only; it does not rewrite history.
+
+## Maintenance recovery and delivery / 维护恢复与交付
+
+A maintenance reviewer starts from fresh `main`, inspects live PR/branch ownership, identifies the owning control surface, and uses:
+
+- `NO_CHANGE_REQUIRED` when no maintenance defect is confirmed;
+- `REPAIR` for a bounded owning-file repair;
+- `COORDINATE` for overlapping live ownership;
+- `BLOCKED` when authority/current state/safe delivery cannot be established.
+
+A justified repair records actual validation, marks unrun checks `NOT_EXECUTED`, reviews the aggregate `main...branch` diff, opens one Draft PR, and stops for maintainer review.
+
+Private Jules prompts, repository memory, credentials, or hidden reasoning are not reconstructed into public control files by default. This repository currently has no public `AGENTS.md`.
 
 ## Reading order / 阅读顺序
 
@@ -115,8 +131,9 @@ This precedence changes current interpretation only.
 6. [SOURCES.md](./SOURCES.md)
 7. [PROVENANCE.md](./PROVENANCE.md)
 8. [REVIEW.md](./REVIEW.md)
-9. [independent-gpt/README.md](./independent-gpt/README.md) when performing memoryless external recovery/audit
-10. August reconciliation/stage synthesis when historical correction is relevant
+9. [MAINTENANCE.md](./MAINTENANCE.md) for maintenance policy
+10. [independent-gpt/README.md](./independent-gpt/README.md) for memoryless maintenance recovery/delivery
+11. relevant historical corrections/ledgers only when their time window is needed
 
 ## Repository-wide implementation classification
 
@@ -128,6 +145,6 @@ Not:
 
 `IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
 
-Formal August natural-month closure: `CLOSED_WITH_MISSING_DAILY_DATE_RETAINED` after the 2026-09-01 reconciliation.
+Historical period-closure labels remain authority for their own recorded windows. Current September cadence state must be recovered from current repository evidence rather than copied from an older cutoff.
 
-2026-08-31 is a W36 Daily research event; W36 remains `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`.
+Final doctrine and merge authority remains with the maintainer.
