@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Verified-core architecture map for system boundaries, architecture claims, repository realization, and implementation-state separation
-> - **Authority:** Current repository-native architecture authority for AF-ARCH claims, subordinate to current repository truth where implementation facts are concerned
-> - **Current meaning:** Read the architecture claims as bounded research/evidence statements and the Repository realization section as the local implementation boundary; external literature never upgrades local implementation state automatically
-> - **Evidence / implementation boundary:** SUPPORTED or PROPOSED describes claim/evidence state, not an implemented autonomous-agent runtime; validator/schema/source presence is documentary infrastructure rather than runtime capability
-> - **Cross-document relation:** SOURCES owns canonical source identities; EVIDENCE owns evidence vocabulary; PROVENANCE owns source/version/temporal reconstruction; REVIEW owns review disposition
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `ARCHITECTURE`
+> - **Role:** Current verified-core architecture map
+> - **Authority:** Current repository-native authority for Architecture, repository-realization boundary, AF-ARCH claims and implementation-state separation
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when durable system architecture or local realization boundaries materially change
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Architecture Principles / 架构原则
 

@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Current research/evidence map for collaboration topology, attribution, message contracts, and typed consensus
-> - **Authority:** Current repository-native collaboration subject authority for AF-COLLAB claims
-> - **Current meaning:** Use each claim's explicit State/Evidence/Mapping/Implementation/Validation fields; conceptual mappings remain research guidance unless a concrete repository implementation exists
-> - **Evidence / implementation boundary:** No multi-agent transport, arbiter, consensus runtime, trajectory capture, or collaboration execution layer is implemented by this repository
-> - **Cross-document relation:** Architecture supplies system-level boundaries; Tools and Memory cover adjacent authority/state concerns; SOURCES/EVIDENCE/PROVENANCE bound every external result
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `SUBJECT / CLAIM MAP`
+> - **Role:** Current collaboration research/evidence map
+> - **Authority:** Current repository-native authority for Collaboration topology, attribution, message contracts, consensus/coordination claims and their implementation/validation states
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when collaboration claims, evidence mapping or repository realization materially changes
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Collaboration System / 协作系统
 

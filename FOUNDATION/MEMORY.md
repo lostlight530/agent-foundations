@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Current research/evidence map for memory lifecycle, prospective-memory limits, provenance, compaction fidelity, and versioned correction
-> - **Authority:** Current repository-native memory subject authority for AF-MEM claims
-> - **Current meaning:** Interpret memory claims as bounded architecture requirements or external evidence maps, not as a declaration that Agent Foundations contains a memory runtime
-> - **Evidence / implementation boundary:** No vector store, retrieval service, compaction engine, retention engine, or cross-session memory implementation exists here
-> - **Cross-document relation:** Architecture provides system boundary; Tools covers action authority; Provenance/Evidence distinguish durable record identity from correctness
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `SUBJECT / CLAIM MAP`
+> - **Role:** Current memory research/evidence map
+> - **Authority:** Current repository-native authority for Memory lifecycle, prospective-memory limits, provenance-before-persistence, compaction fidelity and versioned correction
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when memory claims/evidence mapping or repository realization materially changes
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Memory System / 记忆系统
 

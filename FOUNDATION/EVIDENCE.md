@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Canonical documentary evidence semantics for claim state, evidence class, mapping, implementation, validation, source identity, and verified-core admission
-> - **Authority:** Current evidence-vocabulary authority for the Foundation core
-> - **Current meaning:** This file defines how evidence is interpreted; it does not own a frozen source-registry ceiling. The current contiguous Sxx range is recovered from SOURCES.md at the reviewed revision
-> - **Evidence / implementation boundary:** Evidence class, source registration, structural validation, and repeated citation do not establish truth, local implementation, theorem correctness, or experimental reproduction
+> - **Subject class:** `EVIDENCE CONTRACT`
+> - **Role:** Canonical documentary evidence semantics
+> - **Authority:** Current repository-native authority for Claim state, evidence class, mapping, implementation, validation, source identity and verified-core admission semantics
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** Evidence class, source registration, structural validation and repeated citation do not establish truth, local implementation, theorem correctness or experimental reproduction
 > - **Cross-document relation:** SOURCES owns source identity; PROVENANCE owns versions/check surfaces/timing; REVIEW owns disposition; domain claim maps consume these vocabularies
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Update trigger:** Update when evidence vocabulary/admission semantics change or current source-identity ownership becomes inconsistent
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Evidence Contract / 证据契约
 

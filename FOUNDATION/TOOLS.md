@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Current research/evidence map for tool authority, untrusted-input handling, inspectable plans, debugging loops, monitoring, and bounded side effects
-> - **Authority:** Current repository-native tools subject authority for AF-TOOL claims
-> - **Current meaning:** Treat these as proposed or source-supported control requirements unless an explicit repository implementation state says otherwise
-> - **Evidence / implementation boundary:** No tool runtime, permission broker, sandbox, replay engine, approval service, monitor service, or side-effect control layer is implemented here
-> - **Cross-document relation:** Architecture supplies whole-system boundary; Collaboration covers inter-agent transport/authority; Memory covers durable state; evidence/provenance files bound source-derived claims
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `SUBJECT / CLAIM MAP`
+> - **Role:** Current tools research/evidence map
+> - **Authority:** Current repository-native authority for Tool authority, untrusted-input handling, inspectable plans, debugging/monitoring and bounded-side-effect claims
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when tool claims/evidence mapping or repository realization materially changes
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Tool System / 工具系统
 

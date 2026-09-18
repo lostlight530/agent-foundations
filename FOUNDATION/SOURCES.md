@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Canonical contiguous external-source identity registry for the Foundation verified core
-> - **Authority:** Owning authority for current Sxx identity, bibliographic identity, and per-source use/verification boundaries
-> - **Current meaning:** The active source range is the ordered contiguous S01 through the highest registered Sxx in this current file; historical count statements do not define the present ceiling
-> - **Evidence / implementation boundary:** Registration means eligible documentary evidence only; it does not establish claim truth, theorem correctness, local implementation, reproduction, or independent corroboration
-> - **Cross-document relation:** EVIDENCE defines how registered sources may support claims; PROVENANCE governs exact versions/check surfaces; REVIEW governs admission/reuse/correction
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `SOURCE REGISTRY`
+> - **Role:** Canonical contiguous external-source identity registry
+> - **Authority:** Current repository-native authority for Current Sxx identity, bibliographic identity, source use and per-source verification boundary
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** Registration means eligible documentary evidence only; it does not establish claim truth, theorem correctness, local implementation, reproduction or independent corroboration
+> - **Cross-document relation:** EVIDENCE defines support semantics; PROVENANCE governs versions/check surfaces; REVIEW governs admission/reuse/correction
+> - **Update trigger:** Update for source admission, identity/version correction, deduplication or materially changed source boundary
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Primary Source Registry / 一手来源登记
 

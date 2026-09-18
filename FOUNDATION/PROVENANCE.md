@@ -1,11 +1,13 @@
 > [!NOTE]
 > **Current architecture interpretation — 2026-09-18**
-> - **Role:** Current provenance and reproducibility contract for sources, versions, claim surfaces, corrections, producers, software publication, and AI assistance
-> - **Authority:** Current provenance authority for reconstructing documentary claim/evidence chains
-> - **Current meaning:** Keep external scientific source identity, repository DOI, Git revision, producer identity, and revision-matched validation as separate objects
-> - **Evidence / implementation boundary:** A DOI, path, generated artifact, validator definition, or later correction does not prove historical execution, source truth, experimental reproduction, or exact archive-to-Git equivalence
-> - **Cross-document relation:** SOURCES supplies canonical identities; EVIDENCE supplies semantics; REVIEW supplies disposition; current Git main supplies repository-state truth
-> - **Preservation rule:** The existing subject text remains the owning repository document. This pass clarifies current interpretation and corrects only confirmed current-authority drift; historical examples and dated evidence retain their original time boundary.
+> - **Subject class:** `PROVENANCE CONTRACT`
+> - **Role:** Current reproducibility and provenance contract
+> - **Authority:** Current repository-native authority for Source/version/check-surface, producer, correction, temporal, software-publication and validation provenance
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when provenance objects, version/check-surface rules or revision-matched validation requirements change
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
 
 # Reproducibility and Provenance / 可复现性与溯源
 
