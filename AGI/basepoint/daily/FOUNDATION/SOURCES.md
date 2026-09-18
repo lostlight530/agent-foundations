@@ -1,0 +1,475 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Subject class:** `SOURCE REGISTRY`
+> - **Role:** Canonical contiguous external-source identity registry
+> - **Authority:** Current repository-native authority for Current Sxx identity, bibliographic identity, source use and per-source verification boundary
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** Registration means eligible documentary evidence only; it does not establish claim truth, theorem correctness, local implementation, reproduction or independent corroboration
+> - **Cross-document relation:** EVIDENCE defines support semantics; PROVENANCE governs versions/check surfaces; REVIEW governs admission/reuse/correction
+> - **Update trigger:** Update for source admission, identity/version correction, deduplication or materially changed source boundary
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
+
+# Primary Source Registry / 一手来源登记
+
+Current calibration: 2026-09-01. Registry presence means “eligible to cite”, not “repository capability”.
+
+当前校准：2026-09-01。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+
+Canonical rules:
+
+- source IDs are contiguous and documentary identifiers, not a daily counter
+- one canonical source identity must not be registered under multiple `Sxx` IDs
+- for arXiv, the base arXiv identifier is the canonical paper identity; a later revisit/version does not create a new source ID
+- explicit `vN` and its version date are provenance fields and must be checked separately when material
+- registration does not establish theorem correctness, formula accuracy, experimental reproduction, or repository implementation
+
+## S01 — NIST AI 600-1
+
+- Type: `E1_PRIMARY_STANDARD`
+- Title: *Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*
+- Version: NIST AI 600-1; page updated 2026-04-08
+- URL: https://doi.org/10.6028/NIST.AI.600-1
+- Use: risk identification, measurement, governance, and lifecycle controls; not a certification of any repository.
+
+## S02 — OWASP Agentic Top 10 2026
+
+- Type: `E1_PRIMARY_STANDARD`
+- Version: 2026, released 2025-12-09
+- URL: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
+- Use: agent goal hijack, tool misuse, identity/privilege abuse, supply-chain risk, unexpected code execution, memory poisoning, and related mitigations.
+
+## S03 — OpenAI trustworthy third-party evaluations
+
+- Type: `E1_PRIMARY_STANDARD`
+- Date: 2026-05-29
+- URL: https://openai.com/index/trustworthy-third-party-evaluations-foundations/
+- Use: model, harness, tools, safeguards, retries, budgets, elicitation, and validity checks are part of an evaluation claim.
+
+## S04 — OpenAI chain-of-thought monitorability evaluation
+
+- Type: `E3_REPRODUCIBLE_PREPRINT`
+- Date: 2025-12-18
+- URL: https://openai.com/index/evaluating-chain-of-thought-monitorability/
+- Use: monitoring can add evidence but remains system- and monitor-dependent and imperfect.
+
+## S05 — OpenAI internal coding-agent monitoring
+
+- Type: `E1_PRIMARY_STANDARD`
+- Date: 2026-03-19
+- URL: https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
+- Use: monitoring architecture, alerting, deployment feedback, and explicit limitations.
+
+## S06 — Anthropic Constitution
+
+- Type: `E1_PRIMARY_STANDARD`
+- Version: January 2026
+- URL: https://www.anthropic.com/constitution
+- Use: natural-language constitutions shape intended behavior but are living documents and do not ensure adherence.
+
+## S07 — Anthropic constitutional classifiers
+
+- Type: `E3_REPRODUCIBLE_PREPRINT`
+- Date: 2026-01-09
+- URL: https://www.anthropic.com/research/next-generation-constitutional-classifiers
+- Use: measured safeguard improvements and residual jailbreak risk; no perfect defense claim.
+
+## S08 — PM-Bench
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2607.12385v1; COLM 2026
+- URL: https://arxiv.org/abs/2607.12385
+- Use: prospective-memory benchmark; the reported best configuration reached 65.1% F1 in that study.
+
+## S09 — Agentic Context Management
+
+- Type: `E3_REPRODUCIBLE_PREPRINT`
+- Identifier: arXiv:2607.21503v1
+- URL: https://arxiv.org/abs/2607.21503
+- Use: context as a lifecycle spanning ingest, scope, anticipation, compaction, consolidation, and provenance; vendor-linked results remain source-specific.
+
+## S10 — RAFA
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2309.17382v3; ICML 2024
+- Authors: Zhihan Liu, Hao Hu, Shenao Zhang, Hongyi Guo, Shuqi Ke, Boyi Liu, Zhaoran Wang
+- URL: https://arxiv.org/abs/2309.17382
+- Use: regret result under the paper’s Bayesian adaptive MDP, posterior-sampling, and planner assumptions; not a universal agent-convergence result.
+- August 2026 note: the 2026-08-27 Memory-System Daily Research Chunk is a later revisit of this existing canonical source. It does not create a new source identity.
+
+## S11 — CHMAS
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2607.19555v1; ACC 2026
+- URL: https://arxiv.org/abs/2607.19555
+- Use: centralized strategic planning plus distributed tactical execution; counterexample to blanket rejection of all central coordination.
+
+## S12 — HalluProp
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2607.26836v1
+- URL: https://arxiv.org/abs/2607.26836
+- Use: pre-hoc hallucination-risk inference and propagation modeling; not prevention proof.
+
+## S13 — AgentLocate
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2607.07989v1; COLM 2026
+- URL: https://arxiv.org/abs/2607.07989
+- Use: multi-agent failure localization using multiple evaluators; attribution remains evaluator-dependent.
+
+## S14 — AgentDebugX
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2607.18754v1
+- URL: https://arxiv.org/abs/2607.18754
+- Use: Detect–Attribute–Recover–Rerun debugging loop and reported benchmark results; external implementation only.
+
+## S15 — Plover
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2607.15193v1
+- URL: https://arxiv.org/abs/2607.15193
+- Use: inspectable and revisable plans for supervised GUI-agent repair; GUI implementation is out of this repository’s scope.
+
+## S16 — From Agent Failures to Text Policies
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2607.20668v1
+- URL: https://arxiv.org/abs/2607.20668
+- Use: human-written policies improved tested frozen agents while generated policies did not reliably beat fixed prompting in the reported setting.
+
+## S17 — AlphaEvolve
+
+- Type: `E1_PRIMARY_STANDARD`
+- Date: 2025-05; impact update 2026-05-07
+- URL: https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/
+- Use: LLM proposals paired with executable evaluators and evolutionary selection; applicable where objective scoring exists.
+
+## S18 — SLSA 1.2
+
+- Type: `E1_PRIMARY_STANDARD`
+- Version: 1.2, approved
+- URL: https://slsa.dev/spec/v1.2/
+- Use: software supply-chain provenance and incremental assurance; not an AI-behavior standard.
+
+## S19 — On the Convergence of Bounded Agents
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2307.11044v1
+- Version date: 2023-07-20
+- URL: https://arxiv.org/abs/2307.11044
+- Use: two bounded-agent convergence definitions centered on minimal future behavioral state size and performance change relative to internal-state change; not a proof of convergence for general LLM agents.
+- Verification boundary: paper identity and abstract-level propositions are primary-source supported; formulas/theorems require separate full-text verification.
+
+## S20 — Variational Policy Propagation for Multi-agent Reinforcement Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2004.08883v4
+- Version date: 2022-01-29
+- v1 date: 2020-04-19
+- URL: https://arxiv.org/abs/2004.08883
+- Use: collaborative MARL, MRF-form joint policy under the paper’s conditions, and variational-inference-based policy layers; architecture mapping remains conceptual.
+- Verification boundary: v4/date pairing is primary-source verified; exact formulas and assumptions require theorem/formula-level checks before strong transcription labels.
+
+## S21 — No-regret learning in harmonic games
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2412.20203v1
+- Version date: 2024-12-28
+- URL: https://arxiv.org/abs/2412.20203
+- Use: vanilla FTRL non-convergence/cycling phenomena in harmonic games and extrapolated FTRL convergence with at-most `O(1)` regret under the paper’s conditions.
+- Verification boundary: these are harmonic-game results, not a general multi-agent or LLM-agent convergence guarantee.
+
+## S22 — Compatibility of Fairness and Nash Welfare under Subadditive Valuations
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2407.12461v4
+- Version date: 2025-11-07
+- v1 date: 2024-07-17
+- URL: https://arxiv.org/abs/2407.12461
+- Use: existence of partial EFX and complete EF1 allocations with `1/2`-of-optimal NSW guarantees under subadditive valuations; the abstract also describes a polynomial transformation from an arbitrary input allocation.
+- Conflict note: during the 2026-08-17 audit, the current arXiv abstract and rendered full-text theorem surface were not treated as automatically interchangeable for the exact polynomial-transformation coefficient. Preserve `PRIMARY_SOURCE_CONFLICT` until versioned TeX/PDF re-verification resolves any discrepancy.
+- Verification boundary: do not state the transformation factor as directly relative to optimal unless the theorem used actually provides that relation.
+
+## S23 — MAC-SQL
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2312.11242v6; COLING 2025 (Oral)
+- Version date: 2025-03-18
+- v1 date: 2023-12-18
+- URL: https://arxiv.org/abs/2312.11242
+- Use: multi-agent Text-to-SQL decomposition with Decomposer, Selector, and Refiner roles plus reported empirical execution accuracy.
+- Verification boundary: the sequential-generation factorization is a paper mechanism; it is not by itself a formal convergence or numerical error-accumulation bound.
+
+## S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2402.04417v2
+- Version date: 2024-07-25
+- v1 date: 2024-02-06
+- URL: https://arxiv.org/abs/2402.04417
+- Use: decentralized MAMAB with malicious participants, validators, signatures, secure multiparty computation, UCB-style coordination, and paper-reported logarithmic regret under stated assumptions.
+- Verification boundary: paper-level result is supported; long transcribed equations require separate `FORMULA_TRANSCRIPTION_VERIFIED` status before being treated as exact.
+
+## S25 — Finite-Time Frequentist Regret Bounds of Multi-Agent Thompson Sampling on Sparse Hypergraphs
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2312.15549v1; AAAI 2024
+- Version date: 2023-12-24
+- URL: https://arxiv.org/abs/2312.15549
+- Use: epsilon-exploring MATS, sublinear worst-case frequentist regret in the studied MAMAB hypergraph setting, and matching lower-bound interpretation up to constants/log terms when sufficiently sparse.
+- Verification boundary: the regret guarantee remains tied to the paper’s hypergraph, reward-additivity, exploration, and sparsity assumptions; it does not transfer automatically to generic agent architectures.
+
+## S26 — Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.13910v3
+- Version date: 2024-07-17
+- v1 date: 2023-12-21
+- Authors: Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
+- URL: https://arxiv.org/abs/2312.13910
+- Use: group regret bounds for multi-agent model-based RL under limited communication range.
+- Verification boundary: exact v3/date identity corrected by the 2026-08-24 W34 post-hoc audit; theorem/formula scope remains independently reviewable.
+
+## S27 — Optimal Regret Bounds for Collaborative Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.09674v1
+- Version date: 2023-12-15
+- Authors: Amitis Shidani, Sattar Vakili
+- URL: https://arxiv.org/abs/2312.09674
+- Use: CExp$^2$ algorithm, mixed reward collaborative bandit problem formulation, and optimal $\mathcal{O}(\log(T))$ regret bound under bounded expected communication rounds.
+- Verification boundary: the bound is structurally tied to the static agent weight matrix $W$ and the assumption that an oracle $\mathcal{P}(\Delta)$ exists to solve the constrained optimization problem for arm allocation; it does not automatically scale to dynamic communication topologies or unpredictable environments.
+
+## S28 — ADMM-Tracking Gradient for Distributed Optimization
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2309.14142v3
+- Version date: 2025-02-04
+- v1 date: 2023-09-25
+- URL: https://arxiv.org/abs/2309.14142
+- Use: decentralized consensus optimization via an ADMM-based dynamic consensus protocol, maintaining linear convergence under asynchronous updates and unreliable network communications.
+- Verification boundary: exact v3/date identity corrected by the 2026-08-24 W34 post-hoc audit. The convergence result remains bounded by the paper's strongly convex setting and ADMM-based consensus assumptions.
+
+## S29 — Robust Multi-Agent Bandits with Heavy-Tailed Rewards and Information Asymmetry
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.10529v1
+- Version date: 2026-08-11
+- Authors: Daphne Feng, Ricardo Parada, Lily Jiang, Sophia Yi, William Chang
+- URL: https://arxiv.org/abs/2608.10529
+- Use: mRUCB-Intervals algorithm for decentralized action selection with observable actions but independent heavy-tailed rewards.
+- Verification boundary: the bound holds under a bounded $1+\varepsilon$ moment condition and remains tied to the studied horizon/agent/action regime.
+
+## S30 — Exploiting hidden structures in non-convex games for convergence to Nash equilibrium
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.16609v1
+- Version date: 2023-12-27
+- Authors: Iosif Sakos, Emmanouil-Vasileios Vlatakis-Gkaragkounis, Panayotis Mertikopoulos, Georgios Piliouras
+- URL: https://arxiv.org/abs/2312.16609
+- Use: Preconditioned Hidden Gradient Descent (PHGD) algorithm and theoretical convergence bounds in hidden non-convex multi-agent games under monotone assumptions bounded by representation maps.
+- Verification boundary: guarantees depend strictly on latent monotone structure, non-critical representation maps, smoothness, and bounded second moments; they do not generalize unconditionally to all non-convex learning topologies.
+
+## S31 — Multi-Agent Learning in Contextual Games under Unknown Constraints
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.14685v2
+- Version date: 2024-01-14
+- v1 date: 2023-10-23
+- URL: https://arxiv.org/abs/2310.14685
+- Use: no-regret, no-violation approach for repeated contextual games where feasible action sets are unknown a priori.
+- Verification boundary: exact v2/date identity corrected by the 2026-08-24 W34 post-hoc audit. Guarantees depend on the paper’s feasibility/slack and RKHS assumptions.
+
+## S32 — On the Variational Interpretation of Mirror Play in Monotone Games
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2403.15636v1
+- Version date: 2024-03-22
+- Authors: Yunian Pan, Tao Li, Quanyan Zhu
+- URL: https://arxiv.org/abs/2403.15636
+- Use: variational interpretation of mirror play in monotone games, finite-time quantification of closed-loop equilibrium paths, and exponential convergence when the game is strongly monotone.
+- Verification boundary: guarantees depend strictly on strong monotonicity with respect to the aggregated mirror map; they do not generalize unconditionally to non-monotone multi-agent settings.
+
+## S33 — Distributed Stochastic Optimization under Heavy-Tailed Noises
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.15847v3
+- Source identity date: 2023-12-26 (base arXiv record first submission)
+- Exact v3 date: `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS`
+- Authors: Chao Sun, Huiming Zhang, Bo Chen, Li Yu
+- URL: https://arxiv.org/abs/2312.15847
+- Use: distributed optimization without a centralized server under heavy-tailed gradient noise, combining neighbor consensus with gradient clipping / stochastic subgradient projection and a paper-level almost-sure convergence result under stated conditions.
+- Verification boundary: source identity, authors, problem statement, and abstract-level convergence proposition are primary-source supported. Exact v3 submission date and long formula transcription remain separate provenance checks.
+
+## S34 — Stability of Multi-Agent Learning in Competitive Networks: Delaying the Onset of Chaos
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.11943v1
+- Version date: 2023-12-19
+- Authors: Aamal Hussain, Francesco Belardinelli
+- URL: https://arxiv.org/abs/2312.11943
+- Use: stability analysis of multi-agent learning in competitive network games, including conditions under which connectivity/local interaction structure affects instability onset in the studied model.
+- Verification boundary: conclusions remain tied to the paper’s competitive-game parameterization and asymptotic/statistical assumptions; they are not a universal stability law for arbitrary multi-agent or LLM-agent systems.
+
+## S35 — Distributed Optimization via Kernelized Multi-armed Bandits
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.04719v1
+- Version date: 2023-12-07
+- Authors: Ayush Rai, Shaoshuai Mou
+- URL: https://arxiv.org/abs/2312.04719
+- Use: decentralized kernelized multi-armed-bandit formulation for distributed global optimization, including MA-IGP-UCB and delayed extension results under the paper’s RKHS/network assumptions.
+- Verification boundary: the regret bounds and privacy/communication trade-offs remain paper-specific; they do not establish a repository implementation or generalized multi-agent convergence guarantee.
+
+## August 24–27 registry reconciliation
+
+- S33, S34, and S35 are retained as distinct canonical sources after source-identity review.
+- S35 historical generated research originally carried incorrect author names; current canonical authors are `Ayush Rai, Shaoshuai Mou`.
+- the source that had been introduced as `S36` on 2026-08-27 is RAFA, already canonical as S10. It is therefore **not** retained as a second source ID. The stable identifier remains recorded only in the S10 source block so registry parsers do not misassign it to S35.
+- the 2026-08-27 bilingual Memory-System research chunk remains historical evidence of a later RAFA revisit; current source identity resolves to S10.
+
+## S36 — Near Optimal Memory-Regret Tradeoff for Online Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2303.01673v2
+- Version date: 2023-03-09
+- Authors: Binghui Peng, Aviad Rubinstein
+- URL: https://arxiv.org/abs/2303.01673
+- Use: provided the memory-regret tradeoff lower bound against an adaptive adversary $\mathcal{O}(\sqrt{n}/\epsilon)$ space for $\epsilon T$ regret.
+- Verification boundary: bounds depend on full feedback multi-expert assumptions and theoretical space limits, not a generalized multi-agent reinforcement learning guarantee.
+
+## S37 — Joint Lyapunov Certificates for K-Agent Generative AI Governance
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.09087v1
+- Version date: 2026-08-10
+- Authors: Sriram Nagaraj
+- URL: https://arxiv.org/abs/2608.09087
+- Use: abstract-supported joint Lyapunov analysis, critical-coupling, noise-floor, and zero-knowledge-attestation claims under the paper's linear, homogeneous, state-independent-noise assumptions.
+- Verification boundary: checked against official arXiv identity and abstract on 2026-08-31; exact formula transcription, numerical studies, cryptographic construction, repository implementation, and reproduction were not independently re-certified in this pass.
+
+## S38 — Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games
+
+- Type: `E2_PEER_REVIEWED`
+- Identifier: arXiv:2310.09727v2; NeurIPS 2023 Main Conference Track
+- Version date: 2023-10-27
+- v1 date: 2023-10-15
+- Authors: Youbang Sun, Tao Liu, Ruida Zhou, P. R. Kumar, Shahin Shahrampour
+- URL: https://arxiv.org/abs/2310.09727
+- Proceedings: https://proceedings.neurips.cc/paper_files/paper/2023/hash/8936fa1691764912d9519e1b5673ea66-Abstract.html
+- DOI: 10.52202/075280-1907
+- Use: independent natural policy gradient in Markov potential games; the paper reports asymptotic attainment of an epsilon-Nash equilibrium within `O(1/epsilon)` iterations under its technical assumptions, including exact policy evaluation and the suboptimality-gap condition.
+- Verification boundary: source identity, v2 date, authors, peer-reviewed venue, and abstract-level proposition were independently checked during the 2026-09-01 reconciliation. Exact equation transcription in the historical 08-31 Daily chunk, repository implementation, and experimental reproduction were `NOT_RECERTIFIED_IN_THIS_PASS` / `REFERENCE_ONLY` / `NOT_TESTED` respectively.
+
+
+## S39 — Provably Safe Decentralized Contingency MPC under State-Only Information and Limited Sensing for Nonlinear Multi-agent Systems
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2608.30874v1
+- Version date: 2026-08-31
+- Authors: Max Studt, Georg Schildbach
+- URL: https://arxiv.org/abs/2608.30874
+- Use: memory-free, state-dependent safe-set interaction mechanism and Lyapunov-type convergence bounds for decentralized contingency MPC.
+- Verification boundary: explicitly assumes the contingency cost is bounded by a recursively maintained scalar bound $\hat J_i^{\mathrm c}(t)$ which monotonically decreases; does not universally guarantee safe fallback outside the localized control problem parameterization.
+
+
+## S40 — TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.15667v3
+- Version date: 2023-12-25
+- Authors: Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+- URL: https://arxiv.org/abs/2312.15667
+- Use: topology-based policy gradient and cooperation mapping
+- Verification boundary: explicitly assumes Erdős–Rényi topology and tabular expressions for convergence guarantees.
+
+## S41 — Replication-proof Bandit Mechanism Design with Bayesian Agents
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.16896v2
+- Version date: 2025-01-31
+- v1 date: 2023-12-28
+- Authors: Suho Shin, Seyed A. Esmaeili, MohammadTaghi Hajiaghayi
+- URL: https://arxiv.org/abs/2312.16896
+- Use: hierarchical exploration-then-commit framework and replication-proof equilibrium
+- Verification boundary: explicitly assumes stochastically ordered family of arms and discrete priors; ensures sublinear regret for truthful behavior.
+
+
+## S42 — On Sparse Modern Hopfield Model
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2309.12673v2
+- Version date: 2023-09-22
+- Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- URL: https://arxiv.org/abs/2309.12673
+- Use: sparsemax-based energy and retrieval dynamics for modern Hopfield networks
+- Verification boundary: bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns.
+
+## S43 — ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.13227v1
+- Version date: 2023-10-20
+- Authors: Yuchen Zhuang
+- URL: https://arxiv.org/abs/2310.13227
+- Use: Proposed ToolChain*, an efficient tree search-based planning algorithm incorporating A* search to prune high-cost invalid tool actions, bounding exploration space dynamically.
+- Verification boundary: Guarantees rely strictly on task-specific heuristic function quality from long-term memory and large language model self-consistency/imagination bounds, under specific multi-step API function call environments.
+
+
+## S44 — Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2403.17907v1
+- Version date: 2024-03-26
+- Authors: Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+- URL: https://arxiv.org/abs/2403.17907
+- Use: Proposed adaptive consensus dynamics against intermittent attacks via a windowed trust metric
+- Verification boundary: Bound guarantees assume identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions (d - c_j > 0), and connected legitimate graph.
+
+
+## S45 — Discretized Distributed Optimization over Dynamic Digraphs
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2311.07939v2
+- Version date: 2023-11-14
+- Authors: Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+- URL: https://arxiv.org/abs/2311.07939
+- Use: Proposed discretized distributed optimization over dynamic networks eliminating the need for real-time bi-stochastic weight redesigns under link removals.
+- Verification boundary: Guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced.
+
+
+## S46 — Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2303.14023v1
+- Version date: 2023-03-24
+- Authors: Jiahao Dai, Jing-Wen Yi, Li Chai
+- URL: https://arxiv.org/abs/2303.14023
+- Use: memory-assisted acceleration of consensus for second-order multi-agent systems, including one-tap and M-tap memory formulations under the paper's control/stability assumptions.
+- Verification boundary: source identity, authors, first-version date, and abstract-level proposition are primary-source supported. The result is specific to the paper's second-order consensus/formation-control model and does not establish a general agent-memory mechanism, LLM-agent memory property, or repository implementation.
+
+## S47 — Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.08484v3
+- Exact v3 date: `VERSION_DATE_NOT_RECERTIFIED_IN_THIS_PASS`
+- Authors: Quentin Bertrand, Juan Duque, Emilio Calvano, Gauthier Gidel
+- URL: https://arxiv.org/abs/2312.08484
+- Use: self-play epsilon-greedy Q-learning dynamics in the iterated prisoner's dilemma, including convergence toward a cooperative Pavlov / win-stay-lose-shift policy under the paper's stated assumptions.
+- Verification boundary: base source identity, authors, and paper-level proposition are primary-source supported. Exact v3 submission date and historical formula transcription were not re-certified in this pass. The result is bounded to the studied game, memory, initialization, learning-rate, discount/exploration assumptions and does not establish generic multi-agent collusion, repository implementation, or real-market behavior.
+
+## S48 — Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators in Multi-Agent Network
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.15607v1
+- Version date: 2023-10-24
+- Authors: Kai Gong, Liwei Zhang
+- URL: https://arxiv.org/abs/2310.15607
+- Use: Distributed proximal-correction algorithm and linear convergence rate guarantees under inexact criteria for maximal monotone operators.
+- Verification boundary: Guarantees depend strictly on the strong monotonicity of the operator or Lipschitz continuity of the inverse operator at zero. Does not guarantee exact proximal operator execution without sub-problem solvers.
+
+## Registry-state rule
+
+The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
+
+Do not place a fixed historical upper-bound sentence in the middle of the registry. A later legitimate source addition changes registry state, not evidence vocabulary. Historical source counts belong to dated research/reconciliation records, not to this current registry authority.
