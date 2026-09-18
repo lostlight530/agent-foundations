@@ -2441,3 +2441,25 @@ Imagine a group of friends trying to agree on the exact center of a city by aver
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine two rival businesses setting prices without communicating. Normally, they both slash prices (defect) to steal customers, hurting both profits. However, if they both start out wildly optimistic about how much money they can make (optimistic initialization), their learning algorithms slowly realize that punishing the other's price cut while rewarding price matching eventually leads them to implicitly collude and keep prices high (cooperate).
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## Maintenance note — 2026-09-19 / September 14–18 cadence
+
+This note preserves the original Jules Daily Research deliveries and records the current source-lineage interpretation for the later September window.
+
+- **2026-09-14 / PR #165:** the S44 resilient-consensus paper (`arXiv:2403.17907v1`) is a revisit of the canonical S44 source already introduced on 2026-09-11. The later Daily chunk does not create a second source identity or independent corroboration.
+- **2026-09-15 / PR #170:** the replication-proof bandit paper (`arXiv:2312.16896v2`) is a revisit of canonical S41. Re-generation on a later date does not increment the unique-source count.
+- **2026-09-16:** the memory-assisted second-order consensus paper (`arXiv:2303.14023v1`) is the distinct canonical S46 source and is owned by the Memory System, not this Collaboration document.
+- **2026-09-17 / PR #176:** the historical PR title used the label “S46” for the Q-learning collusion paper. Current canonical identity is **S47**, `arXiv:2312.08484v3`. The historical PR title remains historical metadata; downstream source counting and citation must use S47.
+- **2026-09-18:** the distributed proximal-correction paper (`arXiv:2310.15607v1`) is the distinct canonical S48 source. Its current mappings remain documentary/conceptual and do not establish repository implementation or tests.
+
+Current aggregation rules:
+
+`SOURCE_REVISIT != NEW_INDEPENDENT_SUPPORT`
+
+`HISTORICAL_PR_TITLE != CANONICAL_SOURCE_IDENTITY`
+
+`SUCCESSFUL_DAILY_GENERATION != VERIFIED_CORE_ADMISSION`
+
+`PAPER_EVIDENCE != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION`
+
+September 2026 remains an open natural month; this note does not create or imply a final Monthly Strategic Blueprint.
