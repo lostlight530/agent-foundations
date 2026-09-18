@@ -1,3 +1,14 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Subject class:** `EVIDENCE CONTRACT`
+> - **Role:** Canonical documentary evidence semantics
+> - **Authority:** Current repository-native authority for Claim state, evidence class, mapping, implementation, validation, source identity and verified-core admission semantics
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** Evidence class, source registration, structural validation and repeated citation do not establish truth, local implementation, theorem correctness or experimental reproduction
+> - **Cross-document relation:** SOURCES owns source identity; PROVENANCE owns versions/check surfaces/timing; REVIEW owns disposition; domain claim maps consume these vocabularies
+> - **Update trigger:** Update when evidence vocabulary/admission semantics change or current source-identity ownership becomes inconsistent
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
+
 # Evidence Contract / 证据契约
 
 Effective: 2026-08-27  
@@ -66,11 +77,27 @@ Historical generated chunks may contain older labels. Current canonical interpre
 
 ## Canonical source identity / canonical 来源身份
 
-The current canonical registry is the contiguous range:
+The canonical source registry is [SOURCES.md](./SOURCES.md).
 
-`S01–S38` in [SOURCES.md](./SOURCES.md).
+The current contiguous `Sxx` range must be recovered from the current merged revision of `SOURCES.md`. This evidence contract must not freeze a historical upper bound into current evidence semantics.
 
-Source IDs are documentary identifiers, not a daily counter.
+A legitimate source addition can extend the highest canonical `Sxx` identifier without changing the evidence vocabulary itself.
+
+Source IDs are documentary source identities, not a daily counter, execution counter, research-batch counter, or evidence-strength score.
+
+Keep these dimensions separate:
+
+```text
+canonical source identity
+!= research event identity
+!= source version
+!= observation date
+!= evidence strength
+!= claim truth
+!= local implementation
+```
+
+The registry invariant is continuity from `S01` through the highest currently registered identifier unless an explicit reconciliation records an exception. Historical examples below illustrate identity/revisit rules; they do not define the current registry ceiling.
 
 ### Identity rule
 

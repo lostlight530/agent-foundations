@@ -1,3 +1,14 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Subject class:** `SUBJECT / CLAIM MAP`
+> - **Role:** Current tools research/evidence map
+> - **Authority:** Current repository-native authority for Tool authority, untrusted-input handling, inspectable plans, debugging/monitoring and bounded-side-effect claims
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when tool claims/evidence mapping or repository realization materially changes
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
+
 # Tool System / 工具系统
 
 ## Repository realization boundary / 本仓实现边界

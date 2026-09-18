@@ -1,3 +1,14 @@
+> [!NOTE]
+> **Current architecture interpretation — 2026-09-18**
+> - **Subject class:** `PROVENANCE CONTRACT`
+> - **Role:** Current reproducibility and provenance contract
+> - **Authority:** Current repository-native authority for Source/version/check-surface, producer, correction, temporal, software-publication and validation provenance
+> - **Current meaning:** Read every claim through its explicit claim/evidence/mapping/implementation/validation fields and current repository-realization boundary. Historical research and external literature remain evidence inputs rather than automatic capability promotion
+> - **Evidence / implementation boundary:** External literature, documentary support, schema/validator presence or a current path never upgrades local implementation or validation state automatically
+> - **Cross-document relation:** ARCHITECTURE provides whole-system boundaries; SOURCES/EVIDENCE/PROVENANCE/REVIEW provide identity, semantics and disposition without collapsing into runtime capability
+> - **Update trigger:** Update when provenance objects, version/check-surface rules or revision-matched validation requirements change
+> - **Preservation rule:** Existing claim text, source history and dated examples remain in the same file. This pass clarifies current authority and repairs confirmed drift without rewriting historical evidence
+
 # Reproducibility and Provenance / 可复现性与溯源
 
 Current calibration: 2026-09-17
