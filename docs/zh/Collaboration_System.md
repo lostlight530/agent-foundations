@@ -2278,3 +2278,25 @@ $$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda
 - **Repository Test Status (测试状态):** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy (初学者类比):** 想象两家竞争企业在没有沟通的情况下定价。通常，他们都会大幅降价（背叛）来抢走客户，从而损害双方的利润。然而，如果他们一开始都对能赚多少钱抱有疯狂的乐观态度（乐观初始化），他们的学习算法会慢慢意识到，惩罚对方的降价同时奖励价格匹配，最终会导致他们隐性共谋并保持高价（合作）。
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## 维护说明 — 2026-09-19 / 9 月 14–18 日周期
+
+本说明保留原始 Jules Daily Research 交付，只记录 9 月后段当前应采用的来源谱系解释。
+
+- **2026-09-14 / PR #165：** S44 弹性共识论文（`arXiv:2403.17907v1`）是 2026-09-11 已进入 canonical S44 的同源再访。后续 Daily chunk 不产生第二个来源身份，也不增加独立佐证。
+- **2026-09-15 / PR #170：** 防复制 bandit 论文（`arXiv:2312.16896v2`）是 canonical S41 的再访。不同日期重新生成研究块不增加 unique-source count。
+- **2026-09-16：** 基于记忆信息加速二阶多智能体共识的论文（`arXiv:2303.14023v1`）是新的独立 canonical S46，归属 Memory System，而不是本 Collaboration 文档的新来源。
+- **2026-09-17 / PR #176：** 历史 PR 标题曾把 Q-learning collusion 论文标成 “S46”。当前 canonical 身份应为 **S47**，`arXiv:2312.08484v3`。历史 PR 标题继续作为历史元数据保留；后续来源计数与引用必须使用 S47。
+- **2026-09-18：** distributed proximal-correction 论文（`arXiv:2310.15607v1`）是新的独立 canonical S48。当前映射仍属于文档/概念层，不建立仓库实现或测试事实。
+
+当前聚合规则：
+
+`SOURCE_REVISIT != NEW_INDEPENDENT_SUPPORT`
+
+`HISTORICAL_PR_TITLE != CANONICAL_SOURCE_IDENTITY`
+
+`SUCCESSFUL_DAILY_GENERATION != VERIFIED_CORE_ADMISSION`
+
+`PAPER_EVIDENCE != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION`
+
+2026 年 9 月自然月仍处于 OPEN；本说明不创建、也不暗示 September Monthly Strategic Blueprint 已最终封月。
