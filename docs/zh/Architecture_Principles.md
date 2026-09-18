@@ -1031,7 +1031,30 @@ $$
 #### 8. 初学者类比
 想象一个厨师团队（智能体）在不同但部分重叠的厨房工作站（组/超边）工作。如果他们只根据过去的成功经验来猜测做什么菜（汤普森采样），有时他们可能会陷入糟糕的日常套路中。频率论后悔界是一个数学保证，即如果他们在一小部分时间（$\epsilon$）内尝试完全新的东西，随着时间的推移，他们最坏情况下的错误将被严格限制，前提是他们没有太多重叠的工作站（稀疏超图）。
 
+
+<!-- WEEKLY_SYNC_REPORT_EXCLUDE_BEGIN -->
+### 用于极大单调算子的分布式近端修正算法
+
+- **技术点名称:** 用于极大单调算子的分布式近端修正算法
+- **System Container:** Architecture Principles System
+- **Frontier Source:** arXiv:2310.15607v1 (Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators in Multi-Agent Network)
+- **原始论文问题 (Original Paper Problem):** 决策耦合问题中，每个智能体私下持有极大单调算子。在不严重依赖严格假设的情况下，标准的分布式梯度下降 (DGD) 算法对于一般的算子包含问题缺乏精确收敛性质或线性速率。
+- **核心假设 (Core Assumptions):** 智能体在一个连通的网络拓扑上进行通信。该问题涉及极大单调算子的和。为了获得线性收敛速率界，假设构造的算子 $\Phi$ 的逆在原点处是李普希茨连续的。非精确的近端步骤需要有界的误差序列。
+- **数学机制 (Mathematical Mechanism):** 在分布式近端点方法中引入累积修正项，将问题转化为寻找复合极大单调算子的根，并使用非精确标准来计算近端映射。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 算法在理论上保证对于任何恒定的惩罚参数，都能收敛到最优解。当逆算子 $\Phi^{-1}$ 在原点处李普希茨连续，并满足更强的非精确标准时，可以建立线性收敛速率。
+- **适用范围 (Applicability Scope):** 在连通多智能体网络拓扑内具有耦合不等式和仿射等式约束的分布式凸优化问题。
+- **局限 (Limitations):** 计算近端步骤的非精确标准要求误差序列是可和的（例如，几何衰减）；仅要求误差渐近趋于零可能导致收敛失败。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上支持在去中心化通信拓扑中通过累积误差修正规则来管理智能体协调的系统架构。
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一群人试图在一个大场地上寻找确切的中间位置，但每个人只能看到自己当地的坡度并与直接的邻居交谈。他们不是盲目地朝着坡度的方向迈步，而是采取计算好的步伐（近端点），并不断记录他们过去的修正误差，确保他们最终都能完美地收敛到同一个中间点，即使他们个人的计算略不精确。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+<!-- WEEKLY_SYNC_REPORT_EXCLUDE_END -->
 <!-- WEEKLY_SYNC_REPORT -->
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)

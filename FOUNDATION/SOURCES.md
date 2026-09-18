@@ -458,6 +458,16 @@ Canonical rules:
 - Use: self-play epsilon-greedy Q-learning dynamics in the iterated prisoner's dilemma, including convergence toward a cooperative Pavlov / win-stay-lose-shift policy under the paper's stated assumptions.
 - Verification boundary: base source identity, authors, and paper-level proposition are primary-source supported. Exact v3 submission date and historical formula transcription were not re-certified in this pass. The result is bounded to the studied game, memory, initialization, learning-rate, discount/exploration assumptions and does not establish generic multi-agent collusion, repository implementation, or real-market behavior.
 
+## S48 — Distributed Proximal-Correction Algorithm for the Sum of Maximal Monotone Operators in Multi-Agent Network
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2310.15607v1
+- Version date: 2023-10-24
+- Authors: Kai Gong, Liwei Zhang
+- URL: https://arxiv.org/abs/2310.15607
+- Use: Distributed proximal-correction algorithm and linear convergence rate guarantees under inexact criteria for maximal monotone operators.
+- Verification boundary: Guarantees depend strictly on the strong monotonicity of the operator or Lipschitz continuity of the inverse operator at zero. Does not guarantee exact proximal operator execution without sub-problem solvers.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
