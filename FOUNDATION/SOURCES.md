@@ -468,6 +468,16 @@ Canonical rules:
 - Use: Distributed proximal-correction algorithm and linear convergence rate guarantees under inexact criteria for maximal monotone operators.
 - Verification boundary: Guarantees depend strictly on the strong monotonicity of the operator or Lipschitz continuity of the inverse operator at zero. Does not guarantee exact proximal operator execution without sub-problem solvers.
 
+## S49 — Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2401.00167v1
+- Version date: 2023-12-30
+- Authors: Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
+- URL: http://arxiv.org/abs/2401.00167v1
+- Use: Proposed adaptive tuning of symmetry constraints in partially symmetric multi-agent reinforcement learning.
+- Verification boundary: Theoretical bounds apply to bounded performance errors for partially symmetric Markov games. Requires hyperparameter tuning for decay rates.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
