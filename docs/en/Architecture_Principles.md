@@ -1089,11 +1089,21 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
 - **Scope of Application:** Multi-agent reinforcement learning tasks featuring heterogeneous agents with underlying partial symmetric structures, such as robotic navigation and coordination.
 - **Limitations:** The adaptive decay requires manual tuning of the decay rate $\beta$ for optimal performance.
 - **Agent Architecture Mapping:** can conceptually support the design of representation constraints in agent policies to share experiences among agents intelligently while avoiding representation collapse.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
 - **Beginner Analogy:** Imagine teaching a team of slightly different robots to navigate. At first, you teach them by assuming they are all identical, which helps them learn the basics very fast (symmetry). As they get better, you slowly stop forcing this assumption and let them learn their own unique quirks (adaptive tuning), so they can eventually perform their specific tasks perfectly.
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Architecture Mapping Status: DESIGN_ANALOGY
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+
+#### Maintenance Contract Normalization — 2026-09-19
+- Original Jules research addition preserved: YES
+- Evidence class: E4_PREPRINT
+- Canonical mapping state: DESIGN_ANALOGY
+- Canonical implementation state: NOT_IMPLEMENTED
+- Canonical validation state: NOT_TESTED
+- Source registration: S49
+- Boundary: paper evidence and formula extraction do not establish repository implementation or experimental reproduction
