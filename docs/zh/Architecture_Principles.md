@@ -1089,11 +1089,21 @@ $$
 - **适用范围 (Scope of Application):** 具有部分对称结构的异质多智能体强化学习任务，如机器人导航和协作。
 - **局限 (Limitations):** 自适应衰减需要手动调整衰减率 $\beta$ 以获得最佳性能。
 - **Agent 架构映射 (Agent Architecture Mapping):** 在理论上可以支持智能体策略中表征约束的设计，在智能体之间智能地共享经验，同时避免表征崩溃。
-- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **仓库测试状态 (Repository Test Status):** EVIDENCE_INSUFFICIENT
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **仓库测试状态 (Repository Test Status):** NOT_TESTED
 - **初学者类比 (Beginner Analogy):** 想象一下教一组略有不同的机器人导航。一开始，你假设它们完全相同来教它们，这帮助它们非常快地学习基础知识（对称性）。当它们变得更好时，你慢慢不再强加这个假设，让它们学习自己独特的怪癖（自适应调节），这样它们最终可以完美地执行特定的任务。
 - **证据状态 (Evidence Status):**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: DESIGN_CANDIDATE
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+
+#### 维护契约归一化 — 2026-09-19
+- 原始 Jules 研究新增保留: YES
+- 证据类别: E4_PREPRINT
+- 当前规范映射状态: DESIGN_ANALOGY
+- 当前规范实现状态: NOT_IMPLEMENTED
+- 当前规范验证状态: NOT_TESTED
+- 来源登记: S49
+- 边界: 论文证据与公式抽取不证明仓库已经实现，也不证明完成实验复现
