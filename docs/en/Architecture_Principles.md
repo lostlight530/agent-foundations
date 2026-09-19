@@ -1067,3 +1067,43 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### Leveraging Partial Symmetry in Multi-Agent Learning
+
+- **Technical Point Name:** Partial Symmetry Exploitation Adaptive Tuning
+- **System Container:** Architecture Principles
+- **Frontier Source:** S49 (arXiv:2401.00167v1, *Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning*)
+- **Original Paper Problem:** Exploiting perfect symmetry as an inductive bias improves multi-agent reinforcement learning (MARL). However, real-world multi-agent systems often exhibit partial symmetry where agents have slight heterogeneity, making strict symmetry assumptions detrimental or unexplored.
+- **Core Assumptions:**
+  1. The problem is a partially symmetric Markov game.
+  2. A transformation $g$ can be applied to states and actions representing potential symmetries.
+  3. The degree of symmetry can be quantified by comparing the transition dynamics under the transformation.
+- **Mathematical Mechanism:**
+  The degree of symmetry $D$ between the transformed state $gs'$ and a true next state $\bar{s}^{\prime}$ is quantified as:
+  $$D(gs', \bar{s}^{\prime}) = 1- \frac{1}{2} \frac{\|gs'-\bar{s}^{\prime}\|_2^2}{\|gs'\|_2^2+\| \bar{s}^{\prime}\|_2^2}$$
+  An adaptive tuning coefficient is defined to dynamically adjust the symmetry regularization based on the iteration step $k$:
+  $$\lambda (D,k) = D e^{-\beta k}$$
+- **Convergence or behavior boundaries:**
+  The performance error introduced by using symmetry-augmented data in MARL is theoretically bounded by the degree of symmetry. By adaptively decaying the symmetry usage probability $\lambda (D,k)$, the model exploits symmetry for initial sample efficiency and later relies on raw data to mitigate asymptotic bias, improving overall convergence.
+- **Scope of Application:** Multi-agent reinforcement learning tasks featuring heterogeneous agents with underlying partial symmetric structures, such as robotic navigation and coordination.
+- **Limitations:** The adaptive decay requires manual tuning of the decay rate $\beta$ for optimal performance.
+- **Agent Architecture Mapping:** can conceptually support the design of representation constraints in agent policies to share experiences among agents intelligently while avoiding representation collapse.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** Imagine teaching a team of slightly different robots to navigate. At first, you teach them by assuming they are all identical, which helps them learn the basics very fast (symmetry). As they get better, you slowly stop forcing this assumption and let them learn their own unique quirks (adaptive tuning), so they can eventually perform their specific tasks perfectly.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_ANALOGY
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+
+#### Maintenance Contract Normalization — 2026-09-19
+- Original Jules research addition preserved: YES
+- Evidence class: E4_PREPRINT
+- Canonical mapping state: DESIGN_ANALOGY
+- Canonical implementation state: NOT_IMPLEMENTED
+- Canonical validation state: NOT_TESTED
+- Source registration: S49
+- Boundary: paper evidence and formula extraction do not establish repository implementation or experimental reproduction

@@ -1067,3 +1067,43 @@ $$
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+
+### 多智能体学习中的部分对称性利用 (Leveraging Partial Symmetry in Multi-Agent Learning)
+
+- **技术点名称 (Technical Point Name):** 部分对称性利用自适应调节 (Partial Symmetry Exploitation Adaptive Tuning)
+- **系统容器 (System Container):** Architecture Principles
+- **前沿来源 (Frontier Source):** S49 (arXiv:2401.00167v1, *Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning*)
+- **原始问题 (Original Paper Problem):** 利用完美对称性作为归纳偏置可以改善多智能体强化学习（MARL）。然而，现实世界的多智能体系统通常表现出部分对称性（智能体存在轻微的异质性），导致严格的对称性假设会产生负面影响，或者在这方面的研究还是空白。
+- **核心假设 (Core Assumptions):**
+  1. 问题是一个部分对称马尔可夫博弈。
+  2. 可以对代表潜在对称性的状态和动作应用变换 $g$。
+  3. 可以通过比较变换下的状态转移来量化对称性的程度。
+- **数学机制 (Mathematical Mechanism):**
+  变换后的状态 $gs'$ 和真实的下一状态 $\bar{s}^{\prime}$ 之间的对称度 $D$ 量化为：
+  $$D(gs', \bar{s}^{\prime}) = 1- \frac{1}{2} \frac{\|gs'-\bar{s}^{\prime}\|_2^2}{\|gs'\|_2^2+\| \bar{s}^{\prime}\|_2^2}$$
+  定义了一个自适应调节系数，以根据迭代步数 $k$ 动态调整对称性正则化：
+  $$\lambda (D,k) = D e^{-\beta k}$$
+- **收敛或行为边界 (Convergence or behavior boundaries):**
+  在 MARL 中使用对称性增强数据所引入的性能误差在理论上受到对称性程度的约束。通过自适应衰减对称性使用概率 $\lambda (D,k)$，模型在初期利用对称性提高样本效率，后期依赖原始数据以减轻渐近偏差，从而改善整体收敛性。
+- **适用范围 (Scope of Application):** 具有部分对称结构的异质多智能体强化学习任务，如机器人导航和协作。
+- **局限 (Limitations):** 自适应衰减需要手动调整衰减率 $\beta$ 以获得最佳性能。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在理论上可以支持智能体策略中表征约束的设计，在智能体之间智能地共享经验，同时避免表征崩溃。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **仓库测试状态 (Repository Test Status):** NOT_TESTED
+- **初学者类比 (Beginner Analogy):** 想象一下教一组略有不同的机器人导航。一开始，你假设它们完全相同来教它们，这帮助它们非常快地学习基础知识（对称性）。当它们变得更好时，你慢慢不再强加这个假设，让它们学习自己独特的怪癖（自适应调节），这样它们最终可以完美地执行特定的任务。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_ANALOGY
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+
+#### 维护契约归一化 — 2026-09-19
+- 原始 Jules 研究新增保留: YES
+- 证据类别: E4_PREPRINT
+- 当前规范映射状态: DESIGN_ANALOGY
+- 当前规范实现状态: NOT_IMPLEMENTED
+- 当前规范验证状态: NOT_TESTED
+- 来源登记: S49
+- 边界: 论文证据与公式抽取不证明仓库已经实现，也不证明完成实验复现
