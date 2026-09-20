@@ -478,6 +478,17 @@ Canonical rules:
 - Use: Proposed adaptive tuning of symmetry constraints in partially symmetric multi-agent reinforcement learning.
 - Verification boundary: Theoretical bounds apply to bounded performance errors for partially symmetric Markov games. Requires hyperparameter tuning for decay rates.
 
+
+## S50 — Sample Efficient Reinforcement Learning with Partial Dynamics Knowledge
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2312.12558v3
+- Version date: 2023-12-19
+- Authors: Meshal Alharbi, Mardavij Roozbehani, Munther Dahleh
+- URL: https://arxiv.org/abs/2312.12558
+- Use: Proposed optimistic Q-learning algorithm that achieves sublinear regret independent of state and action cardinalities by incorporating partial knowledge of additive disturbance models.
+- Verification boundary: Theoretical regret bound guarantees strictly depend on the additive disturbance model assumption (independent of states and actions) and the presence of bounded approximation errors without structural mismatch amplifications.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
