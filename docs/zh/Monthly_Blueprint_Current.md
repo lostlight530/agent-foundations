@@ -1,37 +1,50 @@
 # 月度战略蓝图 — 当前状态
 
-当前证据窗口：**2026-08-01 至 2026-08-31**
+当前证据窗口：**2026-09-01 至 2026-09-20**
 
-状态：**FINAL NATURAL-MONTH DOCUMENTARY CLOSURE**
+状态：**PROVISIONAL MONTH-TO-DATE / MONTH OPEN**
 
-最终权威总账：[历史归档](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
+当前 9 月蓝图：[2026-09 through day 20](../monthly/2026-09-strategic-blueprint.md)
 
-08-31 定向 reconciliation：[历史归档](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
-
-此前 through-day-30 蓝图继续保留为历史/临时证据，不回写原记录。
+上一自然月最终状态：2026 年 8 月 final 继续保留在历史 evidence/closure ledger 与 August blueprint 谱系中。
 
 ## 当前定位
 
 Agent Foundations 是理论、证据、溯源与文档型架构仓库，不是已经实现的自治智能体运行时。
 
-## verified-core 边界
+## 9 月当前状态
 
-- canonical source registry：`S01–S38`
-- 08-28 S36：内存/遗憾论文，v2 日期纠正为 2023-03-09
-- 08-29：MATS 重访统一解析到已有 S25
-- 08-30 S37：Joint Lyapunov 论文，仅在 arXiv 官方摘要范围内支持
-- 08-31 S38：马尔可夫势博弈的独立 NPG；NeurIPS 2023，当前纳入仅限独立复核后的来源/会议/版本身份与摘要级命题
-- 当前映射仍属于文档/参考层，没有形成仓库 runtime 实现或复现证据
+- 截至 2026-09-20 已到期 Daily 逻辑日期：20
+- 已识别 Daily research 日期：20 / 20
+- 当前 canonical source registry：S01–S50
+- W36 历史 Weekly：存在
+- W37 历史 Weekly：存在
+- W38 当前 human-authorized Weekly completion：已写入 8 个双语 owning system 文档
+- 自然月：OPEN
+- September final Monthly：NOT_DUE
 
-五个状态轴继续相互独立。`STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`。
+关键边界：
 
-## 日历与缺失状态边界
+```text
+DAILY_CHUNK_COUNT != UNIQUE_SOURCE_COUNT
+SOURCE_REGISTRATION != VERIFIED_CORE_ADMISSION
+PAPER_EVIDENCE != IMPLEMENTATION
+IMPLEMENTATION != VALIDATION
+CURRENT_WEEKLY_COMPLETION != INVENTED_HISTORICAL_JULES_RUN
+```
 
-- 已识别 Daily research commits：`30`
-- 08-06：`NO_DAILY_RESEARCH_COMMIT_IDENTIFIED`
-- 08-31：作为 W36 Daily research event 保留
-- W36：`WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`
+## W38 当前来源状态
 
-自然月收口不会回填 08-06，也不会制造不存在的 W36 Weekly cascade。
+- S44 revisit — 不增加独立来源
+- S41 revisit — 不增加独立来源
+- S46 new — Memory
+- S47 new — Collaboration；历史 PR 标题误标继续保留为历史，canonical ID 为 S47
+- S48 new — Architecture
+- S49 new — Architecture，2026-09-19 已完成当前状态词汇归一
+- S50 new — Memory，当前周度解释采用 DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED
 
-正式状态：`AUGUST_NATURAL_MONTH_CLOSED / 1_MISSING_DAILY_DATE_RETAINED / W36_OPEN / CONTAINER_HEALTH_NOT_EVALUATED`。
+本页不把任何 W38 论文提升为仓库 runtime 实现或实验复现。
+
+正式状态：
+
+`SEPTEMBER_MONTH_OPEN / 20_OF_20_DUE_DAILY_DATES_PRESENT / S01_S50_CURRENT_REGISTRY / W38_CURRENT_WEEKLY_COMPLETION_PRESENT / FINAL_MONTHLY_NOT_DUE`

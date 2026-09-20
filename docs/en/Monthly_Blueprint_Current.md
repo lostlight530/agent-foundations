@@ -1,37 +1,50 @@
 # Monthly Strategic Blueprint — Current
 
-Current evidence window: **2026-08-01 through 2026-08-31**
+Current evidence window: **2026-09-01 through 2026-09-20**
 
-Status: **FINAL NATURAL-MONTH DOCUMENTARY CLOSURE**
+Status: **PROVISIONAL MONTH-TO-DATE / MONTH OPEN**
 
-Authoritative final ledger: [historical archive](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md)
+Current September blueprint: [2026-09 through day 20](../monthly/2026-09-strategic-blueprint.md)
 
-08-31 targeted reconciliation: [historical archive](https://github.com/lostlight530/agent-foundations/blob/main/historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md)
-
-The earlier through-day-30 blueprint remains historical/provisional evidence and is not rewritten.
+Previous natural-month final: August 2026 remains preserved in the historical evidence/closure ledger and the August blueprint lineage.
 
 ## Current position
 
 Agent Foundations is a theory, evidence, provenance, and documentary architecture repository, not an implemented autonomous-agent runtime.
 
-## Verified-core boundary
+## September current state
 
-- canonical source registry: `S01–S38`
-- 08-28 S36: memory/regret paper, corrected v2 date 2023-03-09
-- 08-29: MATS revisit resolves to existing S25
-- 08-30 S37: joint-Lyapunov paper at official-arXiv abstract scope
-- 08-31 S38: Independent NPG for Markov Potential Games; NeurIPS 2023, current admission bounded to independently checked source/venue/version identity and abstract-level proposition
-- all current mappings remain documentary/reference-level; no repository runtime implementation or reproduction is established
+- due Daily logical dates through 2026-09-20: 20
+- Daily research dates identified: 20 / 20
+- current canonical source registry: S01–S50
+- W36 historical Weekly: present
+- W37 historical Weekly: present
+- W38 current human-authorized Weekly completion: present in the eight bilingual owning system documents
+- natural month: OPEN
+- final September Monthly: NOT_DUE
 
-The five axes remain independent. `STRUCTURAL_VALIDATOR_PRESENT != CLAIM_SEMANTICS_VERIFIED`.
+Important boundaries:
 
-## Calendar and missing-state boundary
+```text
+DAILY_CHUNK_COUNT != UNIQUE_SOURCE_COUNT
+SOURCE_REGISTRATION != VERIFIED_CORE_ADMISSION
+PAPER_EVIDENCE != IMPLEMENTATION
+IMPLEMENTATION != VALIDATION
+CURRENT_WEEKLY_COMPLETION != INVENTED_HISTORICAL_JULES_RUN
+```
 
-- Daily research commits identified: `30`
-- 08-06: `NO_DAILY_RESEARCH_COMMIT_IDENTIFIED`
-- 08-31: retained as a W36 Daily research event
-- W36: `WEEK_IN_PROGRESS / NO_WEEKLY_CLOSURE`
+## W38 current source state
 
-A natural-month closure does not backfill 08-06 and does not fabricate a W36 Weekly cascade.
+- S44 revisit — no new independent source
+- S41 revisit — no new independent source
+- S46 new — Memory
+- S47 new — Collaboration; historical PR title mislabel retained as history, canonical ID is S47
+- S48 new — Architecture
+- S49 new — Architecture, current state normalized on 2026-09-19
+- S50 new — Memory, current weekly interpretation uses DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED
 
-Formal state: `AUGUST_NATURAL_MONTH_CLOSED / 1_MISSING_DAILY_DATE_RETAINED / W36_OPEN / CONTAINER_HEALTH_NOT_EVALUATED`.
+No W38 paper is promoted here to repository runtime implementation or experimental reproduction.
+
+Formal state:
+
+`SEPTEMBER_MONTH_OPEN / 20_OF_20_DUE_DAILY_DATES_PRESENT / S01_S50_CURRENT_REGISTRY / W38_CURRENT_WEEKLY_COMPLETION_PRESENT / FINAL_MONTHLY_NOT_DUE`
