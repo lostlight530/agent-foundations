@@ -648,3 +648,29 @@ Imagine a group of drivers trying to match their speeds on a highway to form a c
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+
+
+## Sample Efficient Q-Learning with Partial Dynamics Knowledge
+
+- **System Container:** Memory System
+- **Frontier Source:** Sample Efficient Reinforcement Learning with Partial Dynamics Knowledge (arXiv:2312.12558v3)
+- **Authors:** Meshal Alharbi, Mardavij Roozbehani, Munther Dahleh
+- **URL:** https://arxiv.org/abs/2312.12558
+- **Publication Date:** 2023-12-19
+- **Theoretical Selection Reason:** Analyzes the theoretical sample complexity of Q-learning when prior structural knowledge (specifically additive disturbances) is retained and utilized, overcoming state-action space dependencies.
+- **Original Problem Formulation (论文原始问题):** How to incorporate partial or noisy prior knowledge of system dynamics (specifically additive disturbance models) to accelerate the online reinforcement learning process and reduce sample complexity.
+- **Core Assumptions (核心假设):** (1) Systems evolve according to an additive disturbance model: $S_{h+1} = f(S_h, A_h) + W_h$. (2) $f$ represents underlying system dynamics (which can be partially known/learned), and $W_h$ are unknown disturbances independent of states and actions.
+- **Mathematical Mechanism (数学机制):** Proposes an optimistic Q-learning algorithm that uses a biased estimator based on the known/approximate function $f$ rather than estimating full transition probabilities, incorporating bonuses based on information limits.
+- **Core Update Formula (核心更新公式):**
+  Regret bound under partial dynamics knowledge (Theorem 1):
+  Total regret is at most $\mathcal{O}(\sqrt{H^6T\iota} + L\zeta HT)$, where $\zeta$ bounds the approximation error $||\hat{f}-f||_\infty$.
+- **Convergence or Behavior Boundaries (收敛或行为边界):** Achieves sublinear $\tilde{\mathcal{O}}(\text{Poly}(H)\sqrt{T})$ regret bound independent of state/action cardinalities under perfect knowledge of $f$. When using noisy estimate $\hat{f}$, regret scales linearly with the approximation error $\zeta$ without amplifying the error by $S$ or $A$.
+- **Scope of Applicability (适用范围):** Finite episodic Markov Decision Processes where the transition dynamics follow an additive disturbance model. Suitable for problems like inventory control and operations research.
+- **Limitations (局限):** Strong assumption on the structural form of the dynamics (additive disturbances independent of state/action). Persisting bias $\zeta > 0$ introduces an unavoidable linear term in regret.
+- **Agent Architecture Mapping (Agent 架构映射):** DESIGN_CANDIDATE. The theory suggests a Memory System design where the agent explicitly maintains a structural prior model ($\hat{f}$) of the environment (a "world model") to vastly improve sample efficiency of its value estimations, instead of relying purely on unstructured model-free updates.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy (初学者类比):** Imagine driving on a bumpy road (disturbances) with a somewhat inaccurate map (partial dynamics knowledge). Even with a flawed map, you learn your route much faster than someone driving completely blind, as long as the map's errors aren't too large.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE

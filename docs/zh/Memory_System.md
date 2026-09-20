@@ -649,3 +649,29 @@ EVIDENCE_INSUFFICIENT
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+
+
+## 基于部分动力学知识的样本高效 Q 学习
+
+- **System Container:** Memory System
+- **Frontier Source:** Sample Efficient Reinforcement Learning with Partial Dynamics Knowledge (arXiv:2312.12558v3)
+- **Authors:** Meshal Alharbi, Mardavij Roozbehani, Munther Dahleh
+- **URL:** https://arxiv.org/abs/2312.12558
+- **Publication Date:** 2023-12-19
+- **Theoretical Selection Reason:** 分析了在保留并利用先验结构知识（特别是加性扰动）时 Q 学习的理论样本复杂性，克服了状态-动作空间维度的依赖，对智能体的记忆构建有理论启发。
+- **Original Problem Formulation (论文原始问题):** 如何结合对系统动力学的部分或有噪声的先验知识（特别是加性扰动模型），以加速在线强化学习过程并降低样本复杂性。
+- **Core Assumptions (核心假设):** (1) 系统根据加性扰动模型演化：$S_{h+1} = f(S_h, A_h) + W_h$。(2) $f$ 代表潜在的系统动力学（可以部分已知/学习得到），$W_h$ 是独立于状态和动作的未知扰动。
+- **Mathematical Mechanism (数学机制):** 提出了一种乐观 Q 学习算法，该算法使用基于已知/近似函数 $f$ 的有偏估计器，而不是估计完整的状态转移概率，并结合基于信息限制的探索奖励。
+- **Core Update Formula (核心更新公式):**
+  部分动力学知识下的后悔界 (Theorem 1)：
+  总后悔最多为 $\mathcal{O}(\sqrt{H^6T\iota} + L\zeta HT)$，其中 $\zeta$ 是近似误差 $||\hat{f}-f||_\infty$ 的上界。
+- **Convergence or Behavior Boundaries (收敛或行为边界):** 在完全已知 $f$ 的情况下，实现了独立于状态/动作基数的亚线性 $\tilde{\mathcal{O}}(\text{Poly}(H)\sqrt{T})$ 后悔界。当使用有噪声的估计 $\hat{f}$ 时，后悔随近似误差 $\zeta$ 线性增长，且该误差不会被状态数 $S$ 或动作数 $A$ 放大。
+- **Scope of Applicability (适用范围):** 转移状态遵循加性扰动模型的有限幕式马尔可夫决策过程。适用于库存控制和运筹学等问题。
+- **Limitations (局限):** 对动力学结构形式（独立于状态/动作的加性扰动）有较强的假设。持续的偏差 $\zeta > 0$ 会在后悔中引入不可避免的线性项。
+- **Agent Architecture Mapping (Agent 架构映射):** DESIGN_CANDIDATE。该理论启发了记忆系统 (Memory System) 的设计：智能体应该显式地维护环境的结构先验模型（“世界模型” $\hat{f}$），以极大地提高其价值估计的样本效率，而不是纯粹依赖无结构的无模型更新。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy (初学者类比):** 想象你在一条颠簸的道路（扰动）上开车，手里有一张不太准确的地图（部分动力学知识）。即使地图有缺陷，只要错误不大，你学会认路的速度也会比完全瞎开的人快得多。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
