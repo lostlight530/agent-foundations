@@ -489,6 +489,17 @@ Canonical rules:
 - Use: Proposed optimistic Q-learning algorithm that achieves sublinear regret independent of state and action cardinalities by incorporating partial knowledge of additive disturbance models.
 - Verification boundary: Theoretical regret bound guarantees strictly depend on the additive disturbance model assumption (independent of states and actions) and the presence of bounded approximation errors without structural mismatch amplifications.
 
+## S51 — Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2601.12580v1
+- Version date: 2026-01-18
+- Authors: Sofiya Zaichyk
+- URL: https://arxiv.org/abs/2601.12580
+- Use: ontology-scoped validation, slice/global stuttering bisimulation, causal isolation, and communication-cost bounds for decentralized multi-agent semantic coordination
+- Verification boundary: official arXiv abstract and HTML full text were checked on 2026-09-21. The deterministic slice/global bisimulation result depends on slice-scoped validation, reliable refresh propagation, and deterministic merge/no reordering. The stated `O(d)` communication bound is scoped to agents whose semantic slices intersect the update. The paper's simulation is author-reported validation, not independent repository reproduction, and does not establish an Agent Foundations collaboration runtime
+
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
