@@ -2377,3 +2377,88 @@ NO_RUNTIME_PROMOTION
 /
 MONTH_OPEN
 ```
+
+## Semantic Fusion：用于去中心化协作的切片范围双模拟 — 2026-09-21
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
+- **Authors:** Sofiya Zaichyk
+- **URL:** https://arxiv.org/abs/2601.12580
+- **Version:** arXiv:2601.12580v1
+- **Publication Date:** 2026-01-18
+- **Source Surface Checked:** 官方 arXiv 摘要与 HTML 全文
+- **Check Date:** 2026-09-21
+- **Theoretical Selection Reason:** 论文给出了去中心化 Agent 在只持有局部语义视图、异步运行时，使局部执行与全局语义投影保持形式关系的明确条件，因此它提供的是有边界的协调机制，而不是单纯 Benchmark 提升
+
+### 论文原始问题
+
+去中心化 Agent 可能只持有部分语义视图并异步运行。论文研究在不依赖中心控制、全局同步或无限制消息传递的情况下，局部状态演化何时能够与全局语义模型保持一致
+
+### 核心假设
+
+论文的确定性 slice/global stuttering-bisimulation 结果依赖：
+
+1. **切片范围验证:** 每个被集成的更新都必须满足 ontology 约束，并且只影响创建该更新的 Agent 所属语义切片
+2. **可靠 refresh 传播:** 每个与某切片相关的更新最终都会到达所有相关 Agent
+3. **确定性合并且不重排:** 取回的更新只合并一次，并按照 commit 顺序处理
+
+这些是论文定理的适用条件，不是本仓库已经实现的事实
+
+### 数学机制
+
+对 Agent (a)，论文用 stuttering-bisimulation relation 将局部记忆 (M_a(t)) 与全局记忆在 ontology slice 上的投影联系起来：
+
+[
+\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
+]
+
+因此局部 transition system 在给定假设下与全局执行在该 Agent ontology slice 上的投影形成 stuttering bisimulation
+
+论文还把一个已验证更新的通信成本限制为其语义切片与更新实体相交的 Agent 数 (d)：
+
+[
+\mathrm{Communication\ Cost}=O(d)
+]
+
+这是针对 scoped propagation 的通信边界，不表示整个系统的所有实现开销都与 Agent 总数无关
+
+### 收敛或行为边界
+
+- 在定理假设成立时，局部 slice execution 可以通过 stuttering bisimulation 与对应的全局投影建立形式关系
+- 对于 ontology scope 完全不相交的更新，论文给出 causal isolation
+- 论文报告了 250 个 Agent、11,325 次更新的作者侧模拟验证
+- 作者侧模拟不等于本仓库独立复现
+- 这些形式结果不能自动推广到任意 LLM Agent 语义、任意 ontology 演化、超出假设的非可靠 refresh，也不能证明本仓库 runtime 行为
+
+### 适用范围
+
+适用于具有显式语义切片、结构化更新验证、可检查状态迁移和有界传播规则的去中心化多 Agent 系统
+
+### 局限
+
+- 确定性双模拟结果依赖 slice-relevant update 的可靠传播和确定性排序
+- 正确的 ontology 设计与验证本身被作为假设，并未被普遍解决
+- 论文中的形式语义与 reference architecture 属于外部证据
+- Agent Foundations 当前没有实现 Semantic Fusion Collaboration runtime
+
+### Agent 架构映射
+
+- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
+- **Current Mapping State:** `DESIGN_ANALOGY`
+- **Repository Implementation State:** `NOT_IMPLEMENTED`
+- **Repository Validation State:** `NOT_TESTED`
+
+可借鉴的设计类比是：协作状态应当具有明确 scope、类型和本地验证边界，而不是默认所有 Agent 继承同一个可任意修改的全局上下文。该类比不能证明仓库已经实现 ontology slice、refresh propagation 或 bisimulation checker
+
+### 初学者类比
+
+想象多个应急小组共同维护一张持续变化的城市地图，每个小组只看到与自己任务有关的区域。地图变化只有满足共同规则才允许写入，并且只有负责相关区域的小组需要刷新。论文的定理更接近于证明：在特定传播与排序假设下，每个小组的局部地图可以和全局地图中与自己相关的部分保持行为一致，而不是证明任意群聊都天然不会产生状态冲突
+
+### 证据状态
+
+- **Evidence Level:** `E4_PREPRINT`
+- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
+- **Independent Reproduction:** `NO`
+- **Verified-Core Admission:** `NOT_PERFORMED`
+- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
+
