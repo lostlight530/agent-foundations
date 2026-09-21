@@ -2571,17 +2571,17 @@ These assumptions are part of the theorem boundary, not implementation facts abo
 
 For agent (a), the paper relates local memory (M_a(t)) to a projected global memory through a stuttering-bisimulation relation:
 
-$
+$$
 \exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
-$
+$$
 
 so the local transition system is stuttering-bisimilar to the global execution projected onto the agent's ontology slice
 
 The paper also bounds communication for a validated update by the number (d) of agents whose semantic slices intersect the updated entities:
 
-$
+$$
 \mathrm{Communication\ Cost}=O(d)
-$
+$$
 
 This is a scoped communication bound, not a claim that total system cost is independent of all other implementation overhead
 
