@@ -2540,3 +2540,88 @@ NO_RUNTIME_PROMOTION
 /
 MONTH_OPEN
 ```
+
+## Semantic Fusion: slice-scoped bisimulation for decentralized coordination — 2026-09-21
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
+- **Authors:** Sofiya Zaichyk
+- **URL:** https://arxiv.org/abs/2601.12580
+- **Version:** arXiv:2601.12580v1
+- **Publication Date:** 2026-01-18
+- **Source Surface Checked:** official arXiv abstract and HTML full text
+- **Check Date:** 2026-09-21
+- **Theoretical Selection Reason:** The paper gives explicit formal conditions under which decentralized agents can maintain scoped semantic state while relating local execution to a projected global semantics. It therefore supplies a bounded coordination mechanism rather than a benchmark-only improvement
+
+### Original problem
+
+Decentralized agents may hold only partial semantic views and operate asynchronously. The paper asks when local state evolution can remain coherent with a global semantic model without requiring centralized control, global synchronization, or unrestricted message passing
+
+### Core assumptions
+
+For the deterministic slice/global stuttering-bisimulation result, the paper requires:
+
+1. **Slice-scoped validation:** every integrated update is ontology-valid and affects only the authoring agent's slice
+2. **Reliable refresh propagation:** every slice-relevant update eventually reaches each interested agent
+3. **Deterministic merge with no reordering:** retrieved updates are merged exactly once in commit order
+
+These assumptions are part of the theorem boundary, not implementation facts about this repository
+
+### Mathematical mechanism
+
+For agent (a), the paper relates local memory (M_a(t)) to a projected global memory through a stuttering-bisimulation relation:
+
+$$
+\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
+$$
+
+so the local transition system is stuttering-bisimilar to the global execution projected onto the agent's ontology slice
+
+The paper also bounds communication for a validated update by the number (d) of agents whose semantic slices intersect the updated entities:
+
+$$
+\mathrm{Communication\ Cost}=O(d)
+$$
+
+This is a scoped communication bound, not a claim that total system cost is independent of all other implementation overhead
+
+### Convergence or behavior boundaries
+
+- Under the theorem assumptions, local slice execution can be related to projected global behavior by stuttering bisimulation
+- Ontology-external updates are causally isolated from an agent whose slice does not intersect those entities
+- The paper reports a 250-agent simulation with 11,325 updates as author-run validation of its formal model
+- Author-run simulation is not independent reproduction by this repository
+- The formal results do not establish correctness for arbitrary LLM-agent semantics, arbitrary ontology evolution, unreliable refresh outside the stated model, or this repository's runtime behavior
+
+### Applicability scope
+
+The mechanism is relevant to decentralized multi-agent systems with explicit semantic slices, structured update validation, inspectable state transitions, and bounded propagation rules
+
+### Limitations
+
+- The deterministic bisimulation result depends on reliable delivery of slice-relevant updates and deterministic ordering assumptions
+- Correct ontology design and validation are assumed rather than solved universally
+- The paper's formal semantics and reference architecture are external evidence
+- No local Collaboration runtime implements Semantic Fusion in Agent Foundations
+
+### Agent architecture mapping
+
+- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
+- **Current Mapping State:** `DESIGN_ANALOGY`
+- **Repository Implementation State:** `NOT_IMPLEMENTED`
+- **Repository Validation State:** `NOT_TESTED`
+
+A useful design analogy is to treat collaboration state as scoped, typed, and locally validated rather than assuming that every agent must inherit one global mutable context. The analogy does not establish that the repository already implements ontology slices, refresh propagation, or bisimulation checking
+
+### Beginner analogy
+
+Imagine several emergency teams sharing one evolving city map. Each team sees only the districts relevant to its job. A map change is accepted only if it follows the agreed map rules, and only teams whose districts are affected need to refresh. The theorem is closer to proving that each team's permitted local map can stay behaviorally aligned with the relevant part of the global map under specific delivery and ordering assumptions; it is not proof that any arbitrary group chat will remain consistent
+
+### Evidence status
+
+- **Evidence Level:** `E4_PREPRINT`
+- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
+- **Independent Reproduction:** `NO`
+- **Verified-Core Admission:** `NOT_PERFORMED`
+- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
+
