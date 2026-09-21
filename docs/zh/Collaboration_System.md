@@ -2408,17 +2408,17 @@ MONTH_OPEN
 
 对 Agent (a)，论文用 stuttering-bisimulation relation 将局部记忆 (M_a(t)) 与全局记忆在 ontology slice 上的投影联系起来：
 
-$
+$$
 \exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
-$
+$$
 
 因此局部 transition system 在给定假设下与全局执行在该 Agent ontology slice 上的投影形成 stuttering bisimulation
 
 论文还把一个已验证更新的通信成本限制为其语义切片与更新实体相交的 Agent 数 (d)：
 
-$
+$$
 \mathrm{Communication\ Cost}=O(d)
-$
+$$
 
 这是针对 scoped propagation 的通信边界，不表示整个系统的所有实现开销都与 Agent 总数无关
 
