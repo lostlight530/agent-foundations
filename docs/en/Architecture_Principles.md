@@ -1180,3 +1180,26 @@ NO_VERIFIED_CORE_PROMOTION
 /
 MONTH_OPEN
 ```
+
+
+## Daily Research Chunk: Generalized Velocity Rigidity for Macroscopic Motion
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Macroscopic Motion Patterns from Generalized Velocity Rigidity in Multi-Agent Networks (arXiv:2609.18276v1, 2026-09-16)
+- **Authors:** Ronghai He, Changhuang Wan
+- **URL:** https://arxiv.org/abs/2609.18276
+- **论文原始问题:** Extending graph rigidity from the classical position space to the continuous-time velocity space to coordinate coherent network-level macroscopic motion patterns without constraining spatial shape.
+- **核心假设:** The multi-agent framework maintains infinitesimal velocity rigidity at all times, such that the differential constraint residual vanishes identically.
+- **数学机制 (Mathematical mechanism):** Kinematic Differential Inclusion: $a(t) \in \text{Null}(R_v(v(t)))$. The global acceleration vector must be strictly confined to the instantaneous null space of the velocity rigidity matrix $R_v(v)$.
+- **收敛或行为边界 (Convergence or behavior boundaries):** Velocity-degenerate configurations (consensus, collinearity) act as transition modes allowing spatial shearing, stretching, and contraction, preserving prescribed velocity constraints.
+- **适用范围:** Multi-agent swarms requiring continuous multi-phase maneuvers, topological morphing, and passage through constrained environments while preserving cohesive dynamics.
+- **局限:** Position configuration is regulated indirectly through velocity constraints. It does not explicitly guarantee bounded formation diameter or inter-agent collision avoidance without additional position/distance constraints.
+- **Agent 架构映射:** Translates structural rigidity concepts to velocity-space topologies, allowing agents in a constrained topology to undergo coordinated macro-spatial deformations (scaling, rotation, shearing) dynamically.
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT (Theoretical mapping; continuous kinematic differential inclusions are not yet implemented as execution bounds).
+- **初学者类比:** Imagine a flock of birds moving together. Instead of rigidly keeping the exact same distance from each other, they maintain relative speed relationships. This allows the flock to stretch into a thin line to pass through a narrow canyon and then expand back into a circle, all while moving as one coordinated group.
+- **中英文内容:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

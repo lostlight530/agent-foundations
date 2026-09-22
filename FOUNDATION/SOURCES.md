@@ -500,6 +500,18 @@ Canonical rules:
 - Verification boundary: official arXiv abstract and HTML full text were checked on 2026-09-21. The deterministic slice/global bisimulation result depends on slice-scoped validation, reliable refresh propagation, and deterministic merge/no reordering. The stated `O(d)` communication bound is scoped to agents whose semantic slices intersect the update. The paper's simulation is author-reported validation, not independent repository reproduction, and does not establish an Agent Foundations collaboration runtime
 
 
+
+## S52 — Macroscopic Motion Patterns from Generalized Velocity Rigidity in Multi-Agent Networks
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2609.18276v1
+- Version date: 2026-09-16
+- Authors: Ronghai He, Changhuang Wan
+- URL: https://arxiv.org/abs/2609.18276
+- Use: Generalized velocity rigidity for macroscopic multi-agent motion patterns, mapping the kinematic differential inclusion to curved flocking and spatial shearing.
+- Verification boundary: Guarantees depend strictly on maintaining infinitesimal velocity rigidity at all times, with acceleration confined to the instantaneous null space. It regulates position indirectly and does not explicitly guarantee bounded formation size or collision avoidance.
+
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.

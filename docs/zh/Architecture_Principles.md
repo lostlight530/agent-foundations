@@ -1180,3 +1180,26 @@ NO_VERIFIED_CORE_PROMOTION
 /
 MONTH_OPEN
 ```
+
+
+## Daily Research Chunk: 广义速度刚性与宏观运动模式
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Macroscopic Motion Patterns from Generalized Velocity Rigidity in Multi-Agent Networks (arXiv:2609.18276v1, 2026-09-16)
+- **Authors:** Ronghai He, Changhuang Wan
+- **URL:** https://arxiv.org/abs/2609.18276
+- **论文原始问题:** 将图刚性理论从经典位置空间扩展到连续时间的速度空间，以协调网络级宏观运动模式，而不对空间形状施加严格约束。
+- **核心假设:** 多智能体框架在所有时刻都保持无穷小速度刚性，确保微分约束残差恒为零。
+- **数学机制 (Mathematical mechanism):** 运动学微分包含：$a(t) \in \text{Null}(R_v(v(t)))$。全局加速度向量必须严格限制在速度刚性矩阵 $R_v(v)$ 的瞬时零空间内 (核心更新公式)。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 速度退化配置（如共识、共线）可作为过渡模式，允许空间剪切、拉伸和收缩，同时保留预设的速度约束。
+- **适用范围:** 需要连续多阶段机动、拓扑变形和穿越受限环境，同时保持连贯动力学的多智能体集群。
+- **局限:** 位置配置仅通过速度约束间接调节。若无额外的位置或距离约束，无法明确保证有界的编队直径或防止智能体间碰撞。
+- **Agent 架构映射:** 将结构刚性概念转化为速度空间拓扑，允许受拓扑约束的智能体动态进行协调的宏观空间变形（缩放、旋转、剪切）。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT (概念映射；连续运动学微分包含尚未作为执行边界实现)。
+- **初学者类比:** 想象一群鸟一起飞翔。它们不是僵硬地保持完全相同的距离，而是维持相对速度关系。这使得鸟群可以拉伸成一条细线穿过狭窄的峡谷，然后重新扩展成一个圆圈，同时始终作为一个协调的群体移动。
+- **中英文内容:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
