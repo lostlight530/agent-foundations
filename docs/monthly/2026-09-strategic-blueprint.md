@@ -868,3 +868,18 @@ NO_VERIFIED_CORE_OR_RUNTIME_PROMOTION
 /
 MONTH_OPEN
 ```
+
+
+## NIGHTLY_FULL_REVIEW_2026-09-22
+
+The nightly pass re-read all 22 retained September Daily research dates, W36/W37/W38 weekly history/current completion, W39 open state, the S01–S52 registry, and the current month-to-date blueprint.
+
+Controlling boundaries remain unchanged:
+- paper evidence != conceptual mapping != implementation != validation;
+- source registration != verified-core admission;
+- source revisit != new independent evidence;
+- later Daily delivery != original Weekly input availability;
+- producer change (including 2026-09-21 GPT task producer versus Jules-produced dates) != task identity change;
+- documentary review != validator execution != scientific reproduction.
+
+2026-09-22 S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED under the current interpretation. W39 remains IN_PROGRESS, September remains MONTH_OPEN, and final Monthly closure remains NOT_DUE. No audit sidecar is created.

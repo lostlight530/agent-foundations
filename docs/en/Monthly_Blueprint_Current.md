@@ -73,3 +73,8 @@ No W39 Weekly cascade is created by this current-state update.
 Formal state:
 
 `SEPTEMBER_MONTH_OPEN / 22_OF_22_RETAINED_DAILY_DATES_PRESENT_THROUGH_2026_09_22 / S01_S52_CURRENT_REGISTRY / W38_CURRENT_WEEKLY_COMPLETION_PRESENT / W39_IN_PROGRESS / FINAL_MONTHLY_NOT_DUE`
+
+
+### Nightly reconciliation — 2026-09-22
+
+The September current blueprint has been re-read across all 22 retained Daily dates and all due Weekly periods. Month remains OPEN; W39 remains in progress; no source-registration, mapping, implementation, validation, or verified-core state is upgraded by maintenance alone.
