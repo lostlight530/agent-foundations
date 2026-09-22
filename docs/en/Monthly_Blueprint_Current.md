@@ -1,10 +1,10 @@
 # Monthly Strategic Blueprint — Current
 
-Current evidence window: **2026-09-01 through 2026-09-21**
+Current evidence window: **2026-09-01 through 2026-09-22**
 
 Status: **PROVISIONAL MONTH-TO-DATE / MONTH OPEN**
 
-Current September blueprint: [2026-09 through day 21](../monthly/2026-09-strategic-blueprint.md)
+Current September blueprint: [2026-09 through day 22](../monthly/2026-09-strategic-blueprint.md)
 
 Previous natural-month final: August 2026 remains preserved in the historical evidence/closure ledger and the August blueprint lineage.
 
@@ -14,9 +14,9 @@ Agent Foundations is a theory, evidence, provenance, and documentary architectur
 
 ## September current state
 
-- retained Daily research logical dates through 2026-09-21: 21
-- Daily research dates identified through 2026-09-21: 21 / 21
-- current canonical source registry: S01–S51
+- retained Daily research logical dates through 2026-09-22: 22
+- Daily research dates identified through 2026-09-22: 22 / 22
+- current canonical source registry: S01–S52
 - W36 historical Weekly: present
 - W37 historical Weekly: present
 - W38 current human-authorized Weekly completion: present in the eight bilingual owning system documents
@@ -72,4 +72,4 @@ No W39 Weekly cascade is created by this current-state update.
 
 Formal state:
 
-`SEPTEMBER_MONTH_OPEN / 21_OF_21_RETAINED_DAILY_DATES_PRESENT_THROUGH_2026_09_21 / S01_S51_CURRENT_REGISTRY / W38_CURRENT_WEEKLY_COMPLETION_PRESENT / W39_IN_PROGRESS / FINAL_MONTHLY_NOT_DUE`
+`SEPTEMBER_MONTH_OPEN / 22_OF_22_RETAINED_DAILY_DATES_PRESENT_THROUGH_2026_09_22 / S01_S52_CURRENT_REGISTRY / W38_CURRENT_WEEKLY_COMPLETION_PRESENT / W39_IN_PROGRESS / FINAL_MONTHLY_NOT_DUE`
