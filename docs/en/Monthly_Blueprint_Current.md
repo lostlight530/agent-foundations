@@ -78,3 +78,21 @@ Formal state:
 ### Nightly reconciliation — 2026-09-22
 
 The September current blueprint has been re-read across all 22 retained Daily dates and all due Weekly periods. Month remains OPEN; W39 remains in progress; no source-registration, mapping, implementation, validation, or verified-core state is upgraded by maintenance alone.
+
+
+## Current reconciliation — 2026-09-23
+
+The current retained September Daily sequence remains through 2026-09-22 at this reviewed main cut. This page does not classify a 2026-09-23 Daily as missed merely because no later retained path was observed here.
+
+```text
+CURRENT_PATH_NOT_OBSERVED
+!= TASK_NOT_EXECUTED
+
+MONTH_OPEN
+!= FINAL_MONTHLY
+
+SOURCE_REGISTRY_S01_S52
+!= VERIFIED_CORE_ADMISSION
+```
+
+W39 remains in progress and all Paper -> Mapping -> Implementation -> Validation boundaries remain unchanged.
