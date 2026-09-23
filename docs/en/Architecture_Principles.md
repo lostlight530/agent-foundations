@@ -1231,3 +1231,26 @@ PAPER_EVIDENCE
 != VALIDATION
 ```
 
+
+
+### 2026-09-23 maintenance calibration of the 2026-09-22 S52 mapping
+
+The S52 generalized-velocity-rigidity material remains a design analogy derived from paper-level evidence.
+
+Current state:
+
+- Evidence level: E4_PREPRINT.
+- Mapping state: DESIGN_ANALOGY.
+- Implementation state: REFERENCE_ONLY.
+- Validation state: NOT_TESTED.
+
+The paper's kinematic/velocity-rigidity guarantees are not repository execution guarantees. Source registration and conceptual fit do not establish a runtime architecture, test result, or verified-core admission.
+
+```text
+PAPER_GUARANTEE
+!= REPOSITORY_EXECUTION_BOUND
+
+DESIGN_ANALOGY
+!= IMPLEMENTATION
+!= VALIDATION
+```
