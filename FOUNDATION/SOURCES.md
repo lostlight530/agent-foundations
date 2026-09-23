@@ -519,17 +519,21 @@ The canonical current range is the contiguous sequence from `S01` through the hi
 Do not place a fixed historical upper-bound sentence in the middle of the registry. A later legitimate source addition changes registry state, not evidence vocabulary. Historical source counts belong to dated research/reconciliation records, not to this current registry authority.
 
 
-## 2026-09-23 maintenance calibration for S52
+## 2026-09-23 dual-view annotation for S52
 
-The 2026-09-22 Daily introduced S52 / arXiv:2609.18276v1 as a canonical bibliographic source lineage.
+### View 1 — N-1 / 2026-09-22 source-entry calibration
 
-This registry admission establishes source identity and provenance only.
+S52 / arXiv:2609.18276v1 is a canonical bibliographic source identity. Registration establishes provenance/identity only.
+
+### View 2 — N / 2026-09-23 current interpretation
+
+Current repository use keeps S52 at paper-level evidence. Later blueprint/current-owner state does not convert registration into verified-core admission, implementation, validation, or independent reproduction.
 
 ```text
-SOURCE_REGISTRATION
+SOURCE_REGISTRATION_AT_N_MINUS_1
++
+CURRENT_MAPPING_AT_N
 != VERIFIED_CORE_ADMISSION
 != IMPLEMENTATION
 != VALIDATION
 ```
-
-For current use, S52 remains paper-level evidence. Any repository mapping must preserve the exact versioned paper identity and the checked claim boundary. No independent reproduction, repository implementation, or runtime validation is created by this maintenance pass.
