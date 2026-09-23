@@ -1231,3 +1231,16 @@ PAPER_EVIDENCE
 != VALIDATION
 ```
 
+
+### 2026-09-23 对 2026-09-22 S52 映射的双口径批注
+
+**N-1 口径:** S52 继续保持 E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED. 论文保证只在论文自身假设与范围内成立.  
+**N 口径:** 当前九月蓝图可以继续引用这一 mapping, 但后续文档整合不能把它升级成仓库执行、验证或 verified-core admission.
+
+```text
+N_MINUS_1_PAPER_MAPPING
++
+N_CURRENT_DOCUMENTARY_USE
+!= IMPLEMENTATION
+!= VALIDATION
+```

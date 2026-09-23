@@ -1231,3 +1231,16 @@ PAPER_EVIDENCE
 != VALIDATION
 ```
 
+
+### 2026-09-23 dual-view annotation for the 2026-09-22 S52 mapping
+
+**N-1 view:** S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED. The paper's guarantees are paper-scoped.  
+**N view:** the current September blueprint may continue using that mapping, but later documentary integration does not create repository execution, validation, or verified-core admission.
+
+```text
+N_MINUS_1_PAPER_MAPPING
++
+N_CURRENT_DOCUMENTARY_USE
+!= IMPLEMENTATION
+!= VALIDATION
+```

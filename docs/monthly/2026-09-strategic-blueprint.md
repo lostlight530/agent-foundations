@@ -883,3 +883,12 @@ Controlling boundaries remain unchanged:
 - documentary review != validator execution != scientific reproduction.
 
 2026-09-22 S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED under the current interpretation. W39 remains IN_PROGRESS, September remains MONTH_OPEN, and final Monthly closure remains NOT_DUE. No audit sidecar is created.
+
+## SEPTEMBER_DUAL_CUTOFF_MAINTENANCE_2026-09-23
+
+### A1 / N-1 cutoff — 2026-09-22
+
+- Review scope: all retained September research/source/mapping updates through 2026-09-22, including source registry, EN/ZH architecture mappings, weekly integration state, and September blueprint ownership.
+- Preserve the evidence ladder: paper/source registration != mapping != implementation != validation != verified-core admission.
+- S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED.
+- September blueprint remains month-to-date; no natural-month final or paradigm promotion is created by maintenance.
