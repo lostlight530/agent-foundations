@@ -884,6 +884,33 @@ Controlling boundaries remain unchanged:
 
 2026-09-22 S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED under the current interpretation. W39 remains IN_PROGRESS, September remains MONTH_OPEN, and final Monthly closure remains NOT_DUE. No audit sidecar is created.
 
+
+## CURRENT_RECONCILIATION_2026-09-23
+
+Maintenance type: A2 current-state reconciliation.
+
+At this reviewed main cut, the current retained September Daily research sequence still runs through 2026-09-22. No 2026-09-23 Daily research contribution is classified by this pass as executed or missed.
+
+Current state therefore remains:
+
+```text
+RETAINED_DAILY_DATES_THROUGH_2026_09_22 = 22
+CURRENT_SOURCE_REGISTRY = S01-S52
+W39 = IN_PROGRESS
+SEPTEMBER = MONTH_OPEN
+FINAL_MONTHLY = NOT_DUE
+```
+
+The absence of a later retained Daily path at this cut is not converted into a historical failure claim.
+
+```text
+CURRENT_PATH_NOT_OBSERVED_AT_REVIEW_CUT
+!= TASK_NOT_EXECUTED
+!= HISTORICAL_MISSING_PROVEN
+```
+
+No source, mapping, implementation, validation, or verified-core state is upgraded by this A2 reconciliation.
+
 ## SEPTEMBER_DUAL_CUTOFF_MAINTENANCE_2026-09-23
 
 ### A1 / N-1 cutoff — 2026-09-22
@@ -892,3 +919,10 @@ Controlling boundaries remain unchanged:
 - Preserve the evidence ladder: paper/source registration != mapping != implementation != validation != verified-core admission.
 - S52 remains E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED.
 - September blueprint remains month-to-date; no natural-month final or paradigm promotion is created by maintenance.
+
+### A2 / N cutoff — 2026-09-23
+
+- Current blueprint/current-owner state is reconciled at the 2026-09-23 repository cut.
+- Later documentary integration does not retroactively turn source registration or theoretical mapping into implementation or validation.
+- Absence of a later Daily path at a reviewed cut is not converted into a historical task-failure claim without execution evidence.
+- This current-state note preserves and extends A1; it does not replace it.
