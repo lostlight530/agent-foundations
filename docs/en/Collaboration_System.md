@@ -2642,21 +2642,19 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **论文原始问题 (Original Paper Problem):** Centralized critics can transmit the effect of one agent's sub-optimal or exploratory action into other agents' policy updates (the centralized-decentralized mismatch, CDM), while fully individual critics reduce that interference at the cost of cooperation. TAPE studies a middle ground in which policy updates use utilities from a topology-defined coalition.
 - **核心假设 (Core Assumptions):**
   - The paper models the cooperative task as a Dec-POMDP.
-  - TAPE's agent topology encodes **relationships among policy updates**: if edge (e_{ij}) exists, agent (i) considers agent (j)'s utility in its update. It is explicitly **not** the test-time communication network.
-  - The only general topology constraint stated in the framework is self-consideration, (e_{ii}inmathcal{E}) for every agent. The paper says the topology may otherwise be arbitrary.
+  - TAPE's agent topology encodes **relationships among policy updates**: if edge \(e_{ij}\) exists, agent \(i\) considers agent \(j\)'s utility in its update. It is explicitly **not** the test-time communication network.
+  - The only general topology constraint stated in the framework is self-consideration, \(e_{ii}\in\mathcal{E}\) for every agent. The paper says the topology may otherwise be arbitrary.
   - Theorem 1's stochastic policy-improvement result is stated for tabular policies and sufficiently small updates.
 - **数学机制 (Mathematical Mechanism):**
-  - Coalition utility for agent (i): (mathbf{U}_{i}=sum_{j=1}^{n}E_{ij}U_{j}).
+  - Coalition utility for agent \(i\): \(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\).
   - Stochastic TAPE update:
-    [
-    
-abla J_{1}(	heta)=mathbb{E}_{oldsymbol{pi}}left[sum_{i}
-abla_{	heta_i}logpi_i(a_i|	au_i)mathbf{U}_iight].
-    ]
+    \[
+    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
+    \]
   - This is the paper's topology-conditioned coalition-utility policy-gradient mechanism; it is not a generic neighborhood-Q formula invented by this repository.
 - **收敛或行为边界 (Convergence or Behavior Boundaries):**
-  - Under Theorem 1's tabular-policy and sufficiently-small-update conditions, the stochastic TAPE update monotonically improves the paper's joint objective (J(oldsymbol{pi})).
-  - The paper separately analyzes update diversity for Erdős–Rényi (ER) topology; Theorem 2 relates the variance gap to the ER edge probability by (Deltapropto p^2).
+  - Under Theorem 1's tabular-policy and sufficiently-small-update conditions, the stochastic TAPE update monotonically improves the paper's joint objective \(J(\boldsymbol{\pi})\).
+  - The paper separately analyzes update diversity for Erdős–Rényi (ER) topology; Theorem 2 relates the variance gap to the ER edge probability by \(\Delta\propto p^2\).
   - ER is one graph model studied and used in experiments; it is **not** a universal topology prerequisite for Theorem 1.
 - **适用范围 (Scope of Application):** Cooperative multi-agent reinforcement learning where coalition-scoped utility in policy updates is a meaningful way to trade off cooperation against CDM. The result does not establish a general decentralized communication protocol.
 - **局限 (Limitations):** The policy-improvement theorem is assumption-bound; the paper's topology is not evidence of test-time communication behavior; theorem/experiment results do not establish performance under arbitrary dynamic topology, arbitrary function approximation, or an Agent Foundations runtime.
