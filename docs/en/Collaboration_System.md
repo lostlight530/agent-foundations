@@ -2625,3 +2625,50 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **Verified-Core Admission:** `NOT_PERFORMED`
 - **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
 
+
+
+### 理论点 33 (Theoretical Point 33)
+
+- **技术点名称 (Technology Point Name):** Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **System Container:** Collaboration System
+- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
+  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+  - **URL:** https://arxiv.org/abs/2312.15667
+  - **Version:** arXiv:2312.15667v3
+  - **v1 Date:** 2023-12-25
+  - **v3 Date:** 2024-01-15
+  - **Check Date:** 2026-09-24
+- **论文原始问题 (Original Paper Problem):** Centralized critics can transmit the effect of one agent's sub-optimal or exploratory action into other agents' policy updates (the centralized-decentralized mismatch, CDM), while fully individual critics reduce that interference at the cost of cooperation. TAPE studies a middle ground in which policy updates use utilities from a topology-defined coalition.
+- **核心假设 (Core Assumptions):**
+  - The paper models the cooperative task as a Dec-POMDP.
+  - TAPE's agent topology encodes **relationships among policy updates**: if edge \(e_{ij}\) exists, agent \(i\) considers agent \(j\)'s utility in its update. It is explicitly **not** the test-time communication network.
+  - The only general topology constraint stated in the framework is self-consideration, \(e_{ii}\in\mathcal{E}\) for every agent. The paper says the topology may otherwise be arbitrary.
+  - Theorem 1's stochastic policy-improvement result is stated for tabular policies and sufficiently small updates.
+- **数学机制 (Mathematical Mechanism):**
+  - Coalition utility for agent \(i\): \(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\).
+  - Stochastic TAPE update:
+    \[
+    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
+    \]
+  - This is the paper's topology-conditioned coalition-utility policy-gradient mechanism; it is not a generic neighborhood-Q formula invented by this repository.
+- **收敛或行为边界 (Convergence or Behavior Boundaries):**
+  - Under Theorem 1's tabular-policy and sufficiently-small-update conditions, the stochastic TAPE update monotonically improves the paper's joint objective \(J(\boldsymbol{\pi})\).
+  - The paper separately analyzes update diversity for Erdős–Rényi (ER) topology; Theorem 2 relates the variance gap to the ER edge probability by \(\Delta\propto p^2\).
+  - ER is one graph model studied and used in experiments; it is **not** a universal topology prerequisite for Theorem 1.
+- **适用范围 (Scope of Application):** Cooperative multi-agent reinforcement learning where coalition-scoped utility in policy updates is a meaningful way to trade off cooperation against CDM. The result does not establish a general decentralized communication protocol.
+- **局限 (Limitations):** The policy-improvement theorem is assumption-bound; the paper's topology is not evidence of test-time communication behavior; theorem/experiment results do not establish performance under arbitrary dynamic topology, arbitrary function approximation, or an Agent Foundations runtime.
+- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING. A bounded design analogy is to make the set of peer utilities influencing an update explicit and inspectable. This is not a repository requirement, deployed coordination protocol, or proof that sparse neighborhoods are always preferable.
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** A project team can decide whose feedback should affect a particular member's performance update. Listening to everyone can spread unrelated mistakes; listening to nobody prevents cooperation. TAPE formalizes a selected coalition of peers whose utilities enter the update, without claiming that those same links are the team's communication network.
+- **中英文内容 (Bilingual Content):** ALIGNED
+- **证据状态 (Evidence Status):**
+  - Canonical Source: S40
+  - Source Revisit: YES
+  - New Independent Source Support: NO
+  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+  - Verified-Core Admission: NOT_PERFORMED
+- **2026-09-24 Correction / Reconciliation:** Earlier TAPE prose in this generated document used stronger language that conflated policy-update topology with communication topology and paired v3 with the v1 date. That historical wording is retained as point-in-time generated research, but the current source interpretation is the bounded version above.
