@@ -926,3 +926,12 @@ No source, mapping, implementation, validation, or verified-core state is upgrad
 - Later documentary integration does not retroactively turn source registration or theoretical mapping into implementation or validation.
 - Absence of a later Daily path at a reviewed cut is not converted into a historical task-failure claim without execution evidence.
 - This current-state note preserves and extends A1; it does not replace it.
+## SEPTEMBER_DUAL_CUTOFF_MAINTENANCE_2026-09-24
+
+### A1 / N-1 cutoff — full September review through 2026-09-23
+
+- Review scope: all retained September Daily research/source/mapping contributions from 2026-09-01 through the 2026-09-23 cutoff, W36/W37/W38 weekly integration, W39 open state, current source registry, bilingual system mappings, and the month-to-date blueprint.
+- The retained Daily sequence remains through 2026-09-22 at this cutoff; absence of a retained 2026-09-23 Daily path is not converted into `TASK_NOT_EXECUTED` without execution evidence.
+- Preserve `paper/source registration != mapping != implementation != validation != verified-core admission`.
+- Source revisits remain one canonical lineage unless independent evidence identity is established.
+- September remains MONTH_OPEN; final natural-month blueprint and verified-core promotion remain NOT_DUE / NOT_PERFORMED.

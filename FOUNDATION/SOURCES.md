@@ -539,3 +539,12 @@ CURRENT_MAPPING_AT_N
 != IMPLEMENTATION
 != VALIDATION
 ```
+## 2026-09-24 full-period source-registry annotation
+
+### A1 / N-1 cutoff — September source history through 2026-09-23
+
+- Re-read the September source-registration / revisit history through the 2026-09-23 cutoff together with the current S01–S52 registry state.
+- Canonical identity, paper evidence, mapping, implementation, validation, and verified-core admission remain separate states.
+- Revisited canonical sources do not become new independent source support merely because they appear on another Daily or system surface.
+- The registry is current provenance/identity authority; historical Daily counts and point-in-time mapping language remain historical evidence.
+- No 2026-09-23 Daily source addition is inferred from current registry presence where no such original Daily contribution is retained.
