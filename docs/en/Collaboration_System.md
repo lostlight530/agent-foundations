@@ -2625,3 +2625,32 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **Verified-Core Admission:** `NOT_PERFORMED`
 - **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
 
+
+
+### 理论点 33 (Theoretical Point 33)
+
+- **技术点名称 (Technology Point Name):** Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+  - **URL:** https://arxiv.org/abs/2312.15667
+  - **Publication Date:** 2023-12-25
+- **论文原始问题 (Original Paper Problem):** Centralized critics in Multi-Agent Policy Gradient methods face the centralized-decentralized mismatch (CDM) issue, where sub-optimal or explorative actions by some agents negatively affect the policy learning of others, causing miscoordination. Conversely, using fully individual critics limits cooperation.
+- **核心假设 (Core Assumptions):**
+  - The communication topology among agents forms an undirected graph where agents coordinate with a designated subset (coalition) of peers rather than the entire global team.
+  - Value function decomposition operates over this local neighborhood graph, adhering to tabular or linear mixing structures for theoretical convergence bounds.
+- **数学机制 (Mathematical Mechanism):**
+  - **核心更新公式:** $\nabla_{\theta_i} J(\pi_{\theta_i}) = \mathbb{E} \left[ \nabla_{\theta_i} \log \pi_{\theta_i} (a_i | o_i) Q_i^{\bm{\pi}}(s, \bm{a}_{\mathcal{N}_i}) \right]$
+- **收敛或行为边界 (Convergence or behavior boundaries):** Ensures monotonic policy improvement in stochastic multi-agent policy gradient by replacing the global team $Q$-value with a topology-based coalition $Q$-value, balancing cooperative incentives against CDM-induced variance.
+- **适用范围 (Scope of Application):** Applies to decentralized multi-agent reinforcement learning settings requiring cooperative credit assignment over a sparse graph structure instead of dense global communication.
+- **局限 (Limitations):** Convergence guarantees are bounded by the assumption of an Erdős–Rényi topology or fixed sparse communication graphs; dynamically changing topologies may disrupt theoretical monotonic improvement guarantees.
+- **Agent 架构映射 (Agent Architecture Mapping):** Informs the Collaboration System by establishing that an agent should only factor in the utility of its topological neighbors (coalition) during cooperative updates, rather than relying on a monolithic global reward signal that is highly susceptible to the explorative noise of distant agents.
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** Imagine a massive factory where workers are grouped into assembly lines. If a worker is evaluated based on the total output of the entire factory (centralized critic), someone else's mistake on a different floor will unfairly ruin their performance review. If they are evaluated solely on their own work (individual critic), they won't help the person next to them. The topology approach groups workers with their immediate teammates, ensuring they cooperate locally without being penalized for distant, unrelated errors.
+- **中英文内容 (Bilingual Content):** ALIGNED
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

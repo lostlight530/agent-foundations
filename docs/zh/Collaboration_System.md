@@ -2462,3 +2462,32 @@ $$
 - **Verified-Core Admission:** `NOT_PERFORMED`
 - **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
 
+
+
+### 理论点 33 (Theoretical Point 33)
+
+- **技术点名称 (Technology Point Name):** 面向协作多智能体策略梯度的智能体拓扑 (Agent Topology for Cooperative Multi-Agent Policy Gradient)
+- **System Container:** Collaboration System
+- **Frontier Source:**
+  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+  - **URL:** https://arxiv.org/abs/2312.15667
+  - **Publication Date:** 2023-12-25
+- **论文原始问题 (Original Paper Problem):** 在多智能体策略梯度方法中，中心化评论家（Critic）面临着“中心化-去中心化不匹配”（CDM）问题：某些智能体的次优或探索性动作会负面影响其他智能体的策略学习，从而导致协作失调。反之，完全使用独立评论家则会严重限制智能体间的协作。
+- **核心假设 (Core Assumptions):**
+  - 智能体之间的通信拓扑构成一个无向图，智能体只与指定的部分同伴（联盟）进行协调，而不是与整个全局团队协调。
+  - 价值函数分解在局部邻域图上运行，且遵循表格或线性混合结构以满足理论收敛界的条件。
+- **数学机制 (Mathematical Mechanism):**
+  - **核心更新公式:** $\nabla_{\theta_i} J(\pi_{\theta_i}) = \mathbb{E} \left[ \nabla_{\theta_i} \log \pi_{\theta_i} (a_i | o_i) Q_i^{\bm{\pi}}(s, \bm{a}_{\mathcal{N}_i}) \right]$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 通过将全局团队的 $Q$ 值替换为基于拓扑的联盟 $Q$ 值，确保了随机多智能体策略梯度的单调策略改进，在合作激励与由 CDM 引发的方差之间取得了平衡。
+- **适用范围 (Scope of Application):** 适用于需要基于稀疏图结构而非密集全局通信进行协作信用分配的去中心化多智能体强化学习场景。
+- **局限 (Limitations):** 其收敛保证局限于 Erdős–Rényi 拓扑或固定稀疏通信图的假设；动态变化的拓扑可能会破坏其单调改进的理论保证。
+- **Agent 架构映射 (Agent Architecture Mapping):** 为协作系统（Collaboration System）提供设计指导：在协作更新时，智能体仅应考虑其拓扑邻居（联盟）的效用，而不是依赖易受远端智能体探索噪声干扰的单一全局奖励信号。
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一个分为多条流水线的巨大工厂。如果一名工人的考核取决于整个工厂的总产量（中心化评价），那么其他楼层的失误也会不公平地毁掉他的绩效。如果只看他个人的产量（独立评价），他便不会去帮助身边的同事。拓扑方法将工人与直接接触的队友分组，确保他们能在局部合作，同时不会因为遥远且无关的错误受到惩罚。
+- **中英文内容 (Bilingual Content):** ALIGNED
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
