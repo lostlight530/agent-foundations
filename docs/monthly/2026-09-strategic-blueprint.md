@@ -935,3 +935,30 @@ No source, mapping, implementation, validation, or verified-core state is upgrad
 - Preserve `paper/source registration != mapping != implementation != validation != verified-core admission`.
 - Source revisits remain one canonical lineage unless independent evidence identity is established.
 - September remains MONTH_OPEN; final natural-month blueprint and verified-core promotion remain NOT_DUE / NOT_PERFORMED.
+
+### A2 / N cutoff — 2026-09-24 current-state reconciliation
+
+The A1 full-period review through the 2026-09-23 cutoff remains preserved.
+
+Current state adds the 2026-09-24 Collaboration System research contribution:
+- canonical source: S40 / TAPE, a source revisit rather than a new registered source;
+- new independent source support: NO;
+- current source registry: S01–S52;
+- current TAPE source identity: arXiv:2312.15667v3, v3 dated 2024-01-15;
+- policy-update topology is not test-time communication topology;
+- coalition-utility / stochastic-TAPE policy-gradient mechanism remains paper evidence;
+- implementation/test state remains EVIDENCE_INSUFFICIENT;
+- verified-core admission remains NOT_PERFORMED.
+
+Current retained Daily research dates total 23 at this cut: 2026-09-01..2026-09-22 plus 2026-09-24. The absence of a retained 2026-09-23 path is not converted into a historical execution claim.
+
+```text
+PAPER_EVIDENCE
+!= DESIGN_ANALOGY
+!= IMPLEMENTATION
+!= VALIDATION
+SOURCE_REVISIT
+!= NEW_INDEPENDENT_SUPPORT
+```
+
+W39 remains IN_PROGRESS. September remains MONTH_OPEN. Final Monthly closure remains NOT_DUE.

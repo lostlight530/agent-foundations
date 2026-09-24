@@ -113,3 +113,29 @@ PAPER_EVIDENCE
 ```
 
 W39 继续 IN_PROGRESS；September 继续 OPEN。
+
+## 2026-09-24 当前状态 reconciliation
+
+已合并的 A1 保留 2026-09-23 cutoff 之前的九月全周期复核。当前 main 新增 2026-09-24 Collaboration System Daily research contribution，该贡献复访 canonical source S40 / TAPE。
+
+当前九月状态：
+- 已保留 Daily research 日期共 23 个：2026-09-01..2026-09-22 加 2026-09-24；
+- 本页不因未观察到 2026-09-23 retained Daily path 就把它分类成已执行或漏跑；
+- canonical source registry 仍为 S01–S52；
+- 2026-09-24 TAPE 属于 `SOURCE_REVISIT`，不是新 canonical source，也不是新的独立来源支持；
+- S40 当前身份是 arXiv:2312.15667v3，v3 日期 2024-01-15，v1 日期 2023-12-25；
+- TAPE topology 仅描述 policy-update / coalition-utility 关系，明确不是 test-time communication topology；
+- 仓库实现/测试状态继续为 `EVIDENCE_INSUFFICIENT`；
+- verified-core admission 继续为 `NOT_PERFORMED`；
+- W39 继续 IN_PROGRESS，September 继续 OPEN。
+
+```text
+SOURCE_REVISIT
+!= NEW_INDEPENDENT_SOURCE
+PAPER_MECHANISM
+!= REPOSITORY_IMPLEMENTATION
+CURRENT_PATH_NOT_OBSERVED_FOR_2026_09_23
+!= TASK_NOT_EXECUTED
+```
+
+A1 全历史批注和更早的 paper/mapping 状态继续保留为 point-in-time evidence。

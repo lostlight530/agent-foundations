@@ -113,3 +113,29 @@ PAPER_EVIDENCE
 ```
 
 W39 remains IN_PROGRESS; September remains OPEN.
+
+## Current reconciliation — 2026-09-24
+
+The merged A1 full-period review through the 2026-09-23 cutoff remains intact. Current main now includes a 2026-09-24 Collaboration System Daily research contribution that revisits canonical source S40 / TAPE.
+
+Current September state at this cut:
+- retained Daily research dates: 23 total, covering 2026-09-01..2026-09-22 plus 2026-09-24;
+- no retained 2026-09-23 Daily path is classified by this page as executed or missed;
+- current canonical source registry remains S01–S52;
+- 2026-09-24 TAPE work is `SOURCE_REVISIT`, not a new canonical source and not new independent source support;
+- S40 current identity is arXiv:2312.15667v3 with v3 date 2024-01-15 and v1 date 2023-12-25;
+- TAPE topology is bounded to policy-update / coalition-utility relationships and is explicitly not test-time communication topology;
+- repository implementation/test state remains `EVIDENCE_INSUFFICIENT`;
+- verified-core admission remains `NOT_PERFORMED`;
+- W39 remains IN_PROGRESS and September remains OPEN.
+
+```text
+SOURCE_REVISIT
+!= NEW_INDEPENDENT_SOURCE
+PAPER_MECHANISM
+!= REPOSITORY_IMPLEMENTATION
+CURRENT_PATH_NOT_OBSERVED_FOR_2026_09_23
+!= TASK_NOT_EXECUTED
+```
+
+The A1 full-history annotations and earlier paper/mapping states remain point-in-time evidence.
