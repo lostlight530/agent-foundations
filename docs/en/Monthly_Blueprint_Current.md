@@ -96,3 +96,20 @@ SOURCE_REGISTRY_S01_S52
 ```
 
 W39 remains in progress and all Paper -> Mapping -> Implementation -> Validation boundaries remain unchanged.
+## Full-period reconciliation — 2026-09-24 / A1 cutoff 2026-09-23
+
+The September evidence history was re-read from 2026-09-01 through the 2026-09-23 cutoff across retained Daily research, due Weekly integration, source registry, bilingual system mappings, and the month-to-date blueprint.
+
+At this cutoff the retained Daily research sequence still ends on 2026-09-22. This is a repository-visible state, not proof that a 2026-09-23 task was not executed.
+
+```text
+CURRENT_PATH_NOT_OBSERVED_AT_CUTOFF
+!= TASK_NOT_EXECUTED
+SOURCE_REGISTRATION
+!= VERIFIED_CORE_ADMISSION
+PAPER_EVIDENCE
+!= IMPLEMENTATION
+!= VALIDATION
+```
+
+W39 remains IN_PROGRESS; September remains OPEN.
