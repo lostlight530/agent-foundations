@@ -378,11 +378,13 @@ Canonical rules:
 
 - Type: `E4_PREPRINT`
 - Identifier: arXiv:2312.15667v3
-- Version date: 2023-12-25
+- Version date: 2024-01-15
+- v1 date: 2023-12-25
 - Authors: Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
 - URL: https://arxiv.org/abs/2312.15667
-- Use: topology-based policy gradient and cooperation mapping
-- Verification boundary: explicitly assumes Erdős–Rényi topology and tabular expressions for convergence guarantees.
+- Use: topology-based policy-gradient objectives that use coalition utility to balance cooperation against centralized-decentralized mismatch in cooperative MARL.
+- Verification boundary: the paper's agent topology describes which agents' utilities enter policy updates; it is explicitly not the test-time communication network. The topology may be arbitrary subject to self-consideration edges. The stochastic policy-improvement theorem is stated for tabular policies and sufficiently small updates; Erdős–Rényi topology is used in the paper's graph analysis/experiments and in the variance relation of Theorem 2, not as a universal prerequisite for Theorem 1.
+- Correction 2026-09-24: the prior registry entry conflated the v1 date with v3 and over-compressed the topology/theorem assumptions. Historical generated prose remains point-in-time evidence; current source interpretation uses the corrected identity and boundary above.
 
 ## S41 — Replication-proof Bandit Mechanism Design with Bayesian Agents
 
