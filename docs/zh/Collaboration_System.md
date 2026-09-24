@@ -2468,26 +2468,46 @@ $$
 
 - **技术点名称 (Technology Point Name):** 面向协作多智能体策略梯度的智能体拓扑 (Agent Topology for Cooperative Multi-Agent Policy Gradient)
 - **System Container:** Collaboration System
-- **Frontier Source:**
+- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
   - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
   - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
   - **URL:** https://arxiv.org/abs/2312.15667
-  - **Publication Date:** 2023-12-25
-- **论文原始问题 (Original Paper Problem):** 在多智能体策略梯度方法中，中心化评论家（Critic）面临着“中心化-去中心化不匹配”（CDM）问题：某些智能体的次优或探索性动作会负面影响其他智能体的策略学习，从而导致协作失调。反之，完全使用独立评论家则会严重限制智能体间的协作。
+  - **Version:** arXiv:2312.15667v3
+  - **v1 Date:** 2023-12-25
+  - **v3 Date:** 2024-01-15
+  - **Check Date:** 2026-09-24
+- **论文原始问题 (Original Paper Problem):** 中心化评论家会让某个智能体的次优或探索动作影响其他智能体的策略更新，即 centralized-decentralized mismatch（CDM）；而完全独立的评论家虽然减少这种干扰，却会削弱协作。TAPE 研究一种中间方案：让策略更新只使用由拓扑定义的联盟 utility。
 - **核心假设 (Core Assumptions):**
-  - 智能体之间的通信拓扑构成一个无向图，智能体只与指定的部分同伴（联盟）进行协调，而不是与整个全局团队协调。
-  - 价值函数分解在局部邻域图上运行，且遵循表格或线性混合结构以满足理论收敛界的条件。
+  - 论文把协作任务建模为 Dec-POMDP。
+  - TAPE 的 agent topology 描述的是**策略更新之间的关系**：若边 (e_{ij}) 存在，智能体 (i) 在更新时考虑智能体 (j) 的 utility。论文明确说明它**不是**测试阶段的通信网络。
+  - 框架对一般拓扑给出的基本约束是每个智能体必须包含自考虑边，即对所有 (i)，(e_{ii}inmathcal{E})；除此之外论文允许任意拓扑。
+  - Theorem 1 的随机 TAPE policy-improvement 结果以表格策略（tabular policies）和足够小的更新为条件。
 - **数学机制 (Mathematical Mechanism):**
-  - **核心更新公式:** $\nabla_{\theta_i} J(\pi_{\theta_i}) = \mathbb{E} \left[ \nabla_{\theta_i} \log \pi_{\theta_i} (a_i | o_i) Q_i^{\bm{\pi}}(s, \bm{a}_{\mathcal{N}_i}) \right]$
-- **收敛或行为边界 (Convergence or behavior boundaries):** 通过将全局团队的 $Q$ 值替换为基于拓扑的联盟 $Q$ 值，确保了随机多智能体策略梯度的单调策略改进，在合作激励与由 CDM 引发的方差之间取得了平衡。
-- **适用范围 (Scope of Application):** 适用于需要基于稀疏图结构而非密集全局通信进行协作信用分配的去中心化多智能体强化学习场景。
-- **局限 (Limitations):** 其收敛保证局限于 Erdős–Rényi 拓扑或固定稀疏通信图的假设；动态变化的拓扑可能会破坏其单调改进的理论保证。
-- **Agent 架构映射 (Agent Architecture Mapping):** 为协作系统（Collaboration System）提供设计指导：在协作更新时，智能体仅应考虑其拓扑邻居（联盟）的效用，而不是依赖易受远端智能体探索噪声干扰的单一全局奖励信号。
+  - 智能体 (i) 的联盟 utility：(mathbf{U}_{i}=sum_{j=1}^{n}E_{ij}U_{j})。
+  - 随机 TAPE 更新：
+    [
+    
+abla J_{1}(	heta)=mathbb{E}_{oldsymbol{pi}}left[sum_{i}
+abla_{	heta_i}logpi_i(a_i|	au_i)mathbf{U}_iight].
+    ]
+  - 这是论文给出的、由拓扑约束 coalition utility 的策略梯度机制；不是本仓自行概括出的通用“邻域 Q”公式。
+- **收敛或行为边界 (Convergence or Behavior Boundaries):**
+  - 在 Theorem 1 的 tabular-policy 与 sufficiently-small-update 条件下，随机 TAPE 更新对论文定义的联合目标 (J(oldsymbol{pi})) 给出单调改进。
+  - 论文另行分析 Erdős–Rényi（ER）拓扑下的参数更新多样性；Theorem 2 给出方差差值与 ER 边概率的关系 (Deltapropto p^2)。
+  - ER 是论文研究并用于实验的一类图模型，**不是** Theorem 1 的通用拓扑前提。
+- **适用范围 (Scope of Application):** 适用于协作多智能体强化学习，其中可以用 coalition-scoped utility 明确控制哪些 peer utility 影响策略更新，以在协作与 CDM 之间取得有界折中。该结果不建立一个通用去中心化通信协议。
+- **局限 (Limitations):** policy-improvement 定理受明确假设约束；论文的 agent topology 不证明测试阶段通信行为；定理与实验不能自动推广到任意动态拓扑、任意函数逼近器，也不能证明 Agent Foundations 已实现相关 runtime。
+- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING。可借鉴的有界设计类比是：显式、可检查地定义一次更新会受哪些 peer utility 影响。它不是仓库强制规范、已部署协作协议，也不证明稀疏邻域总是优于其他结构。
 - **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 想象一个分为多条流水线的巨大工厂。如果一名工人的考核取决于整个工厂的总产量（中心化评价），那么其他楼层的失误也会不公平地毁掉他的绩效。如果只看他个人的产量（独立评价），他便不会去帮助身边的同事。拓扑方法将工人与直接接触的队友分组，确保他们能在局部合作，同时不会因为遥远且无关的错误受到惩罚。
+- **初学者类比 (Beginner Analogy):** 一个项目组可以明确规定某位成员更新绩效判断时，应参考哪些队友的反馈。听所有人会把远处无关错误传播进来，谁都不听又无法协作。TAPE 把“哪些队友的 utility 进入本次更新”形式化，但不声称这些边同时就是团队实际通信网络。
 - **中英文内容 (Bilingual Content):** ALIGNED
 - **证据状态 (Evidence Status):**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Canonical Source: S40
+  - Source Revisit: YES
+  - New Independent Source Support: NO
+  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+  - Verified-Core Admission: NOT_PERFORMED
+- **2026-09-24 Correction / Reconciliation:** 本生成文档较早的 TAPE 段落曾使用更强措辞，把 policy-update topology 与 communication topology 混同，并把 v3 与 v1 日期配对。历史生成文本继续作为时间点证据保留，但当前来源解释以后述有界版本为准。
