@@ -754,3 +754,26 @@ NO_IMPLEMENTATION_OR_VALIDATION_PROMOTION
 /
 MONTH_OPEN
 ```
+
+## 2026-04-01：针对 POMPG 的内部状态策略梯度方法
+
+- **技术点名称 (Technology):** 针对部分可观测马尔可夫势博弈的内部状态自然策略梯度
+- **System Container:** Memory System
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+  - **Authors:** Wonseok Yang, Thinh T. Doan
+  - **URL:** https://arxiv.org/abs/2604.00433
+- **论文原始问题 (Original Problem):** 解决部分可观测马尔可夫势博弈（POMPG）由于部分可观测性以及在无限历史中计算精确信念状态的困难性而极具挑战。
+- **核心假设 (Core Assumptions):** 存在势函数（potential function）将博弈映射为全局目标；真实的公共信息信念状态与内部状态近似信念状态之间的总变差距离（total variation distance） $d_b$ 有界；以及初始策略的探索率严格为正（$\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$）。
+- **数学机制 (Mathematical Mechanism):** 将共享的观测历史压缩为有限的内部状态 $w^k$，并运行有限状态控制器（FSC）自然策略梯度更新。更新利用 Fisher 信息矩阵的 Moore-Penrose 伪逆：$\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 在学习率为 $\eta = (1-\beta)^2/(2n\phi_{\max})$ 的情况下，时间平均的纳什均衡差距收敛速度为 $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 是一个与信念近似误差 $d_b$ 成正比的渐近误差下界。
+- **适用范围 (Applicable Scope):** 适用于代理共享部分信息但无法维护完整信念状态的多智能体系统，且受限于有限内部记忆约束的 POMPG 环境。
+- **局限 (Limitations):** 收敛结果仅达到受误差下界 $\varepsilon_{\text{FSC}}$ 约束的近似纳什均衡。边界常数与 $\sqrt{a}$ 成反比，这可能在内部状态空间较大或使用均匀初始化时显著恶化。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层可支持 Memory System，通过将 Agent 记忆边界建模为近似全局信念的有限内部状态（$w^k$），并显式计算协作任务中由记忆压缩导致的性能下降底线。
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一群侦探（智能体）试图破案。他们无法记住所有发现的线索（无限信念状态），所以将案卷总结成简短的简报（有限内部状态）。他们的团队合作随着时间的推移稳步提升，但总会犯下少量的错误，这些错误的数量与总结简报时丢失的信息量成正比。
+- **中英文内容 (Bilingual Content):** 中英文版本在已验证的属性上在结构和语义上保持一致。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT

@@ -514,6 +514,17 @@ Canonical rules:
 - Verification boundary: Guarantees depend strictly on maintaining infinitesimal velocity rigidity at all times, with acceleration confined to the instantaneous null space. It regulates position indirectly and does not explicitly guarantee bounded formation size or collision avoidance.
 
 
+## S53 — Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2604.00433v1
+- Version date: 2026-04-01
+- Authors: Wonseok Yang, Thinh T. Doan
+- URL: https://arxiv.org/abs/2604.00433
+- Use: Internal State-Based NPG for Partially Observable Markov Potential Games
+- Verification boundary: Guarantees depend strictly on a bounded total variation distance $d_b$ between true belief states and approximate internal states, and strictly positive initial policy exploration. The average Nash Equilibrium gap convergence floor is bounded by the approximation error.
+
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
@@ -525,7 +536,7 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 
 ### View 1 — N-1 / 2026-09-22 source-entry calibration
 
-S52 / arXiv:2609.18276v1 is a canonical bibliographic source identity. Registration establishes provenance/identity only.
+S52 / arXiv 2609.18276v1 is a canonical bibliographic source identity. Registration establishes provenance/identity only.
 
 ### View 2 — N / 2026-09-23 current interpretation
 

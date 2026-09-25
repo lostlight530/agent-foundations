@@ -753,3 +753,26 @@ NO_IMPLEMENTATION_OR_VALIDATION_PROMOTION
 /
 MONTH_OPEN
 ```
+
+## 2026-04-01: Internal State-Based Policy Gradient for POMPGs
+
+- **技术点名称 (Technology):** Internal State-Based NPG for Partially Observable Markov Potential Games
+- **System Container:** Memory System
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+  - **Authors:** Wonseok Yang, Thinh T. Doan
+  - **URL:** https://arxiv.org/abs/2604.00433
+- **论文原始问题 (Original Problem):** Solving partially observable Markov potential games (POMPGs) is challenging due to partial observability and the intractability of exact belief state computation over infinite histories.
+- **核心假设 (Core Assumptions):** The existence of a potential function mapping the game to a generalized objective; bounded total variation distance $d_b$ between true common-information belief states and the internal-state approximate belief states; and strictly positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
+- **数学机制 (Mathematical Mechanism):** Compresses shared observation histories into a finite internal state $w^k$, running a finite-state controller (FSC) Natural Policy Gradient update. The update uses the Moore-Penrose inverse of the Fisher information matrix: $\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$.
+- **收敛或行为边界 (Convergence or behavior boundaries):** Under a learning rate of $\eta = (1-\beta)^2/(2n\phi_{\max})$, the time-averaged Nash Equilibrium gap converges as $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is an asymptotic error floor proportional to the belief approximation error $d_b$.
+- **适用范围 (Applicable Scope):** Multi-agent systems operating in episodic or continuing POMPGs where agents share partial information but cannot maintain full belief states, bounded by finite internal memory constraints.
+- **局限 (Limitations):** The convergence is only to an approximate Nash Equilibrium bounded by the error floor $\varepsilon_{\text{FSC}}$. The bound constant depends inversely on $\sqrt{a}$, which can degrade with large internal state spaces or uniform initialization.
+- **Agent 架构映射 (Agent Architecture Mapping):** Can conceptually support the Memory System by modeling agent memory bounds as finite internal states ($w^k$) that approximate global belief, explicitly calculating the performance degradation floor caused by memory compression in collaborative tasks.
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** Imagine a group of detectives (agents) trying to solve a case. They can't remember every single clue ever found (infinite belief state), so they summarize the case file into a short briefing (finite internal state). Their teamwork improves steadily over time, but they will always make a small number of mistakes proportional to how much information was lost when summarizing the briefing.
+- **中英文内容 (Bilingual Content):** Both English and Chinese sections are structurally and semantically aligned on verified properties.
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
