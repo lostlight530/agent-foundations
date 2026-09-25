@@ -962,3 +962,24 @@ SOURCE_REVISIT
 ```
 
 W39 remains IN_PROGRESS. September remains MONTH_OPEN. Final Monthly closure remains NOT_DUE.
+
+## 中秋加班维护补充 — A1 / 2026-09-24
+
+本轮把 2026-09-24 作为 N 日, 对 9 月 1 日至 9 月 23 日的 Daily research、W36/W37/W38、开放 W39、source registry 与月内 blueprint 做一次完整的中秋加班复核.
+
+复核重点不是增加论文数量, 而是确认 bibliographic identity、source revisit、mapping、implementation、validation 和 verified-core admission 没有在月度叙事里被压成一个状态. 同一 arXiv 身份的再次阅读仍是 source revisit, 不能因为跨日出现就自动算新的独立来源. Weekly 或 Monthly 重新提到某个 paper, 也不自动产生 implementation 或 validation.
+
+9 月 23 日缺少 retained Daily path 的事实继续只说明当前可见路径边界, 不反推 `TASK_NOT_EXECUTED`. 后来的 9 月 24 日研究可以扩展当前 blueprint, 但不能替代 9 月 23 日当时不存在的仓库证据.
+
+这次允许月度文件写得更完整, 但不机械复制 Daily. 增加的是跨日关系和证据分层, 不是新的学术结论.
+
+```text
+PAPER_IDENTITY
+!= NEW_INDEPENDENT_SOURCE
+MAPPING
+!= IMPLEMENTATION
+IMPLEMENTATION
+!= VALIDATION
+MISSING_CURRENT_PATH
+!= TASK_NOT_EXECUTED
+```
