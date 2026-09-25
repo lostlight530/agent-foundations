@@ -1004,3 +1004,25 @@ SOURCE_REVISIT
 MONTH_OPEN
 != FINAL_BLUEPRINT
 ```
+
+
+## 2026-09-25 A1 — September full-coverage maintenance through 2026-09-24
+
+Base revision: `14edbda6957af176a818a5ea77541841fe7559ef`. Cutoff: 2026-09-24 Asia/Shanghai.
+
+Coverage decision summary:
+- Retained September Daily research through 2026-09-24, due Weekly cascades, the S01-S52 source registry, bilingual mapping surfaces, and the month-to-date blueprint were re-read.
+- 2026-09-01..2026-09-23 retain prior decisions. The missing retained 2026-09-23 Daily path remains a current-path boundary and is not promoted to `TASK_NOT_EXECUTED`.
+- 2026-09-24 is `APPEND_RELATION`: S40 / TAPE is a canonical source revisit, not a new independent source admission. Paper mechanism remains distinct from repository implementation, validation, and verified-core admission.
+- W39 remains `NOT_DUE` for closure. September remains `MONTH_OPEN`; final blueprint closure and verified-core promotion remain `NOT_DUE / NOT_PERFORMED`.
+
+```text
+PAPER
+!= MAPPING
+!= IMPLEMENTATION
+!= VALIDATION
+SOURCE_REVISIT
+!= NEW_INDEPENDENT_SUPPORT
+CURRENT_PATH_MISSING
+!= TASK_NOT_EXECUTED
+```
