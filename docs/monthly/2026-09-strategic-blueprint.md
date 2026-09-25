@@ -1026,3 +1026,27 @@ SOURCE_REVISIT
 CURRENT_PATH_MISSING
 != TASK_NOT_EXECUTED
 ```
+
+
+## 2026-09-25 A2 — current September relational version
+
+Base revision after merged A1: `91360bfb0959911bab661c6d64952b7cf51433d3`. N-day review date: 2026-09-25.
+
+Current month evolution:
+- The merged A1 cutoff through 2026-09-24 remains intact.
+- Current main does not expose a retained 2026-09-25 Daily research contribution at this review cut. This is a current-path observation only and does not prove `TASK_NOT_EXECUTED`.
+- The latest retained Daily research contribution remains 2026-09-24 and revisits S40 / TAPE. It remains one canonical source lineage, not new independent support.
+- No new source admission, mapping promotion, repository implementation, validation, or verified-core admission is established.
+- W39 remains IN_PROGRESS. September remains MONTH_OPEN. Final Monthly blueprint and verified-core promotion remain `NOT_DUE / NOT_PERFORMED`.
+
+A2 evolution: `NO_MATERIAL_CHANGE` to the current Foundations blueprint at this cut.
+
+```text
+CURRENT_PATH_NOT_OBSERVED_FOR_2026_09_25
+!= TASK_NOT_EXECUTED
+SOURCE_REVISIT
+!= NEW_INDEPENDENT_SUPPORT
+PAPER_EVIDENCE
+!= IMPLEMENTATION
+!= VALIDATION
+```
