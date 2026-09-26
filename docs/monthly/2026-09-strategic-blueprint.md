@@ -1050,3 +1050,146 @@ PAPER_EVIDENCE
 != IMPLEMENTATION
 != VALIDATION
 ```
+
+## SUCCESSOR_A1_FULL_COVERAGE_2026-09-26_FOR_LOGICAL_2026-09-25
+
+- Maintenance task type: TEN_REPOSITORY_MONTHLY_A1_SUCCESSOR
+- Logical maintenance date: 2026-09-25
+- A1 cutoff: 2026-09-24 Asia/Shanghai
+- Historical thin A1 PR retained: #205
+- Owner family: Daily research / Weekly integration / SOURCES / bilingual mapping
+- Successor purpose: restore full coverage and decision depth; no rewrite of the merged thin A1.
+- Later 2026-09-25/26 artifacts may exist on transport main but are not A1 evidence.
+- History rewrite: NO
+- Runtime/test replay by this successor: NOT_EXECUTED
+- Natural September finalization: NOT_DUE at cutoff
+- Governing boundary: PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION; repeated source use is revisit/inheritance, not independent corroboration.
+
+### Coverage method
+
+- Read the current month owner together with its preserved dated reconciliations and the repository's existing September routing.
+- Record an explicit logical-date decision so NO_FOLLOW_UP is distinguishable from NOT_REVIEWED.
+- Preserve task-time missing, blocked, degraded, partial, reconstruction, and unknown states.
+- Prefer the existing owning correction/reconciliation when a defect has already been repaired.
+- Do not convert document presence into execution, validation, reproduction, source independence, or scientific truth.
+- Do not back-project 2026-09-25 or 2026-09-26 current state into the 2026-09-24 cutoff.
+
+### Date-by-date coverage ledger
+
+#### 2026-09-01
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-02
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-03
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-04
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-05
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-06
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: Later Daily does not retroactively become original W36 Weekly input.
+#### 2026-09-07
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-08
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: TAPE revisit remains one canonical source lineage and existing correction controls stronger unsupported wording.
+#### 2026-09-09
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-10
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-11
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-12
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-13
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: Later Daily does not retroactively become original W37 Weekly input.
+#### 2026-09-14
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-15
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-16
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-17
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: Historical PR title/source-ID mismatch remains separated from canonical source identity.
+#### 2026-09-18
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-19
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: S49 source registration/formula extraction remains distinct from implementation or reproduction.
+#### 2026-09-20
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-21
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: Producer change is preserved; GPT task producer != Jules producer, while task identity remains the governed Daily research task.
+#### 2026-09-22
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: APPEND_RELATION_OR_RETAIN_EXISTING_RECONCILIATION.
+- Rationale: Retain canonical source/mapping state through cutoff; no verified-core admission is inferred.
+#### 2026-09-23
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+#### 2026-09-24
+- Coverage: REVIEWED_IN_CANONICAL_MONTH_OWNER / Daily research / Weekly integration / SOURCES / bilingual mapping.
+- Decision: NO_FOLLOW_UP.
+- Rationale: No new owner-level defect requiring historical-file mutation is established; the retained dated state remains controlling.
+
+### Cross-window and authority decisions
+
+- W36/W37/W38 remain closed historical windows only to the extent their own owning records establish; this successor does not replay them.
+- W39 remains open at the A1 cutoff; no weekly-final result is manufactured.
+- September remains OPEN; natural-month final/closure is not due.
+- Existing index/source/registry relationships are preserved unless the current owner already records a correction.
+- Negative and unknown states remain evidence; they are not normalized away for narrative continuity.
+- Repository-specific boundary retained: PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION; repeated source use is revisit/inheritance, not independent corroboration.
+- 2026-09-25 belongs to A2 only.
+- 2026-09-26 later state is outside this logical maintenance task.
+
+### A1 successor disposition
+
+- Coverage completeness: RECORDED_FOR_2026-09-01_THROUGH_2026-09-24.
+- Decision completeness: RECORDED_PER_LOGICAL_DATE.
+- New runtime/test/scientific-validation credit: NONE.
+- New source-independence credit: NONE.
+- New month-final or durable-governance credit: NONE.
+- Historical thin A1 remains merged point-in-time evidence; this successor adds depth rather than rewriting it.
+- Required next step: merge A1 successor, fresh-read main, then construct A2 successor from the merged state.
