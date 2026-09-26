@@ -2509,3 +2509,23 @@ $$
   - Repository Test Status: EVIDENCE_INSUFFICIENT
   - Verified-Core Admission: NOT_PERFORMED
 - **2026-09-24 Correction / Reconciliation:** 本生成文档较早的 TAPE 段落曾使用更强措辞，把 policy-update topology 与 communication topology 混同，并把 v3 与 v1 日期配对。历史生成文本继续作为时间点证据保留，但当前来源解释以后述有界版本为准。
+
+### 认知与概率混合的受保护多智能体协调 (Epistemic-Probabilistic Guarded Coordination)
+
+- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
+- **Original Problem:** 基于 LLM 的多智能体系统通常缺乏对社会知识与协议驱动协调机制的显式表示，导致其生成的动作看似流畅，但并未真正受到智能体信息状态或交互协议的授权约束。
+- **Core Assumptions:** 依赖于适应于过滤 $\mathcal{F}_t$ 的执行过程，一个映射到有界状态 $B$ 的排名函数 $\rho$，以及严格的状态约束，即策略必须在非目标状态下以至少 $\varepsilon > 0$ 的概率选择被允许的动作。
+- **Mathematical Mechanism:** 数学更新与边界验证：
+  核心更新公式 (Guard predicate definition):
+  ```latex
+  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
+  ```
+- **收敛或行为边界 (Convergence or behavior boundaries):** 系统提供了由到达目标集合 $G$ 的期望时间所界定的条件排名进度界限：$\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$。
+- **适用范围 (Applicability):** 需要遵循协议的多智能体协作架构，以及在需要通过符号化核心来限制具有不确定性的 LLM 行为的神经符号系统中。
+- **局限 (Limitations):** 理论边界极度依赖于非目标等待时间受几何随机变量支配的假设及明确的认知状态约束。在受限知识片段之外的一般化环境中尚缺乏具体的实现与保证。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在设计上可作为候选方案（Design Candidate），用于在多智能体路由中建立生成行为与确定性许可引擎分离的策略守卫层。
+- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一个公司，员工（LLM）会提出各种有创意的点子，但在任何点子被执行前，都必须经过一位铁面无私的合规官（Guard）依据不可更改的规则手册进行核对。无论员工的提议听起来多么完美，只要违反了成文规则，合规官就会默默驳回并给出一张诊断单。
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT

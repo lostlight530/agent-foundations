@@ -525,6 +525,17 @@ Canonical rules:
 - Verification boundary: Guarantees depend strictly on a bounded total variation distance $d_b$ between true belief states and approximate internal states, and strictly positive initial policy exploration. The average Nash Equilibrium gap convergence floor is bounded by the approximation error.
 
 
+
+## S54 — Epistemic-Probabilistic Model for Guarded Multi-Agent LLM Coordination
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2609.29366v1
+- Version date: 2026-09-24
+- Authors: Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani
+- URL: https://arxiv.org/abs/2609.29366
+- Use: Proposed an epistemic-probabilistic model and a neuro-symbolic architecture with a Guard to control execution against an authoritative state.
+- Verification boundary: Bound guarantees (e.g., conditional ranking progress) require a non-goal state waiting time bounded by a geometric random variable of mean 1/varepsilon, restricted to the source-compatible knowledge fragment, and do not imply an implemented validation in a general agent environment.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.

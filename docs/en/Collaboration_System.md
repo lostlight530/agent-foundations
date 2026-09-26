@@ -2672,3 +2672,23 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
   - Repository Test Status: EVIDENCE_INSUFFICIENT
   - Verified-Core Admission: NOT_PERFORMED
 - **2026-09-24 Correction / Reconciliation:** Earlier TAPE prose in this generated document used stronger language that conflated policy-update topology with communication topology and paired v3 with the v1 date. That historical wording is retained as point-in-time generated research, but the current source interpretation is the bounded version above.
+
+### Epistemic-Probabilistic Guarded Coordination
+
+- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
+- **Original Problem:** LLM-based multi-agent systems often lack explicit representations of social knowledge and protocol-governed coordination, generating fluent actions that are not necessarily licensed by the agent's information state or interaction protocols.
+- **Core Assumptions:** Relies on an execution process adapted to a filtration $\mathcal{F}_t$, a ranking function $\rho$ mapping to bounded states $B$, and strict state constraints where the policy selects a permitted call at non-goal states with a minimum probability bound of $\varepsilon > 0$.
+- **Mathematical Mechanism:** Mathematical Updates and Bound Verification:
+  核心更新公式 (Guard predicate definition):
+  ```latex
+  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
+  ```
+- **Convergence or behavior boundaries:** The system provides conditional ranking progress bounded by the expected hitting time to the goal set $G$: $\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$.
+- **Applicability:** Multi-agent architectures that require protocol-compliant collaboration and neuro-symbolic boundaries where a symbolic core restricts potentially uncertain LLM actions.
+- **Limitations:** Bound theorems rely exclusively on theoretical non-goal wait-times dominating a geometric random variable and crisp epistemic states. General implementation outside a restricted knowledge fragment lacks practical guarantees.
+- **Agent Architecture Mapping:** Can conceptually inform a decoupled policy-guard layer in multi-agent routing where generation actions are separated from a deterministic permission engine.
+- **Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine an organization where employees (LLMs) propose creative ideas, but before any idea is actioned, an unbending compliance officer (the Guard) checks an immutable rulebook to authorize it. No matter how convincingly an idea is presented, if it violates the written rules, the officer silently rejects it and returns a diagnostic slip.
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
