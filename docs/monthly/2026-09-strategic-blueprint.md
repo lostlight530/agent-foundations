@@ -1394,3 +1394,28 @@ PAPER_EVIDENCE
 - Historical rewrite required: NO.
 - New implementation/validation/source-independence credit: NONE.
 - Next: merge A1, fresh-read main, compile 2026-09-26 A2.
+
+
+## A2_CURRENT_MONTH_RELATION_2026-09-26
+
+- Logical maintenance date: 2026-09-26
+- Exact A1-merged base main: `de1bee494f6c81d0f76432fb31e79a4659fbcf83`
+- Current-month relation window: 2026-09-01 through 2026-09-26
+- A1 coverage through 2026-09-25: INHERITED_FROM_MERGED_A1.
+
+### N-day integration — Foundations
+- S54, “Epistemic-Probabilistic Model for Guarded Multi-Agent LLM Coordination” (arXiv:2609.29366v1, 2026-09-24), is now registered and mapped into the Collaboration System.
+- The mapping is PAPER_ONLY / CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT.
+- Source identity, title, authors and version date were rechecked; no repository implementation, verified-core admission or independent reproduction is established.
+- The guard/ranking formulas remain source-bounded theoretical mechanisms under their stated assumptions.
+
+### Relation boundary
+- paper evidence != implemented guard layer.
+- conceptual applicability != runtime validation or safety guarantee.
+- source registration != independent corroboration.
+- W39 and September remain OPEN; natural-month close is NOT_DUE.
+
+### A2 disposition
+- 2026-09-26 Foundations relation: APPEND_PAPER_BOUNDED_COLLABORATION_MAPPING.
+- Historical rewrite: NO.
+- Current September relation: UPDATED_THROUGH_2026-09-26.
