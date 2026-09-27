@@ -1078,6 +1078,31 @@ Imagine a team of chefs (agents) working in different, partially overlapping kit
 <!-- WEEKLY_SYNC_REPORT_EXCLUDE_END -->
 <!-- WEEKLY_SYNC_REPORT -->
 
+### Preserved S52 evidence boundary after weekly weaving
+
+The weekly cascade moves the S52 research chunk into stable Architecture Principles sections, but does not erase its evidence classification.
+
+- Canonical Source: S52 / arXiv:2609.18276v1
+- Evidence Level: E4_PREPRINT
+- Mapping State: DESIGN_ANALOGY
+- Implementation State: REFERENCE_ONLY
+- Validation State: NOT_TESTED
+- Verified-Core Claim State: NOT_ASSIGNED_BY_THIS_MAINTENANCE
+- Independent Reproduction: NO
+- Repository Implementation Status: EVIDENCE_INSUFFICIENT
+
+The paper-level velocity-rigidity mechanism remains conditional on the paper's kinematic assumptions and maintenance of infinitesimal velocity rigidity. No repository path currently implements the continuous-time differential inclusion as an execution contract.
+
+```text
+PAPER_EVIDENCE
+!= DESIGN_ANALOGY
+!= REPOSITORY_IMPLEMENTATION
+!= VALIDATION
+```
+
+Historical dual-view remains preserved: the original S52 Daily mapping is a point-in-time research contribution; later documentary weaving may use that mapping but does not retroactively create implementation, validation, or verified-core admission.
+
+
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
