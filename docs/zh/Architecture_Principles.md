@@ -1246,3 +1246,25 @@ MONTH_OPEN
   - S52 / arXiv:2609.18276v1 successfully migrated to core text.
 - **双语对齐状态 (Bilingual alignment status):**
   - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
+
+
+### 基于内部状态的策略梯度 (Internal State-Based Policy Gradient)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+- **URL:** https://arxiv.org/abs/2604.00433
+- **Publication Date:** 2026-04-01
+- **Authors:** Wonseok Yang, Thinh T. Doan
+- **Selection Reason:** 为具有部分可观测性的多智能体系统提供了一种自然策略梯度算法，该算法依赖于共享的内部状态（有限状态控制器），而不是精确的全局公共信息。
+- **Original Problem:** 在现实的去中心化环境中，多智能体马尔可夫势博弈 (MPG) 中的完全可观测假设是不成立的。当智能体依赖于内部信念近似而不是真实的全局公共信息时，学习动态必须在数学上界定近似误差，以确保收敛到纳什均衡。
+- **Core Assumptions:** 依赖于基于公共信息的真实信念状态与基于共享内部状态的近似信念状态之间足够小且有界的总变差距离 ($d_b$)。它还严格要求初始策略具有正向探索性 ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$)。
+- **数学机制 (Mathematical Mechanism):** 算法更新依赖于基于优势函数的自然策略梯度 (NPG) 步骤: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 平均纳什均衡间隙的收敛下界可分析：$\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 与总变差距离 $d_b$ 直接成正比。
+- **适用范围 (Applicable Scope):** 依赖于共享内部状态抽象，而不是在带宽受限的网络上交换完整轨迹历史的去中心化协作 AI 系统。
+- **局限 (Limitations):** 当初始状态探索系数 $a$ 较小（例如，大型内部状态空间上的均匀初始化）时，理论边界会变差。
+- **Agent 架构映射 (Agent Architecture Mapping):** 指导去中心化记忆压缩的设计；共享总结的内部状态（有限状态控制器）而不是完整历史记录的智能体仍然保留了理论上有界的收敛性，从而验证了解耦架构记忆层的合理性。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **初学者类比 (Beginner Analogy):** 想象一组侦探在不同的城市破案。他们不是把找到的每一条线索都寄给所有人（完全可观测），而只是发送他们当前理论的简短摘要（内部状态）。只要他们的摘要与完整的真相没有偏离太多，整个团队最终仍能锁定正确的罪犯，只是带着一个数学上可预测的微小误差范围。
+- **证据状态 (Evidence Status):** VERIFIED_FROM_LATEX_SOURCE
+- **映射状态 (Mapping Status):** CONCEPTUAL_MAPPING
+- **测试状态 (Repository Test Status):** NOT_TESTED

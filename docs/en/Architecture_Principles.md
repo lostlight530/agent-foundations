@@ -1244,3 +1244,25 @@ MONTH_OPEN
   - S52 / arXiv:2609.18276v1 successfully migrated to core text.
 - **双语对齐状态 (Bilingual alignment status):**
   - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
+
+
+### Internal State-Based Policy Gradient
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+- **URL:** https://arxiv.org/abs/2604.00433
+- **Publication Date:** 2026-04-01
+- **Authors:** Wonseok Yang, Thinh T. Doan
+- **Selection Reason:** Provides a natural policy gradient algorithm for multi-agent systems with partial observability, relying on shared internal states (Finite-State Controllers) rather than exact global common information.
+- **Original Problem:** Fully observable assumptions in multi-agent Markov Potential Games (MPGs) fail in realistic decentralized environments. When agents rely on internal belief approximations instead of true global common information, the learning dynamics must mathematically bound the approximation error to ensure convergence to a Nash Equilibrium.
+- **Core Assumptions:** Relies on a sufficiently small, bounded total variation distance ($d_b$) between the true belief state based on common information and the approximate belief state based on shared internal states. It also strictly requires positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
+- **Mathematical Mechanism:** The algorithmic update relies on an advantage-based Natural Policy Gradient (NPG) step: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$.
+- **Convergence or behavior boundaries:** The average Nash Equilibrium gap convergence floor is analytically bounded: $\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is directly proportional to the total variation distance $d_b$.
+- **Applicable Scope:** Decentralized cooperative AI systems relying on shared internal state abstractions rather than exchanging full trajectory histories over bandwidth-constrained networks.
+- **Limitations:** The theoretical bound worsens when the initial state exploration coefficient $a$ is small (e.g., uniform initialization over a large internal state space).
+- **Agent Architecture Mapping:** Informs the design of decentralized memory compression; agents sharing summarized internal states (Finite State Controllers) rather than full history logs still preserve theoretically bounded convergence, validating a decoupled architectural memory layer.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine a group of detectives solving a case in separate cities. Instead of mailing every single clue they find to everyone (fully observable), they only send short summaries of their current theories (internal states). As long as their summaries aren't too far off from the complete truth, the whole team will still eventually converge on the correct culprit, just with a small, mathematically predictable margin of error.
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Test Status:** NOT_TESTED
