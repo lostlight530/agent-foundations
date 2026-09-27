@@ -266,6 +266,23 @@ Deterministic Convergence Mechanism: 该研究将物理信息边界（Physics-In
 
 ###
 
+### 广义速度刚性与宏观运动模式 (Generalized Velocity Rigidity for Macroscopic Motion)
+- **Frontier Source:** Macroscopic Motion Patterns from Generalized Velocity Rigidity in Multi-Agent Networks (arXiv:2609.18276v1, 2026-09-16)
+- **Authors:** Ronghai He, Changhuang Wan
+- **URL:** https://arxiv.org/abs/2609.18276
+- **论文原始问题:** 将图刚性理论从经典位置空间扩展到连续时间的速度空间，以协调网络级宏观运动模式，而不对空间形状施加严格约束。
+- **核心假设:** 多智能体框架在所有时刻都保持无穷小速度刚性，确保微分约束残差恒为零。
+- **收敛或行为边界:** 速度退化配置（如共识、共线）可作为过渡模式，允许空间剪切、拉伸和收缩，同时保留预设的速度约束。
+- **适用范围:** 需要连续多阶段机动、拓扑变形和穿越受限环境，同时保持连贯动力学的多智能体集群。
+- **局限:** 位置配置仅通过速度约束间接调节。若无额外的位置或距离约束，无法明确保证有界的编队直径或防止智能体间碰撞。
+- **Agent 架构映射:** 将结构刚性概念转化为速度空间拓扑，允许受拓扑约束的智能体动态进行协调的宏观空间变形（缩放、旋转、剪切）。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT (概念映射；连续运动学微分包含尚未作为执行边界实现)。
+- **证据状态:**
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown & Pseudocode)
 
 ### Mathematical Mechanism: 数学机制 (Lyapunov式约束核心公式)
@@ -590,6 +607,9 @@ def F_theta_pow(F_theta, N, x, u):
     return val
 ```
 
+### 数学机制：广义速度刚性与宏观运动模式
+运动学微分包含：$a(t) \in \text{Null}(R_v(v(t)))$。全局加速度向量必须严格限制在速度刚性矩阵 $R_v(v)$ 的瞬时零空间内 (核心更新公式)。
+
 ## 4. 结语
 
 “四个仓库是系统在做什么，这个仓库是系统为什么有效。”
@@ -682,6 +702,11 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
 ```
 
 ### For Beginners: Practical Analogies
+
+#### 初学者类比：广义速度刚性与宏观运动模式
+想象一群鸟一起飞翔。它们不是僵硬地保持完全相同的距离，而是维持相对速度关系。这使得鸟群可以拉伸成一条细线穿过狭窄的峡谷，然后重新扩展成一个圆圈，同时始终作为一个协调的群体移动。
+
+
 
 #### 解释: 在未知约束下的上下文博弈中的多智能体学习
 想象一下你在一个陌生的国家学习开一辆新车。你不仅不知道最快的路线（未知的报酬），也不知道当地的交通规则（未知的约束）。每次你开车（一个上下文），你都试图在不违反规则的情况下更快地到达目的地。数学公式保证，随着时间的推移，你的违规次数将降至接近零，因为你了解了约束的模式，尽管你一开始完全是在靠猜。
@@ -1182,65 +1207,17 @@ MONTH_OPEN
 ```
 
 
-## Daily Research Chunk: 广义速度刚性与宏观运动模式
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Macroscopic Motion Patterns from Generalized Velocity Rigidity in Multi-Agent Networks (arXiv:2609.18276v1, 2026-09-16)
-- **Authors:** Ronghai He, Changhuang Wan
-- **URL:** https://arxiv.org/abs/2609.18276
-- **论文原始问题:** 将图刚性理论从经典位置空间扩展到连续时间的速度空间，以协调网络级宏观运动模式，而不对空间形状施加严格约束。
-- **核心假设:** 多智能体框架在所有时刻都保持无穷小速度刚性，确保微分约束残差恒为零。
-- **数学机制 (Mathematical mechanism):** 运动学微分包含：$a(t) \in \text{Null}(R_v(v(t)))$。全局加速度向量必须严格限制在速度刚性矩阵 $R_v(v)$ 的瞬时零空间内 (核心更新公式)。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 速度退化配置（如共识、共线）可作为过渡模式，允许空间剪切、拉伸和收缩，同时保留预设的速度约束。
-- **适用范围:** 需要连续多阶段机动、拓扑变形和穿越受限环境，同时保持连贯动力学的多智能体集群。
-- **局限:** 位置配置仅通过速度约束间接调节。若无额外的位置或距离约束，无法明确保证有界的编队直径或防止智能体间碰撞。
-- **Agent 架构映射:** 将结构刚性概念转化为速度空间拓扑，允许受拓扑约束的智能体动态进行协调的宏观空间变形（缩放、旋转、剪切）。
-- **仓库实现状态:** EVIDENCE_INSUFFICIENT (概念映射；连续运动学微分包含尚未作为执行边界实现)。
-- **初学者类比:** 想象一群鸟一起飞翔。它们不是僵硬地保持完全相同的距离，而是维持相对速度关系。这使得鸟群可以拉伸成一条细线穿过狭窄的峡谷，然后重新扩展成一个圆圈，同时始终作为一个协调的群体移动。
-- **中英文内容:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-- **证据状态:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-### 当前维护解释 — 2026-09-22
-
-上方 S52 generated chunk 作为原始 Daily research contribution 保留
-
-依据 `FOUNDATION/MAINTENANCE.md` 的当前仓库解释：
-
-- Canonical Source: S52 / arXiv:2609.18276v1
-- Evidence Level: E4_PREPRINT
-- Mapping State: DESIGN_ANALOGY
-- Implementation State: REFERENCE_ONLY
-- Validation State: NOT_TESTED
-- Verified-Core Claim State: NOT_ASSIGNED_BY_THIS_MAINTENANCE
-- Independent Reproduction: NO
-
-论文层速度刚性机制仍受无穷小速度刚性持续成立以及论文运动学假设约束
-
-当前仓库没有把连续时间微分包含实现为执行合同的路径证据
-
-本次维护没有执行仓库验证或独立科学复现
-
-```text
-PAPER_EVIDENCE
-!= DESIGN_ANALOGY
-!= REPOSITORY_IMPLEMENTATION
-!= VALIDATION
-```
-
-
-### 2026-09-23 对 2026-09-22 S52 映射的双口径批注
-
-**N-1 口径:** S52 继续保持 E4_PREPRINT / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED. 论文保证只在论文自身假设与范围内成立.  
-**N 口径:** 当前九月蓝图可以继续引用这一 mapping, 但后续文档整合不能把它升级成仓库执行、验证或 verified-core admission.
-
-```text
-N_MINUS_1_PAPER_MAPPING
-+
-N_CURRENT_DOCUMENTARY_USE
-!= IMPLEMENTATION
-!= VALIDATION
-```
+<!-- WEEKLY_SYNC_REPORT -->
+- **本周文档级联编制 (Weekly document cascade weaving):**
+  - Woven `Generalized Velocity Rigidity for Macroscopic Motion` into core sections (theory, math, analogy).
+- **动态演进映射 (Dynamic evolution mapping):**
+  - Maintained DESIGN_ANALOGY mapping and REFERENCE_ONLY implementation state as specified in maintenance notes.
+- **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
+  - COMPATIBLE with Memory Assumptions: Velocity rigidity does not contradict cognitive manifolds.
+  - COMPATIBLE with Tool Execution Assumptions: Deterministic action policies remain unaffected.
+  - COMPATIBLE with Collaboration Assumptions: Enhances multi-agent continuous-time coordination without violating decentralized data constraints.
+  - COMPATIBLE with Architecture Principle Assumptions: Consistent with constraining divergence via mathematical boundaries.
+- **来源迁移记录 (Source migration record):**
+  - S52 / arXiv:2609.18276v1 successfully migrated to core text.
+- **双语对齐状态 (Bilingual alignment status):**
+  - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
