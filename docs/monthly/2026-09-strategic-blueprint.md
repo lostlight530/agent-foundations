@@ -1419,3 +1419,27 @@ PAPER_EVIDENCE
 - 2026-09-26 Foundations relation: APPEND_PAPER_BOUNDED_COLLABORATION_MAPPING.
 - Historical rewrite: NO.
 - Current September relation: UPDATED_THROUGH_2026-09-26.
+
+## A1_MONTH_TO_DATE_REVALIDATION_2026-09-27
+
+- Logical maintenance date: 2026-09-27
+- Cutoff: 2026-09-26
+- Exact base main: `727c92aba31935974d574935c49ebac2a7271ea9`
+- Scope: September Daily research, weekly cascade relation and monthly strategic owner; 2026-09-27 daily/weekly arrivals are reserved for A2.
+- Prior September claim/evidence/mapping/implementation/validation states remain preserved.
+
+### Coverage decisions
+- 2026-09-01 through 2026-09-25: REVIEWED / RETAIN_EXISTING_DECISIONS
+- 2026-09-26 S54 guarded-coordination research relation: REVIEWED / RETAIN_CONCEPTUAL_MAPPING_BOUNDARY / NO_FOLLOW_UP
+- Paper evidence remains distinct from repository implementation and validation.
+
+### Boundary
+- paper != implementation != validation.
+- same source revisit != independent source.
+- conceptual mapping != verified core admission.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
+
+### A1 disposition
+- 2026-09-26 Foundations: NO_FOLLOW_UP.
+- Historical rewrite required: NO.
+- New implementation/test/verified-core/source-independence credit: NONE.
