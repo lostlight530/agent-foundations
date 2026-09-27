@@ -1443,3 +1443,28 @@ PAPER_EVIDENCE
 - 2026-09-26 Foundations: NO_FOLLOW_UP.
 - Historical rewrite required: NO.
 - New implementation/test/verified-core/source-independence credit: NONE.
+
+## A2_CURRENT_MONTH_RELATION_2026-09-27
+
+- Logical maintenance date: 2026-09-27
+- Exact A1-merged base main: `a835c60056c7c9267d0433c13aabc4a072436b16`
+- Current-month relation window: 2026-09-01 through 2026-09-27
+- A1 coverage through 2026-09-26: INHERITED_FROM_MERGED_A1.
+
+### N-day integration — Foundations
+- The 2026-09-27 Weekly system-document cascade is present and migrated S52 material into the stable bilingual Architecture Principles surfaces under the weekly contract, preserving evidence/mapping/implementation/validation boundaries.
+- The prior wrapper removal is treated as contract-governed migration after content transfer, not arbitrary history deletion.
+- The 2026-09-27 Daily Internal State-Based Policy Gradient research arrived later and is present in both EN/ZH Architecture Principles with NOT_IMPLEMENTED / CONCEPTUAL_MAPPING / NOT_TESTED boundaries.
+- Current coexistence of Weekly and later Daily does not imply that the earlier Weekly execution consumed the later Daily. The later Daily remains input for a future eligible cascade rather than retroactive weekly evidence.
+
+### Relation boundary
+- paper evidence != implementation != validation.
+- bilingual current-path presence != original weekly consumption.
+- later Daily arrival != earlier Weekly input availability.
+- conceptual mapping != verified core.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
+
+### A2 disposition
+- 2026-09-27 Foundations relation: WEEKLY_THEN_LATER_DAILY_INTEGRATED_WITH_ORDERING_BOUNDARY.
+- New implementation/test/verified-core/source-independence credit: NONE.
+- Historical rewrite: NO.
