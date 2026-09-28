@@ -2529,3 +2529,27 @@ $$
 - **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
 - **初学者类比 (Beginner Analogy):** 想象一个公司，员工（LLM）会提出各种有创意的点子，但在任何点子被执行前，都必须经过一位铁面无私的合规官（Guard）依据不可更改的规则手册进行核对。无论员工的提议听起来多么完美，只要违反了成文规则，合规官就会默默驳回并给出一张诊断单。
 - **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+
+
+### 基于拓扑的多智能体策略梯度 (Topology-based multi-Agent Policy gradiEnt (TAPE))
+
+- **技术点 (Technical Point):** 基于拓扑的多智能体策略梯度 (TAPE)
+- **System Container:** Collaboration System
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **版本身份 (Version Identity):** arXiv v1 提交于 2023-12-25；v3 修订于 2024-01-15。本仓映射明确对应 v3，不静默替换为后续版本。
+- **论文原始问题 (Original Problem):** 现有的多智能体策略梯度 (MAPG) 方法受到集中-分散不匹配 (CDM) 问题的困扰，即一个智能体的次优动作会不当地影响其他智能体的参数更新，限制了稳健的协作。
+- **核心假设 (Core Assumptions):** 合作多智能体强化学习 (MARL)，策略可被参数化（例如神经网络），并且智能体形成智能体拓扑（如 Erdős-Rényi 随机图），将通信限制在联盟成员之间。
+- **数学机制 (Mathematical Mechanism):**
+  随机 TAPE 提出了一种基于联盟效用的基于拓扑的策略梯度。智能体 $i$ 的策略梯度为：
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
+  这可以转化为：
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
+  其中 $E_{ij}$ 是表示智能体拓扑的邻接矩阵。
+- **收敛或行为边界 (Convergence or behavior boundaries):**
+  定理 1 证明了随机 TAPE 策略的改进：对于任何更新前的策略 $\bm{\pi}$ 和以足够小的步长更新的策略 $\hat{\bm{\pi}}$，联合策略单调递增：$J(\hat{\bm{\pi}})\geq J(\bm{\pi})$。定理 2 表明，与标准 DOP 相比，随机 TAPE 在策略更新中保持了更高的方差，从而能够更好地探索参数空间（方差差异与 $p^2$ 成正比）。
+- **适用范围 (Applicability Scope):** 需要多样化协作模式并能抵御局部次优动作的合作多智能体环境，特别是在 SMAC 或基于等级的觅食等游戏中。
+- **局限 (Limitations):** Erdős-Rényi 拓扑中过大的边缘概率 $p$ 可能会重新引入 CDM 问题，需要平衡超参数 $p$。边界依赖于足够小的步长 $\delta$。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持 LLM 多智能体网络中的模块化协作图，智能体仅影响直接连接对等方的梯度/更新，从而避免单个不良行为者引发全系统范围的故障级联。
+- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一群工人在建房子。如果每个人都听所有人的（全连接），一个人喊出坏主意就会分散整个团队的注意力（CDM 问题）。使用 TAPE，工人只听从他们直接的本地团队（他们的联盟或拓扑）。这防止了坏主意同时到处蔓延，同时仍然允许团队共同找出建房子的最佳方法。

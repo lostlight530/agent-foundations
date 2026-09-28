@@ -2692,3 +2692,27 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine an organization where employees (LLMs) propose creative ideas, but before any idea is actioned, an unbending compliance officer (the Guard) checks an immutable rulebook to authorize it. No matter how convincingly an idea is presented, if it violates the written rules, the officer silently rejects it and returns a diagnostic slip.
 - **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+
+
+### Topology-based multi-Agent Policy gradiEnt (TAPE)
+
+- **Technical Point:** Topology-based multi-Agent Policy gradiEnt (TAPE)
+- **System Container:** Collaboration System
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **Version Identity:** arXiv v1 submitted 2023-12-25; v3 revised 2024-01-15. The repository mapping refers to v3 and does not silently substitute a later revision.
+- **Original Problem:** Existing multi-agent policy gradient (MAPG) methods suffer from the Centralized-Decentralized Mismatch (CDM) issue where a sub-optimal action of one agent can improperly affect the parameter updates of other agents, limiting robust cooperation.
+- **Core Assumptions:** Cooperative multi-agent reinforcement learning (MARL), where policies can be parameterized (e.g., neural networks), and agents form an agent topology (such as Erdős-Rényi random graphs) restricting communication to coalition members.
+- **Mathematical Mechanism:**
+  Stochastic TAPE proposes a topology-based policy gradient based on Coalition Utility. The policy gradient for agent $i$ is:
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
+  which translates to:
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
+  where $E_{ij}$ is the adjacency matrix representing the agent topology.
+- **Convergence or behavior boundaries:**
+  Theorem 1 demonstrates a stochastic TAPE policy improvement: For any pre-update policy $\bm{\pi}$ and updated policy $\hat{\bm{\pi}}$ with sufficiently small step sizes, the joint policy is monotonically improved: $J(\hat{\bm{\pi}})\geq J(\bm{\pi})$. Theorem 2 shows that stochastic TAPE maintains higher variance in policy updates compared to standard DOP, allowing for better exploration of the parameter space (variance difference proportional to $p^2$).
+- **Applicability Scope:** Cooperative multi-agent environments needing diverse cooperation patterns and robustness against localized sub-optimal actions, particularly in games like SMAC or Level-Based Foraging.
+- **Limitations:** Large edge probabilities $p$ in the Erdős-Rényi topology can re-introduce the CDM issue, requiring a balanced hyperparameter $p$. Bounding relies on sufficiently small step size $\delta$.
+- **Agent Architecture Mapping:** Can conceptually support modular collaboration graphs in LLM multi-agent networks, where agents only influence the gradients/updates of directly connected peers, avoiding system-wide failure cascades from a single bad actor.
+- **Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of workers building a house. If everyone listens to everyone else (fully connected), one person shouting a bad idea distracts the whole team (CDM issue). With TAPE, workers only listen to their immediate local team (their coalition or topology). This prevents bad ideas from spreading everywhere at once, while still allowing the teams to collectively figure out the best way to build the house.
