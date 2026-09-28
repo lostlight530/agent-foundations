@@ -2698,7 +2698,8 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 
 - **Technical Point:** Topology-based multi-Agent Policy gradiEnt (TAPE)
 - **System Container:** Collaboration System
-- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. (2024). *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **Version Identity:** arXiv v1 submitted 2023-12-25; v3 revised 2024-01-15. The repository mapping refers to v3 and does not silently substitute a later revision.
 - **Original Problem:** Existing multi-agent policy gradient (MAPG) methods suffer from the Centralized-Decentralized Mismatch (CDM) issue where a sub-optimal action of one agent can improperly affect the parameter updates of other agents, limiting robust cooperation.
 - **Core Assumptions:** Cooperative multi-agent reinforcement learning (MARL), where policies can be parameterized (e.g., neural networks), and agents form an agent topology (such as Erdős-Rényi random graphs) restricting communication to coalition members.
 - **Mathematical Mechanism:**
