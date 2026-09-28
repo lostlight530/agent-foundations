@@ -1468,3 +1468,29 @@ PAPER_EVIDENCE
 - 2026-09-27 Foundations relation: WEEKLY_THEN_LATER_DAILY_INTEGRATED_WITH_ORDERING_BOUNDARY.
 - New implementation/test/verified-core/source-independence credit: NONE.
 - Historical rewrite: NO.
+
+## A1_MONTH_TO_DATE_REVALIDATION_2026-09-28
+
+- Logical maintenance date: 2026-09-28
+- Cutoff: 2026-09-27
+- Exact base main: `03dba79a884f966729cc844c062ff29869f2d30d`
+- The 2026-09-28 TAPE Daily research already visible on current main is excluded from A1 and reserved for A2.
+
+### Coverage decisions
+- 2026-09-01 through 2026-09-26: REVIEWED / RETAIN_MERGED_OWNER_DECISIONS.
+- 2026-09-27 Weekly cascade: REVIEWED / RETAIN_CONTRACT_GOVERNED_SYSTEM_DOCUMENT_MIGRATION.
+- 2026-09-27 later Daily Internal State-Based Policy Gradient: REVIEWED / RETAIN_LATER_DAILY_NOT_CONSUMED_BY_EARLIER_WEEKLY.
+- Paper evidence, conceptual mapping, implementation state and validation state remain separate.
+
+### Boundary
+- paper != implementation != validation.
+- current bilingual path presence != original weekly consumption.
+- later Daily arrival != earlier Weekly input availability.
+- current 2026-09-28 research presence != A1 evidence eligibility.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
+
+### A1 disposition
+- Coverage through N-1 = 2026-09-27: VERIFIED_IN_CURRENT_OWNER_CHAIN.
+- Historical rewrite required: NO.
+- 2026-09-28 Daily research consumed by A1: NO.
+- New implementation/test/verified-core/source-independence credit: NONE.
