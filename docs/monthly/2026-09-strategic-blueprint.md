@@ -1494,3 +1494,28 @@ PAPER_EVIDENCE
 - Historical rewrite required: NO.
 - 2026-09-28 Daily research consumed by A1: NO.
 - New implementation/test/verified-core/source-independence credit: NONE.
+## A2_CURRENT_MONTH_RELATION_2026-09-28
+
+- Logical maintenance date: 2026-09-28
+- Exact A1-merged base main: `c307fec466b1dc5555bf63945ef83076766cee48`
+- Current-month relation window: 2026-09-01 through 2026-09-28
+- A1 coverage through 2026-09-27: INHERITED_FROM_MERGED_A1.
+
+### N-day integration — Foundations
+- 2026-09-28 Daily research on TAPE is present in EN/ZH Collaboration System surfaces.
+- Exact source identity: arXiv:2312.15667v3, TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient, by Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang and Yali Du.
+- Version chronology is explicit: v1 submitted 2023-12-25; v3 revised 2024-01-15. The repository mapping refers to v3 and does not silently substitute a later revision.
+- The paper supports an agent-topology framework for cooperative multi-agent policy gradient, a stochastic-TAPE policy-improvement result, and empirical evaluation on cooperative MARL benchmarks.
+- Repository state remains PAPER_ONLY / CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT for implementation and validation. No local TAPE implementation, benchmark replay, or independent reproduction is claimed.
+
+### Current-cut boundary
+- paper evidence != implementation != validation.
+- conceptual LLM-agent architecture mapping != demonstrated local behavior.
+- exact arXiv version identity != independent reproduction.
+- Any other 2026-09-28 periodic Foundations task not present at this review cut is NOT_YET_OBSERVED_AT_THIS_CHECK, not missing/failed.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
+
+### A2 disposition
+- 2026-09-28 Foundations relation: TAPE_DAILY_INTEGRATED_WITH_VERSION_AND_MAPPING_BOUNDARY.
+- Historical rewrite: NO.
+- New implementation/test/verified-core/source-independence credit: NONE.
