@@ -2535,7 +2535,8 @@ $$
 
 - **技术点 (Technical Point):** 基于拓扑的多智能体策略梯度 (TAPE)
 - **System Container:** Collaboration System
-- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. (2024). *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **版本身份 (Version Identity):** arXiv v1 提交于 2023-12-25；v3 修订于 2024-01-15。本仓映射明确对应 v3，不静默替换为后续版本。
 - **论文原始问题 (Original Problem):** 现有的多智能体策略梯度 (MAPG) 方法受到集中-分散不匹配 (CDM) 问题的困扰，即一个智能体的次优动作会不当地影响其他智能体的参数更新，限制了稳健的协作。
 - **核心假设 (Core Assumptions):** 合作多智能体强化学习 (MARL)，策略可被参数化（例如神经网络），并且智能体形成智能体拓扑（如 Erdős-Rényi 随机图），将通信限制在联盟成员之间。
 - **数学机制 (Mathematical Mechanism):**
