@@ -1545,3 +1545,29 @@ PAPER_EVIDENCE
 - Historical rewrite required: NO.
 - 2026-09-29 Daily research consumed by A1: NO.
 - New implementation/test/verified-core/source-independence credit: NONE.
+
+## A2_CURRENT_MONTH_RELATION_2026-09-29
+
+- Logical maintenance date: 2026-09-29
+- Exact A1-merged base main: `8e7a2c0ca66e50a9e012322b83308d4880c27742`
+- Current-month relation window: 2026-09-01 through 2026-09-29.
+- A1 coverage through 2026-09-28: INHERITED_FROM_MERGED_A1.
+
+### N-day integration — Foundations
+- 2026-09-29 Daily research on `Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning` is present in EN/ZH Collaboration System surfaces.
+- Exact retained source identity: arXiv:2401.00167v1; the repository records the v1 chronology date as 2023-12-30.
+- The paper-level mechanism and bound are retained only under the paper's partially symmetric Markov-game assumptions, including bounded reward variation and transition discrepancy conditions.
+- The repository mapping from partial symmetry to collaboration/state-sharing among LLM agents remains CONCEPTUAL_MAPPING.
+- Repository implementation remains EVIDENCE_INSUFFICIENT; repository test status remains NOT_TESTED; no benchmark replay or independent reproduction is claimed.
+
+### Relation boundary
+- PAPER_THEOREM_OR_BOUND != LOCAL_IMPLEMENTATION_BEHAVIOR.
+- PARTIAL_SYMMETRY_ASSUMPTIONS != GENERIC_MULTI_AGENT_SYSTEM_ASSUMPTIONS.
+- CONCEPTUAL_MAPPING != DEMONSTRATED_ARCHITECTURE_EFFECT.
+- ARXIV_VERSION_IDENTITY != INDEPENDENT_REPRODUCTION.
+
+### A2 disposition
+- 2026-09-29 Foundations relation: PARTIAL_SYMMETRY_DAILY_INTEGRATED_AS_PAPER_ONLY_CONCEPTUAL_MAPPING.
+- Historical rewrite: NO.
+- New implementation/test/verified-core/source-independence credit: NONE.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
