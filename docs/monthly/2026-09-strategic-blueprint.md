@@ -1519,3 +1519,29 @@ PAPER_EVIDENCE
 - 2026-09-28 Foundations relation: TAPE_DAILY_INTEGRATED_WITH_VERSION_AND_MAPPING_BOUNDARY.
 - Historical rewrite: NO.
 - New implementation/test/verified-core/source-independence credit: NONE.
+
+## A1_MONTH_TO_DATE_REVALIDATION_2026-09-29
+
+- Logical maintenance date: 2026-09-29
+- Cutoff: 2026-09-28
+- Exact base main: `99b9223dc3b445d106f723c0d1d508ced5cbf83c`
+- 2026-09-29 partial-symmetry Daily research is visible on current main but excluded from A1 and reserved for A2.
+
+### Coverage decisions
+- Through 2026-09-27: REVIEWED / RETAIN_EXISTING_OWNER_DECISIONS.
+- 2026-09-28 TAPE Daily: REVIEWED / RETAIN_EXACT_ARXIV_VERSION_AND_CONCEPTUAL_MAPPING_BOUNDARY.
+- TAPE remains PAPER_ONLY / CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT for repository implementation and validation.
+- Later paper mappings do not retroactively imply Weekly consumption or repository implementation.
+
+### Boundary
+- paper evidence != implementation != validation.
+- conceptual architecture mapping != demonstrated local behavior.
+- exact arXiv identity != independent reproduction.
+- current 2026-09-29 research presence != A1 evidence eligibility.
+- September remains OPEN / NATURAL_MONTH_CLOSE_NOT_DUE.
+
+### A1 disposition
+- Coverage through N-1 = 2026-09-28: VERIFIED_IN_CURRENT_OWNER_CHAIN.
+- Historical rewrite required: NO.
+- 2026-09-29 Daily research consumed by A1: NO.
+- New implementation/test/verified-core/source-independence credit: NONE.
