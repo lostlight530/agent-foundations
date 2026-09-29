@@ -2716,3 +2716,32 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine a group of workers building a house. If everyone listens to everyone else (fully connected), one person shouting a bad idea distracts the whole team (CDM issue). With TAPE, workers only listen to their immediate local team (their coalition or topology). This prevents bad ideas from spreading everywhere at once, while still allowing the teams to collectively figure out the best way to build the house.
+
+### Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
+- **Original Problem:** Strict symmetry is rarely satisfied in real-world multi-agent applications, rendering existing symmetry-based data augmentation techniques brittle when applied to partially symmetric environments, leading to accumulated performance errors.
+- **Core Assumptions:** The environment is formulated as a Partially Symmetric Markov Game $\mathcal{M}_g$ satisfying bounded reward variations $|R(s, a) - R(gs, ga)| \leq \epsilon$ and partial transition invariance under Maximum Mean Discrepancy (MMD) bounded by $\delta$.
+- **Mathematical Mechanism:**
+  核心更新公式 (Core Update Formula)
+  An adaptive tuning coefficient dictates the probability of using symmetry-augmented data or weighting symmetry constraints, which decays over time:
+  $$
+  \lambda (D,k) = D e^{-\beta k}
+  $$
+  where $D$ represents the degree of symmetry and $\beta$ is the decay rate over $k$ iterations.
+- **Convergence or behavior boundaries:**
+  收敛界 (Convergence Bound)
+  For the Partially Symmetric Markov game, the performance error introduced by incorporating symmetry samples is bounded:
+  $$
+  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
+  $$
+- **Applicability:** Decentralized or partially symmetric multi-agent networks where agents share similar but not completely identical transition and reward structures.
+- **Limitations:** The theoretical error bounds require specific hyperparameter tuning for decay rates ($\beta$) to balance the early exploration speedup against later state-specific exploitation.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. The bounded partial symmetry concept can guide the collaboration system's state-sharing and data augmentation protocols across similar but distinct agent roles.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
+- **Repository Test Status:** NOT_TESTED.
+- **Beginner Analogy:** Imagine teaching two slightly different robots to navigate a maze. While they aren't identical twins (perfect symmetry), they are similar enough that one robot can initially learn from the other's mistakes. However, as they get closer to mastering the maze, they need to rely more on their own specific sensors and less on their partner's generic advice to avoid making small but critical errors.
+- **Bilingual Content:** Included.
+- **Paper Evidence Status:** PAPER_ONLY.
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.

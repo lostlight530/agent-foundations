@@ -2553,3 +2553,32 @@ $$
 - **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
 - **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
 - **初学者类比 (Beginner Analogy):** 想象一群工人在建房子。如果每个人都听所有人的（全连接），一个人喊出坏主意就会分散整个团队的注意力（CDM 问题）。使用 TAPE，工人只听从他们直接的本地团队（他们的联盟或拓扑）。这防止了坏主意同时到处蔓延，同时仍然允许团队共同找出建房子的最佳方法。
+
+### 利用部分对称性进行多智能体强化学习 (Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
+- **Original Problem:** 现实世界的多智能体应用中很少满足严格的对称性，这使得现有的基于对称性的数据增强技术在应用于部分对称环境时显得脆弱，从而导致累积的性能误差。
+- **Core Assumptions:** 环境被公式化为满足有界奖励偏差 $|R(s, a) - R(gs, ga)| \leq \epsilon$ 且在最大均值差异 (MMD) 下受到 $\delta$ 限制的部分对称马尔可夫博弈 $\mathcal{M}_g$。
+- **Mathematical Mechanism:**
+  核心更新公式 (Core Update Formula)
+  自适应调节系数决定了使用对称性增强数据或加权对称性约束的概率，该概率随时间衰减：
+  $$
+  \lambda (D,k) = D e^{-\beta k}
+  $$
+  其中 $D$ 表示对称程度，$\beta$ 是在 $k$ 次迭代中的衰减率。
+- **Convergence or behavior boundaries:**
+  收敛界 (Convergence Bound)
+  对于部分对称马尔可夫博弈，引入对称样本所带来的性能误差是有界的：
+  $$
+  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
+  $$
+- **Applicability:** 去中心化或部分对称的多智能体网络，其中智能体共享相似但不完全相同的转换和奖励结构。
+- **Limitations:** 理论上的误差界限需要对衰减率 ($\beta$) 进行特定的超参数调整，以平衡早期的探索加速和后期的特定状态利用。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. 有界部分对称性的概念可以指导协作系统在相似但不同的智能体角色之间进行状态共享和数据增强协议的设计。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
+- **Repository Test Status:** NOT_TESTED.
+- **Beginner Analogy:** 想象一下教两个略有不同的机器人走迷宫。虽然它们不是同卵双胞胎（完美对称），但它们足够相似，以至于一个机器人最初可以从另一个机器人的错误中学习。然而，随着它们越来越接近掌握迷宫，它们需要更多地依赖自己特定的传感器，减少对同伴一般建议的依赖，以避免犯下微小但关键的错误。
+- **Bilingual Content:** Included.
+- **Paper Evidence Status:** PAPER_ONLY.
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
