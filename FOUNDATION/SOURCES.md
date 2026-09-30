@@ -536,12 +536,23 @@ Canonical rules:
 - Use: Proposed an epistemic-probabilistic model and a neuro-symbolic architecture with a Guard to control execution against an authoritative state.
 - Verification boundary: Bound guarantees (e.g., conditional ranking progress) require a non-goal state waiting time bounded by a geometric random variable of mean 1/varepsilon, restricted to the source-compatible knowledge fragment, and do not imply an implemented validation in a general agent environment.
 
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
 
 Do not place a fixed historical upper-bound sentence in the middle of the registry. A later legitimate source addition changes registry state, not evidence vocabulary. Historical source counts belong to dated research/reconciliation records, not to this current registry authority.
 
+
+
+## S55 — Multi-Agent Flow Matching with Decoupled Generative Guidance
+- Type: Canonical Source
+- Identifier: arxiv-2609.38133v1
+- Version date: 2026-09-29
+- Authors: Ruoyu Lin, Magnus Egerstedt, Fabio Pasqualetti
+- URL: http://arxiv.org/abs/2609.38133v1
+- Use: Daily Research Chunk (Architecture Principles)
+- Verification boundary: Verified from LaTeX Source
 
 ## 2026-09-23 dual-view annotation for S52
 

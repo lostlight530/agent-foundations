@@ -1268,3 +1268,29 @@ MONTH_OPEN
 - **证据状态 (Evidence Status):** VERIFIED_FROM_LATEX_SOURCE
 - **映射状态 (Mapping Status):** CONCEPTUAL_MAPPING
 - **测试状态 (Repository Test Status):** NOT_TESTED
+
+### 具有解耦生成引导的多智能体流匹配 (DeGG-Flow)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
+- **原始问题 (Original Problem):** 生成式建模可以产生多样化的对象，但缺乏所生成对象满足硬约束的正式保证。在多智能体生成中，这尤其具有挑战性，因为需求可能依赖于多个智能体，但每个智能体必须独立决定其引导输入，而不依赖于其他智能体同时计算的输入。
+- **核心假设 (Core Assumptions):**
+  - 共享需求函数 $q_a^{\mathrm{SE}}$ 和边界函数 $\beta_a^{\mathrm{SE}}$ 是 $C^1$ 的。
+  - 概率分布 $\mu_1$ 和 $\nu_1$ 具有有限的二阶矩。
+  - 向量场 $f^{\theta}$ 关于生成状态是李普希茨连续的，且李普希茨常数 $L(\tau)$ 是可积的。
+  - 引导校正 $\Gamma(s\,|\,\xi)$ 在初始分布上的期望范数平方随时间是可积的。
+- **数学机制 (Mathematical Mechanism):** DeGG-Flow 将生成过程表示为控制仿射动力系统。通过建立可行性条件和有限视界收敛保证，它为共享需求（依赖于多个智能体）和私有需求（依赖于智能体及其邻居）开发了引导条件。
+  - 收敛界:
+    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 如果满足最终边界条件 $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$，则 $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$，这意味着最终生成的状态严格满足共享的硬需求。标称分布和引导分布之间的 Wasserstein 距离 $W_2(\mu_1,\nu_1)$ 由积分的引导校正界定。
+- **适用范围 (Applicable Scope):** 需要满足硬约束的多智能体生成环境，例如多机器人协作和具有启示性要求的场景生成。
+- **局限 (Limitations):** 理论边界假设底层向量场的李普希茨连续性和分布的有限二阶矩。该框架要求最终边界条件严格达到零，以保证精确的约束满足。
+- **Agent 架构映射 (Agent Architecture Mapping):** 通过引入解耦的引导模块，在概念上支持生成式智能体架构，确保来自多个自治智能体的去中心化输出满足共享的系统级硬约束，而无需在生成期间同步交换内部状态。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **仓库测试状态 (Repository Test Status):** NOT_TESTED
+- **初学者类比 (Beginner Analogy):** 想象多个艺术家一起绘制一幅大型壁画。如果他们不协调，最终的画面将是混乱的。每个艺术家不需要经常停下来讨论每一笔，而是遵循一套解耦的“护栏”（引导），这确保了他们个人的工作在边缘处与其他人的完美对齐，从而保证最终的壁画满足整体设计，而不需要实时的微观管理。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
