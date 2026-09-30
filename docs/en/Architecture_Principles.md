@@ -1266,3 +1266,29 @@ MONTH_OPEN
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Mapping Status:** CONCEPTUAL_MAPPING
 - **Repository Test Status:** NOT_TESTED
+
+### Multi-Agent Flow Matching with Decoupled Generative Guidance (DeGG-Flow)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
+- **Original Problem:** Generative modeling produces diverse objects but lacks formal guarantees that the generated objects satisfy hard constraints. In multi-agent generation, this is challenging because requirements can depend on multiple agents, but each agent must determine its guidance input independently without relying on simultaneously computed inputs of others.
+- **Core Assumptions:**
+  - The shared requirement function $q_a^{\mathrm{SE}}$ and bound function $\beta_a^{\mathrm{SE}}$ are $C^1$.
+  - The probability distributions $\mu_1$ and $\nu_1$ have finite second moments.
+  - The vector field $f^{\theta}$ is Lipschitz continuous with respect to the generated state with integrable Lipschitz constant $L(\tau)$.
+  - The expected squared norm of the guidance correction $\Gamma(s\,|\,\xi)$ over the initial distribution is integrable over time.
+- **Mathematical Mechanism:** DeGG-Flow represents the generative process as a control-affine dynamical system. It develops guidance conditions for shared requirements (dependent on multiple agents) and private requirements (dependent on an agent and its neighbors) by establishing feasibility conditions and finite-horizon convergence guarantees.
+  - 收敛界 (Convergence bound):
+    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
+- **Convergence or behavior boundaries:** If the final boundary condition $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$ is met, then $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$, meaning the final generated state strictly satisfies the shared hard requirement. The Wasserstein distance $W_2(\mu_1,\nu_1)$ between the nominal and guided distributions is bounded by the integrated guidance correction.
+- **Applicable Scope:** Multi-agent generative environments requiring hard constraint satisfaction, such as multi-robot collaboration and scene generation with affordance requirements.
+- **Limitations:** Theoretical bounds assume Lipschitz continuity of the underlying vector fields and finite second moments of the distributions. The framework requires the final bound condition to strictly reach zero to guarantee exact constraint satisfaction.
+- **Agent Architecture Mapping:** Can conceptually support generative agent architectures by introducing decoupled guidance modules, ensuring that decentralized outputs from multiple autonomous agents satisfy shared system-level hard constraints without requiring synchronized internal state exchange during generation.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** Imagine multiple artists painting a large mural together. If they don't coordinate, the final picture will be chaotic. Instead of constantly stopping to discuss every brushstroke, each artist follows a set of decoupled "guardrails" (guidance) that ensures their individual work will perfectly align with the others at the edges, guaranteeing the final mural satisfies the overall design without needing real-time micromanagement.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
