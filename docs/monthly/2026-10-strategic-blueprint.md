@@ -43,3 +43,37 @@ PAPER
 ```
 
 A1 result: MONTH_OPEN_BASELINE_INITIALIZED.
+
+
+## A2_CURRENT_MONTH_RELATION_2026-10-01
+
+- Logical maintenance date: 2026-10-01
+- Exact A1-merged base main: `4e7d772412b75c1d73d9c432cac4631e7d37aa50`
+- Native Daily delivery: PR #229 / sparse modern Hopfield model source S42
+- Updated native surfaces: `docs/en/Memory_System.md`, `docs/zh/Memory_System.md`
+- Native groundedness claim retained: VERIFIED_FROM_LATEX_SOURCE for checked source fields
+- Bilingual alignment retained: SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+- Weekly final: NOT_DUE
+- October Monthly final: NOT_DUE
+
+### Evidence boundary
+
+```text
+SOURCE_LATEX_CHECK
+!= INDEPENDENT_REPLICATION
+
+DAILY_CONCEPTUAL_MAPPING
+!= REPOSITORY_IMPLEMENTATION
+
+BILINGUAL_ALIGNMENT_ON_CHECKED_FIELDS
+!= UNIVERSAL_SEMANTIC_EQUIVALENCE
+```
+
+### A2 disposition
+
+- October day-1 research relation: INTEGRATED
+- Month version: OPEN
+- Verified-core promotion by this maintenance pass: NONE
+- Historical rewrite: NO
+- Extra audit executed: NO
+- New implementation, validation, or independent-source credit beyond the native Daily: NONE
