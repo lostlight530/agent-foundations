@@ -777,3 +777,26 @@ MONTH_OPEN
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
+
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
+- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- **URL:** https://arxiv.org/abs/2309.12673
+- **论文原始问题 (Original problem):** 对应于稠密 softmax 注意力机制的标准现代 Hopfield 模型，由于其全局激活范围，在隔离和检索稀疏表示或高度相关的记忆模式时存在困难，缺乏依赖于稀疏性的记忆检索机制。
+- **核心假设 (Core assumptions):** 记忆模式存储在半径为 $R$ 的有界球体内。查询和记忆模式在对应于 sparsemax 分布的 Gini 熵正则化下运行，假设 sparsemax 的变分形式适用。
+- **数学机制 (Mathematical mechanism):** 提出了一种使用稀疏熵正则化（Sparsemax）凸共轭的闭式稀疏 Hopfield 能量：
+  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
+  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 记忆检索单调收敛至平稳点。建立了依赖于稀疏性的记忆检索误差界：$\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$，当支持集 $\kappa$（稀疏维度）较小时，该误差界显著收紧，证明了比稠密模拟更紧的误差边界。
+- **适用范围 (Applicable scope):** 需要稀疏模式隔离和噪声鲁棒性的连续状态记忆架构、联想记忆模型和注意力机制。
+- **局限 (Limitations):** 边界和确切容量依赖于记忆模式的明确分布和范数界限。理论上的提升严重依赖于稀疏维度 $\kappa$ 较小这一条件；如果表示变得均匀稠密，该边界可能不会比稠密模型更紧。
+- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING。稀疏检索动力学能在概念上为 Agent 记忆机制提供设计候选，防止松散相关上下文的混合，支持选择性的长期情景检索，而无需检索整个记忆历史。
+- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED。仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块。
+- **初学者类比 (Beginner analogy):** 想象你在一个巨大的图书馆找一本特定的书。稠密现代 Hopfield 模型会以不同亮度打开图书馆里所有的灯，如果很多书长得很像，就很难聚焦。而稀疏现代 Hopfield 模型使用了一束激光聚光灯（sparsemax），严格只照亮你想要的那本书（以及几本高度相关的），让其他的书完全处于黑暗中，这极大地减少了干扰并提高了检索的精准度。
+- **证据状态 (Evidence status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

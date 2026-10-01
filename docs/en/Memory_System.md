@@ -776,3 +776,26 @@ MONTH_OPEN
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## On Sparse Modern Hopfield Model
+
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
+- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- **URL:** https://arxiv.org/abs/2309.12673
+- **论文原始问题 (Original problem):** The standard modern Hopfield model, corresponding to dense softmax attention, struggles to isolate and retrieve sparsely represented or closely correlated patterns due to its global activation scope, lacking a sparsity-dependent memory retrieval mechanism.
+- **核心假设 (Core assumptions):** Memory patterns are stored in a bounded sphere of radius $R$. The query and memory patterns operate under a Gini entropic regularizer corresponding to the sparsemax distribution, assuming the variational form of sparsemax is applicable.
+- **数学机制 (Mathematical mechanism):** Proposes a closed-form sparse Hopfield energy using the convex conjugate of the sparse entropic regularizer (Sparsemax):
+  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
+  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
+- **收敛或行为边界 (Convergence or behavior boundaries):** Retrieves memory monotonically to stationary points. It establishes a sparsity-dependent memory retrieval error bound: $\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$, where the error bound tightens significantly when the support $\kappa$ (sparsity dimension) is small, proving tighter error boundaries than the dense analog.
+- **适用范围 (Applicable scope):** Continuous-state memory architectures, associative memory models, and attention mechanisms requiring sparse pattern isolation and noise robustness.
+- **局限 (Limitations):** Bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns. The theoretical improvements heavily depend on the sparsity dimension $\kappa$ being small; if representations become uniformly dense, the bound may not be tighter than the dense model.
+- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING. The sparsemax retrieval dynamics can conceptually inform Agent memory mechanisms to prevent blending of loosely related contexts, enabling selective long-term episodic retrieval without retrieving the entire memory history.
+- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED. The repository currently maintains the theoretical bounds and principles but does not implement an executable SparseHopfieldLayer memory module.
+- **初学者类比 (Beginner analogy):** Imagine looking for a specific book in a massive library. The dense modern Hopfield model turns on all the lights in the library at varying dimness, making it hard to focus on one book if many are similar. The sparse modern Hopfield model uses a laser spotlight (sparsemax) to strictly illuminate only the exact book you want (and maybe a few highly relevant neighbors), keeping the rest in total darkness, which drastically reduces noise and improves focus.
+- **证据状态 (Evidence status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
