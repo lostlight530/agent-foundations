@@ -167,3 +167,72 @@ NO_NEW_NATIVE_PATH_OBSERVED
 - Current retained native research owner: 2026-10-01 S42 relation
 - Verified-core promotion: NONE
 - New implementation/validation/independent-source credit: NONE
+
+
+## A2_SUCCESSOR_RECONCILIATION_2026-10-02_LATE_NATIVE_DELIVERY
+
+- Reconciliation type: FORWARD_ONLY_SUCCESSOR_WITH_SCOPE_REPAIR
+- Predecessor A2 PR: #233
+- Predecessor A2 merge time: 2026-10-02T13:27:38Z
+- Predecessor observation: NO_NEW_2026_10_02_NATIVE_PATH_OBSERVED_AT_THIS_CHECK
+- Later native Jules PR: #235
+- Later native PR merge time: 2026-10-02T14:27:41Z
+- Historical rewrite: NO
+- Implementation/test replay by this reconciliation: NOT_PERFORMED
+- Verified-core promotion: NONE
+
+### Temporal reconciliation
+
+PR #233 remains historically valid because PR #235 had not yet merged when the predecessor A2 checked current main.
+The later merge changes current repository state only and does not retroactively make the earlier path available.
+
+```text
+LATER_NATIVE_DELIVERY
+!= EARLIER_PATH_AVAILABILITY
+
+EARLIER_NO_PATH_OBSERVED
+!= TASK_NOT_EXECUTED
+
+SUCCESSOR_RECONCILIATION
+!= HISTORICAL_REWRITE
+```
+
+### Native delivery scope review
+
+The merged PR #235 narrative declared a Daily research update for DeGG-Flow / S55 and named the bilingual Architecture Principles documents as modified outputs.
+The actual PR diff retained on main changed only these four root-level helper/search scripts:
+
+- `append.py`
+- `append_chunks.py`
+- `search_arxiv.py`
+- `search_arxiv2.py`
+
+No PR #235 delta was present in `docs/en/Architecture_Principles.md` or `docs/zh/Architecture_Principles.md`.
+The DeGG-Flow sections and canonical S55 registry entry already existed before PR #235, so their current presence is not re-credited as a new 2026-10-02 Daily contribution.
+
+This successor removes the four leaked helper/search scripts from current main while preserving PR #235 and its merge history as delivery evidence.
+
+```text
+PR_MERGED
+!= CONTRACT_COMPLETE_DAILY_INTEGRATION
+
+PR_BODY_DECLARED_FILES
+!= ACTUAL_CHANGED_FILES
+
+PREEXISTING_RESEARCH_CONTENT
+!= NEW_DAILY_CREDIT
+
+TEMPORARY_HELPER_CLEANUP
+!= HISTORICAL_ERASURE
+```
+
+### Successor disposition
+
+- Earlier A2 observation: HISTORICALLY_VALID
+- Later PR #235 delivery: OBSERVED
+- PR #235 scope conformance: DELIVERY_SCOPE_DEFECT_CONFIRMED
+- New valid bilingual Daily document delta attributable to PR #235: NONE
+- Temporary/helper files retained after correction: NONE
+- Existing DeGG-Flow / S55 evidence state: PRESERVED_WITHOUT_NEW_CREDIT
+- October relationship continuity: UPDATED_WITH_LATE_DELIVERY_AND_SCOPE_REPAIR
+- New implementation, validation, independent-source or verified-core credit: NONE
