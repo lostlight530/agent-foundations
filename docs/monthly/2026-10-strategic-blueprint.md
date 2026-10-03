@@ -335,3 +335,49 @@ CONCEPTUAL_MAPPING
 - W40 settlement: NOT_DUE
 - Verified-core promotion: NONE
 - New implementation / validation / independent-source credit: NONE
+
+
+## A1_SUCCESSOR_FULL_COVERAGE_2026-10-03
+
+- Logical maintenance date: 2026-10-03
+- Exact successor base main: `2a427ec06f72218582b8de6f1d2a38ff89e3b2fe`
+- Coverage window: 2026-10-01 through 2026-10-02
+- Coverage mode: MONTH_START_TO_N_MINUS_1_FULL_COVERAGE
+- Predecessor same-day A1/A2: PRESERVED_AS_POINT_IN_TIME_HISTORY
+- Current-main movement after predecessor A2: PR #239 native 2026-10-03 research delivery is now present
+- A1 cutoff handling: N_DAY_NOT_CONSUMED_IN_A1_COVERAGE
+- Historical rewrite: NO
+- Implementation/test replay by maintenance: NOT_PERFORMED
+
+### Successor coverage decision
+
+- 2026-10-01 through 2026-10-02 prior A1 decisions: RECHECKED / NO_FOLLOW_UP
+- S56 / arXiv:2607.05580v3 and its bilingual Collaboration System mapping are N-day inputs and are deferred to A2.
+- Earlier A2 NO_NEW_2026_10_03_NATIVE_PATH_OBSERVED_AT_THIS_CHECK remains historically valid for its earlier cut.
+- Current path presence does not retroactively create earlier availability, verified-core admission, implementation, or validation.
+
+```text
+EARLIER_NATIVE_PATH_NOT_OBSERVED
++
+LATER_S56_DELIVERY_PRESENT
+=
+A2_RECONCILIATION_REQUIRED
+
+PAPER
+!= MAPPING
+!= IMPLEMENTATION
+!= VALIDATION
+
+A1_N_MINUS_1_CUTOFF
+!= N_DAY_RELATIONAL_UPDATE
+```
+
+### Successor A1 disposition
+
+- N-1 coverage completeness: RECONFIRMED_THROUGH_2026-10-02
+- N-1 decision completeness: RECONFIRMED_THROUGH_2026-10-02
+- N-day research mutation by A1: NO
+- Verified-core promotion: NONE
+- W40 settlement: NOT_DUE
+- October natural-month final: NOT_DUE
+- A2 dependency: MUST_FRESH_READ_THIS_A1_MERGED_MAIN_AND_CONSUME_S56_NATIVE_INPUT
