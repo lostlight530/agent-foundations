@@ -236,3 +236,51 @@ TEMPORARY_HELPER_CLEANUP
 - Existing DeGG-Flow / S55 evidence state: PRESERVED_WITHOUT_NEW_CREDIT
 - October relationship continuity: UPDATED_WITH_LATE_DELIVERY_AND_SCOPE_REPAIR
 - New implementation, validation, independent-source or verified-core credit: NONE
+
+
+## A1_FULL_COVERAGE_2026-10-03
+
+- Logical maintenance date: 2026-10-03
+- Exact base main: `78d5753105c02c5201b024353a89383b18ff3209`
+- Coverage window: 2026-10-01 through 2026-10-02
+- Coverage mode: MONTH_START_TO_N_MINUS_1_FULL_COVERAGE
+- Historical rewrite: NO
+- Extra audit executed: NO
+- Implementation/test replay by maintenance: NOT_PERFORMED
+
+### Coverage decisions
+
+| Surface | Decision | Preserved boundary |
+| --- | --- | --- |
+| 2026-10-01 S42 sparse-modern-Hopfield research relation | REVIEWED / NO_FOLLOW_UP | source grounding and bilingual checked-field alignment remain scoped; mapping != implementation != validation |
+| `docs/en/Memory_System.md` / `docs/zh/Memory_System.md` current S42 content | REVIEWED / RETAIN | current content does not create new 2026-10-03 research credit |
+| current DeGG-Flow content in `docs/en/Architecture_Principles.md` / `docs/zh/Architecture_Principles.md` | REVIEWED / RETAIN_WITHOUT_2026_10_02_RECREDIT | current presence predates the defective delivery claim and is not re-attributed |
+| 2026-10-02 predecessor A2 no-path observation | REVIEWED / RETAIN_AS_POINT_IN_TIME_CUTOFF | later delivery does not rewrite earlier availability |
+| 2026-10-02 successor reconciliation and helper-script cleanup | REVIEWED / RETAIN | PR delivery-scope defect remains explicit; leaked helper files remain removed |
+| W40 Weekly / October Monthly final | NOT_DUE | current week/month remain open |
+
+### A1 disposition
+
+- Coverage completeness: COMPLETE_THROUGH_2026-10-02_AT_THIS_CHECK
+- Decision completeness: COMPLETE_THROUGH_2026-10-02_AT_THIS_CHECK
+- PR #235 delivery-scope defect: PRESERVED
+- Valid new bilingual Daily document delta attributable to PR #235: NONE
+- Preexisting DeGG-Flow / S55 state: PRESERVED_WITHOUT_NEW_CREDIT
+- Verified-core promotion: NONE
+- New implementation / validation / independent-source credit: NONE
+
+```text
+PR_MERGED
+!= CONTRACT_COMPLETE_DAILY_INTEGRATION
+
+PR_BODY_DECLARED_FILES
+!= ACTUAL_CHANGED_FILES
+
+PREEXISTING_RESEARCH_CONTENT
+!= NEW_DAILY_CREDIT
+
+PAPER
+!= MAPPING
+!= IMPLEMENTATION
+!= VALIDATION
+```
