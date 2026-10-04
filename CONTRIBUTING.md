@@ -1,5 +1,9 @@
 # Contributing
 
+## Open research contributions
+
+For research-method or positioning changes, start with [`OPEN_RESEARCH.md`](./OPEN_RESEARCH.md). For new bounded research records, use [`RESEARCH_TEMPLATE.md`](./RESEARCH_TEMPLATE.md). The FOUNDATION verified core, evidence/provenance vocabulary, implementation and validation states, and historical records remain authoritative.
+
 Contributions are welcome when they improve Agent Foundations' verified core, source registry, reproducibility, documentary tooling, bilingual consistency, or repository infrastructure without strengthening claims beyond their evidence.
 
 ## Start from the current core
