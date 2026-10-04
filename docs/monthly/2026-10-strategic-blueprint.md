@@ -590,3 +590,162 @@ N_DAY_2026_10_04_EXCLUDED
 =
 A1_COMPLETE_FOR_2026_10_04
 ```
+
+## A2 CURRENT MONTH RELATION — 2026-10-04
+
+- Repository: `lostlight530/agent-foundations`
+- Plane: `A2 / CURRENT_MONTH_RELATIONAL_VERSION`
+- Logical maintenance date: `2026-10-04`
+- Exact A1-merged base main: `75d799ac98a89e37677c44c28e29d6584b0de429`
+- Required predecessor A1: PR #245 / MERGED
+- Fresh-read after A1 merge: YES
+- Current relation window: 2026-10-01..2026-10-04
+- Owner: `docs/monthly/2026-10-strategic-blueprint.md`
+- System: Agent Foundations
+- Historical rewrite: NO
+- Native replay: NO
+- Extra benchmark/runtime execution: NOT_PERFORMED
+- Duplicate research credit: NONE
+
+### A1 dependency
+- A1 #245 is present on this base.
+- A1 covers 2026-10-01..2026-10-03.
+- A2 consumes 2026-10-04 Daily + Weekly document state.
+- Prior A2 records remain point-in-time history.
+- Later current state does not rewrite prior evidence classification.
+
+### Inherited 2026-10-01 relation
+- October month-open relation retained.
+- Daily research evidence remains source-scoped.
+- Paper evidence does not become repository implementation.
+- Conceptual mapping does not become executable capability.
+- Agreement is not treated as truth.
+
+### Inherited 2026-10-02 relation
+- A1/A2 10/2 relation retained.
+- D30 #234 remains retrospective audit evidence.
+- Daily #235 late-delivery chronology remains explicit.
+- Successor A2 #236 remains point-in-time reconciliation.
+- No late delivery is backdated into earlier A2 visibility.
+
+### Inherited 2026-10-03 relation
+- A1/A2 10/3 chronology retained.
+- Daily #239 later visibility remains explicit.
+- Successor A1/A2 #240/#241 retained.
+- Canonical source identity remains controlling over historical title noise.
+- No duplicate source independence is created by document repetition.
+
+### 2026-10-04 Daily relation consumed
+- Daily research #242 is merged.
+- New canonical source: S57.
+- S57 title: Consensus and Factual Dynamics in Large Populations of Interacting Language Models.
+- S57 identifier: arxiv-2609.39211v1.
+- S57 Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE.
+- S57 Architecture Mapping Status: CONCEPTUAL_MAPPING.
+- S57 Repository Implementation Status: NOT_IMPLEMENTED.
+- S57 Repository Test Status: NOT_TESTED.
+- S57 supports separating semantic consensus from factual correctness.
+- S57 does not prove repository collaboration correctness.
+- S57 does not prove runtime safety.
+
+### 2026-10-04 Weekly relation consumed
+- Original Weekly #243 is closed unmerged.
+- #243 broad relocation/deletion behavior is not current-main evidence.
+- Rebuilt bounded Weekly #244 is merged.
+- #244 preserves existing EN/ZH research blocks in place.
+- #244 adds bounded W40 cascade sections.
+- #244 does not claim complete migration where not independently verified.
+- #244 keeps paper-to-architecture mapping evidence-scoped.
+- #244 keeps runtime compatibility unverified.
+- #244 keeps bilingual alignment limited to checked fields.
+
+### Current relational synthesis
+- Foundations Daily research state is current through 2026-10-04.
+- Weekly document cascade is current through 2026-W40.
+- S57 is integrated as paper evidence plus conceptual mapping only.
+- No repository implementation is inferred.
+- No repository test pass is inferred.
+- Documentary compatibility is not runtime compatibility.
+- Existing historical sections remain preserved.
+- September monthly finality conflict remains prior-month reconciliation material.
+- October natural-month strategic blueprint final is not due.
+- No verified-core promotion is created by maintenance.
+
+### Relation matrix
+| Surface | A2 state | Boundary |
+| --- | --- | --- |
+| Daily S57 | CONSUMED | paper evidence / conceptual mapping only |
+| Weekly #244 | CONSUMED | bounded documentary cascade |
+| Closed #243 | HISTORY_ONLY | not main evidence |
+| Rolling October owner | OPEN / CURRENT | not natural-month final |
+| Prior A1 | CONSUMED | N-1 foundation |
+| Prior A2 | PRESERVED | no overwrite |
+| September monthly conflict | PRIOR_MONTH_CONTEXT | explicit reconciliation remains needed |
+| D30 | SEPARATE | retrospective audit plane |
+| Verified core | NOT_PROMOTED | evidence threshold not met |
+
+### Evidence invariants
+- AGREEMENT != TRUTH.
+- PAPER_EVIDENCE != REPOSITORY_IMPLEMENTATION.
+- CONCEPTUAL_MAPPING != IMPLEMENTATION.
+- DOCUMENTARY_COMPATIBILITY != RUNTIME_COMPATIBILITY.
+- LATER_PATH_PRESENT != ORIGINAL_INPUT_AVAILABLE.
+- CURRENT_REPOSITORY_STATE != TASK_TIME_STATE.
+- MERGED_ARTIFACT != SUCCESSFUL_EXECUTION.
+- SOURCE_CODE != EXECUTED_BEHAVIOR.
+- TEST_SOURCE != TEST_EXECUTION.
+- NATIVE_TASK_DELIVERY != A1_MAINTENANCE.
+- A1_MAINTENANCE != A2_RELATIONAL_VERSION.
+- A2_RELATIONAL_VERSION != PERIODIC_AUDIT.
+- PERIODIC_AUDIT != DURABLE_GOVERNANCE.
+
+### Foundations-specific boundaries
+- Exact source mapping remains required.
+- Paper formulas retain original-domain assumptions.
+- Cross-domain appearance does not create independent support.
+- Bilingual alignment is limited to checked fields.
+- Weekly weaving does not authorize deletion of historical research blocks without verified complete migration.
+- Paper evidence and repository implementation remain separate columns.
+- Repository implementation and repository tests remain separate columns.
+- September MONTH_OPEN / FINAL conflict is not silently normalized by October maintenance.
+
+### Validation checklist
+- A1 merged before A2 branch: YES.
+- Fresh post-A1 base used: YES.
+- 2026-10-01 relation preserved: YES.
+- 2026-10-02 relation preserved: YES.
+- 2026-10-03 relation preserved: YES.
+- 2026-10-04 Daily relation consumed: YES.
+- 2026-10-04 Weekly relation consumed: YES.
+- Closed-unmerged #243 promoted: NO.
+- Paper evidence upgraded to implementation: NO.
+- Conceptual mapping upgraded to runtime: NO.
+- Duplicate research credit: NO.
+- Runtime execution invented: NO.
+- Test execution invented: NO.
+- Verified-core promotion invented: NO.
+- Natural-month final manufactured: NO.
+- Periodic audit manufactured: NO.
+- Durable governance promoted: NO.
+- Parallel monthly owner created: NO.
+
+### A2 disposition
+- Current October relation: CURRENT_THROUGH_2026-10-04.
+- October version state: OPEN.
+- S57 paper evidence: VERIFIED_FROM_LATEX_SOURCE.
+- S57 mapping: CONCEPTUAL_MAPPING.
+- S57 implementation: NOT_IMPLEMENTED.
+- S57 tests: NOT_TESTED.
+- Weekly cascade: MERGED / BOUNDED.
+- Natural-month final: NOT_DUE.
+- Historical chronology: PRESERVED.
+- New runtime credit: NONE.
+- New verified-core credit: NONE.
+- New governance credit: NONE.
+- Next A1 must fresh-read this merged main.
+
+```text
+MERGED_A1 + FRESH_MAIN_READ + DAILY_S57 + WEEKLY_W40
+= CURRENT_MONTH_RELATION_THROUGH_2026_10_04
+PAPER_EVIDENCE != IMPLEMENTATION != TESTED_RUNTIME
+```
