@@ -564,6 +564,18 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 - Use: Daily Research Chunk (Collaboration System)
 - Verification boundary: Verified from LaTeX Source
 
+
+## S57 — Consensus and Factual Dynamics in Large Populations of Interacting Language Models
+- Type: `E4_PREPRINT`
+- Identifier: arxiv-2609.39211v1
+- Version date: 2026-09-30
+- Authors: Emanuele Ricco, Elia Onofri, Vincenzo Sammartino, Roberto Di Pietro
+- URL: http://arxiv.org/abs/2609.39211v1
+- Use: Daily Research Chunk (Collaboration System)
+- Reason for selection: Provides a rigorous study on how consensus dynamics decouple from factual correctness in LLM populations, directly informing decentralized multi-agent topologies.
+- Actually extracted paragraphs or formulas: Extracted the whitened spin projection mechanism and the equations for Semantic Magnetisation $\mathbf{m}(t) = \frac{1}{N_a}\sum_{i=1}^{N_a}\mathbf{s}_i(t)$ and Semantic Cohesion $\bar{c}(t) = \frac{2}{N_a(N_a-1)}\sum_{i<j}\mathbf{s}_i(t)\cdot\mathbf{s}_j(t)$.
+- Verification boundary: Verified from LaTeX Source
+
 ## 2026-09-23 dual-view annotation for S52
 
 ### View 1 — N-1 / 2026-09-22 source-entry calibration

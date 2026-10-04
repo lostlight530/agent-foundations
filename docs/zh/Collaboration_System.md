@@ -2608,3 +2608,27 @@ $$
 - **Bilingual Content:** Included.
 - **Paper Evidence Status:** PAPER_ONLY.
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
+
+
+### 4.2 语义共识与事实动态 (arXiv:2609.39211v1)
+
+- **Technical Point (技术点):** 语义共识与事实动态
+- **System Container (所属系统):** Collaboration System
+- **Frontier Source (前沿来源):** [Consensus and Factual Dynamics in Large Populations of Interacting Language Models](http://arxiv.org/abs/2609.39211v1)
+- **Original Problem (论文原始问题):** 如何在消除原始嵌入各向异性偏差的前提下，衡量 LLM 智能体群体中真实的语义对齐度，并将事实正确性作为独立于“单纯同意”的维度进行追踪。
+- **Core Assumptions (核心假设):** 原始嵌入空间存在内在的正余弦相似度偏差，可通过白化处理予以修正。智能体排列在特定的几何结构中（从一维环到平均场图），在没有权威约束的情况下进行迭代对话交互。
+- **Mathematical Mechanism (数学机制):**
+  *白化自旋投影:* 每个智能体的嵌入 $\mathbf{e}$ 转化为各向同性状态空间: $\mathbf{s} = \tilde{\mathbf{e}} \,/\, \lVert\tilde{\mathbf{e}}\rVert$, 其中 $\tilde{\mathbf{e}} = (\mathbf{e} - \boldsymbol\mu)\oslash\boldsymbol\varsigma$。
+  *语义磁化率 (Semantic Magnetisation):* $\mathbf{m}(t) = \frac{1}{N_a}\sum_{i=1}^{N_a}\mathbf{s}_i(t)$ 以及序参量 $m(t) = \lVert \mathbf{m}(t)\rVert \in [0,1]$。
+  *语义内聚度 (Semantic Cohesion):* $\bar{c}(t) = \frac{2}{N_a(N_a-1)}\sum_{i<j}\mathbf{s}_i(t)\cdot\mathbf{s}_j(t)$。
+- **Convergence or behavior boundaries (收敛或行为边界):** 共识 ($m \to 1$) 是由交互几何决定的近乎普遍的结果（连通性越高，收敛越快）。然而，共识在单纯的语义轴上是简并的：集体纠错 ($\rho \to 0$) 和群体幻觉 ($\rho \to 1$) 都会产生相同的极高内聚度 $\bar{c} \approx 1$。
+- **Applicability Scope (适用范围):** 在固定网络拓扑下，智能体通过迭代分享基于文本的回答的多 LLM 系统。
+- **Limitations (局限):** 该动态规律是经验性的，尚未对所有模型提供严格分析证明。采样温度参数 $T$ 仅在交互前起作用，且对事实结果不是单调的控制变量。
+- **Agent Architecture Mapping (Agent 架构映射):** 可以概念上支持在协作 LLM 群体中独立追踪共识（一致性）和事实正确性（落地依据）的机制，防止系统天真地假设群体一致即代表事实真相。
+- **Repository Implementation Status (仓库实现状态):** NOT_IMPLEMENTED
+- **Beginner Analogy (初学者类比):** 想象一个房间里的人在解谜。如果他们互相讨论得足够久，最终所有人都会达成同一个答案（高共识）。但大家意见一致并不代表答案就是对的——他们可能互相说服，陷入了同一个错误（群体幻觉）。这里的数学机制分别测量了大家的“箭头”有多整齐（共识）以及这些“箭头”是否真的指向了正确靶心（事实性）。
+- **Evidence Status (证据状态):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
