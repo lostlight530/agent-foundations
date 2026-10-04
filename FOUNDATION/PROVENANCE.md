@@ -11,7 +11,7 @@
 
 # Reproducibility and Provenance / 可复现性与溯源
 
-Current calibration: 2026-09-17
+Current calibration: 2026-10-04
 
 This file defines public source, version, claim-surface, temporal, correction, producer, software-publication, and AI-assistance provenance for the Agent Foundations documentary core.
 
@@ -187,3 +187,32 @@ Target revision-matched validation object:
 `GIT_REVISION + ENVIRONMENT + COMMAND + INPUT/FIXTURE + RESULT + UNTESTED_BOUNDARY`.
 
 These objects are intentionally distinct and must not inherit authority from one another.
+
+
+## 2026-10-04 special provenance closeout — S57 / AF-COLLAB-006
+
+Current provenance object:
+
+- Canonical source identity: `S57`.
+- Base source identity: `arXiv:2609.39211`.
+- Cited version: `v1`.
+- Version date retained by the registry: `2026-09-30`.
+- Strongest checked source surface retained by the Daily research record: LaTeX source.
+- Durable claim object: `AF-COLLAB-006`.
+- Claim scope: consensus/agreement and factual correctness remain separate evaluation axes within the cited source's bounded setting.
+- Repository implementation state: `REFERENCE_ONLY`.
+- Repository validation state: `NOT_TESTED`.
+- Independent reproduction: `NOT_PERFORMED`.
+- Repository validator execution for this special closeout: `NOT_EXECUTED`.
+
+The Daily research event, Weekly documentary cascade, canonical source registration and verified-core claim admission are distinct events.
+
+```text
+DAILY_RESEARCH_EVENT
+!= SOURCE_IDENTITY
+!= VERIFIED_CORE_CLAIM
+!= IMPLEMENTATION
+!= VALIDATION_EXECUTION
+```
+
+The source version/date and claim admission are current documentary provenance. They do not retroactively change the 2026-10-04 Daily producer event or imply that the Daily producer executed repository validation.
