@@ -44,8 +44,6 @@ In cooperative multi-agent systems, standard policy gradients treat all agents i
 - **Tabular Expressions:** Convergence bounds are established assuming tabular representations for policies and value functions.
 - **Local Observability:** Agents can only observe their local state and communicate with their immediate neighbors in the topology.
 
-
-
 ### Bounds and Convergence
 - **Convergence Guarantees:** Under tabular expressions and specific topological conditions (Erdős–Rényi), the decentralized policy gradient converges to a stationary point of the true objective.
 - **Topological Bottleneck:** The rate of convergence is bounded by the spectral properties (algebraic connectivity) of the communication graph.
@@ -63,6 +61,296 @@ In cooperative multi-agent systems, standard policy gradients treat all agents i
 Imagine a large corporation trying to launch a new product. If every employee tries to talk to everyone else (all-to-all communication), it's chaos. If they only listen to the CEO (centralized), local context is lost.
 TAPE suggests a structure where employees only communicate with their direct team members and adjacent departments (their "topology"). By learning to value the input from these specific neighbors, each department can adjust its strategy locally. The math proves that if the organizational chart is connected well enough, these local adjustments will eventually lead the entire company to a coordinated, optimal product launch without needing a central boss to micromanage every detail.
 
+## Discretized Distributed Optimization over Dynamic Digraphs
+- **System Container:** Collaboration System
+- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
+  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+  - **Publication Date:** 2023-11-14
+  - **URL:** https://arxiv.org/abs/2311.07939
+
+#### 1. The Original Problem
+The paper addresses the challenge of distributed optimization over time-varying directed graphs where link failures or switching topologies disrupt the bi-stochasticity of network weight matrices, a property required by most existing algorithms. It proposes a discretized model that eliminates the need for real-time weight redesign under link removals.
+
+#### 2. Mathematical Mechanism
+The core mechanism involves continuous-time and discretized networked dynamics with gradient tracking over weight-balanced (rather than bi-stochastic) digraphs.
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
+  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
+
+#### 3. Core Assumptions
+- **Cost Function:** The local cost functions $f_i$ are smooth, strictly convex, and have locally Lipschitz gradients.
+- **Network Connectivity:** The graph $\mc{G}$ is directed and strongly connected at every time $t$. The link weights are positive and strictly less than $1$.
+- **Weight-Balanced Design:** The weighted adjacency matrices $W$ and $A$ are weight-balanced rather than strictly bi-stochastic (i.e., row sums equal column sums, but not necessarily 1).
+
+#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+The framework guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced. The step-size $\alpha$ is bounded as:
+$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
+
+#### 5. Applicability & Scope
+The framework is applicable to dynamic networks experiencing link drops or switching topologies, guaranteeing convergence as long as the underlying graph remains strongly connected and weight-balanced at all times.
+
+#### 6. Theoretical Limitations
+The convergence guarantees rely strictly on the local cost functions being strictly convex and the network remaining strongly connected with weight-balanced matrices at every time instant. If these connectivity or balanced conditions fail momentarily, the bounds may not hold.
+
+#### 7. Architecture Mapping
+- **Mapping Status:** CONCEPTUAL_MAPPING
+- **Explanation:** The weight-balanced, gradient-tracking mechanism conceptually maps to decentralized learning and optimization protocols within a multi-agent system where agent connections drop dynamically. It informs the design of resilient update mechanisms that do not require perfect bi-stochastic synchronization after every topology change.
+
+#### 8. Evidence & Status
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 9. Beginner's Analogy
+Imagine a group of friends trying to agree on the exact center of a city by averaging their individual map locations. They can only communicate by calling a few specific friends (directed graph). Usually, if a phone line drops, everyone has to perfectly re-adjust how much they trust everyone else to ensure their averages don't drift (bi-stochastic redesign). This algorithm works differently: as long as everyone still receives as much information as they send out overall (weight-balanced), they can keep updating their estimates without needing a complete recalculation every time a call drops.
+
+## Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions
+- **System Container:** Collaboration System
+- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
+  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+  - **Publication Date:** 2024-03-26
+  - **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** Legitimate agents in an undirected network must reach consensus when subjected to intermittent faulty or malicious transmissions, where constant-threshold trust models fail to detect intermittent Byzantine activity.
+- **Core Assumptions:**
+  - Identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions ($d - c_j > 0$).
+  - The underlying legitimate graph remains continuously connected across time.
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Misclassification Probability Bound):
+    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
+- **Convergence or Behavior Bound:** Legitimate agents almost surely determine their trusted neighborhood correctly with geometrically decaying misclassification probabilities, guaranteeing consensus even in the presence of malicious agents.
+- **Applicability Scope:** Resilient multi-agent coordination scenarios (like federated learning or distributed fleet control) requiring consensus under unreliable or actively compromised transmission environments.
+- **Limitations:** The bounding relies heavily on the explicit expectation gap ($d - c_j > 0$) being bounded away from zero, failing if malicious nodes accurately mimic the baseline trust distribution.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of friends trying to decide where to eat (consensus). Some people in the group are secretly trying to ruin the plans by shouting random, bad ideas at random times (intermittent attacks). Standard filtering fails because the bad actors act normal most of the time. This system introduces a sliding trust window: if someone occasionally throws a wrench in the plans, their trust score geometrically decays over time, ensuring the friends only listen to the reliable ones and eventually make a decision.
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## Collusion in Self-Play Q-learning
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
+- **Original Problem:** Uncoordinated learning in multi-agent environments like the Iterated Prisoner's Dilemma often fails to achieve mutual cooperation, but empirical evidence shows self-play Q-learners can unexpectedly collude. Understanding the mathematical mechanism behind this convergence is necessary for predictable multi-agent training.
+- **Core Assumptions:**
+  - Agents employ self-play $\epsilon$-greedy Q-learning.
+  - The game is the Iterated Prisoner's Dilemma (IPD) with standard payoff structures favoring defection.
+- **Mathematical Mechanism:**
+  - **Core Update Formula:** The algorithm converges toward cooperative states through a sequence of phase transitions driven by Q-value updates. In the initial phase, the convergence of the defect action Q-value is bounded by $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$.
+- **Convergence Bound:**
+  - The convergence of the Q-values is linear in each phase, achieving convergence in $\bigo(1/\alpha)$ steps per phase, eventually guaranteeing convergence to a cooperative Pavlov-like policy under specific initialization bounds.
+- **Applicability Scope:** Independent multi-agent reinforcement learning (MARL) in general-sum games, where agents update local value functions without central coordination.
+- **Limitations:** The proof heavily relies on optimistic initialization and specific bounds on the learning rate and discount factor; it does not generalize to arbitrary adversarial general-sum games without the IPD payoff structure.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- Can conceptually support independent multi-agent self-play mechanisms where cooperative equilibria can be fostered purely through decentralized value updates and optimistic initialization, rather than explicit coordination protocols.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine two rival businesses setting prices without communicating. Normally, they both slash prices (defect) to steal customers, hurting both profits. However, if they both start out wildly optimistic about how much money they can make (optimistic initialization), their learning algorithms slowly realize that punishing the other's price cut while rewarding price matching eventually leads them to implicitly collude and keep prices high (cooperate).
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## Semantic Fusion: slice-scoped bisimulation for decentralized coordination — 2026-09-21
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
+- **Authors:** Sofiya Zaichyk
+- **URL:** https://arxiv.org/abs/2601.12580
+- **Version:** arXiv:2601.12580v1
+- **Publication Date:** 2026-01-18
+- **Source Surface Checked:** official arXiv abstract and HTML full text
+- **Check Date:** 2026-09-21
+- **Theoretical Selection Reason:** The paper gives explicit formal conditions under which decentralized agents can maintain scoped semantic state while relating local execution to a projected global semantics. It therefore supplies a bounded coordination mechanism rather than a benchmark-only improvement
+
+### Original problem
+
+Decentralized agents may hold only partial semantic views and operate asynchronously. The paper asks when local state evolution can remain coherent with a global semantic model without requiring centralized control, global synchronization, or unrestricted message passing
+
+### Core assumptions
+
+For the deterministic slice/global stuttering-bisimulation result, the paper requires:
+
+1. **Slice-scoped validation:** every integrated update is ontology-valid and affects only the authoring agent's slice
+2. **Reliable refresh propagation:** every slice-relevant update eventually reaches each interested agent
+3. **Deterministic merge with no reordering:** retrieved updates are merged exactly once in commit order
+
+These assumptions are part of the theorem boundary, not implementation facts about this repository
+
+### Mathematical mechanism
+
+For agent (a), the paper relates local memory (M_a(t)) to a projected global memory through a stuttering-bisimulation relation:
+
+$$
+\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
+$$
+
+so the local transition system is stuttering-bisimilar to the global execution projected onto the agent's ontology slice
+
+The paper also bounds communication for a validated update by the number (d) of agents whose semantic slices intersect the updated entities:
+
+$$
+\mathrm{Communication\ Cost}=O(d)
+$$
+
+This is a scoped communication bound, not a claim that total system cost is independent of all other implementation overhead
+
+### Convergence or behavior boundaries
+
+- Under the theorem assumptions, local slice execution can be related to projected global behavior by stuttering bisimulation
+- Ontology-external updates are causally isolated from an agent whose slice does not intersect those entities
+- The paper reports a 250-agent simulation with 11,325 updates as author-run validation of its formal model
+- Author-run simulation is not independent reproduction by this repository
+- The formal results do not establish correctness for arbitrary LLM-agent semantics, arbitrary ontology evolution, unreliable refresh outside the stated model, or this repository's runtime behavior
+
+### Applicability scope
+
+The mechanism is relevant to decentralized multi-agent systems with explicit semantic slices, structured update validation, inspectable state transitions, and bounded propagation rules
+
+### Limitations
+
+- The deterministic bisimulation result depends on reliable delivery of slice-relevant updates and deterministic ordering assumptions
+- Correct ontology design and validation are assumed rather than solved universally
+- The paper's formal semantics and reference architecture are external evidence
+- No local Collaboration runtime implements Semantic Fusion in Agent Foundations
+
+### Agent architecture mapping
+
+- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
+- **Current Mapping State:** `DESIGN_ANALOGY`
+- **Repository Implementation State:** `NOT_IMPLEMENTED`
+- **Repository Validation State:** `NOT_TESTED`
+
+A useful design analogy is to treat collaboration state as scoped, typed, and locally validated rather than assuming that every agent must inherit one global mutable context. The analogy does not establish that the repository already implements ontology slices, refresh propagation, or bisimulation checking
+
+### Beginner analogy
+
+Imagine several emergency teams sharing one evolving city map. Each team sees only the districts relevant to its job. A map change is accepted only if it follows the agreed map rules, and only teams whose districts are affected need to refresh. The theorem is closer to proving that each team's permitted local map can stay behaviorally aligned with the relevant part of the global map under specific delivery and ordering assumptions; it is not proof that any arbitrary group chat will remain consistent
+
+### Evidence status
+
+- **Evidence Level:** `E4_PREPRINT`
+- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
+- **Independent Reproduction:** `NO`
+- **Verified-Core Admission:** `NOT_PERFORMED`
+- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
+
+## 理论点 33 (Theoretical Point 33)
+
+- **技术点名称 (Technology Point Name):** Agent Topology for Cooperative Multi-Agent Policy Gradient
+- **System Container:** Collaboration System
+- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
+  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+  - **URL:** https://arxiv.org/abs/2312.15667
+  - **Version:** arXiv:2312.15667v3
+  - **v1 Date:** 2023-12-25
+  - **v3 Date:** 2024-01-15
+  - **Check Date:** 2026-09-24
+- **论文原始问题 (Original Paper Problem):** Centralized critics can transmit the effect of one agent's sub-optimal or exploratory action into other agents' policy updates (the centralized-decentralized mismatch, CDM), while fully individual critics reduce that interference at the cost of cooperation. TAPE studies a middle ground in which policy updates use utilities from a topology-defined coalition.
+- **核心假设 (Core Assumptions):**
+  - The paper models the cooperative task as a Dec-POMDP.
+  - TAPE's agent topology encodes **relationships among policy updates**: if edge \(e_{ij}\) exists, agent \(i\) considers agent \(j\)'s utility in its update. It is explicitly **not** the test-time communication network.
+  - The only general topology constraint stated in the framework is self-consideration, \(e_{ii}\in\mathcal{E}\) for every agent. The paper says the topology may otherwise be arbitrary.
+  - Theorem 1's stochastic policy-improvement result is stated for tabular policies and sufficiently small updates.
+- **数学机制 (Mathematical Mechanism):**
+  - Coalition utility for agent \(i\): \(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\).
+  - Stochastic TAPE update:
+    \[
+    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
+    \]
+  - This is the paper's topology-conditioned coalition-utility policy-gradient mechanism; it is not a generic neighborhood-Q formula invented by this repository.
+- **收敛或行为边界 (Convergence or Behavior Boundaries):**
+  - Under Theorem 1's tabular-policy and sufficiently-small-update conditions, the stochastic TAPE update monotonically improves the paper's joint objective \(J(\boldsymbol{\pi})\).
+  - The paper separately analyzes update diversity for Erdős–Rényi (ER) topology; Theorem 2 relates the variance gap to the ER edge probability by \(\Delta\propto p^2\).
+  - ER is one graph model studied and used in experiments; it is **not** a universal topology prerequisite for Theorem 1.
+- **适用范围 (Scope of Application):** Cooperative multi-agent reinforcement learning where coalition-scoped utility in policy updates is a meaningful way to trade off cooperation against CDM. The result does not establish a general decentralized communication protocol.
+- **局限 (Limitations):** The policy-improvement theorem is assumption-bound; the paper's topology is not evidence of test-time communication behavior; theorem/experiment results do not establish performance under arbitrary dynamic topology, arbitrary function approximation, or an Agent Foundations runtime.
+- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING. A bounded design analogy is to make the set of peer utilities influencing an update explicit and inspectable. This is not a repository requirement, deployed coordination protocol, or proof that sparse neighborhoods are always preferable.
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** A project team can decide whose feedback should affect a particular member's performance update. Listening to everyone can spread unrelated mistakes; listening to nobody prevents cooperation. TAPE formalizes a selected coalition of peers whose utilities enter the update, without claiming that those same links are the team's communication network.
+- **中英文内容 (Bilingual Content):** ALIGNED
+- **证据状态 (Evidence Status):**
+  - Canonical Source: S40
+  - Source Revisit: YES
+  - New Independent Source Support: NO
+  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+  - Verified-Core Admission: NOT_PERFORMED
+- **2026-09-24 Correction / Reconciliation:** Earlier TAPE prose in this generated document used stronger language that conflated policy-update topology with communication topology and paired v3 with the v1 date. That historical wording is retained as point-in-time generated research, but the current source interpretation is the bounded version above.
+
+## Epistemic-Probabilistic Guarded Coordination
+
+- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
+- **Original Problem:** LLM-based multi-agent systems often lack explicit representations of social knowledge and protocol-governed coordination, generating fluent actions that are not necessarily licensed by the agent's information state or interaction protocols.
+- **Core Assumptions:** Relies on an execution process adapted to a filtration $\mathcal{F}_t$, a ranking function $\rho$ mapping to bounded states $B$, and strict state constraints where the policy selects a permitted call at non-goal states with a minimum probability bound of $\varepsilon > 0$.
+- **Mathematical Mechanism:** Mathematical Updates and Bound Verification:
+  核心更新公式 (Guard predicate definition):
+  ```latex
+  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
+  ```
+- **Convergence or behavior boundaries:** The system provides conditional ranking progress bounded by the expected hitting time to the goal set $G$: $\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$.
+- **Applicability:** Multi-agent architectures that require protocol-compliant collaboration and neuro-symbolic boundaries where a symbolic core restricts potentially uncertain LLM actions.
+- **Limitations:** Bound theorems rely exclusively on theoretical non-goal wait-times dominating a geometric random variable and crisp epistemic states. General implementation outside a restricted knowledge fragment lacks practical guarantees.
+- **Agent Architecture Mapping:** Can conceptually inform a decoupled policy-guard layer in multi-agent routing where generation actions are separated from a deterministic permission engine.
+- **Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine an organization where employees (LLMs) propose creative ideas, but before any idea is actioned, an unbending compliance officer (the Guard) checks an immutable rulebook to authorize it. No matter how convincingly an idea is presented, if it violates the written rules, the officer silently rejects it and returns a diagnostic slip.
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+
+## Topology-based multi-Agent Policy gradiEnt (TAPE)
+
+- **Technical Point:** Topology-based multi-Agent Policy gradiEnt (TAPE)
+- **System Container:** Collaboration System
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **Version Identity:** arXiv v1 submitted 2023-12-25; v3 revised 2024-01-15. The repository mapping refers to v3 and does not silently substitute a later revision.
+- **Original Problem:** Existing multi-agent policy gradient (MAPG) methods suffer from the Centralized-Decentralized Mismatch (CDM) issue where a sub-optimal action of one agent can improperly affect the parameter updates of other agents, limiting robust cooperation.
+- **Core Assumptions:** Cooperative multi-agent reinforcement learning (MARL), where policies can be parameterized (e.g., neural networks), and agents form an agent topology (such as Erdős-Rényi random graphs) restricting communication to coalition members.
+- **Mathematical Mechanism:**
+  Stochastic TAPE proposes a topology-based policy gradient based on Coalition Utility. The policy gradient for agent $i$ is:
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
+  which translates to:
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
+  where $E_{ij}$ is the adjacency matrix representing the agent topology.
+- **Convergence or behavior boundaries:**
+  Theorem 1 demonstrates a stochastic TAPE policy improvement: For any pre-update policy $\bm{\pi}$ and updated policy $\hat{\bm{\pi}}$ with sufficiently small step sizes, the joint policy is monotonically improved: $J(\hat{\bm{\pi}})\geq J(\bm{\pi})$. Theorem 2 shows that stochastic TAPE maintains higher variance in policy updates compared to standard DOP, allowing for better exploration of the parameter space (variance difference proportional to $p^2$).
+- **Applicability Scope:** Cooperative multi-agent environments needing diverse cooperation patterns and robustness against localized sub-optimal actions, particularly in games like SMAC or Level-Based Foraging.
+- **Limitations:** Large edge probabilities $p$ in the Erdős-Rényi topology can re-introduce the CDM issue, requiring a balanced hyperparameter $p$. Bounding relies on sufficiently small step size $\delta$.
+- **Agent Architecture Mapping:** Can conceptually support modular collaboration graphs in LLM multi-agent networks, where agents only influence the gradients/updates of directly connected peers, avoiding system-wide failure cascades from a single bad actor.
+- **Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of workers building a house. If everyone listens to everyone else (fully connected), one person shouting a bad idea distracts the whole team (CDM issue). With TAPE, workers only listen to their immediate local team (their coalition or topology). This prevents bad ideas from spreading everywhere at once, while still allowing the teams to collectively figure out the best way to build the house.
+
+## Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
+- **Original Problem:** Strict symmetry is rarely satisfied in real-world multi-agent applications, rendering existing symmetry-based data augmentation techniques brittle when applied to partially symmetric environments, leading to accumulated performance errors.
+- **Core Assumptions:** The environment is formulated as a Partially Symmetric Markov Game $\mathcal{M}_g$ satisfying bounded reward variations $|R(s, a) - R(gs, ga)| \leq \epsilon$ and partial transition invariance under Maximum Mean Discrepancy (MMD) bounded by $\delta$.
+- **Mathematical Mechanism:**
+  核心更新公式 (Core Update Formula)
+  An adaptive tuning coefficient dictates the probability of using symmetry-augmented data or weighting symmetry constraints, which decays over time:
+  $$
+  \lambda (D,k) = D e^{-\beta k}
+  $$
+  where $D$ represents the degree of symmetry and $\beta$ is the decay rate over $k$ iterations.
+- **Convergence or behavior boundaries:**
+  收敛界 (Convergence Bound)
+  For the Partially Symmetric Markov game, the performance error introduced by incorporating symmetry samples is bounded:
+  $$
+  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
+  $$
+- **Applicability:** Decentralized or partially symmetric multi-agent networks where agents share similar but not completely identical transition and reward structures.
+- **Limitations:** The theoretical error bounds require specific hyperparameter tuning for decay rates ($\beta$) to balance the early exploration speedup against later state-specific exploitation.
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. The bounded partial symmetry concept can guide the collaboration system's state-sharing and data augmentation protocols across similar but distinct agent roles.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
+- **Repository Test Status:** NOT_TESTED.
+- **Beginner Analogy:** Imagine teaching two slightly different robots to navigate a maze. While they aren't identical twins (perfect symmetry), they are similar enough that one robot can initially learn from the other's mistakes. However, as they get closer to mastering the maze, they need to rely more on their own specific sensors and less on their partner's generic advice to avoid making small but critical errors.
+- **Bilingual Content:** Included.
+- **Paper Evidence Status:** PAPER_ONLY.
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
 
 ## Weekly Document Cascade & Conflict Audit
 
@@ -495,8 +783,6 @@ Implementation Status: No repository implementation exists. This is a conceptual
 The algorithm introduces a topology-aware policy gradient approach where each agent $i$'s policy update relies on messages from its neighbors $\mathcal{N}_i$. The objective function $J(\pi)$ is maximized using a decentralized gradient:
 $$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
 where $Q^{\pi}_{i}$ is a local action-value function conditioned on the messages $m_{\mathcal{N}_i}$ received from neighboring agents in the topology graph.
-
-
 
 ### Weaved Integrations
 
@@ -2318,7 +2604,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **For Beginners: Practical Analogy:** Imagine a massive restaurant kitchen with 20 chefs. Instead of forcing all 20 to agree on every single dish simultaneously (which takes forever), they are divided into small, overlapping teams based on the menu. Each team optimizes their own local recipes. This mathematically bounds how badly the kitchen can fail, ensuring worst-case efficiency as long as the teams remain relatively independent (sparse).
 - **Evidence Status:** PAPER_ONLY
 
-
 ### Replication-proof Bandit Mechanism Design with Bayesian Agents
 - **System Container:** Collaboration System
 - **Frontier Source:** S41 (arXiv:2312.16896v2, *Replication-proof Bandit Mechanism Design with Bayesian Agents*)
@@ -2337,7 +2622,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine multiple chefs submitting secret recipes to a restaurant's menu. If the restaurant uses a standard tasting algorithm (like UCB), a sneaky chef might submit the same average recipe 100 times under different names just to increase the chance it gets picked. The Hierarchical ETC algorithm fixes this by first randomly picking a chef, and then evaluating their recipes. The chefs quickly realize that submitting duplicates doesn't increase their chance of being picked as the chef, it just wastes their own evaluation time.
-
 
 ### Convergence in Markov Coevolutionary Opinion Formation
 
@@ -2364,7 +2648,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Beginner Analogy:** Imagine a group of people forming opinions where who talks to whom (the social network) randomly changes based on what they currently believe. This usually leads to endless chaos. However, if everyone updates their opinions optimistically (assuming others won't change drastically), they can eventually reach a roughly stable state (an approximate equilibrium) where no one drastically changes their mind anymore.
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 
-<!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
@@ -2377,96 +2660,6 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Discretized Distributed Optimization over Dynamic Digraphs
-- **System Container:** Collaboration System
-- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
-  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
-  - **Publication Date:** 2023-11-14
-  - **URL:** https://arxiv.org/abs/2311.07939
-
-#### 1. The Original Problem
-The paper addresses the challenge of distributed optimization over time-varying directed graphs where link failures or switching topologies disrupt the bi-stochasticity of network weight matrices, a property required by most existing algorithms. It proposes a discretized model that eliminates the need for real-time weight redesign under link removals.
-
-#### 2. Mathematical Mechanism
-The core mechanism involves continuous-time and discretized networked dynamics with gradient tracking over weight-balanced (rather than bi-stochastic) digraphs.
-- **数学更新规则 (Mathematical Update Rule):**
-  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
-  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
-- **数学更新规则 (Mathematical Update Rule):**
-  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
-
-#### 3. Core Assumptions
-- **Cost Function:** The local cost functions $f_i$ are smooth, strictly convex, and have locally Lipschitz gradients.
-- **Network Connectivity:** The graph $\mc{G}$ is directed and strongly connected at every time $t$. The link weights are positive and strictly less than $1$.
-- **Weight-Balanced Design:** The weighted adjacency matrices $W$ and $A$ are weight-balanced rather than strictly bi-stochastic (i.e., row sums equal column sums, but not necessarily 1).
-
-#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
-The framework guarantees dynamically convergent optimization assuming the underlying dynamic network topology remains weight-symmetric and balanced. The step-size $\alpha$ is bounded as:
-$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
-
-#### 5. Applicability & Scope
-The framework is applicable to dynamic networks experiencing link drops or switching topologies, guaranteeing convergence as long as the underlying graph remains strongly connected and weight-balanced at all times.
-
-#### 6. Theoretical Limitations
-The convergence guarantees rely strictly on the local cost functions being strictly convex and the network remaining strongly connected with weight-balanced matrices at every time instant. If these connectivity or balanced conditions fail momentarily, the bounds may not hold.
-
-#### 7. Architecture Mapping
-- **Mapping Status:** CONCEPTUAL_MAPPING
-- **Explanation:** The weight-balanced, gradient-tracking mechanism conceptually maps to decentralized learning and optimization protocols within a multi-agent system where agent connections drop dynamically. It informs the design of resilient update mechanisms that do not require perfect bi-stochastic synchronization after every topology change.
-
-#### 8. Evidence & Status
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-#### 9. Beginner's Analogy
-Imagine a group of friends trying to agree on the exact center of a city by averaging their individual map locations. They can only communicate by calling a few specific friends (directed graph). Usually, if a phone line drops, everyone has to perfectly re-adjust how much they trust everyone else to ensure their averages don't drift (bi-stochastic redesign). This algorithm works differently: as long as everyone still receives as much information as they send out overall (weight-balanced), they can keep updating their estimates without needing a complete recalculation every time a call drops.
-
-### Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions
-- **System Container:** Collaboration System
-- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
-  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
-  - **Publication Date:** 2024-03-26
-  - **URL:** https://arxiv.org/abs/2403.17907
-- **Original Problem:** Legitimate agents in an undirected network must reach consensus when subjected to intermittent faulty or malicious transmissions, where constant-threshold trust models fail to detect intermittent Byzantine activity.
-- **Core Assumptions:**
-  - Identical expected trust of legitimate transmissions, which are strictly higher than expected trust of malicious transmissions ($d - c_j > 0$).
-  - The underlying legitimate graph remains continuously connected across time.
-- **Mathematical Mechanism:**
-  - **核心更新公式** (Misclassification Probability Bound):
-    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
-- **Convergence or Behavior Bound:** Legitimate agents almost surely determine their trusted neighborhood correctly with geometrically decaying misclassification probabilities, guaranteeing consensus even in the presence of malicious agents.
-- **Applicability Scope:** Resilient multi-agent coordination scenarios (like federated learning or distributed fleet control) requiring consensus under unreliable or actively compromised transmission environments.
-- **Limitations:** The bounding relies heavily on the explicit expectation gap ($d - c_j > 0$) being bounded away from zero, failing if malicious nodes accurately mimic the baseline trust distribution.
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a group of friends trying to decide where to eat (consensus). Some people in the group are secretly trying to ruin the plans by shouting random, bad ideas at random times (intermittent attacks). Standard filtering fails because the bad actors act normal most of the time. This system introduces a sliding trust window: if someone occasionally throws a wrench in the plans, their trust score geometrically decays over time, ensuring the friends only listen to the reliable ones and eventually make a decision.
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-
-### Collusion in Self-Play Q-learning
-
-- **System Container:** Collaboration System
-- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
-- **Original Problem:** Uncoordinated learning in multi-agent environments like the Iterated Prisoner's Dilemma often fails to achieve mutual cooperation, but empirical evidence shows self-play Q-learners can unexpectedly collude. Understanding the mathematical mechanism behind this convergence is necessary for predictable multi-agent training.
-- **Core Assumptions:**
-  - Agents employ self-play $\epsilon$-greedy Q-learning.
-  - The game is the Iterated Prisoner's Dilemma (IPD) with standard payoff structures favoring defection.
-- **Mathematical Mechanism:**
-  - **Core Update Formula:** The algorithm converges toward cooperative states through a sequence of phase transitions driven by Q-value updates. In the initial phase, the convergence of the defect action Q-value is bounded by $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$.
-- **Convergence Bound:**
-  - The convergence of the Q-values is linear in each phase, achieving convergence in $\bigo(1/\alpha)$ steps per phase, eventually guaranteeing convergence to a cooperative Pavlov-like policy under specific initialization bounds.
-- **Applicability Scope:** Independent multi-agent reinforcement learning (MARL) in general-sum games, where agents update local value functions without central coordination.
-- **Limitations:** The proof heavily relies on optimistic initialization and specific bounds on the learning rate and discount factor; it does not generalize to arbitrary adversarial general-sum games without the IPD payoff structure.
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
-- Can conceptually support independent multi-agent self-play mechanisms where cooperative equilibria can be fostered purely through decentralized value updates and optimistic initialization, rather than explicit coordination protocols.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine two rival businesses setting prices without communicating. Normally, they both slash prices (defect) to steal customers, hurting both profits. However, if they both start out wildly optimistic about how much money they can make (optimistic initialization), their learning algorithms slowly realize that punishing the other's price cut while rewarding price matching eventually leads them to implicitly collude and keep prices high (cooperate).
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 
 ## Maintenance note — 2026-09-19 / September 14–18 cadence
 
@@ -2489,7 +2682,6 @@ Current aggregation rules:
 `PAPER_EVIDENCE != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION`
 
 September 2026 remains an open natural month; this note does not create or imply a final Monthly Strategic Blueprint.
-
 
 ## W38 Current Weekly Cascade — 2026-09-20
 
@@ -2567,207 +2759,14 @@ NO_RUNTIME_PROMOTION
 MONTH_OPEN
 ```
 
-## Semantic Fusion: slice-scoped bisimulation for decentralized coordination — 2026-09-21
-
-- **System Container:** Collaboration System
-- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
-- **Authors:** Sofiya Zaichyk
-- **URL:** https://arxiv.org/abs/2601.12580
-- **Version:** arXiv:2601.12580v1
-- **Publication Date:** 2026-01-18
-- **Source Surface Checked:** official arXiv abstract and HTML full text
-- **Check Date:** 2026-09-21
-- **Theoretical Selection Reason:** The paper gives explicit formal conditions under which decentralized agents can maintain scoped semantic state while relating local execution to a projected global semantics. It therefore supplies a bounded coordination mechanism rather than a benchmark-only improvement
-
-### Original problem
-
-Decentralized agents may hold only partial semantic views and operate asynchronously. The paper asks when local state evolution can remain coherent with a global semantic model without requiring centralized control, global synchronization, or unrestricted message passing
-
-### Core assumptions
-
-For the deterministic slice/global stuttering-bisimulation result, the paper requires:
-
-1. **Slice-scoped validation:** every integrated update is ontology-valid and affects only the authoring agent's slice
-2. **Reliable refresh propagation:** every slice-relevant update eventually reaches each interested agent
-3. **Deterministic merge with no reordering:** retrieved updates are merged exactly once in commit order
-
-These assumptions are part of the theorem boundary, not implementation facts about this repository
-
-### Mathematical mechanism
-
-For agent (a), the paper relates local memory (M_a(t)) to a projected global memory through a stuttering-bisimulation relation:
-
-$$
-\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
-$$
-
-so the local transition system is stuttering-bisimilar to the global execution projected onto the agent's ontology slice
-
-The paper also bounds communication for a validated update by the number (d) of agents whose semantic slices intersect the updated entities:
-
-$$
-\mathrm{Communication\ Cost}=O(d)
-$$
-
-This is a scoped communication bound, not a claim that total system cost is independent of all other implementation overhead
-
-### Convergence or behavior boundaries
-
-- Under the theorem assumptions, local slice execution can be related to projected global behavior by stuttering bisimulation
-- Ontology-external updates are causally isolated from an agent whose slice does not intersect those entities
-- The paper reports a 250-agent simulation with 11,325 updates as author-run validation of its formal model
-- Author-run simulation is not independent reproduction by this repository
-- The formal results do not establish correctness for arbitrary LLM-agent semantics, arbitrary ontology evolution, unreliable refresh outside the stated model, or this repository's runtime behavior
-
-### Applicability scope
-
-The mechanism is relevant to decentralized multi-agent systems with explicit semantic slices, structured update validation, inspectable state transitions, and bounded propagation rules
-
-### Limitations
-
-- The deterministic bisimulation result depends on reliable delivery of slice-relevant updates and deterministic ordering assumptions
-- Correct ontology design and validation are assumed rather than solved universally
-- The paper's formal semantics and reference architecture are external evidence
-- No local Collaboration runtime implements Semantic Fusion in Agent Foundations
-
-### Agent architecture mapping
-
-- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
-- **Current Mapping State:** `DESIGN_ANALOGY`
-- **Repository Implementation State:** `NOT_IMPLEMENTED`
-- **Repository Validation State:** `NOT_TESTED`
-
-A useful design analogy is to treat collaboration state as scoped, typed, and locally validated rather than assuming that every agent must inherit one global mutable context. The analogy does not establish that the repository already implements ontology slices, refresh propagation, or bisimulation checking
-
-### Beginner analogy
-
-Imagine several emergency teams sharing one evolving city map. Each team sees only the districts relevant to its job. A map change is accepted only if it follows the agreed map rules, and only teams whose districts are affected need to refresh. The theorem is closer to proving that each team's permitted local map can stay behaviorally aligned with the relevant part of the global map under specific delivery and ordering assumptions; it is not proof that any arbitrary group chat will remain consistent
-
-### Evidence status
-
-- **Evidence Level:** `E4_PREPRINT`
-- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
-- **Independent Reproduction:** `NO`
-- **Verified-Core Admission:** `NOT_PERFORMED`
-- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
-
-
-
-### 理论点 33 (Theoretical Point 33)
-
-- **技术点名称 (Technology Point Name):** Agent Topology for Cooperative Multi-Agent Policy Gradient
-- **System Container:** Collaboration System
-- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
-  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
-  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
-  - **URL:** https://arxiv.org/abs/2312.15667
-  - **Version:** arXiv:2312.15667v3
-  - **v1 Date:** 2023-12-25
-  - **v3 Date:** 2024-01-15
-  - **Check Date:** 2026-09-24
-- **论文原始问题 (Original Paper Problem):** Centralized critics can transmit the effect of one agent's sub-optimal or exploratory action into other agents' policy updates (the centralized-decentralized mismatch, CDM), while fully individual critics reduce that interference at the cost of cooperation. TAPE studies a middle ground in which policy updates use utilities from a topology-defined coalition.
-- **核心假设 (Core Assumptions):**
-  - The paper models the cooperative task as a Dec-POMDP.
-  - TAPE's agent topology encodes **relationships among policy updates**: if edge \(e_{ij}\) exists, agent \(i\) considers agent \(j\)'s utility in its update. It is explicitly **not** the test-time communication network.
-  - The only general topology constraint stated in the framework is self-consideration, \(e_{ii}\in\mathcal{E}\) for every agent. The paper says the topology may otherwise be arbitrary.
-  - Theorem 1's stochastic policy-improvement result is stated for tabular policies and sufficiently small updates.
-- **数学机制 (Mathematical Mechanism):**
-  - Coalition utility for agent \(i\): \(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\).
-  - Stochastic TAPE update:
-    \[
-    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
-    \]
-  - This is the paper's topology-conditioned coalition-utility policy-gradient mechanism; it is not a generic neighborhood-Q formula invented by this repository.
-- **收敛或行为边界 (Convergence or Behavior Boundaries):**
-  - Under Theorem 1's tabular-policy and sufficiently-small-update conditions, the stochastic TAPE update monotonically improves the paper's joint objective \(J(\boldsymbol{\pi})\).
-  - The paper separately analyzes update diversity for Erdős–Rényi (ER) topology; Theorem 2 relates the variance gap to the ER edge probability by \(\Delta\propto p^2\).
-  - ER is one graph model studied and used in experiments; it is **not** a universal topology prerequisite for Theorem 1.
-- **适用范围 (Scope of Application):** Cooperative multi-agent reinforcement learning where coalition-scoped utility in policy updates is a meaningful way to trade off cooperation against CDM. The result does not establish a general decentralized communication protocol.
-- **局限 (Limitations):** The policy-improvement theorem is assumption-bound; the paper's topology is not evidence of test-time communication behavior; theorem/experiment results do not establish performance under arbitrary dynamic topology, arbitrary function approximation, or an Agent Foundations runtime.
-- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING. A bounded design analogy is to make the set of peer utilities influencing an update explicit and inspectable. This is not a repository requirement, deployed coordination protocol, or proof that sparse neighborhoods are always preferable.
-- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** A project team can decide whose feedback should affect a particular member's performance update. Listening to everyone can spread unrelated mistakes; listening to nobody prevents cooperation. TAPE formalizes a selected coalition of peers whose utilities enter the update, without claiming that those same links are the team's communication network.
-- **中英文内容 (Bilingual Content):** ALIGNED
-- **证据状态 (Evidence Status):**
-  - Canonical Source: S40
-  - Source Revisit: YES
-  - New Independent Source Support: NO
-  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-  - Verified-Core Admission: NOT_PERFORMED
-- **2026-09-24 Correction / Reconciliation:** Earlier TAPE prose in this generated document used stronger language that conflated policy-update topology with communication topology and paired v3 with the v1 date. That historical wording is retained as point-in-time generated research, but the current source interpretation is the bounded version above.
-
-### Epistemic-Probabilistic Guarded Coordination
-
-- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
-- **Original Problem:** LLM-based multi-agent systems often lack explicit representations of social knowledge and protocol-governed coordination, generating fluent actions that are not necessarily licensed by the agent's information state or interaction protocols.
-- **Core Assumptions:** Relies on an execution process adapted to a filtration $\mathcal{F}_t$, a ranking function $\rho$ mapping to bounded states $B$, and strict state constraints where the policy selects a permitted call at non-goal states with a minimum probability bound of $\varepsilon > 0$.
-- **Mathematical Mechanism:** Mathematical Updates and Bound Verification:
-  核心更新公式 (Guard predicate definition):
-  ```latex
-  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
-  ```
-- **Convergence or behavior boundaries:** The system provides conditional ranking progress bounded by the expected hitting time to the goal set $G$: $\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$.
-- **Applicability:** Multi-agent architectures that require protocol-compliant collaboration and neuro-symbolic boundaries where a symbolic core restricts potentially uncertain LLM actions.
-- **Limitations:** Bound theorems rely exclusively on theoretical non-goal wait-times dominating a geometric random variable and crisp epistemic states. General implementation outside a restricted knowledge fragment lacks practical guarantees.
-- **Agent Architecture Mapping:** Can conceptually inform a decoupled policy-guard layer in multi-agent routing where generation actions are separated from a deterministic permission engine.
-- **Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine an organization where employees (LLMs) propose creative ideas, but before any idea is actioned, an unbending compliance officer (the Guard) checks an immutable rulebook to authorize it. No matter how convincingly an idea is presented, if it violates the written rules, the officer silently rejects it and returns a diagnostic slip.
-- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
-
-
-### Topology-based multi-Agent Policy gradiEnt (TAPE)
-
-- **Technical Point:** Topology-based multi-Agent Policy gradiEnt (TAPE)
-- **System Container:** Collaboration System
-- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
-- **Version Identity:** arXiv v1 submitted 2023-12-25; v3 revised 2024-01-15. The repository mapping refers to v3 and does not silently substitute a later revision.
-- **Original Problem:** Existing multi-agent policy gradient (MAPG) methods suffer from the Centralized-Decentralized Mismatch (CDM) issue where a sub-optimal action of one agent can improperly affect the parameter updates of other agents, limiting robust cooperation.
-- **Core Assumptions:** Cooperative multi-agent reinforcement learning (MARL), where policies can be parameterized (e.g., neural networks), and agents form an agent topology (such as Erdős-Rényi random graphs) restricting communication to coalition members.
-- **Mathematical Mechanism:**
-  Stochastic TAPE proposes a topology-based policy gradient based on Coalition Utility. The policy gradient for agent $i$ is:
-  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
-  which translates to:
-  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
-  where $E_{ij}$ is the adjacency matrix representing the agent topology.
-- **Convergence or behavior boundaries:**
-  Theorem 1 demonstrates a stochastic TAPE policy improvement: For any pre-update policy $\bm{\pi}$ and updated policy $\hat{\bm{\pi}}$ with sufficiently small step sizes, the joint policy is monotonically improved: $J(\hat{\bm{\pi}})\geq J(\bm{\pi})$. Theorem 2 shows that stochastic TAPE maintains higher variance in policy updates compared to standard DOP, allowing for better exploration of the parameter space (variance difference proportional to $p^2$).
-- **Applicability Scope:** Cooperative multi-agent environments needing diverse cooperation patterns and robustness against localized sub-optimal actions, particularly in games like SMAC or Level-Based Foraging.
-- **Limitations:** Large edge probabilities $p$ in the Erdős-Rényi topology can re-introduce the CDM issue, requiring a balanced hyperparameter $p$. Bounding relies on sufficiently small step size $\delta$.
-- **Agent Architecture Mapping:** Can conceptually support modular collaboration graphs in LLM multi-agent networks, where agents only influence the gradients/updates of directly connected peers, avoiding system-wide failure cascades from a single bad actor.
-- **Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a group of workers building a house. If everyone listens to everyone else (fully connected), one person shouting a bad idea distracts the whole team (CDM issue). With TAPE, workers only listen to their immediate local team (their coalition or topology). This prevents bad ideas from spreading everywhere at once, while still allowing the teams to collectively figure out the best way to build the house.
-
-### Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning
-
-- **System Container:** Collaboration System
-- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
-- **Original Problem:** Strict symmetry is rarely satisfied in real-world multi-agent applications, rendering existing symmetry-based data augmentation techniques brittle when applied to partially symmetric environments, leading to accumulated performance errors.
-- **Core Assumptions:** The environment is formulated as a Partially Symmetric Markov Game $\mathcal{M}_g$ satisfying bounded reward variations $|R(s, a) - R(gs, ga)| \leq \epsilon$ and partial transition invariance under Maximum Mean Discrepancy (MMD) bounded by $\delta$.
-- **Mathematical Mechanism:**
-  核心更新公式 (Core Update Formula)
-  An adaptive tuning coefficient dictates the probability of using symmetry-augmented data or weighting symmetry constraints, which decays over time:
-  $$
-  \lambda (D,k) = D e^{-\beta k}
-  $$
-  where $D$ represents the degree of symmetry and $\beta$ is the decay rate over $k$ iterations.
-- **Convergence or behavior boundaries:**
-  收敛界 (Convergence Bound)
-  For the Partially Symmetric Markov game, the performance error introduced by incorporating symmetry samples is bounded:
-  $$
-  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
-  $$
-- **Applicability:** Decentralized or partially symmetric multi-agent networks where agents share similar but not completely identical transition and reward structures.
-- **Limitations:** The theoretical error bounds require specific hyperparameter tuning for decay rates ($\beta$) to balance the early exploration speedup against later state-specific exploitation.
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. The bounded partial symmetry concept can guide the collaboration system's state-sharing and data augmentation protocols across similar but distinct agent roles.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
-- **Repository Test Status:** NOT_TESTED.
-- **Beginner Analogy:** Imagine teaching two slightly different robots to navigate a maze. While they aren't identical twins (perfect symmetry), they are similar enough that one robot can initially learn from the other's mistakes. However, as they get closer to mastering the maze, they need to rely more on their own specific sensors and less on their partner's generic advice to avoid making small but critical errors.
-- **Bilingual Content:** Included.
-- **Paper Evidence Status:** PAPER_ONLY.
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
+<!-- WEEKLY_SYNC_REPORT -->
+- **本周文档级联编制 (Weekly document cascade weaving):**
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
+- **动态演进映射 (Dynamic evolution mapping):**
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- **来源迁移记录 (Source migration record):**
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- **双语对齐状态 (Bilingual alignment status):**
+  - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.

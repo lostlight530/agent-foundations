@@ -179,8 +179,6 @@ Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，�
   对应的稀疏检索动力学（定理 `coro:eps_sparse_dense`）提供了一个更紧的、依赖于稀疏度的误差界：
   $$\|\mathcal{T}(\mathbf{x})-\xi_\mu\| \le m+d^{1/2}m\beta \left[\kappa \left(\max_{\nu\in[M]}\langle\xi_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)}\right)+\frac{1}{\beta}\right]$$
 
-
-
 在智能体漫长且孤独的生命周期中，不可能存在实时的、完美的人类导师去给它的每一次操作打上“对与错”的标注（Label）。无监督学习（特别是对比学习），赋予了智能体以“拽着自己的鞋带把自己提起来（Bootstrapping）”的方式，从纯粹的、海量的自我交互中，自动建立起一个符合物理直觉的“世界模型（World Model）”。
 
 我们不搞“算力堆砌”去暴力记忆大千世界的皮毛，我们通过理论上绝对保证收敛的对比损失函数（InfoNCE Loss），确保智能体的记忆系统能够在接近无限的探索过程中，稳如泰山地提炼出世界的本质概念。
@@ -441,8 +439,6 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 - **初学者类比**:
   想象一位侦探在翻看数千张嫌疑人照片。密集的搜索引擎试图给每一张脸都打一个微小的“匹配分数”，这会制造出一个巨大且嘈杂的烂摊子。而稀疏搜索引擎就像一个严格的过滤器：它瞬间扔掉 99% 与描述不符的照片，只返回最精确的几个候选人，从而给出一个清晰锐利得多的答案。
 
-
-
 ### RAFA 后验采样遗憾界类比 (Practical Analogies)
 想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
 
@@ -579,22 +575,7 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）。如果你学到了新的一课，你只更新这四本桌上书籍的分数。这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉。
 
-<!-- WEEKLY_SYNC_REPORT -->
-## Weekly Document Cascade & Conflict Audit
-
-- 本周文档级联编织 (Weekly document cascade weaving)
-  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
-- 动态演进映射 (Dynamic evolution mapping)
-  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
-- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
-- 来源迁移记录 (Source migration record)
-  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
-- 双语对齐状态 (Bilingual alignment status)
-  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+## Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
 
 - **System Container:** Memory System
 - **Frontier Source:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information (arXiv:2303.14023v1)
@@ -650,8 +631,6 @@ EVIDENCE_INSUFFICIENT
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 
-
-
 ## 基于部分动力学知识的样本高效 Q 学习
 
 - **System Container:** Memory System
@@ -676,6 +655,64 @@ EVIDENCE_INSUFFICIENT
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 
+## 2026-04-01：针对 POMPG 的内部状态策略梯度方法
+
+- **技术点名称 (Technology):** 针对部分可观测马尔可夫势博弈的内部状态自然策略梯度
+- **System Container:** Memory System
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+  - **Authors:** Wonseok Yang, Thinh T. Doan
+  - **URL:** https://arxiv.org/abs/2604.00433
+- **论文原始问题 (Original Problem):** 解决部分可观测马尔可夫势博弈（POMPG）由于部分可观测性以及在无限历史中计算精确信念状态的困难性而极具挑战。
+- **核心假设 (Core Assumptions):** 存在势函数（potential function）将博弈映射为全局目标；真实的公共信息信念状态与内部状态近似信念状态之间的总变差距离（total variation distance） $d_b$ 有界；以及初始策略的探索率严格为正（$\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$）。
+- **数学机制 (Mathematical Mechanism):** 将共享的观测历史压缩为有限的内部状态 $w^k$，并运行有限状态控制器（FSC）自然策略梯度更新。更新利用 Fisher 信息矩阵的 Moore-Penrose 伪逆：$\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 在学习率为 $\eta = (1-\beta)^2/(2n\phi_{\max})$ 的情况下，时间平均的纳什均衡差距收敛速度为 $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 是一个与信念近似误差 $d_b$ 成正比的渐近误差下界。
+- **适用范围 (Applicable Scope):** 适用于代理共享部分信息但无法维护完整信念状态的多智能体系统，且受限于有限内部记忆约束的 POMPG 环境。
+- **局限 (Limitations):** 收敛结果仅达到受误差下界 $\varepsilon_{\text{FSC}}$ 约束的近似纳什均衡。边界常数与 $\sqrt{a}$ 成反比，这可能在内部状态空间较大或使用均匀初始化时显著恶化。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层可支持 Memory System，通过将 Agent 记忆边界建模为近似全局信念的有限内部状态（$w^k$），并显式计算协作任务中由记忆压缩导致的性能下降底线。
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一群侦探（智能体）试图破案。他们无法记住所有发现的线索（无限信念状态），所以将案卷总结成简短的简报（有限内部状态）。他们的团队合作随着时间的推移稳步提升，但总会犯下少量的错误，这些错误的数量与总结简报时丢失的信息量成正比。
+- **中英文内容 (Bilingual Content):** 中英文版本在已验证的属性上在结构和语义上保持一致。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
+
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
+- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- **URL:** https://arxiv.org/abs/2309.12673
+- **论文原始问题 (Original problem):** 对应于稠密 softmax 注意力机制的标准现代 Hopfield 模型，由于其全局激活范围，在隔离和检索稀疏表示或高度相关的记忆模式时存在困难，缺乏依赖于稀疏性的记忆检索机制。
+- **核心假设 (Core assumptions):** 记忆模式存储在半径为 $R$ 的有界球体内。查询和记忆模式在对应于 sparsemax 分布的 Gini 熵正则化下运行，假设 sparsemax 的变分形式适用。
+- **数学机制 (Mathematical mechanism):** 提出了一种使用稀疏熵正则化（Sparsemax）凸共轭的闭式稀疏 Hopfield 能量：
+  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
+  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 记忆检索单调收敛至平稳点。建立了依赖于稀疏性的记忆检索误差界：$\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$，当支持集 $\kappa$（稀疏维度）较小时，该误差界显著收紧，证明了比稠密模拟更紧的误差边界。
+- **适用范围 (Applicable scope):** 需要稀疏模式隔离和噪声鲁棒性的连续状态记忆架构、联想记忆模型和注意力机制。
+- **局限 (Limitations):** 边界和确切容量依赖于记忆模式的明确分布和范数界限。理论上的提升严重依赖于稀疏维度 $\kappa$ 较小这一条件；如果表示变得均匀稠密，该边界可能不会比稠密模型更紧。
+- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING。稀疏检索动力学能在概念上为 Agent 记忆机制提供设计候选，防止松散相关上下文的混合，支持选择性的长期情景检索，而无需检索整个记忆历史。
+- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED。仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块。
+- **初学者类比 (Beginner analogy):** 想象你在一个巨大的图书馆找一本特定的书。稠密现代 Hopfield 模型会以不同亮度打开图书馆里所有的灯，如果很多书长得很像，就很难聚焦。而稀疏现代 Hopfield 模型使用了一束激光聚光灯（sparsemax），严格只照亮你想要的那本书（以及几本高度相关的），让其他的书完全处于黑暗中，这极大地减少了干扰并提高了检索的精准度。
+- **证据状态 (Evidence status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- 来源迁移记录 (Source migration record)
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
 ## W38 当前周度级联 — 2026-09-20
 
@@ -755,48 +792,14 @@ NO_IMPLEMENTATION_OR_VALIDATION_PROMOTION
 MONTH_OPEN
 ```
 
-## 2026-04-01：针对 POMPG 的内部状态策略梯度方法
-
-- **技术点名称 (Technology):** 针对部分可观测马尔可夫势博弈的内部状态自然策略梯度
-- **System Container:** Memory System
-- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
-  - **Authors:** Wonseok Yang, Thinh T. Doan
-  - **URL:** https://arxiv.org/abs/2604.00433
-- **论文原始问题 (Original Problem):** 解决部分可观测马尔可夫势博弈（POMPG）由于部分可观测性以及在无限历史中计算精确信念状态的困难性而极具挑战。
-- **核心假设 (Core Assumptions):** 存在势函数（potential function）将博弈映射为全局目标；真实的公共信息信念状态与内部状态近似信念状态之间的总变差距离（total variation distance） $d_b$ 有界；以及初始策略的探索率严格为正（$\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$）。
-- **数学机制 (Mathematical Mechanism):** 将共享的观测历史压缩为有限的内部状态 $w^k$，并运行有限状态控制器（FSC）自然策略梯度更新。更新利用 Fisher 信息矩阵的 Moore-Penrose 伪逆：$\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 在学习率为 $\eta = (1-\beta)^2/(2n\phi_{\max})$ 的情况下，时间平均的纳什均衡差距收敛速度为 $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 是一个与信念近似误差 $d_b$ 成正比的渐近误差下界。
-- **适用范围 (Applicable Scope):** 适用于代理共享部分信息但无法维护完整信念状态的多智能体系统，且受限于有限内部记忆约束的 POMPG 环境。
-- **局限 (Limitations):** 收敛结果仅达到受误差下界 $\varepsilon_{\text{FSC}}$ 约束的近似纳什均衡。边界常数与 $\sqrt{a}$ 成反比，这可能在内部状态空间较大或使用均匀初始化时显著恶化。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层可支持 Memory System，通过将 Agent 记忆边界建模为近似全局信念的有限内部状态（$w^k$），并显式计算协作任务中由记忆压缩导致的性能下降底线。
-- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 想象一群侦探（智能体）试图破案。他们无法记住所有发现的线索（无限信念状态），所以将案卷总结成简短的简报（有限内部状态）。他们的团队合作随着时间的推移稳步提升，但总会犯下少量的错误，这些错误的数量与总结简报时丢失的信息量成正比。
-- **中英文内容 (Bilingual Content):** 中英文版本在已验证的属性上在结构和语义上保持一致。
-- **证据状态 (Evidence Status):**
-  - Paper Evidence Status: PAPER_ONLY
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-## 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
-
-- **System Container:** Memory System
-- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
-- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
-- **URL:** https://arxiv.org/abs/2309.12673
-- **论文原始问题 (Original problem):** 对应于稠密 softmax 注意力机制的标准现代 Hopfield 模型，由于其全局激活范围，在隔离和检索稀疏表示或高度相关的记忆模式时存在困难，缺乏依赖于稀疏性的记忆检索机制。
-- **核心假设 (Core assumptions):** 记忆模式存储在半径为 $R$ 的有界球体内。查询和记忆模式在对应于 sparsemax 分布的 Gini 熵正则化下运行，假设 sparsemax 的变分形式适用。
-- **数学机制 (Mathematical mechanism):** 提出了一种使用稀疏熵正则化（Sparsemax）凸共轭的闭式稀疏 Hopfield 能量：
-  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
-  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
-- **收敛或行为边界 (Convergence or behavior boundaries):** 记忆检索单调收敛至平稳点。建立了依赖于稀疏性的记忆检索误差界：$\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$，当支持集 $\kappa$（稀疏维度）较小时，该误差界显著收紧，证明了比稠密模拟更紧的误差边界。
-- **适用范围 (Applicable scope):** 需要稀疏模式隔离和噪声鲁棒性的连续状态记忆架构、联想记忆模型和注意力机制。
-- **局限 (Limitations):** 边界和确切容量依赖于记忆模式的明确分布和范数界限。理论上的提升严重依赖于稀疏维度 $\kappa$ 较小这一条件；如果表示变得均匀稠密，该边界可能不会比稠密模型更紧。
-- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING。稀疏检索动力学能在概念上为 Agent 记忆机制提供设计候选，防止松散相关上下文的混合，支持选择性的长期情景检索，而无需检索整个记忆历史。
-- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED。仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块。
-- **初学者类比 (Beginner analogy):** 想象你在一个巨大的图书馆找一本特定的书。稠密现代 Hopfield 模型会以不同亮度打开图书馆里所有的灯，如果很多书长得很像，就很难聚焦。而稀疏现代 Hopfield 模型使用了一束激光聚光灯（sparsemax），严格只照亮你想要的那本书（以及几本高度相关的），让其他的书完全处于黑暗中，这极大地减少了干扰并提高了检索的精准度。
-- **证据状态 (Evidence status):**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED
+<!-- WEEKLY_SYNC_REPORT -->
+- **本周文档级联编制 (Weekly document cascade weaving):**
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
+- **动态演进映射 (Dynamic evolution mapping):**
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- **来源迁移记录 (Source migration record):**
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- **双语对齐状态 (Bilingual alignment status):**
+  - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.

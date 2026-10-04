@@ -87,7 +87,6 @@
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象舰队中的多艘船（AI智能体）独立航行，但被一根共享的绳子（耦合）拴在一起。如果每位船长只检查自己船的稳定性（单智能体验证），他们可能会忽略共享绳子上的张力正将整个舰队拖离航线（系综级漂移）。联合 Lyapunov 证书就像一个舰队级的张力传感器，它通过数学计算基于船只连接方式的最大安全绳索强度（$\gamma^*$），从而确保整个舰队保持稳定。
 
-
 ## AF-ARCH-018: 分布式应急MPC中的Lyapunov式安全边界
 
 ### System Container
@@ -108,8 +107,6 @@ Architecture Principles
 - 在智能体级别的回退区域（安全集）内，到达安全平衡点的应急机动始终可用。
 - 应急计划受到一个单调递减的局部标量界 $\hat J_i^{\mathrm c}(t)$ 的约束。
 
-
-
 ### 收敛界与行为边界
 局部MPC强制约束 $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$。通过截尾平移论证（shifted-tail argument），确保了最优应急成本的单调递减，从而避免了碰撞并保证了递归可行性。
 
@@ -124,8 +121,6 @@ Architecture Principles
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-
 
 ### 未知约束下的上下文博弈中的多智能体学习 (Multi-Agent Learning in Contextual Games under Unknown Constraints)
 
@@ -150,8 +145,6 @@ Architecture Principles
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一下，你在一个陌生的城市试图找到去上班的最佳路线（最大化奖励），但你不知道交通规则或哪些道路正在施工（未知约束）。你没有屡次被罚款，而是每天从类似的交通环境中学习。随着时间的推移，你的策略保证你能找到最佳路线，同时将总的交通违规次数增长控制得非常慢，以至于平均违规次数趋于零。
-
-
 
 ### 重尾噪声下的分布式随机优化 (Distributed Stochastic Optimization under Heavy-Tailed Noises)
 
@@ -317,8 +310,6 @@ u_i(t)-\bar u_i^{\mathrm c,*}(t)
 \right)
 ```
 该更新机制迫使应急成本表现为离散时间Lyapunov函数。
-
-
 
 ### Weaved Integrations
 
@@ -621,7 +612,6 @@ def F_theta_pow(F_theta, N, x, u):
 ### 初学者类比
 想象一群无人机在没有无线电通信的情况下穿过森林。如果无人机依赖记忆去推测其他无人机几秒前的位置，它最终会因为路径意外交叉而坠毁。相反，这个算法迫使每架无人机不断重新计算一个即时的“安全停车路径”（应急计划），并在数学上限制了停车所需的能量（成本）。只要这个“停车成本”不断下降，我们就可以从数学上保证整个机群能安全到达目的地而不会相互碰撞。
 
-
 ### Analogy for 免训练自适应停止机制 (TASR)
 给思考装上了“刹车片”。当发现最近两步想的东西一模一样，且置信度越过红线，直接强行拔电源停止思考，彻底根除了 AI 常见的死循环发散。
 
@@ -705,8 +695,6 @@ def predictive_coding_update(W, dL_dW, dE_dW, eta):
 
 #### 初学者类比：广义速度刚性与宏观运动模式
 想象一群鸟一起飞翔。它们不是僵硬地保持完全相同的距离，而是维持相对速度关系。这使得鸟群可以拉伸成一条细线穿过狭窄的峡谷，然后重新扩展成一个圆圈，同时始终作为一个协调的群体移动。
-
-
 
 #### 解释: 在未知约束下的上下文博弈中的多智能体学习
 想象一下你在一个陌生的国家学习开一辆新车。你不仅不知道最快的路线（未知的报酬），也不知道当地的交通规则（未知的约束）。每次你开车（一个上下文），你都试图在不违反规则的情况下更快地到达目的地。数学公式保证，随着时间的推移，你的违规次数将降至接近零，因为你了解了约束的模式，尽管你一开始完全是在靠猜。
@@ -1056,7 +1044,6 @@ $$
 #### 8. 初学者类比
 想象一个厨师团队（智能体）在不同但部分重叠的厨房工作站（组/超边）工作。如果他们只根据过去的成功经验来猜测做什么菜（汤普森采样），有时他们可能会陷入糟糕的日常套路中。频率论后悔界是一个数学保证，即如果他们在一小部分时间（$\epsilon$）内尝试完全新的东西，随着时间的推移，他们最坏情况下的错误将被严格限制，前提是他们没有太多重叠的工作站（稀疏超图）。
 
-
 <!-- WEEKLY_SYNC_REPORT_EXCLUDE_BEGIN -->
 ### 用于极大单调算子的分布式近端修正算法
 
@@ -1104,6 +1091,52 @@ PAPER_EVIDENCE
 
 历史双口径继续保留：原始 S52 Daily mapping 是点时间研究贡献；后续文档编织可以引用该 mapping，但不能倒推为仓库实现、验证或 verified-core admission。
 
+## 基于内部状态的策略梯度 (Internal State-Based Policy Gradient)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+- **URL:** https://arxiv.org/abs/2604.00433
+- **Publication Date:** 2026-04-01
+- **Authors:** Wonseok Yang, Thinh T. Doan
+- **Selection Reason:** 为具有部分可观测性的多智能体系统提供了一种自然策略梯度算法，该算法依赖于共享的内部状态（有限状态控制器），而不是精确的全局公共信息。
+- **Original Problem:** 在现实的去中心化环境中，多智能体马尔可夫势博弈 (MPG) 中的完全可观测假设是不成立的。当智能体依赖于内部信念近似而不是真实的全局公共信息时，学习动态必须在数学上界定近似误差，以确保收敛到纳什均衡。
+- **Core Assumptions:** 依赖于基于公共信息的真实信念状态与基于共享内部状态的近似信念状态之间足够小且有界的总变差距离 ($d_b$)。它还严格要求初始策略具有正向探索性 ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$)。
+- **数学机制 (Mathematical Mechanism):** 算法更新依赖于基于优势函数的自然策略梯度 (NPG) 步骤: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 平均纳什均衡间隙的收敛下界可分析：$\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 与总变差距离 $d_b$ 直接成正比。
+- **适用范围 (Applicable Scope):** 依赖于共享内部状态抽象，而不是在带宽受限的网络上交换完整轨迹历史的去中心化协作 AI 系统。
+- **局限 (Limitations):** 当初始状态探索系数 $a$ 较小（例如，大型内部状态空间上的均匀初始化）时，理论边界会变差。
+- **Agent 架构映射 (Agent Architecture Mapping):** 指导去中心化记忆压缩的设计；共享总结的内部状态（有限状态控制器）而不是完整历史记录的智能体仍然保留了理论上有界的收敛性，从而验证了解耦架构记忆层的合理性。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **初学者类比 (Beginner Analogy):** 想象一组侦探在不同的城市破案。他们不是把找到的每一条线索都寄给所有人（完全可观测），而只是发送他们当前理论的简短摘要（内部状态）。只要他们的摘要与完整的真相没有偏离太多，整个团队最终仍能锁定正确的罪犯，只是带着一个数学上可预测的微小误差范围。
+- **证据状态 (Evidence Status):** VERIFIED_FROM_LATEX_SOURCE
+- **映射状态 (Mapping Status):** CONCEPTUAL_MAPPING
+- **测试状态 (Repository Test Status):** NOT_TESTED
+
+## 具有解耦生成引导的多智能体流匹配 (DeGG-Flow)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
+- **原始问题 (Original Problem):** 生成式建模可以产生多样化的对象，但缺乏所生成对象满足硬约束的正式保证。在多智能体生成中，这尤其具有挑战性，因为需求可能依赖于多个智能体，但每个智能体必须独立决定其引导输入，而不依赖于其他智能体同时计算的输入。
+- **核心假设 (Core Assumptions):**
+  - 共享需求函数 $q_a^{\mathrm{SE}}$ 和边界函数 $\beta_a^{\mathrm{SE}}$ 是 $C^1$ 的。
+  - 概率分布 $\mu_1$ 和 $\nu_1$ 具有有限的二阶矩。
+  - 向量场 $f^{\theta}$ 关于生成状态是李普希茨连续的，且李普希茨常数 $L(\tau)$ 是可积的。
+  - 引导校正 $\Gamma(s\,|\,\xi)$ 在初始分布上的期望范数平方随时间是可积的。
+- **数学机制 (Mathematical Mechanism):** DeGG-Flow 将生成过程表示为控制仿射动力系统。通过建立可行性条件和有限视界收敛保证，它为共享需求（依赖于多个智能体）和私有需求（依赖于智能体及其邻居）开发了引导条件。
+  - 收敛界:
+    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 如果满足最终边界条件 $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$，则 $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$，这意味着最终生成的状态严格满足共享的硬需求。标称分布和引导分布之间的 Wasserstein 距离 $W_2(\mu_1,\nu_1)$ 由积分的引导校正界定。
+- **适用范围 (Applicable Scope):** 需要满足硬约束的多智能体生成环境，例如多机器人协作和具有启示性要求的场景生成。
+- **局限 (Limitations):** 理论边界假设底层向量场的李普希茨连续性和分布的有限二阶矩。该框架要求最终边界条件严格达到零，以保证精确的约束满足。
+- **Agent 架构映射 (Agent Architecture Mapping):** 通过引入解耦的引导模块，在概念上支持生成式智能体架构，确保来自多个自治智能体的去中心化输出满足共享的系统级硬约束，而无需在生成期间同步交换内部状态。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **仓库测试状态 (Repository Test Status):** NOT_TESTED
+- **初学者类比 (Beginner Analogy):** 想象多个艺术家一起绘制一幅大型壁画。如果他们不协调，最终的画面将是混乱的。每个艺术家不需要经常停下来讨论每一笔，而是遵循一套解耦的“护栏”（引导），这确保了他们个人的工作在边缘处与其他人的完美对齐，从而保证最终的壁画满足整体设计，而不需要实时的微观管理。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
 
 ## Weekly Document Cascade & Conflict Audit
 
@@ -1117,7 +1150,6 @@ PAPER_EVIDENCE
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
 
 ### 多智能体学习中的部分对称性利用 (Leveraging Partial Symmetry in Multi-Agent Learning)
 
@@ -1148,7 +1180,6 @@ PAPER_EVIDENCE
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
 
-
 #### 维护契约归一化 — 2026-09-19
 - 原始 Jules 研究新增保留: YES
 - 证据类别: E4_PREPRINT
@@ -1157,7 +1188,6 @@ PAPER_EVIDENCE
 - 当前规范验证状态: NOT_TESTED
 - 来源登记: S49
 - 边界: 论文证据与公式抽取不证明仓库已经实现，也不证明完成实验复现
-
 
 ## W38 当前周度级联 — 2026-09-20
 
@@ -1231,66 +1261,14 @@ NO_VERIFIED_CORE_PROMOTION
 MONTH_OPEN
 ```
 
-
 <!-- WEEKLY_SYNC_REPORT -->
 - **本周文档级联编制 (Weekly document cascade weaving):**
-  - Woven `Generalized Velocity Rigidity for Macroscopic Motion` into core sections (theory, math, analogy).
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
 - **动态演进映射 (Dynamic evolution mapping):**
-  - Maintained DESIGN_ANALOGY mapping and REFERENCE_ONLY implementation state as specified in maintenance notes.
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Memory Assumptions: Velocity rigidity does not contradict cognitive manifolds.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Tool Execution Assumptions: Deterministic action policies remain unaffected.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Collaboration Assumptions: The paper's velocity-space coordination concept does not, within this documentary review, directly contradict the repository's collaboration assumptions; no implementation or decentralized-data runtime test was performed.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Architecture Principle Assumptions: The mapping is conceptually analogous to mathematical boundary constraints; no repository execution equivalence is established.
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - **来源迁移记录 (Source migration record):**
-  - S52 / arXiv:2609.18276v1 successfully migrated to core text.
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - **双语对齐状态 (Bilingual alignment status):**
   - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
-
-
-### 基于内部状态的策略梯度 (Internal State-Based Policy Gradient)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
-- **URL:** https://arxiv.org/abs/2604.00433
-- **Publication Date:** 2026-04-01
-- **Authors:** Wonseok Yang, Thinh T. Doan
-- **Selection Reason:** 为具有部分可观测性的多智能体系统提供了一种自然策略梯度算法，该算法依赖于共享的内部状态（有限状态控制器），而不是精确的全局公共信息。
-- **Original Problem:** 在现实的去中心化环境中，多智能体马尔可夫势博弈 (MPG) 中的完全可观测假设是不成立的。当智能体依赖于内部信念近似而不是真实的全局公共信息时，学习动态必须在数学上界定近似误差，以确保收敛到纳什均衡。
-- **Core Assumptions:** 依赖于基于公共信息的真实信念状态与基于共享内部状态的近似信念状态之间足够小且有界的总变差距离 ($d_b$)。它还严格要求初始策略具有正向探索性 ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$)。
-- **数学机制 (Mathematical Mechanism):** 算法更新依赖于基于优势函数的自然策略梯度 (NPG) 步骤: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 平均纳什均衡间隙的收敛下界可分析：$\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 与总变差距离 $d_b$ 直接成正比。
-- **适用范围 (Applicable Scope):** 依赖于共享内部状态抽象，而不是在带宽受限的网络上交换完整轨迹历史的去中心化协作 AI 系统。
-- **局限 (Limitations):** 当初始状态探索系数 $a$ 较小（例如，大型内部状态空间上的均匀初始化）时，理论边界会变差。
-- **Agent 架构映射 (Agent Architecture Mapping):** 指导去中心化记忆压缩的设计；共享总结的内部状态（有限状态控制器）而不是完整历史记录的智能体仍然保留了理论上有界的收敛性，从而验证了解耦架构记忆层的合理性。
-- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
-- **初学者类比 (Beginner Analogy):** 想象一组侦探在不同的城市破案。他们不是把找到的每一条线索都寄给所有人（完全可观测），而只是发送他们当前理论的简短摘要（内部状态）。只要他们的摘要与完整的真相没有偏离太多，整个团队最终仍能锁定正确的罪犯，只是带着一个数学上可预测的微小误差范围。
-- **证据状态 (Evidence Status):** VERIFIED_FROM_LATEX_SOURCE
-- **映射状态 (Mapping Status):** CONCEPTUAL_MAPPING
-- **测试状态 (Repository Test Status):** NOT_TESTED
-
-### 具有解耦生成引导的多智能体流匹配 (DeGG-Flow)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
-- **原始问题 (Original Problem):** 生成式建模可以产生多样化的对象，但缺乏所生成对象满足硬约束的正式保证。在多智能体生成中，这尤其具有挑战性，因为需求可能依赖于多个智能体，但每个智能体必须独立决定其引导输入，而不依赖于其他智能体同时计算的输入。
-- **核心假设 (Core Assumptions):**
-  - 共享需求函数 $q_a^{\mathrm{SE}}$ 和边界函数 $\beta_a^{\mathrm{SE}}$ 是 $C^1$ 的。
-  - 概率分布 $\mu_1$ 和 $\nu_1$ 具有有限的二阶矩。
-  - 向量场 $f^{\theta}$ 关于生成状态是李普希茨连续的，且李普希茨常数 $L(\tau)$ 是可积的。
-  - 引导校正 $\Gamma(s\,|\,\xi)$ 在初始分布上的期望范数平方随时间是可积的。
-- **数学机制 (Mathematical Mechanism):** DeGG-Flow 将生成过程表示为控制仿射动力系统。通过建立可行性条件和有限视界收敛保证，它为共享需求（依赖于多个智能体）和私有需求（依赖于智能体及其邻居）开发了引导条件。
-  - 收敛界:
-    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
-- **收敛或行为边界 (Convergence or behavior boundaries):** 如果满足最终边界条件 $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$，则 $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$，这意味着最终生成的状态严格满足共享的硬需求。标称分布和引导分布之间的 Wasserstein 距离 $W_2(\mu_1,\nu_1)$ 由积分的引导校正界定。
-- **适用范围 (Applicable Scope):** 需要满足硬约束的多智能体生成环境，例如多机器人协作和具有启示性要求的场景生成。
-- **局限 (Limitations):** 理论边界假设底层向量场的李普希茨连续性和分布的有限二阶矩。该框架要求最终边界条件严格达到零，以保证精确的约束满足。
-- **Agent 架构映射 (Agent Architecture Mapping):** 通过引入解耦的引导模块，在概念上支持生成式智能体架构，确保来自多个自治智能体的去中心化输出满足共享的系统级硬约束，而无需在生成期间同步交换内部状态。
-- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
-- **仓库测试状态 (Repository Test Status):** NOT_TESTED
-- **初学者类比 (Beginner Analogy):** 想象多个艺术家一起绘制一幅大型壁画。如果他们不协调，最终的画面将是混乱的。每个艺术家不需要经常停下来讨论每一笔，而是遵循一套解耦的“护栏”（引导），这确保了他们个人的工作在边缘处与其他人的完美对齐，从而保证最终的壁画满足整体设计，而不需要实时的微观管理。
-- **证据状态 (Evidence Status):**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED

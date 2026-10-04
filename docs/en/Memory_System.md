@@ -182,8 +182,6 @@ Deterministic Convergence Mechanism: The paper leverages contrastive representat
   $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
   where $\text{Sparsemax}$ enforces strict sparsity on the attention weights by thresholding negative activations: $[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$.
 
-
-
 In the long and lonely lifecycle of an agent, there can be no real-time, perfect human tutor labeling every action as "right" or "wrong." Unsupervised learning (especially contrastive learning) empowers the agent to "bootstrap" itself, automatically building a physically intuitive "World Model" purely from massive amounts of self-interaction.
 
 We do not use brute-force computing to memorize the superficial details of the world. We use a theoretically proven convergent contrastive loss function (InfoNCE Loss) to ensure that the agent's memory system can stably extract the essence of the world during its near-infinite exploration.
@@ -439,8 +437,6 @@ def compute_topological_loss(D_X, D_Z, P_X, P_Z):
 ### Analogy for Sparse Memory Retrieval Dynamics
 - **Beginner Analogy**: Imagine a librarian searching for a book based on a few keywords. A "dense" search might pull every book that shares even one keyword, making the final selection noisy. A "sparse" search strictly filters out the weak matches early, handing you only the most relevant books much faster.
 
-
-
 ### Analogy for RAFA Posterior Sampling Regret Bound
 Imagine you are exploring a maze. Instead of trying every single path randomly, you use your memory (the buffer) to imagine different possible maps of the maze (posterior sampling). You choose the map that makes you most uncertain (highest entropy) to explore next, ensuring you only take new steps when you actually learn something significant about the maze's layout.
 
@@ -578,22 +574,7 @@ Imagine a librarian trying to reorganize a messy pile of books (representing raw
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine organizing a massive library where instead of giving a unique score to every single book you read, you only keep four specific "best example" books on your desk (e.g., the shortest success, the first success after a failure, the most promising failure, and the most recent failure). If you learn a new lesson, you only update the score for these four desk books. This way, you don't waste time grading thousands of old books, and if a book on the desk gives you bad advice, it gets swapped out quickly.
 
-<!-- WEEKLY_SYNC_REPORT -->
-## Weekly Document Cascade & Conflict Audit
-
-- 本周文档级联编织 (Weekly document cascade weaving)
-  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
-- 动态演进映射 (Dynamic evolution mapping)
-  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
-- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
-- 来源迁移记录 (Source migration record)
-  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
-- 双语对齐状态 (Bilingual alignment status)
-  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
+## Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information
 
 - **System Container:** Memory System
 - **Frontier Source:** Accelerating the Convergence Rate of Consensus for Second-Order Multi-Agent Systems by Memory Information (arXiv:2303.14023v1)
@@ -649,8 +630,6 @@ Imagine a group of drivers trying to match their speeds on a highway to form a c
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 
-
-
 ## Sample Efficient Q-Learning with Partial Dynamics Knowledge
 
 - **System Container:** Memory System
@@ -675,6 +654,64 @@ Imagine a group of drivers trying to match their speeds on a highway to form a c
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 
+## 2026-04-01: Internal State-Based Policy Gradient for POMPGs
+
+- **技术点名称 (Technology):** Internal State-Based NPG for Partially Observable Markov Potential Games
+- **System Container:** Memory System
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+  - **Authors:** Wonseok Yang, Thinh T. Doan
+  - **URL:** https://arxiv.org/abs/2604.00433
+- **论文原始问题 (Original Problem):** Solving partially observable Markov potential games (POMPGs) is challenging due to partial observability and the intractability of exact belief state computation over infinite histories.
+- **核心假设 (Core Assumptions):** The existence of a potential function mapping the game to a generalized objective; bounded total variation distance $d_b$ between true common-information belief states and the internal-state approximate belief states; and strictly positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
+- **数学机制 (Mathematical Mechanism):** Compresses shared observation histories into a finite internal state $w^k$, running a finite-state controller (FSC) Natural Policy Gradient update. The update uses the Moore-Penrose inverse of the Fisher information matrix: $\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$.
+- **收敛或行为边界 (Convergence or behavior boundaries):** Under a learning rate of $\eta = (1-\beta)^2/(2n\phi_{\max})$, the time-averaged Nash Equilibrium gap converges as $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is an asymptotic error floor proportional to the belief approximation error $d_b$.
+- **适用范围 (Applicable Scope):** Multi-agent systems operating in episodic or continuing POMPGs where agents share partial information but cannot maintain full belief states, bounded by finite internal memory constraints.
+- **局限 (Limitations):** The convergence is only to an approximate Nash Equilibrium bounded by the error floor $\varepsilon_{\text{FSC}}$. The bound constant depends inversely on $\sqrt{a}$, which can degrade with large internal state spaces or uniform initialization.
+- **Agent 架构映射 (Agent Architecture Mapping):** Can conceptually support the Memory System by modeling agent memory bounds as finite internal states ($w^k$) that approximate global belief, explicitly calculating the performance degradation floor caused by memory compression in collaborative tasks.
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** Imagine a group of detectives (agents) trying to solve a case. They can't remember every single clue ever found (infinite belief state), so they summarize the case file into a short briefing (finite internal state). Their teamwork improves steadily over time, but they will always make a small number of mistakes proportional to how much information was lost when summarizing the briefing.
+- **中英文内容 (Bilingual Content):** Both English and Chinese sections are structurally and semantically aligned on verified properties.
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+
+## On Sparse Modern Hopfield Model
+
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
+- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
+- **URL:** https://arxiv.org/abs/2309.12673
+- **论文原始问题 (Original problem):** The standard modern Hopfield model, corresponding to dense softmax attention, struggles to isolate and retrieve sparsely represented or closely correlated patterns due to its global activation scope, lacking a sparsity-dependent memory retrieval mechanism.
+- **核心假设 (Core assumptions):** Memory patterns are stored in a bounded sphere of radius $R$. The query and memory patterns operate under a Gini entropic regularizer corresponding to the sparsemax distribution, assuming the variational form of sparsemax is applicable.
+- **数学机制 (Mathematical mechanism):** Proposes a closed-form sparse Hopfield energy using the convex conjugate of the sparse entropic regularizer (Sparsemax):
+  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
+  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
+- **收敛或行为边界 (Convergence or behavior boundaries):** Retrieves memory monotonically to stationary points. It establishes a sparsity-dependent memory retrieval error bound: $\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$, where the error bound tightens significantly when the support $\kappa$ (sparsity dimension) is small, proving tighter error boundaries than the dense analog.
+- **适用范围 (Applicable scope):** Continuous-state memory architectures, associative memory models, and attention mechanisms requiring sparse pattern isolation and noise robustness.
+- **局限 (Limitations):** Bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns. The theoretical improvements heavily depend on the sparsity dimension $\kappa$ being small; if representations become uniformly dense, the bound may not be tighter than the dense model.
+- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING. The sparsemax retrieval dynamics can conceptually inform Agent memory mechanisms to prevent blending of loosely related contexts, enabling selective long-term episodic retrieval without retrieving the entire memory history.
+- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED. The repository currently maintains the theoretical bounds and principles but does not implement an executable SparseHopfieldLayer memory module.
+- **初学者类比 (Beginner analogy):** Imagine looking for a specific book in a massive library. The dense modern Hopfield model turns on all the lights in the library at varying dimness, making it hard to focus on one book if many are similar. The sparse modern Hopfield model uses a laser spotlight (sparsemax) to strictly illuminate only the exact book you want (and maybe a few highly relevant neighbors), keeping the rest in total darkness, which drastically reduces noise and improves focus.
+- **证据状态 (Evidence status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+## Weekly Document Cascade & Conflict Audit
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- 来源迁移记录 (Source migration record)
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
 ## W38 Current Weekly Cascade — 2026-09-20
 
@@ -754,48 +791,14 @@ NO_IMPLEMENTATION_OR_VALIDATION_PROMOTION
 MONTH_OPEN
 ```
 
-## 2026-04-01: Internal State-Based Policy Gradient for POMPGs
-
-- **技术点名称 (Technology):** Internal State-Based NPG for Partially Observable Markov Potential Games
-- **System Container:** Memory System
-- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
-  - **Authors:** Wonseok Yang, Thinh T. Doan
-  - **URL:** https://arxiv.org/abs/2604.00433
-- **论文原始问题 (Original Problem):** Solving partially observable Markov potential games (POMPGs) is challenging due to partial observability and the intractability of exact belief state computation over infinite histories.
-- **核心假设 (Core Assumptions):** The existence of a potential function mapping the game to a generalized objective; bounded total variation distance $d_b$ between true common-information belief states and the internal-state approximate belief states; and strictly positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
-- **数学机制 (Mathematical Mechanism):** Compresses shared observation histories into a finite internal state $w^k$, running a finite-state controller (FSC) Natural Policy Gradient update. The update uses the Moore-Penrose inverse of the Fisher information matrix: $\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$.
-- **收敛或行为边界 (Convergence or behavior boundaries):** Under a learning rate of $\eta = (1-\beta)^2/(2n\phi_{\max})$, the time-averaged Nash Equilibrium gap converges as $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is an asymptotic error floor proportional to the belief approximation error $d_b$.
-- **适用范围 (Applicable Scope):** Multi-agent systems operating in episodic or continuing POMPGs where agents share partial information but cannot maintain full belief states, bounded by finite internal memory constraints.
-- **局限 (Limitations):** The convergence is only to an approximate Nash Equilibrium bounded by the error floor $\varepsilon_{\text{FSC}}$. The bound constant depends inversely on $\sqrt{a}$, which can degrade with large internal state spaces or uniform initialization.
-- **Agent 架构映射 (Agent Architecture Mapping):** Can conceptually support the Memory System by modeling agent memory bounds as finite internal states ($w^k$) that approximate global belief, explicitly calculating the performance degradation floor caused by memory compression in collaborative tasks.
-- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** Imagine a group of detectives (agents) trying to solve a case. They can't remember every single clue ever found (infinite belief state), so they summarize the case file into a short briefing (finite internal state). Their teamwork improves steadily over time, but they will always make a small number of mistakes proportional to how much information was lost when summarizing the briefing.
-- **中英文内容 (Bilingual Content):** Both English and Chinese sections are structurally and semantically aligned on verified properties.
-- **证据状态 (Evidence Status):**
-  - Paper Evidence Status: PAPER_ONLY
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-
-## On Sparse Modern Hopfield Model
-
-- **System Container:** Memory System
-- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
-- **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
-- **URL:** https://arxiv.org/abs/2309.12673
-- **论文原始问题 (Original problem):** The standard modern Hopfield model, corresponding to dense softmax attention, struggles to isolate and retrieve sparsely represented or closely correlated patterns due to its global activation scope, lacking a sparsity-dependent memory retrieval mechanism.
-- **核心假设 (Core assumptions):** Memory patterns are stored in a bounded sphere of radius $R$. The query and memory patterns operate under a Gini entropic regularizer corresponding to the sparsemax distribution, assuming the variational form of sparsemax is applicable.
-- **数学机制 (Mathematical mechanism):** Proposes a closed-form sparse Hopfield energy using the convex conjugate of the sparse entropic regularizer (Sparsemax):
-  - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
-  - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
-- **收敛或行为边界 (Convergence or behavior boundaries):** Retrieves memory monotonically to stationary points. It establishes a sparsity-dependent memory retrieval error bound: $\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$, where the error bound tightens significantly when the support $\kappa$ (sparsity dimension) is small, proving tighter error boundaries than the dense analog.
-- **适用范围 (Applicable scope):** Continuous-state memory architectures, associative memory models, and attention mechanisms requiring sparse pattern isolation and noise robustness.
-- **局限 (Limitations):** Bounds and exact capacity rely on explicit distribution and norm bounds of memory patterns. The theoretical improvements heavily depend on the sparsity dimension $\kappa$ being small; if representations become uniformly dense, the bound may not be tighter than the dense model.
-- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING. The sparsemax retrieval dynamics can conceptually inform Agent memory mechanisms to prevent blending of loosely related contexts, enabling selective long-term episodic retrieval without retrieving the entire memory history.
-- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED. The repository currently maintains the theoretical bounds and principles but does not implement an executable SparseHopfieldLayer memory module.
-- **初学者类比 (Beginner analogy):** Imagine looking for a specific book in a massive library. The dense modern Hopfield model turns on all the lights in the library at varying dimness, making it hard to focus on one book if many are similar. The sparse modern Hopfield model uses a laser spotlight (sparsemax) to strictly illuminate only the exact book you want (and maybe a few highly relevant neighbors), keeping the rest in total darkness, which drastically reduces noise and improves focus.
-- **证据状态 (Evidence status):**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED
+<!-- WEEKLY_SYNC_REPORT -->
+- **本周文档级联编制 (Weekly document cascade weaving):**
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
+- **动态演进映射 (Dynamic evolution mapping):**
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- **来源迁移记录 (Source migration record):**
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- **双语对齐状态 (Bilingual alignment status):**
+  - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.

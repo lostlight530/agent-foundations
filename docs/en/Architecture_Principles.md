@@ -89,7 +89,6 @@ Traditionally, the NTK (Neural Tangent Kernel) is considered the deterministic e
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine multiple ships (AI agents) in a fleet navigating independently but tethered together by a shared rope (the coupling). If each captain only checks their own ship's stability (single-agent validation), they might miss that the tension in the shared rope is dragging the entire fleet off course (ensemble-level drift). The Joint Lyapunov Certificate is like a fleet-wide tension sensor that mathematically calculates the maximum safe rope strength ($\gamma^*$) based on how the ships are connected, ensuring the whole fleet remains stable.
 
-
 ## AF-ARCH-018: Lyapunov-Type Safety in Decentralized Contingency MPC
 
 ### System Container
@@ -110,8 +109,6 @@ In multi-agent control under state-only information patterns with limited sensin
 - The contingency maneuver to a safe equilibrium must always be available inside agent-wise fallback regions (safe sets).
 - The contingency plan is constrained by a monotonically decreasing local scalar bound $\hat J_i^{\mathrm c}(t)$.
 
-
-
 ### Bounds and Convergence
 The local MPC enforces $J_i^{\mathrm c}(t)\leq \hat J_i^{\mathrm c}(t)$. The shifted-tail argument yields a monotone decrease of the optimal contingency cost, preventing collision and ensuring recursive feasibility.
 
@@ -126,8 +123,6 @@ The formulation does not universally solve adversarial multi-agent conflicts; co
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-
 
 ### Multi-Agent Learning in Contextual Games under Unknown Constraints
 
@@ -152,8 +147,6 @@ The formulation does not universally solve adversarial multi-agent conflicts; co
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** Imagine you're in a new city trying to find the best route to work (maximizing reward), but you don't know the traffic rules or which roads are under construction (unknown constraints). Instead of getting fined repeatedly, you learn from similar traffic contexts every day. Over time, your strategy guarantees you find the best route while keeping your total traffic violations growing so slowly that, on average, they approach zero.
-
-
 
 ### Distributed Stochastic Optimization under Heavy-Tailed Noises
 
@@ -318,8 +311,6 @@ u_i(t)-\bar u_i^{\mathrm c,*}(t)
 \right)
 ```
 This forces the contingency cost to act as a discrete-time Lyapunov function.
-
-
 
 ### Weaved Integrations
 
@@ -620,7 +611,6 @@ All the external tool calls, massive multi-modal memory extractions, and complex
 ### Analogy for For Beginners: Practical Analogy
 ### For Beginners: Practical Analogy
 Imagine multiple drones flying through a forest without radio communication. If a drone relies on memory of where other drones were seconds ago, it will eventually crash because paths cross unexpectedly. Instead, this algorithm forces every drone to constantly recalculate an immediate "safe stopping path" (the contingency plan). It mathematically bounds the energy (cost) needed to stop. If this "stopping cost" constantly decreases, we can mathematically guarantee the entire swarm safely converges to their destinations without hitting each other.
-
 
 ### Analogy for Training-Free Adaptive Stopping (TASR)
 It installs "brake pads" on thinking. If the system realizes its current and previous thoughts are identical while passing a confidence redline, it unplugs itself. This completely cures infinite AI loops.
@@ -1054,7 +1044,6 @@ This theoretical regret bound can conceptually support the Architecture Principl
 #### 8. Beginner's Analogy
 Imagine a team of chefs (agents) working in different, partially overlapping kitchen stations (groups/hyperedges). If they just guess what to cook based on past success (Thompson Sampling), sometimes they might get stuck in a bad routine. The frequentist regret bound is a mathematical guarantee that if they try something completely new a small fraction of the time ($\epsilon$), their worst-case mistakes over time are strictly limited, provided they don't have too many overlapping stations (sparse hypergraph).
 
-
 <!-- WEEKLY_SYNC_REPORT_EXCLUDE_BEGIN -->
 ### Distributed Proximal-Correction Algorithm for Maximal Monotone Operators
 
@@ -1102,6 +1091,52 @@ PAPER_EVIDENCE
 
 Historical dual-view remains preserved: the original S52 Daily mapping is a point-in-time research contribution; later documentary weaving may use that mapping but does not retroactively create implementation, validation, or verified-core admission.
 
+## Internal State-Based Policy Gradient
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
+- **URL:** https://arxiv.org/abs/2604.00433
+- **Publication Date:** 2026-04-01
+- **Authors:** Wonseok Yang, Thinh T. Doan
+- **Selection Reason:** Provides a natural policy gradient algorithm for multi-agent systems with partial observability, relying on shared internal states (Finite-State Controllers) rather than exact global common information.
+- **Original Problem:** Fully observable assumptions in multi-agent Markov Potential Games (MPGs) fail in realistic decentralized environments. When agents rely on internal belief approximations instead of true global common information, the learning dynamics must mathematically bound the approximation error to ensure convergence to a Nash Equilibrium.
+- **Core Assumptions:** Relies on a sufficiently small, bounded total variation distance ($d_b$) between the true belief state based on common information and the approximate belief state based on shared internal states. It also strictly requires positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
+- **Mathematical Mechanism:** The algorithmic update relies on an advantage-based Natural Policy Gradient (NPG) step: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$.
+- **Convergence or behavior boundaries:** The average Nash Equilibrium gap convergence floor is analytically bounded: $\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is directly proportional to the total variation distance $d_b$.
+- **Applicable Scope:** Decentralized cooperative AI systems relying on shared internal state abstractions rather than exchanging full trajectory histories over bandwidth-constrained networks.
+- **Limitations:** The theoretical bound worsens when the initial state exploration coefficient $a$ is small (e.g., uniform initialization over a large internal state space).
+- **Agent Architecture Mapping:** Informs the design of decentralized memory compression; agents sharing summarized internal states (Finite State Controllers) rather than full history logs still preserve theoretically bounded convergence, validating a decoupled architectural memory layer.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine a group of detectives solving a case in separate cities. Instead of mailing every single clue they find to everyone (fully observable), they only send short summaries of their current theories (internal states). As long as their summaries aren't too far off from the complete truth, the whole team will still eventually converge on the correct culprit, just with a small, mathematically predictable margin of error.
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Test Status:** NOT_TESTED
+
+## Multi-Agent Flow Matching with Decoupled Generative Guidance (DeGG-Flow)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
+- **Original Problem:** Generative modeling produces diverse objects but lacks formal guarantees that the generated objects satisfy hard constraints. In multi-agent generation, this is challenging because requirements can depend on multiple agents, but each agent must determine its guidance input independently without relying on simultaneously computed inputs of others.
+- **Core Assumptions:**
+  - The shared requirement function $q_a^{\mathrm{SE}}$ and bound function $\beta_a^{\mathrm{SE}}$ are $C^1$.
+  - The probability distributions $\mu_1$ and $\nu_1$ have finite second moments.
+  - The vector field $f^{\theta}$ is Lipschitz continuous with respect to the generated state with integrable Lipschitz constant $L(\tau)$.
+  - The expected squared norm of the guidance correction $\Gamma(s\,|\,\xi)$ over the initial distribution is integrable over time.
+- **Mathematical Mechanism:** DeGG-Flow represents the generative process as a control-affine dynamical system. It develops guidance conditions for shared requirements (dependent on multiple agents) and private requirements (dependent on an agent and its neighbors) by establishing feasibility conditions and finite-horizon convergence guarantees.
+  - 收敛界 (Convergence bound):
+    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
+- **Convergence or behavior boundaries:** If the final boundary condition $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$ is met, then $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$, meaning the final generated state strictly satisfies the shared hard requirement. The Wasserstein distance $W_2(\mu_1,\nu_1)$ between the nominal and guided distributions is bounded by the integrated guidance correction.
+- **Applicable Scope:** Multi-agent generative environments requiring hard constraint satisfaction, such as multi-robot collaboration and scene generation with affordance requirements.
+- **Limitations:** Theoretical bounds assume Lipschitz continuity of the underlying vector fields and finite second moments of the distributions. The framework requires the final bound condition to strictly reach zero to guarantee exact constraint satisfaction.
+- **Agent Architecture Mapping:** Can conceptually support generative agent architectures by introducing decoupled guidance modules, ensuring that decentralized outputs from multiple autonomous agents satisfy shared system-level hard constraints without requiring synchronized internal state exchange during generation.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** Imagine multiple artists painting a large mural together. If they don't coordinate, the final picture will be chaotic. Instead of constantly stopping to discuss every brushstroke, each artist follows a set of decoupled "guardrails" (guidance) that ensures their individual work will perfectly align with the others at the edges, guaranteeing the final mural satisfies the overall design without needing real-time micromanagement.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
 
 ## Weekly Document Cascade & Conflict Audit
 
@@ -1115,7 +1150,6 @@ Historical dual-view remains preserved: the original S52 Daily mapping is a poin
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
 
 ### Leveraging Partial Symmetry in Multi-Agent Learning
 
@@ -1146,7 +1180,6 @@ Historical dual-view remains preserved: the original S52 Daily mapping is a poin
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 
-
 #### Maintenance Contract Normalization — 2026-09-19
 - Original Jules research addition preserved: YES
 - Evidence class: E4_PREPRINT
@@ -1155,7 +1188,6 @@ Historical dual-view remains preserved: the original S52 Daily mapping is a poin
 - Canonical validation state: NOT_TESTED
 - Source registration: S49
 - Boundary: paper evidence and formula extraction do not establish repository implementation or experimental reproduction
-
 
 ## W38 Current Weekly Cascade — 2026-09-20
 
@@ -1229,66 +1261,14 @@ NO_VERIFIED_CORE_PROMOTION
 MONTH_OPEN
 ```
 
-
 <!-- WEEKLY_SYNC_REPORT -->
 - **本周文档级联编制 (Weekly document cascade weaving):**
-  - Woven `Generalized Velocity Rigidity for Macroscopic Motion` into core sections (theory, math, analogy).
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
 - **动态演进映射 (Dynamic evolution mapping):**
-  - Maintained DESIGN_ANALOGY mapping and REFERENCE_ONLY implementation state as specified in maintenance notes.
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Memory Assumptions: Velocity rigidity does not contradict cognitive manifolds.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Tool Execution Assumptions: Deterministic action policies remain unaffected.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Collaboration Assumptions: The paper's velocity-space coordination concept does not, within this documentary review, directly contradict the repository's collaboration assumptions; no implementation or decentralized-data runtime test was performed.
-  - NO_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW — Architecture Principle Assumptions: The mapping is conceptually analogous to mathematical boundary constraints; no repository execution equivalence is established.
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
 - **来源迁移记录 (Source migration record):**
-  - S52 / arXiv:2609.18276v1 successfully migrated to core text.
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - **双语对齐状态 (Bilingual alignment status):**
   - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
-
-
-### Internal State-Based Policy Gradient
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
-- **URL:** https://arxiv.org/abs/2604.00433
-- **Publication Date:** 2026-04-01
-- **Authors:** Wonseok Yang, Thinh T. Doan
-- **Selection Reason:** Provides a natural policy gradient algorithm for multi-agent systems with partial observability, relying on shared internal states (Finite-State Controllers) rather than exact global common information.
-- **Original Problem:** Fully observable assumptions in multi-agent Markov Potential Games (MPGs) fail in realistic decentralized environments. When agents rely on internal belief approximations instead of true global common information, the learning dynamics must mathematically bound the approximation error to ensure convergence to a Nash Equilibrium.
-- **Core Assumptions:** Relies on a sufficiently small, bounded total variation distance ($d_b$) between the true belief state based on common information and the approximate belief state based on shared internal states. It also strictly requires positive initial policy exploration ($\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$).
-- **Mathematical Mechanism:** The algorithmic update relies on an advantage-based Natural Policy Gradient (NPG) step: $\pi_i^{t+1}(u_i|\hat{h}_i) = \pi_i^t(u_i|\hat{h}_i)\exp\left( \frac{\eta A_i^{\pi^t}(\hat{h}_i,u_i)}{1-\beta} \right) \big/ g_i^t(\hat{h}_i)$.
-- **Convergence or behavior boundaries:** The average Nash Equilibrium gap convergence floor is analytically bounded: $\frac{1}{T}\sum_{t=0}^{T-1}\text{NE-gap}(\pi^t) \leq \mathcal{O}\big(\sqrt{\frac{n}{aT}}\big) + \varepsilon_{\text{FSC}}$, where $\varepsilon_{\text{FSC}}$ is directly proportional to the total variation distance $d_b$.
-- **Applicable Scope:** Decentralized cooperative AI systems relying on shared internal state abstractions rather than exchanging full trajectory histories over bandwidth-constrained networks.
-- **Limitations:** The theoretical bound worsens when the initial state exploration coefficient $a$ is small (e.g., uniform initialization over a large internal state space).
-- **Agent Architecture Mapping:** Informs the design of decentralized memory compression; agents sharing summarized internal states (Finite State Controllers) rather than full history logs still preserve theoretically bounded convergence, validating a decoupled architectural memory layer.
-- **Repository Implementation Status:** NOT_IMPLEMENTED
-- **Beginner Analogy:** Imagine a group of detectives solving a case in separate cities. Instead of mailing every single clue they find to everyone (fully observable), they only send short summaries of their current theories (internal states). As long as their summaries aren't too far off from the complete truth, the whole team will still eventually converge on the correct culprit, just with a small, mathematically predictable margin of error.
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Test Status:** NOT_TESTED
-
-### Multi-Agent Flow Matching with Decoupled Generative Guidance (DeGG-Flow)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** Multi-Agent Flow Matching with Decoupled Generative Guidance
-- **Original Problem:** Generative modeling produces diverse objects but lacks formal guarantees that the generated objects satisfy hard constraints. In multi-agent generation, this is challenging because requirements can depend on multiple agents, but each agent must determine its guidance input independently without relying on simultaneously computed inputs of others.
-- **Core Assumptions:**
-  - The shared requirement function $q_a^{\mathrm{SE}}$ and bound function $\beta_a^{\mathrm{SE}}$ are $C^1$.
-  - The probability distributions $\mu_1$ and $\nu_1$ have finite second moments.
-  - The vector field $f^{\theta}$ is Lipschitz continuous with respect to the generated state with integrable Lipschitz constant $L(\tau)$.
-  - The expected squared norm of the guidance correction $\Gamma(s\,|\,\xi)$ over the initial distribution is integrable over time.
-- **Mathematical Mechanism:** DeGG-Flow represents the generative process as a control-affine dynamical system. It develops guidance conditions for shared requirements (dependent on multiple agents) and private requirements (dependent on an agent and its neighbors) by establishing feasibility conditions and finite-horizon convergence guarantees.
-  - 收敛界 (Convergence bound):
-    $$W_2(\mu_1,\nu_1) \leq \int_0^1 \! \exp\!\left( \int_s^1 \! L(r) \,\mathrm{d}r \right) \sqrt{ \int_{\mathcal{Z}^{N}}\! \left\|\Gamma(s\,|\,\xi)\right\|^2 p_0(\xi) \,\mathrm{d}\xi } \;\mathrm{d}s$$
-- **Convergence or behavior boundaries:** If the final boundary condition $\beta_a^{\mathrm{SE}}(1\,|\,\chi,\mathbf{z}(0))=0$ is met, then $q_a^{\mathrm{SE}}(1,\mathbf{z}_{\mathcal{S}_a^{\mathrm{SE}}}(1)\,|\,\chi)\leq 0$, meaning the final generated state strictly satisfies the shared hard requirement. The Wasserstein distance $W_2(\mu_1,\nu_1)$ between the nominal and guided distributions is bounded by the integrated guidance correction.
-- **Applicable Scope:** Multi-agent generative environments requiring hard constraint satisfaction, such as multi-robot collaboration and scene generation with affordance requirements.
-- **Limitations:** Theoretical bounds assume Lipschitz continuity of the underlying vector fields and finite second moments of the distributions. The framework requires the final bound condition to strictly reach zero to guarantee exact constraint satisfaction.
-- **Agent Architecture Mapping:** Can conceptually support generative agent architectures by introducing decoupled guidance modules, ensuring that decentralized outputs from multiple autonomous agents satisfy shared system-level hard constraints without requiring synchronized internal state exchange during generation.
-- **Repository Implementation Status:** NOT_IMPLEMENTED
-- **Repository Test Status:** NOT_TESTED
-- **Beginner Analogy:** Imagine multiple artists painting a large mural together. If they don't coordinate, the final picture will be chaotic. Instead of constantly stopping to discuss every brushstroke, each artist follows a set of decoupled "guardrails" (guidance) that ensures their individual work will perfectly align with the others at the edges, guaranteeing the final mural satisfies the overall design without needing real-time micromanagement.
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED

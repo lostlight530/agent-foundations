@@ -44,8 +44,6 @@
 - **表格表示 (Tabular Expressions):** 收敛界是在假设策略和价值函数采用表格表示的情况下建立的。
 - **局部可观察性:** 智能体只能观察其局部状态，并与拓扑图中的直接邻居进行通信。
 
-
-
 ### 边界与收敛
 - **收敛保证:** 在表格表示和特定的拓扑条件（Erdős–Rényi）下，去中心化的策略梯度收敛于真实目标的驻点。
 - **拓扑瓶颈:** 收敛速度受到通信图的谱特性（代数连通度）的限制。
@@ -63,6 +61,296 @@
 想象一家大公司试图推出一款新产品。如果每个员工都试图与其他所有人交谈（全局通信），那将是一场混乱。如果他们只听从 CEO 的（中心化），就会失去局部背景。
 TAPE 提出了一种结构，员工只与他们的直接团队成员和相邻部门（他们的“拓扑”）进行沟通。通过学会重视这些特定邻居的意见，每个部门都可以在局部调整其策略。数学证明了如果组织架构连接得足够好，这些局部调整最终将引导整个公司实现协调一致、最优的产品发布，而不需要一个中央老板来微观管理每一个细节。
 
+## Discretized Distributed Optimization over Dynamic Digraphs
+- **System Container:** Collaboration System
+- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
+  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
+  - **Publication Date:** 2023-11-14
+  - **URL:** https://arxiv.org/abs/2311.07939
+
+#### 1. 原始问题
+该论文旨在解决时变有向图上的分布式优化问题，其中链路故障或切换拓扑会破坏网络权重矩阵的双随机性（这是大多数现有算法所需的属性）。它提出了一个离散化模型，消除了在链路移除下进行实时权重重新设计的需要。
+
+#### 2. 数学机制
+核心机制涉及在权重平衡（而非双随机）有向图上的连续时间和离散化网络动力学及梯度追踪。
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
+  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
+- **数学更新规则 (Mathematical Update Rule):**
+  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
+
+#### 3. 核心假设
+- **成本函数:** 局部成本函数 $f_i$ 是平滑的、严格凸的，且具有局部 Lipschitz 梯度。
+- **网络连通性:** 图 $\mc{G}$ 是有向的，且在每个时间 $t$ 都是强连通的。链路权重为正且严格小于 1。
+- **权重平衡设计:** 权重邻接矩阵 $W$ 和 $A$ 是权重平衡的，而非严格双随机的（即行和等于列和，但不一定等于 1）。
+
+#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+该框架在底层动态网络拓扑保持权重对称和平衡的假设下，保证了动态收敛优化。步长 $\alpha$ 的边界为：
+$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
+
+#### 5. 适用范围
+该框架适用于经历链路断开或拓扑切换的动态网络，只要底层图在所有时间保持强连通和权重平衡，即可保证收敛。
+
+#### 6. 理论局限
+收敛保证严格依赖于局部成本函数的严格凸性以及网络在每个时刻保持强连通和矩阵权重平衡。如果这些连通性或平衡条件瞬间失效，则边界可能不成立。
+
+#### 7. 架构映射
+- **映射状态:** CONCEPTUAL_MAPPING
+- **解释:** 权重平衡的梯度追踪机制在概念上映射为多智能体系统（其中智能体连接动态断开）内部的去中心化学习和优化协议。它为设计弹性更新机制提供了依据，该机制不需要在每次拓扑更改后进行完美的双随机同步。
+
+#### 8. 证据与状态
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+
+#### 9. 初学者类比
+想象一群朋友试图通过平均他们个人的地图位置来商定城市的准确中心。他们只能通过给几个特定的朋友打电话来交流（有向图）。通常，如果电话线断开，每个人都必须完美地重新调整他们对其他人的信任程度，以确保他们的平均值不会偏移（双随机重新设计）。这个算法的工作方式不同：只要每个人接收到的信息量总体上等于发送出的信息量（权重平衡），他们就可以继续更新他们的估计，而不需要在每次电话断开时进行完整的重新计算。
+
+## 间歇性故障与恶意传输下的多智能体弹性共识
+- **System Container:** Collaboration System
+- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
+  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
+  - **Publication Date:** 2024-03-26
+  - **URL:** https://arxiv.org/abs/2403.17907
+- **Original Problem:** 当合法智能体在无向网络中通信时受到间歇性故障或恶意传输的干扰，基于常数阈值的标准信任模型无法检测到这种间歇性的拜占庭活动，难以达成共识。
+- **Core Assumptions:**
+  - 合法传输具有相同的预期信任度，且严格高于恶意传输的预期信任度 ($d - c_j > 0$)。
+  - 潜在的合法图在整个时间上保持连通。
+- **Mathematical Mechanism:**
+  - **核心更新公式** (Misclassification Probability Bound):
+    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
+- **Convergence or Behavior Bound:** 合法智能体几乎必定能通过几何衰减的误分类概率正确确定其信任邻域，保证在存在恶意智能体的情况下的共识收敛。
+- **Applicability Scope:** 弹性多智能体协调场景（如联邦学习或分布式集群控制），需要在不可靠或被主动破坏的传输环境中达成共识。
+- **Limitations:** 界限严重依赖于明确的期望差距 ($d - c_j > 0$) 不能趋近于零，如果恶意节点准确地模仿基线信任分布，该机制将失效。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Repository Test Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** 想象一群朋友试图决定去哪里吃饭（共识）。群体中有一些人通过在随机时间大喊糟糕的想法来秘密试图破坏计划（间歇性攻击）。标准过滤失败是因为坏人在大部分时间表现正常。这个系统引入了滑动信任窗口：如果有人偶尔破坏计划，他们的信任分数会随着时间的推移成几何级数衰减，确保朋友们只听可靠的人的，并最终做出决定。
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## 自我对弈 Q 学习中的共谋
+
+- **System Container (系统容器):** Collaboration System
+- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
+- **Original Problem (论文原始问题):** 在迭代囚徒困境等多智能体环境中，未协调的学习通常无法实现相互合作，但经验证据表明自我对弈 Q 学习者会出人意料地共谋。理解这种收敛背后的数学机制对于可预测的多智能体训练是必要的。
+- **Core Assumptions (核心假设):**
+  - 智能体采用自我对弈的 $\epsilon$-贪婪 Q 学习。
+  - 博弈是具有偏向背叛的标准收益结构的迭代囚徒困境 (IPD)。
+- **Mathematical Mechanism (数学机制):**
+  - **核心更新公式:** 算法通过 Q 值更新驱动的一系列相变收敛到合作状态。在初始阶段，背叛动作 Q 值的收敛界为 $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$。
+- **Convergence or behavior boundaries (收敛或行为边界):**
+  - **收敛界:** Q 值的收敛在每个阶段都是线性的，每个阶段在 $\bigo(1/\alpha)$ 步内实现收敛，最终在特定的初始化界限下保证收敛到类似 Pavlov 的合作策略。
+- **Applicability Scope (适用范围):** 一般和博弈中独立的多智能体强化学习 (MARL)，其中智能体在没有中心协调的情况下更新局部价值函数。
+- **Limitations (局限):** 证明严重依赖于乐观初始化以及对学习率和折扣因子的特定界限；如果没有 IPD 收益结构，它不能推广到任意对抗性一般和博弈。
+- **Agent Architecture Mapping (Agent 架构映射):** CONCEPTUAL_MAPPING
+- 在概念上可以支持独立的多智能体自我对弈机制，其中可以通过去中心化的价值更新和乐观初始化纯粹地培养合作均衡，而不是显式的协调协议。
+- **Repository Implementation Status (实现状态):** EVIDENCE_INSUFFICIENT
+- **Repository Test Status (测试状态):** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy (初学者类比):** 想象两家竞争企业在没有沟通的情况下定价。通常，他们都会大幅降价（背叛）来抢走客户，从而损害双方的利润。然而，如果他们一开始都对能赚多少钱抱有疯狂的乐观态度（乐观初始化），他们的学习算法会慢慢意识到，惩罚对方的降价同时奖励价格匹配，最终会导致他们隐性共谋并保持高价（合作）。
+- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+
+## Semantic Fusion：用于去中心化协作的切片范围双模拟 — 2026-09-21
+
+- **System Container:** Collaboration System
+- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
+- **Authors:** Sofiya Zaichyk
+- **URL:** https://arxiv.org/abs/2601.12580
+- **Version:** arXiv:2601.12580v1
+- **Publication Date:** 2026-01-18
+- **Source Surface Checked:** 官方 arXiv 摘要与 HTML 全文
+- **Check Date:** 2026-09-21
+- **Theoretical Selection Reason:** 论文给出了去中心化 Agent 在只持有局部语义视图、异步运行时，使局部执行与全局语义投影保持形式关系的明确条件，因此它提供的是有边界的协调机制，而不是单纯 Benchmark 提升
+
+### 论文原始问题
+
+去中心化 Agent 可能只持有部分语义视图并异步运行。论文研究在不依赖中心控制、全局同步或无限制消息传递的情况下，局部状态演化何时能够与全局语义模型保持一致
+
+### 核心假设
+
+论文的确定性 slice/global stuttering-bisimulation 结果依赖：
+
+1. **切片范围验证:** 每个被集成的更新都必须满足 ontology 约束，并且只影响创建该更新的 Agent 所属语义切片
+2. **可靠 refresh 传播:** 每个与某切片相关的更新最终都会到达所有相关 Agent
+3. **确定性合并且不重排:** 取回的更新只合并一次，并按照 commit 顺序处理
+
+这些是论文定理的适用条件，不是本仓库已经实现的事实
+
+### 数学机制
+
+对 Agent (a)，论文用 stuttering-bisimulation relation 将局部记忆 (M_a(t)) 与全局记忆在 ontology slice 上的投影联系起来：
+
+$$
+\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
+$$
+
+因此局部 transition system 在给定假设下与全局执行在该 Agent ontology slice 上的投影形成 stuttering bisimulation
+
+论文还把一个已验证更新的通信成本限制为其语义切片与更新实体相交的 Agent 数 (d)：
+
+$$
+\mathrm{Communication\ Cost}=O(d)
+$$
+
+这是针对 scoped propagation 的通信边界，不表示整个系统的所有实现开销都与 Agent 总数无关
+
+### 收敛或行为边界
+
+- 在定理假设成立时，局部 slice execution 可以通过 stuttering bisimulation 与对应的全局投影建立形式关系
+- 对于 ontology scope 完全不相交的更新，论文给出 causal isolation
+- 论文报告了 250 个 Agent、11,325 次更新的作者侧模拟验证
+- 作者侧模拟不等于本仓库独立复现
+- 这些形式结果不能自动推广到任意 LLM Agent 语义、任意 ontology 演化、超出假设的非可靠 refresh，也不能证明本仓库 runtime 行为
+
+### 适用范围
+
+适用于具有显式语义切片、结构化更新验证、可检查状态迁移和有界传播规则的去中心化多 Agent 系统
+
+### 局限
+
+- 确定性双模拟结果依赖 slice-relevant update 的可靠传播和确定性排序
+- 正确的 ontology 设计与验证本身被作为假设，并未被普遍解决
+- 论文中的形式语义与 reference architecture 属于外部证据
+- Agent Foundations 当前没有实现 Semantic Fusion Collaboration runtime
+
+### Agent 架构映射
+
+- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
+- **Current Mapping State:** `DESIGN_ANALOGY`
+- **Repository Implementation State:** `NOT_IMPLEMENTED`
+- **Repository Validation State:** `NOT_TESTED`
+
+可借鉴的设计类比是：协作状态应当具有明确 scope、类型和本地验证边界，而不是默认所有 Agent 继承同一个可任意修改的全局上下文。该类比不能证明仓库已经实现 ontology slice、refresh propagation 或 bisimulation checker
+
+### 初学者类比
+
+想象多个应急小组共同维护一张持续变化的城市地图，每个小组只看到与自己任务有关的区域。地图变化只有满足共同规则才允许写入，并且只有负责相关区域的小组需要刷新。论文的定理更接近于证明：在特定传播与排序假设下，每个小组的局部地图可以和全局地图中与自己相关的部分保持行为一致，而不是证明任意群聊都天然不会产生状态冲突
+
+### 证据状态
+
+- **Evidence Level:** `E4_PREPRINT`
+- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
+- **Independent Reproduction:** `NO`
+- **Verified-Core Admission:** `NOT_PERFORMED`
+- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
+
+## 理论点 33 (Theoretical Point 33)
+
+- **技术点名称 (Technology Point Name):** 面向协作多智能体策略梯度的智能体拓扑 (Agent Topology for Cooperative Multi-Agent Policy Gradient)
+- **System Container:** Collaboration System
+- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
+  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
+  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
+  - **URL:** https://arxiv.org/abs/2312.15667
+  - **Version:** arXiv:2312.15667v3
+  - **v1 Date:** 2023-12-25
+  - **v3 Date:** 2024-01-15
+  - **Check Date:** 2026-09-24
+- **论文原始问题 (Original Paper Problem):** 中心化评论家会让某个智能体的次优或探索动作影响其他智能体的策略更新，即 centralized-decentralized mismatch（CDM）；而完全独立的评论家虽然减少这种干扰，却会削弱协作。TAPE 研究一种中间方案：让策略更新只使用由拓扑定义的联盟 utility。
+- **核心假设 (Core Assumptions):**
+  - 论文把协作任务建模为 Dec-POMDP。
+  - TAPE 的 agent topology 描述的是**策略更新之间的关系**：若边 \(e_{ij}\) 存在，智能体 \(i\) 在更新时考虑智能体 \(j\) 的 utility。论文明确说明它**不是**测试阶段的通信网络。
+  - 框架对一般拓扑给出的基本约束是每个智能体必须包含自考虑边，即对所有 \(i\)，\(e_{ii}\in\mathcal{E}\)；除此之外论文允许任意拓扑。
+  - Theorem 1 的随机 TAPE policy-improvement 结果以表格策略（tabular policies）和足够小的更新为条件。
+- **数学机制 (Mathematical Mechanism):**
+  - 智能体 \(i\) 的联盟 utility：\(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\)。
+  - 随机 TAPE 更新：
+    \[
+    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
+    \]
+  - 这是论文给出的、由拓扑约束 coalition utility 的策略梯度机制；不是本仓自行概括出的通用“邻域 Q”公式。
+- **收敛或行为边界 (Convergence or Behavior Boundaries):**
+  - 在 Theorem 1 的 tabular-policy 与 sufficiently-small-update 条件下，随机 TAPE 更新对论文定义的联合目标 \(J(\boldsymbol{\pi})\) 给出单调改进。
+  - 论文另行分析 Erdős–Rényi（ER）拓扑下的参数更新多样性；Theorem 2 给出方差差值与 ER 边概率的关系 \(\Delta\propto p^2\)。
+  - ER 是论文研究并用于实验的一类图模型，**不是** Theorem 1 的通用拓扑前提。
+- **适用范围 (Scope of Application):** 适用于协作多智能体强化学习，其中可以用 coalition-scoped utility 明确控制哪些 peer utility 影响策略更新，以在协作与 CDM 之间取得有界折中。该结果不建立一个通用去中心化通信协议。
+- **局限 (Limitations):** policy-improvement 定理受明确假设约束；论文的 agent topology 不证明测试阶段通信行为；定理与实验不能自动推广到任意动态拓扑、任意函数逼近器，也不能证明 Agent Foundations 已实现相关 runtime。
+- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING。可借鉴的有界设计类比是：显式、可检查地定义一次更新会受哪些 peer utility 影响。它不是仓库强制规范、已部署协作协议，也不证明稀疏邻域总是优于其他结构。
+- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 一个项目组可以明确规定某位成员更新绩效判断时，应参考哪些队友的反馈。听所有人会把远处无关错误传播进来，谁都不听又无法协作。TAPE 把“哪些队友的 utility 进入本次更新”形式化，但不声称这些边同时就是团队实际通信网络。
+- **中英文内容 (Bilingual Content):** ALIGNED
+- **证据状态 (Evidence Status):**
+  - Canonical Source: S40
+  - Source Revisit: YES
+  - New Independent Source Support: NO
+  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+  - Verified-Core Admission: NOT_PERFORMED
+- **2026-09-24 Correction / Reconciliation:** 本生成文档较早的 TAPE 段落曾使用更强措辞，把 policy-update topology 与 communication topology 混同，并把 v3 与 v1 日期配对。历史生成文本继续作为时间点证据保留，但当前来源解释以后述有界版本为准。
+
+## 认知与概率混合的受保护多智能体协调 (Epistemic-Probabilistic Guarded Coordination)
+
+- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
+- **System Container:** Collaboration System
+- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
+- **Original Problem:** 基于 LLM 的多智能体系统通常缺乏对社会知识与协议驱动协调机制的显式表示，导致其生成的动作看似流畅，但并未真正受到智能体信息状态或交互协议的授权约束。
+- **Core Assumptions:** 依赖于适应于过滤 $\mathcal{F}_t$ 的执行过程，一个映射到有界状态 $B$ 的排名函数 $\rho$，以及严格的状态约束，即策略必须在非目标状态下以至少 $\varepsilon > 0$ 的概率选择被允许的动作。
+- **Mathematical Mechanism:** 数学更新与边界验证：
+  核心更新公式 (Guard predicate definition):
+  ```latex
+  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
+  ```
+- **收敛或行为边界 (Convergence or behavior boundaries):** 系统提供了由到达目标集合 $G$ 的期望时间所界定的条件排名进度界限：$\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$。
+- **适用范围 (Applicability):** 需要遵循协议的多智能体协作架构，以及在需要通过符号化核心来限制具有不确定性的 LLM 行为的神经符号系统中。
+- **局限 (Limitations):** 理论边界极度依赖于非目标等待时间受几何随机变量支配的假设及明确的认知状态约束。在受限知识片段之外的一般化环境中尚缺乏具体的实现与保证。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在设计上可作为候选方案（Design Candidate），用于在多智能体路由中建立生成行为与确定性许可引擎分离的策略守卫层。
+- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一个公司，员工（LLM）会提出各种有创意的点子，但在任何点子被执行前，都必须经过一位铁面无私的合规官（Guard）依据不可更改的规则手册进行核对。无论员工的提议听起来多么完美，只要违反了成文规则，合规官就会默默驳回并给出一张诊断单。
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+
+## 基于拓扑的多智能体策略梯度 (Topology-based multi-Agent Policy gradiEnt (TAPE))
+
+- **技术点 (Technical Point):** 基于拓扑的多智能体策略梯度 (TAPE)
+- **System Container:** Collaboration System
+- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
+- **版本身份 (Version Identity):** arXiv v1 提交于 2023-12-25；v3 修订于 2024-01-15。本仓映射明确对应 v3，不静默替换为后续版本。
+- **论文原始问题 (Original Problem):** 现有的多智能体策略梯度 (MAPG) 方法受到集中-分散不匹配 (CDM) 问题的困扰，即一个智能体的次优动作会不当地影响其他智能体的参数更新，限制了稳健的协作。
+- **核心假设 (Core Assumptions):** 合作多智能体强化学习 (MARL)，策略可被参数化（例如神经网络），并且智能体形成智能体拓扑（如 Erdős-Rényi 随机图），将通信限制在联盟成员之间。
+- **数学机制 (Mathematical Mechanism):**
+  随机 TAPE 提出了一种基于联盟效用的基于拓扑的策略梯度。智能体 $i$ 的策略梯度为：
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
+  这可以转化为：
+  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
+  其中 $E_{ij}$ 是表示智能体拓扑的邻接矩阵。
+- **收敛或行为边界 (Convergence or behavior boundaries):**
+  定理 1 证明了随机 TAPE 策略的改进：对于任何更新前的策略 $\bm{\pi}$ 和以足够小的步长更新的策略 $\hat{\bm{\pi}}$，联合策略单调递增：$J(\hat{\bm{\pi}})\geq J(\bm{\pi})$。定理 2 表明，与标准 DOP 相比，随机 TAPE 在策略更新中保持了更高的方差，从而能够更好地探索参数空间（方差差异与 $p^2$ 成正比）。
+- **适用范围 (Applicability Scope):** 需要多样化协作模式并能抵御局部次优动作的合作多智能体环境，特别是在 SMAC 或基于等级的觅食等游戏中。
+- **局限 (Limitations):** Erdős-Rényi 拓扑中过大的边缘概率 $p$ 可能会重新引入 CDM 问题，需要平衡超参数 $p$。边界依赖于足够小的步长 $\delta$。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持 LLM 多智能体网络中的模块化协作图，智能体仅影响直接连接对等方的梯度/更新，从而避免单个不良行为者引发全系统范围的故障级联。
+- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
+- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
+- **初学者类比 (Beginner Analogy):** 想象一群工人在建房子。如果每个人都听所有人的（全连接），一个人喊出坏主意就会分散整个团队的注意力（CDM 问题）。使用 TAPE，工人只听从他们直接的本地团队（他们的联盟或拓扑）。这防止了坏主意同时到处蔓延，同时仍然允许团队共同找出建房子的最佳方法。
+
+## 利用部分对称性进行多智能体强化学习 (Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
+- **Original Problem:** 现实世界的多智能体应用中很少满足严格的对称性，这使得现有的基于对称性的数据增强技术在应用于部分对称环境时显得脆弱，从而导致累积的性能误差。
+- **Core Assumptions:** 环境被公式化为满足有界奖励偏差 $|R(s, a) - R(gs, ga)| \leq \epsilon$ 且在最大均值差异 (MMD) 下受到 $\delta$ 限制的部分对称马尔可夫博弈 $\mathcal{M}_g$。
+- **Mathematical Mechanism:**
+  核心更新公式 (Core Update Formula)
+  自适应调节系数决定了使用对称性增强数据或加权对称性约束的概率，该概率随时间衰减：
+  $$
+  \lambda (D,k) = D e^{-\beta k}
+  $$
+  其中 $D$ 表示对称程度，$\beta$ 是在 $k$ 次迭代中的衰减率。
+- **Convergence or behavior boundaries:**
+  收敛界 (Convergence Bound)
+  对于部分对称马尔可夫博弈，引入对称样本所带来的性能误差是有界的：
+  $$
+  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
+  $$
+- **Applicability:** 去中心化或部分对称的多智能体网络，其中智能体共享相似但不完全相同的转换和奖励结构。
+- **Limitations:** 理论上的误差界限需要对衰减率 ($\beta$) 进行特定的超参数调整，以平衡早期的探索加速和后期的特定状态利用。
+- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. 有界部分对称性的概念可以指导协作系统在相似但不同的智能体角色之间进行状态共享和数据增强协议的设计。
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
+- **Repository Test Status:** NOT_TESTED.
+- **Beginner Analogy:** 想象一下教两个略有不同的机器人走迷宫。虽然它们不是同卵双胞胎（完美对称），但它们足够相似，以至于一个机器人最初可以从另一个机器人的错误中学习。然而，随着它们越来越接近掌握迷宫，它们需要更多地依赖自己特定的传感器，减少对同伴一般建议的依赖，以避免犯下微小但关键的错误。
+- **Bilingual Content:** Included.
+- **Paper Evidence Status:** PAPER_ONLY.
+- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
 
 ## Weekly Document Cascade & Conflict Audit
 
@@ -468,7 +756,6 @@ Implementation Status: 暂无代码库实现。当前仅为概念映射。
 该算法引入了一种拓扑感知的策略梯度方法，其中每个智能体 $i$ 的策略更新依赖于来自其邻居 $\mathcal{N}_i$ 的消息。通过去中心化梯度最大化目标函数 $J(\pi)$：
 $$ \nabla_{\theta_i} J(\pi) \approx \mathbb{E}_{\pi} \left[ \nabla_{\theta_i} \log \pi_i(a_i|o_i) Q^{\pi}_{i}(o_i, a_i, m_{\mathcal{N}_i}) \right] $$
 其中 $Q^{\pi}_{i}$ 是一个局部的动作价值函数，以从拓扑图中的相邻智能体收到的消息 $m_{\mathcal{N}_i}$ 为条件。
-
 
 ### Code for
 
@@ -2155,7 +2442,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **初学者类比:** 想象一个有 20 个厨师的大型餐厅厨房。与其强迫 20 个人同时就每道菜达成一致（这会花费无尽的时间），不如根据菜单将他们分成小且重叠的团队。每个团队优化自己的局部食谱。这在数学上限制了厨房可能出现的最坏情况，只要团队保持相对独立（稀疏），就能保证最坏情况下的效率。
 - **证据状态:** PAPER_ONLY
 
-
 ### 贝叶斯智能体下防复制的老虎机机制设计 (Replication-proof Bandit Mechanism Design with Bayesian Agents)
 - **System Container:** Collaboration System
 - **Frontier Source:** S41 (arXiv:2312.16896v2, *Replication-proof Bandit Mechanism Design with Bayesian Agents*)
@@ -2174,7 +2460,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
 - **Beginner Analogy:** 想象一下，多个厨师向餐厅菜单提交秘制食谱。如果餐厅使用标准的品尝算法（如 UCB），一个狡猾的厨师可能会将相同的普通食谱以不同的名字提交 100 次，只是为了增加它被选中的机会。层次化 ETC 算法通过首先随机挑选一个厨师，然后评估他们的食谱来解决这个问题。厨师们很快意识到，提交重复的食谱并不会增加他们被选为厨师的机会，这只会浪费他们自己的评估时间。
-
 
 ### 马尔可夫协同演化意见形成的收敛性 (Convergence in Markov Coevolutionary Opinion Formation)
 
@@ -2201,7 +2486,6 @@ Evidence Status: CONCEPTUAL_MAPPING
 - **初学者类比 (Beginner Analogy):** 想象一群人正在形成意见，基于他们目前的信念，他们交流的对象（社交网络）会随机改变。这通常会导致无休止的混乱。然而，如果每个人都乐观地更新他们的意见（假设其他人不会发生剧烈变化），他们最终可以达到一个大致稳定的状态（近似平衡），此时没有人再剧烈改变主意了。
 - **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 
-<!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
 - 本周文档级联编织 (Weekly document cascade weaving)
@@ -2214,96 +2498,6 @@ Evidence Status: CONCEPTUAL_MAPPING
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
-
-
-### Discretized Distributed Optimization over Dynamic Digraphs
-- **System Container:** Collaboration System
-- **Frontier Source:** S45 (arXiv:2311.07939v2, *Discretized Distributed Optimization over Dynamic Digraphs*)
-  - **Authors:** Mohammadreza Doostmohammadian, Wei Jiang, Muwahida Liaquat, Alireza Aghasi, Houman Zarrabi
-  - **Publication Date:** 2023-11-14
-  - **URL:** https://arxiv.org/abs/2311.07939
-
-#### 1. 原始问题
-该论文旨在解决时变有向图上的分布式优化问题，其中链路故障或切换拓扑会破坏网络权重矩阵的双随机性（这是大多数现有算法所需的属性）。它提出了一个离散化模型，消除了在链路移除下进行实时权重重新设计的需要。
-
-#### 2. 数学机制
-核心机制涉及在权重平衡（而非双随机）有向图上的连续时间和离散化网络动力学及梯度追踪。
-- **数学更新规则 (Mathematical Update Rule):**
-  $$\dot{\mb{x}}_i = -\sum_{j=1}^{n} w^q_{ij}(\mb{x}_i-\mb{x}_j)-\alpha \mb{y}_i$$
-  $$\dot{\mb{y}}_i = -\sum_{j=1}^{n} a^q_{ij}(\mb{y}_i-\mb{y}_j) + \partial_t \boldsymbol{\nabla} f_i(\mb{x}_i)$$
-- **数学更新规则 (Mathematical Update Rule):**
-  $$\left(\begin{array}{c} \mb{x}(k+1) \\ \mb{y}(k+1) \end{array} \right) = M_d(\eta,\alpha ) \left(\begin{array}{c} {\mb{x}(k)} \\ {\mb{y}(k)} \end{array} \right)$$
-
-#### 3. 核心假设
-- **成本函数:** 局部成本函数 $f_i$ 是平滑的、严格凸的，且具有局部 Lipschitz 梯度。
-- **网络连通性:** 图 $\mc{G}$ 是有向的，且在每个时间 $t$ 都是强连通的。链路权重为正且严格小于 1。
-- **权重平衡设计:** 权重邻接矩阵 $W$ 和 $A$ 是权重平衡的，而非严格双随机的（即行和等于列和，但不一定等于 1）。
-
-#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
-该框架在底层动态网络拓扑保持权重对称和平衡的假设下，保证了动态收敛优化。步长 $\alpha$ 的边界为：
-$$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda_{\max}(\overline{W}) \}}{\gamma} $$
-
-#### 5. 适用范围
-该框架适用于经历链路断开或拓扑切换的动态网络，只要底层图在所有时间保持强连通和权重平衡，即可保证收敛。
-
-#### 6. 理论局限
-收敛保证严格依赖于局部成本函数的严格凸性以及网络在每个时刻保持强连通和矩阵权重平衡。如果这些连通性或平衡条件瞬间失效，则边界可能不成立。
-
-#### 7. 架构映射
-- **映射状态:** CONCEPTUAL_MAPPING
-- **解释:** 权重平衡的梯度追踪机制在概念上映射为多智能体系统（其中智能体连接动态断开）内部的去中心化学习和优化协议。它为设计弹性更新机制提供了依据，该机制不需要在每次拓扑更改后进行完美的双随机同步。
-
-#### 8. 证据与状态
-- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-
-#### 9. 初学者类比
-想象一群朋友试图通过平均他们个人的地图位置来商定城市的准确中心。他们只能通过给几个特定的朋友打电话来交流（有向图）。通常，如果电话线断开，每个人都必须完美地重新调整他们对其他人的信任程度，以确保他们的平均值不会偏移（双随机重新设计）。这个算法的工作方式不同：只要每个人接收到的信息量总体上等于发送出的信息量（权重平衡），他们就可以继续更新他们的估计，而不需要在每次电话断开时进行完整的重新计算。
-
-### 间歇性故障与恶意传输下的多智能体弹性共识
-- **System Container:** Collaboration System
-- **Frontier Source:** S44 (arXiv:2403.17907v1, *Multi-Agent Resilient Consensus under Intermittent Faulty and Malicious Transmissions (Extended Version)*)
-  - **Authors:** Sarper Aydın, Orhan Eren Akgün, Stephanie Gil, Angelia Nedić
-  - **Publication Date:** 2024-03-26
-  - **URL:** https://arxiv.org/abs/2403.17907
-- **Original Problem:** 当合法智能体在无向网络中通信时受到间歇性故障或恶意传输的干扰，基于常数阈值的标准信任模型无法检测到这种间歇性的拜占庭活动，难以达成共识。
-- **Core Assumptions:**
-  - 合法传输具有相同的预期信任度，且严格高于恶意传输的预期信任度 ($d - c_j > 0$)。
-  - 潜在的合法图在整个时间上保持连通。
-- **Mathematical Mechanism:**
-  - **核心更新公式** (Misclassification Probability Bound):
-    $$ \mathbb{P} \Big ( \max_{i \in \mathcal{L}} \: \limsup_{t \rightarrow \infty} \varphi_i(T_0,t) > \frac{2\eta}{\delta} g_{\mathcal{L}} (T_0) \Big ) < \delta $$
-- **Convergence or Behavior Bound:** 合法智能体几乎必定能通过几何衰减的误分类概率正确确定其信任邻域，保证在存在恶意智能体的情况下的共识收敛。
-- **Applicability Scope:** 弹性多智能体协调场景（如联邦学习或分布式集群控制），需要在不可靠或被主动破坏的传输环境中达成共识。
-- **Limitations:** 界限严重依赖于明确的期望差距 ($d - c_j > 0$) 不能趋近于零，如果恶意节点准确地模仿基线信任分布，该机制将失效。
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象一群朋友试图决定去哪里吃饭（共识）。群体中有一些人通过在随机时间大喊糟糕的想法来秘密试图破坏计划（间歇性攻击）。标准过滤失败是因为坏人在大部分时间表现正常。这个系统引入了滑动信任窗口：如果有人偶尔破坏计划，他们的信任分数会随着时间的推移成几何级数衰减，确保朋友们只听可靠的人的，并最终做出决定。
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
-
-### 自我对弈 Q 学习中的共谋
-
-- **System Container (系统容器):** Collaboration System
-- **Frontier Source:** S47 (arXiv:2312.08484v3, https://arxiv.org/abs/2312.08484, *Self-Play Q-learners Can Provably Collude in the Iterated Prisoner's Dilemma*)
-- **Original Problem (论文原始问题):** 在迭代囚徒困境等多智能体环境中，未协调的学习通常无法实现相互合作，但经验证据表明自我对弈 Q 学习者会出人意料地共谋。理解这种收敛背后的数学机制对于可预测的多智能体训练是必要的。
-- **Core Assumptions (核心假设):**
-  - 智能体采用自我对弈的 $\epsilon$-贪婪 Q 学习。
-  - 博弈是具有偏向背叛的标准收益结构的迭代囚徒困境 (IPD)。
-- **Mathematical Mechanism (数学机制):**
-  - **核心更新公式:** 算法通过 Q 值更新驱动的一系列相变收敛到合作状态。在初始阶段，背叛动作 Q 值的收敛界为 $\qddd^{t+1} = \qddd^{t} + \alpha \left (\rdd + \gamma \qddd^{t} - \qddd^{t} \right )$。
-- **Convergence or behavior boundaries (收敛或行为边界):**
-  - **收敛界:** Q 值的收敛在每个阶段都是线性的，每个阶段在 $\bigo(1/\alpha)$ 步内实现收敛，最终在特定的初始化界限下保证收敛到类似 Pavlov 的合作策略。
-- **Applicability Scope (适用范围):** 一般和博弈中独立的多智能体强化学习 (MARL)，其中智能体在没有中心协调的情况下更新局部价值函数。
-- **Limitations (局限):** 证明严重依赖于乐观初始化以及对学习率和折扣因子的特定界限；如果没有 IPD 收益结构，它不能推广到任意对抗性一般和博弈。
-- **Agent Architecture Mapping (Agent 架构映射):** CONCEPTUAL_MAPPING
-- 在概念上可以支持独立的多智能体自我对弈机制，其中可以通过去中心化的价值更新和乐观初始化纯粹地培养合作均衡，而不是显式的协调协议。
-- **Repository Implementation Status (实现状态):** EVIDENCE_INSUFFICIENT
-- **Repository Test Status (测试状态):** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy (初学者类比):** 想象两家竞争企业在没有沟通的情况下定价。通常，他们都会大幅降价（背叛）来抢走客户，从而损害双方的利润。然而，如果他们一开始都对能赚多少钱抱有疯狂的乐观态度（乐观初始化），他们的学习算法会慢慢意识到，惩罚对方的降价同时奖励价格匹配，最终会导致他们隐性共谋并保持高价（合作）。
-- **Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 
 ## 维护说明 — 2026-09-19 / 9 月 14–18 日周期
 
@@ -2326,7 +2520,6 @@ $$ 0 < \alpha \eta < \frac{\min \{1 - \lambda_{\max}(\overline{A}) , 1 - \lambda
 `PAPER_EVIDENCE != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION`
 
 2026 年 9 月自然月仍处于 OPEN；本说明不创建、也不暗示 September Monthly Strategic Blueprint 已最终封月。
-
 
 ## W38 当前周度级联 — 2026-09-20
 
@@ -2404,207 +2597,14 @@ NO_RUNTIME_PROMOTION
 MONTH_OPEN
 ```
 
-## Semantic Fusion：用于去中心化协作的切片范围双模拟 — 2026-09-21
-
-- **System Container:** Collaboration System
-- **Frontier Source:** S51 — *Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems*
-- **Authors:** Sofiya Zaichyk
-- **URL:** https://arxiv.org/abs/2601.12580
-- **Version:** arXiv:2601.12580v1
-- **Publication Date:** 2026-01-18
-- **Source Surface Checked:** 官方 arXiv 摘要与 HTML 全文
-- **Check Date:** 2026-09-21
-- **Theoretical Selection Reason:** 论文给出了去中心化 Agent 在只持有局部语义视图、异步运行时，使局部执行与全局语义投影保持形式关系的明确条件，因此它提供的是有边界的协调机制，而不是单纯 Benchmark 提升
-
-### 论文原始问题
-
-去中心化 Agent 可能只持有部分语义视图并异步运行。论文研究在不依赖中心控制、全局同步或无限制消息传递的情况下，局部状态演化何时能够与全局语义模型保持一致
-
-### 核心假设
-
-论文的确定性 slice/global stuttering-bisimulation 结果依赖：
-
-1. **切片范围验证:** 每个被集成的更新都必须满足 ontology 约束，并且只影响创建该更新的 Agent 所属语义切片
-2. **可靠 refresh 传播:** 每个与某切片相关的更新最终都会到达所有相关 Agent
-3. **确定性合并且不重排:** 取回的更新只合并一次，并按照 commit 顺序处理
-
-这些是论文定理的适用条件，不是本仓库已经实现的事实
-
-### 数学机制
-
-对 Agent (a)，论文用 stuttering-bisimulation relation 将局部记忆 (M_a(t)) 与全局记忆在 ontology slice 上的投影联系起来：
-
-$$
-\exists\,t'\le t:\;\bigl(M_a(t),\pi_{O_a}(\mathcal{M}(t'))\bigr)\in\mathcal{R}_a
-$$
-
-因此局部 transition system 在给定假设下与全局执行在该 Agent ontology slice 上的投影形成 stuttering bisimulation
-
-论文还把一个已验证更新的通信成本限制为其语义切片与更新实体相交的 Agent 数 (d)：
-
-$$
-\mathrm{Communication\ Cost}=O(d)
-$$
-
-这是针对 scoped propagation 的通信边界，不表示整个系统的所有实现开销都与 Agent 总数无关
-
-### 收敛或行为边界
-
-- 在定理假设成立时，局部 slice execution 可以通过 stuttering bisimulation 与对应的全局投影建立形式关系
-- 对于 ontology scope 完全不相交的更新，论文给出 causal isolation
-- 论文报告了 250 个 Agent、11,325 次更新的作者侧模拟验证
-- 作者侧模拟不等于本仓库独立复现
-- 这些形式结果不能自动推广到任意 LLM Agent 语义、任意 ontology 演化、超出假设的非可靠 refresh，也不能证明本仓库 runtime 行为
-
-### 适用范围
-
-适用于具有显式语义切片、结构化更新验证、可检查状态迁移和有界传播规则的去中心化多 Agent 系统
-
-### 局限
-
-- 确定性双模拟结果依赖 slice-relevant update 的可靠传播和确定性排序
-- 正确的 ontology 设计与验证本身被作为假设，并未被普遍解决
-- 论文中的形式语义与 reference architecture 属于外部证据
-- Agent Foundations 当前没有实现 Semantic Fusion Collaboration runtime
-
-### Agent 架构映射
-
-- **Daily Research Mapping Class:** `CONCEPTUAL_MAPPING`
-- **Current Mapping State:** `DESIGN_ANALOGY`
-- **Repository Implementation State:** `NOT_IMPLEMENTED`
-- **Repository Validation State:** `NOT_TESTED`
-
-可借鉴的设计类比是：协作状态应当具有明确 scope、类型和本地验证边界，而不是默认所有 Agent 继承同一个可任意修改的全局上下文。该类比不能证明仓库已经实现 ontology slice、refresh propagation 或 bisimulation checker
-
-### 初学者类比
-
-想象多个应急小组共同维护一张持续变化的城市地图，每个小组只看到与自己任务有关的区域。地图变化只有满足共同规则才允许写入，并且只有负责相关区域的小组需要刷新。论文的定理更接近于证明：在特定传播与排序假设下，每个小组的局部地图可以和全局地图中与自己相关的部分保持行为一致，而不是证明任意群聊都天然不会产生状态冲突
-
-### 证据状态
-
-- **Evidence Level:** `E4_PREPRINT`
-- **Paper Surface:** `FULL_TEXT_PRIMARY_SOURCE_CHECKED`
-- **Independent Reproduction:** `NO`
-- **Verified-Core Admission:** `NOT_PERFORMED`
-- **Boundary:** `PAPER_EVIDENCE != DESIGN_ANALOGY != IMPLEMENTATION != VALIDATION`
-
-
-
-### 理论点 33 (Theoretical Point 33)
-
-- **技术点名称 (Technology Point Name):** 面向协作多智能体策略梯度的智能体拓扑 (Agent Topology for Cooperative Multi-Agent Policy Gradient)
-- **System Container:** Collaboration System
-- **Frontier Source:** S40 — SOURCE_REVISIT / CURRENT_PRIMARY_RECERTIFICATION
-  - **Title:** TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient
-  - **Authors:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du
-  - **URL:** https://arxiv.org/abs/2312.15667
-  - **Version:** arXiv:2312.15667v3
-  - **v1 Date:** 2023-12-25
-  - **v3 Date:** 2024-01-15
-  - **Check Date:** 2026-09-24
-- **论文原始问题 (Original Paper Problem):** 中心化评论家会让某个智能体的次优或探索动作影响其他智能体的策略更新，即 centralized-decentralized mismatch（CDM）；而完全独立的评论家虽然减少这种干扰，却会削弱协作。TAPE 研究一种中间方案：让策略更新只使用由拓扑定义的联盟 utility。
-- **核心假设 (Core Assumptions):**
-  - 论文把协作任务建模为 Dec-POMDP。
-  - TAPE 的 agent topology 描述的是**策略更新之间的关系**：若边 \(e_{ij}\) 存在，智能体 \(i\) 在更新时考虑智能体 \(j\) 的 utility。论文明确说明它**不是**测试阶段的通信网络。
-  - 框架对一般拓扑给出的基本约束是每个智能体必须包含自考虑边，即对所有 \(i\)，\(e_{ii}\in\mathcal{E}\)；除此之外论文允许任意拓扑。
-  - Theorem 1 的随机 TAPE policy-improvement 结果以表格策略（tabular policies）和足够小的更新为条件。
-- **数学机制 (Mathematical Mechanism):**
-  - 智能体 \(i\) 的联盟 utility：\(\mathbf{U}_{i}=\sum_{j=1}^{n}E_{ij}U_{j}\)。
-  - 随机 TAPE 更新：
-    \[
-    \nabla J_{1}(\theta)=\mathbb{E}_{\boldsymbol{\pi}}\left[\sum_{i}\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right].
-    \]
-  - 这是论文给出的、由拓扑约束 coalition utility 的策略梯度机制；不是本仓自行概括出的通用“邻域 Q”公式。
-- **收敛或行为边界 (Convergence or Behavior Boundaries):**
-  - 在 Theorem 1 的 tabular-policy 与 sufficiently-small-update 条件下，随机 TAPE 更新对论文定义的联合目标 \(J(\boldsymbol{\pi})\) 给出单调改进。
-  - 论文另行分析 Erdős–Rényi（ER）拓扑下的参数更新多样性；Theorem 2 给出方差差值与 ER 边概率的关系 \(\Delta\propto p^2\)。
-  - ER 是论文研究并用于实验的一类图模型，**不是** Theorem 1 的通用拓扑前提。
-- **适用范围 (Scope of Application):** 适用于协作多智能体强化学习，其中可以用 coalition-scoped utility 明确控制哪些 peer utility 影响策略更新，以在协作与 CDM 之间取得有界折中。该结果不建立一个通用去中心化通信协议。
-- **局限 (Limitations):** policy-improvement 定理受明确假设约束；论文的 agent topology 不证明测试阶段通信行为；定理与实验不能自动推广到任意动态拓扑、任意函数逼近器，也不能证明 Agent Foundations 已实现相关 runtime。
-- **Agent 架构映射 (Agent Architecture Mapping):** CONCEPTUAL_MAPPING。可借鉴的有界设计类比是：显式、可检查地定义一次更新会受哪些 peer utility 影响。它不是仓库强制规范、已部署协作协议，也不证明稀疏邻域总是优于其他结构。
-- **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 一个项目组可以明确规定某位成员更新绩效判断时，应参考哪些队友的反馈。听所有人会把远处无关错误传播进来，谁都不听又无法协作。TAPE 把“哪些队友的 utility 进入本次更新”形式化，但不声称这些边同时就是团队实际通信网络。
-- **中英文内容 (Bilingual Content):** ALIGNED
-- **证据状态 (Evidence Status):**
-  - Canonical Source: S40
-  - Source Revisit: YES
-  - New Independent Source Support: NO
-  - Paper Surface: FULL_TEXT_PRIMARY_SOURCE_CHECKED
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-  - Verified-Core Admission: NOT_PERFORMED
-- **2026-09-24 Correction / Reconciliation:** 本生成文档较早的 TAPE 段落曾使用更强措辞，把 policy-update topology 与 communication topology 混同，并把 v3 与 v1 日期配对。历史生成文本继续作为时间点证据保留，但当前来源解释以后述有界版本为准。
-
-### 认知与概率混合的受保护多智能体协调 (Epistemic-Probabilistic Guarded Coordination)
-
-- **Technology Point Name:** Epistemic-Probabilistic Guarded Coordination
-- **System Container:** Collaboration System
-- **Frontier Source:** arXiv:2609.29366v1 (Mehdi Nasiri, Mohammad Saeed Arvenaghi, Sadegh Vaezi, Ebrahim Ardeshir-Larijani, 2026-09-24)
-- **Original Problem:** 基于 LLM 的多智能体系统通常缺乏对社会知识与协议驱动协调机制的显式表示，导致其生成的动作看似流畅，但并未真正受到智能体信息状态或交互协议的授权约束。
-- **Core Assumptions:** 依赖于适应于过滤 $\mathcal{F}_t$ 的执行过程，一个映射到有界状态 $B$ 的排名函数 $\rho$，以及严格的状态约束，即策略必须在非目标状态下以至少 $\varepsilon > 0$ 的概率选择被允许的动作。
-- **Mathematical Mechanism:** 数学更新与边界验证：
-  核心更新公式 (Guard predicate definition):
-  ```latex
-  \Guard_{\ELGM}(\alpha,\hist)= \begin{cases} \permit, & \text{if } \alpha\in\Acts_H(\hist)\text{ and }\ELGM,\hist\models \mathsf{pre}(\alpha),\\ \deny, & \text{otherwise.} \end{cases}
-  ```
-- **收敛或行为边界 (Convergence or behavior boundaries):** 系统提供了由到达目标集合 $G$ 的期望时间所界定的条件排名进度界限：$\mathbb{E}[T]\leq\rho(x_0)/\varepsilon\leq B/\varepsilon$。
-- **适用范围 (Applicability):** 需要遵循协议的多智能体协作架构，以及在需要通过符号化核心来限制具有不确定性的 LLM 行为的神经符号系统中。
-- **局限 (Limitations):** 理论边界极度依赖于非目标等待时间受几何随机变量支配的假设及明确的认知状态约束。在受限知识片段之外的一般化环境中尚缺乏具体的实现与保证。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在设计上可作为候选方案（Design Candidate），用于在多智能体路由中建立生成行为与确定性许可引擎分离的策略守卫层。
-- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 想象一个公司，员工（LLM）会提出各种有创意的点子，但在任何点子被执行前，都必须经过一位铁面无私的合规官（Guard）依据不可更改的规则手册进行核对。无论员工的提议听起来多么完美，只要违反了成文规则，合规官就会默默驳回并给出一张诊断单。
-- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
-
-
-### 基于拓扑的多智能体策略梯度 (Topology-based multi-Agent Policy gradiEnt (TAPE))
-
-- **技术点 (Technical Point):** 基于拓扑的多智能体策略梯度 (TAPE)
-- **System Container:** Collaboration System
-- **Frontier Source:** Xingzhou Lou, Junge Zhang, Timothy J. Norman, Kaiqi Huang, Yali Du. *TAPE: Leveraging Agent Topology for Cooperative Multi-Agent Policy Gradient*. arXiv:2312.15667v3.
-- **版本身份 (Version Identity):** arXiv v1 提交于 2023-12-25；v3 修订于 2024-01-15。本仓映射明确对应 v3，不静默替换为后续版本。
-- **论文原始问题 (Original Problem):** 现有的多智能体策略梯度 (MAPG) 方法受到集中-分散不匹配 (CDM) 问题的困扰，即一个智能体的次优动作会不当地影响其他智能体的参数更新，限制了稳健的协作。
-- **核心假设 (Core Assumptions):** 合作多智能体强化学习 (MARL)，策略可被参数化（例如神经网络），并且智能体形成智能体拓扑（如 Erdős-Rényi 随机图），将通信限制在联盟成员之间。
-- **数学机制 (Mathematical Mechanism):**
-  随机 TAPE 提出了一种基于联盟效用的基于拓扑的策略梯度。智能体 $i$ 的策略梯度为：
-  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_i\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)\mathbf{U}_i\right] $$
-  这可以转化为：
-  $$ \nabla J_1(\theta) = \mathbb{E}_{\bm{\pi}}\left[\sum_{i,j}E_{ij}k_j(s)\nabla_{\theta_i}\log\pi_i(a_i|\tau_i)Q_j^{\phi_j}(s,a_j)\right] $$
-  其中 $E_{ij}$ 是表示智能体拓扑的邻接矩阵。
-- **收敛或行为边界 (Convergence or behavior boundaries):**
-  定理 1 证明了随机 TAPE 策略的改进：对于任何更新前的策略 $\bm{\pi}$ 和以足够小的步长更新的策略 $\hat{\bm{\pi}}$，联合策略单调递增：$J(\hat{\bm{\pi}})\geq J(\bm{\pi})$。定理 2 表明，与标准 DOP 相比，随机 TAPE 在策略更新中保持了更高的方差，从而能够更好地探索参数空间（方差差异与 $p^2$ 成正比）。
-- **适用范围 (Applicability Scope):** 需要多样化协作模式并能抵御局部次优动作的合作多智能体环境，特别是在 SMAC 或基于等级的觅食等游戏中。
-- **局限 (Limitations):** Erdős-Rényi 拓扑中过大的边缘概率 $p$ 可能会重新引入 CDM 问题，需要平衡超参数 $p$。边界依赖于足够小的步长 $\delta$。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持 LLM 多智能体网络中的模块化协作图，智能体仅影响直接连接对等方的梯度/更新，从而避免单个不良行为者引发全系统范围的故障级联。
-- **仓库实现状态 (Implementation Status):** EVIDENCE_INSUFFICIENT
-- **Evidence Status:** PAPER_ONLY, CONCEPTUAL_MAPPING, EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 想象一群工人在建房子。如果每个人都听所有人的（全连接），一个人喊出坏主意就会分散整个团队的注意力（CDM 问题）。使用 TAPE，工人只听从他们直接的本地团队（他们的联盟或拓扑）。这防止了坏主意同时到处蔓延，同时仍然允许团队共同找出建房子的最佳方法。
-
-### 利用部分对称性进行多智能体强化学习 (Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning)
-
-- **System Container:** Collaboration System
-- **Frontier Source:** Leveraging Partial Symmetry for Multi-Agent Reinforcement Learning (arXiv:2401.00167v1, 2023-12-30) by Xin Yu, Rongye Shi, Pu Feng, Yongkai Tian, Simin Li, Shuhao Liao, Wenjun Wu
-- **Original Problem:** 现实世界的多智能体应用中很少满足严格的对称性，这使得现有的基于对称性的数据增强技术在应用于部分对称环境时显得脆弱，从而导致累积的性能误差。
-- **Core Assumptions:** 环境被公式化为满足有界奖励偏差 $|R(s, a) - R(gs, ga)| \leq \epsilon$ 且在最大均值差异 (MMD) 下受到 $\delta$ 限制的部分对称马尔可夫博弈 $\mathcal{M}_g$。
-- **Mathematical Mechanism:**
-  核心更新公式 (Core Update Formula)
-  自适应调节系数决定了使用对称性增强数据或加权对称性约束的概率，该概率随时间衰减：
-  $$
-  \lambda (D,k) = D e^{-\beta k}
-  $$
-  其中 $D$ 表示对称程度，$\beta$ 是在 $k$ 次迭代中的衰减率。
-- **Convergence or behavior boundaries:**
-  收敛界 (Convergence Bound)
-  对于部分对称马尔可夫博弈，引入对称样本所带来的性能误差是有界的：
-  $$
-  \textit{Error}_{\mathcal{M}_g}=|Q^{\star}(s, a) - Q^{\star}(gs, ga)| \le \frac{\epsilon}{1-\gamma} + \frac{\gamma \delta}{1-\gamma}
-  $$
-- **Applicability:** 去中心化或部分对称的多智能体网络，其中智能体共享相似但不完全相同的转换和奖励结构。
-- **Limitations:** 理论上的误差界限需要对衰减率 ($\beta$) 进行特定的超参数调整，以平衡早期的探索加速和后期的特定状态利用。
-- **Agent Architecture Mapping:** CONCEPTUAL_MAPPING. 有界部分对称性的概念可以指导协作系统在相似但不同的智能体角色之间进行状态共享和数据增强协议的设计。
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT.
-- **Repository Test Status:** NOT_TESTED.
-- **Beginner Analogy:** 想象一下教两个略有不同的机器人走迷宫。虽然它们不是同卵双胞胎（完美对称），但它们足够相似，以至于一个机器人最初可以从另一个机器人的错误中学习。然而，随着它们越来越接近掌握迷宫，它们需要更多地依赖自己特定的传感器，减少对同伴一般建议的依赖，以避免犯下微小但关键的错误。
-- **Bilingual Content:** Included.
-- **Paper Evidence Status:** PAPER_ONLY.
-- **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
+<!-- WEEKLY_SYNC_REPORT -->
+- **本周文档级联编制 (Weekly document cascade weaving):**
+  - Woven all Daily Research Chunks into Core Theory, Mathematical Mechanism, Pseudocode/Source Code, and Analogies.
+- **动态演进映射 (Dynamic evolution mapping):**
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- **跨方向范式冲突审计 (Cross-direction paradigm conflict audit):**
+  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+- **来源迁移记录 (Source migration record):**
+  - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
+- **双语对齐状态 (Bilingual alignment status):**
+  - Checked alignment of source, assumptions, math, boundaries, and mappings. SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS.
