@@ -12,7 +12,7 @@
 # Evidence Contract / 证据契约
 
 Effective: 2026-08-27  
-Current calibration: 2026-09-01  
+Current calibration: 2026-10-04  
 Machine-readable vocabulary: [claim.schema.json](./claim.schema.json)
 
 ## Purpose / 目的
@@ -240,3 +240,25 @@ A domain claim retains:
 - limitations
 
 Structure improves consistency. It does not prove the proposition itself.
+
+
+## 2026-10-04 special admission example — S57
+
+S57 / AF-COLLAB-006 is the current reference example for admitting a bounded preprint-backed documentary claim without implementation inflation.
+
+```text
+SUPPORTED + E4_PREPRINT + COUNTEREVIDENCE + REFERENCE_ONLY + NOT_TESTED
+```
+
+is a valid five-axis record.
+
+It does not collapse into:
+
+```text
+SUPPORTED
+=> IMPLEMENTED
+=> EXPERIMENTALLY_TESTED
+=> REPRODUCED
+```
+
+The admission preserves the source's assumptions and the repository's non-runtime boundary.
