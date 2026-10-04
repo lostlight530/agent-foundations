@@ -431,3 +431,162 @@ SAME_ARXIV_SOURCE_ACROSS_BILINGUAL_DOCS
 - W40 Weekly settlement: NOT_DUE
 - October Monthly final: NOT_DUE
 - New implementation/validation credit from maintenance: NONE
+
+## A1 FULL COVERAGE — 2026-10-04
+
+- Repository: `lostlight530/agent-foundations`
+- Plane: `A1 / FULL_COVERAGE_MAINTENANCE`
+- Logical maintenance date: `2026-10-04`
+- Base main: `33ee2b29f158c832fabbcd10afdc06f6a6662916`
+- Coverage window: `2026-10-01..2026-10-03`
+- N-day excluded from A1: `2026-10-04`
+- Owner: `docs/monthly/2026-10-strategic-blueprint.md`
+- System: Agent Foundations
+- Historical rewrite: `NO`
+- Native replay: `NO`
+- Extra runtime/test execution: `NOT_PERFORMED`
+- New evidence credit: `NONE`
+
+### Retained maintenance chronology
+
+- 2026-10-01 A1 #230 initialized the October owner; A2 #231 integrated the first October research relation.
+- 2026-10-02 A1 #232 / A2 #233 reviewed the N-1 relation; D30 #234 remained retrospective; Daily #235 arrived later and successor A2 #236 reconciled its scope.
+- 2026-10-03 A1 #237 / A2 #238 preceded native Daily #239; successor A1 #240 / A2 #241 preserved chronology.
+- Paper evidence, architecture mapping, repository implementation, and test status remain separate axes.
+- Each review cut remains independently interpretable.
+- Later current-main visibility does not backdate earlier task-time visibility.
+- Merged evidence remains bounded by the owning artifact.
+- Closed-unmerged delivery history is not promoted into current-main truth.
+
+### 2026-10-01 coverage
+
+- October owner A1 #230 / A2 #231: MERGED.
+- Daily research input: PRESENT.
+- Paper evidence remains source-scoped.
+- Conceptual mapping is not implementation.
+- Agreement is not truth.
+- A1 decision: RETAIN / EVIDENCE_SCOPED.
+- Coverage status: COMPLETE_FOR_DATE.
+- New implementation credit: NONE.
+- New test credit: NONE.
+- New verified-core promotion: NONE.
+
+### 2026-10-02 coverage
+
+- A1 #232 / A2 #233: MERGED.
+- D30 #234: MERGED_AS_RETROSPECTIVE_AUDIT.
+- Daily research #235: MERGED later.
+- Successor A2 #236: MERGED to reconcile late delivery scope.
+- Later Daily presence does not establish earlier A2 visibility.
+- A1 decision: RETAIN / LATE_DELIVERY_CHRONOLOGY_PRESERVED.
+- Coverage status: COMPLETE_FOR_DATE.
+- New implementation credit: NONE.
+- New benchmark credit: NONE.
+- New paradigm-finality credit: NONE.
+
+### 2026-10-03 coverage
+
+- A1 #237 / A2 #238: MERGED.
+- Daily research #239: MERGED later.
+- Successor A1 #240 / A2 #241: MERGED.
+- Paper/source chronology remains canonical-source scoped.
+- No source is counted twice because it appears in multiple documents.
+- A1 decision: RETAIN_CURRENT_RELATION.
+- Coverage status: COMPLETE_FOR_DATE.
+- New implementation credit: NONE.
+- New test credit: NONE.
+- New verified-core promotion: NONE.
+
+### Artifact-class review
+
+- Native Daily artifacts: REVIEWED / RETAIN.
+- Weekly artifacts: REVIEWED_IF_DUE / RETAIN.
+- Rolling Monthly owner: REVIEWED / APPEND_ONLY.
+- Prior-month monthly surface: PRIOR_MONTH_CONTEXT_ONLY.
+- D30 audit: RETROSPECTIVE_AUDIT_PLANE.
+- Prior A1 sections: POINT_IN_TIME_HISTORY.
+- Prior A2 sections: POINT_IN_TIME_HISTORY.
+- Closed-unmerged PRs: DELIVERY_HISTORY_ONLY.
+- 2026-10-04 native/weekly artifacts: BOUNDARY_ONLY / DEFER_TO_A2.
+
+### 2026-10-04 boundary only
+
+- Daily S57 research #242: MERGED.
+- Original Weekly #243: CLOSED_UNMERGED because its broad rewrite was not accepted.
+- Rebuilt bounded Weekly #244: MERGED.
+- S57 paper evidence: VERIFIED_FROM_LATEX_SOURCE.
+- S57 architecture mapping: CONCEPTUAL_MAPPING.
+- S57 repository implementation: NOT_IMPLEMENTED.
+- S57 repository tests: NOT_TESTED.
+- N-day evidence is not consumed into A1.
+- N-day evidence is reserved for A2 after A1 merges.
+
+### Evidence invariants
+
+- `LATER_PATH_PRESENT != ORIGINAL_INPUT_AVAILABLE`
+- `CURRENT_PATH_COMPLETE != HISTORICAL_EXECUTION_COMPLETE`
+- `LATER_SUCCESS != EARLIER_SUCCESS`
+- `CURRENT_REPOSITORY_STATE != TASK_TIME_STATE`
+- `MERGED_ARTIFACT != SUCCESSFUL_EXECUTION`
+- `MERGED_MONTHLY_ARTIFACT != NATURAL_MONTH_CLOSE`
+- `DUE_DATE != EXECUTION`
+- `SCHEDULED != EXECUTED`
+- `SAME_DATE != SAME_STATE`
+- `SOURCE_CODE != EXECUTED_BEHAVIOR`
+- `TEST_SOURCE != TEST_EXECUTION`
+- `NATIVE_TASK_DELIVERY != A1_MAINTENANCE`
+- `A1_MAINTENANCE != A2_RELATIONAL_VERSION`
+- `A2_RELATIONAL_VERSION != PERIODIC_AUDIT`
+- `PERIODIC_AUDIT != DURABLE_GOVERNANCE`
+
+### Repository-specific boundaries
+
+- `AGREEMENT != TRUTH`.
+- `PAPER_EVIDENCE != REPOSITORY_IMPLEMENTATION`.
+- `CONCEPTUAL_MAPPING != IMPLEMENTATION`.
+- `DOCUMENTARY_COMPATIBILITY != RUNTIME_COMPATIBILITY`.
+- Bilingual alignment is limited to checked fields.
+- Weekly cascade does not delete or relocate historical sections without verified complete migration.
+- September monthly semantic finality conflict remains prior-month reconciliation material, not an October rewrite.
+
+### Completeness checklist
+
+- 2026-10-01 represented: YES.
+- 2026-10-02 represented: YES.
+- 2026-10-03 represented: YES.
+- N-1 coverage complete: YES.
+- 2026-10-04 excluded from A1 consumption: YES.
+- Historical task-time states preserved: YES.
+- D30 kept separate where present: YES.
+- Closed-unmerged history not promoted: YES.
+- Duplicate evidence credit: NO.
+- Runtime execution invented: NO.
+- Test execution invented: NO.
+- Architecture-health claim invented: NO.
+- Weekly closure invented: NO.
+- Natural-month closure invented: NO.
+- Governance promotion performed: NO.
+- Parallel owner created: NO.
+- A2 allowed before A1 merge: NO.
+
+### A1 disposition
+
+- Coverage completeness: `COMPLETE_THROUGH_2026-10-03_AT_THIS_CHECK`.
+- Decision completeness: `COMPLETE_THROUGH_2026-10-03_AT_THIS_CHECK`.
+- October owner state: `OPEN`.
+- October natural-month final: `NOT_DUE`.
+- New native credit: `NONE`.
+- New runtime credit: `NONE`.
+- New audit credit: `NONE`.
+- New governance credit: `NONE`.
+- A2 dependency: `MUST_MERGE_THIS_A1_THEN_FRESH_READ_MAIN`.
+
+```text
+OCTOBER_1_TO_3_FULL_COVERAGE
++
+HISTORICAL_STATE_PRESERVED
++
+N_DAY_2026_10_04_EXCLUDED
+=
+A1_COMPLETE_FOR_2026_10_04
+```
