@@ -95,3 +95,36 @@ Do not push directly to `main`, rewrite history, force-push, auto-merge, or sile
 Revert the maintenance commit if validation or authority links regress. Escalate unresolved identity, author/version conflict, semantic translation mismatch, status promotion, overlapping ownership, or unsafe delivery to human review.
 
 Final doctrine and merge authority remains with the maintainer.
+
+
+## 2026-10-04 special closeout — Daily/Weekly to verified core
+
+This special maintenance pass closes the S57 research path without collapsing generation into implementation.
+
+Observed repository sequence:
+
+- Daily research PR #242 registered S57 and added bilingual generated research material.
+- Weekly PR #244 preserved the bilingual research sections and performed a bounded documentary cascade.
+- Current source registry retains S57 as one canonical source identity.
+- Current verified core admits AF-COLLAB-006 as a bounded documentary claim.
+- Repository implementation remains `REFERENCE_ONLY`.
+- Repository validation remains `NOT_TESTED`.
+- Validator execution by this special closeout is `NOT_EXECUTED`.
+
+The following remain permanent boundaries:
+
+```text
+RESEARCH_GENERATION
+!= SOURCE_REGISTRATION
+!= VERIFIED_CORE_ADMISSION
+!= IMPLEMENTATION
+!= VALIDATION
+
+AGREEMENT
+!= TRUTH
+
+DOCUMENTARY_CASCADE
+!= RUNTIME_COMPATIBILITY
+```
+
+No historical Daily or Weekly artifact is rewritten by this closeout.
