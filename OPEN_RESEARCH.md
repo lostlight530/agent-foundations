@@ -42,6 +42,14 @@ Keyword Match != Project Purpose
 Scholarly Graph Representation != Repository Self-Definition
 ```
 
+## Research scope and workflows / 科研范围与工作流
+
+Repository positioning follows its declared purpose, implemented or studied research objects, and applicable public contracts. Existing canonical positioning remains unchanged.
+
+Repository-owned workflows may implement research methods and produce bounded observations. Their substantive research role remains intact; the execution mechanism alone does not establish a research domain or scientific validity.
+
+仓库现有定位保持不变；自有工作流的科研作用保留，执行机制本身不构成研究领域或科学有效性的证明
+
 ## Research-production method
 
 The shared ten-repository epistemic skeleton requires recoverable question, falsifiability, evidence/source identity, fixed object/revision identity, procedure actually executed or inspected, raw observation, counterexample, bounded conclusion, research increment, and retest condition.
