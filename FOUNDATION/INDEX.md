@@ -1,7 +1,7 @@
 # Agent Foundations — Verified Core / 可验证核心
 
 Status: repository documentary/evidence core  
-Current calibration: 2026-09-17
+Current calibration: 2026-10-04
 
 `FOUNDATION/**` is the long-lived theory, evidence, provenance, and architecture core of Agent Foundations. The repository is **not** an implemented autonomous-agent runtime.
 
@@ -127,3 +127,22 @@ Not:
 `IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`
 
 Historical period-closure labels remain authoritative only for their recorded windows. Current state is recovered from current repository truth, not copied from an older cutoff.
+
+
+## 2026-10-04 special verified-core closeout
+
+The Collaboration domain now includes `AF-COLLAB-006`, a bounded S57-backed claim that keeps consensus/agreement separate from factual correctness.
+
+Current documentary disposition:
+
+```text
+S57
+→ AF-COLLAB-006
+→ SUPPORTED
+→ E4_PREPRINT
+→ COUNTEREVIDENCE
+→ REFERENCE_ONLY
+→ NOT_TESTED
+```
+
+This is a verified-core documentary admission, not an autonomous-agent runtime expansion.

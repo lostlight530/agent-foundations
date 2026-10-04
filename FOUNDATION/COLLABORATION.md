@@ -1,5 +1,5 @@
 > [!NOTE]
-> **Current architecture interpretation — 2026-09-18**
+> **Current architecture interpretation — 2026-10-04**
 > - **Subject class:** `SUBJECT / CLAIM MAP`
 > - **Role:** Current collaboration research/evidence map
 > - **Authority:** Current repository-native authority for Collaboration topology, attribution, message contracts, consensus/coordination claims and their implementation/validation states
@@ -93,3 +93,30 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 **ZH.** 参数、复制状态、任务归属、证据充分性和事实真伪是不同的共识问题。某类状态的收敛结果不能表述为另一类对象已经达成一致。
 
 **Scope and limits / 范围与局限:** Agent Foundations has no consensus protocol; the claim only bounds how external convergence results may be interpreted. / Agent Foundations 没有共识协议；该条只约束如何解释外部收敛结果。
+
+
+## AF-COLLAB-006 — Consensus and factual correctness are separate evaluation axes / 共识与事实正确性是独立评估轴
+
+- **State / 状态:** `SUPPORTED`
+- **Evidence / 证据:** `E4_PREPRINT`
+- **Mapping / 映射:** `COUNTEREVIDENCE`
+- **Implementation / 实现:** `REFERENCE_ONLY`
+- **Validation / 验证:** `NOT_TESTED`
+- **Sources / 来源:** S57
+
+**EN.** High semantic agreement inside an interacting language-model population does not by itself establish factual correctness. A collaboration system should treat agreement/cohesion and externally grounded factuality as separate evidence axes. The S57 source provides direct counterevidence to any rule that equates consensus with truth inside the source's studied population and interaction conditions.
+
+**ZH.** 交互式语言模型群体中的高语义一致性本身不能证明事实正确。协作系统应把一致性/内聚度与有外部依据的事实性作为独立证据轴。S57 在其研究群体和交互条件内，直接构成“共识等于真理”这一假设的反证。
+
+**Scope and limits / 范围与局限:** S57 is a preprint and its reported dynamics remain source/model/topology specific. The repository does not implement semantic magnetisation, factuality scoring, a consensus protocol, a truth oracle, or a multi-agent runtime. The Daily extraction and this claim-map admission do not establish independent reproduction, theorem-level verification, or general convergence across all LLM populations. / S57 属于预印本，其结果仍受论文使用的模型、拓扑和实验条件约束。本仓库没有实现语义磁化率、事实性评分、共识协议、真值判定器或多智能体运行时。Daily 摘要与本条 claim-map 准入都不代表独立复现、定理级验证或对所有 LLM 群体的一般收敛证明。
+
+```text
+AGREEMENT
+!= FACTUAL_CORRECTNESS
+
+SEMANTIC_COHESION
+!= TRUTH
+
+PAPER_RESULT
+!= REPOSITORY_RUNTIME
+```

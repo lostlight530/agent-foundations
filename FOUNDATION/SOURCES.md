@@ -11,9 +11,9 @@
 
 # Primary Source Registry / 一手来源登记
 
-Current calibration: 2026-09-01. Registry presence means “eligible to cite”, not “repository capability”.
+Current calibration: 2026-10-04. Registry presence means “eligible to cite”, not “repository capability”.
 
-当前校准：2026-09-01。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+当前校准：2026-10-04。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
 
 Canonical rules:
 
@@ -575,6 +575,11 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 - Reason for selection: Provides a rigorous study on how consensus dynamics decouple from factual correctness in LLM populations, directly informing decentralized multi-agent topologies.
 - Actually extracted paragraphs or formulas: Extracted the whitened spin projection mechanism and the equations for Semantic Magnetisation $\mathbf{m}(t) = \frac{1}{N_a}\sum_{i=1}^{N_a}\mathbf{s}_i(t)$ and Semantic Cohesion $\bar{c}(t) = \frac{2}{N_a(N_a-1)}\sum_{i<j}\mathbf{s}_i(t)\cdot\mathbf{s}_j(t)$.
 - Verification boundary: Verified from LaTeX Source
+- Current verified-core relation: `AF-COLLAB-006`
+- Current review disposition: `ACCEPTED_FOR_VERIFIED_CORE` as a bounded documentary claim only
+- Repository implementation: `REFERENCE_ONLY`
+- Repository validation: `NOT_TESTED`
+- Non-claim: consensus, cohesion, or interaction convergence is not factual correctness, truth, safety, or repository runtime behavior
 
 ## 2026-09-23 dual-view annotation for S52
 
@@ -603,3 +608,26 @@ CURRENT_MAPPING_AT_N
 - Revisited canonical sources do not become new independent source support merely because they appear on another Daily or system surface.
 - The registry is current provenance/identity authority; historical Daily counts and point-in-time mapping language remain historical evidence.
 - No 2026-09-23 Daily source addition is inferred from current registry presence where no such original Daily contribution is retained.
+
+
+## 2026-10-04 special source-registry closeout
+
+At this special closeout, the current canonical contiguous source range is `S01` through `S57`.
+
+S57 is retained as one canonical external scientific source identity:
+
+```text
+arXiv:2609.39211
+v1 provenance
+E4_PREPRINT
+checked LaTeX source surface
+```
+
+The 2026-10-04 disposition does not create a second source identity and does not upgrade the paper into repository implementation or experimental reproduction.
+
+```text
+SOURCE_REGISTRATION
+!= CLAIM_TRUTH
+!= LOCAL_IMPLEMENTATION
+!= VALIDATION_EXECUTION
+```
