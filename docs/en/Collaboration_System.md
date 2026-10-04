@@ -2771,3 +2771,27 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - **Bilingual Content:** Included.
 - **Paper Evidence Status:** PAPER_ONLY.
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING.
+
+
+### 4.2 Semantic Consensus and Factual Dynamics (arXiv:2609.39211v1)
+
+- **Technical Point:** Semantic Consensus and Factual Dynamics
+- **System Container:** Collaboration System
+- **Frontier Source:** [Consensus and Factual Dynamics in Large Populations of Interacting Language Models](http://arxiv.org/abs/2609.39211v1)
+- **Original Problem:** How to measure genuine semantic alignment in LLM agent populations without bias from raw embedding anisotropy, and how to track factual correctness as a distinct dimension from mere agreement.
+- **Core Assumptions:** The raw embedding space has an intrinsic positive cosine similarity bias that can be corrected by whitening. Agents are arranged in geometric structures (from 1D rings to mean-field graphs) interacting over iterative conversational sweeps without authoritative pushback.
+- **Mathematical Mechanism:**
+  *Whitened spin projection:* Each agent's embedding $\mathbf{e}$ is transformed into an isotropic state space: $\mathbf{s} = \tilde{\mathbf{e}} \,/\, \lVert\tilde{\mathbf{e}}\rVert$, where $\tilde{\mathbf{e}} = (\mathbf{e} - \boldsymbol\mu)\oslash\boldsymbol\varsigma$.
+  *Semantic Magnetisation:* $\mathbf{m}(t) = \frac{1}{N_a}\sum_{i=1}^{N_a}\mathbf{s}_i(t)$ with order parameter $m(t) = \lVert \mathbf{m}(t)\rVert \in [0,1]$.
+  *Semantic Cohesion (floor-free overlap):* $\bar{c}(t) = \frac{2}{N_a(N_a-1)}\sum_{i<j}\mathbf{s}_i(t)\cdot\mathbf{s}_j(t)$.
+- **Convergence or behavior boundaries:** Consensus ($m \to 1$) is a near-universal outcome driven by interaction geometry (higher connectivity orders faster). However, consensus is degenerate on the semantic axis alone: both collective error correction ($\rho \to 0$) and shared hallucinations ($\rho \to 1$) produce identical cohesion $\bar{c} \approx 1$.
+- **Applicability Scope:** Multi-agent LLM systems where agents iteratively share text-based responses under fixed network topologies.
+- **Limitations:** The dynamics are empirical rather than analytically proven for all models. The temperature parameter $T$ acts only before interaction and is not a monotonic control for factual outcomes.
+- **Agent Architecture Mapping:** Can conceptually support mechanisms that independently track both consensus (agreement) and factual correctness (grounding) in collaborative LLM swarms, preventing the naive assumption that swarm agreement equals truth.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine a room full of people trying to solve a puzzle. If they talk to each other enough, they will eventually all agree on a single answer (high consensus). But their agreement doesn't mean they are right—they might have all convinced each other of a wrong answer (shared hallucination). The math measures both how aligned their arrows are (consensus) and whether the arrows point to the actual target (factuality).
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
