@@ -749,3 +749,147 @@ MERGED_A1 + FRESH_MAIN_READ + DAILY_S57 + WEEKLY_W40
 = CURRENT_MONTH_RELATION_THROUGH_2026_10_04
 PAPER_EVIDENCE != IMPLEMENTATION != TESTED_RUNTIME
 ```
+
+## A1 FULL COVERAGE — 2026-10-05 — FOUNDATIONS
+
+- Repository: `lostlight530/agent-foundations`
+- Plane: `A1 / FULL_COVERAGE_MAINTENANCE`
+- Logical maintenance date: `2026-10-05`
+- Exact base main: `8a01e7067619efe89552ad4f29106bb565780d74`
+- Coverage window: `2026-10-01..2026-10-04`
+- N-day excluded: `2026-10-05`
+- Owner: `docs/monthly/2026-10-strategic-blueprint.md`
+- Native system: Agent Foundations
+- Historical rewrite: NO
+- Native replay: NO
+- Runtime/test execution by maintenance: NOT_PERFORMED
+- New research credit: NONE
+
+### 1. Prior chain
+- 10/1–10/4 monthly relation is retained.
+- Special #247 admitted S57/AF-COLLAB-006 as bounded verified-core documentary evidence.
+- Open Research #248 merged after Special #247.
+- 10/4 A1/A2 remains point-in-time maintenance.
+- 10/4 Special durable work remains a separate governance/evidence plane.
+- Open Research framework merged after prior maintenance and is now part of N-1 current repository state.
+- Later state does not rewrite earlier task-time evidence.
+
+### 2. 2026-10-01 coverage
+- Month-open paper/mapping relation retained.
+- Agreement remains distinct from truth.
+- Decision: RETAIN.
+- New A1 credit: NONE.
+
+### 3. 2026-10-02 coverage
+- D30 remains retrospective.
+- Late Daily chronology remains explicit.
+- Decision: RETAIN.
+- New A1 credit: NONE.
+
+### 4. 2026-10-03 coverage
+- Source identity and mapping chronology remain explicit.
+- Document repetition does not create source independence.
+- Decision: RETAIN.
+- New A1 credit: NONE.
+
+### 5. 2026-10-04 coverage
+- S57 Daily/Weekly relation retained.
+- S57 verified-core admission remains documentary.
+- Implementation remains REFERENCE_ONLY and validation remains NOT_TESTED.
+- Decision: RETAIN.
+- New A1 credit: NONE.
+
+### 6. Open Research / scholarly-submission framework
+- OPEN_RESEARCH.md: PRESENT.
+- RESEARCH_TEMPLATE.md: PRESENT.
+- README research entry: PRESENT.
+- CONTRIBUTING research routing: PRESENT.
+- Open Research is a durable production/positioning guide.
+- Native architecture/methodology/evidence contracts remain stronger.
+- Root template is prospective and does not rewrite historical records.
+- Scholarly metadata is downstream of repository truth.
+- External ontology/classifier labels do not redefine repository identity.
+- Publication does not establish validation.
+- Citation does not establish reproduction.
+- Metadata consistency does not establish scientific correctness.
+- Shadow classification RUN/NOT_RUN remains separate from its output.
+- Submission-oriented wording may not erase negative evidence.
+- Current main may not replace task-time state.
+- Historical Special conclusions remain bounded to their observed evidence.
+
+### 7. Surface matrix
+| Surface | State | Boundary |
+| --- | --- | --- |
+| Native Daily | REVIEWED | producer-owned evidence |
+| Weekly | REVIEWED_IF_DUE | native semantics preserved |
+| Monthly owner | REVIEWED | append-only relation |
+| Special durable work | REVIEWED | separate governance plane |
+| Open Research | REVIEWED | guide below native authority |
+| Research Template | REVIEWED | prospective only |
+| Scholarly metadata | REVIEW_BY_RELATION | no truth/validation promotion |
+| Prior A1/A2 | RETAIN | point-in-time history |
+| 2026-10-05 native | BOUNDARY_ONLY | defer to A2 |
+
+### 8. 2026-10-05 boundary
+- Daily research #249 is merged for 2026-10-05.
+- #249 adds a research chunk using existing source identity S24 to Architecture Principles.
+- N-day evidence is visible only to establish the cutoff.
+- N-day evidence is not consumed by A1.
+- A2 will consume N-day state after A1 merge and fresh-read main.
+
+### 9. Evidence invariants
+- LATER_PATH_PRESENT != ORIGINAL_INPUT_AVAILABLE.
+- CURRENT_PATH_COMPLETE != HISTORICAL_EXECUTION_COMPLETE.
+- LATER_SUCCESS != EARLIER_SUCCESS.
+- CURRENT_REPOSITORY_STATE != TASK_TIME_STATE.
+- SAME_DATE != SAME_STATE.
+- SOURCE_CODE != EXECUTED_BEHAVIOR.
+- TEST_SOURCE != TEST_EXECUTION.
+- PUBLICATION != VALIDATION.
+- CITATION != REPRODUCTION.
+- EXTERNAL_CLASSIFICATION != REPOSITORY_IDENTITY.
+- OPEN_RESEARCH_GUIDE != NATIVE_METHOD_CONTRACT.
+- RESEARCH_TEMPLATE != HISTORICAL_RECORD_REWRITE.
+- NATIVE_TASK_DELIVERY != A1_MAINTENANCE.
+- A1_MAINTENANCE != A2_RELATIONAL_VERSION.
+
+### 10. Repository-specific boundaries
+- AGREEMENT != TRUTH.
+- PAPER_EVIDENCE != REPOSITORY_IMPLEMENTATION.
+- CONCEPTUAL_MAPPING != IMPLEMENTATION.
+- DOCUMENTARY_COMPATIBILITY != RUNTIME_COMPATIBILITY.
+- VERIFIED_CORE_DOCUMENTARY_ADMISSION != VALIDATED_RUNTIME.
+
+### 11. Completeness
+- 10/1 represented: YES.
+- 10/2 represented: YES.
+- 10/3 represented: YES.
+- 10/4 represented: YES.
+- MonthStart→N-1 complete: YES.
+- Open Research relation reviewed: YES.
+- Submission boundary reviewed: YES.
+- Historical state rewritten: NO.
+- Duplicate research credit: NO.
+- Runtime execution invented: NO.
+- Test execution invented: NO.
+- Scientific validity invented: NO.
+- Publication/reproduction credit invented: NO.
+- Natural-month final manufactured: NO.
+- 10/5 consumed by A1: NO.
+- A2 before A1 merge: NO.
+
+### 12. A1 disposition
+- Coverage: COMPLETE_THROUGH_2026-10-04_AT_THIS_CHECK.
+- October owner: OPEN.
+- Open Research framework: PRESENT / RELATION_REVIEWED.
+- Scholarly submission relation: BOUNDED_BY_REPOSITORY_TRUTH.
+- Natural-month final: NOT_DUE.
+- New runtime/scientific/publication credit: NONE.
+- A2 dependency: MUST_MERGE_THIS_A1_THEN_FRESH_READ_CURRENT_MAIN.
+
+```text
+OCTOBER_1_TO_4_FULL_COVERAGE
++ OPEN_RESEARCH_RELATION_REVIEWED
++ N_DAY_2026_10_05_EXCLUDED
+= A1_COMPLETE_FOR_2026_10_05
+```
