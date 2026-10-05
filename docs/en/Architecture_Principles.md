@@ -1300,3 +1300,34 @@ MONTH_OPEN
 - **Cross-direction paradigm conflict audit:** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW. This result is limited to the checked document assumptions and does not establish runtime compatibility.
 - **Source migration record:** No wrapper or historical research section was deleted by this pass. Pre-existing source provenance remains attached to its owning sections.
 - **Bilingual alignment status:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS with the current Chinese counterpart.
+
+
+- **Technical Point Name:** Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
+- **System Container:** Architecture Principles
+- **Frontier Source:** S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit (arXiv:2402.04417v2)
+- **Original Paper Problem:** In decentralized multi-agent multi-armed bandit (MAMAB) systems, malicious participants can perform Byzantine or consensus attacks. How can we ensure reliable cooperative learning and bounding regret without relying on a trusted central server?
+- **Core Assumptions:**
+  1. The system consists of $N$ participants, out of which less than half ($< M/2$) are malicious or performing consensus attacks.
+  2. The network communication leverages a secure multiparty computation, signatures, and a distributed ledger (blockchain) for validation.
+  3. The reward generation is bounded and the agents use UCB-style coordination.
+- **Mathematical Mechanism:** Combines a decentralized consensus estimator $\tilde{\mu}_i$ with blockchain-backed validation and a UCB-based decision rule. The contraction mapping ensures convergence despite malicious inputs:
+  - 数学更新规则 (Mathematical Update Rule): $Dist(\tilde{\mu}_i(t), \mu_i)$ converges to 0 at a rate governed by the contraction factor $(1-P_t)$.
+  - 核心更新公式 (Core Update Formula): The robust estimators $\hat{\mu}_i$ and $\tilde{\mu}_i$ are consistent with honest participants due to robust aggregation.
+- **收敛或行为边界 (Convergence or behavior boundaries):** The cumulative regret is logarithmically bounded, $R(T) \leq \mathcal{O}(\log T)$, under the assumption that the consensus mechanism successfully filters out malicious attacks (since malicious actors $< M/2$).
+- **Applicability Scope:** Decentralized autonomous systems and multi-agent systems where agents share learning experiences (like multi-armed bandits) over an untrusted network without a central aggregator.
+- **Limitations:** Requires the assumption of an honest majority (less than half malicious nodes). Relies on the computational and communication overhead of blockchain validation and secure multiparty computation, which may not scale to highly constrained environments.
+- **Agent Architecture Mapping:** DESIGN_CANDIDATE. This architecture mathematically formalizes the integration of a decentralized ledger (blockchain) with robust statistical aggregation to protect multi-agent cooperative learning from Byzantine manipulation.
+- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
+- **Beginner Analogy:** Imagine a group of friends trying to find the best restaurant in town by sharing their experiences. However, a few of them are trolls who lie about how bad the good restaurants are. To fix this, everyone writes their reviews in a public, unchangeable ledger (like a blockchain) and they use a math rule to ignore extreme outliers. As long as most friends are honest, they will still quickly figure out the best place to eat.
+- **Bilingual Content:** English document updated.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+- **Authors:** Yingying Shi, Yang Jiao, Xuesong Wang
+- **URL:** https://arxiv.org/abs/2402.04417
+- **Version:** v2
+- **Publication Date:** 2024-07-25
+- **Selection Reason:** Provides robust mathematical grounding for resilient multi-agent architecture via distributed ledgers.
+- **Actually Extracted Paragraphs or Formulas:** Extracted contraction mechanism $(1-P_t)$ ensuring convergence of $\tilde{\mu}_i(t)$ and bounds on the reward difference between pulled and optimal arm under the robust MAMAB validation logic.
