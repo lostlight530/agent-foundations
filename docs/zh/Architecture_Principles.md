@@ -1302,3 +1302,34 @@ MONTH_OPEN
 - **跨方向范式冲突审计：** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW。该结论仅限已检查的文档假设，不证明运行时兼容性。
 - **来源迁移记录：** 本轮未删除任何 Wrapper 或历史研究段落；既有来源 provenance 继续保留在其 owning section。
 - **双语对齐状态：** 与当前英文对应内容在已检查字段上 SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS。
+
+
+- **技术点名称:** Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
+- **System Container:** Architecture Principles
+- **Frontier Source:** S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit (arXiv:2402.04417v2)
+- **论文原始问题:** 在去中心化多智能体多臂老虎机 (MAMAB) 系统中，恶意参与者可能会进行拜占庭攻击或共识攻击。如何在不依赖可信中央服务器的情况下确保可靠的协同学习并限制遗憾值 (regret)？
+- **核心假设:**
+  1. 系统包含 $N$ 个参与者，其中恶意或进行共识攻击的参与者少于一半 ($< M/2$)。
+  2. 网络通信利用安全多方计算、签名和分布式账本 (区块链) 进行验证。
+  3. 奖励生成有界，智能体使用基于 UCB 的协调策略。
+- **数学机制:** 将去中心化共识估计器 $\tilde{\mu}_i$ 与基于区块链的验证和基于 UCB 的决策规则相结合。收缩映射确保了即使在有恶意输入的情况下也能收敛：
+  - 数学更新规则: $Dist(\tilde{\mu}_i(t), \mu_i)$ 以由收缩因子 $(1-P_t)$ 控制的速率收敛到 0。
+  - 核心更新公式: 稳健的估计器 $\hat{\mu}_i$ 和 $\tilde{\mu}_i$ 由于稳健聚合而与诚实参与者保持一致。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 累积遗憾受到对数级别的限制，$R(T) \leq \mathcal{O}(\log T)$，前提是共识机制成功过滤了恶意攻击 (由于恶意节点 $< M/2$)。
+- **适用范围:** 去中心化自治系统和多智能体系统，其中智能体在一个不可信的网络上共享学习经验 (如多臂老虎机)，且没有中央聚合器。
+- **局限:** 需要诚实多数的假设 (恶意节点少于一半)。依赖于区块链验证和安全多方计算的计算和通信开销，这可能无法扩展到资源高度受限的环境。
+- **Agent 架构映射:** DESIGN_CANDIDATE。该架构在数学上形式化了去中心化账本 (区块链) 与稳健统计聚合的集成，以保护多智能体协同学习免受拜占庭操纵。
+- **仓库实现状态:** EVIDENCE_INSUFFICIENT
+- **初学者类比:** 想象一群朋友试图通过分享他们的经历来找到镇上最好的餐厅。然而，其中有几个喷子，他们撒谎说好餐厅有多糟糕。为了解决这个问题，每个人都把他们的评论写在一个公开、不可更改的账本 (类似区块链) 上，并使用一个数学规则来忽略极端的异常值。只要大多数朋友是诚实的，他们仍然能很快找出最好的吃饭地方。
+- **中英文内容:** 中文文档已更新。
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
+  - Repository Test Status: EVIDENCE_INSUFFICIENT
+- **Authors:** Yingying Shi, Yang Jiao, Xuesong Wang
+- **URL:** https://arxiv.org/abs/2402.04417
+- **Version:** v2
+- **发布时间:** 2024-07-25
+- **选择理由:** 提供了利用分布式账本构建高韧性多智能体架构的坚实数学基础。
+- **实际提取段落或公式:** 提取了收缩机制 $(1-P_t)$，该机制确保 $\tilde{\mu}_i(t)$ 在稳健的 MAMAB 验证逻辑下收敛，并且提取了所选臂和最优臂之间奖励差异的界限。
