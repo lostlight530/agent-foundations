@@ -1333,3 +1333,24 @@ MONTH_OPEN
 - **发布时间:** 2024-07-25
 - **选择理由:** 提供了利用分布式账本构建高韧性多智能体架构的坚实数学基础。
 - **实际提取段落或公式:** 提取了收缩机制 $(1-P_t)$，该机制确保 $\tilde{\mu}_i(t)$ 在稳健的 MAMAB 验证逻辑下收敛，并且提取了所选臂和最优臂之间奖励差异的界限。
+
+- **技术点名称:** 基于最快分布式线性平均(FDLA)的多智能体多臂老虎机(MAMAB)网络优化
+- **System Container:** Architecture Principles
+- **Frontier Source:** Relational Weight Optimization for Enhancing Team Performance in Multi-Agent Multi-Armed Bandits (arxiv:2410.23379v1)
+- **选择理由:** 为通过最快分布式线性平均优化分布式通信拓扑权重提供了严格的数学框架，与去中心化架构原则直接相关。
+- **实际提取段落或公式:** 提取了 FDLA 约束公式 $\text{minimize } \rho(P - (1/M)\mathbf{11}^T) \text{ subject to } P \in \mathscr{S}, P = P^T, P\mathbf{1} = \mathbf{1}$，以及运行共识方程 $x(t) = P^t x(0) + \sum_{k=1}^t \mu P^k + \sum_{k=1}^t \varepsilon(t-k+1)P^k$。
+- **论文原始问题:** 在多智能体学习中（如基于最大度计算 Perron 矩阵的 Coop-UCB2），传统的网络权重分布无法利用关系网络结构的复杂性，导致图上的协作收敛时间次优。
+- **核心假设:** 通信矩阵 $P$ 是双随机矩阵（$\mathbf{1}^T P = \mathbf{1}^T, P\mathbf{1} = \mathbf{1}$），其最大特征值等于 1。外部观察结果为正态分布变量 $z(t) \sim \mathcal{N}(\mu, \sigma^2)$，表示臂的真实均值和方差。
+- **数学机制:** 通过引入标量松弛变量 $s$ 来最小化谱半径 $\rho(P - (1/M)\mathbf{11}^T)$，将共识权重优化问题转化为半正定规划（SDP），强制要求 $-sI \preceq P-(1/M)\mathbf{1}\mathbf{1}^T \preceq sI$；在数学上，该方法允许负边权重的存在，以加速线性分布平均。
+- **收敛或行为边界:** 在 $\lim_{t\xrightarrow[]{}\infty} \sum_{k=1}^t z(t-k+1)P^k = C\mathbf{1}$ 的前提下，运行共识会在解析上收敛于一个常数：$\lim_{t\xrightarrow{} \infty} x(t) = \bar{x}\mathbf{1} + C\mathbf{1} = C'\mathbf{1}$。
+- **适用范围:** 直接适用于通过相连智能体节点共享估计平均奖励并迭代运行分布式平均共识来优化的随机多臂老虎机问题。
+- **局限:** 虽然 FDLA 产生的负权重能在数学上加快收敛速度，但在严格的协作架构中可能缺乏直接的物理可解释性或安全意义；该结果并不能保证在对抗干扰下的绝对成功。
+- **Agent 架构映射:** 在概念上可以支持高级的关系路由与基于图的记忆共享，通过优化内部共识步骤速度来替代单纯依赖节点均匀广播。
+- **仓库实现状态:** NOT_IMPLEMENTED
+- **初学者类比:** 想象一个团队试图通过仅向周围的人耳语来猜测罐子里软糖的数量。如果每个人都同等重视邻居的猜测（标准平均），需要很长时间才能得出结论。如果我们通过数学计算出确切信任（权重）特定连接的程度——甚至对某些嘈杂连接产生负面影响——整个团队就能快得多地收敛到正确的平均值。
+- **中英文内容:** 此块已分别在中英文档中独立生成，并保持相同的数学边界、假设限制、公式与状态映射，以确保跨语言严格一致。(This chunk is generated independently in both Chinese and English documents maintaining identical boundaries, assumptions, limitations, formulas, and state mappings.)
+- **证据状态:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: PAPER_ONLY
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
