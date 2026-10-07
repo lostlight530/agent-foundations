@@ -428,3 +428,24 @@ MONTH_OPEN
 - **Cross-direction paradigm conflict audit:** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope; runtime compatibility was not executed.
 - **Source migration record:** No wrapper or historical section is deleted by this pass.
 - **Bilingual alignment status:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS with the current Chinese counterpart.
+
+### Cooperative Constrained Stochastic Linear Bandits
+
+- **System Container:** Tool System
+- **Frontier Source:** S59 — Cooperative Multi-Agent Constrained Stochastic Linear Bandits
+- **Original Problem:** (论文原始问题) The paper addresses the multi-agent constrained linear bandit problem, where a network of agents collaboratively maximizes expected cumulative rewards while maintaining expected costs below a specified threshold, relying only on local communication.
+- **Core Assumptions:** (核心假设) Agents only communicate with immediate neighbors. The structure matrix $W$ is doubly stochastic. There exists a known strictly feasible action $x_0$ with cost gap $\tau - c_0 > 0$. The communication steps do not yield new action selections, thereby causing an increase in regret.
+- **Mathematical Mechanism:** (数学机制) The agents use an Optimistic-Pessimistic Linear Bandit (OPLB) algorithm and exchange information using an accelerated consensus procedure. The consensus update step (mix function) is given by:
+  $\alpha_{h+1}^i = \frac{c_h}{c_{h+1}} z_h^i - \frac{c_{h-1}}{c_{h+1}} \alpha_{h-1}^i$ (数学更新规则)
+  where $z_h^i = \sum_{j \in \mathcal{N}(i)} \frac{2W_{i,j}}{|\lambda_2|} \alpha_h^j$, mitigating communication delay impacts bounded by the spectral gap $1 - |\lambda_2|$.
+- **Convergence or behavior boundaries:** (收敛或行为边界) The multi-agent pseudo-regret $R(T)$ up to time $T$ is bounded by $\tilde{O} \left( \frac{d\sqrt{T}}{\tau - c_0} \right)$ with high probability. The regret increases proportionally to the duration of the communication phase $q(s)$.
+- **Applicable Scope:** (适用范围) Applies to multi-agent distributed setups performing constrained exploration-exploitation where cost thresholds are globally strict but reward/cost models vary locally.
+- **Limitations:** (局限) The regret bound is highly sensitive to the spectral gap of the communication graph. Prolonged communication phases where no new estimations are updated directly compound the overall regret penalty.
+- **Agent Architecture Mapping:** (Agent 架构映射) Can conceptually support tool execution layers where multiple decentralized agents perform constrained tool invocations. The accelerated consensus bounds inform how communication delays between agents penalize tool execution reward without violating safety thresholds.
+- **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED
+- **Beginner Analogy:** (初学者类比) Imagine a team of chefs trying to create new recipes (exploration) while ensuring they don't exceed a strict budget (constraint). They can only talk to chefs directly next to them. If they spend too much time talking to sync up their budget estimates, they lose time they could have spent cooking (incurring regret). The algorithm helps them balance cooking and talking optimally.
+- **Evidence Status:** (证据状态)
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

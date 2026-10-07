@@ -556,6 +556,18 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 
 
 
+## S59 — Cooperative Multi-Agent Constrained Stochastic Linear Bandits
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2410.17382v1
+- Version date: 2024-10-22
+- Authors: Amirhossein Reisizadeh, Negar Kiyavash
+- URL: https://arxiv.org/abs/2410.17382
+- Use: Daily Research Chunk (Tool System)
+- Reason for selection: Provides algorithms for networked constrained linear bandit problems, offering rigorous multi-agent regret bounds for exploration-exploitation phases with communication delays.
+- Actually extracted paragraphs or formulas: Extracted the MA-OPLB regret bound $R(T) \leq O(T^{\frac{1}{2}}(\tau-c_0)^{-1})$ and the mix function algorithm $\alpha_{h+1}^i = \frac{c_h}{c_{h+1}} z_h^i - \frac{c_{h-1}}{c_{h+1}} \alpha_{h-1}^i$.
+- Verification boundary: Verified from LaTeX Source. Guarantees strictly depend on assumptions such as the spectral gap of the structure matrix $(1 - |\lambda_2|)$ and the cost gap of a known feasible action. The lack of estimation update during communication periods contributes to an increase in regret.
+
 ## S55 — Multi-Agent Flow Matching with Decoupled Generative Guidance
 - Type: Canonical Source
 - Identifier: arxiv-2609.38133v1
