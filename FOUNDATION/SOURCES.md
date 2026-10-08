@@ -622,9 +622,6 @@ CURRENT_MAPPING_AT_N
 != IMPLEMENTATION
 != VALIDATION
 ```
-## 2026-09-24 full-period source-registry annotation
-
-
 ## S60 — An invariance principle based concentration result for large-scale stochastic pairwise interaction network systems
 
 - Type: Paper
@@ -634,6 +631,8 @@ CURRENT_MAPPING_AT_N
 - URL: http://arxiv.org/abs/2410.22820v1
 - Use: Architecture Principles (PIN Systems Concentration via Mean-Field Lyapunov Function)
 - Verification boundary: Theorem 2
+
+## 2026-09-24 full-period source-registry annotation
 
 ### A1 / N-1 cutoff — September source history through 2026-09-23
 
@@ -646,12 +645,12 @@ CURRENT_MAPPING_AT_N
 
 ## 2026-10-04 special source-registry closeout
 
-At this special closeout, the current canonical contiguous source range is `S01` through `S60`.
+At this special closeout, the current canonical contiguous source range is `S01` through `S57`.
 
 S57 is retained as one canonical external scientific source identity:
 
 ```text
-arxiv-2609.39211
+arXiv:2609.39211
 v1 provenance
 E4_PREPRINT
 checked LaTeX source surface
