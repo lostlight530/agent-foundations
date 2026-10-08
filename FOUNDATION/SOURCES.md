@@ -622,6 +622,16 @@ CURRENT_MAPPING_AT_N
 != IMPLEMENTATION
 != VALIDATION
 ```
+## S60 — An invariance principle based concentration result for large-scale stochastic pairwise interaction network systems
+
+- Type: Paper
+- Identifier: arXiv:2410.22820v1
+- Version date: 2024-10-30T08:57:16Z
+- Authors: Giacomo Como, Fabio Fagnani, Sandro Zampieri
+- URL: http://arxiv.org/abs/2410.22820v1
+- Use: Architecture Principles (PIN Systems Concentration via Mean-Field Lyapunov Function)
+- Verification boundary: Theorem 2
+
 ## 2026-09-24 full-period source-registry annotation
 
 ### A1 / N-1 cutoff — September source history through 2026-09-23
