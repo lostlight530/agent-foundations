@@ -43,6 +43,7 @@ PROTECTED_PATHS = {
 
 CLAIM_HEADING_RE = re.compile(r"^## (AF-(?:ARCH|COLLAB|MEM|TOOL)-\d{3})\b", re.MULTILINE)
 SOURCE_HEADING_RE = re.compile(r"^## (S\d{2})\b", re.MULTILINE)
+LEVEL_TWO_HEADING_RE = re.compile(r"^##\s+", re.MULTILINE)
 SOURCE_REF_RE = re.compile(r"\bS\d{2}\b")
 SOURCE_IDENTIFIER_RE = re.compile(r"^\s*-\s*Identifier:\s*(.+?)\s*$", re.MULTILINE)
 SOURCE_URL_RE = re.compile(r"^\s*-\s*URL:\s*(\S+)\s*$", re.MULTILINE)
@@ -85,8 +86,9 @@ def claim_blocks(text: str) -> list[tuple[str, str]]:
 def source_blocks(text: str) -> list[tuple[str, str]]:
     matches = list(SOURCE_HEADING_RE.finditer(text))
     blocks: list[tuple[str, str]] = []
-    for index, match in enumerate(matches):
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+    for match in matches:
+        next_heading = LEVEL_TWO_HEADING_RE.search(text, match.end())
+        end = next_heading.start() if next_heading else len(text)
         blocks.append((match.group(1), text[match.start():end]))
     return blocks
 
@@ -275,3 +277,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
