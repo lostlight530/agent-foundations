@@ -27,6 +27,16 @@ class ParsingTests(unittest.TestCase):
         text = "# Sources\n## S01 — One\n## S18 — Last\n"
         self.assertEqual(validator.registered_sources(text), {"S01", "S18"})
 
+    def test_source_blocks_stop_at_non_source_level_two_heading(self) -> None:
+        text = (
+            "# Sources\n"
+            "## S01 — One\n- Identifier: arXiv:1111.11111\n"
+            "## S02 — Two\n- Identifier: arXiv:2222.22222\n"
+            "## Annotation\nS01 revisited at https://arxiv.org/abs/1111.11111\n"
+        )
+        blocks = dict(validator.source_blocks(text))
+        self.assertNotIn("1111.11111", blocks["S02"])
+
     def test_action_reference_parser(self) -> None:
         text = "steps:\n  - uses: actions/checkout@" + "a" * 40 + " # v6\n"
         self.assertEqual(validator.action_references(text), ["actions/checkout@" + "a" * 40])
@@ -99,18 +109,17 @@ class ReadmeNarrativeTests(unittest.TestCase):
     def test_verified_core_links_follow_index_reading_order(self) -> None:
         paths = (
             "FOUNDATION/EVIDENCE.md",
+            "FOUNDATION/SOURCES.md",
+            "FOUNDATION/PROVENANCE.md",
             "FOUNDATION/ARCHITECTURE.md",
             "FOUNDATION/MEMORY.md",
             "FOUNDATION/TOOLS.md",
             "FOUNDATION/COLLABORATION.md",
-            "FOUNDATION/SOURCES.md",
-            "FOUNDATION/PROVENANCE.md",
         )
         positions = [README_TEXT.index(f"({path})") for path in paths]
         self.assertEqual(positions, sorted(positions))
 
     def test_bilingual_sections_share_evidence_and_status_axes(self) -> None:
-        english, chinese = README_TEXT.split("## 中文", maxsplit=1)
         shared_tokens = (
             "E0_REPOSITORY_TEST",
             "E1_PRIMARY_STANDARD",
@@ -136,8 +145,15 @@ class ReadmeNarrativeTests(unittest.TestCase):
         )
         for token in shared_tokens:
             with self.subTest(token=token):
-                self.assertIn(token, english)
-                self.assertIn(token, chinese)
+                self.assertIn(token, README_TEXT)
+        level_two_headings = [
+            line for line in README_TEXT.splitlines() if line.startswith("## ")
+        ]
+        self.assertTrue(level_two_headings)
+        for heading in level_two_headings:
+            with self.subTest(heading=heading):
+                self.assertIn(" / ", heading)
 
 if __name__ == "__main__":
     unittest.main()
+
