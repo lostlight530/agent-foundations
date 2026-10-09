@@ -2087,3 +2087,160 @@ DUPLICATE_CREDIT
 - Preserve this A2 as the 2026-10-08 current-relation timepoint.
 - Future maintenance must recover then-current main before choosing a base.
 - Future corrections must reconcile forward without rewriting this timepoint.
+
+
+## A1 FULL-COVERAGE MAINTENANCE — 2026-10-09
+
+- System: FOUNDATIONS.
+- Scope: 2026-10-01..2026-10-08 only; N-day 10-09 is excluded.
+- Read surface: actual 10月 main owner and its dated earlier A2 relation entries.
+- Owner path: `docs/monthly/2026-10-strategic-blueprint.md`.
+- Source level: inherited historical owner ledger, not new producer tests.
+- Owner remains OPEN; no weekly/monthly natural final.
+- Keep original correction, missingness and exact source lineage.
+
+### Per-day evidence audit and interpretation
+
+#### 2026-10-01: checkpoint A2_CURRENT_MONTH_RELATION_2026-10-01
+- Actual prior owner datum 1: Native Daily delivery: PR #229 / sparse modern Hopfield model source S42
+- Actual prior owner datum 2: Updated native surfaces: `docs/en/Memory_System.md`, `docs/zh/Memory_System.md`
+- Actual prior owner datum 3: Native groundedness claim retained: VERIFIED_FROM_LATEX_SOURCE for checked source fields
+- Actual prior owner datum 4: Bilingual alignment retained: SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+- Actual prior owner datum 5: Weekly final: NOT_DUE
+- Actual prior owner datum 6: October Monthly final: NOT_DUE
+- Actual prior owner datum 7: October day-1 research relation: INTEGRATED
+- Evidence decision 2026-10-01: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-01: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-01: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-01: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-01: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-01: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-01: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-02: checkpoint A2_SUCCESSOR_RECONCILIATION_2026-10-02_LATE_NATIVE_DELIVERY
+- Actual prior owner datum 1: Reconciliation type: FORWARD_ONLY_SUCCESSOR_WITH_SCOPE_REPAIR
+- Actual prior owner datum 2: Predecessor A2 PR: #233
+- Actual prior owner datum 3: Predecessor A2 merge time: 2026-10-02T13:27:38Z
+- Actual prior owner datum 4: Predecessor observation: NO_NEW_2026_10_02_NATIVE_PATH_OBSERVED_AT_THIS_CHECK
+- Actual prior owner datum 5: Later native Jules PR: #235
+- Actual prior owner datum 6: Later native PR merge time: 2026-10-02T14:27:41Z
+- Actual prior owner datum 7: Historical rewrite: NO
+- Evidence decision 2026-10-02: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-02: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-02: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-02: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-02: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-02: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-02: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-03: checkpoint A2_SUCCESSOR_CURRENT_MONTH_RELATION_2026-10-03
+- Actual prior owner datum 1: Current month relation window: 2026-10-01 through 2026-10-03
+- Actual prior owner datum 2: Successor A1 dependency: PRESENT_ON_BASE_AND_CONSUMED
+- Actual prior owner datum 3: Predecessor early A2 no-path observation: PRESERVED_AS_POINT_IN_TIME_HISTORY
+- Actual prior owner datum 4: Later native research input now present: S56 / arXiv:2607.05580v3
+- Actual prior owner datum 5: Bilingual Collaboration System mapping: PRESENT_ON_CURRENT_MAIN
+- Actual prior owner datum 6: Historical rewrite: NO
+- Actual prior owner datum 7: Implementation/test replay by maintenance: NOT_PERFORMED
+- Evidence decision 2026-10-03: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-03: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-03: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-03: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-03: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-03: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-03: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-04: checkpoint A2 CURRENT MONTH RELATION — 2026-10-04
+- Actual prior owner datum 1: Required predecessor A1: PR #245 / MERGED
+- Actual prior owner datum 2: Fresh-read after A1 merge: YES
+- Actual prior owner datum 3: Current relation window: 2026-10-01..2026-10-04
+- Actual prior owner datum 4: Historical rewrite: NO
+- Actual prior owner datum 5: Native replay: NO
+- Actual prior owner datum 6: Extra benchmark/runtime execution: NOT_PERFORMED
+- Actual prior owner datum 7: Duplicate research credit: NONE
+- Evidence decision 2026-10-04: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-04: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-04: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-04: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-04: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-04: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-04: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-05: checkpoint A2 CURRENT MONTH RELATION — 2026-10-05 — FOUNDATIONS
+- Actual prior owner datum 1: Required predecessor A1: PR #250 / MERGED
+- Actual prior owner datum 2: Fresh-read after A1 merge: YES
+- Actual prior owner datum 3: Current relation window: `2026-10-01..2026-10-05`
+- Actual prior owner datum 4: Historical rewrite: NO
+- Actual prior owner datum 5: Native replay: NO
+- Actual prior owner datum 6: Extra runtime/test execution by maintenance: NOT_PERFORMED
+- Actual prior owner datum 7: Duplicate evidence/research credit: NONE
+- Evidence decision 2026-10-05: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-05: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-05: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-05: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-05: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-05: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-05: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-06: checkpoint A2 CURRENT MONTH RELATION — 2026-10-06 — FOUNDATIONS
+- Actual prior owner datum 1: Required predecessor A1: PR #253 / MERGED
+- Actual prior owner datum 2: Fresh-read after A1 merge: YES
+- Actual prior owner datum 3: Current month relation window: `2026-10-01..2026-10-06`
+- Actual prior owner datum 4: Native system: Agent Foundations
+- Actual prior owner datum 5: Historical rewrite: NO
+- Actual prior owner datum 6: Native research replay: NO
+- Actual prior owner datum 7: Runtime/test execution by maintenance: NOT_PERFORMED
+- Evidence decision 2026-10-06: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-06: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-06: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-06: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-06: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-06: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-06: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-07: checkpoint A2 CURRENT MONTH RELATION — 2026-10-07 — FOUNDATIONS
+- Actual prior owner datum 1: Required predecessor A1: PR #256 / MERGED
+- Actual prior owner datum 2: Fresh-read after A1 merge: YES
+- Actual prior owner datum 3: Current month relation window: `2026-10-01..2026-10-07`
+- Actual prior owner datum 4: Historical rewrite: NO
+- Actual prior owner datum 5: Native research replay: NO
+- Actual prior owner datum 6: Runtime/test execution by maintenance: NOT_PERFORMED
+- Actual prior owner datum 7: Duplicate source-independence credit: NONE
+- Evidence decision 2026-10-07: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-07: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-07: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-07: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-07: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-07: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-07: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+#### 2026-10-08: checkpoint A2 CURRENT-MONTH RELATION — 2026-10-08
+- Actual prior owner datum 1: Month start: `2026-10-01`
+- Actual prior owner datum 2: Current relation window: `2026-10-01..2026-10-08`
+- Actual prior owner datum 3: Existing owner: `docs/monthly/2026-10-strategic-blueprint.md`
+- Actual prior owner datum 4: A1 dependency: `PRESENT_ON_BASE_AND_CONSUMED`
+- Actual prior owner datum 5: A1 coverage inherited: `COMPLETE_THROUGH_2026-10-07_AT_A1_CUT`
+- Actual prior owner datum 6: Historical rewrite: `NO`
+- Actual prior owner datum 7: Native replay: `NO`
+- Evidence decision 2026-10-08: preserve original producer claims strictly within recorded scope.
+- Runtime decision 2026-10-08: historical producer report does not become a new executed check in this A1.
+- Chronology decision 2026-10-08: file presence today does not prove original task-time input availability.
+- Authority decision 2026-10-08: document claim, experimental execution and scientific validity are distinct.
+- Correction decision 2026-10-08: negative/degraded/unknown outcomes remain visible and are not overwritten.
+- Source decision 2026-10-08: same-lineage retries or translations do not multiply independence.
+- Action 2026-10-08: PRESERVE / DO_NOT_REPLAY / NO_DUPLICATE_CREDIT.
+
+### Reconciliation gate ledger
+
+- Domain-specific boundary 1: `source registry growth != historical S01-S57 closeout rewrite`.
+- Domain-specific boundary 2: `conceptual mapping != agent implementation`.
+- Domain-specific boundary 3: `bilingual matched fields != full translation equivalence`.
+- Domain-specific boundary 4: `paper theorem scope != universal runtime theorem`.
+- Domain-specific boundary 5: `NOT_IMPLEMENTED / NOT_TESTED remains current`.
+- Domain-specific boundary 6: `validator pass != scientific validation`.
+- Month-start through N-1 is complete at owner-ledger review level, not verified new runtime executions.
+- Existing month owner was appended only; no parallel monthly authority created.
+- Historical native Daily, corrections, source registry, tests and production paths unchanged.
+- Unknown scientific applicability and unexecuted tests are not replaced with presumed pass.
+- Full A1 merge precedes A2; A2 must consume fresh post-A1 main.
+- A1 temporal cutoff excludes all 2026-10-09 facts even when current main already contains them.
+- Disposition: COMPLETE_FOR_RELATIONAL_OWNER_REVIEW / NO_EXTRA_AUDIT / MONTH_OPEN.
