@@ -548,6 +548,18 @@ Canonical rules:
 - Use: Daily Research Chunk (Architecture Principles)
 - Verification boundary: Verified from LaTeX source. The convergence of running consensus requires a doubly stochastic matrix $P$ with maximum eigenvalue equal to 1, and only implies stable convergence to a constant when considering network regret. Negative values in $P$ via FDLA optimization may accelerate convergence in certain theoretical networks.
 
+## S61 — Offline-to-Online Multi-Agent Reinforcement Learning with Offline Value Function Memory and Sequential Exploration
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2410.19450v3
+- Version date: 2024-10-25
+- Authors: Yi Ma, Chenyang Wu, Yunsheng Tian, Guannan Zhang, Jianye Hao
+- URL: https://arxiv.org/abs/2410.19450
+- Use: Daily Research Chunk (Memory System)
+- Reason for selection: Provides Offline Value Function Memory (OVM) mechanism and sequential exploration strategies to preserve offline knowledge and adapt seamlessly to online fine-tuning in MARL settings.
+- Actually extracted paragraphs or formulas: Extracted the OVM loss mechanism $\mathcal{L}_{\text{OVM}}$ which trades off between the offline memory target $\bar{Q}_{\text{OVM}}$ and the online temporal difference target.
+- Verification boundary: Verified from LaTeX Source. The loss function assumes bounded temporal difference targets and relies on the $\lambda_{\text{memory}}$ coefficient, bounded by $1$ and annealed to $\lambda_{\text{memory\_end}}$, without guaranteeing general non-stationary convergence outside these conditions.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.

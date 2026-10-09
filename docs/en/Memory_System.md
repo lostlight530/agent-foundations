@@ -807,3 +807,52 @@ MONTH_OPEN
 - **Cross-direction paradigm conflict audit:** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW. No memory paper is treated as proof of durable runtime memory, persistence, or factual correctness.
 - **Source migration record:** No wrapper or historical source record is removed by this pass.
 - **Bilingual alignment status:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS with the current Chinese counterpart.
+
+
+### Offline Value Function Memory (OVM) and Sequential Exploration
+
+- **System Container:** Memory System
+- **Frontier Source:** arXiv:2410.19450 (Offline-to-Online Multi-Agent Reinforcement Learning with Offline Value Function Memory and Sequential Exploration)
+- **Authors:** Yi Ma, Chenyang Wu, Yunsheng Tian, Guannan Zhang, Jianye Hao
+- **Publication Date:** 2024-10-25
+- **URL:** https://arxiv.org/abs/2410.19450
+
+#### 论文原始问题 (Original Problem)
+In Offline-to-Online Multi-Agent Reinforcement Learning (O2O MARL), agents suffer from unlearning pre-trained Q-values due to distributional shifts during the transition from offline to online phases, and face inefficient exploration across the exponentially large joint state-action space.
+
+#### 核心假设 (Core Assumptions)
+The offline dataset must be sufficient to construct a reasonably accurate baseline value function, and the transition dynamics must support an annealing memory coefficient $\lambda_{\text{memory}}$ to gradually shift reliance from offline targets to online temporal difference targets without catastrophic forgetting.
+
+#### 数学机制 (Mathematical Mechanism)
+The OVM target integrates the offline memory and the online temporal difference target:
+$\bar{Q}_{\text{OVM}} = \max \left( \bar{Q}_{\text{tot-offline}}(\tau, \boldsymbol{a}),\ r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}}(\tau', \boldsymbol{a}') \right).$
+The online value function minimizes a trade-off loss defined as the sum of squared errors against both the temporal difference and OVM targets:
+$\mathcal{L}_{\text{OVM}} = (1 - \lambda_{\text{memory}}) \left( Q_{\text{tot}} - \left( r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}} \right) \right)^2 + \lambda_{\text{memory}} \left( Q_{\text{tot}} - \bar{Q}_{\text{OVM}} \right)^2.$
+This formula is extracted as a 数学更新规则 (Mathematical Update Rule).
+
+#### 收敛或行为边界 (Convergence or behavior boundaries)
+By setting the coefficient $\lambda_{\text{memory}}$ to anneal towards $\lambda_{\text{memory\_end}}$, the rule theoretically avoids catastrophic forgetting during initial online fine-tuning, strictly bounding the initial policy deviation, but does not guarantee monotonic convergence under arbitrary non-stationarity.
+
+#### 适用范围 (Applicable Scope)
+Applicable to memory systems within cooperative multi-agent structures where prior offline interactions supply pre-trained Q-values before transitioning to dynamic online environments.
+
+#### 局限 (Limitations)
+Relies heavily on the quality of the offline dataset and requires precise tuning of the memory coefficient annealing duration ($T$). If the offline data is sparse or heavily biased, the offline memory constraint can severely hinder optimal online policy exploration.
+
+#### Agent 架构映射 (Agent Architecture Mapping)
+Can conceptually support the Memory System by establishing a buffer mechanism that anchors newly learned agent behavioral patterns against a historically stable reference model (the offline baseline), preventing sudden policy destabilization during continuous deployment.
+
+#### 仓库实现状态 (Repository Implementation Status)
+NOT_IMPLEMENTED
+
+#### 测试状态 (Repository Test Status)
+NOT_TESTED
+
+#### 初学者类比 (Beginner Analogy)
+Imagine learning to drive using a highly realistic simulator (offline memory) before going onto real streets (online phase). Initially, you rely heavily on your simulator habits (high $\lambda_{\text{memory}}$) to avoid sudden mistakes. As you gain real-world experience, you slowly reduce your reliance on the simulator's exact scenarios and start trusting the real-time feedback from actual driving (temporal difference targets).
+
+#### 证据状态 (Evidence Status)
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED

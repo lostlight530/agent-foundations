@@ -808,3 +808,52 @@ MONTH_OPEN
 - **跨方向范式冲突审计：** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW。任何记忆论文都不被扩写为持久运行时记忆、持久化正确性或事实正确性的证明。
 - **来源迁移记录：** 本轮未删除 Wrapper 或历史来源记录。
 - **双语对齐状态：** 与当前英文对应内容在已检查字段上 SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS。
+
+
+### 离线值函数记忆 (OVM) 与顺序探索 (Offline Value Function Memory and Sequential Exploration)
+
+- **System Container:** Memory System
+- **Frontier Source:** arXiv:2410.19450 (Offline-to-Online Multi-Agent Reinforcement Learning with Offline Value Function Memory and Sequential Exploration)
+- **Authors:** Yi Ma, Chenyang Wu, Yunsheng Tian, Guannan Zhang, Jianye Hao
+- **Publication Date:** 2024-10-25
+- **URL:** https://arxiv.org/abs/2410.19450
+
+#### 论文原始问题 (Original Problem)
+在离线到在线的多智能体强化学习（O2O MARL）中，智能体在从离线阶段过渡到在线阶段时，会因为分布偏移而面临遗忘预训练 Q 值的风险，同时在指数级庞大的联合状态动作空间中探索效率极低。
+
+#### 核心假设 (Core Assumptions)
+离线数据集必须足以构建一个相当准确的基线值函数，且状态转移动态必须支持退火记忆系数 $\lambda_{\text{memory}}$，以将依赖平滑地从离线目标转移到在线时序差分目标，而不会发生灾难性遗忘。
+
+#### 数学机制 (Mathematical Mechanism)
+OVM 目标结合了离线记忆和在线时序差分目标：
+$\bar{Q}_{\text{OVM}} = \max \left( \bar{Q}_{\text{tot-offline}}(\tau, \boldsymbol{a}),\ r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}}(\tau', \boldsymbol{a}') \right).$
+在线值函数通过最小化与时序差分目标和 OVM 目标的均方误差之和来平衡损失：
+$\mathcal{L}_{\text{OVM}} = (1 - \lambda_{\text{memory}}) \left( Q_{\text{tot}} - \left( r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}} \right) \right)^2 + \lambda_{\text{memory}} \left( Q_{\text{tot}} - \bar{Q}_{\text{OVM}} \right)^2.$
+该公式作为数学更新规则提取。
+
+#### 收敛或行为边界 (Convergence or behavior boundaries)
+通过将系数 $\lambda_{\text{memory}}$ 向 $\lambda_{\text{memory\_end}}$ 退火，该规则在理论上避免了初始在线微调期间的灾难性遗忘，严格限制了初始策略偏差，但不能保证在任意非平稳情况下的单调收敛。
+
+#### 适用范围 (Applicable Scope)
+适用于合作多智能体结构中的记忆系统，在此类系统中，过往的离线交互为转换到动态在线环境之前提供了预训练的 Q 值。
+
+#### 局限 (Limitations)
+严重依赖离线数据集的质量，且需要精确调整记忆系数的退火持续时间 ($T$)。如果离线数据稀疏或存在严重偏差，离线记忆约束可能会严重阻碍最佳的在线策略探索。
+
+#### Agent 架构映射 (Agent Architecture Mapping)
+在概念上可以支持记忆系统，通过建立一个缓冲机制，将新学习的智能体行为模式锚定到历史稳定的参考模型（离线基线），防止在持续部署期间出现策略的突然不稳定。
+
+#### 仓库实现状态 (Repository Implementation Status)
+NOT_IMPLEMENTED
+
+#### 测试状态 (Repository Test Status)
+NOT_TESTED
+
+#### 初学者类比 (Beginner Analogy)
+想象一下在实际上路（在线阶段）之前使用高度逼真的模拟器（离线记忆）来学习驾驶。一开始，你严重依赖在模拟器中养成的习惯（高 $\lambda_{\text{memory}}$）以避免犯下突发的错误。随着你积累了真实的道路经验，你慢慢减少对模拟器特定场景的依赖，并开始信任来自实际驾驶的实时反馈（时序差分目标）。
+
+#### 证据状态 (Evidence Status)
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED
