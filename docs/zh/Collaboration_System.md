@@ -2640,3 +2640,38 @@ $$
 - **跨方向范式冲突审计：** COMPATIBLE_WITH_BOUNDARIES。论文支持把一致性与事实性分开，但不证明 Memory 真值、Tool 正确性、仓库运行时行为或通用多智能体安全性。
 - **来源迁移记录：** S57 provenance 继续登记在 FOUNDATION/SOURCES.md。本轮未证明超出已检查 current-main 段落的完整迁移，因此不删除任何历史 Wrapper 或研究块。
 - **双语对齐状态：** 与当前英文 S57 段落在已检查字段上 SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS。
+
+
+### 对数形式量化的分布式优化 (Logarithmically Quantized Distributed Optimization)
+
+- **System Container:** Collaboration System
+- **Frontier Source:** Logarithmically Quantized Distributed Optimization over Dynamic Multi-Agent Networks
+- **URL:** http://arxiv.org/abs/2410.20345
+- **Publication Date:** 2024-10-27
+- **Authors:** Mohammadreza Doostmohammadian, Sérgio Pequito
+- **Selection Reason:** 解决了动态变化拓扑下对数形式量化对分布式优化的影响，在降低通信精度的同时，在数学上证明了系统的稳定性和精确收敛性。
+- **Original Problem:** 分布式优化的实际应用受限于通信带宽（如无线传感器网络或多机器人集群）。虽然量化减轻了通信负载，但在动态网络拓扑上实现收敛到最优解（精确一致）而不是收敛到一个邻域（量化误差），是一项重大挑战。
+- **Core Assumptions:**
+  - 局部目标函数是平滑的、严格凸的，并且具有有界的梯度和海森矩阵。
+  - 通信网络在强连通和权重平衡的拓扑结构之间切换。
+  - 采用对数形式量化，满足扇形有界关系 $(1-\frac{\rho}{2}) \leq \frac{q(\mathbf{x}_i)}{\mathbf{x}_i} \leq (1+\frac{\rho}{2})$。
+- **Mathematical Mechanism:** 该算法利用带有对数形式量化 $q(\mathbf{x}_i)$ 的连续时间一致性动力学。它使用一个辅助变量 $\mathbf{y}_i$ 来跟踪梯度：
+  $\dot{\mathbf{x}}_i = \sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) - \alpha \mathbf{y}_i$
+  $\dot{\mathbf{y}}_i = -\sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) + \dot{\mathbf{x}}_i \nabla^2 f_i(\mathbf{x}_i)$
+  通过特征谱分析表明，对于足够小的跟踪步长 $\alpha$，受扰动的系统矩阵 $M_q(\alpha)$ 保持其稳定特性。
+- **Convergence or behavior boundaries:** 系统是全局渐近稳定的，状态向量 $\mathbf{x}$ 精确收敛到最优点 $\mathbf{x}^*$，辅助梯度跟踪变量 $\mathbf{y}$ 收敛到 $\mathbf{0}$。只要 $\alpha$ 足够小 ($0 < \alpha < \overline{\alpha}$)，无论切换信号拓扑 $\theta$ 如何，都能确保收敛。
+- **Applicable Scope:** 在严格带宽限制下运行的多智能体系统，执行网络连通性波动的分布式任务，如协同过滤、分布式SVM或传感器网络数据处理。
+- **Limitations:**
+  - 由于量化动力学的非线性/非平滑性质，很难确定精确的收敛率界限。
+  - 依赖于连续时间的微分更新，必须为数字实现进行适当的离散化。
+- **Agent Architecture Mapping:** 这在架构上映射为 Collaboration System 智能体间通信协议的 DESIGN_CANDIDATE。它表明共享状态信念或梯度的智能体可以对其消息进行对数压缩，只要它们以足够小的步长跟踪梯度，集群的集体智能就不会退化为持久误差，而是收敛到最优一致。
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** 想象一个分析师团队试图找到产品的最佳平均价格。他们只能通过静电干扰严重的对讲机交谈，因此他们用粗略的区间（如 10块、100块、1000块）而不是精确的几分钱（这就是对数量化）来传达他们的数字。令人惊讶的是，通过仔细跟踪粗略的变化并缓慢前进，团队最终发现了完全准确的最佳价格，而无需任何人发送高精度、长篇幅的消息。
+- **Actually extracted paragraphs or formulas:** 提取了核心动力学公式：
+  $\dot{\mathbf{x}}_i = \sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) - \alpha \mathbf{y}_i$
+  $\dot{\mathbf{y}}_i = -\sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) + \dot{\mathbf{x}}_i \nabla^2 f_i(\mathbf{x}_i)$
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
