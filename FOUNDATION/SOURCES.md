@@ -560,6 +560,18 @@ Canonical rules:
 - Actually extracted paragraphs or formulas: Extracted the OVM loss mechanism $\mathcal{L}_{\text{OVM}}$ which trades off between the offline memory target $\bar{Q}_{\text{OVM}}$ and the online temporal difference target.
 - Verification boundary: Verified from LaTeX Source. The loss function assumes bounded temporal difference targets and relies on the $\lambda_{\text{memory}}$ coefficient, bounded by $1$ and annealed to $\lambda_{\text{memory\_end}}$, without guaranteeing general non-stationary convergence outside these conditions.
 
+## S62 — Logarithmically Quantized Distributed Optimization over Dynamic Multi-Agent Networks
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2410.20345v1
+- Version date: 2024-10-27
+- Authors: Mohammadreza Doostmohammadian, Sérgio Pequito
+- URL: https://arxiv.org/abs/2410.20345
+- Use: Daily Research Chunk (Collaboration System)
+- Reason for selection: Addresses logarithmic quantization in distributed optimization over dynamic networks, proving exact convergence instead of just converging to an error neighborhood.
+- Actually extracted paragraphs or formulas: Extracted the gradient tracking differential equation: $\dot{\mathbf{x}}_i = \sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) - \alpha \mathbf{y}_i$.
+- Verification boundary: Verified from LaTeX Source. The mathematical mechanism proves asymptotic global stability for the continuous-time system under sufficiently small learning rates $\alpha$, but does not guarantee the exact convergence rate.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
