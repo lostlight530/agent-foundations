@@ -2412,7 +2412,7 @@ Evidence Status: CONCEPTUAL_MAPPING
 - 动态演进映射 (Dynamic evolution mapping)
   - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED.
 - 来源迁移记录 (Source migration record)
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
@@ -2847,7 +2847,7 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - 动态演进映射 (Dynamic evolution mapping)
   - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED.
 - 来源迁移记录 (Source migration record)
   - Migrated chunks successfully. Removed W40 wrapper as per instructions.
 - 双语对齐状态 (Bilingual alignment status)
