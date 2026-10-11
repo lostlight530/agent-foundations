@@ -336,6 +336,34 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 
 🔗 [
 
+
+### 联网自动驾驶汽车的多智能体概率集成轨迹采样 (Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles)
+
+- **System Container:** Tool System
+- **Frontier Source:** S26 — Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+- **论文完整标题 (Title):** Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+- **作者 (Authors):** Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
+- **URL:** https://arxiv.org/abs/2312.13910
+- **版本 (Version):** v3
+- **发布时间 (Publication Date):** 2024-07-17
+- **选择理由 (Reason for selection):** 提供了多智能体基于模型强化的群体后悔界，直接指导有界通信范围如何影响去中心化轨迹（工具序列）规划的收敛。
+- **实际提取段落或公式 (Actually extracted paragraphs or formulas):** 提取了群体后悔界公式 $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$。
+- **论文原始问题 (Original Problem):** 论文解决有限通信范围内联网自动驾驶汽车 (CAVs) 的去中心化基于模型的强化学习 (MBRL) 问题，智能体必须在仅局部共享信息的情况下优化轨迹规划，以减轻全局通信的成本和限制。
+- **核心假设 (Core Assumptions):** 状态和动作空间经过离散化和有界处理。智能体在动态有限通信范围 $d$ 内运行，形成动态拓扑 $\mathcal{G}_{d,k}$。收敛性取决于通信图的最小团覆盖数 (minimum clique cover number) $\bar{\chi}\left(\mathcal{G}_d\right)$。
+- **数学机制 (Mathematical Mechanism):** 群体后悔界 $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$ (收敛界)
+- **收敛或行为边界 (Convergence or behavior boundaries):** 群体后悔随 $T$ 呈次线性增加。后悔界在本质上依赖于最小团覆盖数 $\bar{\chi}\left(\mathcal{G}_d\right)$，这意味着图连通度紧密控制着收敛。过度局部化的通信边界会限制智能体可实现的全局最优性。
+- **适用范围 (Applicable Scope):** 在地理或拓扑受限的通信范围内执行基于模型的轨迹规划或动作序列的分布式多智能体系统。
+- **局限 (Limitations):** 理论上最坏情况的群体后悔界依赖于有界的离散状态动作空间。当集成预测失效时，性能对分布外 (OOD) 状态敏感，并且由于 MPC 视界 $w$ 导致的计算延迟对敏捷性施加了实际限制。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持去中心化工具路由与规划，其中多个智能体（作为工具执行）必须形成动作轨迹，同时仅与直接的局部邻居同步内部状态变量，从而在没有中央编排器的情况下允许分布式工具序列。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **初学者类比 (Beginner Analogy):** 想象一群在起雾的城市中行驶的司机，他们只能通过短距离对讲机交谈。与其让一个司机独自猜测路线（单智能体）或每个人都向中央塔楼报告（全局通信），他们不如与附近的汽车分享有限的交通更新，以在脑海中绘制路线图（基于模型的规划）。这帮助他们比盲目驾驶更快地避开交通拥堵，但他们的整体成功取决于对讲机网络的连接程度。
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
