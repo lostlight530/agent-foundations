@@ -283,6 +283,46 @@ Deterministic Convergence Mechanism: 该研究将物理信息边界（Physics-In
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+## 基于不变原理的成对交互网络系统集中性 (PIN Systems Concentration via Mean-Field Lyapunov Function)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** arXiv
+- **Publication Date:** 2024-10-30T08:57:16Z
+- **Authors:** Giacomo Como, Fabio Fagnani, Sandro Zampieri
+- **URL:** http://arxiv.org/abs/2410.22820v1
+- **选择理由 (Reason for Selection):** The paper establishes a rigorous concentration result for stationary distributions in large-scale stochastic pairwise interaction network (PIN) systems, based on an invariance principle with a class-$C^2$ mean-field Lyapunov function. This bounds the behavior of agents interacting on asymptotically totally mixing graphs.
+
+### 原始问题 (Original Problem)
+大规模随机成解交互网络（PIN）模型（如流行病模型或演化动态）是有限状态马尔可夫链。挑战在于证明随着网络规模的增长，它们的平稳分布会集中在特定状态周围，从而克服标准平均场常微分方程近似（如 Kurtz 定理）主要适用于完全图和有界时间范围的局限性。
+
+### 核心假设 (Core Assumptions)
+- 代理的状态空间 $\mathcal{A}$ 是有限的。
+- 交互模式是一个渐近完全混合 (ATM) 图序列 $\mathcal{G}_n$，意味着总混合间隙 $\lim_{n \to +\infty} W_{\mathcal{G}_n} = 0$。
+- 极限漂移 $\bar{D}(\theta)$ 具有一个全局的 $C^2$ 类平均场 Lyapunov 函数 $V: \mathcal{P}(\mathcal{A}) \to \mathbb{R}$。
+
+### 收敛或行为边界 (Convergence or behavior boundaries)
+对于任意 $\delta > 0$，平稳分布的概率质量集中在 $\nabla V(\theta) \cdot \bar{D}(\theta)$ 下界为 $-\delta$ 的配置集合上。这证明了一个不变原理，即当 $n \to +\infty$ 时，系统受到 Lyapunov 导数零点的约束。
+
+### 适用范围 (Applicable Scope)
+适用于任意 ATM 网络（包括 Erdős-Rényi 随机图和完全图）上具有成对随机交互且允许平均场 Lyapunov 函数的大规模多智能体系统。
+
+### 局限 (Limitations)
+- 要求网络序列渐近地完全混合。
+- 依赖于平均场极限的全局 $C^2$ Lyapunov 函数（或微扰的近似 Lyapunov 函数）的存在。
+- 侧重于 $n \to \infty$ 极限，提供渐近保证而非严格的有限时间/有限规模保证。
+
+### Agent 架构映射 (Agent Architecture Mapping)
+这在数学上映射了约束系统行为的架构原则。在大规模多智能体协作或路由网络中，如果可以设计交互规则（类似于极限漂移）以容纳 Lyapunov 函数，该架构在理论上可以降低状态发散的风险，即使智能体在稀疏的随机拓扑上交互，前提是混合间隙趋于零。
+
+### 仓库实现状态 (Repository Implementation Status)
+NOT_IMPLEMENTED
+
+### 证据状态 (Evidence Status)
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown & Pseudocode)
 
 ### Mathematical Mechanism: 数学机制 (Lyapunov式约束核心公式)
@@ -609,6 +649,23 @@ def F_theta_pow(F_theta, N, x, u):
 
 ### 数学机制：广义速度刚性与宏观运动模式
 运动学微分包含：$a(t) \in \text{Null}(R_v(v(t)))$。全局加速度向量必须严格限制在速度刚性矩阵 $R_v(v)$ 的瞬时零空间内 (核心更新公式)。
+
+### Mathematical Mechanism for 基于不变原理的成对交互网络系统集中性
+PIN 模型的极限漂移 $\bar{D}(\theta)$ 是根据突变和交互矩阵定义的。如果存在一个满足以下条件的 Lyapunov 函数 $V$：
+$$ \nabla V(\theta) \cdot \bar{D}(\theta) \leq 0, \quad \forall \theta \in \mathcal{P}(\mathcal{A}) $$
+那么，通过利用 ATM 图序列的拓扑性质，平稳分布 $\mu_n$ 会集中在漂移导数接近于零的地方：
+$$ \lim_{n \to +\infty} \mu_n \left\{ \mathbf{x} \in \mathcal{X} : \nabla V(\theta(\mathbf{x})) \cdot \bar{D}(\theta(\mathbf{x})) > -\delta \right\} = 1 $$
+
+
+### Pseudocode for 基于不变原理的成对交互网络系统集中性
+\begin{theorem}\label{cor:ATM-general-2}
+Consider a PIN model with parameters $(\mc A, \pint, P, \phi)$ on an ATM interaction network $\mc G_{n}$. Let $\mu_{n}$ be a stationary distribution for all $n\ge2$.
+Denote by $\ldrift$ the limit drift and let $V:\mc P(\mc A)\to\R$ be a class-$\mc C^2$ mean-field Lyapunov function.
+Then
+\be\label{mu-conc-mf22} \lim\limits_{n\to +\infty}\mu_{n} \{\xb\in\mc X:\,\nabla V(\theta(\xb))\cdot\ldrift(\theta(\xb))>-\delta\}=1\,,\ee
+ for every $\delta>0$.
+\end{theorem}
+
 
 ## 4. 结语
 
@@ -1232,6 +1289,10 @@ MONTH_OPEN
 ```
 
 
+### Analogy for 基于不变原理的成对交互网络系统集中性
+想象一个房间里有一大群人，每个人偶尔会根据与邻居的随机交流改变自己的观点。即使他们不与所有人交谈（稀疏网络），只要人群足够大且混合得足够好，整体的观点分布最终会集中在一个稳定的配置上。“Lyapunov 函数”就像一个能量景观，确保人群可预测地安定下来，避免混乱的波动。
+
+
 <!-- WEEKLY_SYNC_REPORT -->
 - **本周文档级联编制 (Weekly document cascade weaving):**
   - Woven `Generalized Velocity Rigidity for Macroscopic Motion` into core sections (theory, math, analogy).
@@ -1295,121 +1356,20 @@ MONTH_OPEN
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
 
-## 2026-W40 周度文档级联与冲突审计
-
-- **本周文档级联编织：** 保留 Architecture Principles 中现有研究段落的原位置。本轮未独立证明迁移完整性，因此不搬移、不删除既有理论块。
-- **动态演进映射：** 现有论文到架构的映射继续保持证据分层；论文级边界不升级为仓库实现或运行时验证。
-- **跨方向范式冲突审计：** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW。该结论仅限已检查的文档假设，不证明运行时兼容性。
-- **来源迁移记录：** 本轮未删除任何 Wrapper 或历史研究段落；既有来源 provenance 继续保留在其 owning section。
-- **双语对齐状态：** 与当前英文对应内容在已检查字段上 SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS。
 
 
-- **技术点名称:** Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
-- **System Container:** Architecture Principles
-- **Frontier Source:** S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit (arXiv:2402.04417v2)
-- **论文原始问题:** 在去中心化多智能体多臂老虎机 (MAMAB) 系统中，恶意参与者可能会进行拜占庭攻击或共识攻击。如何在不依赖可信中央服务器的情况下确保可靠的协同学习并限制遗憾值 (regret)？
-- **核心假设:**
-  1. 系统包含 $N$ 个参与者，其中恶意或进行共识攻击的参与者少于一半 ($< M/2$)。
-  2. 网络通信利用安全多方计算、签名和分布式账本 (区块链) 进行验证。
-  3. 奖励生成有界，智能体使用基于 UCB 的协调策略。
-- **数学机制:** 将去中心化共识估计器 $\tilde{\mu}_i$ 与基于区块链的验证和基于 UCB 的决策规则相结合。收缩映射确保了即使在有恶意输入的情况下也能收敛：
-  - 数学更新规则: $Dist(\tilde{\mu}_i(t), \mu_i)$ 以由收缩因子 $(1-P_t)$ 控制的速率收敛到 0。
-  - 核心更新公式: 稳健的估计器 $\hat{\mu}_i$ 和 $\tilde{\mu}_i$ 由于稳健聚合而与诚实参与者保持一致。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 累积遗憾受到对数级别的限制，$R(T) \leq \mathcal{O}(\log T)$，前提是共识机制成功过滤了恶意攻击 (由于恶意节点 $< M/2$)。
-- **适用范围:** 去中心化自治系统和多智能体系统，其中智能体在一个不可信的网络上共享学习经验 (如多臂老虎机)，且没有中央聚合器。
-- **局限:** 需要诚实多数的假设 (恶意节点少于一半)。依赖于区块链验证和安全多方计算的计算和通信开销，这可能无法扩展到资源高度受限的环境。
-- **Agent 架构映射:** DESIGN_CANDIDATE。该架构在数学上形式化了去中心化账本 (区块链) 与稳健统计聚合的集成，以保护多智能体协同学习免受拜占庭操纵。
-- **仓库实现状态:** EVIDENCE_INSUFFICIENT
-- **初学者类比:** 想象一群朋友试图通过分享他们的经历来找到镇上最好的餐厅。然而，其中有几个喷子，他们撒谎说好餐厅有多糟糕。为了解决这个问题，每个人都把他们的评论写在一个公开、不可更改的账本 (类似区块链) 上，并使用一个数学规则来忽略极端的异常值。只要大多数朋友是诚实的，他们仍然能很快找出最好的吃饭地方。
-- **中英文内容:** 中文文档已更新。
-- **证据状态:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: DESIGN_CANDIDATE
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-- **Authors:** Yingying Shi, Yang Jiao, Xuesong Wang
-- **URL:** https://arxiv.org/abs/2402.04417
-- **Version:** v2
-- **发布时间:** 2024-07-25
-- **选择理由:** 提供了利用分布式账本构建高韧性多智能体架构的坚实数学基础。
-- **实际提取段落或公式:** 提取了收缩机制 $(1-P_t)$，该机制确保 $\tilde{\mu}_i(t)$ 在稳健的 MAMAB 验证逻辑下收敛，并且提取了所选臂和最优臂之间奖励差异的界限。
 
-- **技术点名称:** 基于最快分布式线性平均(FDLA)的多智能体多臂老虎机(MAMAB)网络优化
-- **System Container:** Architecture Principles
-- **Frontier Source:** Relational Weight Optimization for Enhancing Team Performance in Multi-Agent Multi-Armed Bandits (arxiv:2410.23379v1)
-- **选择理由:** 为通过最快分布式线性平均优化分布式通信拓扑权重提供了严格的数学框架，与去中心化架构原则直接相关。
-- **实际提取段落或公式:** 提取了 FDLA 约束公式 $\text{minimize } \rho(P - (1/M)\mathbf{11}^T) \text{ subject to } P \in \mathscr{S}, P = P^T, P\mathbf{1} = \mathbf{1}$，以及运行共识方程 $x(t) = P^t x(0) + \sum_{k=1}^t \mu P^k + \sum_{k=1}^t \varepsilon(t-k+1)P^k$。
-- **论文原始问题:** 在多智能体学习中（如基于最大度计算 Perron 矩阵的 Coop-UCB2），传统的网络权重分布无法利用关系网络结构的复杂性，导致图上的协作收敛时间次优。
-- **核心假设:** 通信矩阵 $P$ 是双随机矩阵（$\mathbf{1}^T P = \mathbf{1}^T, P\mathbf{1} = \mathbf{1}$），其最大特征值等于 1。外部观察结果为正态分布变量 $z(t) \sim \mathcal{N}(\mu, \sigma^2)$，表示臂的真实均值和方差。
-- **数学机制:** 通过引入标量松弛变量 $s$ 来最小化谱半径 $\rho(P - (1/M)\mathbf{11}^T)$，将共识权重优化问题转化为半正定规划（SDP），强制要求 $-sI \preceq P-(1/M)\mathbf{1}\mathbf{1}^T \preceq sI$；在数学上，该方法允许负边权重的存在，以加速线性分布平均。
-- **收敛或行为边界:** 在 $\lim_{t\xrightarrow[]{}\infty} \sum_{k=1}^t z(t-k+1)P^k = C\mathbf{1}$ 的前提下，运行共识会在解析上收敛于一个常数：$\lim_{t\xrightarrow{} \infty} x(t) = \bar{x}\mathbf{1} + C\mathbf{1} = C'\mathbf{1}$。
-- **适用范围:** 直接适用于通过相连智能体节点共享估计平均奖励并迭代运行分布式平均共识来优化的随机多臂老虎机问题。
-- **局限:** 虽然 FDLA 产生的负权重能在数学上加快收敛速度，但在严格的协作架构中可能缺乏直接的物理可解释性或安全意义；该结果并不能保证在对抗干扰下的绝对成功。
-- **Agent 架构映射:** 在概念上可以支持高级的关系路由与基于图的记忆共享，通过优化内部共识步骤速度来替代单纯依赖节点均匀广播。
-- **仓库实现状态:** NOT_IMPLEMENTED
-- **初学者类比:** 想象一个团队试图通过仅向周围的人耳语来猜测罐子里软糖的数量。如果每个人都同等重视邻居的猜测（标准平均），需要很长时间才能得出结论。如果我们通过数学计算出确切信任（权重）特定连接的程度——甚至对某些嘈杂连接产生负面影响——整个团队就能快得多地收敛到正确的平均值。
-- **中英文内容:** 此块已分别在中英文档中独立生成，并保持相同的数学边界、假设限制、公式与状态映射，以确保跨语言严格一致。(This chunk is generated independently in both Chinese and English documents maintaining identical boundaries, assumptions, limitations, formulas, and state mappings.)
-- **证据状态:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: PAPER_ONLY
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED
+<!-- WEEKLY_SYNC_REPORT -->
+## 周度文档级联与冲突审计
 
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将新集成的理论边界和算法映射到相应的架构约束中。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移 Chunk。按照要求删除了 W40 Wrapper。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
-## 基于不变原理的成对交互网络系统集中性 (PIN Systems Concentration via Mean-Field Lyapunov Function)
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** arXiv
-- **Publication Date:** 2024-10-30T08:57:16Z
-- **Authors:** Giacomo Como, Fabio Fagnani, Sandro Zampieri
-- **URL:** http://arxiv.org/abs/2410.22820v1
-- **选择理由 (Reason for Selection):** The paper establishes a rigorous concentration result for stationary distributions in large-scale stochastic pairwise interaction network (PIN) systems, based on an invariance principle with a class-$C^2$ mean-field Lyapunov function. This bounds the behavior of agents interacting on asymptotically totally mixing graphs.
-
-### 原始问题 (Original Problem)
-大规模随机成解交互网络（PIN）模型（如流行病模型或演化动态）是有限状态马尔可夫链。挑战在于证明随着网络规模的增长，它们的平稳分布会集中在特定状态周围，从而克服标准平均场常微分方程近似（如 Kurtz 定理）主要适用于完全图和有界时间范围的局限性。
-
-### 核心假设 (Core Assumptions)
-- 代理的状态空间 $\mathcal{A}$ 是有限的。
-- 交互模式是一个渐近完全混合 (ATM) 图序列 $\mathcal{G}_n$，意味着总混合间隙 $\lim_{n \to +\infty} W_{\mathcal{G}_n} = 0$。
-- 极限漂移 $\bar{D}(\theta)$ 具有一个全局的 $C^2$ 类平均场 Lyapunov 函数 $V: \mathcal{P}(\mathcal{A}) \to \mathbb{R}$。
-
-### 数学机制 (Mathematical Mechanism)
-PIN 模型的极限漂移 $\bar{D}(\theta)$ 是根据突变和交互矩阵定义的。如果存在一个满足以下条件的 Lyapunov 函数 $V$：
-$$ \nabla V(\theta) \cdot \bar{D}(\theta) \leq 0, \quad \forall \theta \in \mathcal{P}(\mathcal{A}) $$
-那么，通过利用 ATM 图序列的拓扑性质，平稳分布 $\mu_n$ 会集中在漂移导数接近于零的地方：
-$$ \lim_{n \to +\infty} \mu_n \left\{ \mathbf{x} \in \mathcal{X} : \nabla V(\theta(\mathbf{x})) \cdot \bar{D}(\theta(\mathbf{x})) > -\delta \right\} = 1 $$
-
-### 收敛或行为边界 (Convergence or behavior boundaries)
-对于任意 $\delta > 0$，平稳分布的概率质量集中在 $\nabla V(\theta) \cdot \bar{D}(\theta)$ 下界为 $-\delta$ 的配置集合上。这证明了一个不变原理，即当 $n \to +\infty$ 时，系统受到 Lyapunov 导数零点的约束。
-
-### 适用范围 (Applicable Scope)
-适用于任意 ATM 网络（包括 Erdős-Rényi 随机图和完全图）上具有成对随机交互且允许平均场 Lyapunov 函数的大规模多智能体系统。
-
-### 局限 (Limitations)
-- 要求网络序列渐近地完全混合。
-- 依赖于平均场极限的全局 $C^2$ Lyapunov 函数（或微扰的近似 Lyapunov 函数）的存在。
-- 侧重于 $n \to \infty$ 极限，提供渐近保证而非严格的有限时间/有限规模保证。
-
-### Agent 架构映射 (Agent Architecture Mapping)
-这在数学上映射了约束系统行为的架构原则。在大规模多智能体协作或路由网络中，如果可以设计交互规则（类似于极限漂移）以容纳 Lyapunov 函数，该架构在理论上可以降低状态发散的风险，即使智能体在稀疏的随机拓扑上交互，前提是混合间隙趋于零。
-
-### 仓库实现状态 (Repository Implementation Status)
-NOT_IMPLEMENTED
-
-### 初学者类比 (Beginner Analogy)
-想象一个房间里有一大群人，每个人偶尔会根据与邻居的随机交流改变自己的观点。即使他们不与所有人交谈（稀疏网络），只要人群足够大且混合得足够好，整体的观点分布最终会集中在一个稳定的配置上。“Lyapunov 函数”就像一个能量景观，确保人群可预测地安定下来，避免混乱的波动。
-
-### 实际提取段落或公式 (Actually extracted paragraphs or formulas)
-\begin{theorem}\label{cor:ATM-general-2}
-Consider a PIN model with parameters $(\mc A, \pint, P, \phi)$ on an ATM interaction network $\mc G_{n}$. Let $\mu_{n}$ be a stationary distribution for all $n\ge2$.
-Denote by $\ldrift$ the limit drift and let $V:\mc P(\mc A)\to\R$ be a class-$\mc C^2$ mean-field Lyapunov function.
-Then
-\be\label{mu-conc-mf22} \lim\limits_{n\to +\infty}\mu_{n} \{\xb\in\mc X:\,\nabla V(\theta(\xb))\cdot\ldrift(\theta(\xb))>-\delta\}=1\,,\ee
- for every $\delta>0$.
-\end{theorem}
-
-### 证据状态 (Evidence Status)
-- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-- Architecture Mapping Status: CONCEPTUAL_MAPPING
-- Repository Implementation Status: NOT_IMPLEMENTED
-- Repository Test Status: NOT_TESTED

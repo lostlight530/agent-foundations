@@ -284,6 +284,64 @@ Deterministic Convergence Mechanism: The paper applies Physics-Informed bounds i
   - Repository Implementation Status: EVIDENCE_INSUFFICIENT
   - Repository Test Status: EVIDENCE_INSUFFICIENT
 
+## PIN Systems Concentration via Mean-Field Lyapunov Function
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** arXiv
+- **Publication Date:** 2024-10-30T08:57:16Z
+- **Authors:** Giacomo Como, Fabio Fagnani, Sandro Zampieri
+- **URL:** http://arxiv.org/abs/2410.22820v1
+- **Reason for Selection:** The paper establishes a rigorous concentration result for stationary distributions in large-scale stochastic pairwise interaction network (PIN) systems, based on an invariance principle with a class-$C^2$ mean-field Lyapunov function. This bounds the behavior of agents interacting on asymptotically totally mixing graphs.
+
+### 原始问题 (Original Problem)
+Large-scale stochastic pairwise interaction network (PIN) models (like epidemic models or evolutionary dynamics) are finite-state Markov chains. The challenge is to prove that as the network scale grows, their stationary distributions concentrate around specific states, overcoming the limitations of standard mean-field ODE approximations (e.g., Kurtz's theorem) which apply primarily to complete graphs and bounded time horizons.
+
+### 核心假设 (Core Assumptions)
+- The state space $\mathcal{A}$ of the agents is finite.
+- The interaction pattern is an Asymptotically Totally Mixing (ATM) graph sequence $\mathcal{G}_n$, meaning the total mixing gap $\lim_{n \to +\infty} W_{\mathcal{G}_n} = 0$.
+- The limit drift $\bar{D}(\theta)$ admits a global class-$C^2$ mean-field Lyapunov function $V: \mathcal{P}(\mathcal{A}) \to \mathbb{R}$.
+
+### 数学机制 (Mathematical Mechanism)
+The limit drift $\bar{D}(\theta)$ for a PIN model is defined based on mutation and interaction matrices. If there exists a Lyapunov function $V$ satisfying:
+$$ \nabla V(\theta) \cdot \bar{D}(\theta) \leq 0, \quad \forall \theta \in \mathcal{P}(\mathcal{A}) $$
+Then, by exploiting the topological properties of the ATM graph sequence, the stationary distributions $\mu_n$ concentrate where the drift derivative is close to zero:
+$$ \lim_{n \to +\infty} \mu_n \left\{ \mathbf{x} \in \mathcal{X} : \nabla V(\theta(\mathbf{x})) \cdot \bar{D}(\theta(\mathbf{x})) > -\delta \right\} = 1 $$
+
+### 收敛或行为边界 (Convergence or behavior boundaries)
+For any $\delta > 0$, the probability mass of the stationary distribution concentrates on the set of configurations where $\nabla V(\theta) \cdot \bar{D}(\theta)$ is bounded below by $-\delta$, demonstrating an invariance principle where the system is bounded to the zeros of the Lyapunov derivative as $n \to +\infty$.
+
+### 适用范围 (Applicable Scope)
+Applicable to large-scale multi-agent systems with pairwise stochastic interactions over arbitrary ATM networks (which includes Erdős–Rényi random graphs and complete graphs) that admit a mean-field Lyapunov function.
+
+### 局限 (Limitations)
+- Requires the network sequence to be asymptotically totally mixing.
+- Relies on the existence of a global $C^2$ Lyapunov function for the mean-field limit (or an approximate one for perturbations).
+- Focuses on the $n \to \infty$ limit, providing asymptotic rather than strict finite-time/finite-size guarantees.
+
+### Agent 架构映射 (Agent Architecture Mapping)
+This mathematically maps to architectural principles for bounding system behavior. In a large-scale multi-agent collaboration or routing network, if the interaction rules (analogous to the limit drift) can be designed to admit a Lyapunov function, the architecture can theoretically lower the risk of diverging states, even when agents interact over sparse random topologies, provided the mixing gap approaches zero.
+
+### 仓库实现状态 (Repository Implementation Status)
+NOT_IMPLEMENTED
+
+### 初学者类比 (Beginner Analogy)
+Imagine a large crowd of people in a room where individuals occasionally change their opinion based on a random interaction with a neighbor. Even if they don't talk to everyone (a sparse network), as long as the crowd is large and well-mixed enough, the overall distribution of opinions will eventually concentrate in a stable configuration. The "Lyapunov function" acts as an energy landscape that ensures the crowd settles down predictably, avoiding chaotic fluctuations.
+
+### 实际提取段落或公式 (Actually extracted paragraphs or formulas)
+\begin{theorem}\label{cor:ATM-general-2}
+Consider a PIN model with parameters $(\mc A, \pint, P, \phi)$ on an ATM interaction network $\mc G_{n}$. Let $\mu_{n}$ be a stationary distribution for all $n\ge2$.
+Denote by $\ldrift$ the limit drift and let $V:\mc P(\mc A)\to\R$ be a class-$\mc C^2$ mean-field Lyapunov function.
+Then
+\be\label{mu-conc-mf22} \lim\limits_{n\to +\infty}\mu_{n} \{\xb\in\mc X:\,\nabla V(\theta(\xb))\cdot\ldrift(\theta(\xb))>-\delta\}=1\,,\ee
+ for every $\delta>0$.
+\end{theorem}
+
+### 证据状态 (Evidence Status)
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: CONCEPTUAL_MAPPING
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED
+
 ## 3. Source Code Breakdown & Pseudocode
 
 ### Mathematical Mechanism: 数学机制 (Lyapunov-Type Constraint)
@@ -1110,7 +1168,7 @@ Historical dual-view remains preserved: the original S52 Daily mapping is a poin
 - 动态演进映射 (Dynamic evolution mapping)
   - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - COMPATIBLE. The newly woven theories align perfectly with decentralized agent optimization and bounded interaction principles. No conflicts with Memory, Tool, or Collaboration assumptions.
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED.
 - 来源迁移记录 (Source migration record)
   - Migrated chunks successfully. Removed duplicated MISSING_SOURCE wrappers if any.
 - 双语对齐状态 (Bilingual alignment status)
@@ -1293,121 +1351,20 @@ MONTH_OPEN
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
 
-## 2026-W40 Weekly Document Cascade & Conflict Audit
-
-- **Weekly document cascade weaving:** Existing Architecture Principles research sections are retained in place. This pass does not relocate or delete earlier theory blocks because migration completeness was not independently proven from the current-main cut.
-- **Dynamic evolution mapping:** Existing paper-to-architecture mappings remain evidence-scoped. No paper-level bound is upgraded to repository implementation or runtime validation.
-- **Cross-direction paradigm conflict audit:** NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW. This result is limited to the checked document assumptions and does not establish runtime compatibility.
-- **Source migration record:** No wrapper or historical research section was deleted by this pass. Pre-existing source provenance remains attached to its owning sections.
-- **Bilingual alignment status:** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS with the current Chinese counterpart.
 
 
-- **Technical Point Name:** Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit
-- **System Container:** Architecture Principles
-- **Frontier Source:** S24 — Decentralized Blockchain-based Robust Multi-agent Multi-armed Bandit (arXiv:2402.04417v2)
-- **Original Paper Problem:** In decentralized multi-agent multi-armed bandit (MAMAB) systems, malicious participants can perform Byzantine or consensus attacks. How can we ensure reliable cooperative learning and bounding regret without relying on a trusted central server?
-- **Core Assumptions:**
-  1. The system consists of $N$ participants, out of which less than half ($< M/2$) are malicious or performing consensus attacks.
-  2. The network communication leverages a secure multiparty computation, signatures, and a distributed ledger (blockchain) for validation.
-  3. The reward generation is bounded and the agents use UCB-style coordination.
-- **Mathematical Mechanism:** Combines a decentralized consensus estimator $\tilde{\mu}_i$ with blockchain-backed validation and a UCB-based decision rule. The contraction mapping ensures convergence despite malicious inputs:
-  - 数学更新规则 (Mathematical Update Rule): $Dist(\tilde{\mu}_i(t), \mu_i)$ converges to 0 at a rate governed by the contraction factor $(1-P_t)$.
-  - 核心更新公式 (Core Update Formula): The robust estimators $\hat{\mu}_i$ and $\tilde{\mu}_i$ are consistent with honest participants due to robust aggregation.
-- **收敛或行为边界 (Convergence or behavior boundaries):** The cumulative regret is logarithmically bounded, $R(T) \leq \mathcal{O}(\log T)$, under the assumption that the consensus mechanism successfully filters out malicious attacks (since malicious actors $< M/2$).
-- **Applicability Scope:** Decentralized autonomous systems and multi-agent systems where agents share learning experiences (like multi-armed bandits) over an untrusted network without a central aggregator.
-- **Limitations:** Requires the assumption of an honest majority (less than half malicious nodes). Relies on the computational and communication overhead of blockchain validation and secure multiparty computation, which may not scale to highly constrained environments.
-- **Agent Architecture Mapping:** DESIGN_CANDIDATE. This architecture mathematically formalizes the integration of a decentralized ledger (blockchain) with robust statistical aggregation to protect multi-agent cooperative learning from Byzantine manipulation.
-- **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** Imagine a group of friends trying to find the best restaurant in town by sharing their experiences. However, a few of them are trolls who lie about how bad the good restaurants are. To fix this, everyone writes their reviews in a public, unchangeable ledger (like a blockchain) and they use a math rule to ignore extreme outliers. As long as most friends are honest, they will still quickly figure out the best place to eat.
-- **Bilingual Content:** English document updated.
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: DESIGN_CANDIDATE
-  - Repository Implementation Status: EVIDENCE_INSUFFICIENT
-  - Repository Test Status: EVIDENCE_INSUFFICIENT
-- **Authors:** Yingying Shi, Yang Jiao, Xuesong Wang
-- **URL:** https://arxiv.org/abs/2402.04417
-- **Version:** v2
-- **Publication Date:** 2024-07-25
-- **Selection Reason:** Provides robust mathematical grounding for resilient multi-agent architecture via distributed ledgers.
-- **Actually Extracted Paragraphs or Formulas:** Extracted contraction mechanism $(1-P_t)$ ensuring convergence of $\tilde{\mu}_i(t)$ and bounds on the reward difference between pulled and optimal arm under the robust MAMAB validation logic.
 
-- **Technical Point Name:** Multi-Agent Multi-Armed Bandits (MAMAB) Network Optimization via Fastest Distributed Linear Averaging (FDLA)
-- **System Container:** Architecture Principles
-- **Frontier Source:** Relational Weight Optimization for Enhancing Team Performance in Multi-Agent Multi-Armed Bandits (arxiv:2410.23379v1)
-- **Selection Reason:** Provides a mathematically rigorous framework for optimizing distributed communication topology weighting through Fastest Distributed Linear Averaging, directly relevant for decentralized architecture principles.
-- **Actually Extracted Paragraphs or Formulas:** Extracted the FDLA constraint formulation $\text{minimize } \rho(P - (1/M)\mathbf{11}^T) \text{ subject to } P \in \mathscr{S}, P = P^T, P\mathbf{1} = \mathbf{1}$, and the running consensus equation $x(t) = P^t x(0) + \sum_{k=1}^t \mu P^k + \sum_{k=1}^t \varepsilon(t-k+1)P^k$.
-- **Original problem:** Conventional network weight distributions in multi-agent learning (like Coop-UCB2 using maximum-degree based Perron matrices) fail to exploit relational network structure complexity, resulting in suboptimal cooperative convergence times over graphs.
-- **Core Assumptions:** The communication matrix $P$ is doubly stochastic ($\mathbf{1}^T P = \mathbf{1}^T, P\mathbf{1} = \mathbf{1}$) with maximum eigenvalue equal to 1. The external observation is a normally distributed variable $z(t) \sim \mathcal{N}(\mu, \sigma^2)$ representing arms' true mean and variance.
-- **Mathematical Mechanisms:** Consensus weights are optimized through semi-definite programming (SDP) by introducing a scalar slack variable $s$ to minimize the spectral radius $\rho(P - (1/M)\mathbf{11}^T)$, enforcing $-sI \preceq P-(1/M)\mathbf{1}\mathbf{1}^T \preceq sI$, which mathematically allows for negative edge weights to accelerate linear distributed averaging.
-- **Convergence or behavior boundaries:** The running consensus analytically converges to a constant $\lim_{t\xrightarrow{} \infty} x(t) = \bar{x}\mathbf{1} + C\mathbf{1} = C'\mathbf{1}$ given that $\lim_{t\xrightarrow[]{}\infty} \sum_{k=1}^t z(t-k+1)P^k = C\mathbf{1}$.
-- **Scope:** Directly applicable to stochastic Multi-Armed Bandits optimized via distributed average consensus running iteratively among connected agent nodes sharing estimated mean rewards.
-- **Limitations:** Negative weights generated by FDLA, while mathematically expediting convergence, may lack direct physical interpretability or safe meaning in strictly collaborative architectures; results do not guarantee absolute success under adversarial interference.
-- **Agent Architecture Mapping:** Can conceptually support advanced relational routing and graph-based memory sharing, optimizing internal consensus step speeds over simply relying on uniform node broadcasting.
-- **Repository Implementation Status:** NOT_IMPLEMENTED
-- **Beginner analogy:** Think of a team trying to guess the number of jellybeans in a jar by whispering their guesses to immediate neighbors. If everyone weights their neighbors' guesses equally (standard average), it takes a long time. If we mathematically calculate exactly how much trust (weight) to put on specific connections—even subtracting some influence from certain noisy links—the entire team converges to the correct average much faster.
-- **中英文内容:** 此块已分别在中英文档中独立生成，并保持相同的数学边界、假设限制、公式与状态映射，以确保跨语言严格一致。(This chunk is generated independently in both Chinese and English documents maintaining identical boundaries, assumptions, limitations, formulas, and state mappings.)
-- **Evidence Status:**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: PAPER_ONLY
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED
+<!-- WEEKLY_SYNC_REPORT -->
+## Weekly Document Cascade & Conflict Audit
 
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - Successfully woven un-woven Daily Research Chunks into Core Theory, Mathematical Mechanism, and Analogies.
+- 动态演进映射 (Dynamic evolution mapping)
+  - Mapped newly integrated theoretical bounds and algorithms to corresponding architectural constraints.
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED.
+- 来源迁移记录 (Source migration record)
+  - Migrated chunks successfully. Removed W40 wrapper as per instructions.
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
-## PIN Systems Concentration via Mean-Field Lyapunov Function
-
-- **System Container:** Architecture Principles
-- **Frontier Source:** arXiv
-- **Publication Date:** 2024-10-30T08:57:16Z
-- **Authors:** Giacomo Como, Fabio Fagnani, Sandro Zampieri
-- **URL:** http://arxiv.org/abs/2410.22820v1
-- **Reason for Selection:** The paper establishes a rigorous concentration result for stationary distributions in large-scale stochastic pairwise interaction network (PIN) systems, based on an invariance principle with a class-$C^2$ mean-field Lyapunov function. This bounds the behavior of agents interacting on asymptotically totally mixing graphs.
-
-### 原始问题 (Original Problem)
-Large-scale stochastic pairwise interaction network (PIN) models (like epidemic models or evolutionary dynamics) are finite-state Markov chains. The challenge is to prove that as the network scale grows, their stationary distributions concentrate around specific states, overcoming the limitations of standard mean-field ODE approximations (e.g., Kurtz's theorem) which apply primarily to complete graphs and bounded time horizons.
-
-### 核心假设 (Core Assumptions)
-- The state space $\mathcal{A}$ of the agents is finite.
-- The interaction pattern is an Asymptotically Totally Mixing (ATM) graph sequence $\mathcal{G}_n$, meaning the total mixing gap $\lim_{n \to +\infty} W_{\mathcal{G}_n} = 0$.
-- The limit drift $\bar{D}(\theta)$ admits a global class-$C^2$ mean-field Lyapunov function $V: \mathcal{P}(\mathcal{A}) \to \mathbb{R}$.
-
-### 数学机制 (Mathematical Mechanism)
-The limit drift $\bar{D}(\theta)$ for a PIN model is defined based on mutation and interaction matrices. If there exists a Lyapunov function $V$ satisfying:
-$$ \nabla V(\theta) \cdot \bar{D}(\theta) \leq 0, \quad \forall \theta \in \mathcal{P}(\mathcal{A}) $$
-Then, by exploiting the topological properties of the ATM graph sequence, the stationary distributions $\mu_n$ concentrate where the drift derivative is close to zero:
-$$ \lim_{n \to +\infty} \mu_n \left\{ \mathbf{x} \in \mathcal{X} : \nabla V(\theta(\mathbf{x})) \cdot \bar{D}(\theta(\mathbf{x})) > -\delta \right\} = 1 $$
-
-### 收敛或行为边界 (Convergence or behavior boundaries)
-For any $\delta > 0$, the probability mass of the stationary distribution concentrates on the set of configurations where $\nabla V(\theta) \cdot \bar{D}(\theta)$ is bounded below by $-\delta$, demonstrating an invariance principle where the system is bounded to the zeros of the Lyapunov derivative as $n \to +\infty$.
-
-### 适用范围 (Applicable Scope)
-Applicable to large-scale multi-agent systems with pairwise stochastic interactions over arbitrary ATM networks (which includes Erdős–Rényi random graphs and complete graphs) that admit a mean-field Lyapunov function.
-
-### 局限 (Limitations)
-- Requires the network sequence to be asymptotically totally mixing.
-- Relies on the existence of a global $C^2$ Lyapunov function for the mean-field limit (or an approximate one for perturbations).
-- Focuses on the $n \to \infty$ limit, providing asymptotic rather than strict finite-time/finite-size guarantees.
-
-### Agent 架构映射 (Agent Architecture Mapping)
-This mathematically maps to architectural principles for bounding system behavior. In a large-scale multi-agent collaboration or routing network, if the interaction rules (analogous to the limit drift) can be designed to admit a Lyapunov function, the architecture can theoretically lower the risk of diverging states, even when agents interact over sparse random topologies, provided the mixing gap approaches zero.
-
-### 仓库实现状态 (Repository Implementation Status)
-NOT_IMPLEMENTED
-
-### 初学者类比 (Beginner Analogy)
-Imagine a large crowd of people in a room where individuals occasionally change their opinion based on a random interaction with a neighbor. Even if they don't talk to everyone (a sparse network), as long as the crowd is large and well-mixed enough, the overall distribution of opinions will eventually concentrate in a stable configuration. The "Lyapunov function" acts as an energy landscape that ensures the crowd settles down predictably, avoiding chaotic fluctuations.
-
-### 实际提取段落或公式 (Actually extracted paragraphs or formulas)
-\begin{theorem}\label{cor:ATM-general-2}
-Consider a PIN model with parameters $(\mc A, \pint, P, \phi)$ on an ATM interaction network $\mc G_{n}$. Let $\mu_{n}$ be a stationary distribution for all $n\ge2$.
-Denote by $\ldrift$ the limit drift and let $V:\mc P(\mc A)\to\R$ be a class-$\mc C^2$ mean-field Lyapunov function.
-Then
-\be\label{mu-conc-mf22} \lim\limits_{n\to +\infty}\mu_{n} \{\xb\in\mc X:\,\nabla V(\theta(\xb))\cdot\ldrift(\theta(\xb))>-\delta\}=1\,,\ee
- for every $\delta>0$.
-\end{theorem}
-
-### 证据状态 (Evidence Status)
-- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-- Architecture Mapping Status: CONCEPTUAL_MAPPING
-- Repository Implementation Status: NOT_IMPLEMENTED
-- Repository Test Status: NOT_TESTED

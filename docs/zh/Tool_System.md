@@ -142,6 +142,25 @@ Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建�
 **Repository Test Status**: EVIDENCE_INSUFFICIENT
 **Paper Evidence Status**: VERIFIED_FROM_LATEX_SOURCE
 
+### 合作约束随机线性老虎机 (Cooperative Constrained Stochastic Linear Bandits)
+
+- **System Container:** Tool System
+- **Frontier Source:** S59 — Cooperative Multi-Agent Constrained Stochastic Linear Bandits
+- **论文原始问题 (Original Problem):** 论文解决多智能体约束线性老虎机问题，其中一个智能体网络通过仅依靠局部通信，协作最大化预期累积奖励，同时将预期成本保持在指定阈值以下。
+- **核心假设 (Core Assumptions):** 智能体仅与直接邻居通信。结构矩阵 $W$ 是双重随机的。存在一个已知的严格可行操作 $x_0$，其成本差距为 $\tau - c_0 > 0$。通信步骤不会产生新的操作选择，从而导致后悔值增加。
+
+- **收敛或行为边界 (Convergence or behavior boundaries):** 到时间 $T$ 的多智能体伪后悔 $R(T)$ 以高概率受到 $\tilde{O} \left( \frac{d\sqrt{T}}{\tau - c_0} \right)$ 的限制。后悔值与通信阶段的持续时间 $q(s)$ 成正比增加。
+- **适用范围 (Applicable Scope):** 适用于执行约束探索-利用的多智能体分布式设置，其中成本阈值在全局是严格的，但奖励/成本模型在局部有所不同。
+- **局限 (Limitations):** 后悔界限对通信图的谱间隙高度敏感。没有更新新估计值的延长通信阶段会直接加剧整体后悔惩罚。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持工具执行层，其中多个去中心化智能体执行受限的工具调用。加速共识边界指导智能体之间的通信延迟如何惩罚工具执行奖励，而不违反安全阈值。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
 ## 3. 源码解析与架构伪代码 (Source Code Breakdown)
 ### Code for
 
@@ -235,6 +254,11 @@ def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
 P_{\mathcal{M}}(\mathcal{Y} | \mathcal{Q}, \mathcal{S}^{'}, \mathcal{K}) = \prod_{j=1}^{L} P_{\mathcal{M}}(\mathcal{Y}^{j} | \mathcal{Y}^{<j}; \mathcal{Q}^{j}, \mathcal{S}^{'}, \mathcal{K})
 ```
 其中 $\mathcal{Q}^{j}$ 和 $\mathcal{Y}^{j}$ 是在给定前序生成的子 SQL $\mathcal{Y}^{<j}$、过滤后的最小数据库 Schema $\mathcal{S}^{'}$ 以及知识 $\mathcal{K}$ 的条件下，LLM 生成的第 $j$ 个子问题和子 SQL，而 $L$ 是子问题的总数。
+
+### Mathematical Mechanism for 合作约束随机线性老虎机
+- **数学机制 (Mathematical Mechanism):** 智能体使用乐观-悲观线性老虎机 (OPLB) 算法，并使用加速共识程序交换信息。共识更新步骤（mix 函数）如下：
+  $\alpha_{h+1}^i = \frac{c_h}{c_{h+1}} z_h^i - \frac{c_{h-1}}{c_{h+1}} \alpha_{h-1}^i$ (数学更新规则)
+  其中 $z_h^i = \sum_{j \in \mathcal{N}(i)} \frac{2W_{i,j}}{|\lambda_2|} \alpha_h^j$，减轻由谱间隙 $1 - |\lambda_2|$ 界定的通信延迟影响。
 
 ## 4. 前沿演进：符号策略蒸馏实战 (Symbolic Policy Distillation)
 
@@ -336,6 +360,9 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 
 🔗 [
 
+### Analogy for 合作约束随机线性老虎机
+- **初学者类比 (Beginner Analogy):** 想象一个厨师团队试图创造新食谱（探索），同时确保他们不超过严格的预算（约束）。他们只能与旁边的厨师交谈。如果他们花太多时间交谈以同步他们的预算估计，他们就会失去本可以用来做饭的时间（产生后悔）。该算法帮助他们最佳地平衡做饭和交谈。
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
@@ -407,31 +434,19 @@ NO_RUNTIME_VALIDATION
 MONTH_OPEN
 ```
 
-## 2026-W40 周度文档级联与冲突审计
 
-- **本周文档级联编织：** 保留 Tool System 现有内容。当前 merged main 中未观察到新的 2026-10-04 Tool-System Daily source。
-- **动态演进映射：** 跨领域论文不升级为工具执行、授权、幂等、恢复或外部效果证据。
-- **跨方向范式冲突审计：** 在已检查文档范围内 NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW；未执行运行时兼容性验证。
-- **来源迁移记录：** 本轮未删除 Wrapper 或历史段落。
-- **双语对齐状态：** 与当前英文对应内容在已检查字段上 SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS。
 
-### 合作约束随机线性老虎机 (Cooperative Constrained Stochastic Linear Bandits)
 
-- **System Container:** Tool System
-- **Frontier Source:** S59 — Cooperative Multi-Agent Constrained Stochastic Linear Bandits
-- **论文原始问题 (Original Problem):** 论文解决多智能体约束线性老虎机问题，其中一个智能体网络通过仅依靠局部通信，协作最大化预期累积奖励，同时将预期成本保持在指定阈值以下。
-- **核心假设 (Core Assumptions):** 智能体仅与直接邻居通信。结构矩阵 $W$ 是双重随机的。存在一个已知的严格可行操作 $x_0$，其成本差距为 $\tau - c_0 > 0$。通信步骤不会产生新的操作选择，从而导致后悔值增加。
-- **数学机制 (Mathematical Mechanism):** 智能体使用乐观-悲观线性老虎机 (OPLB) 算法，并使用加速共识程序交换信息。共识更新步骤（mix 函数）如下：
-  $\alpha_{h+1}^i = \frac{c_h}{c_{h+1}} z_h^i - \frac{c_{h-1}}{c_{h+1}} \alpha_{h-1}^i$ (数学更新规则)
-  其中 $z_h^i = \sum_{j \in \mathcal{N}(i)} \frac{2W_{i,j}}{|\lambda_2|} \alpha_h^j$，减轻由谱间隙 $1 - |\lambda_2|$ 界定的通信延迟影响。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 到时间 $T$ 的多智能体伪后悔 $R(T)$ 以高概率受到 $\tilde{O} \left( \frac{d\sqrt{T}}{\tau - c_0} \right)$ 的限制。后悔值与通信阶段的持续时间 $q(s)$ 成正比增加。
-- **适用范围 (Applicable Scope):** 适用于执行约束探索-利用的多智能体分布式设置，其中成本阈值在全局是严格的，但奖励/成本模型在局部有所不同。
-- **局限 (Limitations):** 后悔界限对通信图的谱间隙高度敏感。没有更新新估计值的延长通信阶段会直接加剧整体后悔惩罚。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持工具执行层，其中多个去中心化智能体执行受限的工具调用。加速共识边界指导智能体之间的通信延迟如何惩罚工具执行奖励，而不违反安全阈值。
-- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
-- **初学者类比 (Beginner Analogy):** 想象一个厨师团队试图创造新食谱（探索），同时确保他们不超过严格的预算（约束）。他们只能与旁边的厨师交谈。如果他们花太多时间交谈以同步他们的预算估计，他们就会失去本可以用来做饭的时间（产生后悔）。该算法帮助他们最佳地平衡做饭和交谈。
-- **证据状态 (Evidence Status):**
-  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
-  - Architecture Mapping Status: CONCEPTUAL_MAPPING
-  - Repository Implementation Status: NOT_IMPLEMENTED
-  - Repository Test Status: NOT_TESTED
+<!-- WEEKLY_SYNC_REPORT -->
+## 周度文档级联与冲突审计
+
+- 本周文档级联编织 (Weekly document cascade weaving)
+  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节。
+- 动态演进映射 (Dynamic evolution mapping)
+  - 将新集成的理论边界和算法映射到相应的架构约束中。
+- 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。
+- 来源迁移记录 (Source migration record)
+  - 成功迁移 Chunk。按照要求删除了 W40 Wrapper。
+- 双语对齐状态 (Bilingual alignment status)
+  - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
