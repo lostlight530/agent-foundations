@@ -350,6 +350,34 @@ Imagine a team of specialists building a complex machine. Instead of one person 
 
 🔗 [
 
+
+### Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+
+- **System Container:** Tool System
+- **Frontier Source:** S26 — Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+- **Title:** Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles
+- **Authors:** Ruoqi Wen, Jiahao Huang, Rongpeng Li, Guoru Ding, Zhifeng Zhao
+- **URL:** https://arxiv.org/abs/2312.13910
+- **Version:** v3
+- **Publication Date:** 2024-07-17
+- **Reason for selection:** Provides group regret bounds for multi-agent model-based RL, which directly informs how bounded communication ranges affect the convergence of decentralized trajectory (tool sequence) planning.
+- **Actually extracted paragraphs or formulas:** Extracted the group regret bound $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$.
+- **Original Problem:** The paper addresses decentralized model-based reinforcement learning (MBRL) for connected autonomous vehicles (CAVs) under limited communication ranges, where agents must optimize trajectory planning while only sharing information locally to mitigate the costs and constraints of global communication.
+- **Core Assumptions:** State and action spaces are discretized and bounded. The agents operate over a dynamic limited communication range $d$, forming dynamic topologies $\mathcal{G}_{d,k}$. The convergence depends on the minimum clique cover number $\bar{\chi}\left(\mathcal{G}_d\right)$ of the communication graph.
+- **Mathematical Mechanism:** Group regret bound $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$ (收敛界)
+- **Convergence or behavior boundaries:** The group regret increases sub-linearly with $T$. The regret bound intrinsically relies on the minimum clique cover number $\bar{\chi}\left(\mathcal{G}_d\right)$, meaning that the degree of graph connectivity tightly controls the convergence. Overly localized communication bounds restrict the global optimality achievable by the agents.
+- **Applicable Scope:** Distributed multi-agent systems performing model-based trajectory planning or action sequences under geographically or topologically limited communication ranges.
+- **Limitations:** The theoretical worst-case group regret bounds rely on bounded discrete state-action spaces. Performance is sensitive to out-of-distribution (OOD) states when the ensemble predictions fail, and computational delays due to the MPC horizon $w$ impose practical limits on agility.
+- **Agent Architecture Mapping:** Can conceptually support decentralized tool routing and planning where multiple agents (acting as tools) must form trajectories of actions while only synchronizing internal state variables with their immediate local neighbors, allowing distributed tool sequences without a central orchestrator.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine a group of drivers navigating a foggy city who can only talk via short-range walkie-talkies. Instead of one driver guessing the route alone (single-agent) or everyone reporting to a central tower (global communication), they share limited traffic updates with nearby cars to mentally map the route (model-based planning). This helps them avoid traffic faster than driving blind, but their overall success depends on how well the walkie-talkie network connects them.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
