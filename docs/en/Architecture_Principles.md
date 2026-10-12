@@ -1368,3 +1368,66 @@ MONTH_OPEN
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+
+### Safe Multi-Agent Reinforcement Learning for Behavior-Based Cooperative Navigation
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S63 (arXiv:2312.12861v3, *Safe Multi-Agent Reinforcement Learning for Behavior-Based Cooperative Navigation*)
+  - **Authors:** Murad Dawood, Sicong Pan, Nils Dengler, Siqi Zhou, Angela P. Schoellig, Maren Bennewitz
+  - **Publication Date:** 2023-12-20
+  - **URL:** https://arxiv.org/abs/2312.12861
+  - **Reason for selection:** This paper integrates model predictive control (MPC) safety filters within multi-agent reinforcement learning (MARL), which directly addresses the structural design (architecture principles) of how to ensure physical and operational constraints are satisfied during exploration and execution, without relying on individual preset reference targets.
+  - **Actually extracted paragraphs or formulas:**
+    \begin{equation}
+    \textbf{x}_{t+1} =  f(\textbf{x}_{t}, \textbf{a}_{t}) = \textbf{x}_{t} + \begin{bmatrix}
+    cos \theta_{t} & 0\\
+    sin \theta_{t} & 0\\
+    0 & 1
+    \end{bmatrix} \textbf{a}_{t} \Delta t
+    \end{equation}
+    And the safety optimal control cost function bounding RL actions against constrained safe actions.
+
+#### 1. The Original Problem
+In behavior-based cooperative navigation, multiple agents (e.g., mobile robots) must navigate collaboratively without individual reference targets—using only a single target for the formation's centroid. Using deep multi-agent reinforcement learning (MARL) for this task inherently risks constraint violations (e.g., collisions) because standard RL exploration policies lack hard safety guarantees, especially during the early stages of training.
+
+#### 2. Mathematical Mechanism
+The architecture employs a Model Predictive Control (MPC) safety filter. The discrete-time kinematics of the agent is modeled as:
+
+*数学更新规则 (Mathematical Update Rule):*
+$$ \textbf{x}_{t+1} =  f(\textbf{x}_{t}, \textbf{a}_{t}) = \textbf{x}_{t} + \begin{bmatrix} \cos \theta_{t} & 0\\ \sin \theta_{t} & 0\\ 0 & 1 \end{bmatrix} \textbf{a}_{t} \Delta t $$
+
+The filter receives the unconstrained learning action $\textbf{a}_{\mathit{RL}}$ and solves an optimal control problem to find the closest safe action $\textbf{a}_{t|t}$ that minimizes:
+$$ \lVert \textbf{a}_{\mathit{RL}} - \textbf{a}_{t|t} \rVert^2_{\mathit{R_{0}}} $$
+subject to safety distance constraints to obstacles and other agents, effectively projecting the unconstrained policy output into a verified safe set over a finite prediction horizon.
+
+#### 3. Core Assumptions
+- The physical agent model (e.g., unicycle kinematics) is known and deterministic.
+- Agents can perfectly observe or communicate their states (position and heading) within a local neighborhood to evaluate distance constraints.
+- A feasible safe action exists at each timestep within the MPC horizon.
+
+#### 4. Convergence or behavior boundaries
+The presence of the predictive safety filter structurally prevents the system from taking actions that lead to collisions, acting as a hard behavioral boundary. Empirically, projecting actions onto the safe set accelerates the convergence rate of the MARL training process by pruning catastrophic failure states from the exploration space, bounding the worst-case loss during training.
+
+#### 5. Applicable Scope
+Multi-agent autonomous systems, swarm robotics, and distributed exploration architectures where hard physical constraints (collisions, boundary limits) must be strictly maintained at all times, regardless of the underlying learning model's maturity.
+
+#### 6. Limitations
+Solving the MPC optimization problem at every control step introduces significant computational overhead compared to pure forward-pass RL. If the prediction horizon is too short or the environment is highly dynamic, the feasible safe set may become empty (the system cannot find a safe action).
+
+#### 7. Agent Architecture Mapping
+DESIGN_CANDIDATE. This mechanism informs the Architecture Principles by demonstrating a decoupled "Action Generator" (RL policy) and "Safety Verifier" (MPC filter) pattern. It can conceptually support safety-critical agent architectures where raw LLM or RL outputs must be projected onto a hard-coded constraint manifold before execution.
+
+#### 8. Repository Implementation Status
+NOT_IMPLEMENTED
+
+#### 9. Repository Test Status
+NOT_TESTED
+
+#### 10. For Beginners: Practical Analogy
+Imagine teaching a group of student drivers how to drive in formation. Instead of just letting them crash while they learn (standard RL), you install an automatic braking and steering override system in every car (the MPC safety filter). The students still decide where they want to go, but if they try to turn into each other, the override gently corrects their steering just enough to avoid the crash while keeping them as close to their original intention as possible. This makes learning both perfectly safe and much faster.
+
+#### 11. Evidence Status
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: DESIGN_CANDIDATE
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED

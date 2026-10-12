@@ -1373,3 +1373,66 @@ MONTH_OPEN
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+
+### 行为合作导航中的安全多智能体强化学习 (Safe Multi-Agent Reinforcement Learning for Behavior-Based Cooperative Navigation)
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S63 (arXiv:2312.12861v3, *Safe Multi-Agent Reinforcement Learning for Behavior-Based Cooperative Navigation*)
+  - **Authors:** Murad Dawood, Sicong Pan, Nils Dengler, Siqi Zhou, Angela P. Schoellig, Maren Bennewitz
+  - **Publication Date:** 2023-12-20
+  - **URL:** https://arxiv.org/abs/2312.12861
+  - **Reason for selection:** 本论文在多智能体强化学习 (MARL) 中集成了模型预测控制 (MPC) 安全过滤器，直接解决了如何在无需预设个体参考目标的情况下，在探索和执行过程中确保满足物理与操作约束的结构设计（架构原则）问题。
+  - **Actually extracted paragraphs or formulas:**
+    \begin{equation}
+    \textbf{x}_{t+1} =  f(\textbf{x}_{t}, \textbf{a}_{t}) = \textbf{x}_{t} + \begin{bmatrix}
+    cos \theta_{t} & 0\\
+    sin \theta_{t} & 0\\
+    0 & 1
+    \end{bmatrix} \textbf{a}_{t} \Delta t
+    \end{equation}
+    以及用于约束强化学习输出动作的最优控制代价函数。
+
+#### 1. 论文原始问题 (The Original Problem)
+在基于行为的合作导航中，多个智能体（例如移动机器人）必须在没有个体参考目标的情况下协同导航——仅使用整个编队质心的单一目标。将深度多智能体强化学习（MARL）用于此任务存在违反约束（例如碰撞）的固有风险，因为标准的强化学习探索策略缺乏硬性的安全保证，尤其是在训练的早期阶段。
+
+#### 2. 数学机制 (Mathematical Mechanism)
+该架构采用了模型预测控制（MPC）安全过滤器。智能体的离散时间运动学建模为：
+
+*数学更新规则 (Mathematical Update Rule):*
+$$ \textbf{x}_{t+1} =  f(\textbf{x}_{t}, \textbf{a}_{t}) = \textbf{x}_{t} + \begin{bmatrix} \cos \theta_{t} & 0\\ \sin \theta_{t} & 0\\ 0 & 1 \end{bmatrix} \textbf{a}_{t} \Delta t $$
+
+过滤器接收未受约束的学习动作 $\textbf{a}_{\mathit{RL}}$，并求解一个最优控制问题，以寻找距离其最近的、且能使以下项最小化的安全动作 $\textbf{a}_{t|t}$：
+$$ \lVert \textbf{a}_{\mathit{RL}} - \textbf{a}_{t|t} \rVert^2_{\mathit{R_{0}}} $$
+该问题受限于到障碍物和其他智能体的安全距离约束。它实际上是将不受约束的策略输出在一个有限预测范围内投影到了经验证的安全集合中。
+
+#### 3. 核心假设 (Core Assumptions)
+- 物理智能体模型（例如单轮车运动学）是已知的且为确定性的。
+- 智能体能够在其局部邻域内完美地观察或通信其状态（位置和航向），以评估距离约束。
+- 在 MPC 预测范围内，每个时间步都存在一个可行的安全动作。
+
+#### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+预测安全过滤器的存在从结构上防止了系统采取导致碰撞的动作，这作为一种硬性行为边界。经验表明，将动作投影到安全集合上，通过在探索空间中修剪掉灾难性的失败状态，限制了训练期间的最坏情况损失，从而加快了 MARL 训练过程的收敛速度。
+
+#### 5. 适用范围 (Applicable Scope)
+多智能体自主系统、群体机器人以及分布式探索架构，在这些架构中，无论底层学习模型是否成熟，都必须始终严格维持硬性物理约束（例如碰撞、边界限制）。
+
+#### 6. 局限 (Limitations)
+与纯粹的前向传播强化学习相比，在每个控制步骤中求解 MPC 优化问题引入了巨大的计算开销。如果预测范围太短或者环境高度动态，可行的安全集合可能会变为空集（系统无法找到安全动作）。
+
+#### 7. Agent 架构映射 (Agent Architecture Mapping)
+DESIGN_CANDIDATE。该机制通过展示解耦的“动作生成器”（RL策略）和“安全验证器”（MPC过滤器）模式，为架构原则提供了指导。它可以在概念上支持安全关键型智能体架构，在这些架构中，原始的 LLM 或 RL 输出在执行前必须投影到硬编码的约束流形上。
+
+#### 8. 仓库实现状态 (Repository Implementation Status)
+NOT_IMPLEMENTED
+
+#### 9. 仓库测试状态 (Repository Test Status)
+NOT_TESTED
+
+#### 10. 初学者类比 (Beginner Analogy)
+想象一下教一群学生驾驶员如何进行编队驾驶。不是仅仅让他们在学习过程中不断撞车（标准的强化学习），而是在每辆车上都安装了一套自动刹车和转向干预系统（MPC安全过滤器）。学生们仍然可以决定他们想去哪里，但是如果他们试图撞向彼此，干预系统会稍微纠正他们的方向，其幅度刚好足以避免碰撞，同时使他们尽可能接近最初的意图。这使得学习过程既绝对安全，速度又快得多。
+
+#### 11. 证据状态 (Evidence Status)
+- Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+- Architecture Mapping Status: DESIGN_CANDIDATE
+- Repository Implementation Status: NOT_IMPLEMENTED
+- Repository Test Status: NOT_TESTED
