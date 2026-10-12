@@ -1406,10 +1406,10 @@ subject to safety distance constraints to obstacles and other agents, effectivel
 - A feasible safe action exists at each timestep within the MPC horizon.
 
 #### 4. Convergence or behavior boundaries
-The presence of the predictive safety filter structurally prevents the system from taking actions that lead to collisions, acting as a hard behavioral boundary. Empirically, projecting actions onto the safe set accelerates the convergence rate of the MARL training process by pruning catastrophic failure states from the exploration space, bounding the worst-case loss during training.
+Within the paper's modeled setting, the predictive safety filter is intended to enforce the stated safety constraints by projecting the learned action toward a feasible constrained action. Any collision-avoidance or convergence benefit is paper-level evidence under the paper's assumptions; this repository has not implemented or tested that mechanism.
 
 #### 5. Applicable Scope
-Multi-agent autonomous systems, swarm robotics, and distributed exploration architectures where hard physical constraints (collisions, boundary limits) must be strictly maintained at all times, regardless of the underlying learning model's maturity.
+Potentially applicable to multi-agent autonomous systems, swarm robotics, and distributed exploration architectures where explicit physical constraints matter. Applicability depends on model fidelity, feasible-set assumptions, solver behavior, sensing/communication conditions, and implementation validation.
 
 #### 6. Limitations
 Solving the MPC optimization problem at every control step introduces significant computational overhead compared to pure forward-pass RL. If the prediction horizon is too short or the environment is highly dynamic, the feasible safe set may become empty (the system cannot find a safe action).
@@ -1424,10 +1424,20 @@ NOT_IMPLEMENTED
 NOT_TESTED
 
 #### 10. For Beginners: Practical Analogy
-Imagine teaching a group of student drivers how to drive in formation. Instead of just letting them crash while they learn (standard RL), you install an automatic braking and steering override system in every car (the MPC safety filter). The students still decide where they want to go, but if they try to turn into each other, the override gently corrects their steering just enough to avoid the crash while keeping them as close to their original intention as possible. This makes learning both perfectly safe and much faster.
+Imagine teaching a group of student drivers how to drive in formation. Instead of just letting them crash while they learn (standard RL), you install an automatic braking and steering override system in every car (the MPC safety filter). The students still decide where they want to go, but if they try to turn into each other, the override gently corrects their steering just enough to avoid the crash while keeping them as close to their original intention as possible. In the paper's modeled setting, this illustrates how a safety filter can constrain unsafe actions while preserving the learner's intent; it does not establish perfect safety or faster learning in this repository.
 
 #### 11. Evidence Status
 - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
 - Architecture Mapping Status: DESIGN_CANDIDATE
 - Repository Implementation Status: NOT_IMPLEMENTED
 - Repository Test Status: NOT_TESTED
+
+#### 12. Forward correction — 2026-10-12
+- Original native merge: PR #274
+- Correction scope: evidence-language narrowing only
+- Paper evidence: RETAINED
+- Repository implementation: NOT_IMPLEMENTED
+- Repository runtime test: NOT_TESTED
+- Perfect-safety claim for this repository: NOT_SUPPORTED
+- Universal collision-prevention claim: NOT_SUPPORTED
+- Historical producer record: PRESERVED; correction moves forward.
