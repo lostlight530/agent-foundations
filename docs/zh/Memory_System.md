@@ -898,3 +898,18 @@ MONTH_OPEN
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+### 前向修正 — 2026-10-13
+
+- 原始生产 PR: #278
+- 修正范围: NPG 类比与收敛边界
+- 历史生产研究: PRESERVED
+- “完成完美的合奏”仅是帮助理解的类比
+- 它不构成本仓库能力或无条件收敛的证据
+- 论文结果只在论文给定的马尔可夫势博弈假设下成立
+- 收敛速度依赖精确策略评估、孤立驻点、正的次优性差距条件与分布假设
+- 该结论不推广为任意多智能体系统或本仓库运行时的保证
+- 架构映射仍为 CONCEPTUAL_MAPPING
+- 仓库实现仍为 NOT_IMPLEMENTED
+- 仓库验证仍为 NOT_TESTED
+- 本仓库未执行该机制的运行时收敛实验
+
