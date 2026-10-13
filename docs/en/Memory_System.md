@@ -894,3 +894,18 @@ MONTH_OPEN
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+### Forward Correction — 2026-10-13
+
+- Original producer PR: #278
+- Correction scope: NPG analogy and convergence boundary
+- Historical producer research: PRESERVED
+- The "perfectly together" orchestra wording is illustrative only
+- It is not evidence of repository capability or unconditional convergence
+- The paper result applies under the paper's Markov-potential-game assumptions
+- The stated rate depends on exact policy evaluation, isolated stationary points, positive gap conditions, and distribution assumptions
+- The result is not generalized to arbitrary multi-agent systems or this repository runtime
+- Architecture mapping remains CONCEPTUAL_MAPPING
+- Repository implementation remains NOT_IMPLEMENTED
+- Repository validation remains NOT_TESTED
+- No runtime convergence experiment was executed in this repository
+
