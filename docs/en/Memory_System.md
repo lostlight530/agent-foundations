@@ -918,9 +918,9 @@ MONTH_OPEN
   - Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
   - URL: http://arxiv.org/abs/2410.23574v3
   - Version: v3
-  - Publication Date: 2024-10-31T02:33:47Z
-  - Reason for selection: The paper provides theoretical regret bounds for memory-based online convex optimization with limited prediction horizons. This translates directly to how a memory system should limit the temporal prediction window of stored behaviors to guarantee sublinear regret under model misspecification.
-  - Actually extracted paragraphs or formulas: Formula (1) defining regret and Theorem 1 providing the convergence bound.
+  - Publication Date: 2025-12-25T01:43:07Z (v3; original v1 2024-10-31T02:33:47Z)
+  - Reason for selection: The paper provides theoretical regret bounds for memory-based online convex optimization with limited prediction horizons. A bounded prediction window is a DESIGN_CANDIDATE analogy; the paper does not establish sublinear regret guarantees for an agent memory system or this repository.
+  - Actually extracted paragraphs or formulas: Eq (1) defines total cost, Eq (3) defines dynamic regret; Theorem 1 bounds initialization regret, Theorem 2 bounds whole-algorithm prediction-window regret (Eq (12)).
 
 - **Original Problem:** How to minimize the dynamic regret $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$ when an agent has memory and only scarce, inaccurate predictions of future cost functions, without relying on full gradient feedback.
 - **Core Assumptions:**
@@ -932,7 +932,7 @@ MONTH_OPEN
   - The zeroth-order method updates via Gaussian smoothing perturbations.
   - The regret bound is: $\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$, showing exponential decay with the number of updates $K = \lfloor \frac{W}{h-1} \rfloor$, where $W$ is the prediction window.
 - **Convergence or behavior boundaries:**
-  - The dynamic regret converges linearly with the prediction window size $W$, provided $W \ge h-1$.
+  - Theorem 2 bounds the full algorithm's dynamic regret with an exponentially decreasing term in $K=\lfloor W/(h-1)\rfloor$ (subject to the theorem's assumptions), not a universal linear-convergence claim for agent memory.
   - The prediction window provides bounded improvement; infinite predictions do not yield zero error due to the persistent noise $\varepsilon$ from model misspecification.
 - **Applicability Scope:** Memory architectures where past decisions influence current costs (memory length $h$) and agents use forward-simulated episodic predictions to evaluate actions.
 - **Limitations:**
@@ -947,3 +947,13 @@ MONTH_OPEN
   - Architecture Mapping Status: DESIGN_CANDIDATE
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
+
+### Forward source/theorem correction — 2026-10-14 (native PR #284)
+- Original producer research paragraph: preserved except explicitly corrected bibliographic, theorem and over-generalization claims
+- arXiv identity: 2410.23574v3; v3 2025-12-25T01:43:07Z; 2024-10-31T02:33:47Z is v1 submission, not v3 publication
+- Primary source: https://arxiv.org/abs/2410.23574 and https://arxiv.org/html/2410.23574v3
+- Eq (1): total cost; Eq (3): dynamic regret; Theorem 1: initialization-phase dynamic regret; Theorem 2 / Eq (12): overall regret including exponentially decreasing window-dependent term
+- A separate zeroth-order offline convex optimization subroutine has a linear convergence property under smooth strong convexity; this is distinct from exponential dynamic-regret decay with W
+- Original formula and parameter identity are paper-specific; no direct transfer to agent memory retrieval, retention or confidence decay is established
+- Architecture claim status: DESIGN_CANDIDATE, not guaranteed improvement; implementation NOT_IMPLEMENTED; runtime validation NOT_TESTED
+- This is a bibliographic / interpretation correction, not an execution rerun, formal proof check, or repository verification of the theorem
