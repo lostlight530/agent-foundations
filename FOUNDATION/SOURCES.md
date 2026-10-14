@@ -631,11 +631,11 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 ## S63 — Online Convex Optimization with Memory and Limited Predictions
 - Type: Academic Paper
 - Identifier: arxiv-2410.23574
-- Version date: 2024-10-31
+- Version date: 2025-12-25T01:43:07Z (v3); originally submitted 2024-10-31T02:33:47Z (v1)
 - Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
 - URL: http://arxiv.org/abs/2410.23574v3
 - Use: Constraints on predictive memory windows.
-- Verification boundary: Theorem 1 convergence and Eq 1 regret definition.
+- Verification boundary: Eq (1) is total cost; Eq (3) defines dynamic regret; Theorem 1 bounds initialization-phase regret; Theorem 2 gives the full prediction-window regret bound (Eq (12)). These results do not verify an agent memory runtime.
 
 ## 2026-09-23 dual-view annotation for S52
 
@@ -697,3 +697,10 @@ SOURCE_REGISTRATION
 != LOCAL_IMPLEMENTATION
 != VALIDATION_EXECUTION
 ```
+
+## 2026-10-14 S63 forward provenance correction
+- Native production PR: #284; original source registration retained under the same S63 identity
+- arXiv:2410.23574v3 source version date: 2025-12-25T01:43:07Z, distinct from v1 submission on 2024-10-31T02:33:47Z
+- Eq (1) total cost; Eq (3) dynamic regret; Theorem 1 initialization regret; Theorem 2 / Eq (12) prediction-window dependent overall regret
+- Paper guarantee does not imply runtime or general agent-memory performance; current mapping stays DESIGN_CANDIDATE / NOT_IMPLEMENTED / NOT_TESTED
+- Primary version and full text: https://arxiv.org/abs/2410.23574 and https://arxiv.org/html/2410.23574v3

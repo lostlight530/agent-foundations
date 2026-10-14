@@ -922,9 +922,9 @@ MONTH_OPEN
   - Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
   - URL: http://arxiv.org/abs/2410.23574v3
   - Version: v3
-  - Publication Date: 2024-10-31T02:33:47Z
-  - 选型依据与学术脉络: 论文提供了在有限预测窗口下的带记忆在线凸优化的理论遗憾界。这直接转化为记忆系统应如何限制存储行为的时间预测窗口，以在模型误差下保证次线性遗憾。
-  - 实际提取段落或公式: 定义遗憾的公式 (1) 和提供收敛界的定理 1。
+  - Publication Date: 2025-12-25T01:43:07Z (v3; original v1 2024-10-31T02:33:47Z)
+  - 选型依据与学术脉络: 论文提供了在有限预测窗口下的带记忆在线凸优化的理论遗憾界。将有限预测窗口用于 Agent 记忆系统仅为 DESIGN_CANDIDATE 类比，论文未证明该架构或本仓库具备次线性遗憾保证。
+  - 实际提取段落或公式: 式 (1) 定义总代价，式 (3) 定义动态遗憾；定理 1 给出初始化阶段遗憾界，定理 2 的式 (12) 给出预测窗口相关的整体遗憾界。
 
 - **Original Problem:** 当 Agent 具有记忆且仅有关于未来成本函数的稀缺、不准确预测时，如何在不依赖完整梯度反馈的情况下最小化动态遗憾 $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$。
 - **Core Assumptions:**
@@ -936,18 +936,27 @@ MONTH_OPEN
   - 零阶方法通过高斯平滑扰动进行更新。
   - 遗憾界为：$\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$，显示出随更新次数 $K = \lfloor \frac{W}{h-1} \rfloor$（其中 $W$ 为预测窗口）的指数衰减。
 - **Convergence or behavior boundaries:**
-  - 只要 $W \ge h-1$，动态遗憾就会随预测窗口大小 $W$ 线性收敛。
+  - 在定理 2 的假设下，整体动态遗憾界包含随 $K=\lfloor W/(h-1)\rfloor$ 指数衰减的项；这不是 Agent 记忆系统的线性收敛定理。
   - 预测窗口提供了有界的改进；由于模型误差带来的持续噪声 $\varepsilon$，无限的预测也不会产生零误差。
-- **Applicability Scope:** 过去决策影响当前成本（记忆长度 $h$）且 Agent 使用前向模拟片段预测来评估行动的记忆架构。
+- **Applicability Scope:** 仅可作为带历史依赖成本的有限预测优化问题之概念类比；Agent 记忆架构需独立定义目标、可行集、查询机制并验证后才可比较。
 - **Limitations:**
   - 需要连续且有界的状态空间；若无松弛则无法自然扩展到离散符号记忆树。
   - 假设平稳的记忆边界（$h$ 固定）。
 - **Architecture Mapping:**
-  - Design Candidate: 将预测记忆模块约束为仅向前规划 $W$ 步，其中 $W$ 按比例受历史记忆窗口 $h$ 的限制，并显式衰减超过 $K$ 步的记忆置信度。
+  - Design Candidate：研究有限预测窗口能否用于某个明确定义的 Agent 记忆优化器；$K$ 为零阶迭代次数，不是记忆年龄，论文也未规定 $W$ 与 $h$ 的固定比例或记忆置信度衰减规则。
 - **Implementation Status:** NOT_IMPLEMENTED
-- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。该公式准确告诉你，多获得一天的预报你的打包决策会改善多少，证明了只要预报比你的记忆窗口看得更远，即使模糊也是有用的。
+- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。这一类比只解释预测窗口与未来决策成本的关联，不能据此计算 Agent 记忆系统增加一天预测后具体改善多少，或证明记忆置信度如何衰减。
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: DESIGN_CANDIDATE
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
+
+### 前向来源与定理修正 — 2026-10-14 (原生 PR #284)
+- 保留原生研究的历史产出，修正版本日期、定理索引和超出论文范围的保证陈述
+- arXiv:2410.23574v3 的版本日期为 2025-12-25T01:43:07Z；2024-10-31T02:33:47Z 为 v1 首次提交
+- 一手来源: https://arxiv.org/abs/2410.23574 与 https://arxiv.org/html/2410.23574v3
+- 式 (1) 为总代价；式 (3) 为动态遗憾；定理 1 为初始化阶段遗憾界；定理 2 / 式 (12) 为整体预测窗口相关遗憾界
+- 零阶离线凸优化子过程在相应假设下的线性收敛，不等于整体动态遗憾随 W 指数衰减，也不构成 Agent 记忆运行时保证
+- Agent 记忆检索、保留时间和置信度衰减仅是 DESIGN_CANDIDATE，未经数学同构或运行时验证
+- 实现状态 NOT_IMPLEMENTED，测试状态 NOT_TESTED，本次未运行该算法或重证定理
