@@ -934,14 +934,14 @@ MONTH_OPEN
 - **Convergence or behavior boundaries:**
   - Theorem 2 bounds the full algorithm's dynamic regret with an exponentially decreasing term in $K=\lfloor W/(h-1)\rfloor$ (subject to the theorem's assumptions), not a universal linear-convergence claim for agent memory.
   - The prediction window provides bounded improvement; infinite predictions do not yield zero error due to the persistent noise $\varepsilon$ from model misspecification.
-- **Applicability Scope:** Memory architectures where past decisions influence current costs (memory length $h$) and agents use forward-simulated episodic predictions to evaluate actions.
+- **Applicability Scope:** Potential analogy only: bounded-horizon planning with decision-history-dependent costs. Transfer to an agent memory architecture requires a separately specified optimization objective, feasible set, oracle and validation.
 - **Limitations:**
   - Requires continuous and bounded state spaces; does not naturally extend to discrete symbolic memory trees without relaxations.
   - Assumes stationary memory bounds ($h$ is fixed).
 - **Architecture Mapping:**
-  - Design Candidate: Constrain the predictive memory module to only plan forward $W$ steps where $W$ is proportionally bounded by the historical memory window $h$, explicitly decaying the confidence of memories older than $K$ steps.
+  - Design Candidate only: test whether a finite prediction horizon is useful in a specified memory-related optimizer; do not identify $K$ (zeroth-order update count) with memory age, require $W$ proportional to $h$, or impose confidence decay as a theorem-derived rule.
 - **Implementation Status:** NOT_IMPLEMENTED
-- **Beginner Analogy:** Imagine trying to pack for a road trip when you only remember the last $h$ days of weather and your weather app only gives you a fuzzy forecast for the next $W$ days. The formula tells you exactly how much better your packing will be for every extra day of forecast you get, proving that even a fuzzy forecast is useful as long as it looks further ahead than your memory window.
+- **Beginner Analogy:** Imagine trying to pack for a road trip when you only remember the last $h$ days of weather and your weather app only gives you a fuzzy forecast for the next $W$ days. The forecast window illustrates horizon-dependent decision costs, but the theorem cannot predict how well an agent memory system performs or how confidence should decay.
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: DESIGN_CANDIDATE
