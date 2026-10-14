@@ -4215,3 +4215,179 @@ DUPLICATE_CREDIT
 - Monthly final seal: 0
 - Relation-through: 2026-10-13
 - Status: FINAL_A2_COMPLETE / MONTH_OPEN / HISTORY_PRESERVED
+
+## A1 2026-10-14 Foundation source-to-contract bounded provenance audit
+- Repository: lostlight530/agent-foundations
+- Authority base main: f2a9c5b725af817375871e6b1aa01b149aea2a2a
+- October N−1 maintenance period: 2026-10-01..2026-10-13
+- Fetched complete text of 13 original authority, source, bilingual Memory and prior-month reference files
+- S63 2026-10-14 native research #284 and forward source theorem correction #285 are post-cutoff A2 inputs
+- Source registry identity, evidence claim, architecture mapping, repository implementation and runtime validation do not imply each other
+- Theorem numbering/v3 date error is corrected at 2026-10-14 in native owner surfaces and not rewritten into historical October 13 conditions
+- Bilingual research notes are documentary mappings unless implementation and test evidence separately exist
+- Core verified admission remains distinct from document presence, source discovery and paper-only candidate status
+- October current blueprint remains OPEN, native monthly final NOT_DUE
+- Maintainer performed no scientific rerun or theoretical proof reproduction; no new independent primary-source credit
+
+### FOUNDATION/ARCHITECTURE.md
+- Main blob identity: 0c39c076da29d169aeaf141b2ebee94f7a836a3b
+- Text lines retrieved: 125
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Source heading 1: # Architecture Principles / 架构原则
+- Source heading 2: ## AF-ARCH-001 — System boundary / 系统边界
+- Source heading 3: ## AF-ARCH-002 — Deterministic shell, stochastic component / 确定性外壳与随机组件
+- Source heading 4: ## AF-ARCH-003 — Theorem scope is not agent scope / 定理适用域不等于智能体适用域
+- Source heading 5: ## AF-ARCH-004 — Evaluators create evidence, not truth / 评估器产生证据而非真理
+- Source heading 6: ## AF-ARCH-005 — Constitutions are governed policies / 宪法是受治理的策略
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/COLLABORATION.md
+- Main blob identity: 94bb8b85557d41124c794bf8c562df2d278593b3
+- Text lines retrieved: 123
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE
+- Source heading 1: # Collaboration System / 协作系统
+- Source heading 2: ## Repository realization boundary / 本仓实现边界
+- Source heading 3: ## AF-COLLAB-001 — Topology is a tradeoff, not an ideology / 拓扑是权衡而非信条
+- Source heading 4: ## AF-COLLAB-002 — Decentralization removes only specified single points / 去中心化只消除特定单点
+- Source heading 5: ## AF-COLLAB-003 — Attribution requires preserved trajectories / 归因需要保留轨迹
+- Source heading 6: ## AF-COLLAB-004 — Messages carry contracts and provenance / 消息携带契约与来源
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/EVIDENCE.md
+- Main blob identity: 9c7e0cd274081148b34eb0a6c9d0097cea085ff5
+- Text lines retrieved: 265
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, CORRECTION
+- Source heading 1: # Evidence Contract / 证据契约
+- Source heading 2: ## Purpose / 目的
+- Source heading 3: ## Claim states / 声明状态
+- Source heading 4: ## Evidence levels / 证据等级
+- Source heading 5: ## Mapping states / 映射状态
+- Source heading 6: ## Implementation status / 实现状态
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/INDEX.md
+- Main blob identity: 289ad219a795090fd5c24e9528f207dcd95a43dc
+- Text lines retrieved: 149
+- Evidence/control flags in source: NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Source heading 1: # Agent Foundations — Verified Core / 可验证核心
+- Source heading 2: ## Domain maps / 领域知识图
+- Source heading 3: ## Evidence and source core / 证据与来源核心
+- Source heading 4: ## Repository validation helpers / 仓库验证辅助
+- Source heading 5: ## Review and maintenance layer / 评审与维护层
+- Source heading 6: ## Generated and historical material / 生成与历史材料
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/MAINTENANCE.md
+- Main blob identity: 39740d184fa6170fc7012afa99eacfbf99a9bcd0
+- Text lines retrieved: 131
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Source heading 1: # Agent Foundations maintenance contract / 长期维护契约
+- Source heading 2: ## Scope / 范围
+- Source heading 3: ## Research cadence and admission / 科研周期与准入
+- Source heading 4: ## Maintenance identity and concurrency / 维护身份与并发
+- Source heading 5: ## Correction, authority, and history / 纠错、权威与历史
+- Source heading 6: ## Validator and execution boundary / 验证器与执行边界
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/MEMORY.md
+- Main blob identity: e5b20a3431ffe2a32a42c9574230fadd965cd9a1
+- Text lines retrieved: 96
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Source heading 1: # Memory System / 记忆系统
+- Source heading 2: ## Repository realization boundary / 本仓实现边界
+- Source heading 3: ## AF-MEM-001 — Memory is a lifecycle / 记忆是生命周期
+- Source heading 4: ## AF-MEM-002 — Prospective memory remains fallible / 前瞻记忆仍会失败
+- Source heading 5: ## AF-MEM-003 — Provenance precedes persistence / 持久化之前先有来源
+- Source heading 6: ## AF-MEM-004 — Compaction requires fidelity checks / 压缩需要保真检查
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/PROVENANCE.md
+- Main blob identity: 40f0cdb0103d2fac8bc5a5ca5742a1a250160b96
+- Text lines retrieved: 219
+- Evidence/control flags in source: NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, CORRECTION
+- Source heading 1: # Reproducibility and Provenance / 可复现性与溯源
+- Source heading 2: ## AI-use and producer disclosure / AI 使用与生产者披露
+- Source heading 3: ## Reproducibility target / 可复现目标
+- Source heading 4: ## Repository publication provenance / 仓库出版溯源
+- Source heading 5: ## Repository helper boundaries / 仓库辅助工具边界
+- Source heading 6: ### `FOUNDATION/validate.py`
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/REVIEW.md
+- Main blob identity: cc72b0951bf2ce23bbf2274ede57a0d1cc83d301
+- Text lines retrieved: 211
+- Evidence/control flags in source: NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Source heading 1: # Public Evidence Review States / 公开证据审核状态
+- Source heading 2: ## Purpose / 目的
+- Source heading 3: ## Recovery prerequisite / 恢复前提
+- Source heading 4: ## Review states / 审核状态
+- Source heading 5: ## Source-registration review / 来源登记审核
+- Source heading 6: ## Supported review paths / 支持的审核路径
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/SOURCES.md
+- Main blob identity: 9e5d0c6abb9f1841d8a8fd6ba202874ee65f65cb
+- Text lines retrieved: 707
+- Evidence/control flags in source: DESIGN_CANDIDATE, NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Source heading 1: # Primary Source Registry / 一手来源登记
+- Source heading 2: ## S01 — NIST AI 600-1
+- Source heading 3: ## S02 — OWASP Agentic Top 10 2026
+- Source heading 4: ## S03 — OpenAI trustworthy third-party evaluations
+- Source heading 5: ## S04 — OpenAI chain-of-thought monitorability evaluation
+- Source heading 6: ## S05 — OpenAI internal coding-agent monitoring
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### FOUNDATION/TOOLS.md
+- Main blob identity: 7322e8ef3cea7b66499370d89cabb212a27a9b3e
+- Text lines retrieved: 111
+- Evidence/control flags in source: NOT_IMPLEMENTED, NOT_TESTED, PROVENANCE, CORRECTION
+- Source heading 1: # Tool System / 工具系统
+- Source heading 2: ## Repository realization boundary / 本仓实现边界
+- Source heading 3: ## AF-TOOL-001 — Authority is explicit and per action / 权限按动作明确授予
+- Source heading 4: ## AF-TOOL-002 — Untrusted content never becomes instruction / 不可信内容不得成为指令
+- Source heading 5: ## AF-TOOL-003 — Plans are inspectable state / 计划是可检查状态
+- Source heading 6: ## AF-TOOL-004 — Debugging is a closed loop / 调试是闭环
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### docs/en/Memory_System.md
+- Main blob identity: 455900f76f2499dc22296936b74e5f7601ddb229
+- Text lines retrieved: 960
+- Evidence/control flags in source: DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, VERSION, UNKNOWN, CORRECTION
+- Source heading 1: # Memory System: Representation Learning via SimCLR & Unsupervised Learning
+- Source heading 2: ## 0. Introduction & Quick Overview (For Beginners)
+- Source heading 3: ## 1. Background: Saying Goodbye to Rote Memorization
+- Source heading 4: ## 2. Core Mechanisms
+- Source heading 5: ### Sparse Memory Retrieval Dynamics
+- Source heading 6: ### On Sparse Modern Hopfield Model
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### docs/zh/Memory_System.md
+- Main blob identity: 8243c7ec9d006a7e1c891b30b309a60d9eb741d0
+- Text lines retrieved: 963
+- Evidence/control flags in source: DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, VERSION
+- Source heading 1: # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
+- Source heading 2: ## 0. 导读与核心速览 (For Beginners)
+- Source heading 3: ## 1. 理论基础与背景：告别机械记录 (Background)
+- Source heading 4: ## 2. 核心机制
+- Source heading 5: ### 稀疏记忆检索动力学
+- Source heading 6: ### 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### docs/monthly/2026-09-strategic-blueprint.md
+- Main blob identity: 09bcc820bec30df2d34f4a2b6bde4b1ed98d1578
+- Text lines retrieved: 106
+- Evidence/control flags in source: DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, PROVENANCE
+- Source heading 1: ## 四容器覆盖评估
+- Source heading 2: ## 路线保留、降级或替换
+- Source heading 3: ## 第五容器决策
+- Source heading 4: ## 下月研究 Roadmap
+- Source heading 5: ## Container Distribution (September 2026)
+- Source heading 6: ## Provenance Table
+- Decision: preserve source/claim/mapping/implementation/validation states, no runtime upgrade
+
+### A1 disposition
+- Source records rewritten by A1: NONE
+- Paper status and bilingual matching: scoped documentary evidence only
+- Runtime implementation/validation promoted: NONE
+- Stage/month future completeness fabricated: NONE
+- A2 requires merged 10 A1 and new main SHA
