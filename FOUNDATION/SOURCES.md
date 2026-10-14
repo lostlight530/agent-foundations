@@ -628,6 +628,15 @@ Do not place a fixed historical upper-bound sentence in the middle of the regist
 - Repository validation: `NOT_TESTED`
 - Non-claim: consensus, cohesion, or interaction convergence is not factual correctness, truth, safety, or repository runtime behavior
 
+## S63 — Online Convex Optimization with Memory and Limited Predictions
+- Type: Academic Paper
+- Identifier: arxiv-2410.23574
+- Version date: 2024-10-31
+- Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
+- URL: http://arxiv.org/abs/2410.23574v3
+- Use: Constraints on predictive memory windows.
+- Verification boundary: Theorem 1 convergence and Eq 1 regret definition.
+
 ## 2026-09-23 dual-view annotation for S52
 
 ### View 1 — N-1 / 2026-09-22 source-entry calibration

@@ -909,3 +909,41 @@ MONTH_OPEN
 - Repository validation remains NOT_TESTED
 - No runtime convergence experiment was executed in this repository
 
+
+## Dynamic Regret Bound for Predictive Memory Windows
+
+- **System Container:** Memory System
+- **Frontier Source:**
+  - Title: Online Convex Optimization with Memory and Limited Predictions
+  - Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
+  - URL: http://arxiv.org/abs/2410.23574v3
+  - Version: v3
+  - Publication Date: 2024-10-31T02:33:47Z
+  - Reason for selection: The paper provides theoretical regret bounds for memory-based online convex optimization with limited prediction horizons. This translates directly to how a memory system should limit the temporal prediction window of stored behaviors to guarantee sublinear regret under model misspecification.
+  - Actually extracted paragraphs or formulas: Formula (1) defining regret and Theorem 1 providing the convergence bound.
+
+- **Original Problem:** How to minimize the dynamic regret $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$ when an agent has memory and only scarce, inaccurate predictions of future cost functions, without relying on full gradient feedback.
+- **Core Assumptions:**
+  - The objective functions are strongly convex and smooth.
+  - The memory length $h$ is finite and bounded.
+  - The feasible set $\mathcal{X}$ is convex, bounded, and contains the origin.
+  - The agent has bandit feedback (i.e., only function evaluations via a simulator).
+- **Mathematical Mechanism:**
+  - The zeroth-order method updates via Gaussian smoothing perturbations.
+  - The regret bound is: $\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$, showing exponential decay with the number of updates $K = \lfloor \frac{W}{h-1} \rfloor$, where $W$ is the prediction window.
+- **Convergence or behavior boundaries:**
+  - The dynamic regret converges linearly with the prediction window size $W$, provided $W \ge h-1$.
+  - The prediction window provides bounded improvement; infinite predictions do not yield zero error due to the persistent noise $\varepsilon$ from model misspecification.
+- **Applicability Scope:** Memory architectures where past decisions influence current costs (memory length $h$) and agents use forward-simulated episodic predictions to evaluate actions.
+- **Limitations:**
+  - Requires continuous and bounded state spaces; does not naturally extend to discrete symbolic memory trees without relaxations.
+  - Assumes stationary memory bounds ($h$ is fixed).
+- **Architecture Mapping:**
+  - Design Candidate: Constrain the predictive memory module to only plan forward $W$ steps where $W$ is proportionally bounded by the historical memory window $h$, explicitly decaying the confidence of memories older than $K$ steps.
+- **Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine trying to pack for a road trip when you only remember the last $h$ days of weather and your weather app only gives you a fuzzy forecast for the next $W$ days. The formula tells you exactly how much better your packing will be for every extra day of forecast you get, proving that even a fuzzy forecast is useful as long as it looks further ahead than your memory window.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

@@ -913,3 +913,41 @@ MONTH_OPEN
 - 仓库验证仍为 NOT_TESTED
 - 本仓库未执行该机制的运行时收敛实验
 
+
+## 预测记忆窗口的动态遗憾界 (Dynamic Regret Bound for Predictive Memory Windows)
+
+- **System Container:** Memory System
+- **Frontier Source:**
+  - Title: Online Convex Optimization with Memory and Limited Predictions
+  - Authors: Zhengmiao Wang, Zhi-Wei Liu, Ming Chi, Xiaoling Wang, Housheng Su, Lintao Ye
+  - URL: http://arxiv.org/abs/2410.23574v3
+  - Version: v3
+  - Publication Date: 2024-10-31T02:33:47Z
+  - 选型依据与学术脉络: 论文提供了在有限预测窗口下的带记忆在线凸优化的理论遗憾界。这直接转化为记忆系统应如何限制存储行为的时间预测窗口，以在模型误差下保证次线性遗憾。
+  - 实际提取段落或公式: 定义遗憾的公式 (1) 和提供收敛界的定理 1。
+
+- **Original Problem:** 当 Agent 具有记忆且仅有关于未来成本函数的稀缺、不准确预测时，如何在不依赖完整梯度反馈的情况下最小化动态遗憾 $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$。
+- **Core Assumptions:**
+  - 目标函数是强凸且平滑的。
+  - 记忆长度 $h$ 是有限且有界的。
+  - 可行集 $\mathcal{X}$ 是凸的、有界的且包含原点。
+  - Agent 只有 Bandit 反馈（即只能通过模拟器进行函数求值）。
+- **Mathematical Mechanism:**
+  - 零阶方法通过高斯平滑扰动进行更新。
+  - 遗憾界为：$\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$，显示出随更新次数 $K = \lfloor \frac{W}{h-1} \rfloor$（其中 $W$ 为预测窗口）的指数衰减。
+- **Convergence or behavior boundaries:**
+  - 只要 $W \ge h-1$，动态遗憾就会随预测窗口大小 $W$ 线性收敛。
+  - 预测窗口提供了有界的改进；由于模型误差带来的持续噪声 $\varepsilon$，无限的预测也不会产生零误差。
+- **Applicability Scope:** 过去决策影响当前成本（记忆长度 $h$）且 Agent 使用前向模拟片段预测来评估行动的记忆架构。
+- **Limitations:**
+  - 需要连续且有界的状态空间；若无松弛则无法自然扩展到离散符号记忆树。
+  - 假设平稳的记忆边界（$h$ 固定）。
+- **Architecture Mapping:**
+  - Design Candidate: 将预测记忆模块约束为仅向前规划 $W$ 步，其中 $W$ 按比例受历史记忆窗口 $h$ 的限制，并显式衰减超过 $K$ 步的记忆置信度。
+- **Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。该公式准确告诉你，多获得一天的预报你的打包决策会改善多少，证明了只要预报比你的记忆窗口看得更远，即使模糊也是有用的。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: DESIGN_CANDIDATE
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
