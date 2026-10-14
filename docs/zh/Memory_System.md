@@ -938,14 +938,14 @@ MONTH_OPEN
 - **Convergence or behavior boundaries:**
   - 在定理 2 的假设下，整体动态遗憾界包含随 $K=\lfloor W/(h-1)\rfloor$ 指数衰减的项；这不是 Agent 记忆系统的线性收敛定理。
   - 预测窗口提供了有界的改进；由于模型误差带来的持续噪声 $\varepsilon$，无限的预测也不会产生零误差。
-- **Applicability Scope:** 过去决策影响当前成本（记忆长度 $h$）且 Agent 使用前向模拟片段预测来评估行动的记忆架构。
+- **Applicability Scope:** 仅可作为带历史依赖成本的有限预测优化问题之概念类比；Agent 记忆架构需独立定义目标、可行集、查询机制并验证后才可比较。
 - **Limitations:**
   - 需要连续且有界的状态空间；若无松弛则无法自然扩展到离散符号记忆树。
   - 假设平稳的记忆边界（$h$ 固定）。
 - **Architecture Mapping:**
-  - Design Candidate: 将预测记忆模块约束为仅向前规划 $W$ 步，其中 $W$ 按比例受历史记忆窗口 $h$ 的限制，并显式衰减超过 $K$ 步的记忆置信度。
+  - Design Candidate：研究有限预测窗口能否用于某个明确定义的 Agent 记忆优化器；$K$ 为零阶迭代次数，不是记忆年龄，论文也未规定 $W$ 与 $h$ 的固定比例或记忆置信度衰减规则。
 - **Implementation Status:** NOT_IMPLEMENTED
-- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。该公式准确告诉你，多获得一天的预报你的打包决策会改善多少，证明了只要预报比你的记忆窗口看得更远，即使模糊也是有用的。
+- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。这一类比只解释预测窗口与未来决策成本的关联，不能据此计算 Agent 记忆系统增加一天预测后具体改善多少，或证明记忆置信度如何衰减。
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: DESIGN_CANDIDATE
