@@ -4391,3 +4391,149 @@ DUPLICATE_CREDIT
 - Runtime implementation/validation promoted: NONE
 - Stage/month future completeness fabricated: NONE
 - A2 requires merged 10 A1 and new main SHA
+
+## A2 2026-10-14 Foundation source-to-design and bilingual reconciliation
+- Authority: post-A1 main 263614b06bb0b2649b27874b68d2df7be5da866b
+- Inherited A1: #286 with 13 file-level authority/source checks
+- Native Oct 14 #284 admitted S63 document; subsequent #285 corrected version date and Eq/Theorem references
+- arXiv:2410.23574 v3 date: 2025-12-25; initial v1 submission 2024-10-31
+- Eq (1): cost; Eq (3): regret; Theorem 1 initial phase, Theorem 2 full prediction-window bound
+- Those paper bounds do not establish performance for the repository Memory System
+- English and Chinese Memory documents keep mapping DESIGN_CANDIDATE, implementation NOT_IMPLEMENTED, test NOT_TESTED
+- October 1–13 evidence and Oct 14 native/correction states are separate timestamps
+
+### FOUNDATION/ARCHITECTURE.md
+- A1 checked main blob:  0c39c076da29d169aeaf141b2ebee94f7a836a3b
+- Original document retrieved line count:  125
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Document authority 1:  # Architecture Principles / 架构原则
+- Document authority 2:  ## AF-ARCH-001 — System boundary / 系统边界
+- Document authority 3:  ## AF-ARCH-002 — Deterministic shell, stochastic component / 确定性外壳与随机组件
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/COLLABORATION.md
+- A1 checked main blob:  94bb8b85557d41124c794bf8c562df2d278593b3
+- Original document retrieved line count:  123
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE
+- Document authority 1:  # Collaboration System / 协作系统
+- Document authority 2:  ## Repository realization boundary / 本仓实现边界
+- Document authority 3:  ## AF-COLLAB-001 — Topology is a tradeoff, not an ideology / 拓扑是权衡而非信条
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/EVIDENCE.md
+- A1 checked main blob:  9c7e0cd274081148b34eb0a6c9d0097cea085ff5
+- Original document retrieved line count:  265
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, CORRECTION
+- Document authority 1:  # Evidence Contract / 证据契约
+- Document authority 2:  ## Purpose / 目的
+- Document authority 3:  ## Claim states / 声明状态
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/INDEX.md
+- A1 checked main blob:  289ad219a795090fd5c24e9528f207dcd95a43dc
+- Original document retrieved line count:  149
+- A1 observed evidence/state boundaries:  NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Document authority 1:  # Agent Foundations — Verified Core / 可验证核心
+- Document authority 2:  ## Domain maps / 领域知识图
+- Document authority 3:  ## Evidence and source core / 证据与来源核心
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/MAINTENANCE.md
+- A1 checked main blob:  39740d184fa6170fc7012afa99eacfbf99a9bcd0
+- Original document retrieved line count:  131
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Document authority 1:  # Agent Foundations maintenance contract / 长期维护契约
+- Document authority 2:  ## Scope / 范围
+- Document authority 3:  ## Research cadence and admission / 科研周期与准入
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/MEMORY.md
+- A1 checked main blob:  e5b20a3431ffe2a32a42c9574230fadd965cd9a1
+- Original document retrieved line count:  96
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, CORRECTION
+- Document authority 1:  # Memory System / 记忆系统
+- Document authority 2:  ## Repository realization boundary / 本仓实现边界
+- Document authority 3:  ## AF-MEM-001 — Memory is a lifecycle / 记忆是生命周期
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/PROVENANCE.md
+- A1 checked main blob:  40f0cdb0103d2fac8bc5a5ca5742a1a250160b96
+- Original document retrieved line count:  219
+- A1 observed evidence/state boundaries:  NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, CORRECTION
+- Document authority 1:  # Reproducibility and Provenance / 可复现性与溯源
+- Document authority 2:  ## AI-use and producer disclosure / AI 使用与生产者披露
+- Document authority 3:  ## Reproducibility target / 可复现目标
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/REVIEW.md
+- A1 checked main blob:  cc72b0951bf2ce23bbf2274ede57a0d1cc83d301
+- Original document retrieved line count:  211
+- A1 observed evidence/state boundaries:  NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Document authority 1:  # Public Evidence Review States / 公开证据审核状态
+- Document authority 2:  ## Purpose / 目的
+- Document authority 3:  ## Recovery prerequisite / 恢复前提
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/SOURCES.md
+- A1 checked main blob:  9e5d0c6abb9f1841d8a8fd6ba202874ee65f65cb
+- Original document retrieved line count:  707
+- A1 observed evidence/state boundaries:  DESIGN_CANDIDATE, NOT_IMPLEMENTED, NOT_TESTED, VERSION, PROVENANCE, VERIFIED_CORE, UNKNOWN, CORRECTION
+- Document authority 1:  # Primary Source Registry / 一手来源登记
+- Document authority 2:  ## S01 — NIST AI 600-1
+- Document authority 3:  ## S02 — OWASP Agentic Top 10 2026
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### FOUNDATION/TOOLS.md
+- A1 checked main blob:  7322e8ef3cea7b66499370d89cabb212a27a9b3e
+- Original document retrieved line count:  111
+- A1 observed evidence/state boundaries:  NOT_IMPLEMENTED, NOT_TESTED, PROVENANCE, CORRECTION
+- Document authority 1:  # Tool System / 工具系统
+- Document authority 2:  ## Repository realization boundary / 本仓实现边界
+- Document authority 3:  ## AF-TOOL-001 — Authority is explicit and per action / 权限按动作明确授予
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### docs/en/Memory_System.md
+- A1 checked main blob:  455900f76f2499dc22296936b74e5f7601ddb229
+- Original document retrieved line count:  960
+- A1 observed evidence/state boundaries:  DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, VERSION, UNKNOWN, CORRECTION
+- Document authority 1:  # Memory System: Representation Learning via SimCLR & Unsupervised Learning
+- Document authority 2:  ## 0. Introduction & Quick Overview (For Beginners)
+- Document authority 3:  ## 1. Background: Saying Goodbye to Rote Memorization
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### docs/zh/Memory_System.md
+- A1 checked main blob:  8243c7ec9d006a7e1c891b30b309a60d9eb741d0
+- Original document retrieved line count:  963
+- A1 observed evidence/state boundaries:  DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, VERSION
+- Document authority 1:  # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
+- Document authority 2:  ## 0. 导读与核心速览 (For Beginners)
+- Document authority 3:  ## 1. 理论基础与背景：告别机械记录 (Background)
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### docs/monthly/2026-09-strategic-blueprint.md
+- A1 checked main blob:  09bcc820bec30df2d34f4a2b6bde4b1ed98d1578
+- Original document retrieved line count:  106
+- A1 observed evidence/state boundaries:  DESIGN_CANDIDATE, PAPER_ONLY, NOT_IMPLEMENTED, NOT_TESTED, PROVENANCE
+- Document authority 1:  ## 四容器覆盖评估
+- Document authority 2:  ## 路线保留、降级或替换
+- Document authority 3:  ## 第五容器决策
+- Current relation: source claim ≠ architecture candidate ≠ implementation ≠ independent validation
+- Original producer/source content: retained, not re-executed
+
+### A2 judgment
+- Registry identity S63 unchanged and not duplicated
+- Bibliographic/date correction cannot be backdated into yesterday's published observation
+- Architecture promise, code execution, scientific reproduction: none added
+- Monthly blueprint remains OPEN, no October final seal
