@@ -572,6 +572,18 @@ Canonical rules:
 - Actually extracted paragraphs or formulas: Extracted the gradient tracking differential equation: $\dot{\mathbf{x}}_i = \sum_{j=1}^{n} w_{ij}^{\theta} (q(\mathbf{x}_j)-q(\mathbf{x}_i)) - \alpha \mathbf{y}_i$.
 - Verification boundary: Verified from LaTeX Source. The mathematical mechanism proves asymptotic global stability for the continuous-time system under sufficiently small learning rates $\alpha$, but does not guarantee the exact convergence rate.
 
+## S64 — Decentralized Event-Triggered Online Learning for Safe Consensus of Multi-Agent Systems with Gaussian Process Regression
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2402.03174v1
+- Version date: 2024-02-05
+- Authors: Xiaobing Dai, Zewen Yang, Mengtian Xu, Fangzhou Liu, Georges Hattab, Sandra Hirche
+- URL: https://arxiv.org/abs/2402.03174
+- Use: Daily Research Chunk (Collaboration System)
+- Reason for selection: Addresses decentralized multi-agent learning with unknown dynamics, providing a mathematical event-trigger mechanism to bound prediction errors while proving ultimate convergence bounds (safe consensus) mathematically rather than just empirically.
+- Actually extracted paragraphs or formulas: Extracted the trigger function $\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$ and the consensus error bound $\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$.
+- Verification boundary: Verified from LaTeX Source. The mathematical mechanism proves that ultimate error bounded tracking is achieved under specific local bounds for unknown models, though limited to a scaling effect proportional to $N$.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
