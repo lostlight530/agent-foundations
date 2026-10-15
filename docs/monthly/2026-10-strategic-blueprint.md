@@ -4537,3 +4537,162 @@ DUPLICATE_CREDIT
 - Bibliographic/date correction cannot be backdated into yesterday's published observation
 - Architecture promise, code execution, scientific reproduction: none added
 - Monthly blueprint remains OPEN, no October final seal
+
+## A1 2026-10-15 | Foundations native 14 Daily PR and source retention review
+- Baseline main SHA: 970fd714a8b4ce25fffc3db921f1c2ea7d8bd1bb; original monthly owner blob: dadd40c3f3a0f14ddbbaed625fa8b5c93ea7d119.
+- October 1–14 is A1 input; S64 Oct15 #292 is expressly A2 only.
+- Native PR changed-path source inspection precedes owner relation; original producer files unchanged.
+- Git blob identity denotes currently retained content, NOT task-time version or execution success.
+- EN/ZH mirrors of one source are not two independent papers.
+- Source registration, design candidate, actual implementation and test validation remain distinct.
+- Weekly W40/W41 native cascades and October special closeout are separate from daily research source tasks.
+- Month remains OPEN, final October settlement NOT_DUE.
+- Earlier S63 factual correction #285 retained prospectively; no silent overwrite of #284.
+
+### 2026-10-01 — native PR #229: S42 sparse modern Hopfield
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/229.
+- Claimed production topic: S42 sparse modern Hopfield; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `docs/en/Memory_System.md`, currently retained blob `455900f76f2499dc22296936b74e5f7601ddb229`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Memory_System.md`, currently retained blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`; no inference that current path equals original PR version.
+- 2026-10-01 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-01 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-01 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-02 — native PR #235: DeGG-Flow script-only delivery
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/235.
+- Claimed production topic: DeGG-Flow script-only delivery; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `append.py`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `append_chunks.py`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `search_arxiv.py`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `search_arxiv2.py`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- 2026-10-02 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-02 decision: DeGG-Flow #235 merged four helper-script changes that are not retained on main; bilingual research document completion is UNVERIFIED, and helper scripts must not be recreated automatically.
+- 2026-10-02 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-03 — native PR #239: Markov opinion convergence
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/239.
+- Claimed production topic: Markov opinion convergence; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Collaboration_System.md`, currently retained blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Collaboration_System.md`, currently retained blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; no inference that current path equals original PR version.
+- 2026-10-03 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-03 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-03 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-04 — native PR #242: Collaboration study
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/242.
+- Claimed production topic: Collaboration study; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Collaboration_System.md`, currently retained blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Collaboration_System.md`, currently retained blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; no inference that current path equals original PR version.
+- 2026-10-04 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-04 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-04 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-05 — native PR #249: S24 architecture revisit
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/249.
+- Claimed production topic: S24 architecture revisit; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
+- 2026-10-05 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-05 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-05 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-06 — native PR #252: MAMAB FDLA
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/252.
+- Claimed production topic: MAMAB FDLA; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
+- 2026-10-06 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-06 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-06 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-07 — native PR #255: S59 Tool system
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/255.
+- Claimed production topic: S59 Tool system; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Tool_System.md`, currently retained blob `de3eee2e4b622c7348b825e6a27e111ebb74e825`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Tool_System.md`, currently retained blob `3e723c7b4d07b4648c3cba4d8ea887597a91e35d`; no inference that current path equals original PR version.
+- 2026-10-07 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-07 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-07 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-08 — native PR #258: Mean-field Lyapunov
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/258.
+- Claimed production topic: Mean-field Lyapunov; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
+- 2026-10-08 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-08 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-08 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-09 — native PR #262: OVM sequential exploration
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/262.
+- Claimed production topic: OVM sequential exploration; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Memory_System.md`, currently retained blob `455900f76f2499dc22296936b74e5f7601ddb229`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Memory_System.md`, currently retained blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`; no inference that current path equals original PR version.
+- 2026-10-09 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-09 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-09 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-10 — native PR #265: Log quantization
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/265.
+- Claimed production topic: Log quantization; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Collaboration_System.md`, currently retained blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Collaboration_System.md`, currently retained blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; no inference that current path equals original PR version.
+- 2026-10-10 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-10 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-10 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-11 — native PR #271: S26 Tool recovery
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/271.
+- Claimed production topic: S26 Tool recovery; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `docs/en/Tool_System.md`, currently retained blob `de3eee2e4b622c7348b825e6a27e111ebb74e825`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Tool_System.md`, currently retained blob `3e723c7b4d07b4648c3cba4d8ea887597a91e35d`; no inference that current path equals original PR version.
+- 2026-10-11 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-11 decision: S26 is specifically a recovered prior research source; no duplicate S26 identity.
+- 2026-10-11 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-12 — native PR #274: Safe MARL navigation
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/274.
+- Claimed production topic: Safe MARL navigation; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
+- 2026-10-12 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-12 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-12 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-13 — native PR #278: NPG memory games
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/278.
+- Claimed production topic: NPG memory games; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `docs/en/Memory_System.md`, currently retained blob `455900f76f2499dc22296936b74e5f7601ddb229`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Memory_System.md`, currently retained blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`; no inference that current path equals original PR version.
+- 2026-10-13 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-13 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
+- 2026-10-13 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### 2026-10-14 — native PR #284: S63 dynamic regret
+- Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/284.
+- Claimed production topic: S63 dynamic regret; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
+- Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
+- Changed path `docs/en/Memory_System.md`, currently retained blob `455900f76f2499dc22296936b74e5f7601ddb229`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Memory_System.md`, currently retained blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`; no inference that current path equals original PR version.
+- 2026-10-14 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
+- 2026-10-14 decision: Native S63 PR #284 and later source/theorem repair #285 are separate historical claims.
+- 2026-10-14 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
+
+### Cross-period and follow-on gates
+- Oct 4 weekly native cascade #244 and Oct 11 weekly native cascade #270 remain distinct from Daily research producer identities.
+- Oct 4 special closeout #247 retains canonical S57 identity, not an additional new source.
+- DeGG-Flow October 2 daily-title/diff mismatch remains a bounded investigation item, not a reason to manufacture a native research run.
+- October 14 S63 #285 remains a forward bibliographic correction, preserving initial #284.
+- Current index/source registry is not enough to assert historic exact source availability at each earlier cutoff.
+- No private task template, repository architecture or open-source governance changes produced.
+- No scientific runtime or independent new paper verification performed by the maintenance.
+- A2 must await all ten A1 merges and ten-repo fresh main; S64 October 15 is not an A1 input.
+- A1 owner is a chronological index and explicit decision record; it is not another native Daily.
+
