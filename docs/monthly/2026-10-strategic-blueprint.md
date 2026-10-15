@@ -4592,8 +4592,8 @@ DUPLICATE_CREDIT
 ### 2026-10-05 — native PR #249: S24 architecture revisit
 - Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/249.
 - Claimed production topic: S24 architecture revisit; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
-- Changed path `docs/en/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
-- Changed path `docs/zh/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
 - 2026-10-05 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
 - 2026-10-05 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
 - 2026-10-05 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
@@ -4602,8 +4602,8 @@ DUPLICATE_CREDIT
 - Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/252.
 - Claimed production topic: MAMAB FDLA; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
 - Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
-- Changed path `docs/en/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
-- Changed path `docs/zh/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
 - 2026-10-06 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
 - 2026-10-06 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
 - 2026-10-06 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
@@ -4622,8 +4622,8 @@ DUPLICATE_CREDIT
 - Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/258.
 - Claimed production topic: Mean-field Lyapunov; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
 - Changed path `FOUNDATION/SOURCES.md`, currently retained blob `ff409cad150eac192dfc77f6d6b9386344db1e81`; no inference that current path equals original PR version.
-- Changed path `docs/en/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
-- Changed path `docs/zh/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
 - 2026-10-08 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
 - 2026-10-08 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
 - 2026-10-08 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
@@ -4660,8 +4660,8 @@ DUPLICATE_CREDIT
 ### 2026-10-12 — native PR #274: Safe MARL navigation
 - Original native PR evidence: https://github.com/lostlight530/agent-foundations/pull/274.
 - Claimed production topic: Safe MARL navigation; this A1 verifies actual modified paths and current retention, not external theorem reproduction.
-- Changed path `docs/en/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
-- Changed path `docs/zh/Architecture_System.md`, currently NOT_RETAINED_ON_MAIN; no inference that current path equals original PR version.
+- Changed path `docs/en/Architecture_Principles.md`, currently retained blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`; no inference that current path equals original PR version.
+- Changed path `docs/zh/Architecture_Principles.md`, currently retained blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`; no inference that current path equals original PR version.
 - 2026-10-12 verification boundary: original PR file delivery does not establish autonomous agent runtime, experiment validation or source independence.
 - 2026-10-12 decision: No basis to modify the currently correct bilingual source text merely to record inspection.
 - 2026-10-12 downstream relation: retain original PR attribution; use current owner for monthly source and chronology only.
