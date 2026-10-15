@@ -4855,3 +4855,17 @@ DUPLICATE_CREDIT
 - No new scientific experiments, independent paper verification, deployment, runtime or host checks were executed by this independent maintainer.
 - A2 acceptance requires actual GitHub PR merge and final main/blob/pending-PR check.
 
+## 2026-10-15 forward correction — S55/DeGG-Flow PR #235 scope defect already reconciled by #236
+- Correction type: `HISTORICAL_RECONCILIATION_DISCOVERED_IN_EXISTING_MONTH_OWNER`; this paragraph does not rewrite prior Oct2 PRs or original source files.
+- Authority main: `1bb3524544d95e6a740aa63032065a142e706b92`; primary evidence: merged PR #235 (2026-10-02T14:27:41Z) and successor #236 (2026-10-02T14:43:58Z).
+- PR #235 body claimed new bilingual DeGG-Flow Architecture Principles daily content, but actual changed files were only `append.py`, `append_chunks.py`, `search_arxiv.py`, `search_arxiv2.py`.
+- Canonical S55 and bilingual DeGG-Flow source text already existed before #235; the producer delivery deserves **zero new bilingual Daily source credit**. PR-merge success is not scope acceptance.
+- PR #236 explicitly removed all four accidentally committed helper/search scripts and recorded the forward correction in this same monthly owner under `A2_SUCCESSOR_RECONCILIATION_2026-10-02_LATE_NATIVE_DELIVERY`.
+- GitHub path commit histories confirm deletion of all four files on 2026-10-02 around 14:43 UTC, and current main tree does not retain them.
+- Therefore October 15 A1/A2's phrase `open source-retention discrepancy` was **stale**. Correct current status: `TEMP_HELPER_CLEANUP_COMPLETE`, not an unresolved request to restore temporary files.
+- The distinct surviving defect is `NATIVE_DAILY_SCOPE_DEFECT_CONFIRMED`: the claimed new October 2 bilingual research integration was never delivered by #235. The original task execution/attempt details remain attributable to Jules and not recreated by this audit.
+- No unauthorized reintroduction of leaked scripts, no duplicate S55 canonical identity, and no fictional October 2 new paper observation are permitted.
+- Any future legitimate new Daily output requires new actual author/source/date evidence; a blank placeholder or retrospective copy of preexisting S55 text does not repair the original producer deliverable.
+- Weekly/cumulative October accounting must retain the October 2 deliverable as `PR_MERGED_SCOPE_DEFECT`, with non-delivered document content; source registry and verified-core remain unchanged.
+- Existing original September/October correction history remains preserved. This forward owner amendment has **not** executed tests, verified external paper content anew, or touched general docs/templates.
+- Closure: `FILE_CLEANUP_VERIFIED_DONE`, `FALSE_OPEN_RETENTION_DISCREPANCY_CORRECTED`, `ORIGINAL_DAILY_RESEARCH_DELTA_ABSENT`, `MONTH_OPEN`.
