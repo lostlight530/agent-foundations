@@ -115,3 +115,7 @@ AI 可以辅助起草、翻译、研究组织、一致性检查和候选来源�
 This repository contains no autonomous-agent runtime, deployed memory system, tool-control plane, or collaboration protocol. Mathematical and empirical results retain their original formal and experimental scope. Safety, reliability, and convergence claims must name the system and failure model to which they apply.
 
 本仓库不包含自治智能体运行时、已部署记忆系统、工具控制平面或协作协议。数学与实验结果保留其原始适用域；安全性、可靠性和收敛性声明必须明确适用系统与故障模型。
+
+## Archived checkpoint — 2026-10-14
+
+[v2026.10-fourteen-day-evidence-checkpoint](https://github.com/lostlight530/agent-foundations/releases/tag/v2026.10-fourteen-day-evidence-checkpoint) is archived as [10.5281/zenodo.23365540](https://doi.org/10.5281/zenodo.23365540). For the software-family concept DOI, earlier versions and exact-checkpoint citation, see [Release and Archival Policy](RELEASE_POLICY.md).
