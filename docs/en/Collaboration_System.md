@@ -2853,3 +2853,60 @@ Imagine several emergency teams sharing one evolving city map. Each team sees on
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+## Decentralized Event-Triggered Online Learning for Safe Consensus
+- **System Container:** Collaboration System
+- **Frontier Source:** Decentralized Event-Triggered Online Learning for Safe Consensus of Multi-Agent Systems with Gaussian Process Regression
+- **Identifier:** arXiv:2402.03174v1
+- **Version date:** 2024-02-05
+- **Authors:** Xiaobing Dai, Zewen Yang, Mengtian Xu, Fangzhou Liu, Georges Hattab, Sandra Hirche
+- **URL:** https://arxiv.org/abs/2402.03174
+- **Reason for selection:** Addresses decentralized multi-agent learning with unknown dynamics, providing a mathematical event-trigger mechanism to bound prediction errors while proving ultimate convergence bounds (safe consensus) mathematically rather than just empirically.
+- **Actually extracted paragraphs or formulas:** Extracted the trigger function $\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$ and the consensus error bound $\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$.
+
+### 1. 论文原始问题 (Original Problem)
+In multi-agent systems with unknown non-linear dynamics, conventional robust or adaptive control approaches often suffer from delays due to time-consuming neural network training processes. Continuously updating data-driven models via online learning across all agents creates high computational and communication burdens, while lacking precise prediction guarantees suitable for safety-critical domains.
+
+### 2. 核心假设 (Core Assumptions)
+- The communication topology among agents forms a connected undirected graph.
+- The unknown dynamics function $f(x)$ is bounded and uniformly Lipschitz continuous within a compact domain $\mathbb{X}$.
+- The Gaussian Process (GP) kernel function provides bounded Lipschitz constants, and measurement noises are independent across agents.
+
+### 3. 数学机制 (Mathematical Mechanism)
+A decentralized event-trigger mechanism reduces unnecessary online learning updates. The trigger condition evaluates when the prediction error bound $\eta_i(x_i)$ exceeds the acceptable deviation:
+
+**数学更新规则** (Mathematical Update Rule):
+$$\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$$
+
+Online data collection is only activated for agent $i$ when $\rho(x_i, \bar{x}_i) > 0$, bounding the prediction error while maintaining data efficiency. The constant $\sqrt{N-1} \underline{\eta}$ accounts for unknown learning actions from other agents in a decentralized topology.
+
+### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+With probability at least $1 - N \delta$, the system tracking error converges to an ultimate bound:
+
+**收敛界** (Convergence Bound):
+$$\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$$
+
+where $\underline{\eta} = 2 \sqrt{\beta} \sigma_n$ and $c$ is the control gain.
+
+### 5. 适用范围 (Applicable Scope)
+- Decentralized multi-agent consensus algorithms where underlying agent dynamics possess unknown non-linear elements but are bounded.
+- Systems utilizing Gaussian Process regression or similar probabilistic error bounds for model prediction.
+
+### 6. 局限 (Limitations)
+- The convergence bound scales linearly with the total number of agents $N$, implying that extremely large swarm systems may suffer from unacceptably large steady-state errors.
+- The maximum operator introduces conservatism as $N$ grows, increasing the frequency of trigger events.
+
+### 7. Agent 架构映射 (Architecture Mapping)
+**DESIGN_CANDIDATE**
+This decentralized event-trigger mathematical rule acts as a design candidate for the Collaboration System's communication and synchronization threshold. Instead of triggering sync/learning continuously, nodes only trigger an update when their local uncertainty $\eta_i(x_i)$ exceeds a dynamically weighted threshold proportional to the local-vs-auxiliary state discrepancy $|x_i - \bar{x}_i|$ and the system scale $N$.
+
+### 8. 仓库实现状态 (Repository Implementation Status)
+**NOT_IMPLEMENTED**
+
+### 9. 初学者类比 (Beginner Analogy)
+Imagine a team of explorers mapping an unknown island. Instead of shouting every single new tree they see to the team (which wastes energy and creates noise), each explorer only shouts when they discover something that drastically differs from the map they currently hold and the team's average expected path. The "trigger" formula mathematically calculates exactly when the surprise is big enough to warrant updating everyone's map, ensuring they stay together without over-communicating.
+
+### 10. 证据状态 (Evidence Status)
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED

@@ -2690,3 +2690,60 @@ $$
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
+## 分散式事件触发在线学习用于多智能体系统安全一致性 (Decentralized Event-Triggered Online Learning for Safe Consensus)
+- **System Container:** Collaboration System
+- **Frontier Source:** Decentralized Event-Triggered Online Learning for Safe Consensus of Multi-Agent Systems with Gaussian Process Regression
+- **Identifier:** arXiv:2402.03174v1
+- **Version date:** 2024-02-05
+- **Authors:** Xiaobing Dai, Zewen Yang, Mengtian Xu, Fangzhou Liu, Georges Hattab, Sandra Hirche
+- **URL:** https://arxiv.org/abs/2402.03174
+- **选择理由:** 解决了具有未知动态的分散式多智能体学习问题，提供了一个数学事件触发机制来限制预测误差，同时在数学上证明了最终的收敛界限（安全一致性），而不仅仅是经验结果。
+- **实际提取段落或公式:** 提取了触发函数 $\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$ 以及一致性误差界限 $\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$。
+
+### 1. 论文原始问题 (Original Problem)
+在具有未知非线性动态的多智能体系统中，传统的鲁棒或自适应控制方法往往由于耗时的神经网络训练过程而面临延迟问题。在所有智能体中通过在线学习不断更新数据驱动模型会产生高昂的计算和通信负担，同时缺乏适用于安全关键领域的精确预测保证。
+
+### 2. 核心假设 (Core Assumptions)
+- 智能体之间的通信拓扑形成连通的无向图。
+- 未知动态函数 $f(x)$ 在紧凑域 $\mathbb{X}$ 内有界且一致李普希茨连续。
+- 高斯过程 (GP) 核函数提供有界的李普希茨常数，并且各智能体的测量噪声相互独立。
+
+### 3. 数学机制 (Mathematical Mechanism)
+分散式事件触发机制减少了不必要的在线学习更新。触发条件评估预测误差界限 $\eta_i(x_i)$ 何时超过可接受的偏差：
+
+**数学更新规则** (Mathematical Update Rule):
+$$\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$$
+
+只有当 $\rho(x_i, \bar{x}_i) > 0$ 时，智能体 $i$ 才激活在线数据收集，在保持数据效率的同时限制预测误差。常数 $\sqrt{N-1} \underline{\eta}$ 用于弥补在分散式拓扑中其他智能体未知的学习动作。
+
+### 4. 收敛或行为边界 (Convergence or behavior boundaries)
+系统跟踪误差至少以 $1 - N \delta$ 的概率收敛于一个最终界限：
+
+**收敛界** (Convergence Bound):
+$$\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$$
+
+其中 $\underline{\eta} = 2 \sqrt{\beta} \sigma_n$，且 $c$ 为控制增益。
+
+### 5. 适用范围 (Applicable Scope)
+- 底层智能体动态具有未知但有界的非线性元素的分散式多智能体一致性算法。
+- 利用高斯过程回归或类似概率误差界限进行模型预测的系统。
+
+### 6. 局限 (Limitations)
+- 收敛界限与智能体总数 $N$ 成线性比例关系，这意味着极其庞大的集群系统可能会遭受不可接受的巨大稳态误差。
+- 随着 $N$ 的增加，最大化算子引入了保守性，从而增加了触发事件的频率。
+
+### 7. Agent 架构映射 (Architecture Mapping)
+**DESIGN_CANDIDATE**
+这种分散式事件触发的数学规则可作为协作系统 (Collaboration System) 通信和同步阈值的设计候选。节点不再持续触发同步/学习，而只在本地不确定性 $\eta_i(x_i)$ 超过一个与本地状态与辅助状态差异 $|x_i - \bar{x}_i|$ 及系统规模 $N$ 成正比的动态加权阈值时，才触发更新。
+
+### 8. 仓库实现状态 (Repository Implementation Status)
+**NOT_IMPLEMENTED**
+
+### 9. 初学者类比 (Beginner Analogy)
+想象一队探险家正在绘制一个未知岛屿的地图。与其每看到一棵新树就向团队大喊（这既浪费体力又制造噪音），不如每个探险家只在发现与他们目前持有的地图以及团队的预期路线存在巨大差异时才大喊。“触发”公式可以在数学上精确计算出惊喜何时大到足以值得更新所有人的地图，从而确保他们保持在一起又不会过度沟通。
+
+### 10. 证据状态 (Evidence Status)
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
