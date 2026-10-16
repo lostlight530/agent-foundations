@@ -4869,3 +4869,170 @@ DUPLICATE_CREDIT
 - Weekly/cumulative October accounting must retain the October 2 deliverable as `PR_MERGED_SCOPE_DEFECT`, with non-delivered document content; source registry and verified-core remain unchanged.
 - Existing original September/October correction history remains preserved. This forward owner amendment has **not** executed tests, verified external paper content anew, or touched general docs/templates.
 - Closure: `FILE_CLEANUP_VERIFIED_DONE`, `FALSE_OPEN_RETENTION_DISCREPANCY_CORRECTED`, `ORIGINAL_DAILY_RESEARCH_DELTA_ABSENT`, `MONTH_OPEN`.
+
+## 2026-10-16 A1 | Foundation 15 native PR original scope and present authority
+
+- Current main reference `49b41c15c1c867cc9c68349f9e9747080f0cfae7`; A1 period October 1 to 15, original Oct16 S65 native source out of this cutoff
+- Fifteen original research PR IDs validated from merged PR list and each original changed-file inventory
+- Current working copies are cumulative and may differ from original PR blob; do not treat current blob as dated original producer bytes
+- Original Oct2 DeGG-Flow PR #235 changed only four scripts; later dated #295 repair reconciles helper retention without inventing original bilingual documentation
+- Source publication, bibliographic identity, bilingual documentation and implemented runtime/verified core are distinct evidence layers
+- W40/W41 native weekly cascade, W42 OPEN, Oct4 Special and October Monthly OPEN remain separate
+### 2026-10-01 | Native producer PR #229 — Memory
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/229
+- Research workstream: Memory; original changed-file count and path identity 2
+- Source class: S42 Hopfield source; source registration and runnable memory distinct
+- Original changed path: `docs/en/Memory_System.md`; current main Git blob `455900f76f2499dc22296936b74e5f7601ddb229`, cumulative authority
+- Original changed path: `docs/zh/Memory_System.md`; current main Git blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-02 | Native producer PR #235 — Script
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/235
+- Research workstream: Script; original changed-file count and path identity 4
+- Source class: DeGG-Flow scripts-only original PR, four original helper paths no longer current; preserve #295 forward resolution
+- Original changed path: `append.py`; current main ABSENT_ON_CURRENT_MAIN / historical PR retained
+- Original changed path: `append_chunks.py`; current main ABSENT_ON_CURRENT_MAIN / historical PR retained
+- Original changed path: `search_arxiv.py`; current main ABSENT_ON_CURRENT_MAIN / historical PR retained
+- Original changed path: `search_arxiv2.py`; current main ABSENT_ON_CURRENT_MAIN / historical PR retained
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: ORIGINAL_SCRIPTS_ONLY_NO_NATIVE_DOCS; LATER_S55_CORRECTION
+- A1 decision: PRESERVE_DATED_CORRECTION_AND_SOURCE_BOUNDARY
+### 2026-10-03 | Native producer PR #239 — Collaboration
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/239
+- Research workstream: Collaboration; original changed-file count and path identity 3
+- Source class: Coevolutionary opinion formation paper, no runtime collaboration result
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Collaboration_System.md`; current main Git blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`, cumulative authority
+- Original changed path: `docs/zh/Collaboration_System.md`; current main Git blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-04 | Native producer PR #242 — Collaboration
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/242
+- Research workstream: Collaboration; original changed-file count and path identity 3
+- Source class: Collaboration research source and bilingual comments are one producer
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Collaboration_System.md`; current main Git blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`, cumulative authority
+- Original changed path: `docs/zh/Collaboration_System.md`; current main Git blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-05 | Native producer PR #249 — Architecture
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/249
+- Research workstream: Architecture; original changed-file count and path identity 2
+- Source class: S24 revisited source, not independent new source ID
+- Original changed path: `docs/en/Architecture_Principles.md`; current main Git blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`, cumulative authority
+- Original changed path: `docs/zh/Architecture_Principles.md`; current main Git blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-06 | Native producer PR #252 — Architecture
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/252
+- Research workstream: Architecture; original changed-file count and path identity 3
+- Source class: FDLA MAMAB mathematical assumptions, not deployed Tool route
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Architecture_Principles.md`; current main Git blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`, cumulative authority
+- Original changed path: `docs/zh/Architecture_Principles.md`; current main Git blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-07 | Native producer PR #255 — Tool
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/255
+- Research workstream: Tool; original changed-file count and path identity 3
+- Source class: S59 constrained bandit, NOT_IMPLEMENTED
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Tool_System.md`; current main Git blob `34662cbbf9e6e9a7fa5a78859c390a2798fca787`, cumulative authority
+- Original changed path: `docs/zh/Tool_System.md`; current main Git blob `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-08 | Native producer PR #258 — Architecture
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/258
+- Research workstream: Architecture; original changed-file count and path identity 3
+- Source class: Mean-field Lyapunov model with bounded assumptions, not arbitrary agent convergence
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Architecture_Principles.md`; current main Git blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`, cumulative authority
+- Original changed path: `docs/zh/Architecture_Principles.md`; current main Git blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-09 | Native producer PR #262 — Memory
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/262
+- Research workstream: Memory; original changed-file count and path identity 3
+- Source class: OVM research, paper evidence not persisted memory
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Memory_System.md`; current main Git blob `455900f76f2499dc22296936b74e5f7601ddb229`, cumulative authority
+- Original changed path: `docs/zh/Memory_System.md`; current main Git blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-10 | Native producer PR #265 — Collaboration
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/265
+- Research workstream: Collaboration; original changed-file count and path identity 3
+- Source class: Log quantization theory, not validated multi-agent coordination
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Collaboration_System.md`; current main Git blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`, cumulative authority
+- Original changed path: `docs/zh/Collaboration_System.md`; current main Git blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-11 | Native producer PR #271 — Tool
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/271
+- Research workstream: Tool; original changed-file count and path identity 2
+- Source class: S26 recovery on refreshed main, original temporal attribution retained
+- Original changed path: `docs/en/Tool_System.md`; current main Git blob `34662cbbf9e6e9a7fa5a78859c390a2798fca787`, cumulative authority
+- Original changed path: `docs/zh/Tool_System.md`; current main Git blob `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-12 | Native producer PR #274 — Architecture
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/274
+- Research workstream: Architecture; original changed-file count and path identity 2
+- Source class: Safe MARL navigation paper, no host security proof
+- Original changed path: `docs/en/Architecture_Principles.md`; current main Git blob `0e1efd7bf4898cf5933f94cbd55b505fcfa9b25c`, cumulative authority
+- Original changed path: `docs/zh/Architecture_Principles.md`; current main Git blob `dba7f14b366bd690d844eb05b4ff3dcc790c4c61`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+### 2026-10-13 | Native producer PR #278 — Memory
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/278
+- Research workstream: Memory; original changed-file count and path identity 2
+- Source class: NPG daily with later claim-narrowing PR #281
+- Original changed path: `docs/en/Memory_System.md`; current main Git blob `455900f76f2499dc22296936b74e5f7601ddb229`, cumulative authority
+- Original changed path: `docs/zh/Memory_System.md`; current main Git blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: PRESERVE_DATED_CORRECTION_AND_SOURCE_BOUNDARY
+### 2026-10-14 | Native producer PR #284 — Memory
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/284
+- Research workstream: Memory; original changed-file count and path identity 3
+- Source class: S63 memory source, date/version/theorem forward fix #285
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Memory_System.md`; current main Git blob `455900f76f2499dc22296936b74e5f7601ddb229`, cumulative authority
+- Original changed path: `docs/zh/Memory_System.md`; current main Git blob `8243c7ec9d006a7e1c891b30b309a60d9eb741d0`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: PRESERVE_DATED_CORRECTION_AND_SOURCE_BOUNDARY
+### 2026-10-15 | Native producer PR #292 — Collaboration
+- Original PR: https://github.com/lostlight530/agent-foundations/pull/292
+- Research workstream: Collaboration; original changed-file count and path identity 3
+- Source class: S64 collaboration paper only, NOT_IMPLEMENTED/NOT_TESTED
+- Original changed path: `FOUNDATION/SOURCES.md`; current main Git blob `7a1255a6705dd724b1bfea7be4e86aacf4d73378`, cumulative authority
+- Original changed path: `docs/en/Collaboration_System.md`; current main Git blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`, cumulative authority
+- Original changed path: `docs/zh/Collaboration_System.md`; current main Git blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`, cumulative authority
+- Temporal owner distinction: original PR merged on logical date; current cumulative file is current state not original historical SHA
+- Admission: PAPER_OR_DOC_EVIDENCE_ONLY / NO_RUNTIME_PROMOTION
+- A1 decision: NO_FOLLOW_UP original, preserve claim and source id
+
+### Period and source reuse gates
+- Oct4 Special PR #247 verified-core admission is a distinct decision from Oct4 ordinary Daily PR #242
+- Oct13 NPG #281 and Oct14 S63 #285 are forward corrections, not second native Daily source credits
+- Oct15 helper discrepancy #295 does not create a retroactive Oct2 document research producer result
+- W40 native weekly PR #244 and W41 weekly PR #270 are separate weekly period artifacts, not source proliferation
+- W42 weekly Oct12–18 OPEN and final not due, October final not due
+- Sxx canonical source registrations are bibliography identities; repeated educational content is not a new unique paper
+- Native Oct16 S65 PR #297 belongs to A2 current-day input, not A1 N−1 review
+- Original paths not present on current main remain historical PR changed-file facts; absence does not prove a task never ran
+- No source execution, mathematical theorem replication, tool routing implementation or external standard conformance performed here
+- A1 status: 15_SOURCE_PR_ORIGINAL_INVENTORY_CHECKED / S55_HISTORICAL_DISCREPANCY_RETAINED / MONTH_OPEN
