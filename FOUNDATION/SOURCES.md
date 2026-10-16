@@ -584,6 +584,19 @@ Canonical rules:
 - Actually extracted paragraphs or formulas: Extracted the trigger function $\rho(x_i, \bar{x}_i) = \eta_i(x_i) - \max \left\{ c |x_i - \bar{x}_i| - \sqrt{N-1} \underline{\eta} , \underline{\eta} \right\}$ and the consensus error bound $\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$.
 - Verification boundary: Verified from LaTeX Source. The mathematical mechanism proves that ultimate error bounded tracking is achieved under specific local bounds for unknown models, though limited to a scaling effect proportional to $N$.
 
+
+## S65 — Adversarial Network Optimization under Bandit Feedback: Maximizing Utility in Non-Stationary Multi-Hop Networks
+
+- Type: Paper
+- Identifier: arXiv:2408.16215v1
+- Version date: 2024-08-29
+- Authors: Yan Dai, Longbo Huang
+- URL: http://arxiv.org/abs/2408.16215v1
+- Use: Daily Research Chunk (Tool System)
+- Reason for selection: Provides rigorous bounds for multi-hop utility maximization under bandit feedback, directly informing non-stationary multi-step tool routing.
+- Actually extracted paragraphs or formulas: Extracted the utility gap convergence bound: $\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$.
+- Verification boundary: Verified from LaTeX Source. The guarantee requires bounded feasible action sets and Lipschitz continuous, concave utility functions, assuming bandit feedback without full gradient knowledge.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
