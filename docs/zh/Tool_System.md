@@ -391,6 +391,30 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
   - Repository Test Status: NOT_TESTED
 
 
+
+
+### 在非平稳多跳网络中最大化效用：基于 Bandit 反馈的对抗网络优化
+
+- **技术点名称:** Adversarial Tool Network Optimization under Bandit Feedback
+- **System Container:** Tool System
+- **Frontier Source:** S65 — Adversarial Network Optimization under Bandit Feedback: Maximizing Utility in Non-Stationary Multi-Hop Networks
+- **论文原始问题 (Original Problem):** 在非平稳的多跳网络中优化效用，且系统仅能获得其所选路径的效用反馈，而缺乏关于其他未选择路径的完整梯度信息（Bandit 反馈）。
+- **核心假设 (Core Assumptions):** 动作可行域有界，且未知的效用函数为凹函数、一致有界且李普希茨连续。网络稳定性通过与参考策略对比进行评估。
+- **数学机制 (Mathematical Mechanism):** 效用差距收敛界：$\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$ (收敛界)。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 该算法能够稳定系统，并以多项式级收敛速度使平均效用逼近参考策略，这意味着预期的效用差距将以 $\mathcal{O}_T(V^{-1})$ 的速率衰减。
+- **适用范围 (Applicable Scope):** 多步工具执行流水线、动态工具路由选择，以及具备不完整反馈的对抗性 API 交互环境。
+- **局限 (Limitations):** 效用差距的多项式衰减依赖于参数 $V$，且 $T$ 相较于 $V$ 不能太小。该界限要求有界的动作可行域与凹效用函数，这可能无法精确反映工具输出高度离散或不连续的实际情况。
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层面上可支持动态多工具规划与选择，其中 Agent 作为路由器进行顺序决策。该理论界指导在缺乏完整结果梯度时，如何在跨多个专业工具的路由路径上平衡探索与利用。
+- **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
+- **初学者类比 (Beginner Analogy):** 想象你正通过一系列中转航班（多跳）前往目的地，但每个航班的延误情况会不可预测地改变（非平稳）。此外，你只能得知你所乘路线的总延误时间，而不知道未选路线的情况（Bandit 反馈）。该数学界限保证了，随着时间推移，你所选路线的平均效率将极其接近最优的固定路由策略。
+- **中英文内容:** Ensure semantic alignment.
+- **证据状态 (Evidence Status):**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 

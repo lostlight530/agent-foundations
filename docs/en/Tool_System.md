@@ -405,6 +405,35 @@ Imagine a team of specialists building a complex machine. Instead of one person 
   - Repository Test Status: NOT_TESTED
 
 
+
+
+### Adversarial Tool Network Optimization under Bandit Feedback
+
+- **System Container:** Tool System
+- **Frontier Source:** S65 — Adversarial Network Optimization under Bandit Feedback: Maximizing Utility in Non-Stationary Multi-Hop Networks
+- **Title:** Adversarial Network Optimization under Bandit Feedback: Maximizing Utility in Non-Stationary Multi-Hop Networks
+- **Authors:** Yan Dai, Longbo Huang
+- **URL:** http://arxiv.org/abs/2408.16215v1
+- **Version:** v1
+- **Publication Date:** 2024-08-29
+- **Reason for selection:** Provides rigorous bounds for multi-hop utility maximization under bandit feedback, directly informing the architecture of multi-step tool routing and execution where tool outcomes are non-stationary and only bandit (success/failure) feedback is available.
+- **Actually extracted paragraphs or formulas:** Extracted the utility gap convergence bound: $\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$.
+- **Original Problem:** Optimizing utility in non-stationary multi-hop networks where only bandit feedback is available, meaning the system observes the utility of the chosen path but lacks full gradient information about alternatives.
+- **Core Assumptions:** Feasible set of arrival rates is bounded, and the unknown utility functions are concave, uniformly bounded, and Lipschitz continuous. The network stability is evaluated against a reference policy.
+- **Mathematical Mechanism:** Utility gap convergence bound: $\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$ (收敛界).
+- **Convergence or behavior boundaries:** The algorithm stabilizes the system and achieves an average utility approaching the reference policy at a polynomial convergence rate, meaning the expected utility gap decays as $\mathcal{O}_T(V^{-1})$.
+- **Applicable Scope:** Multi-step tool execution pipelines, dynamic tool selection routing, and adversarial API interaction environments with incomplete feedback.
+- **Limitations:** The polynomial decay of the utility gap depends on the parameter $V$, where $T$ cannot be too small compared to $V$. It requires bounded feasible action sets and concave utility functions, which might not precisely reflect highly discrete or discontinuous tool outcomes.
+- **Agent Architecture Mapping:** Can conceptually support dynamic multi-tool planning and selection where the agent acts as a router making sequential decisions. The bounds suggest how to balance exploration and exploitation in routing paths across multiple specialized tools when complete outcome gradients are unavailable.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Beginner Analogy:** Imagine you are navigating a series of connecting flights (multi-hop) to reach a destination, but the delays for each flight change unpredictably (non-stationary). Furthermore, you only find out the total delay of the path you actually took, not the ones you skipped (bandit feedback). This mathematical bound guarantees that, over time, your chosen route's average efficiency will get very close to the best possible consistent routing strategy.
+- **Evidence Status:**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
+
+
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
 
