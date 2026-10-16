@@ -1446,3 +1446,10 @@ NOT_TESTED
 - 本仓库绝对安全主张: NOT_SUPPORTED
 - 普遍避碰保证主张: NOT_SUPPORTED
 - 历史生产记录: PRESERVED；修正向前追加。
+
+### 2026-10-16 前向来源身份校正：10 月 12 日 Safe-MARL 研究条目的 S63 撞号
+- 上方原有 `Frontier Source: S63 (arXiv:2312.12861v3)` 保留 10 月 12 日原生 PR #274 的历史写法，不得据此推断它与 `FOUNDATION/SOURCES.md` 当前规范条目 S63 是同一论文。
+- 当前来源总表 S63 实际对应另一篇 `Online Convex Optimization with Memory and Limited Predictions` (arXiv:2410.23574v3)，源自 10 月 14 日原生 PR #284。
+- 当前 Safe-MARL 研究的引用与跨文档 claim transfer 必须使用 `arXiv:2312.12861v3`、完整标题和 PR #274 复合身份，不能只写 `S63`。
+- 撞号冲突状态保留为 OPEN，本次不凭空分配新的 S 编号，也不重写原始论文与 PR 文本。
+- 论文中的 MPC 约束研究、Memory 理论与当前实际运行的智能体安全验证是不同证据层，本次没有重新运行算法或完成实证验收。

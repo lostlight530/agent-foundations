@@ -729,3 +729,13 @@ SOURCE_REGISTRATION
 - Eq (1) total cost; Eq (3) dynamic regret; Theorem 1 initialization regret; Theorem 2 / Eq (12) prediction-window dependent overall regret
 - Paper guarantee does not imply runtime or general agent-memory performance; current mapping stays DESIGN_CANDIDATE / NOT_IMPLEMENTED / NOT_TESTED
 - Primary version and full text: https://arxiv.org/abs/2410.23574 and https://arxiv.org/html/2410.23574v3
+
+## 2026-10-16 forward reconciliation — historical `S63` label collision, no silent alias promotion
+- Original 2026-10-12 architecture PR #274 used `S63` for `Safe Multi-Agent Reinforcement Learning for Behavior-Based Cooperative Navigation` (arXiv:2312.12861v3) in English and Chinese Architecture Principles, but did not add a matching canonical SOURCES.md source registration.
+- The current `## S63` canonical source in this registry is instead `Online Convex Optimization with Memory and Limited Predictions` (arXiv:2410.23574v3), introduced under 2026-10-14 native PR #284 and separately corrected in #285.
+- These are two different paper objects, subjects, source versions and source roles. The shared literal `S63` label in historical architecture text is a collision, not evidence of identity or supersession.
+- Source lookup gate: `S63` alone is AMBIGUOUS across current repository text; resolve by exact arXiv ID+version+paper title+original PR before reading mathematics, judging source support or transferring a claim.
+- Registry authoritative current mapping remains `S63 -> arXiv:2410.23574v3` for the memory-system paper, pending separately reviewed source-ID governance. Do not invent or automatically assign a replacement number for arXiv:2312.12861v3.
+- Preserve original Oct12 and Oct14 sections and PR histories byte-for-byte; this is a dated reconciliation note, not an original-producer rewrite or retrospective S63 registration.
+- Current disposition: SOURCE_ID_COLLISION_OPEN / ORIGINAL_ARXIV_OBJECTS_DISTINCT / NO_NEW_ID_ALLOCATED / CLAIM_TRANSFER_BY_S63_ONLY_BLOCKED.
+- Verification performed: compared current source register and EN/ZH architecture citation strings and original PR source scope; no external math theorem replication or document validation command executed here.
