@@ -1441,3 +1441,10 @@ Imagine teaching a group of student drivers how to drive in formation. Instead o
 - Perfect-safety claim for this repository: NOT_SUPPORTED
 - Universal collision-prevention claim: NOT_SUPPORTED
 - Historical producer record: PRESERVED; correction moves forward.
+
+### 2026-10-16 source-identity reconciliation for the October 12 safe-MARL research section
+- The earlier `Frontier Source: S63 (arXiv:2312.12861v3)` string above remains the original PR #274 citation as historically written; do not silently reinterpret it as the current canonical `S63` from `FOUNDATION/SOURCES.md`.
+- The current registry `S63` refers to the DIFFERENT paper `Online Convex Optimization with Memory and Limited Predictions` (arXiv:2410.23574v3), introduced in Oct14 PR #284.
+- For the safe-MARL section, use the fully qualified paper identity `arXiv:2312.12861v3`, original PR #274, and the exact paper title, NOT `S63` alone, for citations and downstream claim transfer.
+- The label collision remains OPEN until an independently reviewed canonical identifier decision; none has been issued by this correction.
+- Neither paper's results establish a current deployed safe-agent, tested MPC filter, memory runtime, or universal convergence guarantee.
