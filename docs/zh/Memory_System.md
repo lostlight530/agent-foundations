@@ -960,3 +960,24 @@ MONTH_OPEN
 - 零阶离线凸优化子过程在相应假设下的线性收敛，不等于整体动态遗憾随 W 指数衰减，也不构成 Agent 记忆运行时保证
 - Agent 记忆检索、保留时间和置信度衰减仅是 DESIGN_CANDIDATE，未经数学同构或运行时验证
 - 实现状态 NOT_IMPLEMENTED，测试状态 NOT_TESTED，本次未运行该算法或重证定理
+
+
+### 稀疏现代 Hopfield 能量与检索动力学 (Sparse Modern Hopfield Energy and Retrieval Dynamics)
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu, URL: https://arxiv.org/abs/2309.12673, Date: 2023-09-22)
+- **Reason for selection:** 提供了现代 Hopfield 模型中稀疏检索的数学界限和明确的能量函数，适用于结构化记忆系统。 (Provides mathematical bounds and explicit energy functions for sparse retrieval in modern Hopfield models, suitable for structured memory systems.)
+- **Actually extracted paragraphs or formulas:** 提取了稀疏能量函数 $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$。 (Extracted the sparse energy function $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$.)
+- **Original Problem:** 现代 Hopfield 网络中的密集注意力机制容易受到记忆干扰且缺乏稀疏性，阻碍了重叠记忆的精确检索。
+- **Core Assumptions:** 依赖于明确的分布界限和存储记忆模式的有界范数。
+- **Mathematical Mechanism:** 使用 sparsemax 作为能量函数的投影算子：$E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$。（数学更新规则）
+- **Convergence or behavior boundaries:** 在模式稀疏性和分离性假设成立时保证精确的容量界限。
+- **Scope of application:** 适用于需要在密集模式插值中进行精确恢复的情景与结构化联想记忆模型。
+- **Limitations:** 理论容量保证严格依赖于存储模式的几何分离性，在面对任意或对抗性嵌入时可能显著降低。
+- **Agent Architecture Mapping:** 在概念上可以支持智能体情景记忆中的稀疏检索层，以减轻上下文窗口模糊。 (DESIGN_CANDIDATE)
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** 这就像用一把精密镊子从文件柜中准确夹出你需要的那一份文件，而不是抓起一把重叠的文件。
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED

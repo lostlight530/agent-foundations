@@ -957,3 +957,24 @@ MONTH_OPEN
 - Original formula and parameter identity are paper-specific; no direct transfer to agent memory retrieval, retention or confidence decay is established
 - Architecture claim status: DESIGN_CANDIDATE, not guaranteed improvement; implementation NOT_IMPLEMENTED; runtime validation NOT_TESTED
 - This is a bibliographic / interpretation correction, not an execution rerun, formal proof check, or repository verification of the theorem
+
+
+### Sparse Modern Hopfield Energy and Retrieval Dynamics
+- **System Container:** Memory System
+- **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu, URL: https://arxiv.org/abs/2309.12673, Date: 2023-09-22)
+- **Reason for selection:** Provides mathematical bounds and explicit energy functions for sparse retrieval in modern Hopfield models, suitable for structured memory systems.
+- **Actually extracted paragraphs or formulas:** Extracted the sparse energy function $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$.
+- **Original Problem:** Dense attention in modern Hopfield networks suffers from memory interference and lacks sparsity, which hinders exact retrieval of overlapping memories.
+- **Core Assumptions:** Relies on explicit distribution bounds and bounded norms of stored memory patterns.
+- **Mathematical Mechanism:** Uses sparsemax as a projection operator for the energy function: $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$. (数学更新规则)
+- **Convergence or behavior boundaries:** Guarantees exact capacity bounds when pattern sparsity and separation assumptions hold.
+- **Scope of application:** Applicable to episodic and structured associative memory models where exact recovery is required over dense pattern interpolation.
+- **Limitations:** The theoretical capacity guarantees strictly depend on the geometric separation of stored patterns and may degrade significantly with arbitrary or adversarial embeddings.
+- **Agent Architecture Mapping:** Can conceptually support sparse retrieval layers within agent episodic memory to mitigate context-window blurring. (DESIGN_CANDIDATE)
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** It's like using a precise pair of tweezers to pick exactly the one file you need from a filing cabinet, rather than grabbing a handful of overlapping files.
+- **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
+- **Architecture Mapping Status:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
