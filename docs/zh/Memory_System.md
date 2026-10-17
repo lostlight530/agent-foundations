@@ -981,3 +981,18 @@ MONTH_OPEN
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** NOT_IMPLEMENTED
 - **Repository Test Status:** NOT_TESTED
+
+
+## 2026-10-17 前向纠错 — S42 论文版本与能量函数身份
+
+- **修正身份：** `S42/2309.12673v2/2026-10-17/source-and-formula`，属于有日期的后续 correction，不改写 Jules 原生产时点事实
+- **生产与交付时间线：** 10 月 1 日 [PR #229](https://github.com/lostlight530/agent-foundations/pull/229) 和 10 月 17 日 [PR #301](https://github.com/lostlight530/agent-foundations/pull/301) 均引用 `arXiv:2309.12673v2`，是同一篇论文、同一精确版本
+- **来源独立性：** 再次写入研究内容不构成第二篇独立论文或新的 source family，Daily producer 交付数量与独立来源数量必须分开
+- **版本日期：** [arXiv 原始版本记录](https://arxiv.org/abs/2309.12673v2) 显示 v1 提交于 2023-09-22，v2 最后修订于 **2023-11-29 22:45:39 UTC**；此前文档多处把 v2 与 v1 的 9 月 22 日日期绑定，属于不同时间语义混淆
+- **10 月 17 日原始公式问题：** `E = -\sum_i \text{sparsemax}(X_i) + \frac12\|Y\|^2` 不是论文 Eq. (2.1) 所定义的能量函数；不能直接以 Sparsemax 向量投影映射取代能量函数中的凸共轭标量项
+- **原始论文准确公式：** [NeurIPS 2023 正式论文 Section 2.1 / Eq. (2.1)](https://papers.nips.cc/paper_files/paper/2023/file/57bc0a850255e2041341bf74c7e2b9fa-Paper-Conference.pdf) 给出 `\mathcal{H}(x)=-\Psi^*(\beta\Xi^T x)+\tfrac12\langle x,x\rangle`
+- **凸共轭与投影的区别：** 同段定义 `\Psi^*(z)=\tfrac12\|z\|^2-\tfrac12\|\operatorname{Sparsemax}(z)-z\|^2+\tfrac12`，Eq. (2.2) 则以单纯形上的约束优化定义 Sparsemax，两者不能互换
+- **证据状态：** 10 月 17 日针对简化公式的 `VERIFIED_FROM_LATEX_SOURCE` 自述不构成公式真实性证明，现将该特定表达判为 `FORMULA_NOT_SUPPORTED_AS_WRITTEN`；本次直接核验了正式论文具体公式，未独立重证全部定理
+- **理论映射边界：** S42 仍是记忆稀疏检索的 `DESIGN_CANDIDATE`，仓内实现 `NOT_IMPLEMENTED`、测试 `NOT_TESTED`、verified-core 晋升 `NOT_PERFORMED`
+- **历史保护：** 保留 10 月 1 日和 10 月 17 日原始双语正文、生产者原状态、Git PR 与合并证据，仅追加当前有日期的修正解释
+- **本次结论：** `SOURCE_VERSION_DATE_RECONCILED / FORMULA_RESTATEMENT_REJECTED / SAME_SOURCE_REVISIT / NO_THEOREM_RERUN`
