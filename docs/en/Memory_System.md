@@ -978,3 +978,18 @@ MONTH_OPEN
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** NOT_IMPLEMENTED
 - **Repository Test Status:** NOT_TESTED
+
+
+## 2026-10-17 forward reconciliation — S42 paper version and energy identity
+
+- **Correction identity:** `S42/2309.12673v2/2026-10-17/source-and-formula`. This is a later correction, not a rewrite of the original daily producer's research.
+- **Producer chronology:** original S42 delivery [PR #229](https://github.com/lostlight530/agent-foundations/pull/229) on October 1 and the later S42 delivery [PR #301](https://github.com/lostlight530/agent-foundations/pull/301) on October 17 both cite the *same* arXiv paper and version, `2309.12673v2`.
+- **No new bibliographic independence:** the second document insertion is a revisitation, not another independently identified paper or a new source family; any daily producer/delivery count remains distinct from paper/source independence.
+- **Version chronology from primary metadata:** [arXiv:2309.12673v2](https://arxiv.org/abs/2309.12673v2) reports v1 submitted on 2023-09-22 and **v2 revised on 2023-11-29 22:45:39 UTC**. Earlier `v2 / 2023-09-22` pairs in this document conflate the v1 submission date with the exact v2 revision date.
+- **Unsupported formula in PR #301:** `E = -\\sum_i \\text{sparsemax}(X_i) + \\frac12\\|Y\\|^2` is **not** the paper's stated sparse Hopfield energy in Equation (2.1). Sparsemax is not substituted for the scalar convex conjugate merely by naming it.
+- **Primary paper equation:** [NeurIPS 2023 camera-ready PDF, Section 2.1, Equation (2.1)](https://papers.nips.cc/paper_files/paper/2023/file/57bc0a850255e2041341bf74c7e2b9fa-Paper-Conference.pdf) states `\\mathcal{H}(x)=-\\Psi^*(\\beta\\Xi^T x)+\\tfrac12\\langle x,x\\rangle`.
+- **Conjugate meaning:** the same section defines `\\Psi^*(z)=\\tfrac12\\|z\\|^2-\\tfrac12\\|\\operatorname{Sparsemax}(z)-z\\|^2+\\tfrac12`; its Equation (2.2) defines Sparsemax through a simplex-constrained optimization, not as an additive scalar energy term.
+- **Claim-level correction:** any `VERIFIED_FROM_LATEX_SOURCE` label attached to the October 17 simplified expression must be read as `FORMULA_NOT_SUPPORTED_AS_WRITTEN`, irrespective of the producer's original self-report. The cited primary equation is now directly inspected; its broader theorems have **not** been independently proven here.
+- **Mapping / implementation gate:** S42 stays a conceptual memory-retrieval `DESIGN_CANDIDATE`; repository implementation remains `NOT_IMPLEMENTED`, runtime tests `NOT_TESTED`, verified-core promotion `NOT_PERFORMED`.
+- **Historical preservation:** the original October 1 and October 17 bilingual text, PR chronology and declared statuses stay visible as point-in-time producer records; this appended dated correction supplies the current evidence interpretation.
+- **Current disposition:** `SOURCE_VERSION_DATE_RECONCILED / FORMULA_RESTATEMENT_REJECTED / SAME_SOURCE_REVISIT / NO_THEOREM_RERUN`.
