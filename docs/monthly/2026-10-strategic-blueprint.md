@@ -5209,3 +5209,153 @@ DUPLICATE_CREDIT
 - No new independent research experiments performed in this A2, no environment, tooling or actual agent scheduler changed
 - The September Stage, weekly document cascades, Special and source history remain unchanged by this PR; A2 updates only existing monthly strategic blueprint
 - Final A2 state: OCT_2026_BLUEPRINT_OPEN / 16_ORIGINAL_RESEARCH_PR_LINES / S63_COLLISION_DISCLOSED_NOT_RENUMBERED / NO_RUNTIME_IMPLEMENTATION_CLAIM
+
+## 2026-10-17 A1 | Foundations original October 01–16 research identity and evidence states
+
+- Base current main `04db0cc70d91702738abcd3b78ae129578aa40f8`; original 16-date window Oct01–16; Oct17 producer S42 revisit belongs exclusively to post-A1 current-month relation
+- The sixteen source PRs are delivery identities, not sixteen unique source papers or independent mathematical proofs
+- Reuse existing native PR-linked original source review, current Git blob identity, publisher/assumption/implementation claims
+- Critical Oct02 PR #235 delivered scripts only; later #295 repaired helper-status discrepancy, not the missing promised original bilingual research delta
+- Oct12 safe MARL was originally referred to as S63 in PR #274 but registry S63 on Oct14 is a different arXiv object; preserve collision with exact source IDs
+- Paper identity and translation are not verified-core implementation; no external theorem reproduction, runtime tests or evidence rank upgrade
+- Weekly cascades and Oct04 special remain derivative or extra scoped work, not substitutes for each date's original Daily
+- October monthly owner OPEN, natural final NOT_DUE; W42 weekly closure pending
+
+### Sixteen original PR sources, current holders and source-to-claim adjudication
+#### 2026-10-01 | Memory | source PR #229
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/229; producer date is not the current cumulative file version
+- Research object: S42 Sparse Modern Hopfield
+- Mathematical/source assumptions: Bounded sparsemax retrieval and pattern norms
+- Bounded proposition, no runtime claim: Paper association memory not durable repository agent memory
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Memory_System.md `d307a46011c72769d45706490a69d91283e53764`
+- Current ZH holder: docs/zh/Memory_System.md `dc77a898c6962439da4430325590079ae99a9a4f`; matching source lineage is not an additional independent experiment
+#### 2026-10-02 | Architecture | source PR #235
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/235; producer date is not the current cumulative file version
+- Research object: DeGG-Flow arXiv:2609.38133v1
+- Mathematical/source assumptions: Lipschitz guidance, finite moments and zero final boundary
+- Bounded proposition, no runtime claim: Original PR diff changed only helper scripts, claim to bilingual docs not evidenced by original diff; later #295
+- Semantic admission: `ORIGINAL_SCRIPTS_ONLY / HISTORICAL_SCOPE_DISCREPANCY`; evidence ≠ implementation ≠ validated core
+- Current EN holder: OWNER_PATH_NOT_FOUND
+- Current ZH holder: OWNER_PATH_NOT_FOUND; matching source lineage is not an additional independent experiment
+#### 2026-10-03 | Collaboration | source PR #239
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/239; producer date is not the current cumulative file version
+- Research object: S56 Markov coevolutionary opinions
+- Mathematical/source assumptions: General-sum Markov game, smooth regularizers and optimistic gradient
+- Bounded proposition, no runtime claim: Approximate equilibrium under assumptions is not actual multi-agent consensus
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Collaboration_System.md `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`
+- Current ZH holder: docs/zh/Collaboration_System.md `16600dc2027fc170f14c9af7670dc2e7f20b5023`; matching source lineage is not an additional independent experiment
+#### 2026-10-04 | Collaboration | source PR #242
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/242; producer date is not the current cumulative file version
+- Research object: Consensus and factual dynamics in LLM populations
+- Mathematical/source assumptions: Embedding whitening and repeated interaction without authoritative pushback
+- Bounded proposition, no runtime claim: High social cohesion is not factual truth, safety or reliable answer
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Collaboration_System.md `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`
+- Current ZH holder: docs/zh/Collaboration_System.md `16600dc2027fc170f14c9af7670dc2e7f20b5023`; matching source lineage is not an additional independent experiment
+#### 2026-10-05 | Architecture | source PR #249
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/249; producer date is not the current cumulative file version
+- Research object: S24 blockchain robust distributed bandits
+- Mathematical/source assumptions: Honest-majority and validation/coordination overhead
+- Bounded proposition, no runtime claim: A robust estimator theorem cannot establish host blockchain/MPC deployment
+- Semantic admission: `DESIGN_CANDIDATE`; evidence ≠ implementation ≠ validated core
+- Current EN holder: OWNER_PATH_NOT_FOUND
+- Current ZH holder: OWNER_PATH_NOT_FOUND; matching source lineage is not an additional independent experiment
+#### 2026-10-06 | Architecture | source PR #252
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/252; producer date is not the current cumulative file version
+- Research object: MAMAB FDLA spectral/consensus optimization
+- Mathematical/source assumptions: Doubly stochastic matrices and graph assumptions
+- Bounded proposition, no runtime claim: Negative FDLA weights and adversarial interference remain nontrivial implementation caveats
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: OWNER_PATH_NOT_FOUND
+- Current ZH holder: OWNER_PATH_NOT_FOUND; matching source lineage is not an additional independent experiment
+#### 2026-10-07 | Tool | source PR #255
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/255; producer date is not the current cumulative file version
+- Research object: S59 constrained stochastic linear bandits
+- Mathematical/source assumptions: Feasible safe arm, doubly stochastic graph, delayed neighbor communications
+- Bounded proposition, no runtime claim: Regret inequality does not certify any current tool route or bounded task failure
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Tool_System.md `34662cbbf9e6e9a7fa5a78859c390a2798fca787`
+- Current ZH holder: docs/zh/Tool_System.md `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; matching source lineage is not an additional independent experiment
+#### 2026-10-08 | Architecture | source PR #258
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/258; producer date is not the current cumulative file version
+- Research object: Large-scale mean-field Lyapunov concentration
+- Mathematical/source assumptions: ATM graph sequence, C2 Lyapunov function, asymptotic n
+- Bounded proposition, no runtime claim: Asymptotic guarantee has no automatic finite-time agent behavior proof
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: OWNER_PATH_NOT_FOUND
+- Current ZH holder: OWNER_PATH_NOT_FOUND; matching source lineage is not an additional independent experiment
+#### 2026-10-09 | Memory | source PR #262
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/262; producer date is not the current cumulative file version
+- Research object: Offline Value Memory and sequential exploration
+- Mathematical/source assumptions: Sufficient offline dataset, annealing coefficient and transition model
+- Bounded proposition, no runtime claim: Paper memory loss differs from online persistent ChatGPT/GitHub memory system
+- Semantic admission: `CONCEPTUAL_MAPPING`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Memory_System.md `d307a46011c72769d45706490a69d91283e53764`
+- Current ZH holder: docs/zh/Memory_System.md `dc77a898c6962439da4430325590079ae99a9a4f`; matching source lineage is not an additional independent experiment
+#### 2026-10-10 | Collaboration | source PR #265
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/265; producer date is not the current cumulative file version
+- Research object: Logarithmic quantization distributed optimization
+- Mathematical/source assumptions: Smooth/convex objectives, switching connected balanced network
+- Bounded proposition, no runtime claim: Continuous-time convergence needs discretization and verified network assumptions
+- Semantic admission: `DESIGN_CANDIDATE`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Collaboration_System.md `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`
+- Current ZH holder: docs/zh/Collaboration_System.md `16600dc2027fc170f14c9af7670dc2e7f20b5023`; matching source lineage is not an additional independent experiment
+#### 2026-10-11 | Tool | source PR #271
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/271; producer date is not the current cumulative file version
+- Research object: S26 Tool System recovered native chunk
+- Mathematical/source assumptions: Recovery on new main after weekly cascade, replaced closed #269
+- Bounded proposition, no runtime claim: Do not claim historical abandoned PR #269 merged or prove tool implementation
+- Semantic admission: `RECOVERY_NATIVE_SOURCE`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Tool_System.md `34662cbbf9e6e9a7fa5a78859c390a2798fca787`
+- Current ZH holder: docs/zh/Tool_System.md `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; matching source lineage is not an additional independent experiment
+#### 2026-10-12 | Architecture | source PR #274
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/274; producer date is not the current cumulative file version
+- Research object: Safe MARL navigation arXiv:2312.12861v3
+- Mathematical/source assumptions: Safe MPC action feasible and physical model/observation assumptions
+- Bounded proposition, no runtime claim: Oct12 PR #274 says S63 but canonical S63 belongs to distinct arXiv:2410.23574v3; #299 forward correction
+- Semantic admission: `DESIGN_CANDIDATE / HISTORICAL_S63_COLLISION`; evidence ≠ implementation ≠ validated core
+- Current EN holder: OWNER_PATH_NOT_FOUND
+- Current ZH holder: OWNER_PATH_NOT_FOUND; matching source lineage is not an additional independent experiment
+#### 2026-10-13 | Memory | source PR #278
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/278; producer date is not the current cumulative file version
+- Research object: Independent NPG in Markov potential games
+- Mathematical/source assumptions: Potential game, exact policy oracle and isolated stationary points
+- Bounded proposition, no runtime claim: O(1/epsilon) bound not zero-sum or general memory-runtime convergence
+- Semantic admission: `CONCEPTUAL_MAPPING / CORRECTED_#281`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Memory_System.md `d307a46011c72769d45706490a69d91283e53764`
+- Current ZH holder: docs/zh/Memory_System.md `dc77a898c6962439da4430325590079ae99a9a4f`; matching source lineage is not an additional independent experiment
+#### 2026-10-14 | Memory | source PR #284
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/284; producer date is not the current cumulative file version
+- Research object: Canonical S63 Online Convex Optimization with Memory
+- Mathematical/source assumptions: Strong convexity, smoothness, bounded h/prediction and feasible set
+- Bounded proposition, no runtime claim: Eq1 cost, Eq3 dynamic regret and Theorem2 overall bound distinct; paper v3
+- Semantic admission: `DESIGN_CANDIDATE / FORWARD_CORRECTED_#285`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Memory_System.md `d307a46011c72769d45706490a69d91283e53764`
+- Current ZH holder: docs/zh/Memory_System.md `dc77a898c6962439da4430325590079ae99a9a4f`; matching source lineage is not an additional independent experiment
+#### 2026-10-15 | Collaboration | source PR #292
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/292; producer date is not the current cumulative file version
+- Research object: S64 event-triggered GP safe consensus
+- Mathematical/source assumptions: Undirected connected graph and Lipschitz dynamics
+- Bounded proposition, no runtime claim: Convergence bound scales linearly with N; no production safety validation
+- Semantic admission: `DESIGN_CANDIDATE`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Collaboration_System.md `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`
+- Current ZH holder: docs/zh/Collaboration_System.md `16600dc2027fc170f14c9af7670dc2e7f20b5023`; matching source lineage is not an additional independent experiment
+#### 2026-10-16 | Tool | source PR #297
+- Native provenance: https://github.com/lostlight530/agent-foundations/pull/297; producer date is not the current cumulative file version
+- Research object: S65 adversarial multi-hop network optimization
+- Mathematical/source assumptions: Concave Lipschitz utility, feasible arrival rates and tuned V
+- Bounded proposition, no runtime claim: O_T(1/V) paper utility-gap bound not verified discrete tool routing or measured agent reliability
+- Semantic admission: `CONCEPTUAL_MAPPING / NOT_IMPLEMENTED / NOT_TESTED`; evidence ≠ implementation ≠ validated core
+- Current EN holder: docs/en/Tool_System.md `34662cbbf9e6e9a7fa5a78859c390a2798fca787`
+- Current ZH holder: docs/zh/Tool_System.md `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; matching source lineage is not an additional independent experiment
+
+### October architecture constraints and no-change decisions
+- Stable S42 paper identification already existed before Oct17; any Oct17 revisit and its dated formula correction #302 must enter successor A2, not rewrite A1 Oct01 cutoff
+- Original S63 collision and Oct02 missing promised deliverables are historical facts with later dated repairs, not retrospective native PASS
+- Current files are cumulative, while PR # changes provide original delivery identities; this review does not equate blob retention with historic authorship
+- Verified-core status remains gated by implementation and tests, not double-language research recaps
+- No original producer PR, docs EN/ZH native body, registry or weekly source was modified in this A1
+- No independent experimental or theorem replication conducted, and no permission to auto-promote doctrine
+- Result 16_NATIVE_PR_IDENTITIES_REVIEWED / NO_VERIFIED_CORE_PROMOTION / OCTOBER_MONTH_OPEN
