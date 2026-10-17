@@ -5359,3 +5359,172 @@ DUPLICATE_CREDIT
 - No original producer PR, docs EN/ZH native body, registry or weekly source was modified in this A1
 - No independent experimental or theorem replication conducted, and no permission to auto-promote doctrine
 - Result 16_NATIVE_PR_IDENTITIES_REVIEWED / NO_VERIFIED_CORE_PROMOTION / OCTOBER_MONTH_OPEN
+
+## A2 2026-10-17 | Foundations October month-to-date source/design and identity reconciliation
+
+- Exact main after 10/10 A1 gate: `3092c0d31841dfea41bb1cd3484b10ad1d378f3b`, coverage October 01–17 inclusive
+- As-of date: 16 original Daily research PR identities Oct01–16; October17 has source-specific follow-up #301 and correction #302 but no native dated original-research PR evidenced
+- A1 16-day source identity matrix remains historically complete through Oct16, inherited without retroactive rewrite
+- October17 native producer PR #301 reused S42 / arXiv:2309.12673v2 from Oct01 original #229; it is a revisit, not a 17th independent paper
+- Explicit correction #302 resolves wrong paper-version timestamp and reported incorrect Hopfield energy expression in #301; original erroneous claim is not silently removed from history
+- A1 identified `OWNER_PATH_NOT_FOUND` on Architecture because the audit guessed Architecture_System.md; current actual canonical owners are docs/en/Architecture_Principles.md and docs/zh/Architecture_Principles.md; this A2 forward-reconciles the bad path assumption
+- Architecture, Memory, Collaboration, Tool conceptual models are four design domains, not four implemented product modules guaranteed by publications
+- Rerunning paper-source reviews does not prove runtime agent memory persistence, cooperative deployment, certified safety or reproducible theorem proof
+
+### Sixteen original research deliveries carried into month-wide architecture
+#### 2026-10-01 → Memory | original PR #229
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/229
+- Original paper/object: S42 Sparse Modern Hopfield
+- Required theorem and mathematical assumptions: Bounded sparsemax retrieval and pattern norms
+- Source-to-system negative gate: Paper association memory not durable repository agent memory
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Memory_System.md` blob `d307a46011c72769d45706490a69d91283e53764`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Memory_System.md` blob `dc77a898c6962439da4430325590079ae99a9a4f`; bilingual translation not independent experiment
+#### 2026-10-02 → Architecture | original PR #235
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/235
+- Original paper/object: DeGG-Flow arXiv:2609.38133v1
+- Required theorem and mathematical assumptions: Lipschitz guidance, finite moments and zero final boundary
+- Source-to-system negative gate: Original PR diff changed only helper scripts, claim to bilingual docs not evidenced by original diff; later #295
+- Original scientific/design disposition: `ORIGINAL_SCRIPTS_ONLY / HISTORICAL_SCOPE_DISCREPANCY`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Architecture_Principles.md` blob `6dbd2c147e8c80551b2a5092f9bcc748cd503a91`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Architecture_Principles.md` blob `c8176029f944e0c421b703b0ae982298118d0531`; bilingual translation not independent experiment
+#### 2026-10-03 → Collaboration | original PR #239
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/239
+- Original paper/object: S56 Markov coevolutionary opinions
+- Required theorem and mathematical assumptions: General-sum Markov game, smooth regularizers and optimistic gradient
+- Source-to-system negative gate: Approximate equilibrium under assumptions is not actual multi-agent consensus
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Collaboration_System.md` blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Collaboration_System.md` blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; bilingual translation not independent experiment
+#### 2026-10-04 → Collaboration | original PR #242
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/242
+- Original paper/object: Consensus and factual dynamics in LLM populations
+- Required theorem and mathematical assumptions: Embedding whitening and repeated interaction without authoritative pushback
+- Source-to-system negative gate: High social cohesion is not factual truth, safety or reliable answer
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Collaboration_System.md` blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Collaboration_System.md` blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; bilingual translation not independent experiment
+#### 2026-10-05 → Architecture | original PR #249
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/249
+- Original paper/object: S24 blockchain robust distributed bandits
+- Required theorem and mathematical assumptions: Honest-majority and validation/coordination overhead
+- Source-to-system negative gate: A robust estimator theorem cannot establish host blockchain/MPC deployment
+- Original scientific/design disposition: `DESIGN_CANDIDATE`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Architecture_Principles.md` blob `6dbd2c147e8c80551b2a5092f9bcc748cd503a91`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Architecture_Principles.md` blob `c8176029f944e0c421b703b0ae982298118d0531`; bilingual translation not independent experiment
+#### 2026-10-06 → Architecture | original PR #252
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/252
+- Original paper/object: MAMAB FDLA spectral/consensus optimization
+- Required theorem and mathematical assumptions: Doubly stochastic matrices and graph assumptions
+- Source-to-system negative gate: Negative FDLA weights and adversarial interference remain nontrivial implementation caveats
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Architecture_Principles.md` blob `6dbd2c147e8c80551b2a5092f9bcc748cd503a91`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Architecture_Principles.md` blob `c8176029f944e0c421b703b0ae982298118d0531`; bilingual translation not independent experiment
+#### 2026-10-07 → Tool | original PR #255
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/255
+- Original paper/object: S59 constrained stochastic linear bandits
+- Required theorem and mathematical assumptions: Feasible safe arm, doubly stochastic graph, delayed neighbor communications
+- Source-to-system negative gate: Regret inequality does not certify any current tool route or bounded task failure
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Tool_System.md` blob `34662cbbf9e6e9a7fa5a78859c390a2798fca787`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Tool_System.md` blob `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; bilingual translation not independent experiment
+#### 2026-10-08 → Architecture | original PR #258
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/258
+- Original paper/object: Large-scale mean-field Lyapunov concentration
+- Required theorem and mathematical assumptions: ATM graph sequence, C2 Lyapunov function, asymptotic n
+- Source-to-system negative gate: Asymptotic guarantee has no automatic finite-time agent behavior proof
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Architecture_Principles.md` blob `6dbd2c147e8c80551b2a5092f9bcc748cd503a91`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Architecture_Principles.md` blob `c8176029f944e0c421b703b0ae982298118d0531`; bilingual translation not independent experiment
+#### 2026-10-09 → Memory | original PR #262
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/262
+- Original paper/object: Offline Value Memory and sequential exploration
+- Required theorem and mathematical assumptions: Sufficient offline dataset, annealing coefficient and transition model
+- Source-to-system negative gate: Paper memory loss differs from online persistent ChatGPT/GitHub memory system
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Memory_System.md` blob `d307a46011c72769d45706490a69d91283e53764`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Memory_System.md` blob `dc77a898c6962439da4430325590079ae99a9a4f`; bilingual translation not independent experiment
+#### 2026-10-10 → Collaboration | original PR #265
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/265
+- Original paper/object: Logarithmic quantization distributed optimization
+- Required theorem and mathematical assumptions: Smooth/convex objectives, switching connected balanced network
+- Source-to-system negative gate: Continuous-time convergence needs discretization and verified network assumptions
+- Original scientific/design disposition: `DESIGN_CANDIDATE`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Collaboration_System.md` blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Collaboration_System.md` blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; bilingual translation not independent experiment
+#### 2026-10-11 → Tool | original PR #271
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/271
+- Original paper/object: S26 Tool System recovered native chunk
+- Required theorem and mathematical assumptions: Recovery on new main after weekly cascade, replaced closed #269
+- Source-to-system negative gate: Do not claim historical abandoned PR #269 merged or prove tool implementation
+- Original scientific/design disposition: `RECOVERY_NATIVE_SOURCE`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Tool_System.md` blob `34662cbbf9e6e9a7fa5a78859c390a2798fca787`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Tool_System.md` blob `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; bilingual translation not independent experiment
+#### 2026-10-12 → Architecture | original PR #274
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/274
+- Original paper/object: Safe MARL navigation arXiv:2312.12861v3
+- Required theorem and mathematical assumptions: Safe MPC action feasible and physical model/observation assumptions
+- Source-to-system negative gate: Oct12 PR #274 says S63 but canonical S63 belongs to distinct arXiv:2410.23574v3; #299 forward correction
+- Original scientific/design disposition: `DESIGN_CANDIDATE / HISTORICAL_S63_COLLISION`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Architecture_Principles.md` blob `6dbd2c147e8c80551b2a5092f9bcc748cd503a91`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Architecture_Principles.md` blob `c8176029f944e0c421b703b0ae982298118d0531`; bilingual translation not independent experiment
+#### 2026-10-13 → Memory | original PR #278
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/278
+- Original paper/object: Independent NPG in Markov potential games
+- Required theorem and mathematical assumptions: Potential game, exact policy oracle and isolated stationary points
+- Source-to-system negative gate: O(1/epsilon) bound not zero-sum or general memory-runtime convergence
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING / CORRECTED_#281`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Memory_System.md` blob `d307a46011c72769d45706490a69d91283e53764`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Memory_System.md` blob `dc77a898c6962439da4430325590079ae99a9a4f`; bilingual translation not independent experiment
+#### 2026-10-14 → Memory | original PR #284
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/284
+- Original paper/object: Canonical S63 Online Convex Optimization with Memory
+- Required theorem and mathematical assumptions: Strong convexity, smoothness, bounded h/prediction and feasible set
+- Source-to-system negative gate: Eq1 cost, Eq3 dynamic regret and Theorem2 overall bound distinct; paper v3
+- Original scientific/design disposition: `DESIGN_CANDIDATE / FORWARD_CORRECTED_#285`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Memory_System.md` blob `d307a46011c72769d45706490a69d91283e53764`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Memory_System.md` blob `dc77a898c6962439da4430325590079ae99a9a4f`; bilingual translation not independent experiment
+#### 2026-10-15 → Collaboration | original PR #292
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/292
+- Original paper/object: S64 event-triggered GP safe consensus
+- Required theorem and mathematical assumptions: Undirected connected graph and Lipschitz dynamics
+- Source-to-system negative gate: Convergence bound scales linearly with N; no production safety validation
+- Original scientific/design disposition: `DESIGN_CANDIDATE`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Collaboration_System.md` blob `a09f5907e32cd5c2b1d6614a1a23d37af13948d2`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Collaboration_System.md` blob `16600dc2027fc170f14c9af7670dc2e7f20b5023`; bilingual translation not independent experiment
+#### 2026-10-16 → Tool | original PR #297
+- Original native research artifact identity: https://github.com/lostlight530/agent-foundations/pull/297
+- Original paper/object: S65 adversarial multi-hop network optimization
+- Required theorem and mathematical assumptions: Concave Lipschitz utility, feasible arrival rates and tuned V
+- Source-to-system negative gate: O_T(1/V) paper utility-gap bound not verified discrete tool routing or measured agent reliability
+- Original scientific/design disposition: `CONCEPTUAL_MAPPING / NOT_IMPLEMENTED / NOT_TESTED`; source ≠ installed module, model proposal ≠ runtime proof
+- Current EN owner: `docs/en/Tool_System.md` blob `34662cbbf9e6e9a7fa5a78859c390a2798fca787`; cumulative holder, not a dated PR snapshot
+- Current ZH owner: `docs/zh/Tool_System.md` blob `0e089c0f8435ffaf5da3810f3f8fb66d9c004b6a`; bilingual translation not independent experiment
+
+### October 17 S42 repeated research and forward correction
+- 2026-10-17 #301 is subsequent revisit of S42 originally admitted under #229 on Oct01; original publication object identity remains arXiv:2309.12673v2
+- Oct17 native attempt incorrectly simplified source energy as sparsemax response/gradient sum and assigned v1 September 2023 timing to v2
+- Correction #302 records proper generalized Hopfield potential as `H(x) = -Psi*(beta Xi^T x) + 1/2 <x, x>` in EN/ZH forward-reconciliation
+- Corrected v2 version is not retroactive rewrite of original PR #301 or an executed new memory system
+- Source producer's original inaccurate representation remains historical evidence; repaired conceptual mapping can inform future design review only
+- Oct17 revisit has no distinct new independent research-object credit beyond S42; metric of unique paper objects cannot be inflated by repeated study
+- This monthly A2 does not independently fetch or re-derive the source paper's theorem; correction #302 is historical review evidence only
+
+### Time-scoped correction to A1 path-mapping evidence
+- A1 Architecture records incorrectly noted `OWNER_PATH_NOT_FOUND`, based on guessed paths ending Architecture_System.md
+- Actual Architecture English owner `docs/en/Architecture_Principles.md` now exists, blob identity above
+- Actual Architecture Chinese owner `docs/zh/Architecture_Principles.md` now exists, blob identity above
+- Historical A1 text is retained to record audit error; current A2 interpretation supersedes the bad inferred path naming
+- This path repair is a maintenance-map correction, not new native study, scientific evidence, or runtime fix
+
+### Source and governance decisions after A1→A2
+- October 02 original #235 scripts-only delivery is still an original source-delivery mismatch; later repaired documentation does not rewrite original review receipt
+- October 11 source #271 recovery must not promote replaced closed #269 to merged history
+- S63 label in October 12 PR #274 represents different safe MARL paper from canonical October 14 S63 OCO-with-memory; both identities preserved with exact paper and PR ID
+- October 14 OCO paper dynamic regret vs overall regret use different theorem and comparator scopes
+- Theoretical claims from separate domains have incompatible numerators, denominators and physical conditions; no unified benchmark is calculated
+- Native Original 16 + later Oct17 S42 revisit 1; 17 calendar dates are covered, but only 16 distinct original-date Daily PR deliveries were observed
+- No independent runtime stack test, LLM model evaluation, safety proof reproduction or real human collaboration experiment executed
+- Existing weekly evidence, September Stage handoff and source history unchanged by A2; single October blueprint remains canonical owner
+- W42 natural closure and October final remain NOT_DUE, month-to-date relation OPEN as of Oct17
+- A2 disposition 16_ORIGINAL_DAILY_PR_IDENTITIES / OCT17_REVISIT_PLUS_CORRECTION / ARCHITECTURE_PATH_RECONCILED / ZERO_NEW_VERIFIED_CORE / MONTH_OPEN
