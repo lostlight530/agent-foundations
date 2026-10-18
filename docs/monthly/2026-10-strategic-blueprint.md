@@ -5528,3 +5528,290 @@ DUPLICATE_CREDIT
 - Existing weekly evidence, September Stage handoff and source history unchanged by A2; single October blueprint remains canonical owner
 - W42 natural closure and October final remain NOT_DUE, month-to-date relation OPEN as of Oct17
 - A2 disposition 16_ORIGINAL_DAILY_PR_IDENTITIES / OCT17_REVISIT_PLUS_CORRECTION / ARCHITECTURE_PATH_RECONCILED / ZERO_NEW_VERIFIED_CORE / MONTH_OPEN
+
+## 2026-10-18 A1 | full October 01–17 original research delivery and claim-status reconciliation
+- Exact main: ed3280cd4b04aa133198fd014b3053abf7b00366; canonical owner blob: 190e74eed53c31787ce91b38af25098083de24fd
+- Logical cutoff: 2026-10-17 Asia/Shanghai; PR grouping below uses merge-date, not publication date or original task-assigned date
+- Landing chronology cannot change historical authorship, prior corrections or the meaning of a research claim
+- Claims retain five distinct fields: source, evidence, mapping, implementation, validation; nothing in this pass promotes verified core
+- Producer documents and correction commits cannot prove currently running Memory/Tool/Collaboration/Architecture components
+
+### Dated 17-day merged-PR source ledger
+#### 2026-10-01 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 7; this denominator is landing commits, not native research sessions
+- PR #225 | A1: freeze September evidence — Agent Foundations
+  - actual merged_at=2026-09-30T16:02:09Z, resulting Git merge SHA=f7eaaf7725b8059193c59fddc3d2059cab051e4d, canonical URL=https://github.com/lostlight530/agent-foundations/pull/225
+- PR #226 | A2: reconcile September close — Agent Foundations
+  - actual merged_at=2026-09-30T16:14:46Z, resulting Git merge SHA=52892d1a6216123fa0db5649c9ed8865bfe4ae9a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/226
+- PR #227 | 国庆第一天加班｜Foundations：理论可以大胆，证据不能越级
+  - actual merged_at=2026-09-30T16:49:42Z, resulting Git merge SHA=9182c4cf895add2e0e52d640fb30752ab5f1d537, canonical URL=https://github.com/lostlight530/agent-foundations/pull/227
+- PR #228 | audit: correct 2026-10-01 source-scope provenance
+  - actual merged_at=2026-09-30T17:25:58Z, resulting Git merge SHA=08e06b637bdf8f1bf9e5e0f17bb56213c2d3c20a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/228
+- PR #229 | docs: daily research on sparse modern hopfield model (S42)
+  - actual merged_at=2026-10-01T12:46:15Z, resulting Git merge SHA=ac8bdc579ff1aadfb2cc6a374617353b4c7662a9, canonical URL=https://github.com/lostlight530/agent-foundations/pull/229
+- PR #230 | A1: initialize October relational owner — Foundations
+  - actual merged_at=2026-10-01T13:26:36Z, resulting Git merge SHA=4e7d772412b75c1d73d9c432cac4631e7d37aa50, canonical URL=https://github.com/lostlight530/agent-foundations/pull/230
+- PR #231 | A2: integrate October 1 Foundations research state
+  - actual merged_at=2026-10-01T13:26:58Z, resulting Git merge SHA=3d5054dea3a7758078cda7b157cae53f82042946, canonical URL=https://github.com/lostlight530/agent-foundations/pull/231
+- 2026-10-01 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-01 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-01 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-02 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 5; this denominator is landing commits, not native research sessions
+- PR #232 | October A1: full Foundations review through 2026-10-01
+  - actual merged_at=2026-10-02T13:16:43Z, resulting Git merge SHA=576f9d69abb439ea06b8679ed67efc350b20caaf, canonical URL=https://github.com/lostlight530/agent-foundations/pull/232
+- PR #233 | October A2: reconcile Foundations through 2026-10-02
+  - actual merged_at=2026-10-02T13:27:38Z, resulting Git merge SHA=2f12ae0e211af6e3b43849a0399c81a27df58a84, canonical URL=https://github.com/lostlight530/agent-foundations/pull/233
+- PR #234 | September D30 Independent GPT audit — Agent Foundations
+  - actual merged_at=2026-10-02T14:27:49Z, resulting Git merge SHA=2ddfdc9e1f87d3f435eb7ebb183e34210f517b30, canonical URL=https://github.com/lostlight530/agent-foundations/pull/234
+- PR #235 | docs: daily research chunk for DeGG-Flow
+  - actual merged_at=2026-10-02T14:27:41Z, resulting Git merge SHA=d3731c23655cb8ddcda680036a4d8a7cca8213d2, canonical URL=https://github.com/lostlight530/agent-foundations/pull/235
+- PR #236 | A2 successor: reconcile late Foundations delivery scope defect
+  - actual merged_at=2026-10-02T14:43:58Z, resulting Git merge SHA=78d5753105c02c5201b024353a89383b18ff3209, canonical URL=https://github.com/lostlight530/agent-foundations/pull/236
+- 2026-10-02 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-02 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-02 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-03 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 5; this denominator is landing commits, not native research sessions
+- PR #237 | October A1: full Foundations review through 2026-10-02
+  - actual merged_at=2026-10-03T04:49:41Z, resulting Git merge SHA=9104ef506c8f588e89c731b07c79b2f6a936f6b2, canonical URL=https://github.com/lostlight530/agent-foundations/pull/237
+- PR #238 | October A2: reconcile Foundations through 2026-10-03
+  - actual merged_at=2026-10-03T04:50:10Z, resulting Git merge SHA=92802605363d7bd1df8e76d5ab767a50bb3ae7a0, canonical URL=https://github.com/lostlight530/agent-foundations/pull/238
+- PR #239 | docs: add daily research chunk for convergence in markov coevolutionary opinion formation
+  - actual merged_at=2026-10-03T12:36:54Z, resulting Git merge SHA=2a427ec06f72218582b8de6f1d2a38ff89e3b2fe, canonical URL=https://github.com/lostlight530/agent-foundations/pull/239
+- PR #240 | October A1 successor: recheck Foundations through 2026-10-02
+  - actual merged_at=2026-10-03T12:47:10Z, resulting Git merge SHA=b8f3ac36a0840e2459cb7391a52575fd8cd38aea, canonical URL=https://github.com/lostlight530/agent-foundations/pull/240
+- PR #241 | October A2 successor: reconcile Foundations S56 current month
+  - actual merged_at=2026-10-03T12:54:39Z, resulting Git merge SHA=052dbef246726daa5af0d3c1aeaf23d012cbe998, canonical URL=https://github.com/lostlight530/agent-foundations/pull/241
+- 2026-10-03 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-03 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-03 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-04 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 6; this denominator is landing commits, not native research sessions
+- PR #242 | docs: daily research chunk for collaboration system
+  - actual merged_at=2026-10-04T08:44:01Z, resulting Git merge SHA=36a5be4deeab718b85908be69093c6e5743e941a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/242
+- PR #244 | docs: weekly system document cascade and conflict audit
+  - actual merged_at=2026-10-04T08:53:59Z, resulting Git merge SHA=33ee2b29f158c832fabbcd10afdc06f6a6662916, canonical URL=https://github.com/lostlight530/agent-foundations/pull/244
+- PR #245 | October A1: full Foundations review through 2026-10-03
+  - actual merged_at=2026-10-04T09:12:00Z, resulting Git merge SHA=75d799ac98a89e37677c44c28e29d6584b0de429, canonical URL=https://github.com/lostlight530/agent-foundations/pull/245
+- PR #246 | October A2: reconcile Foundations through 2026-10-04
+  - actual merged_at=2026-10-04T09:24:52Z, resulting Git merge SHA=30403a35aaefdd527c56de24087a5ba560275964, canonical URL=https://github.com/lostlight530/agent-foundations/pull/246
+- PR #247 | special: close S57 collaboration evidence into verified core
+  - actual merged_at=2026-10-04T09:51:06Z, resulting Git merge SHA=d5048ad6ad381febca8bce0333a8befe7b35acb1, canonical URL=https://github.com/lostlight530/agent-foundations/pull/247
+- PR #248 | docs: establish open research production framework
+  - actual merged_at=2026-10-04T12:01:47Z, resulting Git merge SHA=e3a3f85f7cfef49ae82a6632f10ae5f0ae133d5f, canonical URL=https://github.com/lostlight530/agent-foundations/pull/248
+- 2026-10-04 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-04 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-04 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-05 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 3; this denominator is landing commits, not native research sessions
+- PR #249 | docs: add daily research chunk for S24 to Architecture Principles
+  - actual merged_at=2026-10-05T05:26:52Z, resulting Git merge SHA=8a01e7067619efe89552ad4f29106bb565780d74, canonical URL=https://github.com/lostlight530/agent-foundations/pull/249
+- PR #250 | October A1: full Foundations + open-research review through 2026-10-04
+  - actual merged_at=2026-10-05T13:47:53Z, resulting Git merge SHA=7ff7d7dca1c1278e847469d59b9ced8cb41f4d32, canonical URL=https://github.com/lostlight530/agent-foundations/pull/250
+- PR #251 | October A2: reconcile Foundations + open-research through 2026-10-05
+  - actual merged_at=2026-10-05T13:54:51Z, resulting Git merge SHA=caea66a2fe0da195358e271e762a16ef43b5acc6, canonical URL=https://github.com/lostlight530/agent-foundations/pull/251
+- 2026-10-05 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-05 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-05 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-06 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 3; this denominator is landing commits, not native research sessions
+- PR #252 | docs: add daily research chunk for MAMAB Network Optimization via FDLA
+  - actual merged_at=2026-10-06T08:17:11Z, resulting Git merge SHA=5b7a2e17f1d32aa8df212834d284f1cca5b3170c, canonical URL=https://github.com/lostlight530/agent-foundations/pull/252
+- PR #253 | October A1: full Foundations review through 2026-10-05
+  - actual merged_at=2026-10-06T08:43:30Z, resulting Git merge SHA=2e564471166a1797a02961e535642aa08305dc5e, canonical URL=https://github.com/lostlight530/agent-foundations/pull/253
+- PR #254 | October A2: reconcile Foundations through 2026-10-06
+  - actual merged_at=2026-10-06T08:53:59Z, resulting Git merge SHA=ab624ab0438ec49c69d230c8a73b41217a7247a2, canonical URL=https://github.com/lostlight530/agent-foundations/pull/254
+- 2026-10-06 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-06 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-06 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-07 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 3; this denominator is landing commits, not native research sessions
+- PR #255 | feat: daily research chunk for Tool System (S59)
+  - actual merged_at=2026-10-07T05:50:53Z, resulting Git merge SHA=2e5851f6e6a809fcb0da2c8672318e543ede975a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/255
+- PR #256 | October A1: full Foundations review through 2026-10-06
+  - actual merged_at=2026-10-07T07:19:54Z, resulting Git merge SHA=1f972da50057233ebd25d4ea76240cd5374dd2bd, canonical URL=https://github.com/lostlight530/agent-foundations/pull/256
+- PR #257 | October A2: reconcile Foundations through 2026-10-07
+  - actual merged_at=2026-10-07T07:28:45Z, resulting Git merge SHA=d259fc8ab232a35ec4d5def4ed62810f8d7bfadf, canonical URL=https://github.com/lostlight530/agent-foundations/pull/257
+- 2026-10-07 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-07 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-07 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-08 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #258 | docs: add daily research chunk on mean-field lyapunov concentration bounds
+  - actual merged_at=2026-10-08T07:25:45Z, resulting Git merge SHA=1cfb2fe1dab435bbc89cfaa7510e180581640c73, canonical URL=https://github.com/lostlight530/agent-foundations/pull/258
+- PR #259 | October A1: full Agent Foundations review through 2026-10-07
+  - actual merged_at=2026-10-08T07:36:10Z, resulting Git merge SHA=337a34ae37058c7d960ea9bc5c52cf8f0760f01b, canonical URL=https://github.com/lostlight530/agent-foundations/pull/259
+- PR #260 | October A2: reconcile Agent Foundations through 2026-10-08
+  - actual merged_at=2026-10-08T07:46:25Z, resulting Git merge SHA=84aa138ec37a19d338c39c9d6a3450a02784cf66, canonical URL=https://github.com/lostlight530/agent-foundations/pull/260
+- PR #261 | repair: restore Foundation validation boundaries — thanks to the new Codex cloud workflow
+  - actual merged_at=2026-10-08T15:28:49Z, resulting Git merge SHA=31cf84785b5b59c6f4c4adc66e808c0945a3c2c9, canonical URL=https://github.com/lostlight530/agent-foundations/pull/261
+- 2026-10-08 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-08 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-08 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-09 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 3; this denominator is landing commits, not native research sessions
+- PR #262 | docs: daily research chunk for OVM and Sequential Exploration in Memory System
+  - actual merged_at=2026-10-09T07:56:22Z, resulting Git merge SHA=940fd8197672c438f6903575cf5a713394a8ed5b, canonical URL=https://github.com/lostlight530/agent-foundations/pull/262
+- PR #263 | October A1: Foundations historical full coverage
+  - actual merged_at=2026-10-09T08:40:48Z, resulting Git merge SHA=d69f0c17a29bb03ddc33638940e8376ff83585cb, canonical URL=https://github.com/lostlight530/agent-foundations/pull/263
+- PR #264 | October A2: Foundations relation through 2026-10-09
+  - actual merged_at=2026-10-09T08:56:35Z, resulting Git merge SHA=e7a98d56692f936fb163def598e91ff0003985c8, canonical URL=https://github.com/lostlight530/agent-foundations/pull/264
+- 2026-10-09 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-09 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-09 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-10 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #265 | docs: add log quantization research chunk to collaboration system
+  - actual merged_at=2026-10-10T07:28:24Z, resulting Git merge SHA=0ed054dcc454cfdeaa66a7c25f5657887fb9903d, canonical URL=https://github.com/lostlight530/agent-foundations/pull/265
+- PR #266 | October 10 A1: Foundations review through October 9
+  - actual merged_at=2026-10-10T08:54:37Z, resulting Git merge SHA=62d4b6cabda986315c1f486500b4031c3a47047d, canonical URL=https://github.com/lostlight530/agent-foundations/pull/266
+- PR #267 | October 10 A2: Foundations relation through October 10
+  - actual merged_at=2026-10-10T09:06:20Z, resulting Git merge SHA=783fb2fc3edada306ad11a36a7db25a72ad90bff, canonical URL=https://github.com/lostlight530/agent-foundations/pull/267
+- PR #268 | docs: reconcile concept DOI and three archived release identities
+  - actual merged_at=2026-10-10T15:08:14Z, resulting Git merge SHA=00387b17d81288ec829d4e4e28f5fd0aeef46763, canonical URL=https://github.com/lostlight530/agent-foundations/pull/268
+- 2026-10-10 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-10 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-10 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-11 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #270 | docs: weekly system document cascade and conflict audit
+  - actual merged_at=2026-10-11T07:39:37Z, resulting Git merge SHA=3a2bb7744b66adcee6177a69005065daf0b03312, canonical URL=https://github.com/lostlight530/agent-foundations/pull/270
+- PR #271 | docs: recover 2026-10-11 S26 Tool System daily chunk on refreshed main
+  - actual merged_at=2026-10-11T07:40:31Z, resulting Git merge SHA=464b880448543807d265b8cd0bf4575a02802212, canonical URL=https://github.com/lostlight530/agent-foundations/pull/271
+- PR #272 | October 11 A1: Foundations full review through October 10
+  - actual merged_at=2026-10-11T07:54:07Z, resulting Git merge SHA=80b326816a90aaf2b5715f55a1eb7194d96be364, canonical URL=https://github.com/lostlight530/agent-foundations/pull/272
+- PR #273 | October 11 A2: Foundations relation through October 11
+  - actual merged_at=2026-10-11T08:02:15Z, resulting Git merge SHA=3992720cac29f9d5b202e3529f4bffebdbe64a25, canonical URL=https://github.com/lostlight530/agent-foundations/pull/273
+- 2026-10-11 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-11 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-11 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-12 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #274 | docs: Add Daily Research Chunk on Safe MARL for Behavior-Based Cooperative Navigation
+  - actual merged_at=2026-10-12T10:40:23Z, resulting Git merge SHA=6b6061a36d8147b31f46f8bb5c654a467307ba14, canonical URL=https://github.com/lostlight530/agent-foundations/pull/274
+- PR #275 | correct: narrow S63 safety claims to paper evidence
+  - actual merged_at=2026-10-12T11:00:38Z, resulting Git merge SHA=a2d642ec813361e2559e28f8c77a42d91952f5fa, canonical URL=https://github.com/lostlight530/agent-foundations/pull/275
+- PR #276 | A1 2026-10-12: October maintenance through 2026-10-11
+  - actual merged_at=2026-10-12T11:06:12Z, resulting Git merge SHA=addb3e656cf9703b0eacc49f6b87405f27249102, canonical URL=https://github.com/lostlight530/agent-foundations/pull/276
+- PR #277 | A2 2026-10-12: October maintenance through 2026-10-12
+  - actual merged_at=2026-10-12T11:11:02Z, resulting Git merge SHA=ef27f7a0805c47040f67da8289507c7750ee26b3, canonical URL=https://github.com/lostlight530/agent-foundations/pull/277
+- 2026-10-12 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-12 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-12 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-13 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 6; this denominator is landing commits, not native research sessions
+- PR #278 | docs: append daily research chunk for independent NPG in MPGs
+  - actual merged_at=2026-10-13T07:50:58Z, resulting Git merge SHA=b5bb764b4e522749303627b17bfcf792935264f8, canonical URL=https://github.com/lostlight530/agent-foundations/pull/278
+- PR #279 | A1 2026-10-13: October maintenance through 2026-10-12
+  - actual merged_at=2026-10-13T08:19:15Z, resulting Git merge SHA=fbaf6a0deeb3022c42c36cbd3d7f049829fa4310, canonical URL=https://github.com/lostlight530/agent-foundations/pull/279
+- PR #280 | A2 2026-10-13: October maintenance through 2026-10-13
+  - actual merged_at=2026-10-13T08:24:23Z, resulting Git merge SHA=72ddaf09b163466d61248fe83e15dbf0c2f13c28, canonical URL=https://github.com/lostlight530/agent-foundations/pull/280
+- PR #281 | correct: narrow 2026-10-13 NPG evidence claims
+  - actual merged_at=2026-10-13T08:32:42Z, resulting Git merge SHA=5b3fd6686d43a8764b1b036d73359086231d8342, canonical URL=https://github.com/lostlight530/agent-foundations/pull/281
+- PR #282 | Final A1 2026-10-13: reconcile through 2026-10-12
+  - actual merged_at=2026-10-13T08:38:35Z, resulting Git merge SHA=feda8458e3102cb4adc5a3ce83db35959f1f155e, canonical URL=https://github.com/lostlight530/agent-foundations/pull/282
+- PR #283 | Final A2 2026-10-13: current month through 2026-10-13
+  - actual merged_at=2026-10-13T08:45:01Z, resulting Git merge SHA=81a81fe663113fa4bccb836757314d7f6a8e37ca, canonical URL=https://github.com/lostlight530/agent-foundations/pull/283
+- 2026-10-13 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-13 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-13 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-14 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 7; this denominator is landing commits, not native research sessions
+- PR #284 | feat: integrate dynamic regret bound theory into memory system
+  - actual merged_at=2026-10-14T07:36:24Z, resulting Git merge SHA=1644750c413882ba54d17211a3e5b2d266caddab, canonical URL=https://github.com/lostlight530/agent-foundations/pull/284
+- PR #285 | fix(foundations): S63 v3 source and theorem reconciliation
+  - actual merged_at=2026-10-14T07:43:25Z, resulting Git merge SHA=f2a9c5b725af817375871e6b1aa01b149aea2a2a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/285
+- PR #286 | A1 2026-10-14: Foundation source/contract bilingual evidence review
+  - actual merged_at=2026-10-14T08:05:01Z, resulting Git merge SHA=263614b06bb0b2649b27874b68d2df7be5da866b, canonical URL=https://github.com/lostlight530/agent-foundations/pull/286
+- PR #287 | A2 2026-10-14: Foundation S63 theorem and bilingual source contracts
+  - actual merged_at=2026-10-14T08:58:44Z, resulting Git merge SHA=0409e6c4bf1191013f7c059d15231c097876e4a6, canonical URL=https://github.com/lostlight530/agent-foundations/pull/287
+- PR #288 | D14 2026-10-14: independent pattern formation audit
+  - actual merged_at=2026-10-14T09:10:37Z, resulting Git merge SHA=994d5642e5a94cc2609a3e4b447eb36e7b15faa4, canonical URL=https://github.com/lostlight530/agent-foundations/pull/288
+- PR #289 | D14 2026-10-14: Foundations theory/mapping pattern audit
+  - actual merged_at=2026-10-14T09:17:21Z, resulting Git merge SHA=2e3aa89b9d1144ba8b5774b4f584b23cbe2b28f6, canonical URL=https://github.com/lostlight530/agent-foundations/pull/289
+- PR #290 | reconcile(d14): preserve dual reviews, single audit identity
+  - actual merged_at=2026-10-14T09:21:01Z, resulting Git merge SHA=95e95f3ce251c9d88ac3f2931dad694d05231063, canonical URL=https://github.com/lostlight530/agent-foundations/pull/290
+- 2026-10-14 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-14 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-14 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-15 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 6; this denominator is landing commits, not native research sessions
+- PR #291 | docs(open-science): align archived checkpoint, citation and research reuse
+  - actual merged_at=2026-10-15T02:09:38Z, resulting Git merge SHA=c7d901ed90e6955fcd722399ed10efaa638a90f5, canonical URL=https://github.com/lostlight530/agent-foundations/pull/291
+- PR #292 | docs: daily research chunk for collaboration system (S64)
+  - actual merged_at=2026-10-15T06:51:54Z, resulting Git merge SHA=970fd714a8b4ce25fffc3db921f1c2ea7d8bd1bb, canonical URL=https://github.com/lostlight530/agent-foundations/pull/292
+- PR #293 | A1 2026-10-15: Foundations October native research PR and source retention audit
+  - actual merged_at=2026-10-15T10:47:29Z, resulting Git merge SHA=db0eb5fcc72c995187e6632d6678915e4db83b39, canonical URL=https://github.com/lostlight530/agent-foundations/pull/293
+- PR #294 | A2 2026-10-15: Foundations S64 and October full native/weekly/Special relation
+  - actual merged_at=2026-10-15T11:01:33Z, resulting Git merge SHA=1bb3524544d95e6a740aa63032065a142e706b92, canonical URL=https://github.com/lostlight530/agent-foundations/pull/294
+- PR #295 | reconcile: close stale October 2 S55 helper-retention discrepancy
+  - actual merged_at=2026-10-15T11:52:06Z, resulting Git merge SHA=f164ceec36591ed3027a64519a0baed32a539a6a, canonical URL=https://github.com/lostlight530/agent-foundations/pull/295
+- PR #296 | docs(open-science): strengthen research handoff through Windows maintenance
+  - actual merged_at=2026-10-15T15:51:34Z, resulting Git merge SHA=43f6bfe8441f1b610084280cb11c3e254c8a19d0, canonical URL=https://github.com/lostlight530/agent-foundations/pull/296
+- 2026-10-15 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-15 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-15 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-16 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #297 | docs: add daily research chunk for tool system (adversarial network optimization under bandit feedback)
+  - actual merged_at=2026-10-16T09:01:17Z, resulting Git merge SHA=49b41c15c1c867cc9c68349f9e9747080f0cfae7, canonical URL=https://github.com/lostlight530/agent-foundations/pull/297
+- PR #298 | A1 Oct16 Foundations: fifteen native research PRs and S55 source scope
+  - actual merged_at=2026-10-16T09:53:10Z, resulting Git merge SHA=69547dc98d0d3d9a32d66217a9a73010c24a3a16, canonical URL=https://github.com/lostlight530/agent-foundations/pull/298
+- PR #299 | Foundations source contract: forward-disclose historical S63 paper-ID collision
+  - actual merged_at=2026-10-16T10:35:42Z, resulting Git merge SHA=58e80902fff9f8f062c8eadfa3a0988256381a1f, canonical URL=https://github.com/lostlight530/agent-foundations/pull/299
+- PR #300 | A2 Oct16 Foundations October source review
+  - actual merged_at=2026-10-16T10:41:42Z, resulting Git merge SHA=d4b3fb6e14abe77b8bb43dd5e612b5f765d917c7, canonical URL=https://github.com/lostlight530/agent-foundations/pull/300
+- 2026-10-16 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-16 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-16 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+#### 2026-10-17 | merge-custody ledger
+- GitHub merged PRs on Shanghai calendar day: 4; this denominator is landing commits, not native research sessions
+- PR #301 | docs(daily): add S42 research chunk to Memory System
+  - actual merged_at=2026-10-17T05:44:40Z, resulting Git merge SHA=eaf0bad2aa6366bdcba25167a872ef0e1853f8f1, canonical URL=https://github.com/lostlight530/agent-foundations/pull/301
+- PR #302 | fix(research): reconcile S42 v2 chronology and sparse Hopfield energy formula
+  - actual merged_at=2026-10-17T08:37:26Z, resulting Git merge SHA=04db0cc70d91702738abcd3b78ae129578aa40f8, canonical URL=https://github.com/lostlight530/agent-foundations/pull/302
+- PR #303 | A1 Oct17 Foundations: 16 original source PRs, bilingual authority and negative delivery
+  - actual merged_at=2026-10-17T12:01:05Z, resulting Git merge SHA=3092c0d31841dfea41bb1cd3484b10ad1d378f3b, canonical URL=https://github.com/lostlight530/agent-foundations/pull/303
+- PR #304 | A2 Oct17 Foundations: 16 source PRs, S42 correction and Architecture path repair
+  - actual merged_at=2026-10-17T12:21:04Z, resulting Git merge SHA=d35cafbab67f1d07a26ecf0b274717941d05c8da, canonical URL=https://github.com/lostlight530/agent-foundations/pull/304
+- 2026-10-17 preservation: relevant existing source objects stay tied to their original producer/file identities, not this maintenance pass
+- 2026-10-17 evidence gate: conceptual research ≠ implemented code ≠ independent validation ≠ verified-core admission
+- 2026-10-17 source time: arXiv version date, logical research date, PR merge time and maintenance date are non-interchangeable
+
+### Eight owning theory documents and research control artifacts
+- Source owner path=FOUNDATION/INDEX.md; Git blob=289ad219a795090fd5c24e9528f207dcd95a43dc; bytes=7142
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=FOUNDATION/MAINTENANCE.md; Git blob=39740d184fa6170fc7012afa99eacfbf99a9bcd0; bytes=8453
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=FOUNDATION/REVIEW.md; Git blob=cc72b0951bf2ce23bbf2274ede57a0d1cc83d301; bytes=9841
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=FOUNDATION/SOURCES.md; Git blob=d818d241e71f000682798a57c9c4a1f4b8ca8b52; bytes=47899
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=FOUNDATION/validate.py; Git blob=8ce5d29cfdd31c9d6b33edbc0b94d44c53c98cbb; bytes=9736
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/en/Architecture_Principles.md; Git blob=573c5e828504ac08165dbf25469c1c8d4b62904e; bytes=117999
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/en/Collaboration_System.md; Git blob=3c6d02ecc2b30e79c0901dc96db3e31712ccb588; bytes=258478
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/en/Memory_System.md; Git blob=dd31d620b42d574329002808a9d1b6253c6b03ba; bytes=87748
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/en/Tool_System.md; Git blob=a8bb161bc5b82ecd2da8bc3977249c1488d55a4b; bytes=49050
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/zh/Architecture_Principles.md; Git blob=380716c9cc5e2b159a5f3e37d000cdefa5711113; bytes=111227
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/zh/Collaboration_System.md; Git blob=ec13e481cb695c8e9f55efd00c1d749863d9a029; bytes=231973
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/zh/Memory_System.md; Git blob=1338fbb17e671d6804805bb78a9348af3201cd26; bytes=83451
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+- Source owner path=docs/zh/Tool_System.md; Git blob=12a17805cfd7fa3b7fabb06310f2e6242ef6058e; bytes=46513
+  - Review status=EXACT_OWNER_PRESENT; source numbering and local document assertions remain distinct from original paper semantics and actual runtime
+
+### Scientific identity and historical correction verdicts
+- S42 sparse modern Hopfield arXiv:2309.12673v2 on Oct01 and Oct17 represents the same paper/version; duplicate delivery != independent bibliography
+- Prior S42 energy-equation correction from October17 remains authoritative for source-theorem interpretation; do not transfer an invalid simplified equation
+- Historic S63 used for safe-MARL arXiv:2312.12861v3 clashes with canonical registry S63 used for OCO memory arXiv:2410.23574v3; collision remains OPEN
+- PR #306 source preservation from October18 is outside this A1 source-day cutoff; it becomes a current A2 input and does not rewrite its 8 source documents' earlier facts
+- PRs in bounded latest-100 query on 17 merge days: 78; query completeness beyond 100 PRs NOT_VERIFIED
+- No new external theorem reconstruction, implementation execution, verification result or independent literature source produced by this maintenance
+- A1 decision: month-to-date source and PR chronology reviewed; exceptions retained, no original research overwritten; A2 gated on all ten merged A1 PRs
