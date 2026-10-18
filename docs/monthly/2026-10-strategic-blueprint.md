@@ -5815,3 +5815,168 @@ DUPLICATE_CREDIT
 - PRs in bounded latest-100 query on 17 merge days: 78; query completeness beyond 100 PRs NOT_VERIFIED
 - No new external theorem reconstruction, implementation execution, verification result or independent literature source produced by this maintenance
 - A1 decision: month-to-date source and PR chronology reviewed; exceptions retained, no original research overwritten; A2 gated on all ten merged A1 PRs
+
+## 2026-10-18 A2 | Full October Foundations theory and bilingual evidence version
+- Fresh merged-A1 main c1d68472ff19b0c2fc4d5e113cc2fdb32a391d19; original owner d314cb10c523ef8245ef4f13895c030e39bdd7c9
+- October remains OPEN; this is maintenance, not new Jules native research or a verified algorithm implementation
+- Source publication, logical run, PR merge and current review clocks remain independent
+- Paper, applicability mapping, implementation, test and core admission are different evidentiary axes
+- Oct18 source includes native Tool #305 and pre-merge repaired W42 #306; old original research is preserved
+
+### Per-date research source and cross-owner mapping
+#### 2026-10-01 | merged Git object and source-claim boundaries
+- Merge-custody count=7; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #229 (2026-10-01T12:46:15Z) merge_sha=ac8bdc579ff1aadfb2cc6a374617353b4c7662a9; native document holds exact study identity
+- 2026-10-01 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-01 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-01 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-01 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-02 | merged Git object and source-claim boundaries
+- Merge-custody count=5; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #235 (2026-10-02T14:27:41Z) merge_sha=d3731c23655cb8ddcda680036a4d8a7cca8213d2; native document holds exact study identity
+- 2026-10-02 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-02 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-02 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-02 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-03 | merged Git object and source-claim boundaries
+- Merge-custody count=5; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #239 (2026-10-03T12:36:54Z) merge_sha=2a427ec06f72218582b8de6f1d2a38ff89e3b2fe; native document holds exact study identity
+- 2026-10-03 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-03 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-03 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-03 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-04 | merged Git object and source-claim boundaries
+- Merge-custody count=6; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #242 (2026-10-04T08:44:01Z) merge_sha=36a5be4deeab718b85908be69093c6e5743e941a; native document holds exact study identity
+- 2026-10-04 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-04 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-04 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-04 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-05 | merged Git object and source-claim boundaries
+- Merge-custody count=3; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #249 (2026-10-05T05:26:52Z) merge_sha=8a01e7067619efe89552ad4f29106bb565780d74; native document holds exact study identity
+- 2026-10-05 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-05 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-05 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-05 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-06 | merged Git object and source-claim boundaries
+- Merge-custody count=3; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #252 (2026-10-06T08:17:11Z) merge_sha=5b7a2e17f1d32aa8df212834d284f1cca5b3170c; native document holds exact study identity
+- 2026-10-06 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-06 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-06 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-06 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-07 | merged Git object and source-claim boundaries
+- Merge-custody count=3; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #255 (2026-10-07T05:50:53Z) merge_sha=2e5851f6e6a809fcb0da2c8672318e543ede975a; native document holds exact study identity
+- 2026-10-07 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-07 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-07 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-07 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-08 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #258 (2026-10-08T07:25:45Z) merge_sha=1cfb2fe1dab435bbc89cfaa7510e180581640c73; native document holds exact study identity
+- 2026-10-08 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-08 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-08 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-08 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-09 | merged Git object and source-claim boundaries
+- Merge-custody count=3; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #262 (2026-10-09T07:56:22Z) merge_sha=940fd8197672c438f6903575cf5a713394a8ed5b; native document holds exact study identity
+- 2026-10-09 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-09 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-09 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-09 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-10 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #265 (2026-10-10T07:28:24Z) merge_sha=0ed054dcc454cfdeaa66a7c25f5657887fb9903d; native document holds exact study identity
+- 2026-10-10 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-10 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-10 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-10 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-11 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #271 (2026-10-11T07:40:31Z) merge_sha=464b880448543807d265b8cd0bf4575a02802212; native document holds exact study identity
+- 2026-10-11 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-11 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-11 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-11 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-12 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #274 (2026-10-12T10:40:23Z) merge_sha=6b6061a36d8147b31f46f8bb5c654a467307ba14; native document holds exact study identity
+- 2026-10-12 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-12 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-12 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-12 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-13 | merged Git object and source-claim boundaries
+- Merge-custody count=6; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #278 (2026-10-13T07:50:58Z) merge_sha=b5bb764b4e522749303627b17bfcf792935264f8; native document holds exact study identity
+- 2026-10-13 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-13 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-13 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-13 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-14 | merged Git object and source-claim boundaries
+- Merge-custody count=7; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #284 (2026-10-14T07:36:24Z) merge_sha=1644750c413882ba54d17211a3e5b2d266caddab; native document holds exact study identity
+- 2026-10-14 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-14 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-14 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-14 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-15 | merged Git object and source-claim boundaries
+- Merge-custody count=6; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #291 (2026-10-15T02:09:38Z) merge_sha=c7d901ed90e6955fcd722399ed10efaa638a90f5; native document holds exact study identity
+- 2026-10-15 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-15 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-15 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-15 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-16 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #297 (2026-10-16T09:01:17Z) merge_sha=49b41c15c1c867cc9c68349f9e9747080f0cfae7; native document holds exact study identity
+- 2026-10-16 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-16 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-16 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-16 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-17 | merged Git object and source-claim boundaries
+- Merge-custody count=4; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #301 (2026-10-17T05:44:40Z) merge_sha=eaf0bad2aa6366bdcba25167a872ef0e1853f8f1; native document holds exact study identity
+- 2026-10-17 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-17 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-17 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-17 current relation=INHERITED_A1_BOUNDARY; repeated source and maintenance count add zero independent scientific credit
+#### 2026-10-18 | merged Git object and source-claim boundaries
+- Merge-custody count=3; this count denotes PRs on Shanghai calendar date, not independent paper discoveries or native task logical dates
+- Representative PR: #305 (2026-10-18T05:42:50Z) merge_sha=82257132698be586c77655fc88507469d856deb3; native document holds exact study identity
+- 2026-10-18 source identity requires exact arXiv or publisher version and producer-time documentation; no inferred source promotion from PR title
+- 2026-10-18 theory transfer requires paper assumptions to match specific Architecture, Collaboration, Memory or Tool scope, rather than superficial terminology
+- 2026-10-18 implementation/runtime validation is NOT_VERIFIED in this maintenance review even when historical producer declares a source VERIFIED_FROM_LATEX_SOURCE
+- 2026-10-18 current relation=NEW_TOOL_RESEARCH_AND_REPAIRED_WEEKLY_INTEGRATED; repeated source and maintenance count add zero independent scientific credit
+
+### Bilingual canonical containers and non-destructive source retention
+- docs/en/Architecture_Principles.md @ 573c5e828504ac08165dbf25469c1c8d4b62904e / 117999 bytes; historical source and forward corrections preserved
+  - Architecture_Principles (en) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/zh/Architecture_Principles.md @ 380716c9cc5e2b159a5f3e37d000cdefa5711113 / 111227 bytes; historical source and forward corrections preserved
+  - Architecture_Principles (zh) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/en/Collaboration_System.md @ 3c6d02ecc2b30e79c0901dc96db3e31712ccb588 / 258478 bytes; historical source and forward corrections preserved
+  - Collaboration_System (en) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/zh/Collaboration_System.md @ ec13e481cb695c8e9f55efd00c1d749863d9a029 / 231973 bytes; historical source and forward corrections preserved
+  - Collaboration_System (zh) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/en/Memory_System.md @ dd31d620b42d574329002808a9d1b6253c6b03ba / 87748 bytes; historical source and forward corrections preserved
+  - Memory_System (en) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/zh/Memory_System.md @ 1338fbb17e671d6804805bb78a9348af3201cd26 / 83451 bytes; historical source and forward corrections preserved
+  - Memory_System (zh) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/en/Tool_System.md @ a8bb161bc5b82ecd2da8bc3977249c1488d55a4b / 49050 bytes; historical source and forward corrections preserved
+  - Tool_System (en) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+- docs/zh/Tool_System.md @ 12a17805cfd7fa3b7fabb06310f2e6242ef6058e / 46513 bytes; historical source and forward corrections preserved
+  - Tool_System (zh) relationship is source attribution only, not executed end-to-end Agent runtime or independently proven theorem
+
+### Cross-date conflicts, actual new day and A2 disposition
+- Oct18 #305 Tool research is theory and cannot establish privacy RL tool execution or deployed policy oracles
+- Oct18 W42 #306's initial destructive document replacement was corrected before merge; all eight old container histories retained
+- S42 2309.12673v2 research reappeared Oct17 and represents the same paper/version as the earlier Oct1 source; do not double count unique papers
+- S42 source energy restatement rejected by dated correction; original erroneous producer wording remains historical only
+- S63 safe-MARL 2312.12861v3 and registry S63 OCO with memory 2410.23574v3 are different papers; collision OPEN
+- Same-paper Independent Natural Policy Gradient references across Collaboration/Memory are not independent external corroboration or Tool validation
+- W42 research mapping must not upgrade paper theory to a local verified-core, safety guarantee, or runtime acceptance
+- Existing A1, prior monthly versions and original bilingual producer source blocks remain intact; no files outside canonical owner modified
+- This review performs exact Git main/blob inspection but did not independently re-derive source proofs or run Foundation validators
+- A2 outcome: OCT01_18_RESEARCH_SOURCE_CUSTODY / BILINGUAL_EVIDENCE_RETAINED / CONFLICTS_OPEN / MONTH_OPEN
