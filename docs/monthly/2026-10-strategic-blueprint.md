@@ -5528,3 +5528,148 @@ DUPLICATE_CREDIT
 - Existing weekly evidence, September Stage handoff and source history unchanged by A2; single October blueprint remains canonical owner
 - W42 natural closure and October final remain NOT_DUE, month-to-date relation OPEN as of Oct17
 - A2 disposition 16_ORIGINAL_DAILY_PR_IDENTITIES / OCT17_REVISIT_PLUS_CORRECTION / ARCHITECTURE_PATH_RECONCILED / ZERO_NEW_VERIFIED_CORE / MONTH_OPEN
+
+## 2026-10-18 A1 | first-round October 01–17 complete native research, source-identity and PR ledger
+- Scope owner: docs/monthly/2026-10-strategic-blueprint.md; first-round cutoff October 17 Asia/Shanghai; fresh main=ed3280cd4b04aa133198fd014b3053abf7b00366; inherited owner blob=190e74eed53c31787ce91b38af25098083de24fd
+- Authority separation: Jules native Daily, standalone forward correction, independent GPT maintenance, research source registry, bilingual conceptual containers and runtime test are noninterchangeable
+- This dated A1 ledger preserves all previous history and original producer claims; present file is an append-only current month relation
+- GitHub PR created_at is UTC, not necessarily the logical date of the native research task
+- External paper theorem certification and implementation validation require independent evidence beyond producer self-reported labels
+- EVIDENCE, PROVENANCE, REVIEW and SOURCES are current semantic authorities; historical research prose may contain superseded labels
+### October logical-date census: observed PR-origin identities versus calendar days
+- 2026-10-01 UTC PR-creation window | all PR identities #229, #230, #231 | research-shaped titles #229, #231 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-02 UTC PR-creation window | all PR identities #232, #233, #234, #235, #236 | research-shaped titles #235 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-03 UTC PR-creation window | all PR identities #237, #238, #239, #240, #241 | research-shaped titles #239, #241 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-04 UTC PR-creation window | all PR identities #242, #243, #244, #245, #246, #247, #248 | research-shaped titles #242, #247, #248 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-05 UTC PR-creation window | all PR identities #249, #250, #251 | research-shaped titles #249, #251 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-06 UTC PR-creation window | all PR identities #252, #253, #254 | research-shaped titles #252 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-07 UTC PR-creation window | all PR identities #255, #256, #257 | research-shaped titles #255 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-08 UTC PR-creation window | all PR identities #258, #259, #260, #261 | research-shaped titles #258 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-09 UTC PR-creation window | all PR identities #262, #263, #264 | research-shaped titles #262 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-10 UTC PR-creation window | all PR identities #265, #266, #267, #268 | research-shaped titles #265 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-11 UTC PR-creation window | all PR identities #269, #270, #271, #272, #273 | research-shaped titles #269, #271 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-12 UTC PR-creation window | all PR identities #274, #275, #276, #277 | research-shaped titles #274, #275 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-13 UTC PR-creation window | all PR identities #278, #279, #280, #281, #282, #283 | research-shaped titles #278 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-14 UTC PR-creation window | all PR identities #284, #285, #286, #287, #288, #289, #290 | research-shaped titles #285, #287 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-15 UTC PR-creation window | all PR identities #291, #292, #293, #294, #295, #296 | research-shaped titles #291, #292, #293, #294, #295, #296 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-16 UTC PR-creation window | all PR identities #297, #298, #299, #300 | research-shaped titles #297, #299 | exact producer logical date must be checked inside each PR, not inferred from creation date
+- 2026-10-17 UTC PR-creation window | all PR identities #301, #302, #303, #304 | research-shaped titles #301, #302 | exact producer logical date must be checked inside each PR, not inferred from creation date
+### Eight bilingual research containers plus canonical contracts and historical identity
+- `docs/en/Architecture_Principles.md` | current-main blob=573c5e828504ac08165dbf25469c1c8d4b62904e | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/en/Collaboration_System.md` | current-main blob=3c6d02ecc2b30e79c0901dc96db3e31712ccb588 | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/en/Memory_System.md` | current-main blob=dd31d620b42d574329002808a9d1b6253c6b03ba | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/en/Tool_System.md` | current-main blob=a8bb161bc5b82ecd2da8bc3977249c1488d55a4b | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/monthly/2026-10-strategic-blueprint.md` | current-main blob=190e74eed53c31787ce91b38af25098083de24fd | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/zh/Architecture_Principles.md` | current-main blob=380716c9cc5e2b159a5f3e37d000cdefa5711113 | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/zh/Collaboration_System.md` | current-main blob=ec13e481cb695c8e9f55efd00c1d749863d9a029 | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/zh/Memory_System.md` | current-main blob=1338fbb17e671d6804805bb78a9348af3201cd26 | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `docs/zh/Tool_System.md` | current-main blob=12a17805cfd7fa3b7fabb06310f2e6242ef6058e | BILINGUAL_THEORY_CONTAINER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/ARCHITECTURE.md` | current-main blob=0c39c076da29d169aeaf141b2ebee94f7a836a3b | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/COLLABORATION.md` | current-main blob=94bb8b85557d41124c794bf8c562df2d278593b3 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/EVIDENCE.md` | current-main blob=9c7e0cd274081148b34eb0a6c9d0097cea085ff5 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/INDEX.md` | current-main blob=289ad219a795090fd5c24e9528f207dcd95a43dc | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/MAINTENANCE.md` | current-main blob=39740d184fa6170fc7012afa99eacfbf99a9bcd0 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/MEMORY.md` | current-main blob=e5b20a3431ffe2a32a42c9574230fadd965cd9a1 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/PROVENANCE.md` | current-main blob=40f0cdb0103d2fac8bc5a5ca5742a1a250160b96 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/REVIEW.md` | current-main blob=cc72b0951bf2ce23bbf2274ede57a0d1cc83d301 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/SOURCES.md` | current-main blob=d818d241e71f000682798a57c9c4a1f4b8ca8b52 | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=NOT_INDEXED_OR_CHANGED | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+- `FOUNDATION/TOOLS.md` | current-main blob=7322e8ef3cea7b66499370d89cabb212a27a9b3e | CANONICAL_POLICY_OR_MONTH_OWNER | prior-month-owner-hash=PRESENT | action=REVIEW_ONLY_OR_APPEND_BOUNDARY; underlying file unchanged
+### GitHub October 01–17 PR chronology and evidence class
+- PR #229 | created=2026-10-01T12:09:15Z | merged=2026-10-01T12:46:15Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: daily research on sparse modern hopfield model (S42)
+- PR #230 | created=2026-10-01T13:26:31Z | merged=2026-10-01T13:26:36Z | classification=MAINTENANCE_OR_CORRECTION | title=A1: initialize October relational owner — Foundations
+- PR #231 | created=2026-10-01T13:26:54Z | merged=2026-10-01T13:26:58Z | classification=MAINTENANCE_OR_CORRECTION | title=A2: integrate October 1 Foundations research state
+- PR #232 | created=2026-10-02T13:16:27Z | merged=2026-10-02T13:16:43Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations review through 2026-10-01
+- PR #233 | created=2026-10-02T13:27:18Z | merged=2026-10-02T13:27:38Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations through 2026-10-02
+- PR #234 | created=2026-10-02T13:54:34Z | merged=2026-10-02T14:27:49Z | classification=OTHER | title=September D30 Independent GPT audit — Agent Foundations
+- PR #235 | created=2026-10-02T14:15:06Z | merged=2026-10-02T14:27:41Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: daily research chunk for DeGG-Flow
+- PR #236 | created=2026-10-02T14:43:30Z | merged=2026-10-02T14:43:58Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 successor: reconcile late Foundations delivery scope defect
+- PR #237 | created=2026-10-03T04:49:37Z | merged=2026-10-03T04:49:41Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations review through 2026-10-02
+- PR #238 | created=2026-10-03T04:50:07Z | merged=2026-10-03T04:50:10Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations through 2026-10-03
+- PR #239 | created=2026-10-03T11:43:27Z | merged=2026-10-03T12:36:54Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk for convergence in markov coevolutionary opinion formation
+- PR #240 | created=2026-10-03T12:46:47Z | merged=2026-10-03T12:47:10Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1 successor: recheck Foundations through 2026-10-02
+- PR #241 | created=2026-10-03T12:53:56Z | merged=2026-10-03T12:54:39Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2 successor: reconcile Foundations S56 current month
+- PR #242 | created=2026-10-04T05:09:17Z | merged=2026-10-04T08:44:01Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: daily research chunk for collaboration system
+- PR #243 | created=2026-10-04T08:39:21Z | merged=UNMERGED_OR_CLOSED | classification=OTHER | title=docs: weekly system document cascade and conflict audit
+- PR #244 | created=2026-10-04T08:53:31Z | merged=2026-10-04T08:53:59Z | classification=OTHER | title=docs: weekly system document cascade and conflict audit
+- PR #245 | created=2026-10-04T09:11:54Z | merged=2026-10-04T09:12:00Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations review through 2026-10-03
+- PR #246 | created=2026-10-04T09:24:46Z | merged=2026-10-04T09:24:52Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations through 2026-10-04
+- PR #247 | created=2026-10-04T09:51:00Z | merged=2026-10-04T09:51:06Z | classification=NATIVE_STUDY_OR_DELIVERY | title=special: close S57 collaboration evidence into verified core
+- PR #248 | created=2026-10-04T10:19:07Z | merged=2026-10-04T12:01:47Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: establish open research production framework
+- PR #249 | created=2026-10-05T05:19:47Z | merged=2026-10-05T05:26:52Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk for S24 to Architecture Principles
+- PR #250 | created=2026-10-05T13:47:46Z | merged=2026-10-05T13:47:53Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations + open-research review through 2026-10-04
+- PR #251 | created=2026-10-05T13:54:42Z | merged=2026-10-05T13:54:51Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations + open-research through 2026-10-05
+- PR #252 | created=2026-10-06T05:41:49Z | merged=2026-10-06T08:17:11Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk for MAMAB Network Optimization via FDLA
+- PR #253 | created=2026-10-06T08:37:11Z | merged=2026-10-06T08:43:30Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations review through 2026-10-05
+- PR #254 | created=2026-10-06T08:48:50Z | merged=2026-10-06T08:53:59Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations through 2026-10-06
+- PR #255 | created=2026-10-07T05:39:49Z | merged=2026-10-07T05:50:53Z | classification=NATIVE_STUDY_OR_DELIVERY | title=feat: daily research chunk for Tool System (S59)
+- PR #256 | created=2026-10-07T07:16:39Z | merged=2026-10-07T07:19:54Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Foundations review through 2026-10-06
+- PR #257 | created=2026-10-07T07:24:08Z | merged=2026-10-07T07:28:45Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Foundations through 2026-10-07
+- PR #258 | created=2026-10-08T05:19:52Z | merged=2026-10-08T07:25:45Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk on mean-field lyapunov concentration bounds
+- PR #259 | created=2026-10-08T07:30:49Z | merged=2026-10-08T07:36:10Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: full Agent Foundations review through 2026-10-07
+- PR #260 | created=2026-10-08T07:40:28Z | merged=2026-10-08T07:46:25Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: reconcile Agent Foundations through 2026-10-08
+- PR #261 | created=2026-10-08T15:10:51Z | merged=2026-10-08T15:28:49Z | classification=OTHER | title=repair: restore Foundation validation boundaries — thanks to the new Codex cloud workflow
+- PR #262 | created=2026-10-09T05:10:38Z | merged=2026-10-09T07:56:22Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: daily research chunk for OVM and Sequential Exploration in Memory System
+- PR #263 | created=2026-10-09T08:36:33Z | merged=2026-10-09T08:40:48Z | classification=MAINTENANCE_OR_CORRECTION | title=October A1: Foundations historical full coverage
+- PR #264 | created=2026-10-09T08:53:38Z | merged=2026-10-09T08:56:35Z | classification=MAINTENANCE_OR_CORRECTION | title=October A2: Foundations relation through 2026-10-09
+- PR #265 | created=2026-10-10T05:15:44Z | merged=2026-10-10T07:28:24Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add log quantization research chunk to collaboration system
+- PR #266 | created=2026-10-10T08:52:37Z | merged=2026-10-10T08:54:37Z | classification=MAINTENANCE_OR_CORRECTION | title=October 10 A1: Foundations review through October 9
+- PR #267 | created=2026-10-10T09:04:08Z | merged=2026-10-10T09:06:20Z | classification=MAINTENANCE_OR_CORRECTION | title=October 10 A2: Foundations relation through October 10
+- PR #268 | created=2026-10-10T15:06:04Z | merged=2026-10-10T15:08:14Z | classification=MAINTENANCE_OR_CORRECTION | title=docs: reconcile concept DOI and three archived release identities
+- PR #269 | created=2026-10-11T05:21:09Z | merged=UNMERGED_OR_CLOSED | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk for tool system based on S26
+- PR #270 | created=2026-10-11T07:31:09Z | merged=2026-10-11T07:39:37Z | classification=OTHER | title=docs: weekly system document cascade and conflict audit
+- PR #271 | created=2026-10-11T07:40:26Z | merged=2026-10-11T07:40:31Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: recover 2026-10-11 S26 Tool System daily chunk on refreshed main
+- PR #272 | created=2026-10-11T07:52:34Z | merged=2026-10-11T07:54:07Z | classification=MAINTENANCE_OR_CORRECTION | title=October 11 A1: Foundations full review through October 10
+- PR #273 | created=2026-10-11T08:00:39Z | merged=2026-10-11T08:02:15Z | classification=MAINTENANCE_OR_CORRECTION | title=October 11 A2: Foundations relation through October 11
+- PR #274 | created=2026-10-12T09:36:38Z | merged=2026-10-12T10:40:23Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: Add Daily Research Chunk on Safe MARL for Behavior-Based Cooperative Navigation
+- PR #275 | created=2026-10-12T11:00:28Z | merged=2026-10-12T11:00:38Z | classification=NATIVE_STUDY_OR_DELIVERY | title=correct: narrow S63 safety claims to paper evidence
+- PR #276 | created=2026-10-12T11:03:29Z | merged=2026-10-12T11:06:12Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 2026-10-12: October maintenance through 2026-10-11
+- PR #277 | created=2026-10-12T11:08:42Z | merged=2026-10-12T11:11:02Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 2026-10-12: October maintenance through 2026-10-12
+- PR #278 | created=2026-10-13T05:30:28Z | merged=2026-10-13T07:50:58Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: append daily research chunk for independent NPG in MPGs
+- PR #279 | created=2026-10-13T08:16:42Z | merged=2026-10-13T08:19:15Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 2026-10-13: October maintenance through 2026-10-12
+- PR #280 | created=2026-10-13T08:21:44Z | merged=2026-10-13T08:24:23Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 2026-10-13: October maintenance through 2026-10-13
+- PR #281 | created=2026-10-13T08:32:02Z | merged=2026-10-13T08:32:42Z | classification=OTHER | title=correct: narrow 2026-10-13 NPG evidence claims
+- PR #282 | created=2026-10-13T08:35:31Z | merged=2026-10-13T08:38:35Z | classification=MAINTENANCE_OR_CORRECTION | title=Final A1 2026-10-13: reconcile through 2026-10-12
+- PR #283 | created=2026-10-13T08:41:44Z | merged=2026-10-13T08:45:01Z | classification=MAINTENANCE_OR_CORRECTION | title=Final A2 2026-10-13: current month through 2026-10-13
+- PR #284 | created=2026-10-14T05:31:23Z | merged=2026-10-14T07:36:24Z | classification=OTHER | title=feat: integrate dynamic regret bound theory into memory system
+- PR #285 | created=2026-10-14T07:41:08Z | merged=2026-10-14T07:43:25Z | classification=MAINTENANCE_OR_CORRECTION | title=fix(foundations): S63 v3 source and theorem reconciliation
+- PR #286 | created=2026-10-14T08:02:24Z | merged=2026-10-14T08:05:01Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 2026-10-14: Foundation source/contract bilingual evidence review
+- PR #287 | created=2026-10-14T08:40:51Z | merged=2026-10-14T08:58:44Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 2026-10-14: Foundation S63 theorem and bilingual source contracts
+- PR #288 | created=2026-10-14T09:09:30Z | merged=2026-10-14T09:10:37Z | classification=MAINTENANCE_OR_CORRECTION | title=D14 2026-10-14: independent pattern formation audit
+- PR #289 | created=2026-10-14T09:11:49Z | merged=2026-10-14T09:17:21Z | classification=MAINTENANCE_OR_CORRECTION | title=D14 2026-10-14: Foundations theory/mapping pattern audit
+- PR #290 | created=2026-10-14T09:20:23Z | merged=2026-10-14T09:21:01Z | classification=MAINTENANCE_OR_CORRECTION | title=reconcile(d14): preserve dual reviews, single audit identity
+- PR #291 | created=2026-10-15T02:01:22Z | merged=2026-10-15T02:09:38Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs(open-science): align archived checkpoint, citation and research reuse
+- PR #292 | created=2026-10-15T05:31:45Z | merged=2026-10-15T06:51:54Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: daily research chunk for collaboration system (S64)
+- PR #293 | created=2026-10-15T10:42:35Z | merged=2026-10-15T10:47:29Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 2026-10-15: Foundations October native research PR and source retention audit
+- PR #294 | created=2026-10-15T10:55:59Z | merged=2026-10-15T11:01:33Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 2026-10-15: Foundations S64 and October full native/weekly/Special relation
+- PR #295 | created=2026-10-15T11:51:47Z | merged=2026-10-15T11:52:06Z | classification=MAINTENANCE_OR_CORRECTION | title=reconcile: close stale October 2 S55 helper-retention discrepancy
+- PR #296 | created=2026-10-15T15:42:47Z | merged=2026-10-15T15:51:34Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs(open-science): strengthen research handoff through Windows maintenance
+- PR #297 | created=2026-10-16T05:19:03Z | merged=2026-10-16T09:01:17Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs: add daily research chunk for tool system (adversarial network optimization under bandit feedback)
+- PR #298 | created=2026-10-16T09:52:54Z | merged=2026-10-16T09:53:10Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 Oct16 Foundations: fifteen native research PRs and S55 source scope
+- PR #299 | created=2026-10-16T10:35:27Z | merged=2026-10-16T10:35:42Z | classification=NATIVE_STUDY_OR_DELIVERY | title=Foundations source contract: forward-disclose historical S63 paper-ID collision
+- PR #300 | created=2026-10-16T10:41:17Z | merged=2026-10-16T10:41:42Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 Oct16 Foundations October source review
+- PR #301 | created=2026-10-17T05:27:59Z | merged=2026-10-17T05:44:40Z | classification=NATIVE_STUDY_OR_DELIVERY | title=docs(daily): add S42 research chunk to Memory System
+- PR #302 | created=2026-10-17T08:37:13Z | merged=2026-10-17T08:37:26Z | classification=MAINTENANCE_OR_CORRECTION | title=fix(research): reconcile S42 v2 chronology and sparse Hopfield energy formula
+- PR #303 | created=2026-10-17T12:00:58Z | merged=2026-10-17T12:01:05Z | classification=MAINTENANCE_OR_CORRECTION | title=A1 Oct17 Foundations: 16 original source PRs, bilingual authority and negative delivery
+- PR #304 | created=2026-10-17T12:20:57Z | merged=2026-10-17T12:21:04Z | classification=MAINTENANCE_OR_CORRECTION | title=A2 Oct17 Foundations: 16 source PRs, S42 correction and Architecture path repair
+### Specific source and theory transfer decisions
+- S42 arXiv:2309.12673v2: original Oct01 and Oct17 producer deliveries are same paper/version; two deliveries do not equal two independent sources
+- S42 exact energy-function simplification in the later daily was rejected by Oct17 forward correction; the original incorrect text remains visible
+- S42 previous v2 date conflation with v1 initial submission is a bibliographic chronology problem, not runtime evidence
+- S63 historical safe-MARL citation and canonical newer S63 current registry are a source-key collision; refer to exact arXiv+paper+producer PR
+- Same-family theoretical papers do not inherit claim verification, evidence support or implementation from a neighboring research container
+- October 02 original Daily #235 scripts-only delivery was explicitly distinguished from expected research-doc original delivery in the prior monthly owner
+- October 11 recovery has a separate delivered PR identity; replacing a failed original PR must not recode it as native merged success
+- Multilingual retention must preserve citations, formula conditions, mapping status, implementation status, validation status and correction history
+- A source registry number represents a bibliographic identity, not a distinct observed experiment or an independently validated theorem
+- Native producer VALIDATED_FROM_LATEX_SOURCE is self-report until exact primary source material and formula conditions are inspected independently
+- In a design analogy, convergence bound, MARL game assumptions and deployed human-agent collaboration are distinct categories
+- Verified-core admission demands current executable contract plus actual test; Daily markdown alone is documentary evidence only
+- Research paper presence in MEMORY or COLLABORATION cannot imply working context management, tool approval, durable execution or runtime trust plane
+- Architecture / Collaboration / Memory / Tools source transfers require explicit original problem, assumptions, limitations, counterexamples and evidence level
+- Original Oct17 A1/A2 owner relation is retained; Oct18 repaired Weekly PR #306 is excluded from the Oct17 cutoff and is A2 eligible only
+- Since Jules PR #306 was originally destructive, its Oct18 premerge preservation repair belongs to the later head SHA/merge lineage, not the original producer execution
+- Code/runtime test, external primary-source reread, independent theorem reproduction and new verified-core implementation performed here: NONE
+- Oct01–17 UTC-created PR count 76; primary-document review inventory 19 exact file blobs; selected native title candidates 26
+- Explicit unresolved gaps, negative research credits and chronology ambiguities are positive audit outcomes; do not rewrite original failures
+- No alteration of existing Daily research/bilingual/source body by this A1; no new bibliographic identity assigned
+- A1 disposition: ORIGINAL_PR_CENSUS_PRESENT / CORRECTION_LINEAGE_PRESERVED / BILINGUAL_SOURCE_SEPARATED / MONTH_OPEN
