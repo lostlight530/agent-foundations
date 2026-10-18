@@ -502,3 +502,32 @@ MONTH_OPEN
   - 成功迁移 Chunk。按照要求删除了 W40 Wrapper。
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+## 工具系统隐私保护下的遗憾下界 (Tool System Privacy-Preserving Regret Bounding)
+
+- **System Container:** Tool System (工具系统)
+- **Frontier Source:**
+  - **Title:** On the Optimal Regret of Locally Private Linear Contextual Bandit
+  - **Authors:** Jiachun Li, David Simchi-Levi, Yining Wang
+  - **URL:** http://arxiv.org/abs/2404.09413v1
+  - **Version:** v1
+  - **Publication Date:** 2024-04-15
+  - **Reason for selection:** 提供了在满足局部隐私约束下的线性上下文 Bandit 的严格理论分析，给出了实现最优遗憾界的方法，可用于指导具有隐私限制环境中的工具路由。
+  - **Actually extracted paragraphs or formulas:** 算法 2 (RegCB.Elimination)，其累计遗憾界为 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$。
+- **Original Problem:** (论文原始问题) 在受到局部隐私约束的线性上下文 Bandit 问题中，是否能够达到无约束下的 $\tilde{O}(\sqrt{T})$ 最优遗憾界。
+- **Core Assumptions:** (核心假设) 奖励函数呈线性；满足 $\alpha$-局部隐私约束；动作空间有限且上下文为随机分布；能够通过平均绝对偏差 (MAD) 限定预言机的误差。
+- **Mathematical Mechanism:** (数学机制)
+  - **Formula classification:** 算法伪代码 (Algorithm Pseudocode)
+  - 动作消除规则 (RegCB.Elimination): $\mathcal{A}_{\tau'}(x_t)\leftarrow \{a\in\mathcal{A}_{\tau'-1}: \hat{f}_{\tau'}^a(x_t)+\Delta_{\tau'}^a(x_t)\ge\max_{a'\in\mathcal{A}_{\tau'-1}} \hat{f}_{\tau'}^{a'}(x_t)-\Delta_{\tau'}^{a'}(x_t)\}$
+- **Convergence or behavior boundaries:** (收敛或行为边界) 累计遗憾严格受到 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$ 的限制，在采用特定几何周期的策略下，可达到 $\tilde{O}(\sqrt{T})$。
+- **Applicability Scope:** (适用范围) 具有上下文信息且必须保护系统状态隐私的分布式工具调用环境。
+- **Limitations:** (局限) 性能界限严重依赖动作空间大小 $A$ 和上下文维度 $d$；实际算法需要维护所有活跃动作的置信区间。
+- **Agent Architecture Mapping:** (Agent 架构映射) 该机制可以在概念上支持局部隐私工具调用协议设计，使得涉及敏感状态信息的多步工具选择能依靠注入校准噪声免受泄漏，同时确保理论遗憾收敛。
+- **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED
+- **Repository Test Status:** (仓库测试状态) NOT_TESTED
+- **Beginner Analogy:** (初学者类比) 就像在挑选工具时戴上一层薄薄的眼罩，防止旁观者看清你的准确意图。这个算法能让你在被噪声干扰的情况下，依然通过不断排除劣质工具，最终稳定地挑出最合适的工具。
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
