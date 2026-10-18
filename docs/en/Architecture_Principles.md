@@ -1448,3 +1448,11 @@ Imagine teaching a group of student drivers how to drive in formation. Instead o
 - For the safe-MARL section, use the fully qualified paper identity `arXiv:2312.12861v3`, original PR #274, and the exact paper title, NOT `S63` alone, for citations and downstream claim transfer.
 - The label collision remains OPEN until an independently reviewed canonical identifier decision; none has been issued by this correction.
 - Neither paper's results establish a current deployed safe-agent, tested MPC filter, memory runtime, or universal convergence guarantee.
+
+## 2026-W42 forward weekly review — architecture and provenance boundaries
+- Review context: Jules original Weekly PR #306, followed by pre-merge preservation of the preceding research and existing corrections.
+- Source identity: the 2026-10-16 S63 collision between arXiv:2312.12861v3 and registry arXiv:2410.23574v3 remains OPEN; no renumbering authorized.
+- This container's partially observable Markov Potential Games source arXiv:2604.00433v1 is distinct from independent natural policy gradient arXiv:2310.09727v2 in Memory/Collaboration.
+- Conditional decentralized policy optimization is a bounded design analogy, not currently deployed authorization, coordination or tool-runtime control.
+- No new source identity, verified-core admission, implementation or cross-agent execution evidence was established by this review.
+- External theorem reproduction and code/runtime tests: NOT_EXECUTED; existing historical research and source correction text: PRESERVED.

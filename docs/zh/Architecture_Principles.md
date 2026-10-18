@@ -1453,3 +1453,11 @@ NOT_TESTED
 - 当前 Safe-MARL 研究的引用与跨文档 claim transfer 必须使用 `arXiv:2312.12861v3`、完整标题和 PR #274 复合身份，不能只写 `S63`。
 - 撞号冲突状态保留为 OPEN，本次不凭空分配新的 S 编号，也不重写原始论文与 PR 文本。
 - 论文中的 MPC 约束研究、Memory 理论与当前实际运行的智能体安全验证是不同证据层，本次没有重新运行算法或完成实证验收。
+
+## 2026-W42 前向周度审查——架构与来源身份
+- Jules 原生 Weekly PR #306 合并前执行保全，原文和已存在的时间点 correction 均不被替换
+- 2026-10-16 的 S63 来源撞号保持 OPEN：arXiv:2312.12861v3 和当前登记 arXiv:2410.23574v3 仍为不同对象，不擅自重编 ID
+- 现有部分可观察 Markov Potential Games 研究 arXiv:2604.00433v1 与 Memory/Collaboration 的独立自然策略梯度 arXiv:2310.09727v2 不是同一论文
+- 去中心化策略优化仅能在原论文假设内构成设计类比，不能转化为当前仓库已部署的协作、授权或工具 Runtime
+- 本轮不新增来源身份、不晋升 verified-core、不宣称本地执行或跨 Agent 验证成功
+- 外部定理复证与运行测试 NOT_EXECUTED；历史正文、公式和既有修正 PRESERVED

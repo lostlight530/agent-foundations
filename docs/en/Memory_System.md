@@ -993,3 +993,12 @@ MONTH_OPEN
 - **Mapping / implementation gate:** S42 stays a conceptual memory-retrieval `DESIGN_CANDIDATE`; repository implementation remains `NOT_IMPLEMENTED`, runtime tests `NOT_TESTED`, verified-core promotion `NOT_PERFORMED`.
 - **Historical preservation:** the original October 1 and October 17 bilingual text, PR chronology and declared statuses stay visible as point-in-time producer records; this appended dated correction supplies the current evidence interpretation.
 - **Current disposition:** `SOURCE_VERSION_DATE_RECONCILED / FORMULA_RESTATEMENT_REJECTED / SAME_SOURCE_REVISIT / NO_THEOREM_RERUN`.
+
+## 2026-W42 forward weekly review — memory and policy-gradient separation
+- Original Memory research and 2026-10-17 S42 source/formula correction remain preserved after Jules PR #306's destructive replacement was identified.
+- Sparse modern Hopfield arXiv:2309.12673v2 (S42) is distinct from the potential-game policy-gradient study arXiv:2310.09727v2.
+- The 2026-10-17 forward correction FORMULA_NOT_SUPPORTED_AS_WRITTEN on an earlier simplified S42 energy expression remains effective.
+- Memory and Collaboration references to arXiv:2310.09727 are one canonical paper identity, not independently produced scientific evidence.
+- The potential-game work may suggest limited historical/state-design analogies; it does not establish a local memory runtime, policy-evaluation oracle, or convergence validation.
+- No source reallocation, paper formula replacement, verified-core promotion, experimental replication or production acceptance occurred in this review.
+- State: SAME_SOURCE_REVISIT / BOUNDED_DESIGN_ANALOGY / RUNTIME_NOT_EXECUTED; all original chunks remain historical evidence.

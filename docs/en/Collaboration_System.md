@@ -2910,3 +2910,12 @@ Imagine a team of explorers mapping an unknown island. Instead of shouting every
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** NOT_IMPLEMENTED
 - **Repository Test Status:** NOT_TESTED
+
+## 2026-W42 forward weekly review — collaboration assumptions
+- Original Collaboration research and previous Weekly notes are preserved despite Jules PR #306's attempted wholesale replacement.
+- Previously recorded primary subject: Provably Fast Convergence of Independent Natural Policy Gradient for Markov Potential Games (arXiv:2310.09727v2).
+- Paper-specific Markov potential-game and policy-gradient assumptions do not hold automatically in adversarial, misaligned or heterogeneous multi-agent systems.
+- A mathematical convergence statement cannot establish cross-agent execution authority, authenticated coordination, accepted tool effects, or deployment correctness.
+- A corresponding Memory citation of the same arXiv paper is a same-source cross-container reference, not independent corroboration.
+- Disposition: CONDITIONALLY_APPLICABLE_DESIGN_ANALOGY; new source credit NONE; local integration and independent execution tests NOT_EXECUTED.
+- This review is appended as a forward interpretation; historical source/theorem text and provenance remain intact.

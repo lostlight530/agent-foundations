@@ -996,3 +996,12 @@ MONTH_OPEN
 - **理论映射边界：** S42 仍是记忆稀疏检索的 `DESIGN_CANDIDATE`，仓内实现 `NOT_IMPLEMENTED`、测试 `NOT_TESTED`、verified-core 晋升 `NOT_PERFORMED`
 - **历史保护：** 保留 10 月 1 日和 10 月 17 日原始双语正文、生产者原状态、Git PR 与合并证据，仅追加当前有日期的修正解释
 - **本次结论：** `SOURCE_VERSION_DATE_RECONCILED / FORMULA_RESTATEMENT_REJECTED / SAME_SOURCE_REVISIT / NO_THEOREM_RERUN`
+
+## 2026-W42 前向周度审查——记忆与策略梯度的边界
+- Jules 原生 PR #306 曾试图整文件替换，本轮保全原文和 2026-10-17 S42 论文与公式前向纠错
+- 稀疏现代 Hopfield arXiv:2309.12673v2（S42）与势博弈独立自然策略梯度 arXiv:2310.09727v2 是不同研究对象
+- 对此前 S42 简化能量表达式的 FORMULA_NOT_SUPPORTED_AS_WRITTEN 裁定仍有效，不借 Weekly 覆盖
+- Memory 与 Collaboration 重复引用 arXiv:2310.09727 属于同源跨容器映射，不构成两份独立论文或独立复现
+- 策略梯度理论只能提供有界设计类比，尚未建立本地记忆算法、policy oracle 或跨系统执行证据
+- 本轮不重编 Source ID、不替换论文公式、不晋升 verified-core，也未执行实验复现和生产验收
+- 当前状态 SAME_SOURCE_REVISIT / BOUNDED_DESIGN_ANALOGY / RUNTIME_NOT_EXECUTED；历史研究全部保留

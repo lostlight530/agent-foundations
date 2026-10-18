@@ -531,3 +531,11 @@ MONTH_OPEN
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
+
+## 2026-W42 前向周度审查——工具运行合同
+- Jules 原生 Weekly PR #306 的覆盖式替换在合并前被纠正；工具研究正文、五轴校准和历史 Weekly 保留
+- 此前 main 中的 Tool 容器未见 arXiv:2310.09727v2 的实质论文研究段落，不能声称已将该 Daily 成功编织到工具系统
+- 势博弈策略梯度研究不能自动证明工具权限、policy oracle、approval 当前有效、幂等性或外部 effect 收据
+- 相关跨容器映射只能是 CONDITIONALLY_COMPATIBLE_AS_DESIGN_ANALOGY，并需单独核对论文与 Runtime 假设
+- 本轮未增加来源身份、工具授权、集成运行测试或 verified-core 晋升
+- 审查状态 SOURCE_NOT_ADDED / HISTORICAL_DOCUMENT_PRESERVED / RUNTIME_VALIDATION_NOT_EXECUTED；不得用笼统 MISSING_SOURCE 覆盖既有研究
