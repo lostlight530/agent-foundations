@@ -521,3 +521,32 @@ MONTH_OPEN
   - Migrated chunks successfully. Removed W40 wrapper as per instructions.
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
+
+## Tool System Privacy-Preserving Regret Bounding
+
+- **System Container:** Tool System
+- **Frontier Source:**
+  - **Title:** On the Optimal Regret of Locally Private Linear Contextual Bandit
+  - **Authors:** Jiachun Li, David Simchi-Levi, Yining Wang
+  - **URL:** http://arxiv.org/abs/2404.09413v1
+  - **Version:** v1
+  - **Publication Date:** 2024-04-15
+  - **Reason for selection:** This paper provides a theoretical foundation for integrating locally private constraints in linear contextual bandits, yielding an optimal regret bound. It allows modeling how to bound exploration regret when agents select tools (actions) in privacy-constrained environments.
+  - **Actually extracted paragraphs or formulas:** Algorithm 2 (RegCB.Elimination), bounding cumulative regret by $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$.
+- **Original Problem:** (论文原始问题) Whether a minimax optimal regret of $\tilde{O}(\sqrt{T})$ can be achieved in linear contextual bandit problems under local privacy constraints.
+- **Core Assumptions:** (核心假设) The reward model is linear; local privacy is constrained by parameter $\alpha$; action space is finite and contexts are stochastic; errors from the oracle can be effectively bounded by Mean Absolute Deviation (MAD).
+- **Mathematical Mechanism:** (数学机制)
+  - **Formula classification:** 算法伪代码 (Algorithm Pseudocode)
+  - Action elimination (RegCB.Elimination): $\mathcal{A}_{\tau'}(x_t)\leftarrow \{a\in\mathcal{A}_{\tau'-1}: \hat{f}_{\tau'}^a(x_t)+\Delta_{\tau'}^a(x_t)\ge\max_{a'\in\mathcal{A}_{\tau'-1}} \hat{f}_{\tau'}^{a'}(x_t)-\Delta_{\tau'}^{a'}(x_t)\}$
+- **Convergence or behavior boundaries:** (收敛或行为边界) Cumulative regret is strictly bounded by $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$, leading to a final regret bound of $\tilde{O}(\sqrt{T})$ using careful elimination epoch scheduling.
+- **Applicability Scope:** (适用范围) Non-stationary linear environments requiring privacy protection over state context distributions; tool selection where feedback must remain private.
+- **Limitations:** (局限) The bound scales significantly with the action space size $A$ and context dimension $d$; the implementation relies on maintaining confidence intervals across active actions.
+- **Agent Architecture Mapping:** (Agent 架构映射) This mechanism can conceptually support localized privacy-constrained tool selection protocols, where sensitive contextual states of different tools are shielded using calibrated noise while avoiding linear regret.
+- **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED
+- **Repository Test Status:** (仓库测试状态) NOT_TESTED
+- **Beginner Analogy:** (初学者类比) Imagine blindfolding yourself slightly before picking a tool from a box to prevent onlookers from knowing exactly what you are doing. The algorithm provides a methodical way to still reliably pick the best tools over time without letting the noise ruin your success rate.
+- **Evidence Status:**
+  - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

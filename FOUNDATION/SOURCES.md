@@ -597,6 +597,18 @@ Canonical rules:
 - Actually extracted paragraphs or formulas: Extracted the utility gap convergence bound: $\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$.
 - Verification boundary: Verified from LaTeX Source. The guarantee requires bounded feasible action sets and Lipschitz continuous, concave utility functions, assuming bandit feedback without full gradient knowledge.
 
+
+## S66 — On the Optimal Regret of Locally Private Linear Contextual Bandit
+- Type: Canonical Source
+- Identifier: arXiv:2404.09413v1
+- Version date: 2024-04-15
+- Authors: Jiachun Li, David Simchi-Levi, Yining Wang
+- URL: http://arxiv.org/abs/2404.09413v1
+- Use: Daily Research Chunk (Tool System)
+- Reason for selection: Provides rigorous regret bounds for linear contextual bandits under local privacy constraints, offering tools for privacy-preserving bounded tool routing.
+- Actually extracted paragraphs or formulas: Extracted Algorithm 2 (RegCB.Elimination) and its cumulative regret bound $O(n_1 + A^2\sum_{t=2}^{t_0} n_t\mathcal{E}_{\alpha,\delta}(n_{t-1}))$.
+- Verification boundary: Verified from LaTeX Source. Guarantees depend strictly on assumptions such as local privacy parameter constraints, finite action spaces, bounded mean absolute deviation (MAD) errors, and non-stationary distribution environments.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
