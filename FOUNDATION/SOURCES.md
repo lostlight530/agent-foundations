@@ -609,6 +609,19 @@ Canonical rules:
 - Actually extracted paragraphs or formulas: Extracted Algorithm 2 (RegCB.Elimination) and its cumulative regret bound $O(n_1 + A^2\sum_{t=2}^{t_0} n_t\mathcal{E}_{\alpha,\delta}(n_{t-1}))$.
 - Verification boundary: Verified from LaTeX Source. Guarantees depend strictly on assumptions such as local privacy parameter constraints, finite action spaces, bounded mean absolute deviation (MAD) errors, and non-stationary distribution environments.
 
+## S67 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent
+
+- Type: `E4_PREPRINT`
+- Identifier: arXiv:2409.09869v1
+- Version date: 2024-09-15
+- Authors: Pavel Osinenko, Grigory Yaremenko, Roman Zashchitin, Anton Bolychev, Sinan Ibrahim, Dmitrii Dobriborsci
+- URL: https://arxiv.org/abs/2409.09869
+- Use: 2026-10-19 Daily Research Chunk (Architecture Principles), English and Chinese
+- Reason for selection: Examines an online model-free critic-as-Lyapunov control agent with a nominal stabilizer as a fallback under its stated dynamical assumptions.
+- Actually extracted paragraphs or formulas: Quadratic class-ℶ-infinity bounds `kappa_low(r)=C_low*r^2`, `kappa_up(r)=C_up*r^2`; critic decrease and fallback-policy constraint scheme as described in the source-linked bilingual research chunk.
+- Verification boundary: Paper metadata and abstract cross-checked against arXiv:2409.09869v1. Paper-only source eligibility; no independent theorem reproduction, local controller implementation, host-runtime tests, general safety guarantee or durable-claim admission. Source identity registration is not verification of mathematical correctness.
+- Provenance correction: Source block admitted during explicit human-authorized pre-merge GPT-6 review on 2026-10-19. Original Jules bilingual research text and `S67` citation preserved; earlier unregistered `S67` gap was recorded in this PR review.
+
 ## Registry-state rule
 
 The canonical current range is the contiguous sequence from `S01` through the highest registered `Sxx` entry present in this file at the reviewed revision.
