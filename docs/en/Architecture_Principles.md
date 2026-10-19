@@ -1461,7 +1461,7 @@ Imagine teaching a group of student drivers how to drive in formation. Instead o
 ## Daily Research Chunk: Critic as Lyapunov Function (CALF) for Bounded Architecture
 
 - **System Container:** Architecture Principles
-- **Frontier Source:** arXiv:2409.09869v1 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent (canonical Sxx registration: NOT_REGISTERED)
+- **Frontier Source:** S67 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent
   - **Authors:** Pavel Osinenko, Grigory Yaremenko, Roman Zashchitin, Anton Bolychev, Sinan Ibrahim, Dmitrii Dobriborsci
   - **URL:** http://arxiv.org/abs/2409.09869v1
   - **Version:** v1
@@ -1485,10 +1485,3 @@ Imagine teaching a group of student drivers how to drive in formation. Instead o
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
-
-
-### 2026-10-19 pre-merge source-identity correction | independent GPT-6 review
-- Original Jules draft labeled the CALF paper as `S67`, but the canonical `FOUNDATION/SOURCES.md` registry currently ends at `S66`. That proposed label had no canonical registration.
-- Current evidence identity is `arXiv:2409.09869v1` with the exact paper title and authors; any future Sxx admission requires a separate canonical registry decision.
-- Correction scope: one bibliography identity field; paper-only and conceptual-mapping claims are retained. Repository implementation remains `NOT_IMPLEMENTED` and test remains `NOT_TESTED`.
-- Review method: canonical source registry + arXiv landing metadata; full repository-native validator not executed by reviewer.
