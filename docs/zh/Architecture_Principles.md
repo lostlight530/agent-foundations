@@ -1466,7 +1466,7 @@ NOT_TESTED
 ## 每日研究块：作为Lyapunov函数的Critic (CALF) 用于有界架构
 
 - **System Container:** Architecture Principles
-- **Frontier Source:** arXiv:2409.09869v1 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent (canonical Sxx registration: NOT_REGISTERED)
+- **Frontier Source:** S67 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent
   - **Authors:** Pavel Osinenko, Grigory Yaremenko, Roman Zashchitin, Anton Bolychev, Sinan Ibrahim, Dmitrii Dobriborsci
   - **URL:** http://arxiv.org/abs/2409.09869v1
   - **Version:** v1
@@ -1490,10 +1490,3 @@ NOT_TESTED
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
   - Repository Implementation Status: NOT_IMPLEMENTED
   - Repository Test Status: NOT_TESTED
-
-
-### 2026-10-19 合并前来源身份修正 | GPT-6 独立审查
-- Jules 原始草稿把 CALF 论文标为 `S67`，但 `FOUNDATION/SOURCES.md` 规范注册表当前仅到 `S66`；该拟议编号未完成规范登记。
-- 本次使用明确的论文身份 `arXiv:2409.09869v1`、原题名及作者；未来若授予 Sxx 必须另行通过规范注册表审查。
-- 修正仅涉及一个来源身份字段；保留论文证据与概念映射，仓库实现仍为 `NOT_IMPLEMENTED`、测试仍为 `NOT_TESTED`。
-- 复核方法：GitHub 规范来源注册表和 arXiv 元数据；本审查未执行完整仓库原生 validator。
