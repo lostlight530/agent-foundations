@@ -1461,3 +1461,32 @@ NOT_TESTED
 - 去中心化策略优化仅能在原论文假设内构成设计类比，不能转化为当前仓库已部署的协作、授权或工具 Runtime
 - 本轮不新增来源身份、不晋升 verified-core、不宣称本地执行或跨 Agent 验证成功
 - 外部定理复证与运行测试 NOT_EXECUTED；历史正文、公式和既有修正 PRESERVED
+
+
+## 每日研究块：作为Lyapunov函数的Critic (CALF) 用于有界架构
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S67 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent
+  - **Authors:** Pavel Osinenko, Grigory Yaremenko, Roman Zashchitin, Anton Bolychev, Sinan Ibrahim, Dmitrii Dobriborsci
+  - **URL:** http://arxiv.org/abs/2409.09869v1
+  - **Version:** v1
+  - **Publication Date:** 2024-09-15T21:27:44Z
+  - **Reason for selection:** 提供了使用Critic作为Lyapunov函数来确保动态系统稳定性的无模型方法，适用于将Agent行为约束在预定义安全包络内。
+  - **Actually extracted paragraphs or formulas:** 提取了二次K-无穷界限：$\hat \kappa_\low(\bullet) = C_\low \bullet^{2}, \ \hat \kappa_\up(\bullet) = C_\up \bullet^{2}$ (核心更新公式) 及其约束更新逻辑。
+- **Original Problem:** 在线强化学习环境中保留学习到的Q函数（Critic）的Lyapunov性质，以确保动态系统稳定，同时将其与名义均匀稳定器结合。
+- **Core Assumptions:** 存在一个已知的名义均匀稳定器 $\policy_0$；状态转移函数 $\transit$ 在范数意义下是上半连续的。
+- **Mathematical Mechanism:** 算法检查类似Lyapunov的约束：$\hat Q^w(\state_t, \action_t) - \hat Q^{w^\dagger}(\state^\dagger, \action^\dagger) \le - \bar \nu$ 以及 $\hat \kappa_\low (\nrm{\state_t}) \le \hat Q^{w}(\state_t, \action_t) \le \hat \kappa_\up(\nrm{\state_t})$。如果违反约束，权重被“冻结”，系统退回调用名义稳定器 $\policy_0$。
+- **收敛或行为边界 (Convergence or behavior boundaries):**
+  - **界限:** 系统在最多 $T^* := \bar T^{\policy_0} \cdot \hat T$ 步内到达目标状态集，其中 $\hat T$ 是Critic可能连续失败的最大次数。
+  - **类型:** 收敛界
+- **Scope of Application:** 在线强化学习场景，存在已知的后备基础策略，且状态空间允许测量到目标集的距离。
+- **Limitations:** 达到目标的时间 $T^*$ 依赖于初始状态，一般无法在紧集上实现一致界，除非满足特定的一致性条件。
+- **Agent Architecture Mapping:** 在Agent架构中可以在概念上支持安全包络机制：将启发式规则策略视为 $\policy_0$，当学习到的Agent策略违反概念上的成本函数预期下降时，回退到该安全策略。
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** 这就像一个正在学习开车的学员（学习Agent）和带有副刹车的教练（稳定器）。如果学员的操作增加了风险（违反了Lyapunov衰减约束），教练会短暂接管方向盘以稳定车辆，然后再让学员继续尝试。
+- **Evidence Status:**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED

@@ -1456,3 +1456,32 @@ Imagine teaching a group of student drivers how to drive in formation. Instead o
 - Conditional decentralized policy optimization is a bounded design analogy, not currently deployed authorization, coordination or tool-runtime control.
 - No new source identity, verified-core admission, implementation or cross-agent execution evidence was established by this review.
 - External theorem reproduction and code/runtime tests: NOT_EXECUTED; existing historical research and source correction text: PRESERVED.
+
+
+## Daily Research Chunk: Critic as Lyapunov Function (CALF) for Bounded Architecture
+
+- **System Container:** Architecture Principles
+- **Frontier Source:** S67 — Critic as Lyapunov function (CALF): a model-free, stability-ensuring agent
+  - **Authors:** Pavel Osinenko, Grigory Yaremenko, Roman Zashchitin, Anton Bolychev, Sinan Ibrahim, Dmitrii Dobriborsci
+  - **URL:** http://arxiv.org/abs/2409.09869v1
+  - **Version:** v1
+  - **Publication Date:** 2024-09-15T21:27:44Z
+  - **Reason for selection:** Provides a model-free method to ensure dynamical system stability using a critic as a Lyapunov function, relevant for constraining agent behavior within a predefined envelope.
+  - **Actually extracted paragraphs or formulas:** Extracted the quadratic K-infinity bounds: $\hat \kappa_\low(\bullet) = C_\low \bullet^{2}, \ \hat \kappa_\up(\bullet) = C_\up \bullet^{2}$ (核心更新公式) and the constraint update logic.
+- **Original Problem:** Retaining the Lyapunov property of a learned Q-function (critic) in an online setting to ensure dynamical system stabilization while combining it with a nominal uniform stabilizer.
+- **Core Assumptions:** Exists a known nominal uniform stabilizer $\policy_0$; the transition dynamics $\transit$ are upper semi-continuous in norm.
+- **Mathematical Mechanism:** The algorithm checks Lyapunov-like constraints: $\hat Q^w(\state_t, \action_t) - \hat Q^{w^\dagger}(\state^\dagger, \action^\dagger) \le - \bar \nu$ and $\hat \kappa_\low (\nrm{\state_t}) \le \hat Q^{w}(\state_t, \action_t) \le \hat \kappa_\up(\nrm{\state_t})$. If they fail, the weights are "frozen" and the nominal stabilizer $\policy_0$ is invoked.
+- **Convergence or behavior boundaries (Convergence or behavior boundaries):**
+  - **Bound:** The target state is reached in at most $T^* := \bar T^{\policy_0} \cdot \hat T$ steps, where $\hat T$ is the maximum number of times the critic can fail sequentially.
+  - **Type:** 收敛界
+- **Scope of Application:** Online reinforcement learning settings where a known base fallback policy exists and the state space allows for measurable distances to a goal set.
+- **Limitations:** The reaching time $T^*$ depends on the initial state and cannot generally be made uniform over compacts unless specific uniformity conditions hold.
+- **Agent Architecture Mapping:** Can conceptually support safety envelopes in agent architectures by treating a heuristic rule-based policy as $\policy_0$ and reverting to it when the learned agent's policy violates expected decay in a conceptual cost function.
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Repository Test Status:** NOT_TESTED
+- **Beginner Analogy:** It's like having a student driver (the learning agent) and an instructor with dual controls (the stabilizer). If the student makes a move that increases risk (violates the Lyapunov decay constraint), the instructor briefly takes the wheel to stabilize the car before letting the student try again.
+- **Evidence Status:**
+  - Paper Evidence Status: PAPER_ONLY
+  - Architecture Mapping Status: CONCEPTUAL_MAPPING
+  - Repository Implementation Status: NOT_IMPLEMENTED
+  - Repository Test Status: NOT_TESTED
