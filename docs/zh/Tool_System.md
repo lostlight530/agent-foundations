@@ -539,3 +539,33 @@ MONTH_OPEN
 - 相关跨容器映射只能是 CONDITIONALLY_COMPATIBLE_AS_DESIGN_ANALOGY，并需单独核对论文与 Runtime 假设
 - 本轮未增加来源身份、工具授权、集成运行测试或 verified-core 晋升
 - 审查状态 SOURCE_NOT_ADDED / HISTORICAL_DOCUMENT_PRESERVED / RUNTIME_VALIDATION_NOT_EXECUTED；不得用笼统 MISSING_SOURCE 覆盖既有研究
+
+## 2026-10-21 每日研究块——工具执行效果的内核驻留因果标签
+
+- **System Container:** Tool System（工具系统）
+- **Producer:** GPT-6 独立原生 Daily 接续执行，逻辑日期 Asia/Shanghai 2026-10-21
+- **来源身份:** Yifei Bao、Ting Liu、Yuxin Ren、Ruizhe Huang、Likang Luo、Ziteng Xu、Yu Wang、Peng Jiang，*AgentLoupe: Kernel-Resident Semantic Causal Labels for AI Agent Observability*，arXiv:2610.23233v2
+- **版本与时间:** v1 于 2026-10-16 10:01:50 UTC 提交；v2 于 2026-10-19 01:49:36 UTC 修订
+- **实际打开的一手全文:** https://arxiv.org/html/2610.23233v2，第 2.1、3.1–3.4 与 4.1–4.2 节
+- **来源等级:** 原始研究论文；本仓未复验的论文证据按 E4_PREPRINT，不因报告被研讨会接收就视为本仓复现
+- **选择理由:** 论文明确研究工具动作与延迟系统效果之间的因果身份传递，而不仅依赖进程树、文本相似性或时间窗口推测
+
+### 论文原始问题与核心假设
+- **原始问题:** 代理写入持久化资源后，后续由外部进程触发的效果可能脱离原始进程谱系；工具调用日志本身不足以证明后续效果的语义来源
+- **核心假设:** OpenSSL/BoringSSL 的可观测明文边界、可用的内核 eBPF hook、可跟踪的进程/文件/socket 身份、能够识别的 LLM prompt 边界与传递事件；不是对所有平台或 TLS 实现的普遍保证
+- **研究机制:** 每个新的独立 Prompt 取得新 `chain_id`；fork/clone 从父进程传递，写文件时绑定 inode，后续 open/exec 可把 inode 标签接续到进程，网络操作关联 socket 和进程标签
+- **机制分类:** 论文描述的标签传递规则，不是数学收敛定理、源码审计结果或本仓已实现组件
+- **行为规则的概念化表达（非原文公式）:** 仅在作者列出的交接谓词成立时令 `L(target) <- L(source)`；新 prompt 分配新 `chain_id`，通过 `related_chain_id` 保留此前影响关系
+- **防止过度传播的约束:** 不在无关独立 Prompt 之间无条件继承标签；被拒绝的跨链传递可作为 PROP 事件留存
+- **论文报告的实验边界:** 三种工作负载开销分别为 +4.5%、+8.0%、+7.7%，另有两个案例；不是对所有运行场景的错误归因率保证
+
+### Agent 架构映射与局限
+- **架构映射:** 可作为工具执行与迟到效果之间携带因果证据身份的候选机制，与当前执行授权合同分开；增强可解释性不等于授权、拦截或任务完成验证
+- **行为边界:** 标签传递仅适用于已捕获的事件与论文约定的继承规则；论文第 5 节说明传播的误报率、漏报率仍未量化
+- **适用范围:** 需要支持的内核、资源 incarnation 身份、TLS 捕获与可用事件顺序证据；不能由论文试验直接推出端到端安全、全面因果真值
+- **反例边界:** 后续动作附有标签不等于动作发生时具备批准，缺少标签也不能推出历史效果从未发生
+- **初学者类比:** 行李上的长期标签有助于查出是谁打包、后来谁打开，但标签既不是打开行李的授权书，也不能证明操作成功
+- **Claim State:** OBSERVED；**Evidence Level:** E4_PREPRINT；**Mapping State:** CANDIDATE_MECHANISM；**Implementation State:** NOT_IMPLEMENTED；**Validation State:** NOT_TESTED
+- **仓库验证:** 本次没有执行 Tool System runtime、eBPF fixture、真实效果重放或外部定理复现
+- **跨仓来源边界:** 即便其他仓库也观察到同一论文，它仍属于同一来源谱系，不能计为独立验证或自动晋升 Foundation verified-core
+
