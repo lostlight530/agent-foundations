@@ -558,3 +558,33 @@ MONTH_OPEN
 - Cross-container interpretation is CONDITIONALLY_COMPATIBLE_AS_DESIGN_ANALOGY only where the original theorem and local runtime assumptions are independently met.
 - No new source, tool permission, local integration, runtime test or verified-core promotion has been demonstrated in this Weekly review.
 - Disposition: SOURCE_NOT_ADDED / HISTORICAL_DOCUMENT_PRESERVED / RUNTIME_VALIDATION_NOT_EXECUTED; generic MISSING_SOURCE does not erase existing sources.
+
+## 2026-10-21 Daily Research Chunk — Kernel-Resident Causal Labels for Tool-Effect Provenance
+
+- **System Container:** Tool System
+- **Producer:** GPT-6 independent native Daily successor, 2026-10-21 Asia/Shanghai logical date
+- **Source identity:** Yifei Bao, Ting Liu, Yuxin Ren, Ruizhe Huang, Likang Luo, Ziteng Xu, Yu Wang, Peng Jiang, *AgentLoupe: Kernel-Resident Semantic Causal Labels for AI Agent Observability*, arXiv:2610.23233v2
+- **Source version / chronology:** v1 submitted 2026-10-16 10:01:50 UTC; v2 revised 2026-10-19 01:49:36 UTC
+- **Verified original full text:** https://arxiv.org/html/2610.23233v2 — Sections 2.1, 3.1–3.4 and 4.1–4.2
+- **Source classification:** original research paper; E4_PREPRINT for unreplicated paper-level claims in this repository, despite reported workshop acceptance
+- **Selection reason:** makes a tool-action-to-later-system-effect causal identity contract explicit, beyond process-tree inference or text/time similarity
+
+### Original problem and assumptions
+- **Problem:** delayed execution via an agent-written persistent resource can run outside the agent process lineage; a tool-call record does not by itself establish the origin of later system effects.
+- **Assumptions:** instrumentable OpenSSL/BoringSSL plaintext capture and supported kernel eBPF hooks, tracked process/file/socket resource identities, recognized LLM prompt boundaries, and label-preserving handoffs; this is not a portable guarantee for every OS or TLS stack.
+- **Observed mechanism:** a newly recognized independent LLM prompt receives a fresh `chain_id`. At named handoffs, fork/clone propagates parent-to-child, a labeled write associates the label with the inode, later open/exec transfers the inode label, and network operations transfer labels to socket/process state.
+- **Algorithm classification:** source-described label propagation rules, **not** a mathematical convergence proof, verified source-code audit, or repository implementation.
+- **Bounded transfer expression (our interpretation, not a quoted equation):** `L(target) <- L(source)` only for the paper's enumerated handoff predicates; `new_prompt -> fresh chain_id`, preserving `related_chain_id` for a prior influence relationship.
+- **Anti-overpropagation condition:** no unconditional label inheritance between unrelated LLM prompts; rejected cross-chain transfers remain observable in PROP records.
+- **Paper evaluation:** the authors report three measured workload overheads of +4.5%, +8.0%, and +7.7%, and two case studies, not a general bound on false-positive/negative attribution.
+
+### Architecture mapping and evidence limits
+- **Tool architecture mapping:** CANDIDATE_MECHANISM for carrying causal evidence identity across a delayed file/process/socket effect and a separate current-authorization boundary. It may improve forensic explanation, but cannot itself authorize a tool call, prevent an effect, or validate task completion.
+- **Behavior boundary:** label propagation only covers instrumented/recognized events and paper-specific inheritance rules; the paper explicitly says propagation false-positive and false-negative rates remain unquantified (§5).
+- **Scope / limitations:** applicability needs a supported kernel, stable resource incarnation semantics, suitable TLS hooking, trustworthy record ordering, and captured events; neither end-to-end security nor universal causal truth follows from author experiments.
+- **Counterexample to overclaim:** a chain label on a later effect is not an effect-time approval receipt, and a missing recorded label is not authoritative evidence that an earlier effect never occurred.
+- **Beginner analogy:** a durable luggage tag can connect the person who packed a bag to someone who opened it later, but the tag does not prove that opening the bag was authorized or successful.
+- **Claim State:** OBSERVED; **Evidence Level:** E4_PREPRINT; **Mapping State:** CANDIDATE_MECHANISM; **Implementation State:** NOT_IMPLEMENTED; **Validation State:** NOT_TESTED.
+- **Repository checks:** no Tool System runtime implementation, eBPF fixture, real effect replay, or theorem reproduction was executed for this Daily research.
+- **Cross-container restriction:** this source also appears in other repositories' observation contexts; reuse across repositories is the same source lineage, not independent scientific corroboration or automatic Foundation verified-core admission.
+
