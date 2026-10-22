@@ -569,3 +569,33 @@ MONTH_OPEN
 - **仓库验证:** 本次没有执行 Tool System runtime、eBPF fixture、真实效果重放或外部定理复现
 - **跨仓来源边界:** 即便其他仓库也观察到同一论文，它仍属于同一来源谱系，不能计为独立验证或自动晋升 Foundation verified-core
 
+
+
+## 2026-10-22 每日研究块——带来源类型的工具动作执行前承诺决策
+
+- **任务身份:** `foundations/research/daily`；**System Container:** Tool System（工具系统）
+- **Producer:** GPT-6 前瞻性原生 Daily，逻辑日期 Asia/Shanghai 2026-10-22；检查时间 2026-10-22T04:27:15.059Z
+- **来源身份:** Bo Yan、Qi Zhang、Ziwen Kan、Fnu Suya、Song Wang，*PROVISO: Provenance-Informed Action Selection for Secure LLM Agents*，arXiv:2610.27115v1
+- **来源版本与发布时间:** v1 2026-10-19 18:13:53 UTC；摘要 https://arxiv.org/abs/2610.27115v1；一手全文 https://arxiv.org/html/2610.27115v1
+- **实际检查范围:** 原论文第 1、3.1–3.2 节，包含决策实例形式化、来源角色模型；另检查摘要与实验结果章节的标题和方法边界
+- **研究选择理由:** 为 2026-10-21 AgentLoupe 的“事后因果溯源”补充一个不等价的“效果发生前，谁有权许可动作目标”的问题；不是借论文名制造每日增长
+- **规范来源登记:** 本 Daily 不自行分配新的 `Sxx`；可引用性、入库仍由 `FOUNDATION/SOURCES.md` 控制，该登记表尚保留历史 S63 身份冲突
+
+### 原始问题、模型与假设
+- **原始问题:** 不可信工具响应可能把攻击者选择的操作或目标混入动作，尽管用户授权了不同目标；简单的允许/拒绝判定也可能误拒合法继续执行
+- **模型:** 作者定义 `x=(K,G,P0,P1)`，其中 `K` 是可信用户/部署观察，`G` 是外部工具与文档观察，`P0` 为原始提议动作，`P1` 为可用替代动作；在提议之后、效果发生之前的 commitment point 进行选择
+- **论文公式（原论文第 3.1 节式 1）:** `V*(x,a)=E[y(x,a) | x,a]`，含义是在该部署评估器下对候选动作结果价值建模；不是形式化授权证书或普遍安全定理
+- **机制:** provenance-typed memory 对来源角色编码；learned role-query deliberation 联合对照可信意图、外部证据与两个候选动作；calibrated commitment 根据训练/校准结果择优
+- **核心假设:** 必须有可确认的 `K` 策略/任务语义、具有实际意义的 `P1`、部署相关的 outcome scorer 与校准数据；部分 candidate-selection 实验依赖可恢复的隔离环境 rollout，而不是无边界生产重放
+- **论文报告的结果:** 作者报告在 SkillsBench 与 ToolSafe 上，相比各自最强比较基线，F1 分别提升 13.84 与 7.07 个百分点；这是特定 benchmark 口径，并非本仓复现或普遍承诺
+
+### 反证门与架构含义
+- **强反例:** 来源类型标记不能自动证明 `K` 在 effect time 仍拥有有效授权；过期审批、目标 incarnation 改变、漏捕获副作用，都可能让已选择的动作失去合法性；学习到的得分在分布漂移时也可能失效
+- **与 10/21 来源关系:** AgentLoupe 的“事后因果标签”不构成对 PROVISO“执行前授权决策”的独立复现；两者可以相关，但不互相替代
+- **有界架构映射:** `CANDIDATE_MECHANISM`，用于分离指令来源、当前执行许可、候选动作选择、事后 effect receipt，并在执行前要求独立授权校验；不是新增学习式 guard 的实施决策
+- **反证范围:** 已检查论文的行动语义与隔离 rollout 前提，足以限制普遍安全推论；未进行第三方复现或本地工具执行试验
+- **Evidence Delta:** NEW_EVIDENCE=PROVISO 原论文；CORRECTED_INTERPRETATION=事后归因不等于事前授权；UNCHANGED_BOUNDARY=没有本地工具控制面；NEW_COUNTEREVIDENCE=权限过期与替代动作不可用；UNKNOWN_RETAINED=跨部署泛化性；NEXT_RETEST=权限变化条件下携带 revision 的真实执行收据
+- **五轴状态:** **Claim State:** OBSERVED；**Evidence Level:** E4_PREPRINT；**Mapping State:** CANDIDATE_MECHANISM；**Implementation State:** NOT_IMPLEMENTED；**Validation State:** NOT_TESTED
+- **跨仓谱系:** 若 Horizon 引用同一个 arXiv 对象仍只有 `SOURCE_LINEAGE=1`，重复引用的 `INDEPENDENT_EVIDENCE_CREDIT=0`；此处只是新仓解释，不产生第二份独立科学证据
+- **验证边界:** 完成双语研究文本，但没有执行本仓完整 Python validator、实施工具守卫、效果重放或论文实验复现；不升级 verified core，不修改规范 SOURCES 登记
+
