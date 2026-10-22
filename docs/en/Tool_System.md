@@ -588,3 +588,33 @@ MONTH_OPEN
 - **Repository checks:** no Tool System runtime implementation, eBPF fixture, real effect replay, or theorem reproduction was executed for this Daily research.
 - **Cross-container restriction:** this source also appears in other repositories' observation contexts; reuse across repositories is the same source lineage, not independent scientific corroboration or automatic Foundation verified-core admission.
 
+
+
+## 2026-10-22 Daily Research Chunk — Provenance-Typed Pre-Effect Tool-Action Commitment
+
+- **Task identity:** `foundations/research/daily`; **System Container:** Tool System
+- **Producer:** GPT-6, prospective native Daily execution, logical date 2026-10-22 (Asia/Shanghai); checked at 2026-10-22T04:27:15.059Z
+- **Source identity:** Bo Yan, Qi Zhang, Ziwen Kan, Fnu Suya, Song Wang, *PROVISO: Provenance-Informed Action Selection for Secure LLM Agents*, arXiv:2610.27115v1
+- **Source version and publication:** v1 submitted 2026-10-19 18:13:53 UTC; original abstract: https://arxiv.org/abs/2610.27115v1; full text: https://arxiv.org/html/2610.27115v1
+- **Source surface actually checked:** original paper Sections 1 and 3.1–3.2, including formal decision instance and provenance-typed roles; abstracts/results section headings separately inspected
+- **Selection policy:** this is a concrete pre-commitment mechanism that answers a question not resolved by the 2026-10-21 AgentLoupe post-effect tracing study: *who can license an action's objective and target, before the effect occurs?*
+- **Canonical registry:** source is not assigned a new `Sxx` ID by this Daily; source eligibility and admission remain subject to `FOUNDATION/SOURCES.md`, which also retains an unresolved historical S63 collision.
+
+### Original question, exact model and assumptions
+- **Original problem:** a proposed tool action may contain an attacker-chosen operation or target inherited from an untrusted external observation even when the user authorized a different objective. Binary guards also have a nonzero cost of rejecting benign continuations.
+- **Model:** authors define a decision instance `x=(K,G,P0,P1)`: `K` represents trusted user/deployment observations; `G` represents external observations; `P0` is the proposed action and `P1` an available alternative. The action is evaluated at a *commitment point* after proposal but before actual effect.
+- **Paper equation (original Section 3.1 Eq. 1):** `V*(x,a)=E[y(x,a) | x,a]`. This is an outcome-based *value objective under the paper's deployment scorer*, not a formal authorization certificate or a proof of universal safety.
+- **Claimed mechanism:** provenance-typed memory distinguishes roles of otherwise identical text; learned role-query deliberation compares trusted intent, external content and action candidates; calibrated commitment chooses among available options with outcome feedback.
+- **Applicability assumptions:** a trusted `K` policy/task representation and meaningful `P1` must be available; a deployment-specific outcome scorer and training/calibration data are required. Some candidate-selection tasks use restored/sandboxed environment rollouts, not unconstrained live execution.
+- **Paper-reported results:** authors report SkillsBench and ToolSafe F1 gains of 13.84 and 7.07 points over the strongest compared baseline respectively; these are benchmark-specific, not locally reproduced and not a guarantee for new tool ecosystems.
+
+### Counterevidence gate and architecture consequence
+- **Strong counterexample:** typed provenance alone does not establish that `K` represents currently valid authorization; a stale approval, changed resource incarnation or missed tool side-effect can invalidate a seemingly good candidate after commitment. A learned score can be wrong under a shifted distribution.
+- **Existing 2026-10-21 related paper:** AgentLoupe's post-effect kernel causal lineage is not independent validation of PROVISO's pre-effect authorization model; the papers cover complementary but non-substitutable boundaries.
+- **Bounded mapping:** a `CANDIDATE_MECHANISM` for separating *origin of an instruction*, *current license to act*, *candidate action choice* and *later effect receipt*, with an explicit independently checked authorization predicate before execution. It is not a decision to deploy a learned guard or to change repository tooling.
+- **Counterevidence searched:** the paper's own action semantics and sandboxed candidate-selection conditions expose conditions omitted by a universal-security reading; no independent third-party replication or local action replay was performed.
+- **Evidence Delta:** NEW_EVIDENCE=PROVISO original paper; CORRECTED_INTERPRETATION=attribution-of-effect is not licensing-before-effect; UNCHANGED_BOUNDARY=NO_LOCAL_CONTROL_PLANE; NEW_COUNTEREVIDENCE=stale authority and unavailable alternatives; UNKNOWN_RETAINED=robustness outside studied deployments; NEXT_RETEST=actual revision-matched guarded action receipt under changed authority.
+- **Five-axis record:** **Claim State:** OBSERVED; **Evidence Level:** E4_PREPRINT; **Mapping State:** CANDIDATE_MECHANISM; **Implementation State:** NOT_IMPLEMENTED; **Validation State:** NOT_TESTED.
+- **Cross-repository lineage:** the same arXiv identity may be observed by Horizon; `SOURCE_LINEAGE=1`, `INDEPENDENT_EVIDENCE_CREDIT=0` for this repetition. This Daily is a separate *interpretation* and does not register another paper.
+- **Validation boundary:** bilingual documentary content produced; no implementation, full-repository Python validator, action replay, or paper theorem/experiment reproduction executed. No verified-core admission or source registry update.
+
