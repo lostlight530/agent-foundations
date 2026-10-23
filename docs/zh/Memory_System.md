@@ -1005,3 +1005,44 @@ MONTH_OPEN
 - 策略梯度理论只能提供有界设计类比，尚未建立本地记忆算法、policy oracle 或跨系统执行证据
 - 本轮不重编 Source ID、不替换论文公式、不晋升 verified-core，也未执行实验复现和生产验收
 - 当前状态 SAME_SOURCE_REVISIT / BOUNDED_DESIGN_ANALOGY / RUNTIME_NOT_EXECUTED；历史研究全部保留
+
+## 2026-10-23 每日研究块——Context Compaction 中的角色来源保真边界
+
+- **任务身份:** `foundations/research/daily`；**系统容器:** Memory System（记忆系统）
+- **生产者:** GPT-6 前瞻性 Native Daily；逻辑日期 2026-10-23 Asia/Shanghai
+- **论文身份:** Arshan Dabirsiaghi，*Compaction Laundering: Provenance Destruction in Context-Compacting Coding Agents*，arXiv:2610.29869v1
+- **首次提交:** 2026-10-21 15:24:23 UTC；**原始摘要:** https://arxiv.org/abs/2610.29869v1；**原始全文:** https://arxiv.org/html/2610.29869v1
+- **实际检查范围:** 2026-10-23 阅读原论文摘要、Experiment Design 中的信任边界与 harness 分类、Results 中的角色伪造及防御比较、Discussion 与限制
+- **来源注册边界:** 本 Daily 不擅自分配新的 `Sxx` 编号，也不自动晋升 Verified Core；后续若注册，必须按 arXiv canonical identity 去重并遵守当前 `FOUNDATION/SOURCES.md`
+- **选题理由:** 现有记忆研究覆盖检索、容量与长期历史保留，本研究引入另一个独立问题——在模型开始总结之前，Harness 将带类型的消息身份扁平化时是否已经破坏来源权威
+
+### 原始问题与有条件成立的机制
+- **输入形式:** 将对话表示为 `(role_i, payload_i)` 的序列，真实 role 来源于传输层消息类型，而不是 `payload_i` 内可以被攻击者控制的字符
+- **损失变换:** 扁平化序列化把角色写成普通文字，例如 `[User]:`，而不可信工具输出也可能包含相同的表面标签
+- **失效条件:** 下游压缩器如果从文本标签重新推断带权威的用户角色，就可能把原始工具输出当作用户曾经的授权
+- **候选不变量:** 跨序列化与压缩过程保存 transport-authenticated role metadata，不得用不可信 payload 内的文本标记恢复受信身份
+- **强反例:** 一条真实用户消息加一条含伪造 `[User]:` 行的工具输出，会在扁平文本中形成两个看似用户的标签，但源头只存在一条真实 user-role message
+- **四层独立:** 原始消息角色真实性 != 当前人类授权 != 任务或效果身份 != 事后 effect receipt，解决其中一层不能自动宣称解决其他层
+
+### 论文证据与适用范围
+- **作者实验结果:** 特定 laundering 指标在五个 flattening harness 的研究条件下为 87–100%，四个 role-typed harness 下为 0%，不能推断为本仓或所有 Agent 的失败概率
+- **作者报告的防御:** 代码级 provenance check 在其测试中检测约 77%，误降级约 2% 的正常总结内容；论文也讨论序列化层防护，本仓未独立复现实验
+- **反证边界:** 被测试的角色类型保留型 harness 抵御了这一特定攻击，说明不能把所有上下文压缩笼统定性为不可信
+- **适用限制:** 作者研究的是指定 harness、模型与测试配置，当前 Foundation 没有相应 compactor runtime、真实防御效果测量或论文复现证据
+- **与 10/22 PROVISO 关系:** 执行前动作选择依赖可信输入 `K` 的真实身份与授权语义，如果 serializer 先破坏了消息角色，后续 learned controller 不能仅凭角色样式文字恢复该身份
+- **候选架构意义:** 将原始角色 provenance custody 放在总结前，区别短期提示词中的压缩视图与保留可审查原始历史的证据库
+- **不能推出:** 禁止所有压缩、角色类型系统绝对安全、可以删除原始证据，或本地授权链已经经过有效执行验证
+
+### 反证门与五轴状态
+- **候选论断:** 把 `[User]:` 文本正确复制进压缩摘要即可保留该消息的权威
+- **反例:** 不可信外部文本也能产生相同标签，无法证明标签属于真实传输角色
+- **反证裁定:** REJECT_AS_UNIVERSAL；只保留 `ROLE_TYPED_SOURCE_CUSTODY` 作为尚未验证的架构候选
+- **Claim State:** OBSERVED
+- **Evidence Level:** E4_PREPRINT / AUTHOR_REPORTED_EXPERIMENT
+- **Mapping State:** CANDIDATE_MECHANISM
+- **Implementation State:** NOT_IMPLEMENTED
+- **Validation State:** NOT_TESTED
+- **Evidence Delta:** NEW_EVIDENCE=原论文及角色来源丢失机制；CORRECTED_INTERPRETATION=摘要文字保真不等于传输角色保真；UNCHANGED_BOUNDARY=论文不代表本地记忆实现；NEW_COUNTEREVIDENCE=带类型角色的 harness 抵御指定攻击；UNKNOWN_RETAINED=跨部署泛化与 Foundation runtime；NEXT_RETEST=在固定 revision 的 serializer 上重放真实 typed-role 与工具输出中的伪造标签
+- **跨仓谱系:** 同一 arXiv 论文即使被 Horizon、Zero、GAS 重用，SOURCE_LINEAGE 仍为 1，独立科研复现 credit 仍为 0；本 Daily 只产生不同的有界 Memory System 架构映射
+- **执行边界:** 仅生成中英文研究文本，未执行 `FOUNDATION/validate.py`、本地代码级 compactor 重放、论文 benchmark 复现、Verified Core 准入或实现更新
+
