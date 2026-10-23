@@ -6,7 +6,7 @@
 - Prior A2 relation preserved unchanged: `historical-audits/2026-10/2026-10-21-a2-month-relation.md` at blob `342b206d87e5bca16d3e4b4da16735015aa55d25`
 - Fixed month identity: `2026-10`
 - Current source-identity paths mapped: 39; N−1 append-only revisions: 2; N-day append-only revisions: 2
-- The live main tree SHA equals the fresh main commit; all 39 selected source paths exist and current SHAs match the A1 table
+- Fresh `main` commit `7890a32e23243e39131b6ca650172a8bf0033f1e` records root tree `f89f6edc857b63eae575f754bf505caeb9c43d19`; all 39 mapped source paths, blob SHAs, and byte sizes match the recursive tree for that commit.
 - Provenance-event ledger: 90 events; current source-path inventory: 39; independent paper lineage for arXiv:2610.29869v1 remains one
 
 ## Complete source-to-current mapping
@@ -73,3 +73,9 @@
 ## Result
 
 `A2_MONTH_VERSION_2026-10 / PR320_N_DAY_ADMITTED / SOURCE_LINEAGE_ONE / IMPLEMENTATION_NOT_IMPLEMENTED / MONTH_OPEN`
+
+## 2026-10-23 post-merge correction — Git object identity
+
+- Superseded wording: “The live main tree SHA equals the fresh main commit; all 39 selected source paths exist and current SHAs match the A1 table”. The original version remains in Git history.
+- Correction: a commit SHA identifies a Git commit object; a tree SHA identifies a separate tree object. The recorded base commit and root-tree SHA are distinct, and the mapped source rows were verified against that root tree.
+- Scope: wording precision only. Source identities, mapping counts, owner states, historical task-time classifications, research credit, and month-closure state are unchanged.
