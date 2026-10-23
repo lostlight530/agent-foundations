@@ -1009,8 +1009,13 @@ MONTH_OPEN
 ## 2026-10-23 每日研究块——Context Compaction 中的角色来源保真边界
 
 - **任务身份:** `foundations/research/daily`；**系统容器:** Memory System（记忆系统）
+- **技术点名称:** ROLE_TYPED_SOURCE_CUSTODY_BEFORE_CONTEXT_COMPACTION（上下文压缩前的带类型角色来源保全）
 - **生产者:** GPT-6 前瞻性 Native Daily；逻辑日期 2026-10-23 Asia/Shanghai
+- **前沿来源:** arXiv 原作者预印本与原始全文
 - **论文身份:** Arshan Dabirsiaghi，*Compaction Laundering: Provenance Destruction in Context-Compacting Coding Agents*，arXiv:2610.29869v1
+- **版本:** v1
+- **发布时间 / 提交时间:** 2026-10-21T15:24:23Z
+- **选择理由:** 该论文将记忆总结之前的序列化信任边界单独分离出来，与检索准确性和长期记忆容量问题不同
 - **首次提交:** 2026-10-21 15:24:23 UTC；**原始摘要:** https://arxiv.org/abs/2610.29869v1；**原始全文:** https://arxiv.org/html/2610.29869v1
 - **实际检查范围:** 2026-10-23 阅读原论文摘要、Experiment Design 中的信任边界与 harness 分类、Results 中的角色伪造及防御比较、Discussion 与限制
 - **来源注册边界:** 本 Daily 不擅自分配新的 `Sxx` 编号，也不自动晋升 Verified Core；后续若注册，必须按 arXiv canonical identity 去重并遵守当前 `FOUNDATION/SOURCES.md`
@@ -1020,6 +1025,11 @@ MONTH_OPEN
 - **输入形式:** 将对话表示为 `(role_i, payload_i)` 的序列，真实 role 来源于传输层消息类型，而不是 `payload_i` 内可以被攻击者控制的字符
 - **损失变换:** 扁平化序列化把角色写成普通文字，例如 `[User]:`，而不可信工具输出也可能包含相同的表面标签
 - **失效条件:** 下游压缩器如果从文本标签重新推断带权威的用户角色，就可能把原始工具输出当作用户曾经的授权
+- **核心假设:** 攻击者可以控制 Agent 读取的部分内容；序列化器将带类型的消息角色扁平化为未转义的文本标签；下游总结又将伪造标签当作真实用户消息角色
+- **数学机制:** NONE_PROVIDED；这是一项结构性序列化与归因实验，不是收敛定理或形式化数值界
+- **收敛 / 行为边界:** 论文作者报告五个被测 flattening harness 的 laundering 率为 87–100%，四个 role-typed harness 为 0%；来源伪造与后续工具执行是不同指标，二者都不是 Foundation 本地失败率
+- **原文摘录（英文原文，13 词）:** “Susceptibility is therefore a property of the serialization strategy, not of the model.”
+- **初学者类比:** 在文件内部打印一个伪造姓名标签，并不能让文件真的成为该姓名所指人物发出的消息
 - **候选不变量:** 跨序列化与压缩过程保存 transport-authenticated role metadata，不得用不可信 payload 内的文本标记恢复受信身份
 - **强反例:** 一条真实用户消息加一条含伪造 `[User]:` 行的工具输出，会在扁平文本中形成两个看似用户的标签，但源头只存在一条真实 user-role message
 - **四层独立:** 原始消息角色真实性 != 当前人类授权 != 任务或效果身份 != 事后 effect receipt，解决其中一层不能自动宣称解决其他层
@@ -1031,16 +1041,20 @@ MONTH_OPEN
 - **适用限制:** 作者研究的是指定 harness、模型与测试配置，当前 Foundation 没有相应 compactor runtime、真实防御效果测量或论文复现证据
 - **与 10/22 PROVISO 关系:** 执行前动作选择依赖可信输入 `K` 的真实身份与授权语义，如果 serializer 先破坏了消息角色，后续 learned controller 不能仅凭角色样式文字恢复该身份
 - **候选架构意义:** 将原始角色 provenance custody 放在总结前，区别短期提示词中的压缩视图与保留可审查原始历史的证据库
+- **Agent 架构映射:** 在 serializer 与 compactor 之间保留经认证的角色元数据；让压缩视图与可审查的原始证据分离；在任何效果发生前独立验证当前授权谓词
 - **不能推出:** 禁止所有压缩、角色类型系统绝对安全、可以删除原始证据，或本地授权链已经经过有效执行验证
 
 ### 反证门与五轴状态
 - **候选论断:** 把 `[User]:` 文本正确复制进压缩摘要即可保留该消息的权威
 - **反例:** 不可信外部文本也能产生相同标签，无法证明标签属于真实传输角色
 - **反证裁定:** REJECT_AS_UNIVERSAL；只保留 `ROLE_TYPED_SOURCE_CUSTODY` 作为尚未验证的架构候选
-- **Claim State:** OBSERVED
+- **Claim State:** PAPER_REPORTED
+- **Evidence State:** PAPER_ONLY
 - **Evidence Level:** E4_PREPRINT / AUTHOR_REPORTED_EXPERIMENT
-- **Mapping State:** CANDIDATE_MECHANISM
+- **Mapping State:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
 - **Implementation State:** NOT_IMPLEMENTED
+- **Test Status:** NOT_TESTED
 - **Validation State:** NOT_TESTED
 - **Evidence Delta:** NEW_EVIDENCE=原论文及角色来源丢失机制；CORRECTED_INTERPRETATION=摘要文字保真不等于传输角色保真；UNCHANGED_BOUNDARY=论文不代表本地记忆实现；NEW_COUNTEREVIDENCE=带类型角色的 harness 抵御指定攻击；UNKNOWN_RETAINED=跨部署泛化与 Foundation runtime；NEXT_RETEST=在固定 revision 的 serializer 上重放真实 typed-role 与工具输出中的伪造标签
 - **跨仓谱系:** 同一 arXiv 论文即使被 Horizon、Zero、GAS 重用，SOURCE_LINEAGE 仍为 1，独立科研复现 credit 仍为 0；本 Daily 只产生不同的有界 Memory System 架构映射
