@@ -1002,3 +1002,58 @@ MONTH_OPEN
 - The potential-game work may suggest limited historical/state-design analogies; it does not establish a local memory runtime, policy-evaluation oracle, or convergence validation.
 - No source reallocation, paper formula replacement, verified-core promotion, experimental replication or production acceptance occurred in this review.
 - State: SAME_SOURCE_REVISIT / BOUNDED_DESIGN_ANALOGY / RUNTIME_NOT_EXECUTED; all original chunks remain historical evidence.
+
+## 2026-10-23 Daily Research Chunk — Role Provenance Preservation Across Context Compaction
+
+- **Task identity:** `foundations/research/daily`; **System Container:** Memory System
+- **Technical Point:** ROLE_TYPED_SOURCE_CUSTODY_BEFORE_CONTEXT_COMPACTION
+- **Producer:** GPT-6 prospective Native Daily, logical date 2026-10-23 Asia/Shanghai
+- **Frontier Source:** original arXiv author preprint and full text
+- **Source identity:** Arshan Dabirsiaghi, *Compaction Laundering: Provenance Destruction in Context-Compacting Coding Agents*, arXiv:2610.29869v1
+- **Version:** v1
+- **Publication / submission time:** 2026-10-21T15:24:23Z
+- **Selection reason:** the paper isolates an upstream serialization trust boundary before memory summarization, distinct from retrieval accuracy and long-term memory capacity
+- **Original submission:** 2026-10-21 15:24:23 UTC; **Original abstract:** https://arxiv.org/abs/2610.29869v1; **Full text:** https://arxiv.org/html/2610.29869v1
+- **Original material inspected:** Abstract, Experiment Design (trust boundary, harness classes, prompt provenance), Results (role spoofing, defense and harness differentiation), Discussion and Limits on 2026-10-23
+- **Source registry rule:** this Daily does not allocate an `Sxx` identity or create verified-core admission; any later registration must deduplicate by canonical arXiv paper ID and resolve current `FOUNDATION/SOURCES.md` authority
+- **Selection reason:** the existing Memory System chiefly records retrieval/capacity and history preservation; this paper supplies a separate, concrete trust-boundary failure *before* the model summarizes a transcript, at the serialization of typed message roles into plain text
+
+### Original problem and exact conditional mechanism
+- **Input model:** let a typed conversation be a sequence of pairs `(role_i, payload_i)`, where role identity originates from the chat transport, not from characters supplied inside `payload_i`
+- **Lossy transformation:** a flattening serializer emits a plain text stream, for example with role-looking `[User]:` prefixes, after which untrusted payload text may contain identical delimiter characters
+- **Failure condition:** if a downstream compactor reconstructs authoritative roles from these text delimiters, it may treat an untrusted tool response as a prior user approval
+- **Core assumptions:** an attacker can control some content the agent reads; the serializer flattens typed roles into unescaped in-band text labels; downstream summarization treats the forged label as a role-bearing user turn
+- **Mathematical mechanism:** NONE_PROVIDED; this is a structural serialization and attribution experiment, not a convergence theorem or a formal numerical bound
+- **Convergence / behavior boundary:** the paper reports 87–100% laundering across five tested flattening harnesses and 0% across four tested role-typed harnesses; laundering and subsequent tool execution are separate metrics, and neither result is a Foundation-local rate
+- **Extracted source passage (verbatim, 13 words):** “Susceptibility is therefore a property of the serialization strategy, not of the model.”
+- **Beginner analogy:** a forged name tag printed inside a document does not authenticate that document as a message from the named person
+- **Boundary invariant candidate:** preserve each message's authenticated role identity through serialization and compaction as typed metadata; do not infer trusted role from text tokens inside an untrusted payload
+- **Counterexample:** one true user message plus one tool message containing a forged `[User]:` line can create two apparent user labels in a flat transcript, although the transport still defines exactly one user turn
+- **Distinct contracts:** message-role authenticity != current human authorization != task/effect identity != a post-effect receipt; solving one does not establish the others
+
+### Source-level evidence and applicability
+- **Author-reported evaluation:** the specific tested laundering behavior was observed at 87–100 percent across five flattening harnesses and at 0 percent across four role-typed harnesses; these are conditional research groups, not probabilities for this repository
+- **Reported mitigation:** a code-level check caught 77 percent of the tested laundering with 2 percent legitimate-summary demotion; a structural serializer boundary is also discussed, not independently replicated here
+- **Important counterevidence:** the tested role-typed harnesses resisted this exploit variant, showing that the finding is not a generic assertion that all context compaction is unsafe
+- **Scope limit:** the author demonstrates a particular role-spoofing attack with its own harnesses, models and test setup; there is no Foundations-specific compactor, security control, memory runtime or paper replication receipt in this Daily
+- **Adjacent 2026-10-22 PROVISO study:** pre-effect action selection assumes a trustworthy representation of trusted inputs `K`; it does not automatically restore message-role provenance once a serializer has destroyed it
+- **Architecture consequence:** design candidate for immutable role/provenance custody preceding summarization, with query-time compact views separated from retained inspectable raw history
+- **Agent Architecture Mapping:** preserve authenticated role metadata across serializer and compactor boundaries; keep source-linked raw evidence separately inspectable; require an independent authorization predicate before effects
+- **What should not be concluded:** long-context compression is forbidden, typed-role systems are universally safe, raw retention can always be discarded, or local tool authorizations are already correct
+
+### Counterevidence gate and five-axis state
+- **Candidate claim:** faithfully passing role labels as characters through a summary is sufficient to preserve message authority
+- **Disproof direction:** role-looking delimiter injection is observationally ambiguous under untrusted flattened content, so role labels cannot serve as cryptographic or transport-authenticated principals
+- **Gate disposition:** REJECT_AS_UNIVERSAL; keep `ROLE_TYPED_SOURCE_CUSTODY` as a design candidate, not a validated implementation
+- **Claim State:** PAPER_REPORTED
+- **Evidence State:** PAPER_ONLY
+- **Evidence Level:** E4_PREPRINT / AUTHOR_REPORTED_EXPERIMENT
+- **Mapping State:** DESIGN_CANDIDATE
+- **Repository Implementation Status:** NOT_IMPLEMENTED
+- **Implementation State:** NOT_IMPLEMENTED
+- **Test Status:** NOT_TESTED
+- **Validation State:** NOT_TESTED
+- **Evidence Delta:** NEW_EVIDENCE=precise original paper and role-loss mechanism; CORRECTED_INTERPRETATION=summary fidelity does not establish original role identity; UNCHANGED_BOUNDARY=paper != local memory implementation; NEW_COUNTEREVIDENCE=typed-role harnesses resist this specific attack; UNKNOWN_RETAINED=generalization and Foundation runtime behavior; NEXT_RETEST=revision-matched serializer fixture with exact typed-role and spoofed-tool replay
+- **Cross-repository lineage:** if Horizon, Zero or GAS cite arXiv:2610.29869, its SOURCE_LINEAGE remains 1 and independent scientific replication credit remains 0; this Daily adds a distinct bounded memory-system mapping, not an independent study
+- **Execution boundary:** documentary bilingual research only; no `FOUNDATION/validate.py`, code-level compactor replay, external benchmark reproduction, verified-core admission or implementation update was executed
+
