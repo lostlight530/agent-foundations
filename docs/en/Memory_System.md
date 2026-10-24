@@ -1057,3 +1057,76 @@ MONTH_OPEN
 - **Cross-repository lineage:** if Horizon, Zero or GAS cite arXiv:2610.29869, its SOURCE_LINEAGE remains 1 and independent scientific replication credit remains 0; this Daily adds a distinct bounded memory-system mapping, not an independent study
 - **Execution boundary:** documentary bilingual research only; no `FOUNDATION/validate.py`, code-level compactor replay, external benchmark reproduction, verified-core admission or implementation update was executed
 
+---
+
+## 2026-10-24 Daily Research Chunk — Certified Reasoning Reuse Versus Memory Identity Errors
+
+- **Canonical task:** `foundations/research/daily`
+- **Logical date:** 2026-10-24 Asia/Shanghai
+- **Producer:** GPT-6 prospective native research, not historical Jules
+- **Research container:** Memory System
+- **Base main revision:** 7c9374e22c1b8fc5aad873ec42c0bf203700e5f3
+- **Research status:** BOUNDED_THEORY_MAPPING / SOURCE_TEXT_INSPECTED / NO_IMPLEMENTATION
+- **Canonical source registration:** NOT_REQUESTED_FOR_THIS_DAILY; source identities below are not invented `Sxx` entries
+- **Temporal boundary:** these are October 7 and October 19 source publications studied on October 24, not releases published today
+
+### Canonical primary sources and inspected surfaces
+
+**P-20261024-01 — reasoning contraction and change detection**
+
+- Paper: *Many Steps into One: Reasoning Contraction and the Limits of Safe Memory Reuse for LLM Agents*
+- Authors: Jianghong Zhou, Hao Rong, Chen Lin, Daoan Zhang
+- Canonical arXiv base ID: `2610.17544`; exact inspected version: `v2`
+- Version timestamp: 2026-10-19T18:28:33Z (the original v1 was submitted 2026-10-13)
+- URL: https://arxiv.org/abs/2610.17544v2
+- Surface: arXiv version metadata and author HTML introduction, formal change-detection discussion, counterexamples and experimental summary
+- Original research question: when an expensive multi-step reasoning path is compressed into a reusable memory or macro, how can a system detect that the macro has become unreliable after upstream facts change?
+- Mechanism: the paper treats retirement as a sequential change-detection problem, distinguishes false retirement from delayed detection, and analyzes the behavior of fixed success/failure counters versus likelihood-ratio-weighted detectors
+- Narrow reported outcome: authors find that ordinary counters can continue serving stale answers under partial fact changes and propose per-memory certification / restart after edits; rates and asymptotics depend on their source-defined datasets, distributions, certification policy and false-alarm criterion
+- Mathematical boundary: the paper's Theorem 1 and likelihood-ratio corollary were inspected as *author-defined theorems*, but their complete proofs, asymptotic assumptions, and exact constants were NOT independently derived or machine checked here
+- What this does not prove: all counter mechanisms fail, all memories require the same stochastic model, exact empirical transfer to this repository, or a production-ready verified memory system
+
+**P-20261024-02 — temporal validity is not identity correctness**
+
+- Paper: *Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation*
+- Authors: Haonan Deng, Park Sinchaisri
+- Canonical arXiv base ID: `2610.10265`; exact inspected version: `v1`
+- Version timestamp: 2026-10-07T15:37:12Z
+- URL: https://arxiv.org/abs/2610.10265v1
+- Surface: original abstract and author HTML introductory experimental design/results
+- Original research question: can a memory block be evaluated for stale, misattributed or late content *before* a language model generates the answer?
+- Mechanism: distinguish active-slot temporal validity, entity/participant assignment, abstention and serving-time budget
+- Bounded counterevidence: filtering for currently active values eliminated observed stale exposure under the controlled correctly keyed-slot setting, yet it did not resolve same-name subject misattribution or incorrect slot merges; this is not a universal latency or identity guarantee
+- Limitations: controlled benchmarks, specific memory models, imperfect open-domain key assignment; no independent reproduction in this run
+
+### New theory-to-architecture interpretation
+
+The two paper identities support different failure axes and do not independently replicate the same experiment:
+
+1. **Validity of a reused derivation:** after a source edit, a previously certified shortcut can become stale even when its original authorship and memory key are intact
+2. **Validity of the memory key and subject:** detecting changed outcome distribution cannot repair an incorrect subject/slot assignment or a false merge of facts about different people
+3. **Operational constraint:** a hypothetical Memory contract would need explicit source-version/epoch identity, edit notices or verification receipts for reused reasoning, *plus* distinct identity resolution, abstention and latency evidence
+4. **Do not collapse levels:** a theoretically admissible detector is not local implementation; a well-keyed store is not model correctness; paper observations are not live Foundation tests
+
+A source-custody counterexample to overpromotion: a macro can pass its checks on correctly attributed old facts and later become invalid after an upstream edit; conversely, perfectly fresh memory content assigned to the wrong subject is still not usable. Neither issue can be fixed by repeating the other paper's citation.
+
+### Counterevidence gate and five independent axes
+
+- **Claim State:** OBSERVED (bounded original-paper mechanisms); no universal guarantee
+- **Evidence Level:** E4_PREPRINT for both primary author works, not locally reproduced or independently peer-reviewed here
+- **Mapping State:** CANDIDATE_MECHANISM
+- **Implementation State:** NOT_IMPLEMENTED
+- **Validation State:** NOT_TESTED
+- **NEW_EVIDENCE:** version-specific paper object `2610.17544v2` and independent object `2610.10265v1`, with complementary pre-generation memory failure dimensions
+- **CORRECTED_INTERPRETATION:** counting historical successful memory uses does not alone certify current validity, and current validity does not certify correct subject attribution
+- **UNCHANGED_BOUNDARY:** `Paper != Mapping != Implementation != Validation`; no change to verified core or canonical source registry
+- **NEW_COUNTEREVIDENCE:** exact active-slot filtering can remove observed staleness under the authors' ideal-key assumptions while identity misattribution remains; certified reuse can still be beneficial under stable conditions
+- **UNKNOWN_RETAINED:** generalization across memory domains and model architectures, paper theorem reproduction, measurable local improvement, production error/latency trade-off
+- **NEXT_RETEST_CONDITION:** pin exact source revisions and implement an isolated benchmark with (a) correct-slot edited facts, (b) wrong-person same-name facts, (c) unchanged facts, (d) deadline-limited retrieval, with independent before-generation metrics; only then consider claim promotion
+
+### Delivery and provenance boundary
+
+- Bilingual English/Chinese documentary research increment only; one aligned theoretical mapping, not two independent experiments
+- No new `Sxx` ID allocated or verified-core claim admitted by Daily text alone
+- No `FOUNDATION/validate.py`, `FOUNDATION.test_contract`, theorem rederivation, model benchmark, or production agent memory runtime executed
+- Previous Daily chunks and their producer attribution are preserved unchanged; Weekly and Monthly retain their own authority
