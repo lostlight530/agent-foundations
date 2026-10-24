@@ -1060,3 +1060,76 @@ MONTH_OPEN
 - **跨仓谱系:** 同一 arXiv 论文即使被 Horizon、Zero、GAS 重用，SOURCE_LINEAGE 仍为 1，独立科研复现 credit 仍为 0；本 Daily 只产生不同的有界 Memory System 架构映射
 - **执行边界:** 仅生成中英文研究文本，未执行 `FOUNDATION/validate.py`、本地代码级 compactor 重放、论文 benchmark 复现、Verified Core 准入或实现更新
 
+---
+
+## 2026-10-24 Daily Research Chunk — 推理压缩记忆的有效性检测与身份归属边界
+
+- **Canonical Task:** `foundations/research/daily`
+- **Logical Date:** 2026-10-24 Asia/Shanghai
+- **Producer:** GPT-6 前瞻性原生研究，不继承或冒充历史 Jules
+- **Research Container:** Memory System
+- **Base Main Revision:** 7c9374e22c1b8fc5aad873ec42c0bf203700e5f3
+- **Research Status:** BOUNDED_THEORY_MAPPING / SOURCE_TEXT_INSPECTED / NO_IMPLEMENTATION
+- **Canonical Source Registration:** THIS_DAILY_NOT_REGISTERED，不自行编造 `Sxx` 来源编号
+- **时间边界:** 论文分别在 10 月 7 日与 10 月 19 日发布或修订，10 月 24 日是本次研究检查时间，不是论文发布日期
+
+### 原始论文身份与实际检查深度
+
+**P-20261024-01 — 推理压缩与变化检测**
+
+- 题名: *Many Steps into One: Reasoning Contraction and the Limits of Safe Memory Reuse for LLM Agents*
+- 作者: Jianghong Zhou, Hao Rong, Chen Lin, Daoan Zhang
+- Canonical arXiv Base ID: `2610.17544`，实际检查版本 `v2`
+- Version Timestamp: 2026-10-19T18:28:33Z，v1 提交于 2026-10-13
+- 原始 URL: https://arxiv.org/abs/2610.17544v2
+- 检查表面: 版本元数据、作者 HTML 中引言、形式化变化检测讨论、反例和实验摘要
+- 原始问题: 经过多步推理形成的记忆或宏被重复调用后，底层事实改变时，系统怎样检测它已不可靠
+- 机制: 把失效退休视为序贯变化检测，区分错误退休和检测延迟，对比简单成功/失败计数与基于 likelihood ratio 的加权检测
+- 条件化结果: 作者报告在部分事实变化下，普通计数器可能继续给出过时回答，并提出按单条记忆认证、遇到事实变更后重启认证的方案，结果依赖作者给定分布、数据集与误报约束
+- 数学边界: 本次阅读了作者 Theorem 1 与 likelihood-ratio 推论的文本位置，但没有独立推导完整证明、验证渐近条件或常数
+- 不支持的推广: 全部计数器都必然失败、所有 Memory 适用同一随机模型、仓库已有可用的验证式记忆系统
+
+**P-20261024-02 — 时间有效性不等于对象身份正确**
+
+- 题名: *Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation*
+- 作者: Haonan Deng, Park Sinchaisri
+- Canonical arXiv Base ID: `2610.10265`，实际检查版本 `v1`
+- Version Timestamp: 2026-10-07T15:37:12Z
+- 原始 URL: https://arxiv.org/abs/2610.10265v1
+- 检查表面: 原始摘要及作者 HTML 引言中的实验设计与结果
+- 原始问题: 生成答案以前，能否直接测量记忆块的过时值、错误归属、缺失和服务延迟
+- 机制: 将 active-slot 时间有效性、主体分配、拒答能力和服务时间预算独立建模
+- 有边界的反证: 在 key 正确的受控设置中，仅提供 active value 消除了该实验观察到的过时暴露，但不能自动解决同名主体误归属和错误合并
+- 局限: 受控 benchmark 和指定检索系统，本轮未独立复现，也不构成所有工作负载的延迟或身份保证
+
+### 新增理论到架构映射
+
+两篇论文是不同原始对象，研究互补维度，不是对同一结论的双重独立复现实验
+
+1. **推理复用的当前有效性:** 历史经过确认的推理捷径仍可能在其事实前提改变后失效，即使来源身份、memory key 一直正确
+2. **记忆对象身份的正确性:** 即便能发现结果分布变化，依然无法自动修复错误的主体归属、slot merge 或同名对象混淆
+3. **架构候选约束:** 若未来实现 Memory，需要同时明确 source version / epoch、编辑通知、复用前或复用时验证收据，并单独保留主体识别、拒答和延迟证据
+4. **不能坍缩的边界:** 统计意义上有条件成立的 detector 不等于本仓代码实现，active slot 不等于答案正确，外部论文不等于本地实验
+
+反证案例: 一条正确归属且此前有效的推理宏，可以在上游事实更新后失效；反过来，当前有效却归属给错误人物的记忆也不能被安全使用，两种问题不能靠复述另一篇论文自动解决
+
+### Counterevidence Gate 与五轴状态
+
+- **Claim State:** OBSERVED，仅表示有边界的原论文机制，不是普遍定律
+- **Evidence Level:** 两篇均为 E4_PREPRINT，未由本仓独立复现
+- **Mapping State:** CANDIDATE_MECHANISM
+- **Implementation State:** NOT_IMPLEMENTED
+- **Validation State:** NOT_TESTED
+- **NEW_EVIDENCE:** `2610.17544v2` 与 `2610.10265v1` 两个精确版本来源，补充生成前记忆有效性与身份归属两条不同失效维度
+- **CORRECTED_INTERPRETATION:** 历史复用成功次数不单独证明当前有效，时间有效也不能证明主体身份正确
+- **UNCHANGED_BOUNDARY:** `Paper != Mapping != Implementation != Validation`，Daily 不升级 verified core，不自行注册来源
+- **NEW_COUNTEREVIDENCE:** 在论文特定正确 key 条件下 active-slot 过滤可消除已观察到的过时暴露，但身份归属仍可能错误；稳定事实下有条件的认证式复用仍可有益
+- **UNKNOWN_RETAINED:** 跨应用泛化、定理独立复证、仓库实际收益、生产场景精度和延迟代价
+- **NEXT_RETEST_CONDITION:** 固定来源版本，在隔离基准中分别测试正确 slot 的事实变更、同名不同人的错误归属、事实不变的对照以及有 deadline 的检索，收集生成前指标和独立验证数据，再考虑 claim promotion
+
+### 交付与 provenance 边界
+
+- 只形成对应中英文理论研究增量，合计是一项概念映射，不是两次独立实验
+- 未新增 `Sxx`，未将 Daily 文本自动纳入 verified core
+- 未执行 `FOUNDATION/validate.py`、`FOUNDATION.test_contract`、形式化证明复核、模型 benchmark 或本地 Agent Memory Runtime
+- 所有既有 Daily 以及 producer provenance 原样保留，Weekly 与 Monthly 的独立权限不变
