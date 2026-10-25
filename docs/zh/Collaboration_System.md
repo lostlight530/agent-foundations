@@ -2756,3 +2756,55 @@ $$\lim_{t \to \infty}\| \tilde{\bm{x}}(t) \| \le 2 c^{-1} N \underline{\eta}$$
 - Memory 容器对相同 arXiv 论文的引用属于同源映射，不能作为新增独立来源
 - 当前定性 CONDITIONALLY_APPLICABLE_DESIGN_ANALOGY；新来源 credit 为 NONE；集成/独立执行测试 NOT_EXECUTED
 - 本段是前向审查说明，不重写先前公式、原始引文和历史生产时间线
+
+## 2026-10-25 Daily Research — SpecAgent：轨迹语义审查不等于真实 Effect 验证
+
+- Canonical task: foundations/research/daily
+- Logical date: 2026-10-25 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT JULES
+- Actual execution UTC: 2026-10-25T01:31:56.942Z
+- Base main revision: 42d870e0a29747bb2bad549ed051fc58911a59fc
+- Source: arXiv:2610.21463v1 / Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents
+- Authors: Zilin Wang, Yinhong Liu, Chao Chen, Qun Liu, Zhijiang Guo
+- Version timestamp: 2026-10-15T08:06:32Z; inspected on 2026-10-25
+- Primary metadata: https://arxiv.org/abs/2610.21463v1
+- Full text: https://arxiv.org/html/2610.21463v1
+- Access level: ORIGINAL_VERSIONED_AUTHOR_PREPRINT_FULL_TEXT_READ
+- Existing Sxx registry: NOT_ALTERED / no automatic verified-core admission
+- Reproduction/validation: NOT_EXECUTED
+
+### 原始问题与机制
+SpecAgent 让 Weak 模型根据真实工具观测生成多步草稿，Strong 模型一次性阅读整段轨迹，审查最长语义可接受前缀并修复首个被拒步骤。Weak 会执行被归类为只读的工具操作，在第一次被归类为会改变环境的动作之前暂停。这是论文提出的协作执行协议，不是通用的授权与持久化运行时。
+
+“草稿被接受”不能替代 caller 权限、工具实际执行、原子提交、当前后置条件或外部 effect receipt。论文也承认：某次读取即使从 Agent 的逻辑历史中被移除，外部系统依然可能留下访问日志。所谓“首次写入前先审查”的边界依赖正确分类工具副作用。
+
+### 数学约束与实验口径
+论文 Proposition 1 依赖 decode-bound serving 与单任务内每步骤接受率近似独立两个前提，给出 Strong 模型每个已提交步骤相对于 Strong-only 的时间和内存流量模型：
+
+$$
+R_u=\frac{1-p_u}{1-p_u^n}\frac{v}{d}+\rho(1-p_u)
+$$
+
+其中 p_u 是近似接受率，n 是审查块长度，v 是 verdict 的权重读取次数，d 是 Strong-only 每步骤权重读取次数，rho 是额外修复轮次的概率。这不是端到端任务完成率、权限正确性或整体算力消耗保证。Proposition 2 另加入 Weak 草稿开销项。作者在 tau-squared-Bench、AutomationBench、VitaBench、MCP-Atlas 的实验具有各自的 harness 与分母，本仓未独立复现。论文同时报告 HBM-read 与 wall time 下降以及若干设置下估算 FLOPs 增加，必须区分成功率、延迟、内存流量和计算量。
+
+### 对 Collaboration System 的候选映射与强反例
+候选接口可拆分为 DraftTrajectory（工具身份与有版本的读取观测）、HeldEffect（待提交动作与审批上下文）、ReviewVerdict（模型审查的轨迹前缀）、EffectReceipt（已观察到的真实效果与当前后置条件）。这只属于 CANDIDATE_MECHANISM，不代表本仓已实现或修改正式协议。实际写入前还需要独立授权与 effect-boundary 校验，不能使用 Strong 模型的语义审查结果代替控制面。
+
+强反例：标称只读工具也可能消耗配额、暴露数据或追加审计日志，且当权限已过期、目标状态被其他执行者修改时，Strong 仍可能错误接受看似合理的草稿。叙事上的“接受前缀”和真实授权、持久化结果可能同时处于不同状态，需要外部可审计 receipt 区分。
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED，仅为原论文机制和假设限定的主张
+- Evidence Level: E4_PREPRINT，已读取作者全文，未独立复核定理或复现实验
+- Mapping State: CANDIDATE_MECHANISM，不直接写入正式 Collaboration Contract
+- Implementation State: NOT_IMPLEMENTED，本仓只有文档研究增量
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 论文精确版本和作者、语义前缀审查、首次写入暂缓以及带假设的 Strong-side 成本模型
+- CORRECTED_INTERPRETATION: LLM 的 semantic approval 不是合法授权、原子 effect 或任务完成；HBM 节约不能机械解释为总 FLOPs 节约
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英双语同一来源不是两次独立实验
+- NEW_COUNTEREVIDENCE: 论文自身承认只读操作仍可能留下外部痕迹，实际工具分类和审查器可靠性也未被普遍证明
+- UNKNOWN_RETAINED: 独立复现、权限时效、真正无副作用的读取条件、生产延迟与恢复语义
+- NEXT_RETEST_CONDITION: 固定源码和版本，构造纯只读、标称只读却产生副作用、暂缓写入、过期审批与并发变化的控制实验，将 verifier 结论与独立 effect receipt 对照，并分别记录正确性、FLOPs、HBM-read 和 wall time
+
+### 交付与保全
+本轮仅向中英文正式 Collaboration 研究容器追加一个 Daily 理论增量，独立来源与实验各不得重复计数。不分配新的 Sxx、不将 Daily 自动纳入 verified core、不替换历史研究、不冒充 Jules、不执行 Weekly/Monthly。全仓 validator 和真实 Agent runtime NOT_EXECUTED。
+

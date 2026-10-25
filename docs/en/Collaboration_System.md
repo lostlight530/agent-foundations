@@ -2919,3 +2919,55 @@ Imagine a team of explorers mapping an unknown island. Instead of shouting every
 - A corresponding Memory citation of the same arXiv paper is a same-source cross-container reference, not independent corroboration.
 - Disposition: CONDITIONALLY_APPLICABLE_DESIGN_ANALOGY; new source credit NONE; local integration and independent execution tests NOT_EXECUTED.
 - This review is appended as a forward interpretation; historical source/theorem text and provenance remain intact.
+
+## 2026-10-25 Daily Research — SpecAgent: semantic trajectory review is not effect validation
+
+- Canonical task: foundations/research/daily
+- Logical date: 2026-10-25 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT JULES
+- Actual execution UTC: 2026-10-25T01:31:56.942Z
+- Base main revision: 42d870e0a29747bb2bad549ed051fc58911a59fc
+- Source: arXiv:2610.21463v1 / Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents
+- Authors: Zilin Wang, Yinhong Liu, Chao Chen, Qun Liu, Zhijiang Guo
+- Version timestamp: 2026-10-15T08:06:32Z; inspected on 2026-10-25
+- Primary metadata: https://arxiv.org/abs/2610.21463v1
+- Full text: https://arxiv.org/html/2610.21463v1
+- Access level: ORIGINAL_VERSIONED_AUTHOR_PREPRINT_FULL_TEXT_READ
+- Existing Sxx registry: NOT_ALTERED / no automatic verified-core admission
+- Reproduction/validation: NOT_EXECUTED
+
+### Research question and original mechanism
+SpecAgent splits tool-use trajectories between a Weak model that drafts grounded steps and a Strong model that reviews an entire draft segment. The Weak model executes actions classified as read-only, while withholding the first action classified as state-changing. The Strong model accepts the longest semantically valid prefix and repairs the first rejected step. It is an author-proposed agent collaboration protocol, not a demonstrated general authorization or durability runtime.
+
+The distinction matters: read results ground a proposal, but semantic acceptance of that proposal does not prove caller authority, command execution, atomicity, current postconditions or external effects. The authors explicitly observe that even a read removed from logical agent history may leave an external access log; their no-premature-write guarantee depends on correct classification of environment-changing operations.
+
+### Mathematical and experimental boundaries
+The authors' Proposition 1 assumes decode-bound serving and independent per-step acceptance within a task. It models Strong-model time and memory traffic per committed step, relative to Strong-only, as:
+
+$$
+R_u=\frac{1-p_u}{1-p_u^n}\frac{v}{d}+\rho(1-p_u)
+$$
+
+Here p_u is an approximate acceptance rate, n the review length, v the verdict weight passes, d the Strong-only weight passes per step, and rho the probability of a separate repair. This relation is **not** an end-to-end task-completion, cost, security or correctness bound. Proposition 2 adds the Weak drafting term to latency. Source-reported results cover tau-squared-Bench, AutomationBench, VitaBench and MCP-Atlas, each with specific harnesses and denominators, and are not local replications. The paper reports lower HBM-read and wall time despite higher estimated FLOPs in several settings. Its task success, latency, HBM-read and FLOP metrics must not be collapsed.
+
+### Candidate collaboration contract and counterexample
+An architecture mapping may separate DraftTrajectory (tool identities, versioned read results), HeldEffect (exact proposed mutation and approval context), ReviewVerdict (reviewed prefix and reviewer identity) and EffectReceipt (observed effect and current postcondition). This is a **CANDIDATE_MECHANISM**, not an implementation or protocol change. A write must remain held until an applicable authorization check and effect-boundary verification occur; an LLM review cannot substitute for an authoritative control plane.
+
+Strong counterexample: a tool labeled read-only can modify usage quota, reveal protected data or produce audit records. A verifier can semantically accept a plausible prefix based on a stale authorization snapshot while a concurrent actor changes the target. The abstract reviewer outcome would be true as an authored verdict, while task-level completion or effect authorization would remain UNKNOWN. Paper's benchmark classification and real tool effects must be separately checked.
+
+### Five independent axes and Evidence Delta
+- Claim State: OBSERVED, scoped to the paper's explicitly stated design and model assumptions
+- Evidence Level: E4_PREPRINT; primary author source inspected, theorem and benchmark independently NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM; not promoted into current canonical Collaboration contract
+- Implementation State: NOT_IMPLEMENTED in this repository
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: exact author/version identity, chunked semantic prefix review mechanism, conditional Strong-decoding model and held-first-write boundary
+- CORRECTED_INTERPRETATION: LLM semantic approval is not permission, atomic commit or receipt; Strong-side HBM savings do not imply fewer total FLOPs
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; bilingual repetitions remain one canonical source lineage
+- NEW_COUNTEREVIDENCE: source acknowledges non-reversible traces of reads; held-write classification and reviewer correctness can fail outside the assumed environment
+- UNKNOWN_RETAINED: independent result reproducibility, side-effectful reads, authorization freshness, bounded completion, production latency
+- NEXT_RETEST_CONDITION: pin source code and versions, run fixed read-only / side-effectful-read / held-write / stale-approval / concurrency cases, compare semantic prefix verdict against independent effect receipts; preserve distinct correctness, FLOP, HBM and wall-time metrics
+
+### Delivery boundary
+One aligned EN/ZH Daily research increment, zero new independent validation runs. No Sxx ID allocated, verified core claim admitted, prior generated research replaced, Jules history rewritten, or Weekly/Monthly task executed. Repository validator and runtime replay NOT_EXECUTED.
+
