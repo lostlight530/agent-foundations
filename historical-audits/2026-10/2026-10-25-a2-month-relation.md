@@ -1,0 +1,187 @@
+# A2 | agent-foundations | full 2026-10 source/translation/current blueprint relation
+
+- Exact fresh ten-A1-merged main: `ac3ebdaa943530760d9245f1361221353655bc1d`
+- Merged own A1: `historical-audits/2026-10/2026-10-25-a1-source-custody.md` @ exact blob `8675c1519ee6d2c90de81bca6ed2bd4ae25faca5`
+- Prior A2 merged baseline: `42d870e0a29747bb2bad549ed051fc58911a59fc`
+- MONTH_VERSION: 2026-10; inclusive current cut: Oct01–Oct25; Monthly Blueprint still OPEN
+- Original daily/weekly/monthly production: Jules; Independent GPT is current provenance relation reviewer
+- Foundation daily units can appear as EN/ZH sections in long-lived documents, not 25 synthetic separate date files
+- Current repository source corpus 112 named source/snapshot/mapping objects; post-old-A2 delta 3.
+- Eight current bilingual canonical research documents have independently fetched source text and Git blob identity; date-string anchors are navigation, not semantic equality or empirical PASS.
+
+## Month relation and original native producer boundary
+- The Oct24 #324 merged bilingual Memory research is historical N−1. It is inherited only through the actual merged A1 and previous A2 boundary.
+- The Oct25 #327 merged SpecAgent related research into current EN/ZH Collaboration System documents; both changed as N-day native source blobs.
+- SpecAgent weak read-only/held-write proposal is author-reported research, not a validated implementation, installed workflow feature or benchmark replay.
+- A source citation's presence cannot make two distinct original publishers or independently replicated results.
+- EN and ZH paths have separate immutable Git object identities; SHA differences cannot establish semantic contradiction or semantic equivalence.
+- Monthly current Blueprint is a specific versioned owner and remains MONTH_OPEN until natural-month close.
+- Weekly Cascade snapshots and Daily source memory are separate producer/source classes; their presence is not an actual scheduled run receipt.
+- `FOUNDATION/SOURCES.md` original source roster and source author/version/time must precede validated reference adoption.
+- Zero native test/checker execution is claimed by this A2; external links have not been independently rechecked as part of this relation.
+- D7/D10/D14/D30 Periodic Audit and archived corrections remain independent, not silently consumed as new native runs.
+
+## EN/ZH exact current document pair custody
+- `docs/en/Architecture_Principles.md` | Git blob `90503b04e766a01602d4fe4f43f00f0589cfe5e0` | 123168 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+- `docs/en/Collaboration_System.md` | Git blob `510cc163be08e88d4ff97af7f5df895ddd1cd6d4` | 262929 current text chars | N_DAY_CHANGED_RELATION | author/claim/support/test axes distinct
+- `docs/en/Memory_System.md` | Git blob `00e83d3a59124946efac67e1a87cc69534d09f00` | 101339 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+- `docs/en/Tool_System.md` | Git blob `491efccd31600daca90a608b296ac049b9337692` | 58279 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+- `docs/zh/Architecture_Principles.md` | Git blob `7b148c9f16dc40cf3b5907c12d6046df30139436` | 71813 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+- `docs/zh/Collaboration_System.md` | Git blob `7262708caf1d739623bccb3a4ca082d427cc29ef` | 145418 current text chars | N_DAY_CHANGED_RELATION | author/claim/support/test axes distinct
+- `docs/zh/Memory_System.md` | Git blob `da8f669203ca29d0e56478fdc0cd5cbcad38df67` | 57992 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+- `docs/zh/Tool_System.md` | Git blob `010e3cc8befee32df29c03fa5c6cf4147437db14` | 31952 current text chars | UNCHANGED_HISTORICAL_RELATION | author/claim/support/test axes distinct
+
+## Oct01–25 true current-month document-date navigation
+- 2026-10-01 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-02 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-03 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-04 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-05 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-06 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-07 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-08 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-09 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-10 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-11 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-12 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Architecture_Principles.md; zh/Architecture_Principles.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-13 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-14 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-15 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Collaboration_System.md; zh/Collaboration_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-16 | eight canonical EN/ZH docs textual date anchors 4/8 | en/Architecture_Principles.md; en/Tool_System.md; zh/Architecture_Principles.md; zh/Tool_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-17 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-18 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-19 | eight canonical EN/ZH docs textual date anchors 4/8 | en/Memory_System.md; en/Tool_System.md; zh/Memory_System.md; zh/Tool_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-20 | eight canonical EN/ZH docs textual date anchors 0/8 | NO_LITERALLY_DATED_ANCHOR_IN_8_OWNER_DOCS | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-21 | eight canonical EN/ZH docs textual date anchors 4/8 | en/Memory_System.md; en/Tool_System.md; zh/Memory_System.md; zh/Tool_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-22 | eight canonical EN/ZH docs textual date anchors 3/8 | en/Memory_System.md; en/Tool_System.md; zh/Tool_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-23 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-24 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Memory_System.md; zh/Memory_System.md | PREV_A1_A2_PROVENANCE_INHERIT_ONLY | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+- 2026-10-25 | eight canonical EN/ZH docs textual date anchors 2/8 | en/Collaboration_System.md; zh/Collaboration_System.md | N_DAY_#327_DELIVERY_IN_CURRENT_SOURCE | DATE_TEXT_NOT_NATIVE_EXECUTION_PROOF
+
+## Full current source-to-blueprint relational object ledger
+- 001 | `AGI/basepoint/daily/docs/en/Architecture_Principles.md` | `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 002 | `AGI/basepoint/daily/docs/en/Collaboration_System.md` | `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 003 | `AGI/basepoint/daily/docs/en/Memory_System.md` | `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 004 | `AGI/basepoint/daily/docs/en/Tool_System.md` | `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 005 | `AGI/basepoint/daily/docs/zh/Architecture_Principles.md` | `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 006 | `AGI/basepoint/daily/docs/zh/Collaboration_System.md` | `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 007 | `AGI/basepoint/daily/docs/zh/Memory_System.md` | `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 008 | `AGI/basepoint/daily/docs/zh/Tool_System.md` | `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 009 | `AGI/basepoint/daily/FOUNDATION/SOURCES.md` | `dd1605572715e3ea2d37933190ed5f250722cc68` | 28247 B | DAILY_BASEPOINT_PROVENANCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 010 | `AGI/basepoint/monthly/docs/en/Monthly_Blueprint_Current.md` | `a686309b14d57a42b14ad63c4d838705cb732215` | 1925 B | MONTHLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 011 | `AGI/basepoint/monthly/docs/monthly/2026-08-strategic-blueprint.md` | `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | MONTHLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 012 | `AGI/basepoint/monthly/docs/zh/Monthly_Blueprint_Current.md` | `426d108d70dcfecafa36d8c1fd3d36d29e4bb101` | 1797 B | MONTHLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 013 | `AGI/basepoint/notes/daily/docs/en/Architecture_Principles.md.note.md` | `8a802059415dfa8fa25adfb5b1a6483e1c46dac2` | 607 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 014 | `AGI/basepoint/notes/daily/docs/en/Collaboration_System.md.note.md` | `211669920b6fa23e2a7d2b75a40f9e0ef14b048d` | 616 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 015 | `AGI/basepoint/notes/daily/docs/en/Memory_System.md.note.md` | `9cfc6e6ad13362d8303519769fe7520772d6b4cb` | 638 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 016 | `AGI/basepoint/notes/daily/docs/en/Tool_System.md.note.md` | `947cc28ccac378316a7a21217b1b65bd455bc91d` | 556 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 017 | `AGI/basepoint/notes/daily/docs/zh/Architecture_Principles.md.note.md` | `e6e02b8785bf29e3a01eb73f0091c16703fed3b0` | 607 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 018 | `AGI/basepoint/notes/daily/docs/zh/Collaboration_System.md.note.md` | `f25ea03735955bbcba8478ea1b9429812c3dd377` | 616 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 019 | `AGI/basepoint/notes/daily/docs/zh/Memory_System.md.note.md` | `4f36487b475ab9b7b9ff1e5b5bcd49646ef41273` | 638 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 020 | `AGI/basepoint/notes/daily/docs/zh/Tool_System.md.note.md` | `255a681f7090b36113bbf471d468dac095443ad4` | 556 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 021 | `AGI/basepoint/notes/daily/FOUNDATION/SOURCES.md.note.md` | `065e6b78fff3d6399c5e185f1f32a6d0910195e6` | 687 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 022 | `AGI/basepoint/notes/monthly/docs/en/Monthly_Blueprint_Current.md.note.md` | `8b4fb03af86125db6828e83629286db01e13b302` | 593 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 023 | `AGI/basepoint/notes/monthly/docs/monthly/2026-08-strategic-blueprint.md.note.md` | `b083a2edea00dc0b1128959a04b42ab51f7f81ee` | 600 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 024 | `AGI/basepoint/notes/monthly/docs/zh/Monthly_Blueprint_Current.md.note.md` | `b87609187d2e37e1000d8cd2735a14d941ddbc80` | 593 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 025 | `AGI/basepoint/notes/weekly/docs/en/Architecture_Principles.md.note.md` | `dbd15d69f16180d34c8076ab54142f37a022381b` | 707 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 026 | `AGI/basepoint/notes/weekly/docs/en/Collaboration_System.md.note.md` | `e7353c2c22257efb9773d1e656d9950da79eeb18` | 704 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 027 | `AGI/basepoint/notes/weekly/docs/en/Memory_System.md.note.md` | `9c8b18ac6af37f8895069312b26a4303189baca8` | 697 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 028 | `AGI/basepoint/notes/weekly/docs/en/Tool_System.md.note.md` | `2362f1e72eebd12c8d6580de35ceabb2eea83756` | 695 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 029 | `AGI/basepoint/notes/weekly/docs/zh/Architecture_Principles.md.note.md` | `61eb936ec598a48ef74a47bd1ae202012629aecb` | 707 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 030 | `AGI/basepoint/notes/weekly/docs/zh/Collaboration_System.md.note.md` | `dfd2e4df27b345bcf58f3f1b5fe66cdbd1c0debc` | 704 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 031 | `AGI/basepoint/notes/weekly/docs/zh/Memory_System.md.note.md` | `4238e23d93f8d8c1b71c103560a68cec64b8a7af` | 697 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 032 | `AGI/basepoint/notes/weekly/docs/zh/Tool_System.md.note.md` | `9079e66bf7fb3cb46b7486f6a99d1ff5679557e5` | 695 B | AUDIT_SIDE_CAR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 033 | `AGI/basepoint/weekly/docs/en/Architecture_Principles.md` | `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 034 | `AGI/basepoint/weekly/docs/en/Collaboration_System.md` | `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 035 | `AGI/basepoint/weekly/docs/en/Memory_System.md` | `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 036 | `AGI/basepoint/weekly/docs/en/Tool_System.md` | `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 037 | `AGI/basepoint/weekly/docs/zh/Architecture_Principles.md` | `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 038 | `AGI/basepoint/weekly/docs/zh/Collaboration_System.md` | `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 039 | `AGI/basepoint/weekly/docs/zh/Memory_System.md` | `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 040 | `AGI/basepoint/weekly/docs/zh/Tool_System.md` | `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | WEEKLY_BASEPOINT | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 041 | `docs/en/Architecture_Principles.md` | `90503b04e766a01602d4fe4f43f00f0589cfe5e0` | 123815 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 042 | `docs/en/Collaboration_System.md` | `510cc163be08e88d4ff97af7f5df895ddd1cd6d4` | 264161 B | CURRENT_EN_REFERENCE | ADMITTED_OR_AMENDED_AFTER_OLD_A2 | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 043 | `docs/en/Memory_System.md` | `00e83d3a59124946efac67e1a87cc69534d09f00` | 102261 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 044 | `docs/en/Monthly_Blueprint_Current.md` | `461dfeb087b784de0ff40cae12ecdcd4c7f84b22` | 5778 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 045 | `docs/en/README.md` | `33ba8878127c3da5f3a59ffc444adb54249f13ec` | 3365 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 046 | `docs/en/TAPE_2026-09-10_CORRECTION.md` | `676758aad5b4ed0445aa5d70f3406828c2cc639b` | 3921 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 047 | `docs/en/Tool_System.md` | `491efccd31600daca90a608b296ac049b9337692` | 58724 B | CURRENT_EN_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 048 | `docs/monthly/2026-06-strategic-blueprint.md` | `bbe44ca35ad6515713dc967aafb4466f0fa0202f` | 2960 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 049 | `docs/monthly/2026-07-strategic-blueprint.md` | `2018c8b59f438bb107116b09a68811dc36e2e30f` | 8271 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 050 | `docs/monthly/2026-08-strategic-blueprint.md` | `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 051 | `docs/monthly/2026-08-through-23-strategic-blueprint.md` | `8198e57ff8662ded800c56ebc90b8eb86020c87d` | 5415 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 052 | `docs/monthly/2026-08-through-27-strategic-blueprint.md` | `ba10249678baface4594a18a32e467da065b6ccb` | 4374 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 053 | `docs/monthly/2026-08-through-30-strategic-blueprint.md` | `42dc9f7d21ac42cfcb848a959b95169fdbb91476` | 2756 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 054 | `docs/monthly/2026-09-strategic-blueprint.md` | `09bcc820bec30df2d34f4a2b6bde4b1ed98d1578` | 7601 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 055 | `docs/monthly/2026-10-strategic-blueprint.md` | `44baa112ad4ea91cd81bf8841ba3624fabd3988a` | 487639 B | MONTHLY_BLUEPRINT_VERSION | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 056 | `docs/zh/Architecture_Principles.md` | `7b148c9f16dc40cf3b5907c12d6046df30139436` | 116574 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 057 | `docs/zh/Collaboration_System.md` | `7262708caf1d739623bccb3a4ca082d427cc29ef` | 237059 B | CURRENT_ZH_REFERENCE | ADMITTED_OR_AMENDED_AFTER_OLD_A2 | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 058 | `docs/zh/Memory_System.md` | `da8f669203ca29d0e56478fdc0cd5cbcad38df67` | 95898 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 059 | `docs/zh/Monthly_Blueprint_Current.md` | `ea8717056f9fff978df402e2933644d1cc662119` | 5390 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 060 | `docs/zh/README.md` | `c7516f8d6dfd186ec4577552fca2ea319c9ea49f` | 3098 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 061 | `docs/zh/TAPE_2026-09-10_CORRECTION.md` | `6c6158bae3921373623cd46438f7abffee4874db` | 3504 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 062 | `docs/zh/Tool_System.md` | `010e3cc8befee32df29c03fa5c6cf4147437db14` | 54524 B | CURRENT_ZH_REFERENCE | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 063 | `FOUNDATION/ARCHITECTURE.md` | `0c39c076da29d169aeaf141b2ebee94f7a836a3b` | 9627 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 064 | `FOUNDATION/arxiv_probe.py` | `54bd6091ab22667ecb8a89f49d24e16af0ae3185` | 5609 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 065 | `FOUNDATION/claim.schema.json` | `4578b92834a14b8c8fceb14f0c26b2536410e261` | 1370 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 066 | `FOUNDATION/COLLABORATION.md` | `94bb8b85557d41124c794bf8c562df2d278593b3` | 9072 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 067 | `FOUNDATION/EVIDENCE.md` | `9c7e0cd274081148b34eb0a6c9d0097cea085ff5` | 9780 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 068 | `FOUNDATION/independent-gpt/README.md` | `e6377149b7a55c7ef0fa735780251361a07c4df3` | 6721 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 069 | `FOUNDATION/INDEX.md` | `289ad219a795090fd5c24e9528f207dcd95a43dc` | 7142 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 070 | `FOUNDATION/MAINTENANCE.md` | `39740d184fa6170fc7012afa99eacfbf99a9bcd0` | 8453 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 071 | `FOUNDATION/MEMORY.md` | `e5b20a3431ffe2a32a42c9574230fadd965cd9a1` | 6755 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 072 | `FOUNDATION/plans/2026-08-05-readme-narrative-repair.md` | `463509663db0f405bb39550d91f730c6da98963a` | 3412 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 073 | `FOUNDATION/PROVENANCE.md` | `40f0cdb0103d2fac8bc5a5ca5742a1a250160b96` | 12316 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 074 | `FOUNDATION/REVIEW.md` | `cc72b0951bf2ce23bbf2274ede57a0d1cc83d301` | 9841 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 075 | `FOUNDATION/SOURCES.md` | `781bdd4f2d275e667244888e68fac48857a56d37` | 49319 B | PUBLISHER_SOURCE_REGISTER | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 076 | `FOUNDATION/specs/2026-08-05-readme-narrative-repair-design.md` | `b02af44a579b01a3cd5f1aee403b8509eb0d6dab` | 2599 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 077 | `FOUNDATION/test_contract.py` | `42c9211626fe315ce28304cefb339754d45d77ee` | 6649 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 078 | `FOUNDATION/TOOLS.md` | `7322e8ef3cea7b66499370d89cabb212a27a9b3e` | 7748 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 079 | `FOUNDATION/validate.py` | `8ce5d29cfdd31c9d6b33edbc0b94d44c53c98cbb` | 9736 B | FOUNDATION_SPEC_OR_VALIDATOR | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 080 | `historical-audits/01-corrections-and-errata/2026-08-10--august-source-metadata--errata.md` | `b63e86c9e7ef6cfb4f549ecdf0810b9e71de17b4` | 7143 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 081 | `historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md` | `dcc8682f5a432ee24cd867121c3767ec5229ff52` | 10843 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 082 | `historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md` | `106d11b8c33a4cf4827643cda404d622d18a384b` | 4632 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 083 | `historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md` | `bd115cd86b28d5488dbda3bbf9df3e27486bee5a` | 3271 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 084 | `historical-audits/01-corrections-and-errata/2026-09-07--jules-task-merge--correction.md` | `af564c6b1321a8ad80a069dc0bba854f3dd0bbdc` | 6430 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 085 | `historical-audits/01-corrections-and-errata/2026-10-01--external-review-source-scope--correction.md` | `474e360d57407cebce1921bd6e0a4e99ed905f6b` | 3932 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 086 | `historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md` | `50028b23263e0a7132849279b0bf201787e575fa` | 1985 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 087 | `historical-audits/03-stage-and-period-audits/2026-07--extra-monthly-strategic-blueprint-sidecar.md` | `7ba3c07581ac94ce2414a9afc32491000d677207` | 1639 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 088 | `historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md` | `302f3fedd2d1c67ab97cdf10916aa8995584ec3b` | 4945 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 089 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-27--august-01-27--evidence-ledger.md` | `1d53bfcfe07ae276a17d5f3fdbd12bbcd881b867` | 4131 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 090 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md` | `4f8d2477a8834f2c6bc04e2040288b949465daa8` | 4861 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 091 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md` | `dd8da19398fb36b4728e99203a9f4cbb0ed8049f` | 6896 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 092 | `historical-audits/05-maintenance-and-reconciliation/2026-09-06--jules-cadence-jul-01-sep-06--reconciliation.md` | `c6774acf289de7ae804357b89a158f17e19aeb1b` | 17785 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 093 | `historical-audits/05-maintenance-and-reconciliation/2026-09-06--jules-content-contract-jul-01-sep-06--reconciliation.md` | `7a39e5a15aa6b283d048a02bcdea46b0869c9000` | 16385 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 094 | `historical-audits/05-maintenance-and-reconciliation/2026-09-10--sep-01-10--cadence-reconciliation.md` | `82ec59d82c8ad7b60dc3bea195a0d4d11285c753` | 9073 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 095 | `historical-audits/05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` | `fbc8d38da2b104b07f3c8b580428f4c0a7088ec2` | 4462 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 096 | `historical-audits/05-maintenance-and-reconciliation/2026-09-19--sep-19--maintenance-reconciliation.md` | `48a927aab17444f0292ddb6c39208f8fb412f85a` | 3380 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 097 | `historical-audits/2026-09/2026-09-a1-evidence-freeze.md` | `9b7f48bac4c39227f4e49052b2c0f399fa19b7fe` | 10473 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 098 | `historical-audits/2026-09/2026-09-a2-close-reconciliation.md` | `7969d1020e4d4839718343c6ec18515dba89e393` | 8930 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 099 | `historical-audits/2026-10/2026-10-01-external-independent-gpt-review.md` | `35e2bbc1b5fa023307a939ae2eb83c1d8caaf60d` | 12175 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 100 | `historical-audits/2026-10/2026-10-02-september-d30-independent-gpt-audit.md` | `1622665c17011e9ca328f057f3efc29a86e4ab3c` | 6328 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 101 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation-audit.md` | `28ef0b3e5b8f873d12d238c73ef88667b52f1cd3` | 5933 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 102 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation.md` | `b5da2bdd572a3a5830109981ab089c814c6064c3` | 3510 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 103 | `historical-audits/2026-10/2026-10-20-a1-source-custody.md` | `5990e9318f7527f4a311af57281c4c20e17a4249` | 27041 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 104 | `historical-audits/2026-10/2026-10-20-a2-month-relation.md` | `a89da6a08e85974fcd4423b8e14e5f19740895f4` | 24512 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 105 | `historical-audits/2026-10/2026-10-21-a1-source-custody.md` | `d0550a2a0d986ff820b631b6753a507ae18fc3f5` | 15864 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 106 | `historical-audits/2026-10/2026-10-21-a2-month-relation.md` | `342b206d87e5bca16d3e4b4da16735015aa55d25` | 14252 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 107 | `historical-audits/2026-10/2026-10-23-a1-source-custody.md` | `4eb654c64e7c3d6cb651eff66cfb54935918d764` | 10438 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 108 | `historical-audits/2026-10/2026-10-23-a2-month-relation.md` | `690146513ecaa634c49ea02380fbcc5bcaec02d3` | 9024 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 109 | `historical-audits/2026-10/2026-10-24-a1-source-custody.md` | `946aad2218489e97378d472ffdebe4048f0e4630` | 14354 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 110 | `historical-audits/2026-10/2026-10-24-a2-month-relation.md` | `107d68e005be0715d977df427165f57b8f166193` | 14325 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 111 | `historical-audits/2026-10/2026-10-25-a1-source-custody.md` | `8675c1519ee6d2c90de81bca6ed2bd4ae25faca5` | 31291 B | MAINTENANCE_SOURCE_CHAIN | ADMITTED_OR_AMENDED_AFTER_OLD_A2 | CLAIM_MAPPED_NE_TEST_VALIDATED
+- 112 | `historical-audits/INDEX.md` | `ff7e7b24f56799aa2459d91a72a84bb3b15d9107` | 4901 B | MAINTENANCE_SOURCE_CHAIN | MERGED_A1_INHERITED_UNCHANGED | CLAIM_MAPPED_NE_TEST_VALIDATED
+
+## Delta from previous A2 into latest post-A1 view
+- `docs/en/Collaboration_System.md` | modified +52/-0 | OCT25_NEW_BILINGUAL_NATIVE | no test/equivalence inference
+- `docs/zh/Collaboration_System.md` | modified +52/-0 | OCT25_NEW_BILINGUAL_NATIVE | no test/equivalence inference
+- `historical-audits/2026-10/2026-10-25-a1-source-custody.md` | added +171/-0 | OWN_A1_MERGED | no test/equivalence inference
+
+## End-to-end relation boundary
+- Source → theory claim → evidence → EN/ZH mapping → implementation → testing has not been collapsed by this A2.
+- 112 exact source-object identities indexed; eight bilingual text bodies actually fetched, others inherited by stable blob and preceding A1 custody.
+- 2026-10-25 EN/ZH delivery from #327 is observed without retroactively upgrading earlier research.
+- A1 remains separately sealed; A2 is month-current relationship and does not supersede A1 review.
+- MONTH_OPEN / NOT_EMPIRE_WIDE_VALIDATED / DOCUMENT_RELATION_UPDATED.
+- Follow-on must verify this PR merge and current main; a document PR has no scientific or scheduled workflow PASS.
+
