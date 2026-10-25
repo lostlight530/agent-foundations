@@ -1,0 +1,171 @@
+# A1 | agent-foundations | 2026-10-25 N−1 bilingual source and doctrine custody
+
+- Fresh repository main: `c827adaa6c2c4e6293aed3548adee5c0b7df2df2`
+- Inherited 2026-10-24 merged A2: `42d870e0a29747bb2bad549ed051fc58911a59fc`
+- Previous A1: `historical-audits/2026-10/2026-10-24-a1-source-custody.md`
+- Previous A2: `historical-audits/2026-10/2026-10-24-a2-month-relation.md` @ `107d68e005be0715d977df427165f57b8f166193`
+- Time scope: October 01–24; 2026-10-25 bilingual Daily from PR #327 is EXCLUDED by N−1 boundary
+- Original core provenance: Jules Foundation daily/weekly/monthly; this report is independent GPT maintenance, not a synthetic Jules native run.
+- GitHub exact tree 128 paths, selected full lineage 111; 2 paths different since previous A2.
+- Source identity, theory claim, EN/ZH mapping, implementation, and executed validation remain five distinct planes.
+- The daily research is appended within current bilingual documents, not one dated Markdown file per day. Missing date-stamped filenames are not proof of missing production.
+
+## Distinct evidence chain and decision
+- The 2026-10-24 Native research was merged through PR #324; previous A2 #326 is relation custody, not a second experiment.
+- The current 2026-10-25 PR #327 added SpecAgent-centered research to EN and ZH `Collaboration_System.md` (current blob moved after last A2); its content is N-day and is excluded from this A1's claims.
+- For EN/ZH pairs, preservation requires separate language-path identities, not assumption that equal filenames imply sentence-level semantic equivalence.
+- Original SOURCE registry remains upstream of claim and citation; author-reported arXiv results cannot be promoted into verified implementation or tested benchmark.
+- Previous months' blueprint documents are immutable evidence. The current October blueprint stays OPEN until actual natural-month closure.
+- `AGI/basepoint` is historical captured content, not today's native runner; notes and snapshots do not certify executions.
+- Foundation unit tests or validators were NOT executed in this maintenance pass; file existence is the precise scope of custody only.
+- D7/D10/D14/D30 audits are independent and not credited by A1 or A2.
+
+## Current EN/ZH paired owner snapshots
+- `AGI/basepoint/daily/docs/en/Architecture_Principles.md` @ `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/en/Collaboration_System.md` @ `3021de51492030d1803b7969f5d471c945d42309` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/en/Memory_System.md` @ `692fa8727c7bdd0d94d2286af36342df5488da8a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/en/Tool_System.md` @ `58236c790a3d752dce7a2241676a0c35dbdfe385` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/zh/Architecture_Principles.md` @ `d61e3926b53206e5ef58197edb3d52952a0493fa` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/zh/Collaboration_System.md` @ `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/zh/Memory_System.md` @ `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/daily/docs/zh/Tool_System.md` @ `a469e9567d41b615ef8f66d34f0dfec413d78263` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/en/Architecture_Principles.md` @ `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/en/Collaboration_System.md` @ `3021de51492030d1803b7969f5d471c945d42309` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/en/Memory_System.md` @ `692fa8727c7bdd0d94d2286af36342df5488da8a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/en/Tool_System.md` @ `58236c790a3d752dce7a2241676a0c35dbdfe385` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/zh/Architecture_Principles.md` @ `d61e3926b53206e5ef58197edb3d52952a0493fa` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/zh/Collaboration_System.md` @ `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/zh/Memory_System.md` @ `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `AGI/basepoint/weekly/docs/zh/Tool_System.md` @ `a469e9567d41b615ef8f66d34f0dfec413d78263` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/en/Architecture_Principles.md` @ `90503b04e766a01602d4fe4f43f00f0589cfe5e0` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/en/Collaboration_System.md` @ `510cc163be08e88d4ff97af7f5df895ddd1cd6d4` | N_DAY_DOCUMENT_CHANGED_EXCLUDE_FROM_A1 | semantics NOT_REPLAYED
+- `docs/en/Memory_System.md` @ `00e83d3a59124946efac67e1a87cc69534d09f00` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/en/Tool_System.md` @ `491efccd31600daca90a608b296ac049b9337692` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/zh/Architecture_Principles.md` @ `7b148c9f16dc40cf3b5907c12d6046df30139436` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/zh/Collaboration_System.md` @ `7262708caf1d739623bccb3a4ca082d427cc29ef` | N_DAY_DOCUMENT_CHANGED_EXCLUDE_FROM_A1 | semantics NOT_REPLAYED
+- `docs/zh/Memory_System.md` @ `da8f669203ca29d0e56478fdc0cd5cbcad38df67` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+- `docs/zh/Tool_System.md` @ `010e3cc8befee32df29c03fa5c6cf4147437db14` | SAME_GIT_OBJECT_SINCE_PREVIOUS_A2 | semantics NOT_REPLAYED
+
+## Individual full lineage review | exact Git blob and evidence-class boundaries
+- 001 | `AGI/basepoint/daily/docs/en/Architecture_Principles.md` | blob `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 002 | `AGI/basepoint/daily/docs/en/Collaboration_System.md` | blob `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 003 | `AGI/basepoint/daily/docs/en/Memory_System.md` | blob `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 004 | `AGI/basepoint/daily/docs/en/Tool_System.md` | blob `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 005 | `AGI/basepoint/daily/docs/zh/Architecture_Principles.md` | blob `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 006 | `AGI/basepoint/daily/docs/zh/Collaboration_System.md` | blob `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 007 | `AGI/basepoint/daily/docs/zh/Memory_System.md` | blob `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 008 | `AGI/basepoint/daily/docs/zh/Tool_System.md` | blob `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 009 | `AGI/basepoint/daily/FOUNDATION/SOURCES.md` | blob `dd1605572715e3ea2d37933190ed5f250722cc68` | 28247 B | DAILY_BASEPOINT_ORIGINAL | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 010 | `AGI/basepoint/monthly/docs/en/Monthly_Blueprint_Current.md` | blob `a686309b14d57a42b14ad63c4d838705cb732215` | 1925 B | MONTHLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 011 | `AGI/basepoint/monthly/docs/monthly/2026-08-strategic-blueprint.md` | blob `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | MONTHLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 012 | `AGI/basepoint/monthly/docs/zh/Monthly_Blueprint_Current.md` | blob `426d108d70dcfecafa36d8c1fd3d36d29e4bb101` | 1797 B | MONTHLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 013 | `AGI/basepoint/notes/daily/docs/en/Architecture_Principles.md.note.md` | blob `8a802059415dfa8fa25adfb5b1a6483e1c46dac2` | 607 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 014 | `AGI/basepoint/notes/daily/docs/en/Collaboration_System.md.note.md` | blob `211669920b6fa23e2a7d2b75a40f9e0ef14b048d` | 616 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 015 | `AGI/basepoint/notes/daily/docs/en/Memory_System.md.note.md` | blob `9cfc6e6ad13362d8303519769fe7520772d6b4cb` | 638 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 016 | `AGI/basepoint/notes/daily/docs/en/Tool_System.md.note.md` | blob `947cc28ccac378316a7a21217b1b65bd455bc91d` | 556 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 017 | `AGI/basepoint/notes/daily/docs/zh/Architecture_Principles.md.note.md` | blob `e6e02b8785bf29e3a01eb73f0091c16703fed3b0` | 607 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 018 | `AGI/basepoint/notes/daily/docs/zh/Collaboration_System.md.note.md` | blob `f25ea03735955bbcba8478ea1b9429812c3dd377` | 616 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 019 | `AGI/basepoint/notes/daily/docs/zh/Memory_System.md.note.md` | blob `4f36487b475ab9b7b9ff1e5b5bcd49646ef41273` | 638 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 020 | `AGI/basepoint/notes/daily/docs/zh/Tool_System.md.note.md` | blob `255a681f7090b36113bbf471d468dac095443ad4` | 556 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 021 | `AGI/basepoint/notes/daily/FOUNDATION/SOURCES.md.note.md` | blob `065e6b78fff3d6399c5e185f1f32a6d0910195e6` | 687 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 022 | `AGI/basepoint/notes/monthly/docs/en/Monthly_Blueprint_Current.md.note.md` | blob `8b4fb03af86125db6828e83629286db01e13b302` | 593 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 023 | `AGI/basepoint/notes/monthly/docs/monthly/2026-08-strategic-blueprint.md.note.md` | blob `b083a2edea00dc0b1128959a04b42ab51f7f81ee` | 600 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 024 | `AGI/basepoint/notes/monthly/docs/zh/Monthly_Blueprint_Current.md.note.md` | blob `b87609187d2e37e1000d8cd2735a14d941ddbc80` | 593 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 025 | `AGI/basepoint/notes/weekly/docs/en/Architecture_Principles.md.note.md` | blob `dbd15d69f16180d34c8076ab54142f37a022381b` | 707 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 026 | `AGI/basepoint/notes/weekly/docs/en/Collaboration_System.md.note.md` | blob `e7353c2c22257efb9773d1e656d9950da79eeb18` | 704 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 027 | `AGI/basepoint/notes/weekly/docs/en/Memory_System.md.note.md` | blob `9c8b18ac6af37f8895069312b26a4303189baca8` | 697 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 028 | `AGI/basepoint/notes/weekly/docs/en/Tool_System.md.note.md` | blob `2362f1e72eebd12c8d6580de35ceabb2eea83756` | 695 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 029 | `AGI/basepoint/notes/weekly/docs/zh/Architecture_Principles.md.note.md` | blob `61eb936ec598a48ef74a47bd1ae202012629aecb` | 707 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 030 | `AGI/basepoint/notes/weekly/docs/zh/Collaboration_System.md.note.md` | blob `dfd2e4df27b345bcf58f3f1b5fe66cdbd1c0debc` | 704 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 031 | `AGI/basepoint/notes/weekly/docs/zh/Memory_System.md.note.md` | blob `4238e23d93f8d8c1b71c103560a68cec64b8a7af` | 697 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 032 | `AGI/basepoint/notes/weekly/docs/zh/Tool_System.md.note.md` | blob `9079e66bf7fb3cb46b7486f6a99d1ff5679557e5` | 695 B | SNAPSHOT_NOTE_BOUNDARY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 033 | `AGI/basepoint/weekly/docs/en/Architecture_Principles.md` | blob `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 034 | `AGI/basepoint/weekly/docs/en/Collaboration_System.md` | blob `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 035 | `AGI/basepoint/weekly/docs/en/Memory_System.md` | blob `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 036 | `AGI/basepoint/weekly/docs/en/Tool_System.md` | blob `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 037 | `AGI/basepoint/weekly/docs/zh/Architecture_Principles.md` | blob `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 038 | `AGI/basepoint/weekly/docs/zh/Collaboration_System.md` | blob `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 039 | `AGI/basepoint/weekly/docs/zh/Memory_System.md` | blob `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 040 | `AGI/basepoint/weekly/docs/zh/Tool_System.md` | blob `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | WEEKLY_BASEPOINT | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 041 | `docs/en/Architecture_Principles.md` | blob `90503b04e766a01602d4fe4f43f00f0589cfe5e0` | 123815 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 042 | `docs/en/Collaboration_System.md` | blob `510cc163be08e88d4ff97af7f5df895ddd1cd6d4` | 264161 B | CURRENT_EN_EVIDENCE_MAPPING | AFTER_2026_10_24_A2_CHANGE_KEEP_N_DAY_SEPARATE | PRESERVE_SOURCE_SCOPE
+- 043 | `docs/en/Memory_System.md` | blob `00e83d3a59124946efac67e1a87cc69534d09f00` | 102261 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 044 | `docs/en/Monthly_Blueprint_Current.md` | blob `461dfeb087b784de0ff40cae12ecdcd4c7f84b22` | 5778 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 045 | `docs/en/README.md` | blob `33ba8878127c3da5f3a59ffc444adb54249f13ec` | 3365 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 046 | `docs/en/TAPE_2026-09-10_CORRECTION.md` | blob `676758aad5b4ed0445aa5d70f3406828c2cc639b` | 3921 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 047 | `docs/en/Tool_System.md` | blob `491efccd31600daca90a608b296ac049b9337692` | 58724 B | CURRENT_EN_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 048 | `docs/monthly/2026-06-strategic-blueprint.md` | blob `bbe44ca35ad6515713dc967aafb4466f0fa0202f` | 2960 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 049 | `docs/monthly/2026-07-strategic-blueprint.md` | blob `2018c8b59f438bb107116b09a68811dc36e2e30f` | 8271 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 050 | `docs/monthly/2026-08-strategic-blueprint.md` | blob `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 051 | `docs/monthly/2026-08-through-23-strategic-blueprint.md` | blob `8198e57ff8662ded800c56ebc90b8eb86020c87d` | 5415 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 052 | `docs/monthly/2026-08-through-27-strategic-blueprint.md` | blob `ba10249678baface4594a18a32e467da065b6ccb` | 4374 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 053 | `docs/monthly/2026-08-through-30-strategic-blueprint.md` | blob `42dc9f7d21ac42cfcb848a959b95169fdbb91476` | 2756 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 054 | `docs/monthly/2026-09-strategic-blueprint.md` | blob `09bcc820bec30df2d34f4a2b6bde4b1ed98d1578` | 7601 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 055 | `docs/monthly/2026-10-strategic-blueprint.md` | blob `44baa112ad4ea91cd81bf8841ba3624fabd3988a` | 487639 B | BLUEPRINT_HISTORICAL_LINEAGE | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 056 | `docs/zh/Architecture_Principles.md` | blob `7b148c9f16dc40cf3b5907c12d6046df30139436` | 116574 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 057 | `docs/zh/Collaboration_System.md` | blob `7262708caf1d739623bccb3a4ca082d427cc29ef` | 237059 B | CURRENT_ZH_EVIDENCE_MAPPING | AFTER_2026_10_24_A2_CHANGE_KEEP_N_DAY_SEPARATE | PRESERVE_SOURCE_SCOPE
+- 058 | `docs/zh/Memory_System.md` | blob `da8f669203ca29d0e56478fdc0cd5cbcad38df67` | 95898 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 059 | `docs/zh/Monthly_Blueprint_Current.md` | blob `ea8717056f9fff978df402e2933644d1cc662119` | 5390 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 060 | `docs/zh/README.md` | blob `c7516f8d6dfd186ec4577552fca2ea319c9ea49f` | 3098 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 061 | `docs/zh/TAPE_2026-09-10_CORRECTION.md` | blob `6c6158bae3921373623cd46438f7abffee4874db` | 3504 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 062 | `docs/zh/Tool_System.md` | blob `010e3cc8befee32df29c03fa5c6cf4147437db14` | 54524 B | CURRENT_ZH_EVIDENCE_MAPPING | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 063 | `FOUNDATION/ARCHITECTURE.md` | blob `0c39c076da29d169aeaf141b2ebee94f7a836a3b` | 9627 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 064 | `FOUNDATION/arxiv_probe.py` | blob `54bd6091ab22667ecb8a89f49d24e16af0ae3185` | 5609 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 065 | `FOUNDATION/claim.schema.json` | blob `4578b92834a14b8c8fceb14f0c26b2536410e261` | 1370 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 066 | `FOUNDATION/COLLABORATION.md` | blob `94bb8b85557d41124c794bf8c562df2d278593b3` | 9072 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 067 | `FOUNDATION/EVIDENCE.md` | blob `9c7e0cd274081148b34eb0a6c9d0097cea085ff5` | 9780 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 068 | `FOUNDATION/independent-gpt/README.md` | blob `e6377149b7a55c7ef0fa735780251361a07c4df3` | 6721 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 069 | `FOUNDATION/INDEX.md` | blob `289ad219a795090fd5c24e9528f207dcd95a43dc` | 7142 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 070 | `FOUNDATION/MAINTENANCE.md` | blob `39740d184fa6170fc7012afa99eacfbf99a9bcd0` | 8453 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 071 | `FOUNDATION/MEMORY.md` | blob `e5b20a3431ffe2a32a42c9574230fadd965cd9a1` | 6755 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 072 | `FOUNDATION/plans/2026-08-05-readme-narrative-repair.md` | blob `463509663db0f405bb39550d91f730c6da98963a` | 3412 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 073 | `FOUNDATION/PROVENANCE.md` | blob `40f0cdb0103d2fac8bc5a5ca5742a1a250160b96` | 12316 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 074 | `FOUNDATION/REVIEW.md` | blob `cc72b0951bf2ce23bbf2274ede57a0d1cc83d301` | 9841 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 075 | `FOUNDATION/SOURCES.md` | blob `781bdd4f2d275e667244888e68fac48857a56d37` | 49319 B | ORIGINAL_SOURCE_REGISTRY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 076 | `FOUNDATION/specs/2026-08-05-readme-narrative-repair-design.md` | blob `b02af44a579b01a3cd5f1aee403b8509eb0d6dab` | 2599 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 077 | `FOUNDATION/test_contract.py` | blob `42c9211626fe315ce28304cefb339754d45d77ee` | 6649 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 078 | `FOUNDATION/TOOLS.md` | blob `7322e8ef3cea7b66499370d89cabb212a27a9b3e` | 7748 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 079 | `FOUNDATION/validate.py` | blob `8ce5d29cfdd31c9d6b33edbc0b94d44c53c98cbb` | 9736 B | FOUNDATION_GOVERNANCE_OR_VALIDATOR | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 080 | `historical-audits/01-corrections-and-errata/2026-08-10--august-source-metadata--errata.md` | blob `b63e86c9e7ef6cfb4f549ecdf0810b9e71de17b4` | 7143 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 081 | `historical-audits/01-corrections-and-errata/2026-08-17--w33-source-provenance--errata.md` | blob `dcc8682f5a432ee24cd867121c3767ec5229ff52` | 10843 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 082 | `historical-audits/01-corrections-and-errata/2026-08-24--w34-source-provenance--errata.md` | blob `106d11b8c33a4cf4827643cda404d622d18a384b` | 4632 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 083 | `historical-audits/01-corrections-and-errata/2026-09-01--august-31-source-claim--reconciliation.md` | blob `bd115cd86b28d5488dbda3bbf9df3e27486bee5a` | 3271 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 084 | `historical-audits/01-corrections-and-errata/2026-09-07--jules-task-merge--correction.md` | blob `af564c6b1321a8ad80a069dc0bba854f3dd0bbdc` | 6430 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 085 | `historical-audits/01-corrections-and-errata/2026-10-01--external-review-source-scope--correction.md` | blob `474e360d57407cebce1921bd6e0a4e99ed905f6b` | 3932 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 086 | `historical-audits/02-document-audits/2026-08-28--foundation-documents--document-audit.md` | blob `50028b23263e0a7132849279b0bf201787e575fa` | 1985 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 087 | `historical-audits/03-stage-and-period-audits/2026-07--extra-monthly-strategic-blueprint-sidecar.md` | blob `7ba3c07581ac94ce2414a9afc32491000d677207` | 1639 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 088 | `historical-audits/03-stage-and-period-audits/2026-08-27--august-24-27--period-reconciliation.md` | blob `302f3fedd2d1c67ab97cdf10916aa8995584ec3b` | 4945 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 089 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-27--august-01-27--evidence-ledger.md` | blob `1d53bfcfe07ae276a17d5f3fdbd12bbcd881b867` | 4131 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 090 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md` | blob `4f8d2477a8834f2c6bc04e2040288b949465daa8` | 4861 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 091 | `historical-audits/04-evidence-and-closure-ledgers/2026-08-31--august-01-31--evidence-ledger.md` | blob `dd8da19398fb36b4728e99203a9f4cbb0ed8049f` | 6896 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 092 | `historical-audits/05-maintenance-and-reconciliation/2026-09-06--jules-cadence-jul-01-sep-06--reconciliation.md` | blob `c6774acf289de7ae804357b89a158f17e19aeb1b` | 17785 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 093 | `historical-audits/05-maintenance-and-reconciliation/2026-09-06--jules-content-contract-jul-01-sep-06--reconciliation.md` | blob `7a39e5a15aa6b283d048a02bcdea46b0869c9000` | 16385 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 094 | `historical-audits/05-maintenance-and-reconciliation/2026-09-10--sep-01-10--cadence-reconciliation.md` | blob `82ec59d82c8ad7b60dc3bea195a0d4d11285c753` | 9073 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 095 | `historical-audits/05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` | blob `fbc8d38da2b104b07f3c8b580428f4c0a7088ec2` | 4462 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 096 | `historical-audits/05-maintenance-and-reconciliation/2026-09-19--sep-19--maintenance-reconciliation.md` | blob `48a927aab17444f0292ddb6c39208f8fb412f85a` | 3380 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 097 | `historical-audits/2026-09/2026-09-a1-evidence-freeze.md` | blob `9b7f48bac4c39227f4e49052b2c0f399fa19b7fe` | 10473 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 098 | `historical-audits/2026-09/2026-09-a2-close-reconciliation.md` | blob `7969d1020e4d4839718343c6ec18515dba89e393` | 8930 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 099 | `historical-audits/2026-10/2026-10-01-external-independent-gpt-review.md` | blob `35e2bbc1b5fa023307a939ae2eb83c1d8caaf60d` | 12175 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 100 | `historical-audits/2026-10/2026-10-02-september-d30-independent-gpt-audit.md` | blob `1622665c17011e9ca328f057f3efc29a86e4ab3c` | 6328 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 101 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation-audit.md` | blob `28ef0b3e5b8f873d12d238c73ef88667b52f1cd3` | 5933 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 102 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation.md` | blob `b5da2bdd572a3a5830109981ab089c814c6064c3` | 3510 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 103 | `historical-audits/2026-10/2026-10-20-a1-source-custody.md` | blob `5990e9318f7527f4a311af57281c4c20e17a4249` | 27041 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 104 | `historical-audits/2026-10/2026-10-20-a2-month-relation.md` | blob `a89da6a08e85974fcd4423b8e14e5f19740895f4` | 24512 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 105 | `historical-audits/2026-10/2026-10-21-a1-source-custody.md` | blob `d0550a2a0d986ff820b631b6753a507ae18fc3f5` | 15864 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 106 | `historical-audits/2026-10/2026-10-21-a2-month-relation.md` | blob `342b206d87e5bca16d3e4b4da16735015aa55d25` | 14252 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 107 | `historical-audits/2026-10/2026-10-23-a1-source-custody.md` | blob `4eb654c64e7c3d6cb651eff66cfb54935918d764` | 10438 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 108 | `historical-audits/2026-10/2026-10-23-a2-month-relation.md` | blob `690146513ecaa634c49ea02380fbcc5bcaec02d3` | 9024 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 109 | `historical-audits/2026-10/2026-10-24-a1-source-custody.md` | blob `946aad2218489e97378d472ffdebe4048f0e4630` | 14354 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 110 | `historical-audits/2026-10/2026-10-24-a2-month-relation.md` | blob `107d68e005be0715d977df427165f57b8f166193` | 14325 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+- 111 | `historical-audits/INDEX.md` | blob `ff7e7b24f56799aa2459d91a72a84bb3b15d9107` | 4901 B | CORRECTION_OR_MONTH_CUSTODY | UNCHANGED_REF_INHERIT_PREV_A2_BOUNDARY | PRESERVE_SOURCE_SCOPE
+
+## A1 historical and monthly integrity decisions
+- Distinct source paths with immutable Git blobs have been recorded; claim content has NOT been re-reproduced from primary publication outside the previous native evidence.
+- N−1 coverage draws from merged 2026-10-24 A1/A2 lineage, not from 2026-10-25 EN/ZH research content.
+- October blueprint is an evolving relational owner, not evidence of finished October monthly execution.
+- W40–W43 remain task-native Weekly states; references here do not close any new Weekly.
+- 2026-10-25 content changed only the two current language snapshots since prior A2; the original PR #327 is current main delivery, not consumed into N−1 historical event.
+- No SOURCE entry has been silently upgraded to a validated reference core by this maintenance process.
+- A1 result: BOUNDED_FULL_SOURCE_CUSTODY / SOURCE_TRUTH_NOT_INDEPENDENTLY_REPRODUCED / MONTH_OPEN.
+- A2 requires all ten actual merged A1 PRs and fresh main after them. No A2 branch should exist before that gate.
+
