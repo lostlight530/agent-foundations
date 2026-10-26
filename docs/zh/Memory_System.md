@@ -1133,3 +1133,51 @@ MONTH_OPEN
 - 未新增 `Sxx`，未将 Daily 文本自动纳入 verified core
 - 未执行 `FOUNDATION/validate.py`、`FOUNDATION.test_contract`、形式化证明复核、模型 benchmark 或本地 Agent Memory Runtime
 - 所有既有 Daily 以及 producer provenance 原样保留，Weekly 与 Monthly 的独立权限不变
+
+## 2026-10-26 Daily Research — EPGM：预算内证据补全不等于图谱正确性
+
+- Canonical task: `foundations/research/daily`
+- Logical date: 2026-10-26 Asia/Shanghai；精确执行时刻 NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_NATIVE_PRODUCTION / NOT_JULES_REPLAY
+- Base main: `5f87645e7e2cfd1af824e95ca6cd54f8b5b92a05`
+- Run identity: `agent-foundations/research/daily/2026-10-26/GPT_NATIVE/5f87645e7e2cfd1af824e95ca6cd54f8b5b92a05/gpt-native-20261026-memory-01`
+- Container: Memory System
+- Canonical paper identity: arXiv:2609.25913v2；v2 版本日期 2026-10-06 01:58:15 UTC，v1 初次提交 2026-09-22
+- arXiv 列表标题：*When Does Execution Provenance Help Agent Memory Retrieval?*；v2 全文标题：*EPGM: Execution Provenance for Budgeted Agent Memory Retrieval*
+- Authors: Yiqi Wang, Jinqian Ju, Jiaqi Zhang, Zequn Sun, Yiqun Duan, Mingkai Zheng, Taotao Cai
+- 版本元数据：https://arxiv.org/abs/2609.25913v1 （包含 v2 版本链）
+- 已于 2026-10-26 打开原始 v2 全文：https://arxiv.org/html/2609.25913v2
+- 当前 `FOUNDATION/SOURCES.md` 不包含该 canonical arXiv ID；不自动分配新 Sxx，不升级 Source Registry 或 Verified Core
+- 访问深度：ORIGINAL_VERSIONED_AUTHOR_FULL_TEXT_READ；独立复现实验 NOT_EXECUTED
+
+### 原始机制与数学边界
+论文把工具执行轨迹记忆检索定义为固定 token 预算内的**完整来源证据补全**，而非只找最高相关性的单个片段。每个 Gold Span 由原执行事件、JSON pointer 与字符区间定位；候选证据映射到相同的来源坐标。作者的字符级覆盖率定义为：
+
+```text
+Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
+```
+
+`U(G_q)` 是原始来源坐标上的 Gold 字符集合，`U(C)` 是检索候选覆盖的字符集合。Full Support 还要求所有必要 Gold Span 同时位于声明的 token 预算内。内容相似但来自另一事件的复制文本，不能自动获得相同的来源身份。
+
+论文把增量拆成两部分：来源对齐的 provenance 候选构造，以及固定候选与初始分数之后的图条件残差重排。作者基于 1,207 个 held-out ISETrace 执行轨迹、2,000 个问题，报告 provenance-unit Dense-FT 相对于 512-token flat chunk 在 Full Support@2048 上提升 19.07 个百分点；控制候选和种子分数后，残差 R-GCN 另提升 4.55 个百分点，95% CI [2.98, 6.18]。这是作者报告的离线**检索**结果，不是 Agent 任务完成、权限合法、持久化数据库正确或本仓复现结果。
+
+### 强反例、架构映射与适用范围
+一个图检索器可能找到很合理的关联，却遗漏更早的工具参数或最终 artifact receipt。相反，论文对单事件直接回忆的图残差只报告 +0.19 个百分点的 Full Support 提升，区间包含零；不能据此宣称所有场景都应使用图重排。在作者的多事实设置下，即使采用残差模型，仍有超过三分之一的问题没有在 2048 token 内获得完整支持。来源坐标完整，也不证明来源内容或外部工具效果本身正确。
+
+候选文档接口可表示为 `(event_id, field_pointer, span, source_revision, authorization_scope)`，再附带按 Query 计算的证据集合覆盖与独立 current-effect verifier。这只是 Memory System 的 `CANDIDATE_MECHANISM`，并非现有架构必须修改或仓库已经实现。论文使用离线合成轨迹，还存在多事实证据缺失、隐私、来源许可与访问控制的外推限制。
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED，仅限作者描述的机制和实验条件
+- Evidence Level: E4_PREPRINT
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 精确 v2 身份与日期、原始来源 Span 度量、固定候选图残差控制、作者报告的区间
+- CORRECTED_INTERPRETATION: Rank/Recall@k 不能认证证据集完整，provenance graph 不是事实或 effect verifier
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；跨仓引用同一论文不增加独立来源数
+- NEW_COUNTEREVIDENCE: 直接回忆中图残差提升不显著；合成轨迹及多事实不完整支持限制了普适性
+- UNKNOWN_RETAINED: 固定代码与数据的独立复现、跨会话运行时有效性、隐私安全部署、权限与实际效果完成
+- NEXT_RETEST_CONDITION: 固定源码、数据、token 预算与 Span 坐标，比较 flat、provenance-unit 及固定候选图重排条件；构造单事件和跨事件反例，单独评价答案、来源授权与效果
+
+### 交付与保全
+仅向现有中英文 Memory System 容器追加一份有边界的 Daily 理论增量；不分配 Sxx、不升级 Verified Core、不运行 Weekly cascade、不提前结束十月 Monthly、不冒充独立实验或本地 Memory 实现。全仓验证器和 runtime 测试 NOT_EXECUTED，历史 Jules 与原有 Native 研究文本原样保留。
