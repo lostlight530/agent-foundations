@@ -1130,3 +1130,51 @@ A source-custody counterexample to overpromotion: a macro can pass its checks on
 - No new `Sxx` ID allocated or verified-core claim admitted by Daily text alone
 - No `FOUNDATION/validate.py`, `FOUNDATION.test_contract`, theorem rederivation, model benchmark, or production agent memory runtime executed
 - Previous Daily chunks and their producer attribution are preserved unchanged; Weekly and Monthly retain their own authority
+
+## 2026-10-26 Daily Research — EPGM: budgeted evidence completion is not graph correctness
+
+- Canonical task: `foundations/research/daily`
+- Logical date: 2026-10-26 Asia/Shanghai; exact execution clock instant: NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_NATIVE_PRODUCTION / NOT_JULES_REPLAY
+- Base main: `5f87645e7e2cfd1af824e95ca6cd54f8b5b92a05`
+- Run identity: `agent-foundations/research/daily/2026-10-26/GPT_NATIVE/5f87645e7e2cfd1af824e95ca6cd54f8b5b92a05/gpt-native-20261026-memory-01`
+- Container: Memory System
+- Canonical paper identity: arXiv:2609.25913v2; v2 2026-10-06 01:58:15 UTC, original v1 2026-09-22
+- arXiv listing title: *When Does Execution Provenance Help Agent Memory Retrieval?*; versioned full-text heading: *EPGM: Execution Provenance for Budgeted Agent Memory Retrieval*
+- Authors: Yiqi Wang, Jinqian Ju, Jiaqi Zhang, Zequn Sun, Yiqun Duan, Mingkai Zheng, Taotao Cai
+- Primary metadata: https://arxiv.org/abs/2609.25913v1 (version history, v2 link)
+- Checked original v2 full text: https://arxiv.org/html/2609.25913v2 on 2026-10-26
+- Source registry: canonical arXiv ID absent from current `FOUNDATION/SOURCES.md`; NO automatic new Sxx ID, registry admission or verified-core promotion
+- Access level: ORIGINAL_VERSIONED_AUTHOR_FULL_TEXT_READ; independent data/code reproduction NOT_EXECUTED
+
+### Mechanism and mathematical boundary
+The paper treats memory retrieval over tool-use traces as *budgeted completion of all required source evidence*, rather than high relevance of individual fragments. Each gold span is addressed by an original execution event, JSON pointer and character interval; a candidate maps back to these same source coordinates. The paper's character-based coverage is:
+
+```text
+Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
+```
+
+Here `U(G_q)` is the set of exact original source-addressed gold characters and `U(C)` the characters supplied by retrieved candidates. Full Support additionally requires the *entire* gold span set to fit the stated token budget. Copying equivalent prose from the wrong event does not satisfy the exact provenance identity contract.
+
+The authors distinguish (a) source-aligned provenance candidate construction from (b) graph-conditioned residual reranking. On 2,000 queries over 1,207 held-out execution-grounded ISETrace trajectories, they report +19.07 percentage points Full Support@2048 for provenance-unit Dense-FT relative to 512-token flat chunks, then +4.55 points (95% CI [2.98, 6.18]) for a seed- and candidate-matched residual R-GCN. These are author-reported offline *retrieval* results, not agent completion, verified database persistence, authorization, or independent reproduction.
+
+### Counterexample, architecture mapping and scope
+A graph may return a plausible relation while omitting a necessary earlier tool argument or later artifact receipt. Conversely, for one-event direct recall, the paper reports only +0.19 points Full Support from graph residual over the fixed dense seed (confidence interval includes zero); indiscriminate graph routing is therefore not proven beneficial. Even under the reported multi-fact configuration, over one third of queries still lack Full Support at 2048 tokens. Source-coordinate retrieval is not a proof that the evidence or external tool action was true.
+
+Candidate documentary design: `(event_id, field_pointer, span, source_revision, authorization_scope)` plus query-specific evidence-set coverage, with a separate current-effect verifier. This is a `CANDIDATE_MECHANISM` for source-preserving memory lookup, not a required change to the formal Memory System or an implemented contract. The synthetic offline traces, incomplete multi-fact retrieval, privacy risks and source-license/access constraints limit extrapolation.
+
+### Five independent evidence axes and research delta
+- Claim State: OBSERVED, limited to paper-reported methods and scoped results
+- Evidence Level: E4_PREPRINT
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: exact v2 source identity/date, source-addressed span metric, fixed-candidate graph-residual control, reported uncertainty intervals
+- CORRECTED_INTERPRETATION: rank/Recall@k does not certify complete evidence delivery; provenance graph structure is not a truth or effect verifier
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; this source is one canonical paper even when cited in another repository
+- NEW_COUNTEREVIDENCE: direct-recall graph gain is statistically undetectable; synthetic-trace setting and incomplete multi-fact coverage limit universality
+- UNKNOWN_RETAINED: reproducibility with independently pinned code/data, cross-session runtime validity, privacy-safe deployment, permissions and effect completion
+- NEXT_RETEST_CONDITION: fix dataset/code revisions and token budgets; compare flat, source-aligned and candidate-matched graph conditions on exact span coordinates, include one-event and multi-event counterexamples, evaluate answer correctness and source authorization independently
+
+### Delivery boundary
+One bounded English/Chinese Daily research increment in the existing Memory System containers. No source-ID allocation, verified-core admission, Weekly cascade, October Monthly final, independent experiment or local memory implementation. Repository validator and runtime tests NOT_EXECUTED. Historical Jules text and previous native research unchanged.
