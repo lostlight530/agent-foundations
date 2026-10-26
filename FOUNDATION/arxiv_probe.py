@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch arXiv identity/version provenance with only the Python standard library.
 
-The helper is intentionally explicit and manually invoked. It exists so Jules can
+The helper is intentionally explicit and manually invoked. It exists so a maintainer can
 verify an arXiv identifier, title, authors, and version-specific date without creating
 one-off downloader scripts or relying on truncated search snippets.
 """
