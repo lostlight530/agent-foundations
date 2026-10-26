@@ -1181,3 +1181,41 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 
 ### 交付与保全
 仅向现有中英文 Memory System 容器追加一份有边界的 Daily 理论增量；不分配 Sxx、不升级 Verified Core、不运行 Weekly cascade、不提前结束十月 Monthly、不冒充独立实验或本地 Memory 实现。全仓验证器和 runtime 测试 NOT_EXECUTED，历史 Jules 与原有 Native 研究文本原样保留。
+
+## 2026-W43 Weekly Research Cascade — 来源身份与边界审查
+
+- Canonical task: `foundations/research/weekly`
+- 逻辑周期：2026-W43，2026-10-19 至 2026-10-25（Asia/Shanghai），已自然闭合
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- UTC 执行日期：2026-10-26，精确执行时刻 NOT_CAPTURED
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- 已读四个当前中英文系统容器及 FOUNDATION/EVIDENCE.md、MAINTENANCE.md、SOURCES.md
+- W43 输入统计：在当前正式文档中发现五个有明确日期的 Daily 研究块，中英文成对，对应六个不同 arXiv base identity；没有从文档确认 10-19/20 的其他原生执行，不可凭缺失断言“未执行”
+- Architecture_Principles 当前中英文文档未见带 W43 日期的新增 Daily 块，因此本周不向该容器硬性编织新架构定律
+- 2026-10-26 EPGM `2609.25913v2` 属于 W44，不得提前吸收入 W43
+- 当前 SOURCES 连续 S01–S67，六个本周论文 base ID 尚无 Sxx 身份；历史 S63 collision 保持独立 correction 边界
+- Weekly 继承 Daily 的来源归属，中英双语、跨系统或跨仓重复引用同一论文都不增加独立证据数
+
+### W43 Memory System：来源保管、失效与主体身份是不同失败轴
+- 10-23 Daily：`arXiv:2610.29869v1` 研究 typed transcript 被序列化为未转义文本角色标签后，恶意内容可能被误认成高权限 user turn
+- 10-24 Daily 对象 A：`arXiv:2610.17544v2` 讨论推理复用宏在上游事实变动后产生失效，以及 change detection / certification 的条件
+- 10-24 Daily 对象 B：`arXiv:2610.10265v1` 区分生成前的 stale、misattributed 与 late personal memory；同日两篇论文不是两次 Daily 执行
+- 需单独维护 `origin_role` 来源角色、`subject_key` 主体身份、`source_revision` 新鲜度、`deadline` 响应预算、`effect_receipt` 物理结果，不能互相替代
+- 反例 A：数据完全新鲜且来源可信，但分配到了错误主体，新鲜度检测无法修复错误归因
+- 反例 B：身份和历史推理路径都正确，但上游版本更新后复用结果过时；来源链完整不保证现在仍有效
+- 反例 C：内容近期有效，但角色边界在 compaction 时丢失，外部数据可能被叙述成用户授权
+- 候选 Memory 设计：压缩前保留不可混淆的 typed role/source envelope；记录带版本的 subject link；分别做变更检测、弃答与效果收据校验
+- 三篇论文不构成对此组合接口的联合实验；各自结果仍被独立数据集与 Harness 前提限制
+- Claim State: OBSERVED；Evidence Level: E4_PREPRINT；Mapping State: CANDIDATE_MECHANISM；Implementation State: NOT_IMPLEMENTED；Validation State: NOT_TESTED
+- NEW_EVIDENCE: 两个有效 W43 Daily chunk 包含三个独立 canonical 论文身份，覆盖与检索相关性不同的失败类型
+- CORRECTED_INTERPRETATION: freshness、role provenance、referent identity 不能互相背书
+- UNCHANGED_BOUNDARY: 研究论文不等于本仓 Memory runtime；Source Registry 不自动升级
+- NEW_COUNTEREVIDENCE: 正确 slot 下 active-slot 过滤可抑制 stale 暴露却不能纠正同名混淆；保留原生 typed-role envelope 的系统不满足该压缩注入前提
+- UNKNOWN_RETAINED: 版本可比性、开放域主体解析质量、角色 provenance 保真与运行时延迟
+- NEXT_RETEST_CONDITION: 将角色伪造型压缩样例与事实变更、同名主体及 deadline 控制实验正交组合，分别记录错误率与来源身份
+
+### 交付与状态提升边界
+- 五份有日期的 W43 Daily chunk 中共有六个论文 canonical identity，各记一次；中英文或跨容器引用不得重复计数
+- S01–S67 来源登记与历史冲突未修改；不自动进入 Verified Core、不升级 Implementation 或 Validation
+- 全仓 validator、模型 benchmark、论文定理复现：NOT_EXECUTED
+- 只在对应正式中英文研究容器末尾追加 Weekly；此前 Jules/Native 正文未被覆盖
