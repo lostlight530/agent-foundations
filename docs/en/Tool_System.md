@@ -618,3 +618,40 @@ MONTH_OPEN
 - **Cross-repository lineage:** the same arXiv identity may be observed by Horizon; `SOURCE_LINEAGE=1`, `INDEPENDENT_EVIDENCE_CREDIT=0` for this repetition. This Daily is a separate *interpretation* and does not register another paper.
 - **Validation boundary:** bilingual documentary content produced; no implementation, full-repository Python validator, action replay, or paper theorem/experiment reproduction executed. No verified-core admission or source registry update.
 
+## 2026-W43 Weekly Research Cascade — source-identity and boundary audit
+
+- Canonical task: `foundations/research/weekly`
+- Logical period: 2026-W43, 2026-10-19 through 2026-10-25 (Asia/Shanghai); week closed before execution
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Execution date UTC: 2026-10-26; exact wall-clock time NOT_CAPTURED
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- Input inspection: all four current bilingual system containers and current FOUNDATION/EVIDENCE.md, MAINTENANCE.md and SOURCES.md
+- Input inventory: five distinct explicitly dated W43 Daily research chunks paired EN/ZH, containing six distinct arXiv base identities. October 19/20 additional research executions are NOT_ESTABLISHED by the inspected current formal docs
+- Foundational architecture container: no explicitly dated W43 Daily research chunk found in current EN/ZH Architecture_Principles; no new architecture rule is therefore woven there
+- The 2026-10-26 EPGM `2609.25913v2` Daily belongs to W44, excluded from W43 synthesis
+- Registry: current `FOUNDATION/SOURCES.md` contains contiguous S01–S67; the six examined W43 exact paper base IDs are not currently Sxx entries. Unresolved historical S63 collision retains its own correction boundary
+- All Weekly source assertions inherit source-time Daily provenance. Repeating an original paper across EN/ZH, systems or repositories is not independent evidence
+
+### W43 Tool System: before-effect authorization versus after-effect causal attribution
+- 2026-10-21 source: AgentLoupe, `arXiv:2610.23233v2`, exact source text was inspected by that Daily; retained mechanism uses kernel-resident causal labels across named file/process/socket handoffs
+- 2026-10-22 source: PROVISO, `arXiv:2610.27115v1`, exact source text was inspected by that Daily; provenance-typed choice is modeled before a proposed tool effect is committed
+- Source question A: can one attribute a delayed external action to the originating agent/tool chain, rather than infer identity from timestamp or process tree?
+- Source question B: does the proposed target/action reflect user/deployment trusted intent when untrusted observations are separately tagged?
+- These are complementary *questions*, not independent reproductions of one another: post-effect causal attribution does not authorize an action, while pre-effect selection does not prove any effect was executed
+- Counterexample 1: a correctly attributed later file/socket mutation may have been unauthorized when first proposed
+- Counterexample 2: a well-typed pre-effect decision may be stale after privilege revocation or environment change and may never execute
+- Candidate documentary interface: `ProposedEffect{principal,target,auth_revision,source_roles}` → independently verified `EffectReceipt{attempt,observed_mutation,store_revision,causal_chain}`, linked only by an explicit run/effect identity
+- Architecture mapping: CANDIDATE_MECHANISM / no enforceable universal contract or Tool runtime patch
+- Claim State: OBSERVED; Evidence Level: E4_PREPRINT (both author works); Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- NEW_EVIDENCE: original version-scoped Daily source lineages define two independent stages of the causal/effect question
+- CORRECTED_INTERPRETATION: authors' kernel label propagation and outcome-selected tool proposal do not compose automatically into a proven end-to-end trusted harness
+- UNCHANGED_BOUNDARY: source identity, authorization and physical effect are independent assertions
+- NEW_COUNTEREVIDENCE: limited supported hooks/SSL interception and assumed trustworthy `K`/alternative action bound transferability
+- UNKNOWN_RETAINED: unsupported platforms, cross-agent delegation identity, local tool driver integration and real authorization-effect agreement
+- NEXT_RETEST_CONDITION: pin tool/harness revision; vary revoke-before-execution and indirect effect through later processes, capture authoritative authorization and effect receipts; verify false attribution/rejection separately
+
+### Delivery and anti-promotion gate
+- Six exact W43 paper identities are counted once each across five dated source chunks; same paper across bilingual containers does not multiply evidence
+- Source IDs S01–S67 and the historical collision remain untouched; no verified-core inclusion or Implementation/Validation promotion
+- Full repository validator, model benchmark and paper theorem replication: NOT_EXECUTED
+- Changed only the indicated existing EN/ZH research containers; prior Jules/native text preserved byte-for-byte above this appendix
