@@ -1178,3 +1178,31 @@ Candidate documentary design: `(event_id, field_pointer, span, source_revision, 
 
 ### Delivery boundary
 One bounded English/Chinese Daily research increment in the existing Memory System containers. No source-ID allocation, verified-core admission, Weekly cascade, October Monthly final, independent experiment or local memory implementation. Repository validator and runtime tests NOT_EXECUTED. Historical Jules text and previous native research unchanged.
+
+## 2026-W43 Weekly Research Cascade — evidence and counterevidence (Memory_System)
+
+- Canonical task: `foundations/research/weekly`
+- Period: 2026-W43 / 2026-10-19 through 2026-10-25, Asia/Shanghai, CLOSED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- Record class: BOUNDED_WEEKLY_DOCUMENTARY_CASCADE / no experimental execution
+- Source IDs: arXiv:2610.29869v1; 2610.17544v2; 2610.10265v1
+- Source Registry Sxx: UNCHANGED, no admission or resolution of historical collision
+
+### Source custody before and after compaction
+2026-10-23 Compaction Laundering arXiv:2610.29869v1 tests destruction of typed role provenance during in-band serialization. 2026-10-24 Many Steps into One arXiv:2610.17544v2 examines changed-fact detection for cached reasoning, while Stale, Misattributed, or Late arXiv:2610.10265v1 distinguishes temporal and attribution failure. Those address different preconditions: message-role identity, memory validity, and source attribution. One source appearing on two dates or language mirrors is still one lineage. None is evidence of a deployed memory safety filter, reliable change detector or claim verification.
+
+### Five-axis states and conflict gate
+- Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee
+- Evidence Level: E4_PREPRINT where a specific original author-paper source was inspected; NO_NEW_EVIDENCE for Architecture-only cross-mapping
+- Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles
+- Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: Source-to-container relation audit of existing dated W43 Daily artifacts; zero new independent experiments
+- CORRECTED_INTERPRETATION: Cross-container mapping cannot upgrade paper outcomes into authority, durability, implementation or a test pass
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; EN/ZH counterparts and cross-repo leads do not multiply canonical objects
+- NEW_COUNTEREVIDENCE: Different mechanisms, populations and metric denominators prevent unqualified claim transfer
+- UNKNOWN_RETAINED: exact reproduction, host integration, runtime receipts, access control and cross-session state continuity
+- NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
+- W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
+- October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
