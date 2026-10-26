@@ -6,11 +6,11 @@ Effective: 2026-09-17
 
 ## Scope / 范围
 
-This contract governs the verified-core maintenance/control plane: Jules-produced research inputs as repository evidence, verified-core admission, Independent Review, Independent GPT recovery/repair, cadence interpretation, validator/checker ownership, concurrency, and delivery discipline.
+This contract governs the verified-core maintenance/control plane: native producer-generated research inputs as repository evidence, including current GPT Native prospective records and retained historical Jules records, verified-core admission, Independent Review, Independent GPT recovery/repair, cadence interpretation, validator/checker ownership, concurrency, and delivery discipline.
 
-It does not by itself authorize changes to historical `docs/**`, domain claim maps, sources, schemas, runtime/dependency surfaces, `.github/**`, private Jules task controls, or generated research content. Those surfaces may be read as evidence and changed only when the current owning repository authority or maintainer explicitly makes them part of a repair.
+It does not by itself authorize changes to historical `docs/**`, domain claim maps, sources, schemas, runtime/dependency surfaces, `.github/**`, private producer-side task controls, or generated research content. Those surfaces may be read as evidence and changed only when the current owning repository authority or maintainer explicitly makes them part of a repair.
 
-本契约负责可验证核心的维护/控制平面：Jules 产出作为仓库证据、核心准入、独立审核、Independent GPT 恢复/修复、周期解释、验证器职责、并发和交付纪律。本契约不自动授权改写历史研究流或私有 Jules 控制。
+本契约负责可验证核心的维护/控制平面：当前 GPT Native 与历史 Jules 等原生生产者的研究产物均作为带独立来源身份的仓库证据，核心准入、独立审核、Independent GPT 恢复/修复、周期解释、验证器职责、并发和交付纪律仍分别适用，本契约不授权改写历史研究流或重建私有生产者控制。
 
 ## Research cadence and admission / 科研周期与准入
 
@@ -21,6 +21,16 @@ A 30-day provisional ledger may summarize 30 logical dates, but it is not a natu
 Verified-core admission requires canonical source deduplication plus five independent axes: Claim State, Evidence Level, Mapping State, Implementation State, and Validation State. Paper truth does not imply mapping relevance; mapping does not imply implementation; implementation does not imply validation. `STATIC_CHECKED` is documentary structure evidence, not experimental reproduction.
 
 Canonical source identity is based on stable identifiers such as normalized arXiv identity, not date or revisit. Version, submission date, authors, and inspected source surface must be checked independently. Abstract-only inspection is `ABSTRACT_SUPPORTED`; unverified theorem/formula text cannot be promoted. English and Chinese counterparts must carry equivalent five-axis states and limitations.
+
+## 2026-10-26 forward producer reconciliation / 后向历史保留与前向生产者归属
+
+Status: `CURRENT_CONTROL_PLANE_RECONCILIATION / OCT25_A2_RETAINED`
+
+- The merged 2026-10-25 A2 relation at `historical-audits/2026-10/2026-10-25-a2-month-relation.md` (blob `3c7b95c356ead2a7aecb46033b2cd40f0c945841`) says `Original daily/weekly/monthly production: Jules` globally
+- The 2026-10-25 bilingual native Daily input was merged through PR #327 (`docs/en/Collaboration_System.md` and `docs/zh/Collaboration_System.md`); that PR expressly declares `GPT Native prospective Daily research`, not a Jules execution
+- Read producer identity from each dated Native input and its exact delivery provenance, rather than inheriting a single producer label from a month-level summary. The A2 maintenance author is an Independent GPT relation reviewer, not the native research producer
+- Preserve earlier Jules-attributed artifacts and the original merged A2 text as point-in-time records. This forward interpretation is not an independent research run, external reproduction, validator PASS, source-registry promotion, or October natural-month close
+- Subsequent A1/A2 and monthly handoffs must carry this explicit producer-boundary reconciliation without silently altering historical evidence
 
 ## Maintenance identity and concurrency / 维护身份与并发
 
@@ -46,9 +56,9 @@ Legacy `CONCEPTUAL_MAPPING` maps to `DESIGN_ANALOGY`. Legacy implementation `EVI
 
 Historical record != current state. Current path presence != earlier execution. Later success != earlier success. Correction != history rewrite. Unknown remains unknown.
 
-Jules-generated research remains historical/repository input and is not self-authenticating. The verified-core validator checks declared structural/documentary surfaces only. Independent Review calibrates interpretation. Independent GPT may recover maintenance state and prepare bounded repairs. A human maintainer reviews and merges.
+Native producer-generated research is repository input and is not self-authenticating. Historical Jules research retains Jules provenance; GPT Native prospective research retains its distinct producer identity and does not retroactively replace Jules. The verified-core validator checks declared structural/documentary surfaces only. Independent Review calibrates interpretation. Independent GPT may recover maintenance state and prepare bounded repairs. A human maintainer reviews and merges.
 
-Private Jules task prompts, repository memory, credentials, and hidden reasoning are not reconstructed into public repository files by default. This repository currently has no public `AGENTS.md`; do not infer one from private automation or prior conversations.
+Private producer task prompts, repository memory, credentials, and hidden reasoning are not reconstructed into public repository files by default. This repository currently has no public `AGENTS.md`; do not infer one from private automation or prior conversations.
 
 ## Validator and execution boundary / 验证器与执行边界
 
