@@ -1181,3 +1181,31 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 
 ### 交付与保全
 仅向现有中英文 Memory System 容器追加一份有边界的 Daily 理论增量；不分配 Sxx、不升级 Verified Core、不运行 Weekly cascade、不提前结束十月 Monthly、不冒充独立实验或本地 Memory 实现。全仓验证器和 runtime 测试 NOT_EXECUTED，历史 Jules 与原有 Native 研究文本原样保留。
+
+## 2026-W43 Weekly Research Cascade / 理论关系与反证审查 (Memory_System)
+
+- Canonical task: `foundations/research/weekly`
+- Period: 2026-W43 / 2026-10-19 through 2026-10-25, Asia/Shanghai, CLOSED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- Record class: BOUNDED_WEEKLY_DOCUMENTARY_CASCADE / no experimental execution
+- Source IDs: arXiv:2610.29869v1; 2610.17544v2; 2610.10265v1
+- Source Registry Sxx: UNCHANGED, no admission or resolution of historical collision
+
+### 压缩前后的来源身份与记忆有效性
+10 月 23 日 Compaction Laundering（arXiv:2610.29869v1）研究将 typed role 扁平化为文本时的权限来源丢失。10 月 24 日 Many Steps into One（arXiv:2610.17544v2）研究复用推理的事实变更检测，Stale, Misattributed, or Late（arXiv:2610.10265v1）区分时间失效与错误归因。三者对应不同的角色身份、记忆有效性与来源归属前提，同源跨日重复或中英文镜像不增加独立证据。本仓未实现或验证可用的记忆安全过滤器、变更检测器或事实认证器。
+
+### 五轴状态与冲突门槛
+- Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee
+- Evidence Level: E4_PREPRINT where a specific original author-paper source was inspected; NO_NEW_EVIDENCE for Architecture-only cross-mapping
+- Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles
+- Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: W43 已合并日期化 Daily 的来源关系审查，新增独立实验为零
+- CORRECTED_INTERPRETATION: 多容器映射不能把论文结果升级为授权、持久性、实现或测试成功
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; EN/ZH counterparts and cross-repo leads do not multiply canonical objects
+- NEW_COUNTEREVIDENCE: 不同前提、范围与指标之间不能跨层传递结论
+- UNKNOWN_RETAINED: exact reproduction, host integration, runtime receipts, access control and cross-session state continuity
+- NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
+- W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
+- October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
