@@ -2971,3 +2971,39 @@ Strong counterexample: a tool labeled read-only can modify usage quota, reveal p
 ### Delivery boundary
 One aligned EN/ZH Daily research increment, zero new independent validation runs. No Sxx ID allocated, verified core claim admitted, prior generated research replaced, Jules history rewritten, or Weekly/Monthly task executed. Repository validator and runtime replay NOT_EXECUTED.
 
+## 2026-W43 Weekly Research Cascade — source-identity and boundary audit
+
+- Canonical task: `foundations/research/weekly`
+- Logical period: 2026-W43, 2026-10-19 through 2026-10-25 (Asia/Shanghai); week closed before execution
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Execution date UTC: 2026-10-26; exact wall-clock time NOT_CAPTURED
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- Input inspection: all four current bilingual system containers and current FOUNDATION/EVIDENCE.md, MAINTENANCE.md and SOURCES.md
+- Input inventory: five distinct explicitly dated W43 Daily research chunks paired EN/ZH, containing six distinct arXiv base identities. October 19/20 additional research executions are NOT_ESTABLISHED by the inspected current formal docs
+- Foundational architecture container: no explicitly dated W43 Daily research chunk found in current EN/ZH Architecture_Principles; no new architecture rule is therefore woven there
+- The 2026-10-26 EPGM `2609.25913v2` Daily belongs to W44, excluded from W43 synthesis
+- Registry: current `FOUNDATION/SOURCES.md` contains contiguous S01–S67; the six examined W43 exact paper base IDs are not currently Sxx entries. Unresolved historical S63 collision retains its own correction boundary
+- All Weekly source assertions inherit source-time Daily provenance. Repeating an original paper across EN/ZH, systems or repositories is not independent evidence
+
+### W43 Collaboration System: semantic review is not an effect/approval receipt
+- October 25 Daily source: SpecAgent, `arXiv:2610.21463v1`, author-described weak-model speculative read-only trajectory plus strong-model semantic prefix verification
+- Paper holds a first operation classified as state-changing until the strong model reviews prior steps; conditional serving and per-step acceptance assumptions bound its estimated efficiency relation
+- The exact source-side note that discarded reads can still leave external access logs is counterevidence against equating model-history rollback with side-effect rollback
+- Cross-domain relation (not new source): Tool System PROVISO `2610.27115v1` concerns whether a *proposed effect* is admissible; Tool System AgentLoupe `2610.23233v2` concerns attribution of a *later effect*; Memory `2610.29869v1` concerns loss of trusted role identity under flattening
+- None of those original papers proves the other mechanism; four citations do not constitute a validation of a composed collaboration protocol
+- Bounded candidate handoff: `DraftTrajectory` / `HeldEffect` / `ReviewVerdict` / `AuthorizedEffectReceipt` with explicit caller, time, source revision and external-state identity
+- Adversarial scenario: a tool marked read-only consumes external quota, strong semantic reviewer accepts a plausible prefix, then authorization expires before state-changing dispatch; no paper-level semantic verdict can certify completion
+- Architecture implication: keep human approval, authorization freshness, execution outcome and counterevidence separate from the LLM's semantic confidence and token/latency estimate
+- Claim State: OBSERVED; Evidence Level: E4_PREPRINT; Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- NEW_EVIDENCE: one version-scoped W43 Collaboration Daily and three preexisting cross-container research leads with their distinct roles
+- CORRECTED_INTERPRETATION: holding the *first recognized write* does not imply zero external effect from reads or a universal precommit permission gate
+- UNCHANGED_BOUNDARY: semantic prefix acceptance != tool permission != transaction commit != user-confirmed effect
+- NEW_COUNTEREVIDENCE: side-effectful reads and stale authorization contradict universal read-only/approved claims
+- UNKNOWN_RETAINED: independent paper benchmark reproduction, actual local multi-Agent coordination and cancellation/recovery correctness
+- NEXT_RETEST_CONDITION: source-pinned simulator with late tool effect, side-effectful reads, approval revocation and restart, comparing semantic verdict, policy decision, durable receipt and true postcondition
+
+### Delivery and anti-promotion gate
+- Six exact W43 paper identities are counted once each across five dated source chunks; same paper across bilingual containers does not multiply evidence
+- Source IDs S01–S67 and the historical collision remain untouched; no verified-core inclusion or Implementation/Validation promotion
+- Full repository validator, model benchmark and paper theorem replication: NOT_EXECUTED
+- Changed only the indicated existing EN/ZH research containers; prior Jules/native text preserved byte-for-byte above this appendix
