@@ -1178,3 +1178,41 @@ Candidate documentary design: `(event_id, field_pointer, span, source_revision, 
 
 ### Delivery boundary
 One bounded English/Chinese Daily research increment in the existing Memory System containers. No source-ID allocation, verified-core admission, Weekly cascade, October Monthly final, independent experiment or local memory implementation. Repository validator and runtime tests NOT_EXECUTED. Historical Jules text and previous native research unchanged.
+
+## 2026-W43 Weekly Research Cascade — source-identity and boundary audit
+
+- Canonical task: `foundations/research/weekly`
+- Logical period: 2026-W43, 2026-10-19 through 2026-10-25 (Asia/Shanghai); week closed before execution
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Execution date UTC: 2026-10-26; exact wall-clock time NOT_CAPTURED
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- Input inspection: all four current bilingual system containers and current FOUNDATION/EVIDENCE.md, MAINTENANCE.md and SOURCES.md
+- Input inventory: five distinct explicitly dated W43 Daily research chunks paired EN/ZH, containing six distinct arXiv base identities. October 19/20 additional research executions are NOT_ESTABLISHED by the inspected current formal docs
+- Foundational architecture container: no explicitly dated W43 Daily research chunk found in current EN/ZH Architecture_Principles; no new architecture rule is therefore woven there
+- The 2026-10-26 EPGM `2609.25913v2` Daily belongs to W44, excluded from W43 synthesis
+- Registry: current `FOUNDATION/SOURCES.md` contains contiguous S01–S67; the six examined W43 exact paper base IDs are not currently Sxx entries. Unresolved historical S63 collision retains its own correction boundary
+- All Weekly source assertions inherit source-time Daily provenance. Repeating an original paper across EN/ZH, systems or repositories is not independent evidence
+
+### W43 Memory System: custody, staleness and entity identity are distinct failure axes
+- October 23 Daily: `arXiv:2610.29869v1` compaction laundering describes the loss of role provenance when a typed transcript is flattened into unescaped in-band labels
+- October 24 Daily object A: `arXiv:2610.17544v2` discusses change detection and certification limits when a reusable reasoning contraction becomes stale
+- October 24 Daily object B: `arXiv:2610.10265v1` distinguishes stale, misattributed and late personal memory *before generation*; two papers in one Daily are not two Daily executions
+- Claim decomposition: `origin_role`/content source custody, `subject_key`/entity resolution, `source_revision`/freshness, `deadline`/service validity and `effect_receipt`/runtime truth are non-substitutable predicates
+- Counterexample A: perfectly fresh and correctly sourced data can be attached to the wrong person; a freshness detector cannot solve incorrect subject assignment
+- Counterexample B: a formally accurate identity and previously certified derivation can go stale after upstream revision; provenance alone is not a current validity check
+- Counterexample C: a summarized transcript containing attacker-supplied role delimiters can appear as user approval even when every fact is recent
+- Bounded candidate Memory interface: immutable typed-message/source envelope before compaction; versioned key/subject link; independently assessed staleness/abstention; explicit denial of effect-validation inference
+- No single paper validates this composition; the three are distinct research propositions, each only bound by its own harness/data assumptions
+- Claim State: OBSERVED; Evidence Level: E4_PREPRINT; Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- NEW_EVIDENCE: three canonical sources across two actual W43 Daily chunks, two memory failure predicates not captured by relevance-only retrieval
+- CORRECTED_INTERPRETATION: evidence freshness, provenance role and referent identity cannot certify one another
+- UNCHANGED_BOUNDARY: paper findings are not local Memory runtime; Source Registry remains unmodified
+- NEW_COUNTEREVIDENCE: active-slot filters can suppress staleness under correctly keyed settings but do not repair person-identity merges; role flattening may fail where typed envelopes survive
+- UNKNOWN_RETAINED: source-version compatibility, identity quality on open-domain data, prompt provenance retention and end-to-end latency
+- NEXT_RETEST_CONDITION: synthetic adversarial typed-role compaction paired with changed-fact and same-name subject controls, preserving each failure metric and original source address
+
+### Delivery and anti-promotion gate
+- Six exact W43 paper identities are counted once each across five dated source chunks; same paper across bilingual containers does not multiply evidence
+- Source IDs S01–S67 and the historical collision remain untouched; no verified-core inclusion or Implementation/Validation promotion
+- Full repository validator, model benchmark and paper theorem replication: NOT_EXECUTED
+- Changed only the indicated existing EN/ZH research containers; prior Jules/native text preserved byte-for-byte above this appendix
