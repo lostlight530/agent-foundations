@@ -1,0 +1,160 @@
+# A2 | agent-foundations | 2026-10-26 current October source and native-result relation
+
+- Exact fresh main after ten A1 merged: `4f552287ac3980d02aca803455ba220fc5577db3`.
+- Direct merged 2026-10-26 A1: `historical-audits/2026-10/2026-10-26-a1-source-custody.md` Git blob `0437fcc48745b207ec0f46ed5e688ac4fc17c35b`.
+- Previous merged 2026-10-25 A2 baseline: `dc525add591ea63f2ebec8de694e2307cbf18dd0`.
+- Logical N=2026-10-26 Asia/Shanghai; MonthStart=2026-10-01…2026-10-26 inclusive.
+- Original source owner: Jules/prospective native GPT as preserved in records; Independent GPT A2 is a separate maintenance/relationship run.
+- Scope: 98 current named source objects; embedded research chunks expected dated native source paths; 12 actual source-file changes since previous A2.
+- October remains MONTH_OPEN; Weekly W43 is Oct19–25 and final documentary review was submitted Oct26, not an extra W44 or October seal.
+- Repo-native scanner, Python test suite, benchmark and independent experimental replay by **this A2**: NOT_EXECUTED.
+
+## Updated 2026-10-26 native conclusions and non-inheritance
+- 2026-10-26 Memory_System EN/ZH append via #332 and W43 cross-four-container EN/ZH Weekly via #333 are separate Native deliveries; same arXiv 2609.25913v2 is one upstream paper; four research containers are NOT four independent experiments or verified-core promotion.
+- A2 maintenance source relation is not scientific PLASMA A2, GAS R2, or any Foundation admission protocol; shared labels cannot promote blocked science to PASS.
+- A Git SHA proves a current file identity; PR merged status proves integration, not exact run-time success or external source verification.
+- Previous A1 N−1 remains a separate merged immutable audit; no rewriting original authorship/history.
+- Duplicate or abandoned same-task PRs from today are historical delivery attempts only and get no extra Native research credit.
+
+## Fixed-date source graph: October source slots, not experimental outcomes
+- EN/ZH CURRENT_DOCUMENT | `docs/en/Architecture_Principles.md` | blob `95de96cf1a08fd311bf94b3321646aeff2f91670` | 126313 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/Collaboration_System.md` | blob `46a7c2dba5d7555168f90c488965445a9ce6a7ea` | 266674 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/Memory_System.md` | blob `59235cbb95f684f49dbd5c0635daec48a8f20347` | 110419 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/Monthly_Blueprint_Current.md` | blob `461dfeb087b784de0ff40cae12ecdcd4c7f84b22` | 5778 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/README.md` | blob `33ba8878127c3da5f3a59ffc444adb54249f13ec` | 3365 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/TAPE_2026-09-10_CORRECTION.md` | blob `676758aad5b4ed0445aa5d70f3406828c2cc639b` | 3921 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/en/Tool_System.md` | blob `e5a071320296e3c345d05eb07d2cfe620a58f525` | 61330 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/Architecture_Principles.md` | blob `002634e4a5b5302b6b6281f9cbaddb9bcd8be98f` | 118928 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/Collaboration_System.md` | blob `b3e6b262f70f4e3e7da233eee01f7aff47cc1ffe` | 239419 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/Memory_System.md` | blob `22511d0237f1bea1d07b06f601c92ddc78af21ee` | 103385 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/Monthly_Blueprint_Current.md` | blob `ea8717056f9fff978df402e2933644d1cc662119` | 5390 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/README.md` | blob `c7516f8d6dfd186ec4577552fca2ea319c9ea49f` | 3098 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/TAPE_2026-09-10_CORRECTION.md` | blob `6c6158bae3921373623cd46438f7abffee4874db` | 3504 B | date sections are embedded; no invented daily filename
+- EN/ZH CURRENT_DOCUMENT | `docs/zh/Tool_System.md` | blob `1bc4dca99aaa797a3b29b87661a3193152df4bfa` | 56965 B | date sections are embedded; no invented daily filename
+- October 01–26 Daily source chronology is embedded inside owner documents and PR history, not one Markdown path per date; no unsupported 26/26 native day assertion.
+- 2026-10-26 Daily Memory_System EN/ZH update is separate from W43 EN/ZH four-container cascade; source-title repetition does not increase independent papers.
+- Source Registry S63 ambiguity remains unresolved unless separately corrected under its canonical owner; A2 does not mint a synthetic new Sxx.
+
+## Exact current owner/source, methodology and code object ledger
+- 001 | `AGI/basepoint/daily/docs/en/Architecture_Principles.md` | blob `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 002 | `AGI/basepoint/daily/docs/en/Collaboration_System.md` | blob `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 003 | `AGI/basepoint/daily/docs/en/Memory_System.md` | blob `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 004 | `AGI/basepoint/daily/docs/en/Tool_System.md` | blob `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 005 | `AGI/basepoint/daily/docs/zh/Architecture_Principles.md` | blob `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 006 | `AGI/basepoint/daily/docs/zh/Collaboration_System.md` | blob `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 007 | `AGI/basepoint/daily/docs/zh/Memory_System.md` | blob `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 008 | `AGI/basepoint/daily/docs/zh/Tool_System.md` | blob `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 009 | `AGI/basepoint/daily/FOUNDATION/SOURCES.md` | blob `dd1605572715e3ea2d37933190ed5f250722cc68` | 28247 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 010 | `AGI/basepoint/monthly/docs/en/Monthly_Blueprint_Current.md` | blob `a686309b14d57a42b14ad63c4d838705cb732215` | 1925 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 011 | `AGI/basepoint/monthly/docs/monthly/2026-08-strategic-blueprint.md` | blob `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 012 | `AGI/basepoint/monthly/docs/zh/Monthly_Blueprint_Current.md` | blob `426d108d70dcfecafa36d8c1fd3d36d29e4bb101` | 1797 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 013 | `AGI/basepoint/notes/daily/docs/en/Architecture_Principles.md.note.md` | blob `8a802059415dfa8fa25adfb5b1a6483e1c46dac2` | 607 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 014 | `AGI/basepoint/notes/daily/docs/en/Collaboration_System.md.note.md` | blob `211669920b6fa23e2a7d2b75a40f9e0ef14b048d` | 616 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 015 | `AGI/basepoint/notes/daily/docs/en/Memory_System.md.note.md` | blob `9cfc6e6ad13362d8303519769fe7520772d6b4cb` | 638 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 016 | `AGI/basepoint/notes/daily/docs/en/Tool_System.md.note.md` | blob `947cc28ccac378316a7a21217b1b65bd455bc91d` | 556 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 017 | `AGI/basepoint/notes/daily/docs/zh/Architecture_Principles.md.note.md` | blob `e6e02b8785bf29e3a01eb73f0091c16703fed3b0` | 607 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 018 | `AGI/basepoint/notes/daily/docs/zh/Collaboration_System.md.note.md` | blob `f25ea03735955bbcba8478ea1b9429812c3dd377` | 616 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 019 | `AGI/basepoint/notes/daily/docs/zh/Memory_System.md.note.md` | blob `4f36487b475ab9b7b9ff1e5b5bcd49646ef41273` | 638 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 020 | `AGI/basepoint/notes/daily/docs/zh/Tool_System.md.note.md` | blob `255a681f7090b36113bbf471d468dac095443ad4` | 556 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 021 | `AGI/basepoint/notes/daily/FOUNDATION/SOURCES.md.note.md` | blob `065e6b78fff3d6399c5e185f1f32a6d0910195e6` | 687 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 022 | `AGI/basepoint/notes/monthly/docs/en/Monthly_Blueprint_Current.md.note.md` | blob `8b4fb03af86125db6828e83629286db01e13b302` | 593 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 023 | `AGI/basepoint/notes/monthly/docs/monthly/2026-08-strategic-blueprint.md.note.md` | blob `b083a2edea00dc0b1128959a04b42ab51f7f81ee` | 600 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 024 | `AGI/basepoint/notes/monthly/docs/zh/Monthly_Blueprint_Current.md.note.md` | blob `b87609187d2e37e1000d8cd2735a14d941ddbc80` | 593 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 025 | `AGI/basepoint/notes/weekly/docs/en/Architecture_Principles.md.note.md` | blob `dbd15d69f16180d34c8076ab54142f37a022381b` | 707 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 026 | `AGI/basepoint/notes/weekly/docs/en/Collaboration_System.md.note.md` | blob `e7353c2c22257efb9773d1e656d9950da79eeb18` | 704 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 027 | `AGI/basepoint/notes/weekly/docs/en/Memory_System.md.note.md` | blob `9c8b18ac6af37f8895069312b26a4303189baca8` | 697 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 028 | `AGI/basepoint/notes/weekly/docs/en/Tool_System.md.note.md` | blob `2362f1e72eebd12c8d6580de35ceabb2eea83756` | 695 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 029 | `AGI/basepoint/notes/weekly/docs/zh/Architecture_Principles.md.note.md` | blob `61eb936ec598a48ef74a47bd1ae202012629aecb` | 707 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 030 | `AGI/basepoint/notes/weekly/docs/zh/Collaboration_System.md.note.md` | blob `dfd2e4df27b345bcf58f3f1b5fe66cdbd1c0debc` | 704 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 031 | `AGI/basepoint/notes/weekly/docs/zh/Memory_System.md.note.md` | blob `4238e23d93f8d8c1b71c103560a68cec64b8a7af` | 697 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 032 | `AGI/basepoint/notes/weekly/docs/zh/Tool_System.md.note.md` | blob `9079e66bf7fb3cb46b7486f6a99d1ff5679557e5` | 695 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 033 | `AGI/basepoint/weekly/docs/en/Architecture_Principles.md` | blob `c151b91fb0ce7144ed2e47308c6680ecea075ed1` | 85981 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 034 | `AGI/basepoint/weekly/docs/en/Collaboration_System.md` | blob `3021de51492030d1803b7969f5d471c945d42309` | 219607 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 035 | `AGI/basepoint/weekly/docs/en/Memory_System.md` | blob `692fa8727c7bdd0d94d2286af36342df5488da8a` | 53320 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 036 | `AGI/basepoint/weekly/docs/en/Tool_System.md` | blob `58236c790a3d752dce7a2241676a0c35dbdfe385` | 31149 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 037 | `AGI/basepoint/weekly/docs/zh/Architecture_Principles.md` | blob `d61e3926b53206e5ef58197edb3d52952a0493fa` | 81542 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 038 | `AGI/basepoint/weekly/docs/zh/Collaboration_System.md` | blob `4ccc0ff0c9099a8316de18e9fa4c137a40aa4a6a` | 195509 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 039 | `AGI/basepoint/weekly/docs/zh/Memory_System.md` | blob `9e603266437c5e4f7090df2d9e584b4176cc4a1a` | 51986 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 040 | `AGI/basepoint/weekly/docs/zh/Tool_System.md` | blob `a469e9567d41b615ef8f66d34f0dfec413d78263` | 30553 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 041 | `CONTRIBUTING.md` | blob `dcb47617f33489748d28522a1109976a4bc3ef00` | 4315 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 042 | `docs/en/Architecture_Principles.md` | blob `95de96cf1a08fd311bf94b3321646aeff2f91670` | 126313 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 043 | `docs/en/Collaboration_System.md` | blob `46a7c2dba5d7555168f90c488965445a9ce6a7ea` | 266674 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 044 | `docs/en/Memory_System.md` | blob `59235cbb95f684f49dbd5c0635daec48a8f20347` | 110419 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 045 | `docs/en/Monthly_Blueprint_Current.md` | blob `461dfeb087b784de0ff40cae12ecdcd4c7f84b22` | 5778 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 046 | `docs/en/README.md` | blob `33ba8878127c3da5f3a59ffc444adb54249f13ec` | 3365 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 047 | `docs/en/TAPE_2026-09-10_CORRECTION.md` | blob `676758aad5b4ed0445aa5d70f3406828c2cc639b` | 3921 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 048 | `docs/en/Tool_System.md` | blob `e5a071320296e3c345d05eb07d2cfe620a58f525` | 61330 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 049 | `docs/monthly/2026-06-strategic-blueprint.md` | blob `bbe44ca35ad6515713dc967aafb4466f0fa0202f` | 2960 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 050 | `docs/monthly/2026-07-strategic-blueprint.md` | blob `2018c8b59f438bb107116b09a68811dc36e2e30f` | 8271 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 051 | `docs/monthly/2026-08-strategic-blueprint.md` | blob `13b4bb6081b9c39cb53ea6a55dd6a3417af2819d` | 2618 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 052 | `docs/monthly/2026-08-through-23-strategic-blueprint.md` | blob `8198e57ff8662ded800c56ebc90b8eb86020c87d` | 5415 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 053 | `docs/monthly/2026-08-through-27-strategic-blueprint.md` | blob `ba10249678baface4594a18a32e467da065b6ccb` | 4374 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 054 | `docs/monthly/2026-08-through-30-strategic-blueprint.md` | blob `42dc9f7d21ac42cfcb848a959b95169fdbb91476` | 2756 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 055 | `docs/monthly/2026-09-strategic-blueprint.md` | blob `09bcc820bec30df2d34f4a2b6bde4b1ed98d1578` | 7601 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 056 | `docs/monthly/2026-10-strategic-blueprint.md` | blob `44baa112ad4ea91cd81bf8841ba3624fabd3988a` | 487639 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 057 | `docs/zh/Architecture_Principles.md` | blob `002634e4a5b5302b6b6281f9cbaddb9bcd8be98f` | 118928 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 058 | `docs/zh/Collaboration_System.md` | blob `b3e6b262f70f4e3e7da233eee01f7aff47cc1ffe` | 239419 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 059 | `docs/zh/Memory_System.md` | blob `22511d0237f1bea1d07b06f601c92ddc78af21ee` | 103385 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 060 | `docs/zh/Monthly_Blueprint_Current.md` | blob `ea8717056f9fff978df402e2933644d1cc662119` | 5390 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 061 | `docs/zh/README.md` | blob `c7516f8d6dfd186ec4577552fca2ea319c9ea49f` | 3098 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 062 | `docs/zh/TAPE_2026-09-10_CORRECTION.md` | blob `6c6158bae3921373623cd46438f7abffee4874db` | 3504 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 063 | `docs/zh/Tool_System.md` | blob `1bc4dca99aaa797a3b29b87661a3193152df4bfa` | 56965 B | BILINGUAL_DOC_NOT_IMPLEMENTATION; no native runtime PASS inferred
+- 064 | `FOUNDATION/ARCHITECTURE.md` | blob `0c39c076da29d169aeaf141b2ebee94f7a836a3b` | 9627 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 065 | `FOUNDATION/arxiv_probe.py` | blob `a8d8a68393819dfee25314841b5080d616cd581a` | 5616 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 066 | `FOUNDATION/claim.schema.json` | blob `4578b92834a14b8c8fceb14f0c26b2536410e261` | 1370 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 067 | `FOUNDATION/COLLABORATION.md` | blob `94bb8b85557d41124c794bf8c562df2d278593b3` | 9072 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 068 | `FOUNDATION/EVIDENCE.md` | blob `9c7e0cd274081148b34eb0a6c9d0097cea085ff5` | 9780 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 069 | `FOUNDATION/independent-gpt/README.md` | blob `e6377149b7a55c7ef0fa735780251361a07c4df3` | 6721 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 070 | `FOUNDATION/INDEX.md` | blob `289ad219a795090fd5c24e9528f207dcd95a43dc` | 7142 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 071 | `FOUNDATION/MAINTENANCE.md` | blob `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | 10106 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 072 | `FOUNDATION/MEMORY.md` | blob `e5b20a3431ffe2a32a42c9574230fadd965cd9a1` | 6755 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 073 | `FOUNDATION/plans/2026-08-05-readme-narrative-repair.md` | blob `463509663db0f405bb39550d91f730c6da98963a` | 3412 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 074 | `FOUNDATION/PROVENANCE.md` | blob `40f0cdb0103d2fac8bc5a5ca5742a1a250160b96` | 12316 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 075 | `FOUNDATION/REVIEW.md` | blob `cc72b0951bf2ce23bbf2274ede57a0d1cc83d301` | 9841 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 076 | `FOUNDATION/SOURCES.md` | blob `781bdd4f2d275e667244888e68fac48857a56d37` | 49319 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 077 | `FOUNDATION/specs/2026-08-05-readme-narrative-repair-design.md` | blob `b02af44a579b01a3cd5f1aee403b8509eb0d6dab` | 2599 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 078 | `FOUNDATION/test_contract.py` | blob `42c9211626fe315ce28304cefb339754d45d77ee` | 6649 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 079 | `FOUNDATION/TOOLS.md` | blob `7322e8ef3cea7b66499370d89cabb212a27a9b3e` | 7748 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 080 | `FOUNDATION/validate.py` | blob `8ce5d29cfdd31c9d6b33edbc0b94d44c53c98cbb` | 9736 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 081 | `historical-audits/2026-10/2026-10-01-external-independent-gpt-review.md` | blob `35e2bbc1b5fa023307a939ae2eb83c1d8caaf60d` | 12175 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 082 | `historical-audits/2026-10/2026-10-02-september-d30-independent-gpt-audit.md` | blob `1622665c17011e9ca328f057f3efc29a86e4ab3c` | 6328 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 083 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation-audit.md` | blob `28ef0b3e5b8f873d12d238c73ef88667b52f1cd3` | 5933 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 084 | `historical-audits/2026-10/2026-10-14-d14-pattern-formation.md` | blob `b5da2bdd572a3a5830109981ab089c814c6064c3` | 3510 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 085 | `historical-audits/2026-10/2026-10-20-a1-source-custody.md` | blob `5990e9318f7527f4a311af57281c4c20e17a4249` | 27041 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 086 | `historical-audits/2026-10/2026-10-20-a2-month-relation.md` | blob `a89da6a08e85974fcd4423b8e14e5f19740895f4` | 24512 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 087 | `historical-audits/2026-10/2026-10-21-a1-source-custody.md` | blob `d0550a2a0d986ff820b631b6753a507ae18fc3f5` | 15864 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 088 | `historical-audits/2026-10/2026-10-21-a2-month-relation.md` | blob `342b206d87e5bca16d3e4b4da16735015aa55d25` | 14252 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 089 | `historical-audits/2026-10/2026-10-23-a1-source-custody.md` | blob `4eb654c64e7c3d6cb651eff66cfb54935918d764` | 10438 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 090 | `historical-audits/2026-10/2026-10-23-a2-month-relation.md` | blob `690146513ecaa634c49ea02380fbcc5bcaec02d3` | 9024 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 091 | `historical-audits/2026-10/2026-10-24-a1-source-custody.md` | blob `946aad2218489e97378d472ffdebe4048f0e4630` | 14354 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 092 | `historical-audits/2026-10/2026-10-24-a2-month-relation.md` | blob `107d68e005be0715d977df427165f57b8f166193` | 14325 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 093 | `historical-audits/2026-10/2026-10-25-a1-source-custody.md` | blob `8675c1519ee6d2c90de81bca6ed2bd4ae25faca5` | 31291 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 094 | `historical-audits/2026-10/2026-10-25-a2-month-relation.md` | blob `3c7b95c356ead2a7aecb46033b2cd40f0c945841` | 33467 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 095 | `historical-audits/2026-10/2026-10-26-a1-source-custody.md` | blob `0437fcc48745b207ec0f46ed5e688ac4fc17c35b` | 22802 B | MERGED_A1_PREREQUISITE; no native runtime PASS inferred
+- 096 | `OPEN_RESEARCH.md` | blob `ce494fe37fcc0617d48806dd155d06a1ca773097` | 7363 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 097 | `README.md` | blob `495f0da15c6f9d8d57866f513db04b4b9752e993` | 9486 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+- 098 | `RESEARCH_TEMPLATE.md` | blob `44b89336de1f8f230fbfde17ca62798c30aaf9d6` | 7583 B | CUSTODY_OR_CONTEXT; no native runtime PASS inferred
+
+## Post-prior-A2 exact Git change ledger
+- Δ01 | `FOUNDATION/MAINTENANCE.md` | modified, +15/-5 | current main change only; source/publisher timing retained
+- Δ02 | `FOUNDATION/arxiv_probe.py` | modified, +1/-1 | current main change only; source/publisher timing retained
+- Δ03 | `README.md` | modified, +1/-1 | current main change only; source/publisher timing retained
+- Δ04 | `docs/en/Architecture_Principles.md` | modified, +28/-0 | current main change only; source/publisher timing retained
+- Δ05 | `docs/en/Collaboration_System.md` | modified, +27/-0 | current main change only; source/publisher timing retained
+- Δ06 | `docs/en/Memory_System.md` | modified, +76/-0 | current main change only; source/publisher timing retained
+- Δ07 | `docs/en/Tool_System.md` | modified, +27/-0 | current main change only; source/publisher timing retained
+- Δ08 | `docs/zh/Architecture_Principles.md` | modified, +28/-0 | current main change only; source/publisher timing retained
+- Δ09 | `docs/zh/Collaboration_System.md` | modified, +27/-0 | current main change only; source/publisher timing retained
+- Δ10 | `docs/zh/Memory_System.md` | modified, +76/-0 | current main change only; source/publisher timing retained
+- Δ11 | `docs/zh/Tool_System.md` | modified, +27/-0 | current main change only; source/publisher timing retained
+- Δ12 | `historical-audits/2026-10/2026-10-26-a1-source-custody.md` | added, +158/-0 | current main change only; source/publisher timing retained
+
+## Process corrections from 2026-10-26 ten-repository execution
+- Before generating a PR, compare open PR `(owner, logical period, task class, base)` across **all** available work; reuse matching Draft instead of parallel branch conflicts.
+- A parallel PR closed without merge must never count as a new source experiment or extra native deliverable; actual current-main blob is the authoritative integrated object.
+- A1 is a ten-repository global merge barrier. A2 opens only after re-fetch of all ten exact main SHAs and merged A1 owner blobs.
+- `POST-A1 MAIN` ≠ `PRE-A1 MAIN` ≠ native task's original source base; preserve all three when doing historical correction.
+- Path coverage, scientific execution, standalone tests, local deployment, external first-party assertions and independent reproduction require separate statuses.
+- The last natural period is OPEN: W43 closure does not close October; W44 must not claim W43's Sunday as Monday evidence.
+- When tools cannot materialize native host/runtime, mark NOT_EXECUTED and retain known scientific blockages rather than infer green from PR merge.
+- Remediate only actually confirmed current-contract drift and preserve old files; this A2 updates the dated owner relation, not scientific code or producer history.
