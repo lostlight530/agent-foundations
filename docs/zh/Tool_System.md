@@ -599,3 +599,40 @@ MONTH_OPEN
 - **跨仓谱系:** 若 Horizon 引用同一个 arXiv 对象仍只有 `SOURCE_LINEAGE=1`，重复引用的 `INDEPENDENT_EVIDENCE_CREDIT=0`；此处只是新仓解释，不产生第二份独立科学证据
 - **验证边界:** 完成双语研究文本，但没有执行本仓完整 Python validator、实施工具守卫、效果重放或论文实验复现；不升级 verified core，不修改规范 SOURCES 登记
 
+## 2026-W43 Weekly Research Cascade — 来源身份与边界审查
+
+- Canonical task: `foundations/research/weekly`
+- 逻辑周期：2026-W43，2026-10-19 至 2026-10-25（Asia/Shanghai），已自然闭合
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- UTC 执行日期：2026-10-26，精确执行时刻 NOT_CAPTURED
+- Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5`
+- 已读四个当前中英文系统容器及 FOUNDATION/EVIDENCE.md、MAINTENANCE.md、SOURCES.md
+- W43 输入统计：在当前正式文档中发现五个有明确日期的 Daily 研究块，中英文成对，对应六个不同 arXiv base identity；没有从文档确认 10-19/20 的其他原生执行，不可凭缺失断言“未执行”
+- Architecture_Principles 当前中英文文档未见带 W43 日期的新增 Daily 块，因此本周不向该容器硬性编织新架构定律
+- 2026-10-26 EPGM `2609.25913v2` 属于 W44，不得提前吸收入 W43
+- 当前 SOURCES 连续 S01–S67，六个本周论文 base ID 尚无 Sxx 身份；历史 S63 collision 保持独立 correction 边界
+- Weekly 继承 Daily 的来源归属，中英双语、跨系统或跨仓重复引用同一论文都不增加独立证据数
+
+### W43 Tool System：执行前权限选择与执行后因果溯源
+- 10-21：AgentLoupe `arXiv:2610.23233v2`，Daily 研究记录了在命名进程、文件、socket handoff 中传播内核驻留因果标签的作者机制
+- 10-22：PROVISO `arXiv:2610.27115v1`，Daily 研究记录了在工具效果提交前，依据信任来源角色选择候选操作的作者机制
+- 问题 A：延迟发生的外部效果能否精确归因于原始代理/工具链，而非靠时间戳或父进程猜测
+- 问题 B：提议动作及其目标是否被用户/部署可信意图许可，且不会把外部不可信内容提升为权限来源
+- 两者关注互补的阶段，而不是对同一实验的双重独立证明：事后归因不能授予权限，事前选择也不能证明动作已经真实执行
+- 反例 1：一个可以准确归因的文件/socket 修改，当初仍可能未经授权
+- 反例 2：一个来源角色正确的动作，在后续权限撤销或环境改变后可能失效，甚至从未执行
+- 候选文档接口：`ProposedEffect{principal,target,auth_revision,source_roles}` → 独立核验的 `EffectReceipt{attempt,observed_mutation,store_revision,causal_chain}`，必须由明确 run/effect identity 连接
+- Mapping State: CANDIDATE_MECHANISM；不是本仓正式 Tool runtime 实现或普遍协议义务
+- Claim State: OBSERVED；Evidence Level: E4_PREPRINT；Mapping State: CANDIDATE_MECHANISM；Implementation State: NOT_IMPLEMENTED；Validation State: NOT_TESTED
+- NEW_EVIDENCE: 两个版本明确的原始 Daily 来源揭示执行前选择与执行后归因的不同验证门
+- CORRECTED_INTERPRETATION: 内核标签传播与模型动作选择不会因并列引用就自动组成端到端可信 Harness
+- UNCHANGED_BOUNDARY: 来源身份、权限授权与物理效果是三个独立命题
+- NEW_COUNTEREVIDENCE: 特定内核 hook/SSL 捕获条件与可信 `K`、备选动作存在性限制可迁移性
+- UNKNOWN_RETAINED: 不支持的平台、跨 Agent 委派、真实本地 Tool driver 集成、权限与效果一致性
+- NEXT_RETEST_CONDITION: 固定工具和 Harness 版本，测试执行前权限撤销与延迟间接效果，对照独立权限/效果 receipt，分别统计错误归因和拒绝
+
+### 交付与状态提升边界
+- 五份有日期的 W43 Daily chunk 中共有六个论文 canonical identity，各记一次；中英文或跨容器引用不得重复计数
+- S01–S67 来源登记与历史冲突未修改；不自动进入 Verified Core、不升级 Implementation 或 Validation
+- 全仓 validator、模型 benchmark、论文定理复现：NOT_EXECUTED
+- 只在对应正式中英文研究容器末尾追加 Weekly；此前 Jules/Native 正文未被覆盖
