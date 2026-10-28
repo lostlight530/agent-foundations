@@ -1540,3 +1540,58 @@ For W43 this architecture container has no separately verified dated Daily theor
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: NO_DECISION / NO_NEW_DAILY_SOURCE
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+## 2026-10-28 Daily Research — Forall-Lean-Agent: proof artifact identity is a verification contract
+
+- Canonical task: `foundations/research/daily`
+- Logical date: 2026-10-28 Asia/Shanghai; execution clock instant: NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Record provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION
+- Base main: `f2624cb9c910f5928d62d98db7d404119c6252dd`
+- Run identity: `agent-foundations/research/daily/2026-10-28/GPT_NATIVE/f2624cb9c910f5928d62d98db7d404119c6252dd/gpt-native-20261028-architecture-01`
+- Container: Architecture Principles
+- Canonical source: arXiv:2610.00885v1, *Forall-Lean-Agent for Auditable Reasoning in Formal Mathematics and Software Verification*
+- Author: Naing Oo Lwin
+- Version-specific date: 2026-10-01; checked: 2026-10-28
+- Source surfaces: https://arxiv.org/abs/2610.00885v1 and https://arxiv.org/html/2610.00885 (original author full text, Sections 3, 6, 7)
+- Identity deduplication: one arXiv version, not multiple sources for abstract/HTML, reviewer/actor roles, or cross-repository use
+- Source Registry: no new Sxx allocated; verified-core admission: NOT_REQUESTED
+- Paper reproduction / independent Lean execution: NOT_EXECUTED
+
+### Mechanism and falsifiable architecture boundary
+
+The author separates generation by an actor from verifier-controlled acceptance and a fresh reviewer who receives the task statement and candidate artifact but not the actor transcript. A Lean build alone checks elaboration under the environment and assumptions actually supplied; it cannot establish intended-statement preservation, allowed axiom set, absence of reference leakage, or identity of the artifact eventually submitted. The paper's acceptance rule binds three specific evidence objects to one candidate digest: verifier pass, reviewer approval and on-disk/submitted candidate bytes. An artifact mismatch invalidates acceptance even if one previous copy compiled successfully.
+
+The paper additionally describes statement comparison, declaration-shadowing guards, an axiom audit, and in selected evaluations an independent comparator/kernel. These are *different check surfaces*: original candidate identity, trusted statement preservation, kernel/axiom compliance and evaluation protocol adherence must not collapse to a single PASS. Resumption-state HMAC in the paper binds task/workspace state but is not an external execution receipt or proof of the final artifact's correctness.
+
+### Empirical and counterevidence limits
+
+The author reports 93 to 100 benchmark-rule successes on a fixed 100-task VeriSoftBench subset for one GPT-5.6 Sol low-effort configuration while cost decreases from $69 to $62. That is the paper's reported comparison under its harness and budget, NOT a locally rerun result or a statement about all 500 tasks. The paper also reports stored/submitted artifact divergence in 5 of 97 checked cases and 229 false failure records from authentication errors, illustrating why candidate bytes and infrastructure outcomes must remain distinct. Its Section 7 states there are no repeated configurations, confidence intervals or component ablations, so the independent contribution of each control and generalization remain open.
+
+### Bounded theory-to-architecture mapping
+
+- Architecture candidate: a candidate-bound acceptance envelope `(task identity, frozen statement, candidate digest, verifier identity/result, reviewer identity/verdict, permitted axiom profile, environment revision, publication digest)`
+- Falsifiable condition: substitution of the post-review candidate, target-statement weakening, a disallowed axiom, a stale environment or a missing independent-check receipt must cause explicit rejection or UNKNOWN, not automatic PASS
+- Design mapping: CANDIDATE_MECHANISM for executable specification/evidence contracts, not an implementation prescription
+- Counterexample gate: a digest match without axiom/statement checks can still accept an unintended claim; independent reviewer wording without an independently controlled source or kernel does not guarantee semantic independence
+- Non-applicability: Lean formal proof acceptance says nothing directly about tool side effects, distributed task permission at effect time, or arbitrary agent runtime completion
+- Repository consequence: the present theory may inform a future verification contract review; no CODE, runtime, schema, source-registry, or verified-core modification follows automatically
+
+### Five-axis evidence states
+
+- Claim State: OBSERVED_AUTHOR_PROPOSAL_AND_REPORTED_EVALUATION
+- Evidence Level: E4_PREPRINT / ORIGINAL_VERSIONED_FULL_TEXT_READ
+- Mapping State: CANDIDATE_MECHANISM / BOUNDED_DESIGN_ANALOGY
+- Implementation State: NOT_IMPLEMENTED_FOR_THIS_MAPPING
+- Validation State: NOT_TESTED / NO_LOCAL_PROVER_OR_BENCHMARK_REPRODUCTION
+
+### Evidence Delta
+
+- NEW_EVIDENCE: one original source provides an explicit verifier-reviewer-artifact digest binding, an axiom/statement separation and reported evaluation-integrity failure cases
+- CORRECTED_INTERPRETATION: proof compilation, reviewer endorsement, artifact publication and exact benchmark eligibility are independent acceptance predicates
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; source identity, actor and reviewer are not independent external source counts
+- NEW_COUNTEREVIDENCE: artifact drift and authentication infrastructure errors undermine unqualified aggregate success/false-failure interpretations
+- UNKNOWN_RETAINED: independent replication, component ablation, other benchmarks, assumptions outside the strict Lean policy and any agent-foundations implementation
+- NEXT_RETEST_CONDITION: pin a Lean/compiler/checker revision and target statement, replace candidate bytes after approval and vary axioms/shadowing to test explicit refusal with exact receipts; require a separate environment and independent evaluator for external validation
+
+No historical Daily or Jules material was altered. Weekly cascade and October Monthly remain separate, the natural month is OPEN, and no validator, local proof harness, or GitHub Actions check is claimed executed by this authoring step.

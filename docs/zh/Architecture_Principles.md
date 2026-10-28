@@ -1545,3 +1545,58 @@ NOT_TESTED
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: NO_DECISION / NO_NEW_DAILY_SOURCE
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+## 2026-10-28 Daily Research — Forall-Lean-Agent：证明工件身份是一项验证合同
+
+- Canonical task: `foundations/research/daily`
+- Logical date: 2026-10-28 Asia/Shanghai；实际执行时钟瞬时值：NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Record provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION
+- Base main: `f2624cb9c910f5928d62d98db7d404119c6252dd`
+- Run identity: `agent-foundations/research/daily/2026-10-28/GPT_NATIVE/f2624cb9c910f5928d62d98db7d404119c6252dd/gpt-native-20261028-architecture-01`
+- Container: Architecture Principles
+- Canonical source: arXiv:2610.00885v1，*Forall-Lean-Agent for Auditable Reasoning in Formal Mathematics and Software Verification*
+- Author: Naing Oo Lwin
+- Version-specific date: 2026-10-01；来源检查：2026-10-28
+- Source surfaces: https://arxiv.org/abs/2610.00885v1 与 https://arxiv.org/html/2610.00885，原作者全文第 3、6、7 节
+- Identity deduplication: 摘要与 HTML 是同一 arXiv 版本，Actor/Reviewer 不构成多个独立来源，跨仓使用也不增加独立来源计数
+- Source Registry: 未新建 Sxx；Verified Core：NOT_REQUESTED
+- 论文复现 / 独立 Lean 执行：NOT_EXECUTED
+
+### 机制与可证伪的架构边界
+
+作者将 Actor 的证明生成，与由验证器控制的准入和 Fresh Reviewer 审查分离，Reviewer 读取目标命题和候选工件，但不继承 Actor 的对话轨迹。Lean 编译成功只在实际环境与假设下证明 elaboration 可通过，不能单独证明原始目标命题未被削弱、允许公理集合正确、没有参考答案泄漏，也不能证明后来提交的字节与被审查字节一致。论文的准入合同把 Verifier PASS、Reviewer Approval 和磁盘/提交的 Candidate Bytes 绑定到同一个 digest。即使旧版本候选曾成功编译，最终工件身份不一致也必须拒绝准入
+
+作者还描述了语句一致性检查、声明遮蔽检查、axiom audit，以及特定评估中使用的独立 comparator/kernel。这些属于不同验证平面：候选身份、目标语义、公理合规和评测协议的适用性不能被压缩成一个 PASS。论文中 resume-state HMAC 绑定任务与 workspace 状态，但不自动成为外部 effect receipt 或最终证明正确性证据
+
+### 实验结果与反证边界
+
+作者报告固定的 VeriSoftBench 100 题子集上，一项 GPT-5.6 Sol low-effort 配置的 benchmark-rule successes 从 93 提高到 100，同时成本由 $69 降至 $62。这只代表原论文所述 harness 和预算口径，不是本仓独立复现，也不能推广到完整 500 题。论文还报告了 97 个受检样本中 5 个存储/提交工件不一致，以及因认证错误产生 229 条错误失败记录，说明候选字节身份与基础设施结果必须分开。第 7 节明确没有重复配置试验、置信区间或组件消融，因此各项控制措施的独立贡献与外部泛化仍未确立
+
+### 有边界的 Theory-to-Architecture Mapping
+
+- 架构候选：与具体 Candidate 绑定的准入证据包 `(task identity, frozen statement, candidate digest, verifier identity/result, reviewer identity/verdict, permitted axiom profile, environment revision, publication digest)`
+- 可证伪条件：审查后替换字节、削弱目标、使用禁用公理、环境版本过时或独立检查凭据缺失时，应显式拒绝或保持 UNKNOWN，而不是自动 PASS
+- 映射状态：CANDIDATE_MECHANISM，作为 executable specification/evidence contract 的设计类比，不是已批准的实现方案
+- 反证闸门：digest 一致但没有公理/语句约束仍可能接受错误目标，Reviewer 文本与 Actor 不同也不能自动证明验证依赖真正独立
+- 适用性限制：Lean 形式化证明准入不能直接证明 Tool Side Effect、分布式权限的 effect-time 有效性或通用 Agent Runtime 完成
+- 本仓结果：可以成为后续验证合同研究输入，但不自动修改 CODE、Runtime、Schema、Source Registry 或 Verified Core
+
+### 五轴证据状态
+
+- Claim State: OBSERVED_AUTHOR_PROPOSAL_AND_REPORTED_EVALUATION
+- Evidence Level: E4_PREPRINT / ORIGINAL_VERSIONED_FULL_TEXT_READ
+- Mapping State: CANDIDATE_MECHANISM / BOUNDED_DESIGN_ANALOGY
+- Implementation State: NOT_IMPLEMENTED_FOR_THIS_MAPPING
+- Validation State: NOT_TESTED / NO_LOCAL_PROVER_OR_BENCHMARK_REPRODUCTION
+
+### Evidence Delta
+
+- NEW_EVIDENCE: 一个原始来源给出了 verifier-reviewer-artifact digest 绑定、语句/公理分离，以及评估诚信失败的具体作者报告
+- CORRECTED_INTERPRETATION: 编译成功、审查同意、实际发布和评测资格是相互独立的准入谓词
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；来源身份与 Actor/Reviewer 角色不能混为独立来源数量
+- NEW_COUNTEREVIDENCE: 工件漂移和认证错误可以破坏未经核对的成功率与失败率解释
+- UNKNOWN_RETAINED: 独立复现、组件消融、其他基准、严格 Lean 许可公理以外的前提和本仓真实实现
+- NEXT_RETEST_CONDITION: 固定 Lean/compiler/checker revision 与目标命题，在批准后替换工件，并变化公理/遮蔽条件，检查明确拒绝与完整 receipts；独立验证还需独立环境与评估者
+
+没有修改历史 Daily 或 Jules 内容。Weekly Cascade 与 October Monthly 是独立阶段，自然月仍 OPEN，作者未执行本仓 validator、Lean proof harness 或 GitHub Actions，因此不声明其 PASS
