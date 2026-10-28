@@ -6343,3 +6343,16 @@ NATIVE_MODIFICATION_NOTE: only existing October strategic blueprint owner append
 - October month stays OPEN; implementation, verified-core and runtime validation NOT_PROMOTED
 - FOUNDATION validator and source-reproduction CLI NOT_EXECUTED by this documentary successor
 - Disposition: A2_85_INHERITED / ONE_N_DAY_NATIVE_BILINGUAL_SOURCE / NO_NEW_EXPERIMENT_CREDIT
+
+
+## Forward relation — 2026-10-28 (Day 28, October remains OPEN)
+
+- This is a dated **derived month-to-date routing and acceptance note**, added to the existing October owner; it is not a second monthly version, an original producer Daily, a native monthly final, or an independent audit execution
+- Source state: merged A1 [#345](https://github.com/lostlight530/agent-foundations/pull/345) covers October 1–27; merged A2 [#346](https://github.com/lostlight530/agent-foundations/pull/346) extends the relation through October 28 from the merged A1 main; post-merge [acceptance #348](https://github.com/lostlight530/agent-foundations/pull/348) retains the result and its evidence boundaries
+- October 28 original/derived boundary: October 28 bilingual proof-artifact research PR #344 retains paper-to-mapping-to-implementation-to-validation separation; previously merged bilingual Current Blueprint navigation correction #349 points to this same month owner, not to a second research truth.
+- **A1:** Git source custody and merge `PASS`; complete in-scope content-level per-artifact decisions `PARTIAL / NOT_FULLY_ATTESTED`
+- **A2:** exact merged A1 ancestry and source identity `PASS`; complete Daily→Weekly→Monthly→Special/Stage semantic relations `PARTIAL / NOT_FULLY_ATTESTED`
+- D7 and D10 original independent audit outcomes remain `UNVERIFIED`; D14 is a preserved historical audit node and not a duplicate review credit; October D30 `NOT_DUE` until October 30
+- October natural-month final is `NOT_DUE` until natural closure; later code/path/PR presence does not upgrade earlier `BLOCKED`, `UNKNOWN` or `NOT_EXECUTED` states
+- Prior month-owner blocks above are retained as point-in-time views; no original task-time author, external source, runtime, research-batch count, independent verification, or long-term doctrine is changed by this note
+- `SOURCE_IDENTITY != CONTENT_DECISION != RUNTIME_VERIFICATION`; unresolved audit gates require separately inspectable primary evidence before status promotion
