@@ -1,5 +1,20 @@
 # Monthly Strategic Blueprint — Current
 
+## Current routing — 2026-10-28 (October month open)
+
+- **Current natural month:** October 2026, `OPEN / MONTH_TO_DATE` — not naturally closed
+- **Canonical October month-to-date owner:** [2026-10 Strategic Blueprint](../monthly/2026-10-strategic-blueprint.md)
+- **October 28 native research delivery:** [PR #344](https://github.com/lostlight530/agent-foundations/pull/344) — task-time producer and paper evidence retain their original scope
+- **October 28 independent maintenance:** [A1 PR #345](https://github.com/lostlight530/agent-foundations/pull/345) (Oct 1–27) and [A2 PR #346](https://github.com/lostlight530/agent-foundations/pull/346) (Oct 1–28), both merged in sequence
+- **Post-merge acceptance:** [Day 28 audit #348](https://github.com/lostlight530/agent-foundations/pull/348) — Git delivery and inheritance `PASS`; per-artifact content decisions and complete month-wide semantic relations remain `PARTIAL`
+- **Native October Monthly final / verified-core promotion / independent runtime validation:** `NOT_DUE` / `NOT_PROMOTED` / `NOT_ATTESTED` as applicable; a derived maintenance report cannot manufacture them
+- **Owner synchronization boundary:** The October blueprint is the existing month-to-date owner, but its embedded source relation checkpoints and separate later audit records must be read by their exact dates; a link here does not certify that every October 28 relation has been materially appended to the owner
+
+The September text below is a preserved point-in-time **September 24, 2026 snapshot**, not the live October state. Its historical headings and counts are retained for provenance, not silently overwritten. October current status is determined by the October owner, current merged `main` and dated corrections.
+
+## Preserved historical September snapshot (as of 2026-09-24)
+
+
 Current evidence window: **2026-09-01 through 2026-09-22**
 
 Status: **PROVISIONAL MONTH-TO-DATE / MONTH OPEN**
