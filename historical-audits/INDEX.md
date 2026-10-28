@@ -50,3 +50,7 @@ The old paths remain recoverable through Git history. The archive is historical 
 - `05-maintenance-and-reconciliation/2026-09-19--sep-19--maintenance-reconciliation.md` — 2026-09-19 S49 source/state reconciliation
 
 As of 2026-09-19 this is the latest completed independent periodic-maintenance record in the archive. Current FOUNDATION contracts, source registry and current repository evidence remain higher authority for present interpretation.
+
+## 2026-10-29 forward status-scope erratum
+
+- [2026-09 Strategic Blueprint month-closure scope](01-corrections-and-errata/2026-10-29--september-blueprint-closure-scope--erratum.md) — the original September Blueprint marks `MONTH_OPEN`, labels its blueprint `FINAL`, and explicitly excludes September 30; the dated erratum limits the `FINAL` interpretation without changing historical theory or upgrading verified-core/runtime claims.
