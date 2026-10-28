@@ -1,5 +1,20 @@
 # 月度战略蓝图 — 当前状态
 
+## 当前入口校准 — 2026-10-28（十月自然月未关闭）
+
+- **当前自然月：** 2026 年 10 月，`OPEN / MONTH_TO_DATE`，并非月末最终闭账
+- **十月月内现行 owner：** [2026-10 战略蓝图](../monthly/2026-10-strategic-blueprint.md)
+- **10 月 28 日原生科研交付：** [PR #344](https://github.com/lostlight530/agent-foundations/pull/344)，原始 Producer 和论文证据口径保持不变
+- **10 月 28 日独立维护：** [A1 PR #345](https://github.com/lostlight530/agent-foundations/pull/345)（10 月 1–27 日）与 [A2 PR #346](https://github.com/lostlight530/agent-foundations/pull/346)（10 月 1–28 日），按顺序合并
+- **合并后验收：** [Day 28 审核 PR #348](https://github.com/lostlight530/agent-foundations/pull/348)，Git 交付与继承为 `PASS`，逐文件内容判断和整月语义关系完整性仍为 `PARTIAL`
+- **十月原生 Monthly final / verified-core 提升 / 独立 Runtime 验证：** 根据原合同分别保持 `NOT_DUE` / `NOT_PROMOTED` / `NOT_ATTESTED`，衍生维护不能冒充这些运行结果
+- **Owner 同步边界：** 十月蓝图是现有月内 owner，但其正文的历史 checkpoint 与之后的独立审核记录应按各自日期读取；本入口链接不能证明所有 10 月 28 日关系均已被实质写回 owner
+
+下方九月正文保留为 **2026-09-24 时点的历史快照**，不再代表当前十月状态。旧日期、标题和统计保留原貌，避免改写历史；当前口径应回到十月 owner、最新 `main` 与有日期的 correction
+
+## 九月历史快照保留区（截至 2026-09-24）
+
+
 当前证据窗口：**2026-09-01 至 2026-09-22**
 
 状态：**PROVISIONAL MONTH-TO-DATE / MONTH OPEN**
