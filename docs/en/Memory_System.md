@@ -1206,3 +1206,47 @@ One bounded English/Chinese Daily research increment in the existing Memory Syst
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+
+## 2026-10-29 Daily Research Chunk — Provenance-Preserving Multimodal Entity Evolution (Memory System)
+
+### Native identity and source
+- Canonical task: `foundations/research/daily`
+- Logical date: 2026-10-29 Asia/Shanghai; execution date UTC: 2026-10-29; exact clock: NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `289e3d427329a3813f8641eb3023f4e1577700a7`; run identity: `agent-foundations/research/daily/2026-10-29/GPT_NATIVE/289e3d427329a3813f8641eb3023f4e1577700a7/gpt-native-20261029-memory-01`
+- **Frontier source:** Jielong Tang, Ling-An Zeng, Xujie Yuan, Xiao Dong, Zhiqian Xia, Qingfeng Li, Shixiong Kai, Kaichao Liang, Rong Yao, Jian Yin, *Remembering Through Change: Provenance-Preserving Hypergraph Memory for Multimodal Agents*, arXiv:2610.29995v1, submitted 2026-10-21.
+- **Primary paper:** https://arxiv.org/abs/2610.29995 ; inspected 2026-10-29, original full-text introduction, sections 3.1–3.2 and 4.1–4.3, not just metadata.
+- Canonical source object: arXiv:2610.29995; a repeated EN/ZH entry is one lineage. **No Sxx identifier allocated or verified-core admission performed.** Existing historical S63 ambiguity is not resolved here.
+
+### Original problem and mechanism
+A system summarizing multimodal observations into text can lose image-level discriminating evidence; a system retaining only raw images can fail to bind the same physical entity across sessions or to distinguish changing aspects of that entity. The paper proposes a memory-construction operator `M_T = W(D_<=T)` and a query-conditioned retrieval `E_q = S(q,M_T)`, with answers conditioned on retrieved evidence. These operators describe the paper's design; they do not certify correct historical identity assignments.
+
+The proposed attributed hypergraph separates **entity mentions, atomic facts, and evolution-state nodes**. Its **occurrence hyperedges** group observations under a hypothesized persistent identity; **evolutionary** and **evidential hyperedges** connect time-varying aspect states to supporting facts and observations. Agentic retrieval may traverse these links and inspect original images. The important theoretical distinction is `entity identity != current aspect value != original evidence item`: a changed price or appearance should be attached to an observation time and source, not silently used to overwrite older facts.
+
+### Evidence, assumptions and counterevidence
+- The authors report three multimodal memory benchmarks (MemEye, Mem-Gallery and a WorldMemArena-S subset), three memory backbones and results averaged over three runs; an 8.20–9.98% relative improvement over the strongest baseline is an **author-reported benchmark outcome**, not a local performance measurement or universal upper bound.
+- The method assumes accessible multimodal observations, recoverable entity/coreference relationships, temporal ordering, correct evidence pointers and sufficient storage/retrieval budget. Incorrect identity grouping propagates evidence to the wrong evolution node.
+- A hyperedge pointing to an image is an inspection route, not proof the image is authentic, legally usable, correctly interpreted, or that the retrieved evidence set is complete. A model-generated evolution summary can still be wrong.
+- Experiment details and numeric improvements are those of the author paper; **no independent benchmark or theorem reproduction was executed**.
+
+### Bounded Memory System mapping
+A candidate memory record could separate `entity_mention_id`, `canonical_entity_hypothesis_id`, `aspect`, `observed_value`, `observation_time`, `source_digest`, and `supporting_image_ref`, while retaining multiple competing identity hypotheses and immutable evidence pointers. A temporal query would compare aspect-specific states only after checking provenance, access rights and comparable identity. This is **DESIGN_CANDIDATE**, not a committed schema, deployed retrieval system, or authorization guarantee.
+
+**For beginners:** A photo album may show the same bicycle painted blue and later green. Putting both photos in one folder tells you they may be related; dating each photo and retaining the original lets you investigate the change without pretending that the blue bicycle never existed.
+
+### Five-axis classification and Evidence Delta
+- Claim State: OBSERVED_FOR_AUTHOR_PAPER_DESCRIPTIONS
+- Evidence Level: E4_PREPRINT / ORIGINAL_FULL_TEXT_INSPECTED / NOT_INDEPENDENTLY_REPRODUCED
+- Mapping State: DESIGN_CANDIDATE
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: source-specific typed hypergraph relation among identity, observation, evolution and original visual pointers.
+- CORRECTED_INTERPRETATION: preserving raw pixels alone does not supply cross-session entity identity; a linked evolution summary does not automatically certify historical truth.
+- UNCHANGED_BOUNDARY: Paper != architecture mapping != repository code != runtime validation.
+- NEW_COUNTEREVIDENCE: identity-link errors, incomplete source captures, model inspection errors and benchmark-specific settings limit broad claims.
+- UNKNOWN_RETAINED: third-party reproducibility, access control, host implementation, long-term store consistency and real-world multilingual effects.
+- NEXT_RETEST_CONDITION: exact paper version/code and named benchmark split, evaluate identity-conflict and changed-state queries with inspected original image links and independent access/effect checks.
+
+### Delivery boundary
+This is one prospective bilingual Native Daily theory increment in the existing Memory System containers, not a retroactive Jules run. No Sxx registry change, historical rewrite, monthly close, runtime implementation or measured validator PASS. Full repository validator and source experiment: NOT_EXECUTED at authoring.

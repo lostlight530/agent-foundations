@@ -1209,3 +1209,47 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+
+## 2026-10-29 Daily Research Chunk — 保留来源的多模态实体演化记忆（Memory System）
+
+### 原生任务与来源身份
+- Canonical task: `foundations/research/daily`
+- Logical Date: 2026-10-29 Asia/Shanghai；UTC 执行日期：2026-10-29；精确时间：NOT_CAPTURED
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `289e3d427329a3813f8641eb3023f4e1577700a7`；Run Identity: `agent-foundations/research/daily/2026-10-29/GPT_NATIVE/289e3d427329a3813f8641eb3023f4e1577700a7/gpt-native-20261029-memory-01`
+- **原始论文：** Jielong Tang、Ling-An Zeng、Xujie Yuan、Xiao Dong、Zhiqian Xia、Qingfeng Li、Shixiong Kai、Kaichao Liang、Rong Yao、Jian Yin，*Remembering Through Change: Provenance-Preserving Hypergraph Memory for Multimodal Agents*，arXiv:2610.29995v1，提交于 2026-10-21。
+- URL: https://arxiv.org/abs/2610.29995；2026-10-29 检查原始全文引言、第 3.1–3.2 节及第 4.1–4.3 节，不仅核对元数据。
+- Canonical Source: arXiv:2610.29995；英文和中文引用属于同一来源谱系。**本 Daily 不分配 Sxx，不准入 Verified Core，也不解决已有 S63 冲突。**
+
+### 原始问题与数学/结构机制
+把图像压缩成文字会丢失细节；只保留像素又无法自动说明跨会话的多个观察是否对应同一实体，以及实体不同属性如何随时间改变。论文定义记忆构造算子 `M_T = W(D_<=T)` 和查询条件下的证据检索 `E_q = S(q,M_T)`；它们是论文设计，不是实体身份配对必然正确的证明。
+
+MHG-Mem 的带属性超图区分**实体提及节点、原子事实节点、演化状态节点**，通过 **occurrence hyperedges** 连接同一身份假设下的观测，通过 **evolutionary/evidential hyperedges** 将属性演化状态与支撑事实及原始图像绑定。Agentic search 可跨层检索、再回到原始图像检查。核心边界为 `ENTITY_IDENTITY != CURRENT_ASPECT_VALUE != ORIGINAL_EVIDENCE`：新的价格或外观不能无来源地覆盖过去观察。
+
+### 证据、假设、反证
+- 论文作者报告在 MemEye、Mem-Gallery、WorldMemArena-S 子集上测试，使用三种骨干模型，结果取三次运行平均；对最强基线的 8.20–9.98% 提升属于**作者报告的特定基准结果**，不是本仓测量或普适保证。
+- 前提包括多模态原始观察可访问、实体共指可重建、时间顺序可靠、证据指针没有断裂，以及检索/存储预算充足。错误的身份合并会让后续演化结论混入其他实体的证据。
+- 超边能指向原始图像，但不能凭此证明图像真实性、使用权限、解释正确性或召回证据集完整。生成的演化摘要仍可能错误。
+- 本轮仅核对原始作者全文所述机制和实验范围，**没有运行独立基准、论文公式证明或本仓代码。**
+
+### Memory System 的有界映射
+可研究性的数据字段包括 `entity_mention_id`、`canonical_entity_hypothesis_id`、`aspect`、`observed_value`、`observation_time`、`source_digest` 和 `supporting_image_ref`；保留竞争性身份假设与不可变原始证据指针。时间查询须先检查来源、权限和可比较实体身份，随后才比较属性演化。这是 **DESIGN_CANDIDATE**，不是已部署的数据结构或权限保证。
+
+**通俗类比：** 相册里同一辆自行车过去是蓝色、后来是绿色。两张照片放在一起只能说明它们可能相关；保留拍摄日期和原图，才能检查变化，而不是把蓝色的历史抹掉。
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED_FOR_AUTHOR_PAPER_DESCRIPTIONS
+- Evidence Level: E4_PREPRINT / ORIGINAL_FULL_TEXT_INSPECTED / NOT_INDEPENDENTLY_REPRODUCED
+- Mapping State: DESIGN_CANDIDATE
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 论文中实体身份、观察、演化和原始视觉证据指针的类型化超图关系。
+- CORRECTED_INTERPRETATION: 保留图像不等于完成跨会话实体识别；可追溯的摘要也不自动等于历史事实认证。
+- UNCHANGED_BOUNDARY: 论文 != 架构映射 != 仓库实现 != 运行验证。
+- NEW_COUNTEREVIDENCE: 身份链接错误、原始证据缺失、模型看图误差及特定基准设置限制了外推。
+- UNKNOWN_RETAINED: 第三方复现、权限控制、Host 实现、长期 Store 一致性和多语言真实效果。
+- NEXT_RETEST_CONDITION: 固定论文版本/代码和数据分割，加入实体冲突与状态改变的查询；检查原图指针、独立权限与效果证据。
+
+### 交付与边界
+仅在现有中英文 Memory System 容器追加一条 GPT Native 前瞻 Daily，不改写历史 Jules；不变更 SOURCES 注册、不做 Verified Core 晋升、不提前十月月结、不冒充实验或实现。全仓验证器和源论文实验：NOT_EXECUTED。
