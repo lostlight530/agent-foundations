@@ -645,3 +645,45 @@ MONTH_OPEN
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+## 2026-10-30 Daily Research Chunk — Speculative Tool Trajectories: Verified Prefix Is Not an Effect Receipt
+
+### Native research and original source
+- Canonical Task: foundations/research/daily; Logical date: 2026-10-30 Asia/Shanghai.
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY.
+- Record Provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION; baseline main SHA: 682b7383bacef94a30ecc614ca9280734c87ed07.
+- Run Identity: agent-foundations/research/daily/2026-10-30/GPT_NATIVE/682b7383bacef94a30ecc614ca9280734c87ed07/gpt-native-20261030-01.
+- System container: Tool System. Mirrored original-language entry: docs/zh/Tool_System.md, 2026-10-30.
+- Original paper: Zilin Wang, Yinhong Liu, Chao Chen, Qun Liu, Zhijiang Guo, *Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents*, arXiv:2610.21463v1, submitted 2026-10-15 08:06:32 UTC, https://arxiv.org/html/2610.21463v1 (checked 2026-10-30). Version date and author list checked on the arXiv abstract record. Original author HTML sections 3.1–3.3, Algorithm 1 and efficiency analysis inspected.
+- Canonical registry status: source's base arXiv identity is not presently found in FOUNDATION/SOURCES.md at this revision; NO new Sxx ID is invented or registered in this Daily. A future owner review must reconcile current registry before admission.
+- Paper is a preprint. Original text access and paper authorship are not independent benchmark reproduction, theorem proof checking or software validation.
+
+### Problem, method, and bounded formula
+The authors address strong-model autoregressive decoding cost in long tool-using trajectories. Their SpecAgent protocol lets a weaker model run tool calls classified as *read-only* while drafting a grounded segment, holds the first state-changing action, and asks a strong model to semantically review the whole candidate prefix. The verifier returns the longest accepted prefix, an explanation for the first rejected step, and optionally a repair action. The held effect is committed only after verification; rejected suffixes are discarded. This is a model-proposed protocol with an adapter-defined distinction between reads and effects, not an enforced policy of this repository.
+
+Under the paper's decode-bound serving and independent per-step acceptance assumptions, its Proposition 1 expresses a cost ratio for strong-model time and weight traffic per committed step:
+`R_u = ((1-p_u)/(1-p_u^n)) * (v/d) + rho*(1-p_u)`
+where `p_u` is a task's acceptance rate, `n` is reviewed segment length, `v` is verdict weight passes, `d` is strong-only passes per step, and `rho` is the fallback separate-repair probability. This is a transcription of the author's stated model from section 3.3; the derivation was NOT independently proof-checked, and the expression does not apply without its assumptions. The authors report lower wall time/HBM-read traffic but can incur **higher** estimated FLOPs; therefore a claim of universally lower compute would be false.
+
+### Theory-to-architecture mapping and counterevidence
+- Candidate mechanism: separate `draft_read_effect`, `held_write_intent`, `semantic_prefix_review`, `authorized_effect_commit`, and `post_commit_effect_receipt`. The first three are not substitutes for the last two.
+- The paper assumes that its adapter's classified reads do not mutate the task environment. In real Agent tooling, a GET/read may trigger audit writes, billing, counters, remote state changes, network effects, or privacy exposure. Thus `READ_CLASSIFIED` is not sufficient for `EFFECT_FREE_OBSERVED`; the contract needs independent tool-adapter and authority/effect checks.
+- A verifier's acceptance of a prefix establishes only a model verdict for the declared task and context; it is not an implementation proof, a permission grant, an external source truth oracle, or evidence that an effect actually completed.
+- The author-reported benchmark trade-off is benchmark-/model-/serving-specific; lower memory traffic/time is not the same as lower arithmetic cost. A future test must retain acceptance rate, verifier errors, effect-gate escapes, model identity, actual resource receipts and failure cases.
+- There is no Tool System implementation, deployed authorization gate or measured runtime in this repository attributable to this Daily research.
+
+### Five-axis classification and Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_MECHANISM; any general safety guarantee is HYPOTHESIS_NOT_PROMOTED.
+- Evidence Level: E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION.
+- Mapping State: CANDIDATE_MECHANISM.
+- Implementation State: NOT_IMPLEMENTED.
+- Validation State: NOT_TESTED.
+- NEW_EVIDENCE: version-pinned algorithm with held state-changing action, longest semantically accepted prefix, and conditional decode-traffic cost model.
+- CORRECTED_INTERPRETATION: 'strong model verified' is not 'effect authorized, executed and observed'; read-only is a property to check at tool adapter/effect boundary rather than infer from a label.
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; registered source != verified theorem.
+- NEW_COUNTEREVIDENCE: potential hidden read side effects, strong verifier false acceptance, rejected-prefix effects, and the author's reported FLOPs increases constrain the benefit/safety claim.
+- UNKNOWN_RETAINED: local adapter semantics, authority model, source registry admission, reproduction, latency under our task distribution, actual effects and failure rates.
+- NEXT_RETEST_CONDITION: use version-pinned author code/benchmarks, test an adversarial read-with-side-effects adapter and irrevocable write handling, capture pre/post state, authorization/effect receipts and strong-verifier misclassification with actual task/revision identity.
+
+### Delivery and provenance boundary
+Prospective bilingual research increment appended to the two existing Tool System documents. No historical Jules rewrite, no Source Registry/Verified Core promotion, no host runtime, no schemata, no workflows, no weekly/monthly closure. FOUNDATION/validate.py, contract tests, arXiv reproduction and translation semantic audit: NOT_EXECUTED at authoring. Draft PR awaits human review.
