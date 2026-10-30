@@ -626,3 +626,45 @@ MONTH_OPEN
 - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts
 - W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION
 - October monthly blueprint: NOT_DUE; historical Jules and prospective GPT producer identities unchanged
+
+## 2026-10-30 Daily Research Chunk — 工具轨迹推测执行：语义前缀通过不等于真实效果回执
+
+### 原生研究与原始来源
+- Canonical Task：foundations/research/daily；逻辑日期：2026-10-30 Asia/Shanghai。
+- Producer：GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY。
+- Record Provenance：HUMAN_AUTHORIZED_NATIVE_PRODUCTION；基线 main SHA：682b7383bacef94a30ecc614ca9280734c87ed07。
+- Run Identity：agent-foundations/research/daily/2026-10-30/GPT_NATIVE/682b7383bacef94a30ecc614ca9280734c87ed07/gpt-native-20261030-01。
+- 正式容器：Tool System；英文对应增量：docs/en/Tool_System.md（同一逻辑日期）。
+- 原始论文：Zilin Wang、Yinhong Liu、Chao Chen、Qun Liu、Zhijiang Guo，*Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents*，arXiv:2610.21463v1；2026-10-15 08:06:32 UTC 提交，https://arxiv.org/html/2610.21463v1；2026-10-30 检查。已查看 arXiv 摘要记录以及作者 HTML 全文 3.1–3.3 节、算法 1 与效率分析。
+- 来源登记状态：在本次所见的 FOUNDATION/SOURCES.md 中未检索到该基础 arXiv ID；Daily 不自造新 Sxx、不直接写入正式 Source Registry，须由后续 owning review 核对登记。
+- 论文属于预印本。阅读作者正文不等于独立复现实验、逐步验证证明或测试本仓实现。
+
+### 原始问题、机制及有条件数学表达
+论文研究长工具调用轨迹中强模型逐 token 生成的成本。SpecAgent 允许弱模型先执行适配器分类为“只读”的工具动作，形成有真实观测的候选前缀；遇到第一个可能修改环境的动作时先保留、不得提交。强模型对整段轨迹作语义审查，返回最长可接受前缀、首次拒绝原因和可选修复动作，然后才可能提交所保留的写动作。被拒绝的后缀丢弃。这是作者提出的协作协议，不是本仓已经强制执行的权限策略。
+
+论文 3.3 节 Proposition 1 在“强模型解码受显存带宽限制”和“每步被接受近似独立”等假设下，给出每已提交步骤的强模型耗时/权重读取相对比：
+`R_u = ((1-p_u)/(1-p_u^n)) * (v/d) + rho*(1-p_u)`
+其中 `p_u` 为任务接受率，`n` 为评审段长度，`v` 为 verdict 的权重读取次数，`d` 为强模型单步原始生成的读取次数，`rho` 为拒绝后需要独立修复轮次的概率。此公式是对作者文本的转录，**未独立证明或验证推导**；假设不满足时不能沿用。作者报告部分基准上显存流量与墙钟时间下降，同时估算 FLOPs 可能**上升**，所以不能宣称计算成本普遍降低。
+
+### 映射、反证与适用边界
+- 候选研究机制：将 `draft_read_effect`、`held_write_intent`、`semantic_prefix_review`、`authorized_effect_commit` 和 `post_commit_effect_receipt` 分开记录。前三个阶段不能替代授权提交与效果回执。
+- 论文假设适配器定义的“读取”不修改环境；真实工具中的 GET/read 仍可能触发审计写入、计费、计数器、网络副作用或隐私暴露。因此 `READ_CLASSIFIED != EFFECT_FREE_OBSERVED`，必须单独检查工具适配器、权限与效果。
+- 强模型接受候选前缀只证明其在当前上下文给出的语义判断，不构成权限授权、形式化正确性、外部来源真实性或实际写入完成证明。
+- 作者性能结果依赖模型、任务基准、服务配置和接受率；显存流量/墙钟降低并不代表 FLOPs 更低。后续测试需保留 verifier 误判、非法效果执行、前后状态、资源开销与真实失败案例。
+- 本仓没有因这份研究而得到已部署 Tool System、完成授权控制面或新增真实运行测量。
+
+### 五轴状态与 Evidence Delta
+- Claim State：OBSERVED / AUTHOR_REPORTED_MECHANISM；普遍安全保证保持 HYPOTHESIS_NOT_PROMOTED。
+- Evidence Level：E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION。
+- Mapping State：CANDIDATE_MECHANISM。
+- Implementation State：NOT_IMPLEMENTED。
+- Validation State：NOT_TESTED。
+- NEW_EVIDENCE：带版本身份的只读推测、写入前挂起、最长语义前缀验证算法，以及带明确条件的解码资源成本模型。
+- CORRECTED_INTERPRETATION：“强模型认为可以提交”不等于“已授权、已执行并获得权威效果回执”；只读标签必须接受实际效果边界验证。
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；来源登记不等于定理验证。
+- NEW_COUNTEREVIDENCE：隐性读副作用、verifier 假阳性、错误前缀与作者报告的 FLOPs 上升，限制了泛化收益与安全主张。
+- UNKNOWN_RETAINED：本仓适配器语义、真实权限模型、Registry 接纳、复现实验、实际任务的延迟/资源与失败率。
+- NEXT_RETEST_CONDITION：固定原始作者版本与基准，构造带副作用读工具和不可逆写入的受控实验，逐步捕获提交前后状态、权限/效果回执、verifier 误判及实际环境与修订号。
+
+### 交付与来源边界
+只在现有 Tool System 中英文正式文档末尾追加本次研究增量。未回写历史 Jules、未提升 Source Registry/Verified Core、未部署 runtime、未修改 schema/workflow，也未执行 Weekly/Monthly。FOUNDATION/validate.py、合同测试、论文实验复现及独立双语语义校验在创作时均为 NOT_EXECUTED。仅交付供人工审查的 Draft PR。
