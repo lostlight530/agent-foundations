@@ -350,6 +350,7 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 ### For Beginners: Constraint-Guided Verification for Tool Use
 Imagine giving an intern (the AI) a master key to your company's server (tools), but attaching a GPS tracker and a rulebook (the constraint set $C$). Standard AIs might guess what to delete and accidentally wipe the database. The "Constraint-Guided Verification" physically locks the door if the intern tries to do anything not explicitly proven safe in the rulebook, guaranteeing absolutely zero trial-and-error damage.
 
+```python
 # Eq: P_{u}\leq 1-\frac{h(\mathbf{x}_{0})+\gamma-\varphi K}{M+\gamma}
 
     # We strictly calculate the probability of the tool violating the upper bound W_k.
