@@ -336,6 +336,7 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 ### 0基础业务通俗类比 (For Beginners)
 想象你把公司核心数据库的万能钥匙（工具）交给了一个实习生（AI），但你同时在他手上绑了一个GPS追踪器，并给了一本操作红线手册（约束集 $C$）。传统 AI 可能会瞎猜要删什么东西，一不小心就把库清空了。而“约束引导验证”机制就像是，只要实习生试图做任何没有在红线手册里被严格证明绝对安全的动作，大门就会在物理层面上直接锁死。这就保证了在生产环境中绝对零事故，彻底告别“试错”。
 
+```python
 # Eq: P_{u}\leq 1-\frac{h(\mathbf{x}_{0})+\gamma-\varphi K}{M+\gamma}
 
     # 我们严格计算工具违反上限 W_k 的概率。

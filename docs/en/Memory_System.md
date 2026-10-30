@@ -583,6 +583,7 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 ### For Beginners: Deterministic Representation via Covariance
 Imagine you are drawing a map from a moving car on a bumpy road. Standard memory systems just record the shaky lines, mixing actual roads with random bumps (hallucinations). Our new "Covariance Boundary" acts like a mathematical shock absorber. It strictly separates the deterministic true direction (the road) from the random bouncing ($\mathcal{N}(0,I)$ noise), ensuring that only the absolute truth gets saved to your long-term memory.
 
+```python
 # Eq: \displaystyle\mathrm{D}_{\mathrm{KL}}(\rho_{k+1}\|\rho^{*})
     # Eq: \displaystyle\leq\frac{1-\alpha^{2}h^{2}}{1+2\alpha h}\mathrm{D}_{\mathrm{KL}}(\rho_{k}\|\rho^{*})+\frac{h^{2}}{2(1+2\alpha h)}M_{0}\exp(-4\alpha hk)+\mathcal{O}(h^{3})
 
