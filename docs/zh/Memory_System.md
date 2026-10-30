@@ -587,6 +587,7 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 ### 0基础业务通俗类比 (For Beginners)
 想象你坐在一辆颠簸的车上画地图。传统的记忆系统会把所有手抖画歪的线条都记下来，把现实的道路和随机的颠簸（幻觉）混在一起。我们全新的“协方差边界”就像是一个数学上的车辆减震器。它极其严格地将真实的、确定性的方向（马路）与随机的震动（$\mathcal{N}(0,I)$ 噪声）剥离开，保证只有绝对真实的东西才会被存入你的长期记忆中。
 
+```python
 # Eq: \displaystyle\mathrm{D}_{\mathrm{KL}}(\rho_{k+1}\|\rho^{*})
     # Eq: \displaystyle\leq\frac{1-\alpha^{2}h^{2}}{1+2\alpha h}\mathrm{D}_{\mathrm{KL}}(\rho_{k}\|\rho^{*})+\frac{h^{2}}{2(1+2\alpha h)}M_{0}\exp(-4\alpha hk)+\mathcal{O}(h^{3})
 
