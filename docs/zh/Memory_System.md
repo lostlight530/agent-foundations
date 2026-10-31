@@ -1254,3 +1254,50 @@ MHG-Mem 的带属性超图区分**实体提及节点、原子事实节点、演�
 
 ### 交付与边界
 仅在现有中英文 Memory System 容器追加一条 GPT Native 前瞻 Daily，不改写历史 Jules；不变更 SOURCES 注册、不做 Verified Core 晋升、不提前十月月结、不冒充实验或实现。全仓验证器和源论文实验：NOT_EXECUTED。
+
+
+## 2026-10-31 Daily Research Chunk — 依赖绑定的验证记忆与非局部失效（Memory System）
+
+### 原生任务与来源身份
+- Canonical task: `foundations/research/daily`；Logical Date: 2026-10-31 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `ee927506340ecbc1e20f5feb5fcb3892fcaa8300`
+- Run Identity: `agent-foundations/research/daily/2026-10-31/GPT_NATIVE/ee927506340ecbc1e20f5feb5fcb3892fcaa8300/gpt-native-20261031-memory-01`
+- 原始来源：Yiqi Wang、Jinqian Ju、Jiaqi Zhang、Zhangkai Wu、Yiqun Duan、Zequn Sun、Taotao Cai、Mingkai Zheng，*Memories That Outlive Their Reasons: Dependency-Tethered Memory for Tool-Using LLM Agents*，arXiv:2610.25123v2
+- v1 提交时间：2026-10-18T09:01:52Z；v2 时间：2026-10-22T04:32:22Z；检查日期：2026-10-31
+- 原始摘要：https://arxiv.org/abs/2610.25123；原始全文：https://arxiv.org/html/2610.25123v2
+- 实际检查：作者全文第 2–3、6.5–6.6 节及局限性、原始公式.本次只有一个论文来源谱系，**不分配 Sxx，不升级 Verified Core**.
+
+### 原始问题、数学约束与机制
+这项研究的故障不是「记忆写入时就是假的」，而是**当时正确的验证结论，在上游依赖失效后仍被下游复用**.一个准确记录下来的软件/数据/签名验证 PASS，可能依赖于随后被撤销或更换的其他对象.有限检索窗口看不见远处失效，因而可能同时存在「窗口内记录完全相同，但当前应采取不同动作」的两个世界.论文的 Locality 观察说明：仅靠相同窗口内的文本推理不能区分二者，必须重新核验，或在窗口之外改变提供给 reader 的有效状态.
+
+作者把依赖定义为精确版本 DAG `G`，公式（1）为 `pass_t(v) = own_t(v) AND all pass_t(u) for every v -> u`.它定义理想验证谓词，并不证明真实系统里的依赖抽取、时间戳、源身份一定完整.
+
+Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_from` 精确版本边；读取时跨整个 Store 计算传递依赖，遇到任一上游失效、未确立或较新版本触发器，便把原来的 `verified=true` **呈现为 `null`（待重验）**.它不是把原记录改写为 false，也不声称「出现新版本等于旧版本必定无效」；较新版本是保守复验触发条件.
+
+### 实验口径、反证和局限
+- 作者在 Fallout 合成世界、同一段历史输入和 publish/hold 任务下报告：依赖与验证同会话出现时，Tether 下游不安全发布率 **0.3%**，原子事实记忆 **62%**；相比逐条重新检查节省 **37%** 验证调用.都是论文特定模型、任务和分母上的作者结果，**不是本仓运行数据或普适安全证明**.
+- 关系与验证拆到不同会话后，依赖边漏记增加，论文报告的 Tether 下游不安全率升至 **9.4% 或 22.1%**.即使 reader 的图遍历逻辑正确，也无法遍历未被 writer 记下来的边.
+- 弱 writer、未记录的失效事件、错误或多余的依赖边、保守版本触发，都可能导致错误保留、过度撤销或额外验证成本.作者还报告弱 writer 对直接失效对象可带来更差结果.
+- 合成世界明确陈述依赖；真实 Go advisory replay 使用简化版本范围判定；模拟时间和模型覆盖限制外推.本轮没有执行论文代码、数值复现或本仓记忆运行时测试.
+
+### Memory System 有界架构映射
+可研究的文档字段：`claim_version`、`verification_receipt_id`、`support_object_id`、`support_version`、`derived_from`、`invalidation_observed_at`、`source_provenance`、`edge_completeness`、`read_time_disposition`.读取时，在失效或缺少关键依赖的情况下返回 `UNSETTLED_REVERIFY` 候选，而不是把历史 PASS 当作当前授权.
+
+强反例是：真正依赖晚几个会话才出现，或者上游撤销从未进入 Store.此时对不完整依赖图的全局遍历仍可能让旧 verdict 错误通过.任何实现都必须额外证明依赖记录完整性、权威来源新鲜度和实际副作用前的复验门槛.**本仓没有实现这样的 Memory Engine**.
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED（仅论文机制与作者报告实验）
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 精确版本的递归依赖谓词、局部检索不可区分反例、读时撤销与待重验语义.
+- CORRECTED_INTERPRETATION: 历史为真的记忆记录不等于当前可作为动作依据的验证结论；出现较新版本不等于旧版本被证伪.
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英文镜像、其他仓引用均不增加独立科研来源数.
+- NEW_COUNTEREVIDENCE: 分离会话导致关系边丢失、弱 writer 与未记录撤销事件均可削弱或击穿该机制.
+- UNKNOWN_RETAINED: 独立复现、真实来源及依赖完整性、多 writer 一致性、授权融合和真实部署收益.
+- NEXT_RETEST_CONDITION: 固定论文/代码版本，在检索窗口相同而远处依赖失效不同的成对历史中复验；注入迟到关系、漏边和弱 writer，使用权威效果回执分别统计不安全执行与错误拒绝.
+
+### 交付边界
+仅对现有中英文 Memory System 容器追加一条 2026-10-31 GPT Native 前瞻 Daily，不分配 Sxx、不晋升 Verified Core、不宣称代码实现和测试成功、不提前十月月结、不重写 Jules.全仓验证器及论文基准复现：NOT_EXECUTED.
