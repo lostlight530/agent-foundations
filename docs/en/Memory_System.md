@@ -1251,3 +1251,52 @@ A candidate memory record could separate `entity_mention_id`, `canonical_entity_
 
 ### Delivery boundary
 This is one prospective bilingual Native Daily theory increment in the existing Memory System containers, not a retroactive Jules run. No Sxx registry change, historical rewrite, monthly close, runtime implementation or measured validator PASS. Full repository validator and source experiment: NOT_EXECUTED at authoring.
+
+
+## 2026-10-31 Daily Research Chunk — Dependency-tethered verdict invalidation (Memory System)
+
+### Native provenance and canonical bibliography
+- Canonical task: `foundations/research/daily`; logical date: 2026-10-31 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: `ee927506340ecbc1e20f5feb5fcb3892fcaa8300`
+- Run identity: `agent-foundations/research/daily/2026-10-31/GPT_NATIVE/ee927506340ecbc1e20f5feb5fcb3892fcaa8300/gpt-native-20261031-memory-01`
+- Source identity: arXiv:2610.25123v2, *Memories That Outlive Their Reasons: Dependency-Tethered Memory for Tool-Using LLM Agents*
+- Authors: Yiqi Wang, Jinqian Ju, Jiaqi Zhang, Zhangkai Wu, Yiqun Duan, Zequn Sun, Taotao Cai, Mingkai Zheng
+- v1 submitted: 2026-10-18T09:01:52Z; v2 revision: 2026-10-22T04:32:22Z; inspected: 2026-10-31
+- Original abstract: https://arxiv.org/abs/2610.25123
+- Original versioned full text: https://arxiv.org/html/2610.25123v2
+- Access: author full text, Sections 2–3, 6.5–6.6, limitations and original equation inspected. This is one paper lineage and has not received an Sxx ID or Verified Core admission.
+
+### Problem, formal boundary and mechanism
+The paper studies an *accurate-when-written but unsafe-when-reused* memory verdict. A downstream exact-version object may have passed verification before an unrelated upstream object was revoked or updated. A bounded retrieval window may omit the upstream invalidation, even though the stored downstream record remains syntactically accurate as an historical fact. The author's locality observation constructs two stores serving the same visible window but requiring different safe actions; without an additional check or a store-level withdrawal rule, a window-only reader cannot distinguish them.
+
+The paper models exact-version dependency relationships as a DAG `G`. Its central predicate is `pass_t(v) = own_t(v) AND all pass_t(u) for every dependency edge v -> u` (author Equation 1). This is a *defined ideal verification contract*, not a theorem showing real-world source identities, timestamps or edges are always complete.
+
+Tether adds `derived_from` exact-version edges to check records when the relevant support is locally visible to the writer. At read time it traverses the whole stored dependency relation and presents a passing verdict as `null` (unsettled) if a transitive support has failed, is unsettled or has a newer version recorded. This is **conservative withdrawal**, not an assertion that a newer version automatically invalidated the pinned old version. It removes apparent permission to reuse a verdict; it does not turn an invalid record into a verified false statement.
+
+### Experimental scope and counterevidence
+- The authors' simulated Fallout benchmark uses shared histories, a transitive verification oracle and a publish/hold task. With relations stated alongside their verdicts, the authors report **0.3%** downstream unsafe publication for Tether versus **62%** for an atomic fact memory, with **37% fewer verification calls** than checking every candidate. These are author-reported domain/task metrics, not a universal safety or local performance guarantee.
+- Timing matters: separating relation facts from verification verdicts reduced dependency-edge recall; reported Tether downstream unsafe publication increased to **9.4% or 22.1%** in the studied split cases. A perfect reader cannot recover support edges that were never written.
+- The paper reports a weak-writer configuration under which Tether becomes less safe for directly failing targets, and notes that missing invalidation events, spurious edges and conservative newer-version triggers create errors or unnecessary checks.
+- Synthetic-world assumptions, a particular version-range policy in the real-advisory replay, simulated times and source-specific evaluation denominators restrict transfer. This work did not run the paper's code, reproduce formulas numerically, or validate a production memory store.
+
+### Bounded Memory System mapping
+A candidate design could attach `claim_version`, `verification_receipt_id`, `support_object_id`, `support_version`, `derived_from`, `invalidation_observed_at`, `source_provenance`, `edge_completeness` and `read_time_disposition` to *documentary* verdict records. A read-time gate could return `UNSETTLED_REVERIFY` when required support is invalidated or missing, rather than silently upgrading a stale historical PASS to current authority.
+
+The counterexample for this mapping is a dependency disclosed only in a later session, or a revoked source event not registered in the store; a graph walk over incomplete records can falsely retain a passing verdict. Any implementation would need explicit source/event completeness assumptions, authoritative freshness and a no-effect-before-reverification gate. No such memory engine is implemented in this repository.
+
+### Five-axis state and Evidence Delta
+- Claim State: OBSERVED (author method and reported experiment only)
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: the precise `pass_t` exact-version recursive dependency predicate, the window-locality counterexample and read-time withdrawal semantics.
+- CORRECTED_INTERPRETATION: a memory record may have been true when recorded but not be currently admissible as action evidence; a higher version is a revalidation trigger, not categorical evidence the old one failed.
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; EN/ZH mirrors and cross-repo citations count one original source.
+- NEW_COUNTEREVIDENCE: split-session dependency capture, weak writer and missing invalidation events can defeat or severely weaken the proposed mechanism.
+- UNKNOWN_RETAINED: independent replication, production object/source completeness, multi-writer consistency, authorization integration and real-world effectiveness.
+- NEXT_RETEST_CONDITION: fix a versioned paper/code revision, build paired histories with unchanged retrieved windows but different remote dependency failures, inject omitted/later dependency edges and weak-writer errors, measure unsafe effects and missed valid actions with authoritative receipts.
+
+### Delivery boundary
+One prospective bilingual Daily source-derived theoretical increment in the existing Memory System containers. No Sxx Source Registry allocation, verified-core claim promotion, implementation, checker PASS, October final monthly close, or Jules retrospective rewrite. Repository validator and original paper benchmarks: NOT_EXECUTED during authoring.
