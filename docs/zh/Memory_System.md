@@ -1301,3 +1301,52 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 
 ### 交付边界
 仅对现有中英文 Memory System 容器追加一条 2026-10-31 GPT Native 前瞻 Daily，不分配 Sxx、不晋升 Verified Core、不宣称代码实现和测试成功、不提前十月月结、不重写 Jules.全仓验证器及论文基准复现：NOT_EXECUTED.
+
+
+## 2026-11-01 Daily Research Chunk — 长期记忆条件化与回答多样性（Memory System）
+
+### 原生任务与来源身份
+- Canonical Task: foundations/research/daily；Logical Date: 2026-11-01 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY；provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION
+- Base main: 6e80c61ef6324ce57c5e68b2b894f7f7ca07867a；Run ID: agent-foundations/research/daily/2026-11-01/GPT_NATIVE/6e80c61ef6324ce57c5e68b2b894f7f7ca07867a/gpt-native-20261101-daily-01
+- Canonical Source: arXiv:2610.25127v1，*MemBubble: Benchmarking How Agent Memory Shapes LLM Response Diversity*
+- Authors: Jiajun Tan、Fei Sun、Xinyu Ma、Shixuan Zhang、Du Su、Qi Cao、Daiting Shi、Huawei Shen、Xueqi Cheng
+- 投稿时间: 2026-10-18T09:17:44Z；检查日期: 2026-11-01
+- 原始来源: https://arxiv.org/abs/2610.25127；全文: https://arxiv.org/html/2610.25127
+- 访问深度: ORIGINAL_ABSTRACT_PLUS_FULL_TEXT_METHOD_RESULTS_DISCUSSION_LIMITATIONS；论文代码与独立复现均未执行
+- 来源去重: 当前 FOUNDATION/SOURCES.md 未收录此 arXiv v1；本次仅追加 Daily 文档，不分配 Sxx、不准入 Verified Core，也不因为中英文和跨仓重复引用而增加独立来源数
+
+### 研究问题与指标合同
+长期用户偏好记忆是否会在个性化有效的同时，缩窄模型能够给出的合理答案类别？论文从真实用户与助手对话中的偏好抽取出 1000 个开放式评测实例，构造话题相关、具体场景又区别于原偏好的查询，对比无记忆、完整交互历史及五种记忆机制，并在六种回答模型中实验
+
+作者对同一查询、同一记忆条件下重复抽取的回答进行任务相关的功能等价类划分，再估计回答类别的 Shannon entropy；entropy 降低代表**在该评测协议内**观测到的回答分布更加集中，类别划分、sampling 条件和 judge 身份属于测量口径，不能与任意仓库状态分布之间的 D_KL、GAS 图熵或者回答正确性混用
+
+论文报告：**相对 Full history，平均类别 entropy 降低 34.7%，distinct-k 降低 25.7%**；**相对 No memory，类别 entropy 降低 34.1%**，这些是作者在所测模型与记忆机制上的聚合报告，分母不同，不能相互替代，也不是 Agent Foundations 本仓运行效果
+
+### 反证与适用性边界
+不同模型、不同记忆系统的降幅并不一样，文中 MemoryOS 的降低幅度小于 mem0，不能得出「所有 Memory 都同等有害」的全称判断；更长交互历史或更深检索在部分条件下能缓解多样性下降，但在已报告条件下未完全消除差距
+
+作者刻意选取与被记忆偏好场景不同的查询，但偏好对具体用户请求究竟应该多大程度适用，仍有解释空间；论文主要覆盖开放式任务、固定交互历史，未验证持续交互与动态记忆更新，分布收缩的因果机制及有效缓解措施亦未确认，重复采样也受模型采样设置和功能等价类评判影响
+
+多样性不等于通用质量，更不意味着应忽略用户明确偏好；对明确授权、确定性执行的工具任务，较小的合法答案集合反而可能合理，盲目增大多样性可能损害完成语义
+
+### Memory System 的有界架构映射
+可研究的**候选测量合同**包括：偏好及其适用范围、提取 provenance、检索排序与过滤、responding model、采样设置、judge/等价类版本、适用任务集合和用户显式覆盖；在相同控制条件下比较 Full history、No memory、Candidate memory，分开衡量回答多样性、事实充分性、指令遵守与副作用有效完成
+
+强反例：严格控制 preference relevance 后差异消失，或多样性降低完全来自任务本身的合法结果约束；若要评估长期影响，还需真正发生的动态 Memory 演进及独立标注等价类，而非拿一轮固定测试的作者结果直接推导本仓架构必须修改
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_RESULT_ONLY
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM / NO_CANONICAL_PROMOTION
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 精确版本的原始论文、Full-history 与 No-memory 的不同分母、回答类别 entropy 的测量合同
+- CORRECTED_INTERPRETATION: 个性化收益与回答多样性是两个独立经验维度；类别熵不能冒充正确性、KL 或本仓 Runtime 缺陷
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英文镜像及跨仓引用仍只算同一原始来源
+- NEW_COUNTEREVIDENCE: 模型与记忆机制异质性、偏好适用性争议、固定交互历史、等价类 judge 依赖，不支持全称架构处方
+- UNKNOWN_RETAINED: 独立复现、动态记忆反馈、真实用户意图、等价类稳定性、因果机制、本仓实际能力
+- NEXT_RETEST_CONDITION: 固定论文与 benchmark 版本，匹配模型和 prompt、标注 preference relevance、独立 judge、动态记忆更新对照，保留原始回答样本和精确分母
+
+### 交付边界
+本次仅向既有中英文 Memory System 容器追加 2026-11-01 GPT Native 前瞻 Daily，不修改历史 Producer、SOURCES、Verified Core、Weekly/Monthly 和 Runtime，不声称代码实现、论文复现或仓库 validator PASS，原始来源事实不会因为 Daily 引用而自动获得长期准入
