@@ -44,8 +44,8 @@
 - Any separate future restoration of audit artifacts requires a contract-specific retention and minimality decision; do not restore automatically
 
 ## Repository-specific evidence boundary
-- EN/ZH Memory System 镜像共享同一论文来源，不计作两项独立来源。S63 registry collision 未解；paper/mapping != implementation/verified core。
-- Foundations A1 #362 的 209 additions 是独立后继审查，不将 #361 的 72 additions 改写。
+- EN/ZH Memory System 镜像共享同一论文来源，不计作两项独立来源.S63 registry collision 未解；paper/mapping != implementation/verified core.
+- Foundations A1 #362 的 209 additions 是独立后继审查，不将 #361 的 72 additions 改写.
 - `CURRENT_PATH_PRESENT != ORIGINAL_NATIVE_EXECUTION`
 - `HISTORICAL_PR_DELIVERY != CURRENT_MAIN_RETENTION`
 - `LATER_SUCCESS != EARLIER_SUCCESS`
