@@ -1300,3 +1300,50 @@ The counterexample for this mapping is a dependency disclosed only in a later se
 
 ### Delivery boundary
 One prospective bilingual Daily source-derived theoretical increment in the existing Memory System containers. No Sxx Source Registry allocation, verified-core claim promotion, implementation, checker PASS, October final monthly close, or Jules retrospective rewrite. Repository validator and original paper benchmarks: NOT_EXECUTED during authoring.
+
+
+## 2026-11-01 Daily Research Chunk — Memory-conditioned response diversity (Memory System)
+
+### Native provenance and canonical bibliography
+- Canonical Task: foundations/research/daily; Logical Date: 2026-11-01 Asia/Shanghai.
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY; provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION.
+- Base main: 6e80c61ef6324ce57c5e68b2b894f7f7ca07867a; Run ID: agent-foundations/research/daily/2026-11-01/GPT_NATIVE/6e80c61ef6324ce57c5e68b2b894f7f7ca07867a/gpt-native-20261101-daily-01.
+- Canonical Source: arXiv:2610.25127v1, *MemBubble: Benchmarking How Agent Memory Shapes LLM Response Diversity*.
+- Authors: Jiajun Tan, Fei Sun, Xinyu Ma, Shixuan Zhang, Du Su, Qi Cao, Daiting Shi, Huawei Shen, Xueqi Cheng.
+- Submitted: 2026-10-18T09:17:44Z; inspected: 2026-11-01.
+- Source identity: https://arxiv.org/abs/2610.25127; full text: https://arxiv.org/html/2610.25127.
+- Access depth: ORIGINAL_ABSTRACT_PLUS_FULL_TEXT_METHOD_RESULTS_DISCUSSION_LIMITATIONS; no paper code executed, no independent replication.
+- Source deduplication: this arXiv v1 is absent from the current FOUNDATION/SOURCES.md at authoring. This documentary Daily does NOT allocate an Sxx identity, claim admission, or duplicate the same source into multiple independent observations.
+
+### Research question and formal measurement boundary
+Can long-term user-preference memory narrow a model's *set of plausible responses* even when personalization appears useful? The paper constructs 1,000 open-ended test instances from preferences extracted from real user-assistant dialogues and tests responses to topically related but situationally different queries. It separately compares a no-memory prompt, full interaction history, and five memory mechanisms across six responding models.
+
+For repeated responses sampled under the same query and memory condition, the study groups answers into task-relevant functional equivalence classes and estimates class entropy. A lower class entropy indicates a more concentrated observed distribution **under that evaluation protocol**. The conditioning and equivalence-class judge are part of the metric identity. Shannon response-class entropy is not D_KL between arbitrary repository state distributions, is not graph entropy, and is not a proof of semantic correctness.
+
+The authors report an aggregate **34.7% class-entropy reduction and 25.7% distinct-k reduction compared with Full history** across the evaluated model/memory combinations. The distinct no-memory baseline produces a **34.1%** class-entropy reduction in the paper's comparison. These are author-reported descriptive averages, not independent replication or measured Agent Foundations performance; changing the denominator changes the reported percentage.
+
+### Counterevidence and competing interpretations
+The paper notes variation by model and memory mechanism: MemoryOS exhibits a milder reduction than mem0 in the tested setup, so treating all memories as equally harmful is unsupported. Broader history and deeper memory retrieval sometimes improve diversity but do not eliminate the gap within the reported tested conditions. Its query construction deliberately seeks scenarios distinct from the remembered preference, yet whether a preference should appropriately influence a given user query remains partly contestable.
+
+Limitations explicitly acknowledged: open-ended tasks dominate; interactions and memories remain fixed instead of evolving through longitudinal feedback; the mechanism causing concentration and effective mitigation have not been identified. Repeated samples approximate a response distribution only under the chosen sampling and class judge. Diversity is neither universal quality nor a requirement to disregard an explicit user preference. A narrow response set may be appropriate for a constrained/authorized task; more diversity may be undesirable for a deterministic tool effect.
+
+### Bounded Memory System architecture mapping
+This motivates a **candidate measurement contract**, not a memory rewrite: pair a persisted preference with its applicability scope, extraction provenance, retrieval rank/filter, responding model, sampling regime, evaluator/class-ontology revision, eligible task set, and user override. Test both preference-relevant and preference-irrelevant queries and compare full-history / no-memory / candidate-memory conditions with equal control settings. Keep diversity, instruction compliance, factual adequacy and valid action completion as distinct guardrails, rather than optimizing one scalar score.
+
+A strong falsifier would be matched user queries where the class-entropy gap vanishes with controlled relevance gating, or where reduced diversity is entirely explained by a task-constrained set of valid answers. Recheck on genuinely evolving memory and independently adjudicated functional-equivalence classes before attributing a causal personalization failure.
+
+### Five-axis state and Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_RESULT_ONLY.
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED.
+- Mapping State: CANDIDATE_MECHANISM / NO_CANONICAL_PROMOTION.
+- Implementation State: NOT_IMPLEMENTED.
+- Validation State: NOT_TESTED.
+- NEW_EVIDENCE: versioned primary paper with explicit Full-history versus No-memory denominators and response-class entropy/diversity measurement.
+- CORRECTED_INTERPRETATION: personalization utility and response diversity are independent empirical criteria; measured class entropy does not establish correctness, KL divergence or a local runtime defect.
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; EN/ZH mirrors and other repository mentions still count one author source lineage.
+- NEW_COUNTEREVIDENCE: per-memory/per-model heterogeneity, contested preference relevance, fixed histories and class-judge dependence undermine universal prescriptions.
+- UNKNOWN_RETAINED: independent replication, dynamic memory effects, real user intent, class equivalence stability, observed causality and local capability.
+- NEXT_RETEST_CONDITION: exact version-controlled benchmark, matched prompt/model conditions, preference-relevance annotation, independent evaluator, dynamic memory update control, full raw response samples and denominators.
+
+### Delivery boundary
+This prospective Daily appends research only to the existing English and Chinese Memory System containers. It does not revise old producer text, modify SOURCES/Verified Core, claim implementation, overwrite monthly/weekly artifacts, or execute the repository validator or original benchmark. No external fact is promoted solely by this Daily.
