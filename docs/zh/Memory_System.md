@@ -1350,3 +1350,51 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 
 ### 交付边界
 本次仅向既有中英文 Memory System 容器追加 2026-11-01 GPT Native 前瞻 Daily，不修改历史 Producer、SOURCES、Verified Core、Weekly/Monthly 和 Runtime，不声称代码实现、论文复现或仓库 validator PASS，原始来源事实不会因为 Daily 引用而自动获得长期准入
+
+
+---
+
+## 2026-11-02 Daily Research Chunk — 基于执行轨迹的局部记忆架构修复（Memory System）
+
+### 任务与原始来源身份
+- Task: foundations/research/daily；Logical Date: 2026-11-02 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base Main: f003841b744cde1001ec8b4f8d2b3cf39784f135
+- Run ID: agent-foundations/research/daily/2026-11-02/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-20261102-daily-01
+- Canonical source: arXiv:2610.21170；精确 vN 后缀尚未独立确认
+- 论文: MemScope: Evolving Agent Memory Architectures through Localized Code Repair
+- 作者: Miao Su、Yucan Guo、Zixuan Li、Long Bai、Zhongni Hou、Xiaolong Jin、Jiafeng Guo
+- 原始提交: 2026-10-15 03:27:34 UTC；检查: 2026-11-02
+- 原始来源: https://arxiv.org/abs/2610.21170 ；全文: https://arxiv.org/html/2610.21170
+- 阅读深度: 原始 HTML 的机制、实验、消融及修复案例讨论，未执行论文代码或 benchmark
+- Source Registry: 当前 FOUNDATION/SOURCES.md 未收录此论文身份，本次 Daily 不分配 Sxx，也不准入 Verified Core
+
+### 机制与有界理论映射
+论文将持久化的 Memory 内容，与控制存储、检索、呈现的可执行 Memory Provider 分开讨论，Patch Agent 结合原始执行轨迹、当前存储记忆和 Provider 代码定位局部修复目标，要求保持 Provider 身份与既存 Memory 的兼容性，以有界 old-to-new 代码修改降低全量重写范围，当原有指导已经满足任务需求时允许 no-patch 结果
+
+核心是对失败原因进行可追溯定位，而不是泛化成「记忆系统会自动自我提升」的全称命题，论文的外部框架机制不等于本仓拥有自动改代码能力，也不代表修复后的 Memory 状态必然正确
+
+作者报告的 GAIA 诊断消融准确率分别是 summary-only 63.33%、trace-only 70.00%、trace + memory 86.67%、额外加入 patch history 的变体 83.33%，**增加 Patch History 并没有在该控制实验中单调提高表现**，ALFWorld unseen 在相同 Memory 收集条件下报告演化后 48/67（71.64%），原始 Provider 34/67（50.75%），14 次归档 Provider 转换的代码变更比例中位数为 4.4%，这些都是作者在特定评估口径下的结果，不是 Agent Foundations 本地实现或复现成绩
+
+候选架构约束：每次 Memory Provider 修复提案应携带精确源代码 revision、原始 trace run identity、store URI / incarnation / snapshot、实际失败的 postcondition、精确 patch target 与 diff、兼容性检查及独立的修复前后回执，若 Store 不可比较、轨迹不完整或缺少可复现 fixture，则不能将代码改动提升为安全修复结论，补丁很小也不等于验证充分
+
+### 反证、局限与证伪条件
+83.33% 低于 86.67% 的同一消融数据，直接限制「历史上下文越多，诊断越好」的解释；Trace 可能遗漏副作用，Store 可能是旧快照或错误的实例，局部修补仍可能破坏跨组件不变量，论文的 benchmark、模型、judges 与 14 次改动样本均不能证明普遍生产可靠性
+
+强证伪条件：在固定模型、任务、Store 与源代码的匹配实验中，summary-only 与 trace+store 效果相当，或者在注入缺失事件、陈旧 Store、Memory 兼容性冲突后，trace-guided patch 反而增加 false completion、状态损坏或错误拒绝，同时应保留 no-patch 对照
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_DESCRIPTION / NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: 原始执行轨迹 + 当前存储 Memory + Provider 源码的三路诊断、局部修复合同、合法 no-patch 和定量消融
+- CORRECTED_INTERPRETATION: 作者报告的准确率与补丁局部性不能证明当前 Memory 正确，也不能证明自治修改安全
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation，中英文镜像及跨仓引用仍只有一个原始论文来源
+- NEW_COUNTEREVIDENCE: 该 GAIA 消融中引入 patch history 的结果低于 trace + memory
+- UNKNOWN_RETAINED: 精确论文版本、独立复现、Store 新鲜度、本地实现与跨组件修复不变量
+- NEXT_RETEST_CONDITION: 固定源代码、runner、Store 与补丁字节，注入缺失事件与陈旧快照，独立验证 postcondition、兼容性及 no-patch 对照
+
+### 交付边界
+仅向原有中英文 Memory System 追加 2026-11-02 Native Daily，旧 Jules/GPT 文本均原样保留，不新增 Sxx、不提升 Verified Core、不修改 Runtime、Weekly、Monthly，仓库 Validator：NOT_EXECUTED
