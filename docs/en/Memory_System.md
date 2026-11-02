@@ -1347,3 +1347,47 @@ A strong falsifier would be matched user queries where the class-entropy gap van
 
 ### Delivery boundary
 This prospective Daily appends research only to the existing English and Chinese Memory System containers. It does not revise old producer text, modify SOURCES/Verified Core, claim implementation, overwrite monthly/weekly artifacts, or execute the repository validator or original benchmark. No external fact is promoted solely by this Daily.
+
+
+---
+
+## 2026-11-02 Daily Research Chunk — Trace-grounded local memory repair (Memory System)
+
+### Identity and source
+- Task: foundations/research/daily; logical date: 2026-11-02 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main: f003841b744cde1001ec8b4f8d2b3cf39784f135
+- Run ID: agent-foundations/research/daily/2026-11-02/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-20261102-daily-01
+- Canonical source identity: arXiv:2610.21170; exact vN suffix NOT_VERIFIED
+- Title: MemScope: Evolving Agent Memory Architectures through Localized Code Repair
+- Authors: Miao Su, Yucan Guo, Zixuan Li, Long Bai, Zhongni Hou, Xiaolong Jin, Jiafeng Guo
+- Original submission: 2026-10-15 03:27:34 UTC; checked 2026-11-02
+- Sources: https://arxiv.org/abs/2610.21170 and https://arxiv.org/html/2610.21170
+- Access depth: original HTML mechanisms, experiment/ablation and repair-case discussion. Code and benchmark replication NOT_EXECUTED
+- Source registry: this identity is not currently in FOUNDATION/SOURCES.md; this Daily does not assign an Sxx or admit a Verified Core claim
+
+### Bounded mechanism and theory-to-architecture mapping
+The paper distinguishes runtime memory contents from the executable provider controlling storage, retrieval and presentation. Its Patch Agent inspects raw execution traces, current stored memory and provider source code, localizes a repair, and proposes bounded old-to-new replacements constrained by provider identity and compatibility with existing memory. A no-patch outcome is legitimate when existing guidance is already adequate. Thus failure localization is a candidate mechanism, not an automatic requirement to rewrite code or evidence of a self-modifying host.
+
+Author GAIA diagnostic ablation reports summary-only 63.33%, trace-only 70.00%, trace plus memory 86.67%, and the additional patch-history variant 83.33%. Additional patch history was not a monotonic improvement in that controlled comparison. On ALFWorld unseen tasks the paper reports 48/67 (71.64%) for the evolved provider versus 34/67 (50.75%) for the original under matched collection conditions. The median change ratio of 14 archived provider transitions is reported as 4.4%. These are author-scoped outcomes, not local implementation or validation.
+
+Architectural candidate: a proposed provider patch should carry pinned source revision, originating trace-run identity, store URI/incarnation and snapshot, observed failing postcondition, exact patch target/diff, memory compatibility condition, and independently checked before/after receipt. Without a comparable store, trace completeness or a reproduction fixture, no claim of safe repair can be promoted. The size of a diff is not a safety proof.
+
+### Counterevidence, limits and falsifier
+The non-monotonic 83.33% patch-history result challenges the assumption that longer memory always helps diagnosis. A trace may omit an effect, a store may be stale, and a small patch can violate a nonlocal invariant. Author-selected benchmarks, backbones, judges and 14 archived transitions limit generality. Strong falsifier: pinned matched replay where summary-only reaches the same outcomes, or trace-guided patches increase false completion, compatibility failures or state corruption under injected missing events and stale stores.
+
+### Five-axis and Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED
+- Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_DESCRIPTION / NOT_REPRODUCED
+- Mapping State: CANDIDATE_MECHANISM
+- Implementation State: NOT_IMPLEMENTED
+- Validation State: NOT_TESTED
+- NEW_EVIDENCE: raw trace + runtime memory + provider code triangulation, bounded patch contract, valid no-patch state and measurable ablation
+- CORRECTED_INTERPRETATION: author accuracy and patch locality do not prove current memory correctness or autonomous patch safety
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; other repo citations and EN/ZH mirrors are one source lineage
+- NEW_COUNTEREVIDENCE: patch history underperforms trace+memory in this specific GAIA ablation
+- UNKNOWN_RETAINED: exact version, independent replication, store freshness, local implementation and repair invariants
+- NEXT_RETEST_CONDITION: fixed revision/runner/store/patch receipt, adversarial missing-event and stale-snapshot controls, independent postcondition verification and no-patch counterexample
+
+### Delivery boundary
+Only bilingual append-only Daily research; previous Jules/GPT material retained. No Sxx allocation, Verified Core promotion, runtime/Weekly/Monthly update or repository validator execution.
