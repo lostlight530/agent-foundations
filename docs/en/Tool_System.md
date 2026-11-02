@@ -688,3 +688,68 @@ where `p_u` is a task's acceptance rate, `n` is reviewed segment length, `v` is 
 
 ### Delivery and provenance boundary
 Prospective bilingual research increment appended to the two existing Tool System documents. No historical Jules rewrite, no Source Registry/Verified Core promotion, no host runtime, no schemata, no workflows, no weekly/monthly closure. FOUNDATION/validate.py, contract tests, arXiv reproduction and translation semantic audit: NOT_EXECUTED at authoring. Draft PR awaits human review.
+
+
+---
+
+## 2026-W44 Weekly Research Cascade — tool effect admission and evidence continuity
+
+### Weekly identity, inputs and scope
+- Canonical Task: foundations/research/weekly; ISO period 2026-W44 = 2026-10-26 through 2026-11-01, Asia/Shanghai, naturally closed
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base main SHA: f003841b744cde1001ec8b4f8d2b3cf39784f135
+- Run ID: agent-foundations/research/weekly/2026-W44/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-2026w44-weekly-01
+- Review date: 2026-11-02; exact execution clock NOT_CAPTURED
+- Four canonical containers inspected with their existing EN and ZH research chunks: Memory_System, Tool_System, Collaboration_System, Architecture_Principles
+- Seven Daily input dates: Oct26 Memory, Oct27 Collaboration, Oct28 Architecture, Oct29 Memory, Oct30 Tools, Oct31 Memory, Nov01 Memory. All seven date-specific EN/ZH records are visible on main; 7/7 documentary date coverage, not seven independent experiments or validation receipts
+- The separate 2026-11-02 Daily Memory addition belongs to W45, is in an open Draft and is NOT used as W44 input
+- Source state: INHERITED_DAILY_AUTHOR_SOURCES / NO_FRESH_INDEPENDENT_PRIMARY_REPLAY_BY_THIS_WEEKLY. This Weekly does not allocate Sxx, certify bibliography version pairs anew, or promote claims into Verified Core
+
+### Source identity and cross-container audit
+| Date | Original Daily source identity | Container | Weekly admissible boundary |
+| --- | --- | --- | --- |
+| Oct26 | arXiv:2609.25913v2 — EPGM | Memory | Exact source-event span coverage under a token budget is not source truth or effect completion |
+| Oct27 | arXiv:2610.35835v1 — I-HITL | Collaboration | Approval binding plus a sufficiently independent mediator is conditional, not a visible UI approval guarantee |
+| Oct28 | arXiv:2610.00885v1 — Forall-Lean-Agent | Architecture | Proof artifact identity, statement identity, axiom checks and independent reviewer role are distinct |
+| Oct29 | arXiv:2610.29995 — provenance-preserving multimodal memory | Memory | Entity occurrence, aspect evolution and source pointers are not independently certified entity identity |
+| Oct30 | arXiv:2610.21463v1 — trajectory-level speculation | Tools | Accepted speculative tool prefix does not prove permission or committed side effect |
+| Oct31 | arXiv:2610.25123v2 — dependency-tethered memory | Memory | Current validity requires complete exact-version dependencies and observed invalidation |
+| Nov01 | arXiv:2610.25127v1 — MemBubble | Memory | Response-class entropy under source-defined sampling is not action correctness or causal memory degradation |
+
+All seven are **seven named author-paper lineages as used by seven dated Daily chunks**, not seven independently reproduced results. English/Chinese mirrors and citation across projects add zero new original sources. Oct26 and Oct31 refer to different paper identities despite both discussing provenance/continuity. The Oct30 paper's speculative verifier and the Oct28 paper's proof reviewer operate over different formal objects; there is no basis to treat them as mutual empirical corroboration. Source-registry admission, author/date corrections, equation fidelity, independent theorem rechecks and benchmark reproduction remain separate gates.
+
+### Bounded tool architecture mapping — not an implementation decision
+The cross-container evidence suggests separating five predicates for tool-bearing agents:
+
+1. **Evidence set complete for the claim:** provenance-addressed source spans and query-specific required membership are present. EPGM supports this as a candidate retrieval measurement only
+2. **Proposal / proof artifact verified:** the candidate trajectory or proof object matches the checked task, statement, version and declared assumptions; Forall-Lean-Agent and speculative trajectory papers have different object/validator semantics
+3. **Action authority actually valid:** the specific effect set and approval-relevant state are bound to an independent authorized gate; I-HITL does not imply any current repository mediator exists
+4. **Side effect executed and receipted:** the exact external effect and target incarnation are independently observed; accepting a speculative prefix or finding a source citation is not an effect receipt
+5. **Current completion remains true:** fresh relevant state and full dependency membership still satisfy the requested postcondition; a historical passing memory verdict may have been invalidated by later evidence
+
+This is a **CANDIDATE_MECHANISM / DOCUMENTARY_MAPPING** for review, not a new Tool System runtime contract. The source papers study different tasks, metrics, populations and implementations. No single paper proves the five-step conjunction sufficient, and applying a combined predicate to a real host requires explicit authority and reproducible receipts.
+
+### Counterevidence gate and outstanding work
+- A read-classified speculative tool may have hidden billing, logging, privacy or remote-state effects; the paper's read/no-side-effect assumption must be checked, not adopted as universal truth
+- A trusted mediator may still fail if communication channels, protected-action identity or approval binding are incomplete; an approval transcript is not independent authorization
+- A digest-confirmed proof may validate an unintended statement or hidden axiom; evidence-set recall is not formal theorem soundness
+- A memory dependency graph may omit a revoked source or delayed relation, so recursive validity over an incomplete graph can incorrectly pass
+- Memory-conditioned response entropy may decline even when a constrained task requires a small valid answer space, so diversity is not a reliable completion proxy
+- NEW_EVIDENCE: seven existing source-specific chunks can be reconciled into separately testable evidence/verification/authority/effect/completion predicates without making source claims interchangeable
+- CORRECTED_INTERPRETATION: tool trajectory acceptance and proof artifact checking must not be labeled side-effect completion or authorization
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; Weekly inheritance != fresh independent evidence
+- NEW_COUNTEREVIDENCE: hidden side effects, missing dependency edges, incomplete mediation, axiom/statement mismatch and task-constrained answer sets challenge over-broad promotion
+- UNKNOWN_RETAINED: exact tool runtime semantics, all seven source-version independent rechecks, bibliography admission, implementation, bilingual semantic equivalence beyond checked records and production validation
+- NEXT_RETEST_CONDITION: implement an isolated version-pinned tool harness only after authorization; record proposal, gate decision, approved action identity, actual effect receipt and current postcondition, then inject stale approval, omitted dependency, speculative read side effect and statement mismatch
+
+### Cascade disposition, bilingual and delivery
+- Tool_System EN/ZH: APPEND_BOUNDED_WEEKLY_RELATION; no old source chunk altered
+- Memory_System EN/ZH: NO_FOLLOW_UP on original Daily passages (evidence is already present; do not duplicate it). The ongoing 2026-11-02 Memory Daily branch is an independent W45 input outside this Weekly and is not edited
+- Collaboration_System EN/ZH: NO_FOLLOW_UP, I-HITL's formal limits are inherited without rewriting its original theorem or result
+- Architecture_Principles EN/ZH: NO_FOLLOW_UP; proof artifact and axiom-check boundary already explicit
+- EN/ZH parity check: this append is mirrored for corresponding identities, five-axis state, source limitations and test boundaries, but no independent machine translation/parity validator was executed
+- Claim State: OBSERVED for author-paper description only; weekly mapping CANDIDATE_MECHANISM
+- Evidence Level: E4_PREPRINT for source-specific research; independent reproduction NOT_PERFORMED
+- Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- Only the existing EN/ZH Tool_System files change, append-only. FOUNDATION/SOURCES, verified core, older chunks, code, tests, Memory, Collaboration, Architecture, October monthly, workflows and historical research remain unchanged
+- Repository validator and source benchmark executions: NOT_EXECUTED; human maintainer remains responsible for review and merge
