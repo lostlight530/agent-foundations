@@ -1,0 +1,201 @@
+# 2026-11-03 A1 | Foundations Nov 1–2 bilingual source custody
+- Repository: lostlight530/agent-foundations; independent maintenance, not native Research Daily or Human Review
+- Source current main: `91fa9af33aaa9ec35d575061911c8fc5dba88665`, logical window 2026-11-01..02 Asia/Shanghai
+- November research-month OPEN; Oct blueprint previous-month, W44 naturally closed, W45 open
+- Five axes kept distinct; Verified Core admission requires its own validation, not this record
+- October original A2 strict 0/10 retained; new A1 PR acceptance PENDING_DELIVERY
+
+## Opened primary/source and contract records
+- `docs/en/Memory_System.md` | blob `793c3f81d40224fc8d90505b885766321826a527` | 1394 lines read
+- `docs/zh/Memory_System.md` | blob `0bacb52d4e6bdb5dbb2a8d4c5fd9efa2d91852f5` | 1401 lines read
+- `docs/en/Tool_System.md` | blob `ca9b35c3c589a8d336ce836d3b5650fa04de853e` | 818 lines read
+- `docs/zh/Tool_System.md` | blob `d756adcbc00793f614342507473c91cf421db2ec` | 801 lines read
+- `FOUNDATION/MAINTENANCE.md` | blob `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | 141 lines read
+- `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` | blob `a2f7371b9458024919c3fca895f1770031b95ae3` | 149 lines read
+- `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` | blob `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` | 135 lines read
+
+## Source-addressed distinct judgments
+- R001 | docs/en/Memory_System.md#L638 | - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R002 | docs/en/Memory_System.md#L750 | - Verified-core Claim State: NOT_ASSIGNED_BY_THIS_WEEKLY_PASS | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R003 | docs/en/Memory_System.md#L755 | - Current maintenance interpretation maps that legacy vocabulary to DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R004 | docs/en/Memory_System.md#L844 | - **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED. The repository currently maintains the theoretical bounds and principles but does not implement an executable SparseHopfieldLayer memory module. | **VERIFICATION_GATE / no verified-core promotion**
+- R005 | docs/en/Memory_System.md#L892 | - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R006 | docs/en/Memory_System.md#L975 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R007 | docs/en/Memory_System.md#L980 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R008 | docs/en/Memory_System.md#L1051 | - **Evidence Level:** E4_PREPRINT / AUTHOR_REPORTED_EXPERIMENT | **VERIFICATION_GATE / no verified-core promotion**
+- R009 | docs/en/Memory_System.md#L1053 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R010 | docs/en/Memory_System.md#L1117 | - **Evidence Level:** E4_PREPRINT for both primary author works, not locally reproduced or independently peer-reviewed here | **VERIFICATION_GATE / no verified-core promotion**
+- R011 | docs/en/Memory_System.md#L1168 | - Claim State: OBSERVED, limited to paper-reported methods and scoped results | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R012 | docs/en/Memory_System.md#L1198 | - Evidence Level: E4_PREPRINT where a specific original author-paper source was inspected; NO_NEW_EVIDENCE for Architecture-only cross-mapping | **VERIFICATION_GATE / no verified-core promotion**
+- R013 | docs/en/Memory_System.md#L1199 | - Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R014 | docs/en/Memory_System.md#L1200 | - Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING | **VERIFICATION_GATE / no verified-core promotion**
+- R015 | docs/en/Memory_System.md#L1289 | - Claim State: OBSERVED (author method and reported experiment only) | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R016 | docs/en/Memory_System.md#L1290 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R017 | docs/en/Memory_System.md#L1310 | - Base main: 6e80c61ef6324ce57c5e68b2b894f7f7ca07867a; Run ID: agent-foundations/research/daily/2026-11-01/GPT_NATIVE/6e80c61ef6324ce57c5e68b2b894f7f7ca07867a/gpt-native-20261101-daily-01. | **PERIOD_CUSTODY / original research and delivery distinct**
+- R018 | docs/en/Memory_System.md#L1311 | - Canonical Source: arXiv:2610.25127v1, *MemBubble: Benchmarking How Agent Memory Shapes LLM Response Diversity*. | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R019 | docs/en/Memory_System.md#L1337 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED. | **VERIFICATION_GATE / no verified-core promotion**
+- R020 | docs/en/Memory_System.md#L1338 | - Mapping State: CANDIDATE_MECHANISM / NO_CANONICAL_PROMOTION. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R021 | docs/en/Memory_System.md#L1360 | - Run ID: agent-foundations/research/daily/2026-11-02/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-20261102-daily-01 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R022 | docs/en/Memory_System.md#L1362 | - Title: MemScope: Evolving Agent Memory Architectures through Localized Code Repair | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R023 | docs/en/Memory_System.md#L1381 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_DESCRIPTION / NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R024 | docs/zh/Memory_System.md#L754 | - Verified-core Claim State：NOT_ASSIGNED_BY_THIS_WEEKLY_PASS | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R025 | docs/zh/Memory_System.md#L759 | - 当前维护解释按现行契约映射为 DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED。 | **VERIFICATION_GATE / no verified-core promotion**
+- R026 | docs/zh/Memory_System.md#L760 | - Verified-core Claim State：NOT_ASSIGNED_BY_THIS_WEEKLY_PASS。 | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R027 | docs/zh/Memory_System.md#L848 | - **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED。仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块。 | **VERIFICATION_GATE / no verified-core promotion**
+- R028 | docs/zh/Memory_System.md#L896 | - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。 | **VERIFICATION_GATE / no verified-core promotion**
+- R029 | docs/zh/Memory_System.md#L978 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R030 | docs/zh/Memory_System.md#L983 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R031 | docs/zh/Memory_System.md#L997 | - **理论映射边界：** S42 仍是记忆稀疏检索的 `DESIGN_CANDIDATE`，仓内实现 `NOT_IMPLEMENTED`、测试 `NOT_TESTED`、verified-core 晋升 `NOT_PERFORMED` | **VERIFICATION_GATE / no verified-core promotion**
+- R032 | docs/zh/Memory_System.md#L1054 | - **Evidence Level:** E4_PREPRINT / AUTHOR_REPORTED_EXPERIMENT | **VERIFICATION_GATE / no verified-core promotion**
+- R033 | docs/zh/Memory_System.md#L1056 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R034 | docs/zh/Memory_System.md#L1200 | - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R035 | docs/zh/Memory_System.md#L1202 | - Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R036 | docs/zh/Memory_System.md#L1203 | - Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING | **VERIFICATION_GATE / no verified-core promotion**
+- R037 | docs/zh/Memory_System.md#L1244 | - Evidence Level: E4_PREPRINT / ORIGINAL_FULL_TEXT_INSPECTED / NOT_INDEPENDENTLY_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R038 | docs/zh/Memory_System.md#L1291 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R039 | docs/zh/Memory_System.md#L1309 | - Canonical Task: foundations/research/daily；Logical Date: 2026-11-01 Asia/Shanghai | **PERIOD_CUSTODY / original research and delivery distinct**
+- R040 | docs/zh/Memory_System.md#L1311 | - Base main: 6e80c61ef6324ce57c5e68b2b894f7f7ca07867a；Run ID: agent-foundations/research/daily/2026-11-01/GPT_NATIVE/6e80c61ef6324ce57c5e68b2b894f7f7ca07867a/gpt-native-20261101-daily-01 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R041 | docs/zh/Memory_System.md#L1312 | - Canonical Source: arXiv:2610.25127v1，*MemBubble: Benchmarking How Agent Memory Shapes LLM Response Diversity* | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R042 | docs/zh/Memory_System.md#L1340 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R043 | docs/zh/Memory_System.md#L1341 | - Mapping State: CANDIDATE_MECHANISM / NO_CANONICAL_PROMOTION | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R044 | docs/zh/Memory_System.md#L1360 | - Task: foundations/research/daily；Logical Date: 2026-11-02 Asia/Shanghai | **PERIOD_CUSTODY / original research and delivery distinct**
+- R045 | docs/zh/Memory_System.md#L1363 | - Run ID: agent-foundations/research/daily/2026-11-02/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-20261102-daily-01 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R046 | docs/zh/Memory_System.md#L1388 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_DESCRIPTION / NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R047 | docs/en/Tool_System.md#L156 | - **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R048 | docs/en/Tool_System.md#L400 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R049 | docs/en/Tool_System.md#L429 | - **Repository Implementation Status:** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R050 | docs/en/Tool_System.md#L520 | - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW within the checked documentation scope. The woven theories remain paper evidence or conceptual mappings; runtime compatibility, implementation correctness, and universal architectural compatibility were NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R051 | docs/en/Tool_System.md#L546 | - **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R052 | docs/en/Tool_System.md#L556 | - Jules native Weekly PR #306's attempted document replacement was corrected before merge; historic Tool research, five-axis calibration and dated audit text remain intact. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R053 | docs/en/Tool_System.md#L588 | - **Claim State:** OBSERVED; **Evidence Level:** E4_PREPRINT; **Mapping State:** CANDIDATE_MECHANISM; **Implementation State:** NOT_IMPLEMENTED; **Validation State:** NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R054 | docs/en/Tool_System.md#L618 | - **Five-axis record:** **Claim State:** OBSERVED; **Evidence Level:** E4_PREPRINT; **Mapping State:** CANDIDATE_MECHANISM; **Implementation State:** NOT_IMPLEMENTED; **Validation State:** NOT_TESTED. | **VERIFICATION_GATE / no verified-core promotion**
+- R055 | docs/en/Tool_System.md#L636 | - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R056 | docs/en/Tool_System.md#L638 | - Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R057 | docs/en/Tool_System.md#L639 | - Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING | **VERIFICATION_GATE / no verified-core promotion**
+- R058 | docs/en/Tool_System.md#L678 | - Evidence Level: E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION. | **VERIFICATION_GATE / no verified-core promotion**
+- R059 | docs/en/Tool_System.md#L698 | - Canonical Task: foundations/research/weekly; ISO period 2026-W44 = 2026-10-26 through 2026-11-01, Asia/Shanghai, naturally closed | **PERIOD_CUSTODY / original research and delivery distinct**
+- R060 | docs/en/Tool_System.md#L701 | - Run ID: agent-foundations/research/weekly/2026-W44/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-2026w44-weekly-01 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R061 | docs/en/Tool_System.md#L705 | - The separate 2026-11-02 Daily Memory addition belongs to W45, is in an open Draft and is NOT used as W44 input | **PERIOD_CUSTODY / original research and delivery distinct**
+- R062 | docs/en/Tool_System.md#L717 |  / Nov01 / arXiv:2610.25127v1 — MemBubble / Memory / Response-class entropy under source-defined sampling is not action correctness or causal memory degradation /  | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R063 | docs/en/Tool_System.md#L747 | - Memory_System EN/ZH: NO_FOLLOW_UP on original Daily passages (evidence is already present; do not duplicate it). The ongoing 2026-11-02 Memory Daily branch is an independent W45 input outside this Weekly and is not edited | **PERIOD_CUSTODY / original research and delivery distinct**
+- R064 | docs/en/Tool_System.md#L751 | - Claim State: OBSERVED for author-paper description only; weekly mapping CANDIDATE_MECHANISM | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R065 | docs/en/Tool_System.md#L752 | - Evidence Level: E4_PREPRINT for source-specific research; independent reproduction NOT_PERFORMED | **VERIFICATION_GATE / no verified-core promotion**
+- R066 | docs/en/Tool_System.md#L753 | - Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED | **VERIFICATION_GATE / no verified-core promotion**
+- R067 | docs/en/Tool_System.md#L804 | - Claim State: OBSERVED / AUTHOR_REPORTED_ON_EXACT_EVALUATION | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R068 | docs/en/Tool_System.md#L805 | - Evidence Level: E4_PREPRINT / FULL_TEXT_READ_FOR_DESCRIPTIVE_CLAIMS / INDEPENDENT_REPLICATION_NOT_PERFORMED | **VERIFICATION_GATE / no verified-core promotion**
+- R069 | docs/en/Tool_System.md#L808 | - Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED | **VERIFICATION_GATE / no verified-core promotion**
+- R070 | docs/zh/Tool_System.md#L156 | - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R071 | docs/zh/Tool_System.md#L386 | - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R072 | docs/zh/Tool_System.md#L409 | - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R073 | docs/zh/Tool_System.md#L501 | - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。 | **VERIFICATION_GATE / no verified-core promotion**
+- R074 | docs/zh/Tool_System.md#L527 | - **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED | **VERIFICATION_GATE / no verified-core promotion**
+- R075 | docs/zh/Tool_System.md#L551 | - **来源等级:** 原始研究论文；本仓未复验的论文证据按 E4_PREPRINT，不因报告被研讨会接收就视为本仓复现 | **VERIFICATION_GATE / no verified-core promotion**
+- R076 | docs/zh/Tool_System.md#L569 | - **Claim State:** OBSERVED；**Evidence Level:** E4_PREPRINT；**Mapping State:** CANDIDATE_MECHANISM；**Implementation State:** NOT_IMPLEMENTED；**Validation State:** NOT_TESTED | **VERIFICATION_GATE / no verified-core promotion**
+- R077 | docs/zh/Tool_System.md#L599 | - **五轴状态:** **Claim State:** OBSERVED；**Evidence Level:** E4_PREPRINT；**Mapping State:** CANDIDATE_MECHANISM；**Implementation State:** NOT_IMPLEMENTED；**Validation State:** NOT_TESTED | **VERIFICATION_GATE / no verified-core promotion**
+- R078 | docs/zh/Tool_System.md#L617 | - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R079 | docs/zh/Tool_System.md#L618 | - Evidence Level: E4_PREPRINT where a specific original author-paper source was inspected; NO_NEW_EVIDENCE for Architecture-only cross-mapping | **VERIFICATION_GATE / no verified-core promotion**
+- R080 | docs/zh/Tool_System.md#L619 | - Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R081 | docs/zh/Tool_System.md#L620 | - Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING | **VERIFICATION_GATE / no verified-core promotion**
+- R082 | docs/zh/Tool_System.md#L658 | - Claim State：OBSERVED / AUTHOR_REPORTED_MECHANISM；普遍安全保证保持 HYPOTHESIS_NOT_PROMOTED。 | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R083 | docs/zh/Tool_System.md#L659 | - Evidence Level：E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION。 | **VERIFICATION_GATE / no verified-core promotion**
+- R084 | docs/zh/Tool_System.md#L679 | - Canonical Task: foundations/research/weekly，ISO 2026-W44 = 2026-10-26 至 2026-11-01，Asia/Shanghai，已自然闭合 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R085 | docs/zh/Tool_System.md#L682 | - Run ID: agent-foundations/research/weekly/2026-W44/GPT_NATIVE/f003841b744cde1001ec8b4f8d2b3cf39784f135/gpt-native-2026w44-weekly-01 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R086 | docs/zh/Tool_System.md#L686 | - 2026-11-02 Memory Daily 属于 W45，目前位于另一个未合并 Draft，不作为 W44 输入 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R087 | docs/zh/Tool_System.md#L698 |  / 11/01 / arXiv:2610.25127v1 — MemBubble / Memory / 特定采样条件的回答类别熵不等于行动正确性或记忆因果损害 /  | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R088 | docs/zh/Tool_System.md#L734 | - Claim State: OBSERVED（仅作者论文描述），本周映射 CANDIDATE_MECHANISM | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R089 | docs/zh/Tool_System.md#L736 | - Mapping State: CANDIDATE_MECHANISM；Implementation State: NOT_IMPLEMENTED；Validation State: NOT_TESTED | **VERIFICATION_GATE / no verified-core promotion**
+- R090 | docs/zh/Tool_System.md#L787 | - Claim State: OBSERVED / AUTHOR_REPORTED_ON_EXACT_EVALUATION | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R091 | docs/zh/Tool_System.md#L788 | - Evidence Level: E4_PREPRINT / FULL_TEXT_READ_FOR_DESCRIPTIVE_CLAIMS / INDEPENDENT_REPLICATION_NOT_PERFORMED | **VERIFICATION_GATE / no verified-core promotion**
+- R092 | docs/zh/Tool_System.md#L791 | - Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED | **VERIFICATION_GATE / no verified-core promotion**
+- R093 | FOUNDATION/MAINTENANCE.md#L29 | - The merged 2026-10-25 A2 relation at `historical-audits/2026-10/2026-10-25-a2-month-relation.md` (blob `3c7b95c356ead2a7aecb46033b2cd40f0c945841`) says `Original daily/weekly/monthly production: Jules` globally | **PERIOD_CUSTODY / original research and delivery distinct**
+- R094 | FOUNDATION/MAINTENANCE.md#L30 | - The 2026-10-25 bilingual native Daily input was merged through PR #327 (`docs/en/Collaboration_System.md` and `docs/zh/Collaboration_System.md`); that PR expressly declares `GPT Native prospective Daily research`, not a Jules execution | **PERIOD_CUSTODY / original research and delivery distinct**
+- R095 | FOUNDATION/MAINTENANCE.md#L31 | - Read producer identity from each dated Native input and its exact delivery provenance, rather than inheriting a single producer label from a month-level summary. The A2 maintenance author is an Independent GPT relation reviewer, not the native research producer | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R096 | FOUNDATION/MAINTENANCE.md#L32 | - Preserve earlier Jules-attributed artifacts and the original merged A2 text as point-in-time records. This forward interpretation is not an independent research run, external reproduction, validator PASS, source-registry promotion, or October natural-month close | **PERIOD_CUSTODY / original research and delivery distinct**
+- R097 | FOUNDATION/MAINTENANCE.md#L33 | - Subsequent A1/A2 and monthly handoffs must carry this explicit producer-boundary reconciliation without silently altering historical evidence | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R098 | FOUNDATION/MAINTENANCE.md#L41 | 1. recover the default branch and fresh merged `main` SHA; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R099 | FOUNDATION/MAINTENANCE.md#L42 | 2. inspect relevant open pull requests and active maintenance branches; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R100 | FOUNDATION/MAINTENANCE.md#L43 | 3. identify the owning verified-core maintenance/control file and direct synchronized projections; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R101 | FOUNDATION/MAINTENANCE.md#L44 | 4. check whether the same logical repair already exists or has merged; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R102 | FOUNDATION/MAINTENANCE.md#L82 | - no confirmed maintenance defect or drift → `NO_CHANGE_REQUIRED`; no activity-only commit/branch/PR; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R103 | FOUNDATION/MAINTENANCE.md#L83 | - confirmed maintenance defect with safe local ownership → `REPAIR`; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R104 | FOUNDATION/MAINTENANCE.md#L85 | - missing authority, unrecoverable state, or unsafe delivery boundary → `BLOCKED`. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R105 | FOUNDATION/MAINTENANCE.md#L94 | 2. change only the owning maintenance/control file(s) and direct synchronized projections; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R106 | FOUNDATION/MAINTENANCE.md#L95 | 3. preserve failed, missing, provisional, blocked, non-canonical, insufficient-evidence, and unknown states; | **VERIFICATION_GATE / no verified-core promotion**
+- R107 | FOUNDATION/MAINTENANCE.md#L96 | 4. run available targeted validation supported by the actual environment; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R108 | FOUNDATION/MAINTENANCE.md#L97 | 5. refresh current `main` and overlap state before delivery; | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R109 | FOUNDATION/MAINTENANCE.md#L116 | - Daily research PR #242 registered S57 and added bilingual generated research material. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R110 | FOUNDATION/MAINTENANCE.md#L117 | - Weekly PR #244 preserved the bilingual research sections and performed a bounded documentary cascade. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R111 | FOUNDATION/MAINTENANCE.md#L118 | - Current source registry retains S57 as one canonical source identity. | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R112 | FOUNDATION/MAINTENANCE.md#L119 | - Current verified core admits AF-COLLAB-006 as a bounded documentary claim. | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R113 | FOUNDATION/MAINTENANCE.md#L122 | - Validator execution by this special closeout is `NOT_EXECUTED`. | **VERIFICATION_GATE / no verified-core promotion**
+- R114 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L6 | - 01 / Task is independent maintenance A1 for 2026-11-02, not Foundations native Daily or Plasma A1 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R115 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L11 | - 06 / W44 Weekly PR #372 was delivered on November 2, after the weekly natural end | **PERIOD_CUSTODY / original research and delivery distinct**
+- R116 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L17 | - 12 / Source truth is from GitHub files and PR diffs; no external code or paper experiment is executed | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R117 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L25 | - 06 / docs/monthly/2026-10-strategic-blueprint.md is the previous-month relation owner | **PERIOD_CUSTODY / original research and delivery distinct**
+- R118 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L31 | - 12 / PR #369 is a November 1 forward reconciliation of October 31 A2 acceptance | **PERIOD_CUSTODY / original research and delivery distinct**
+- R119 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L38 | - 03 / The source was submitted October 18, 2026, before the November observation date | **PERIOD_CUSTODY / original research and delivery distinct**
+- R120 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L44 | - 09 / Memory mechanisms are compared against no-memory and full-history baselines | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R121 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L50 | - 15 / One research paper reused in GAS, Zero or Axiom is not multiple independent publishers | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R122 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L58 | - 01 / Claim State must be evaluated independently of Evidence Level | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R123 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L63 | - 06 / Verified-Core admission requires canonical deduplication and separate axis checks | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R124 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L69 | - 12 / Author assertion and external independent replication are different evidence tiers | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R125 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L75 | - 18 / Research/maintenance prose does not provide runtime safety or task-completion receipts | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R126 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L83 | - 06 / October 27 Collaboration source was I-HITL arXiv:2610.35835v1 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R127 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L89 | - 12 / November 2 MemScope belongs to W45 rather than being backfilled into W44 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R128 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L94 | - 17 / No original October 31 A2 additions threshold is changed by the W44 delivery | **PERIOD_CUSTODY / original research and delivery distinct**
+- R129 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L102 | - 06 / October 31 original A2 strict ten-repository acceptance was 0/10 original PRs meeting 100 additions | **PERIOD_CUSTODY / original research and delivery distinct**
+- R130 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L108 | - 12 / That dated text cannot on its own prove the November monthly current-state route | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R131 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L116 | - 04 / W44 Tool_System English relation: REVIEWED / LATER_DELIVERY, not November 1 input availability | **PERIOD_CUSTODY / original research and delivery distinct**
+- R132 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L122 | - 10 / October 31 successor and cleanup: CORRECTION_CHAIN_PRESERVED | **PERIOD_CUSTODY / original research and delivery distinct**
+- R133 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L130 | - 02 / Open PR and recent main merge state inspected at startup | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R134 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L136 | - 08 / Exact-version paper code and benchmark were NOT_REPRODUCED | **VERIFICATION_GATE / no verified-core promotion**
+- R135 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L142 | - 14 / No new scientific conclusion is manufactured from a missing negative evidence dimension | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R136 | historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L148 | - 20 / Human maintainer review is required before any A2 downstream start | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R137 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L3 | - Month identity: `2026-11` / state: `OPEN` / source days: 2026-11-01..02 Asia/Shanghai | **PERIOD_CUSTODY / original research and delivery distinct**
+- R138 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L8 | - Historical original records and producer-time states remain unchanged | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R139 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L15 | - 05 / A2 adds the November 2 native Daily and recomputes entire two-day relationship | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R140 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L20 | - 10 / Current month A2 is not a new paper, Verified Core source or library implementation | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R141 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L27 | - 05 / Paper evaluation contains 1000 open-ended examples under author methodology | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R142 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L32 | - 10 / The paper source is the same lineage when used by GAS or other repositories | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R143 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L39 | - 17 / No Sxx allocation was made by the November 1 Daily | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R144 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L46 | - 05 / Paper mechanism uses raw execution traces, runtime memory and provider source | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R145 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L51 | - 10 / Author GAIA trace-plus-memory diagnostic accuracy is 86.67% | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R146 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L56 | - 15 / Author median archived provider change ratio is 4.4% over 14 transitions | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R147 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L62 | - 21 / The MemScope Daily makes no new Sxx or Verified Core admission | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R148 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L69 | - 05 / October 26 EPGM is arXiv:2609.25913v2 and is a separate paper | **PERIOD_CUSTODY / original research and delivery distinct**
+- R149 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L74 | - 10 / October 31 dependency-tethered memory is arXiv:2610.25123v2 | **PERIOD_CUSTODY / original research and delivery distinct**
+- R150 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L79 | - 15 / The Weekly explicitly does not implement that five-stage runtime gate | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R151 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L85 | - 21 / Original November 2 native branch proposal phrasing stays historical despite merged delivery | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R152 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L92 | - 05 / One paper does not independently confirm the other's reported benchmark | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R153 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L97 | - 10 / November 1 and November 2 count as two Daily logical dates | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R154 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L102 | - 15 / Original October S63 source registry collision remains open pending separate identity correction | **PERIOD_CUSTODY / original research and delivery distinct**
+- R155 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L107 | - 20 / No source, spec, code or schema correction is justified by this relation alone | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R156 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L114 | - 04 / docs/zh/Tool_System.md: mirrored W44 dependency recorded, not extra review execution | **PERIOD_CUSTODY / original research and delivery distinct**
+- R157 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L120 | - 10 / FOUNDATION/MAINTENANCE.md: CONTROLLING_CONTRACT / NO_MUTATION | **BILINGUAL_CUSTODY / one evidence lineage across languages**
+- R158 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L126 | - 16 / No duplicate source count, research credit, verified-core status or implementation claim | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+- R159 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L134 | - No native runtime, independent experiment, source recertification or external side-effect test executed by this maintenance | **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation**
+
+## Bilingual and custody-level reconciliations
+- J01 | Nov 1 native research is MemBubble arXiv:2610.25127v1 recorded in English/Chinese Memory_System as one research unit
+- J02 | Nov 2 native research is MemScope arXiv:2610.21170; absence of verified v-suffix in original record remains UNKNOWN
+- J03 | MemBubble author-reported entropy and diversity changes are not a locally reproduced user-level intervention
+- J04 | MemScope trace/memory/provider code patch diagnostics are candidate architecture mappings rather than implemented Foundation memory repairs
+- J05 | Nov 1 and Nov 2 bilingual mirror chunks are two language surfaces for one source study per day, not doubled evidence count
+- J06 | Foundations Five Axes must be assessed separately: claim, evidence level, mapping, implementation, validation
+- J07 | Research paper source quality does not itself establish an Sxx verified-core source admission
+- J08 | No novel Sxx source ID may be inferred from an append-only documentary chunk
+- J09 | Author study and independent replication are not interchangeable evidence classes
+- J10 | Nov 2 W44 Weekly content in Tool_System is prior closed week analysis, not November Monthly final
+- J11 | Prior October Blueprint remains previous-month history; November Blueprint is NOT_DUE
+- J12 | Historical Jules and current GPT Native records retain different named producer identities
+- J13 | Nov 2 maintenance A1/A2 were independent custody reviews, not additional paper-producing native runs
+- J14 | Nov 3 bilingual Tool_System additions are outside this A1 source cutoff; source retention is not backdated
+- J15 | No FOUNDATION validator/test_contract execution by current A1 reviewer; separate from GitHub Pages CI
+- J16 | Original Oct 31 A2 strict 0/10 must remain unchanged despite subsequent successor and reconciliation
+- J17 | No mutation of historical bilingual chunks, evidence registry, verified-core source maps or runtime during this review
+
+## Source denominator and next gate
+- November 1 and 2: two native research logical dates, each bilingual on owned Memory System surfaces; language mirroring does not multiply source count
+- W44 Weekly already delivered after week close; November Monthly NOT_DUE
+- A1 scope only this audit file, no historical/source registry, FOUNDATION or docs mutation; local semantic parity tests NOT_EXECUTED
+- A2 requires original A1 merged/main-visible and a new source read including Nov 3 bilingual Tool System research
