@@ -736,3 +736,65 @@ MONTH_OPEN
 - Mapping State: CANDIDATE_MECHANISM；Implementation State: NOT_IMPLEMENTED；Validation State: NOT_TESTED
 - 仅对原有中英文 Tool_System 文件做末尾追加，FOUNDATION/SOURCES、Verified Core、旧研究、代码、测试、Memory、Collaboration、Architecture、October Monthly、Actions 和历史事实均不修改
 - 本仓 Validator 与论文实验：NOT_EXECUTED，交付 Draft PR 等待 Human Maintainer 审核合并
+
+---
+
+## 2026-11-03 GPT Native Daily Research — 最小工具接口与独立证明验收
+
+### 任务身份、来源与证据状态
+- Canonical Task: `foundations/research/daily`
+- Logical Date: 2026-11-03，Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base Main SHA: `39c0cdcb9bbbc067b67690b70380e8fa69da695e`
+- Run ID: `agent-foundations/research/daily/2026-11-03/GPT_NATIVE/39c0cdcb9bbbc067b67690b70380e8fa69da695e/gpt-native-20261103-tool-daily-01`
+- 容器: Tool System，仅中英文双语 Daily 理论增量
+- 原始论文: arXiv:2610.17331v1，2026-10-12T19:40:30Z 投稿，2026-11-03 检查
+- 题目: *Do Theorem Provers Need Theorem-Proving Agents? mini-Lean-agent: A Coding-Agent Baseline for Lean*
+- 作者: Tomas Ortega、Simon Park、Ayush Khaitan、Liam Fowl、Alex Kontorovich、Sanjeev Arora
+- 摘要: https://arxiv.org/abs/2610.17331
+- 正文: https://arxiv.org/html/2610.17331
+- 作者链接的代码（未运行）: https://github.com/TomasOrtega/mini-lean-agent
+- 已读取原始来源表面: abstract、full-text design、比较设置、结果、可复现章节
+- 来源身份: 同一作者论文及版本，重复引用或中英文镜像不构成新增独立来源
+- 选择依据: 在明确任务和评价器下分离工具接口/Harness 复杂度与模型能力、最终证明验收，不重复昨天 Memory 的研究对象
+
+### 研究问题与形式化边界
+模型可见工具更多、Agent scaffold 更复杂，并不自动证明形式验证更正确。作者比较仅暴露 `bash` 的文件系统原生 Lean coding Agent 与特殊工具基线。模型能够搜索 Mathlib、修改草稿及目标文件、调用 Lean，但提交物仍是**不可信产物**。独立评价器只把明确提交的产物复制到洁净环境，固定 Lean、Mathlib 与原始定理陈述，拒绝违禁证明捷径。
+
+必须分开:
+```text
+模型可见工具能力
+!= 最终产物已经验证
+!= 原始命题得到保全
+!= 在允许公理条件下的合法证明
+!= agent-foundations 已实现该验证系统
+```
+验收应绑定精确最终字节、原始命题、环境版本与允许公理。模型曾调用编译器，不能单独证明验收成立。
+
+### 作者实验与反证
+- 作者同模型比较使用 Gemini 3.8 Flash high thinking、12 道 Putnam 2025 题、单题 $2 上限，每个题目/Harness 一次运行。mini-Lean-agent 为 7/12，AxProverBase 为 4/12。较难 A5/B6 另有预算扩展，不得混成同一 $2 口径。
+- 用相同 mini-Lean-agent 但改用 Astra，作者报告 12/12，平均每题成本 $1.28。模型及预算条件发生变化，不能把这个结果当作同模型的工具接口因果提升。
+- 负证据: $0.50 预算下两个比较系统都是 0/12；$1.00 下 mini-Lean-agent 4/12、AxProverBase 0/12。通用 shell 接口也不是任意低预算都成功的充分条件。
+- 外推限制: 仅 12 题、直接 Harness 比较每题一次运行、受限模型及任务分布、作者自行执行评价器、当前未独立复验。与 Numina 报告结果也不是完全相同的控制实验。
+- 反例闸门: 若候选变更原始定理、引入 `sorry` / `admit` / 未授权公理，或利用污染过的可变工作区，即使 Agent 自述成功，也必须由独立验收拒绝。
+
+### Tool System 的有界理论映射
+- 候选 Tool Contract: 模型可见 `bash` 是比较用基线，不默认是安全生产架构；将研究探索过程和精确产物的可信验收拆开。
+- 候选 Harness Evaluation: 固定模型、预算、工具集合、benchmark、独立评价器、版本与最终产物字节，在声称复杂工具更优前进行相同任务条件下的对照。
+- 候选 Security/Trust 后果: 评价端不能信任模型已修改的工作区或模型生成的成功标签。但这只是研究映射，不能证明当前 Tool System 已有隔离、权限控制或 Lean 核验。
+
+### 五轴状态与 Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_ON_EXACT_EVALUATION
+- Evidence Level: E4_PREPRINT / FULL_TEXT_READ_FOR_DESCRIPTIVE_CLAIMS / INDEPENDENT_REPLICATION_NOT_PERFORMED
+- Mapping State: CANDIDATE_MECHANISM / DESIGN_ANALOGY
+- Implementation State: NOT_IMPLEMENTED / NO_TARGET_REPOSITORY_RUNTIME_IDENTIFIED
+- Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED
+- NEW_EVIDENCE: 在明确同模型预算下比较最小 shell scaffold 与特殊工具接口，最终证明验收交给独立、保全原始命题的洁净环境评价器。
+- CORRECTED_INTERPRETATION: 工具数量、编译命令是否被调用、模型变化与独立证明验收不能互相代替。
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英文镜像及跨仓引用同一作者研究不增加独立实验数。
+- NEW_COUNTEREVIDENCE: $0.50 下两个系统都没有验证成功题目，修改命题/违禁公理必须拒绝，反驳仅凭工具成功日志就宣布证明成立。
+- UNKNOWN_RETAINED: 独立复现、开放工具任务的外推性、具体安全效果、作者代码精确 commit、本仓实现和运行证据。
+- NEXT_RETEST_CONDITION: 固定 Lean 4.28.0-rc1 / Mathlib v4.28.0-rc1、benchmark 与代码 revision，用同模型/同预算比较 Harness，注入替换命题、违禁公理和评审后修改产物，独立保存精确验收回执。
+
+### 交付与提升边界
+只在 Tool System 中英文文档尾部追加本日原生研究，未分配 `Sxx`，未晋升 Verified Core，未宣称本仓实现任何验证 Runtime。先前研究、归档、代码、测试、Source Registry、Monthly Blueprint、Weekly Cascade 均不修改。本仓 validator 及证明实验: NOT_EXECUTED。等待 Human Maintainer 审查与合并。
