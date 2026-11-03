@@ -753,3 +753,65 @@ This is a **CANDIDATE_MECHANISM / DOCUMENTARY_MAPPING** for review, not a new To
 - Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
 - Only the existing EN/ZH Tool_System files change, append-only. FOUNDATION/SOURCES, verified core, older chunks, code, tests, Memory, Collaboration, Architecture, October monthly, workflows and historical research remain unchanged
 - Repository validator and source benchmark executions: NOT_EXECUTED; human maintainer remains responsible for review and merge
+
+---
+
+## 2026-11-03 GPT Native Daily Research — Minimal Tool Interface and Independent Proof Acceptance
+
+### Identity, source and status
+- Canonical Task: `foundations/research/daily`
+- Logical Date: 2026-11-03, Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Base Main SHA: `39c0cdcb9bbbc067b67690b70380e8fa69da695e`
+- Run ID: `agent-foundations/research/daily/2026-11-03/GPT_NATIVE/39c0cdcb9bbbc067b67690b70380e8fa69da695e/gpt-native-20261103-tool-daily-01`
+- Container: Tool System / mirrored bilingual Daily research only
+- Exact Source: arXiv:2610.17331v1 / submitted 2026-10-12T19:40:30Z / inspected 2026-11-03
+- Title: *Do Theorem Provers Need Theorem-Proving Agents? mini-Lean-agent: A Coding-Agent Baseline for Lean*
+- Authors: Tomas Ortega, Simon Park, Ayush Khaitan, Liam Fowl, Alex Kontorovich, Sanjeev Arora
+- Abstract: https://arxiv.org/abs/2610.17331
+- Full Text: https://arxiv.org/html/2610.17331
+- Code (author linked, repository execution NOT_EXECUTED): https://github.com/TomasOrtega/mini-lean-agent
+- Inspected Source Surface: original abstract, full-text design, comparison setup, results and reproduction section
+- Canonical Identity: one author paper and version, not a new independent source every time it is cited or translated
+- Selection rationale: isolates tool/harness complexity from theorem-proof acceptance and model capability; not a replay of the 2026-11-02 memory research
+
+### Research problem and formal boundary
+A specialized model-visible tool API or multi-agent scaffold is not automatically necessary or sufficient for formal verification. The authors compare a minimal `bash`-only, filesystem-native Lean coding agent with specialist-tool baselines. The model may edit scratch/target files, search Mathlib and invoke Lean, but the submitted artifact is **untrusted** until a separate evaluator copies only the declared artifact into a clean environment, pins Lean/Mathlib and checks the original theorem statement and forbidden proof shortcuts.
+
+The operational distinction is:
+```text
+model-visible tool affordance
+!= verified final artifact
+!= preserved target statement
+!= accepted proof under permitted axioms
+!= verified agent-foundations implementation
+```
+A deterministic or trusted checker must validate **exact final bytes** under its own fixed statement, environment and policy; the fact that a model called the compiler is insufficient.
+
+### Original quantitative and negative evidence
+- Author fixed-model comparison uses Gemini 3.8 Flash with high thinking, 12 Putnam 2025 problems, $2 per-problem cap and one run per problem/harness. mini-Lean-agent: 7/12 verified, AxProverBase: 4/12. The budgets additionally permit special extended runs for harder A5/B6; do not conflate these with the $2 success figures.
+- The same mini-Lean-agent with Astra is author-reported to solve 12/12 at average $1.28 per problem under a different model/budget setup. This is NOT a same-model causal estimate of tool-interface effect.
+- Negative evidence: at the $0.50 cap both compared agents show 0/12; at $1.00 mini-Lean-agent 4/12 while AxProverBase 0/12. Even strong generic shell access is not a universal low-budget success mechanism.
+- Statistical and external limits: small benchmark (12 tasks), one run per problem in direct harness comparison, limited model/task distribution, author-controlled evaluator, no independent reproduction here, and non-identical comparison to Numina's reported results.
+- Counterexample gate: if a candidate modifies the theorem statement, introduces `sorry`/`admit`/unapproved axioms, or relies on a contaminated mutable workspace, a successful agent trace must still be rejected by the independent artifact evaluator.
+
+### Bounded mapping to Tool System
+- Candidate Tool Contract: keep an unrestricted model-visible shell as a **comparative baseline**, not automatically a secure production design; separate task proposal/exploration from trusted acceptance of exact output and postcondition.
+- Candidate Harness Evaluation: pin model, budgets, toolset, benchmark, verifier, source revision, allowed axioms and output bytes. Run a matched scaffold-vs-specialist-tool ablation before claiming specialist tooling helps.
+- Candidate Security/Trust implication: the evaluation authority must not trust the agent-modified workspace or model-created success labels. This is a research analogy, not evidence that the current Tool System enforces isolation, an authorization gate, or Lean checking.
+
+### Five-axis evidence status and Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_ON_EXACT_EVALUATION
+- Evidence Level: E4_PREPRINT / FULL_TEXT_READ_FOR_DESCRIPTIVE_CLAIMS / INDEPENDENT_REPLICATION_NOT_PERFORMED
+- Mapping State: CANDIDATE_MECHANISM / DESIGN_ANALOGY
+- Implementation State: NOT_IMPLEMENTED / NO_TARGET_REPOSITORY_RUNTIME_IDENTIFIED
+- Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED
+- NEW_EVIDENCE: minimally scaffolded shell agent is compared to a specialized interface under a stated common-model budget; final proof acceptance is delegated to a clean, statement-preserving evaluator.
+- CORRECTED_INTERPRETATION: tool count, compiler invocation, and training/model identity cannot be conflated with independently accepted proof correctness or security.
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; EN/ZH mirror and citing the same author study do not create independent experiments.
+- NEW_COUNTEREVIDENCE: zero verified solves for both compared agents at $0.50 and the requirement to reject mutated statement/forbidden axioms refute simple tool-call-success semantics.
+- UNKNOWN_RETAINED: independent reproduction, generalization to open-ended agent tool use, actual security implications, verified source-code commit, and this repository's implementation/runtime behavior.
+- NEXT_RETEST_CONDITION: pin Lean 4.28.0-rc1/Mathlib v4.28.0-rc1, benchmark and code commits; compare identical models/limits, freeze original statement, inject statement substitution, forbidden axioms and artifact-after-review mutation; independently retain exact acceptance receipts.
+
+### Delivery and promotion boundary
+This section is a bilingual append-only Native Daily research chunk. It allocates no `Sxx`, updates no Verified Core claim, and does not claim current Tool System implementation. No prior research chunk, archive, code, test, source registry, Monthly blueprint or Weekly cascade was changed. Repository validator and independent proof checks: NOT_EXECUTED. Human Maintainer review/merge required.
