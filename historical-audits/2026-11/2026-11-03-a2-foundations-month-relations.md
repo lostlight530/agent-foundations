@@ -1,0 +1,178 @@
+# 2026-11-03 A2 | Foundations November 1–3 bilingual relations
+- Original new A1 #376 already merged 036a84a2847f17946f7691ef875f69835782be42; current source main 036a84a2847f17946f7691ef875f69835782be42
+- Independent GPT maintenance A2, logical month 2026-11 OPEN / Nov 1–3 inclusive Shanghai
+- Not a native Daily, not an implementation validation and not Human independent review
+- Historical Oct 31 original A2 0/10 remains NOT_MET; past successors and reconciliation are separate
+## Source files and pinned inspected ranges
+- docs/en/Memory_System.md | blob 793c3f81d40224fc8d90505b885766321826a527 | inspected 1140 onward
+- docs/zh/Memory_System.md | blob 0bacb52d4e6bdb5dbb2a8d4c5fd9efa2d91852f5 | inspected 1080 onward
+- docs/en/Tool_System.md | blob ca9b35c3c589a8d336ce836d3b5650fa04de853e | inspected 590 onward
+- docs/zh/Tool_System.md | blob d756adcbc00793f614342507473c91cf421db2ec | inspected 600 onward
+- FOUNDATION/MAINTENANCE.md | blob bcd17d7774ddda1113ff7273424f9f6eee909fa2 | inspected 1 onward
+- historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md | blob 57cbe183d80eae21c76cdbfcb19c98b4f90205ae | inspected 1 onward
+- historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md | blob e14efd4c0f3ad3ff0053ce32f2705c6a82930b19 | inspected 1 onward
+## Source-anchored month relations and boundary dispositions
+- E001 | docs/en/Memory_System.md#L1140 | - Base main: `5f87645e7e2cfd1af824e95ca6cd54f8b5b92a05` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E002 | docs/en/Memory_System.md#L1147 | - Checked original v2 full text: https://arxiv.org/html/2609.25913v2 on 2026-10-26 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E003 | docs/en/Memory_System.md#L1175 | - UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; this source is one canonical paper even when cited in another repository | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E004 | docs/en/Memory_System.md#L1188 | - Base main: `41dd9734106fb9ca832a14bafb97e14cb8ce29a5` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E005 | docs/en/Memory_System.md#L1199 | - Mapping State: CANDIDATE_MECHANISM or NO_DECISION for Architecture Principles | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E006 | docs/en/Memory_System.md#L1206 | - UNKNOWN_RETAINED: exact reproduction, host integration, runtime receipts, access control and cross-session state continuity | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E007 | docs/en/Memory_System.md#L1218 | - Base main: `289e3d427329a3813f8641eb3023f4e1577700a7`; run identity: `agent-foundations/research/daily/2026-10-29/GPT_NATIVE/289e3d427329a3813f8641eb3023f4e1577700a7/gpt-native-20261029-memory-01` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E008 | docs/en/Memory_System.md#L1231 | - A hyperedge pointing to an image is an inspection route, not proof the image is authentic, legally usable, correctly interpreted, or that the retrieved evidence set is complete. A model-generated evolution summary can still be wrong. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E009 | docs/en/Memory_System.md#L1247 | - UNCHANGED_BOUNDARY: Paper != architecture mapping != repository code != runtime validation. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E010 | docs/en/Memory_System.md#L1261 | - Base main: `ee927506340ecbc1e20f5feb5fcb3892fcaa8300` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E011 | docs/en/Memory_System.md#L1267 | - Original versioned full text: https://arxiv.org/html/2610.25123v2 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E012 | docs/en/Memory_System.md#L1289 | - Claim State: OBSERVED (author method and reported experiment only) | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E013 | docs/en/Memory_System.md#L1298 | - UNKNOWN_RETAINED: independent replication, production object/source completeness, multi-writer consistency, authorization integration and real-world effectiveness. | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E014 | docs/en/Memory_System.md#L1312 | - Authors: Jiajun Tan, Fei Sun, Xinyu Ma, Shixuan Zhang, Du Su, Qi Cao, Daiting Shi, Huawei Shen, Xueqi Cheng. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E015 | docs/en/Memory_System.md#L1337 | - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED. | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E016 | docs/en/Memory_System.md#L1345 | - UNKNOWN_RETAINED: independent replication, dynamic memory effects, real user intent, class equivalence stability, observed causality and local capability. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E017 | docs/en/Memory_System.md#L1361 | - Canonical source identity: arXiv:2610.21170; exact vN suffix NOT_VERIFIED | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E018 | docs/en/Memory_System.md#L1367 | - Source registry: this identity is not currently in FOUNDATION/SOURCES.md; this Daily does not assign an Sxx or admit a Verified Core claim | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E019 | docs/en/Memory_System.md#L1390 | - NEXT_RETEST_CONDITION: fixed revision/runner/store/patch receipt, adversarial missing-event and stale-snapshot controls, independent postcondition verification and no-patch counterexample | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E020 | docs/zh/Memory_System.md#L1081 | - 题名: *Many Steps into One: Reasoning Contraction and the Limits of Safe Memory Reuse for LLM Agents* | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E021 | docs/zh/Memory_System.md#L1091 | - 不支持的推广: 全部计数器都必然失败、所有 Memory 适用同一随机模型、仓库已有可用的验证式记忆系统 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E022 | docs/zh/Memory_System.md#L1113 | 4. **不能坍缩的边界:** 统计意义上有条件成立的 detector 不等于本仓代码实现，active slot 不等于答案正确，外部论文不等于本地实验 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E023 | docs/zh/Memory_System.md#L1129 | - **NEXT_RETEST_CONDITION:** 固定来源版本，在隔离基准中分别测试正确 slot 的事实变更、同名不同人的错误归属、事实不变的对照以及有 deadline 的检索，收集生成前指标和独立验证数据，再考虑 claim promotion | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E024 | docs/zh/Memory_System.md#L1146 | - Canonical paper identity: arXiv:2609.25913v2；v2 版本日期 2026-10-06 01:58:15 UTC，v1 初次提交 2026-09-22 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E025 | docs/zh/Memory_System.md#L1176 | - NEW_EVIDENCE: 精确 v2 身份与日期、原始来源 Span 度量、固定候选图残差控制、作者报告的区间 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E026 | docs/zh/Memory_System.md#L1189 | - Period: 2026-W43 / 2026-10-19 through 2026-10-25, Asia/Shanghai, CLOSED | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E027 | docs/zh/Memory_System.md#L1201 | - Evidence Level: E4_PREPRINT where a specific original author-paper source was inspected; NO_NEW_EVIDENCE for Architecture-only cross-mapping | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E028 | docs/zh/Memory_System.md#L1210 | - NEXT_RETEST_CONDITION: pin exact source and independent source-derived workload; separately test role/source identities, effect authorization and persisted execution receipts | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E029 | docs/zh/Memory_System.md#L1223 | - URL: https://arxiv.org/abs/2610.29995；2026-10-29 检查原始全文引言、第 3.1–3.2 节及第 4.1–4.3 节，不仅核对元数据。 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E030 | docs/zh/Memory_System.md#L1249 | - CORRECTED_INTERPRETATION: 保留图像不等于完成跨会话实体识别；可追溯的摘要也不自动等于历史事实认证。 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E031 | docs/zh/Memory_System.md#L1264 | - Base main: `ee927506340ecbc1e20f5feb5fcb3892fcaa8300` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E032 | docs/zh/Memory_System.md#L1280 | - 关系与验证拆到不同会话后，依赖边漏记增加，论文报告的 Tether 下游不安全率升至 **9.4% 或 22.1%**.即使 reader 的图遍历逻辑正确，也无法遍历未被 writer 记下来的边. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E033 | docs/zh/Memory_System.md#L1298 | - NEW_COUNTEREVIDENCE: 分离会话导致关系边丢失、弱 writer 与未记录撤销事件均可削弱或击穿该机制. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E034 | docs/zh/Memory_System.md#L1313 | - Authors: Jiajun Tan、Fei Sun、Xinyu Ma、Shixuan Zhang、Du Su、Qi Cao、Daiting Shi、Huawei Shen、Xueqi Cheng | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E035 | docs/zh/Memory_System.md#L1344 | - NEW_EVIDENCE: 精确版本的原始论文、Full-history 与 No-memory 的不同分母、回答类别 entropy 的测量合同 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E036 | docs/zh/Memory_System.md#L1360 | - Task: foundations/research/daily；Logical Date: 2026-11-02 Asia/Shanghai | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E037 | docs/zh/Memory_System.md#L1370 | - Source Registry: 当前 FOUNDATION/SOURCES.md 未收录此论文身份，本次 Daily 不分配 Sxx，也不准入 Verified Core | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E038 | docs/zh/Memory_System.md#L1397 | - NEXT_RETEST_CONDITION: 固定源代码、runner、Store 与补丁字节，注入缺失事件与陈旧快照，独立验证 postcondition、兼容性及 no-patch 对照 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E039 | docs/en/Tool_System.md#L590 | - **Cross-container restriction:** this source also appears in other repositories' observation contexts; reuse across repositories is the same source lineage, not independent scientific corroboration or automatic Foundation verified-core admission. | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E040 | docs/en/Tool_System.md#L601 | - **Selection policy:** this is a concrete pre-commitment mechanism that answers a question not resolved by the 2026-10-21 AgentLoupe post-effect tracing study: *who can license an action's objective and target, before the effect occurs?* | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E041 | docs/en/Tool_System.md#L610 | - **Paper-reported results:** authors report SkillsBench and ToolSafe F1 gains of 13.84 and 7.07 points over the strongest compared baseline respectively; these are benchmark-specific, not locally reproduced and not a guarantee for new tool ecosystems. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E042 | docs/en/Tool_System.md#L619 | - **Cross-repository lineage:** the same arXiv identity may be observed by Horizon; `SOURCE_LINEAGE=1`, `INDEPENDENT_EVIDENCE_CREDIT=0` for this repetition. This Daily is a separate *interpretation* and does not register another paper. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E043 | docs/en/Tool_System.md#L636 | - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E044 | docs/en/Tool_System.md#L644 | - NEW_COUNTEREVIDENCE: Different mechanisms, populations and metric denominators prevent unqualified claim transfer | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E045 | docs/en/Tool_System.md#L655 | - Record Provenance: HUMAN_AUTHORIZED_NATIVE_PRODUCTION; baseline main SHA: 682b7383bacef94a30ecc614ca9280734c87ed07. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E046 | docs/en/Tool_System.md#L671 | - The paper assumes that its adapter's classified reads do not mutate the task environment. In real Agent tooling, a GET/read may trigger audit writes, billing, counters, remote state changes, network effects, or privacy exposure. Thus `READ_CLASSIFIED` is not sufficient for `EFFECT_FREE_OBSERVED`; the contract needs independent t | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E047 | docs/en/Tool_System.md#L683 | - CORRECTED_INTERPRETATION: 'strong model verified' is not 'effect authorized, executed and observed'; read-only is a property to check at tool adapter/effect boundary rather than infer from a label. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E048 | docs/en/Tool_System.md#L700 | - Base main SHA: f003841b744cde1001ec8b4f8d2b3cf39784f135 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E049 | docs/en/Tool_System.md#L706 | - Source state: INHERITED_DAILY_AUTHOR_SOURCES / NO_FRESH_INDEPENDENT_PRIMARY_REPLAY_BY_THIS_WEEKLY. This Weekly does not allocate Sxx, certify bibliography version pairs anew, or promote claims into Verified Core | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E050 | docs/en/Tool_System.md#L734 | - A trusted mediator may still fail if communication channels, protected-action identity or approval binding are incomplete; an approval transcript is not independent authorization | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E051 | docs/en/Tool_System.md#L741 | - NEW_COUNTEREVIDENCE: hidden side effects, missing dependency edges, incomplete mediation, axiom/statement mismatch and task-constrained answer sets challenge over-broad promotion | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E052 | docs/en/Tool_System.md#L750 | - EN/ZH parity check: this append is mirrored for corresponding identities, five-axis state, source limitations and test boundaries, but no independent machine translation/parity validator was executed | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E053 | docs/en/Tool_System.md#L765 | - Base Main SHA: `39c0cdcb9bbbc067b67690b70380e8fa69da695e` | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E054 | docs/en/Tool_System.md#L774 | - Inspected Source Surface: original abstract, full-text design, comparison setup, results and reproduction section | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E055 | docs/en/Tool_System.md#L796 | - Counterexample gate: if a candidate modifies the theorem statement, introduces `sorry`/`admit`/unapproved axioms, or relies on a contaminated mutable workspace, a successful agent trace must still be rejected by the independent artifact evaluator. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E056 | docs/en/Tool_System.md#L807 | - Implementation State: NOT_IMPLEMENTED / NO_TARGET_REPOSITORY_RUNTIME_IDENTIFIED | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E057 | docs/en/Tool_System.md#L814 | - NEXT_RETEST_CONDITION: pin Lean 4.28.0-rc1/Mathlib v4.28.0-rc1, benchmark and code commits; compare identical models/limits, freeze original statement, inject statement substitution, forbidden axioms and artifact-after-review mutation; independently retain exact acceptance receipts. | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E058 | docs/zh/Tool_System.md#L600 | - **跨仓谱系:** 若 Horizon 引用同一个 arXiv 对象仍只有 `SOURCE_LINEAGE=1`，重复引用的 `INDEPENDENT_EVIDENCE_CREDIT=0`；此处只是新仓解释，不产生第二份独立科学证据 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E059 | docs/zh/Tool_System.md#L609 | - Record class: BOUNDED_WEEKLY_DOCUMENTARY_CASCADE / no experimental execution | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E060 | docs/zh/Tool_System.md#L620 | - Implementation State: NOT_IMPLEMENTED_FOR_THIS_RESEARCH_MAPPING | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E061 | docs/zh/Tool_System.md#L628 | - W43 cascade result: BOUNDED_MAPPING_ONLY / NO_VERIFIED_CORE_PROMOTION | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E062 | docs/zh/Tool_System.md#L637 | - Run Identity：agent-foundations/research/daily/2026-10-30/GPT_NATIVE/682b7383bacef94a30ecc614ca9280734c87ed07/gpt-native-20261030-01。 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E063 | docs/zh/Tool_System.md#L653 | - 强模型接受候选前缀只证明其在当前上下文给出的语义判断，不构成权限授权、形式化正确性、外部来源真实性或实际写入完成证明。 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E064 | docs/zh/Tool_System.md#L664 | - CORRECTED_INTERPRETATION：“强模型认为可以提交”不等于“已授权、已执行并获得权威效果回执”；只读标签必须接受实际效果边界验证。 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E065 | docs/zh/Tool_System.md#L679 | - Canonical Task: foundations/research/weekly，ISO 2026-W44 = 2026-10-26 至 2026-11-01，Asia/Shanghai，已自然闭合 | A2 decision: CROSS_PERIOD_CUSTODY
+- E066 | docs/zh/Tool_System.md#L685 | - 七个 Daily 输入：10 月 26 日 Memory，27 日 Collaboration，28 日 Architecture，29 日 Memory，30 日 Tools，31 日 Memory，11 月 1 日 Memory，中英文日期对应记录均可在当前 main 找到，共 7/7 个文档日期，不是 7 次独立实验或验证回执 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E067 | docs/zh/Tool_System.md#L710 | 4. **实际副作用已发生且有回执**：确切外部效果及目标 incarnation 有独立可核实证据，语义前缀通过或文献引用并非效果回执 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E068 | docs/zh/Tool_System.md#L721 | - NEW_EVIDENCE: 七条原有有界研究可整理成证据、产物验证、授权、实际效果与当前完成五个可独立测试的谓词，避免互相冒充 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E069 | docs/zh/Tool_System.md#L726 | - NEXT_RETEST_CONDITION: 获得明确授权后以固定版本构建隔离工具 Harness，分别记录提案、授权 Gate、批准的动作身份、实际效果回执和当前 postcondition，注入陈旧审批、缺失依赖、推测 read 副作用和命题错配反例 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E070 | docs/zh/Tool_System.md#L733 | - EN/ZH 对应人工范围检查：来源身份、五轴状态、反例、未验证事项与执行门槛均镜像；未执行独立自动翻译语义等价验证 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E071 | docs/zh/Tool_System.md#L738 | - 本仓 Validator 与论文实验：NOT_EXECUTED，交付 Draft PR 等待 Human Maintainer 审核合并 | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E072 | docs/zh/Tool_System.md#L753 | - 作者: Tomas Ortega、Simon Park、Ayush Khaitan、Liam Fowl、Alex Kontorovich、Sanjeev Arora | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E073 | docs/zh/Tool_System.md#L777 | - 负证据: $0.50 预算下两个比较系统都是 0/12；$1.00 下 mini-Lean-agent 4/12、AxProverBase 0/12。通用 shell 接口也不是任意低预算都成功的充分条件。 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E074 | docs/zh/Tool_System.md#L784 | - 候选 Security/Trust 后果: 评价端不能信任模型已修改的工作区或模型生成的成功标签。但这只是研究映射，不能证明当前 Tool System 已有隔离、权限控制或 Lean 核验。 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E075 | docs/zh/Tool_System.md#L791 | - Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E076 | docs/zh/Tool_System.md#L797 | - NEXT_RETEST_CONDITION: 固定 Lean 4.28.0-rc1 / Mathlib v4.28.0-rc1、benchmark 与代码 revision，用同模型/同预算比较 Harness，注入替换命题、违禁公理和评审后修改产物，独立保存精确验收回执。 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E077 | FOUNDATION/MAINTENANCE.md#L29 | - The merged 2026-10-25 A2 relation at `historical-audits/2026-10/2026-10-25-a2-month-relation.md` (blob `3c7b95c356ead2a7aecb46033b2cd40f0c945841`) says `Original daily/weekly/monthly production: Jules` globally | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E078 | FOUNDATION/MAINTENANCE.md#L30 | - The 2026-10-25 bilingual native Daily input was merged through PR #327 (`docs/en/Collaboration_System.md` and `docs/zh/Collaboration_System.md`); that PR expressly declares `GPT Native prospective Daily research`, not a Jules execution | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E079 | FOUNDATION/MAINTENANCE.md#L31 | - Read producer identity from each dated Native input and its exact delivery provenance, rather than inheriting a single producer label from a month-level summary. The A2 maintenance author is an Independent GPT relation reviewer, not the native research producer | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E080 | FOUNDATION/MAINTENANCE.md#L32 | - Preserve earlier Jules-attributed artifacts and the original merged A2 text as point-in-time records. This forward interpretation is not an independent research run, external reproduction, validator PASS, source-registry promotion, or October natural-month close | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E081 | FOUNDATION/MAINTENANCE.md#L33 | - Subsequent A1/A2 and monthly handoffs must carry this explicit producer-boundary reconciliation without silently altering historical evidence | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E082 | FOUNDATION/MAINTENANCE.md#L42 | 2. inspect relevant open pull requests and active maintenance branches; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E083 | FOUNDATION/MAINTENANCE.md#L43 | 3. identify the owning verified-core maintenance/control file and direct synchronized projections; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E084 | FOUNDATION/MAINTENANCE.md#L44 | 4. check whether the same logical repair already exists or has merged; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E085 | FOUNDATION/MAINTENANCE.md#L45 | 5. refresh assumptions if `main` advances materially. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E086 | FOUNDATION/MAINTENANCE.md#L83 | - confirmed maintenance defect with safe local ownership → `REPAIR`; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E087 | FOUNDATION/MAINTENANCE.md#L85 | - missing authority, unrecoverable state, or unsafe delivery boundary → `BLOCKED`. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E088 | FOUNDATION/MAINTENANCE.md#L94 | 2. change only the owning maintenance/control file(s) and direct synchronized projections; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E089 | FOUNDATION/MAINTENANCE.md#L95 | 3. preserve failed, missing, provisional, blocked, non-canonical, insufficient-evidence, and unknown states; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E090 | FOUNDATION/MAINTENANCE.md#L96 | 4. run available targeted validation supported by the actual environment; | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E091 | FOUNDATION/MAINTENANCE.md#L116 | - Daily research PR #242 registered S57 and added bilingual generated research material. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E092 | FOUNDATION/MAINTENANCE.md#L117 | - Weekly PR #244 preserved the bilingual research sections and performed a bounded documentary cascade. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E093 | FOUNDATION/MAINTENANCE.md#L118 | - Current source registry retains S57 as one canonical source identity. | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E094 | FOUNDATION/MAINTENANCE.md#L119 | - Current verified core admits AF-COLLAB-006 as a bounded documentary claim. | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E095 | FOUNDATION/MAINTENANCE.md#L122 | - Validator execution by this special closeout is `NOT_EXECUTED`. | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E096 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L2 | - Repository: lostlight530/agent-foundations; independent maintenance, not native Research Daily or Human Review | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E097 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L14 | - `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` / blob `a2f7371b9458024919c3fca895f1770031b95ae3` / 149 lines read | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E098 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L27 | - R010 / docs/en/Memory_System.md#L1117 / - **Evidence Level:** E4_PREPRINT for both primary author works, not locally reproduced or independently peer-reviewed here / **VERIFICATION_GATE / no verified-core promotion** | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E099 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L37 | - R020 / docs/en/Memory_System.md#L1338 / - Mapping State: CANDIDATE_MECHANISM / NO_CANONICAL_PROMOTION. / **BILINGUAL_CUSTODY / one evidence lineage across languages** | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E100 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L48 | - R031 / docs/zh/Memory_System.md#L997 / - **理论映射边界：** S42 仍是记忆稀疏检索的 `DESIGN_CANDIDATE`，仓内实现 `NOT_IMPLEMENTED`、测试 `NOT_TESTED`、verified-core 晋升 `NOT_PERFORMED` / **VERIFICATION_GATE / no verified-core promotion** | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E101 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L59 | - R042 / docs/zh/Memory_System.md#L1340 / - Evidence Level: E4_PREPRINT / FULL_TEXT_SUPPORTED_FOR_PAPER_DESCRIPTION / NOT_REPRODUCED / **VERIFICATION_GATE / no verified-core promotion** | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E102 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L69 | - R052 / docs/en/Tool_System.md#L556 / - Jules native Weekly PR #306's attempted document replacement was corrected before merge; historic Tool research, five-axis calibration and dated audit text remain intact. / **BILINGUAL_CUSTODY / one evidence lineage across languages** | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E103 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L80 | - R063 / docs/en/Tool_System.md#L747 / - Memory_System EN/ZH: NO_FOLLOW_UP on original Daily passages (evidence is already present; do not duplicate it). The ongoing 2026-11-02 Memory Daily branch is an independent W45 input outside this Weekly and is not edited / **PERIOD_CUSTODY / original research and delivery distinct** | A2 decision: CROSS_PERIOD_CUSTODY
+- E104 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L90 | - R073 / docs/zh/Tool_System.md#L501 / - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。 / **VERIFICATION_GATE / no verified-core promotion** | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E105 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L101 | - R084 / docs/zh/Tool_System.md#L679 / - Canonical Task: foundations/research/weekly，ISO 2026-W44 = 2026-10-26 至 2026-11-01，Asia/Shanghai，已自然闭合 / **PERIOD_CUSTODY / original research and delivery distinct** | A2 decision: CROSS_PERIOD_CUSTODY
+- E106 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L112 | - R095 / FOUNDATION/MAINTENANCE.md#L31 / - Read producer identity from each dated Native input and its exact delivery provenance, rather than inheriting a single producer label from a month-level summary. The A2 maintenance author is an Independent GPT relation reviewer, not the native research producer / **BILINGUAL_CUSTODY / one | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E107 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L122 | - R105 / FOUNDATION/MAINTENANCE.md#L94 / 2. change only the owning maintenance/control file(s) and direct synchronized projections; / **BILINGUAL_CUSTODY / one evidence lineage across languages** | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E108 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L133 | - R116 / historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L17 / - 12 / Source truth is from GitHub files and PR diffs; no external code or paper experiment is executed / **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation** | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E109 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L143 | - R126 / historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md#L83 / - 06 / October 27 Collaboration source was I-HITL arXiv:2610.35835v1 / **PERIOD_CUSTODY / original research and delivery distinct** | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E110 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L154 | - R137 / historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L3 / - Month identity: `2026-11` / state: `OPEN` / source days: 2026-11-01..02 Asia/Shanghai / **PERIOD_CUSTODY / original research and delivery distinct** | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E111 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L165 | - R148 / historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L69 / - 05 / October 26 EPGM is arXiv:2609.25913v2 and is a separate paper / **PERIOD_CUSTODY / original research and delivery distinct** | A2 decision: CROSS_PERIOD_CUSTODY
+- E112 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L175 | - R158 / historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L126 / - 16 / No duplicate source count, research credit, verified-core status or implementation claim / **SOURCE_AND_FIVE_AXES / separate paper, mapping, implementation and validation** | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E113 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L188 | - J10 / Nov 2 W44 Weekly content in Tool_System is prior closed week analysis, not November Monthly final | A2 decision: CROSS_PERIOD_CUSTODY
+- E114 | historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md#L201 | - A2 requires original A1 merged/main-visible and a new source read including Nov 3 bilingual Tool System research | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E115 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L3 | - Month identity: `2026-11` / state: `OPEN` / source days: 2026-11-01..02 Asia/Shanghai | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E116 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L11 | - 01 / One month identity is 2026-11, OPEN and bounded to two native logical dates | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E117 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L17 | - 07 / November native Monthly Strategic Blueprint final is NOT_DUE | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E118 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L25 | - 03 / The paper's original submission date is October 18, 2026 | A2 decision: CROSS_PERIOD_CUSTODY
+- E119 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L31 | - 09 / Paper limitations include preference relevance and class-evaluator dependence | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E120 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L42 | - 01 / Native November 2 delivery is PR #371 on the same two Memory_System owners | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E121 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L48 | - 07 / A no-patch result is legitimate under the paper method | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E122 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L54 | - 13 / Author ALFWorld unseen-task evolved provider result is 48/67 | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E123 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L61 | - 20 / Implementation and Validation remain NOT_IMPLEMENTED / NOT_TESTED | A2 decision: VALIDATION_STATE_NO_PROMOTION
+- E124 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L70 | - 06 / October 27 I-HITL is arXiv:2610.35835v1 and addresses authority conditions | A2 decision: CROSS_PERIOD_CUSTODY
+- E125 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L76 | - 12 / November 2 MemScope is W45 Daily input and must not be backfilled into W44 | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E126 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L82 | - 18 / A cryptographically sound proof might still concern a wrong statement or hidden axiom | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E127 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L91 | - 04 / Entropy reduction and patch diagnostic accuracy are not commensurate metrics | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E128 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L97 | - 10 / November 1 and November 2 count as two Daily logical dates | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E129 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L104 | - 17 / October A2 successor #365 is separate from original under-threshold #363 | A2 decision: CROSS_PERIOD_CUSTODY
+- E130 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L112 | - 02 / docs/zh/Memory_System.md: same source semantics, no extra origin | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+- E131 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L118 | - 08 / docs/zh/Architecture_Principles.md: W44 historical input, NO_FOLLOW_UP | A2 decision: CROSS_PERIOD_CUSTODY
+- E132 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L125 | - 15 / Independent Human Review and independent replication are NOT_CLAIMED | A2 decision: BILINGUAL_PRODUCER_AND_LANGUAGE_LINEAGE
+- E133 | historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md#L134 | - No native runtime, independent experiment, source recertification or external side-effect test executed by this maintenance | A2 decision: SOURCE_TO_FIVE_AXIS_BOUNDARY
+## Cross-date bilingual source and five-axis inheritance
+- J01 | Nov1 native bilingual research targets arXiv:2610.25127v1 MemBubble, one original author source
+- J02 | Nov2 native bilingual research targets arXiv:2610.21170 MemScope with version suffix not originally verified
+- J03 | Nov3 Tool System native bilingual research targets arXiv:2610.17331v1 mini-Lean-agent
+- J04 | Three date-specific research increments are three source identities, not six independent English/Chinese runs
+- J05 | Nov3 paper's fixed-model 7/12 versus 4/12 proof results are author-reported, not independently reproduced
+- J06 | Nov3 reported 12/12 under a different model/budget is not a same-model causal control
+- J07 | Shell tool invocation is not equivalent to trusted exact final bytes acceptance
+- J08 | Lean theorem statement mutation, sorry/admit and unapproved axioms are negative evaluator test gates
+- J09 | Research mapping can be DESIGN_ANALOGY without repository implementation
+- J10 | Verified Core Sxx admission is separate from Daily chunk append-only publication
+- J11 | Claim State, Evidence Level, Mapping, Implementation and Validation must remain independent
+- J12 | Five-axis statements must be equivalent across language surfaces, not counted as two studies
+- J13 | Nov1 MemBubble entropy result is not a Foundation live memory deployment guarantee
+- J14 | Nov2 MemScope patch accuracy is not evidence of a Foundation installed patch agent
+- J15 | Nov3 Lean comparison is not a real installed Tool System proof checker
+- J16 | W44 Weekly is closed logically and was delivered in November but is not November Monthly final
+- J17 | W45 Weekly final and November Blueprint final are NOT_DUE
+- J18 | October Blueprint and S63 historical unknown are separate predecessor period/registry concerns
+- J19 | Nov2 A2 was an older relational version covering just two dates; this is Nov3 full current version
+- J20 | Original A1 #376 merged before current A2 and provides source-custody input, not native new paper study
+- J21 | Original October A2 strict 0/10 remains historical NOT_MET despite successors and reconciliation
+- J22 | Current source prose still contains producer-time proposed/merge-pending wording; PR metadata is authoritative for current delivery
+- J23 | No Lean runtime, Foundation validator or bilingual semantic checker was executed by this maintenance
+- J24 | November remains OPEN and no automatic Verified Core promotion or historical source mutation is allowed
+## Current period and verification
+- Nov1/2 Memory source research and Nov3 Tool System Lean source research, each bilingual one date/one underlying paper
+- November Blueprint final NOT_DUE; previous Oct blueprint and W44 weekly remain distinct predecessor records
+- Implementation NOT_IMPLEMENTED and Validation NOT_TESTED absent executed evidence, no verified-core Sxx mutation
+- No native code, bilingual source chunks, registry or historical audit edited; only new dated A2 file
+- Original A2 strict acceptance to be separately established from GitHub PR additions, semantic uniqueness, merge and main retention
