@@ -10,7 +10,7 @@ Reconstitute inspectable, platform-separated research objects from the researche
 | Research series edition | Topic | Evidence status | Own WorkflowHub version |
 |---|---|---|---|
 | E1 Astron | AgentFlow → Workflow Contract → Entrustability; iFLYTEK organization and MemFlywheel ecosystem separate annex | public practice + discussions + issue comments | separate entry/revision series |
-| E2 Nexent | RailSmart → dynamic semantic orchestration / MCP → Skills ≠ subagents → Harness / control plane | 7 repo Discussions + maintainer replies + 3 community PRs | separate entry/revision series |
+| E2 Nexent | RailSmart → dynamic semantic orchestration / MCP → Skills ≠ subagents → Harness / control plane | 7 repo Discussions + one organization Discussion + maintainer replies + 3 community PRs | separate entry/revision series |
 | E3 DeerFlow | Research Flow → Super Agent Harness, state, sandbox, memory, skills, subagents | primary software documentation; user GitHub participation not yet corroborated | separate entry only if a meaningful executable research object exists |
 
 Here `E1/E2/E3` are **our collection's platform editions**, *not* a claim that a Nexent upload is a successor revision of an Astron executable workflow. Each platform gets a separate workflow/RO-Crate when validated, then its own genuine revision history. No mixing of publisher versions, source revisions, and inferred implementation histories.
