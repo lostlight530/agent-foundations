@@ -67,6 +67,18 @@
       "limitation": "reply on same discussion, individual reply permalink not captured"
     },
     {
+      "id": "AS-C824-U2",
+      "platform": "astron",
+      "kind": "discussion_comment",
+      "url": "https://github.com/iflytek/astron-agent/discussions/824",
+      "date": "2026-01-11",
+      "actor": "lostlight530",
+      "title": "Additional non-text discussion comment entry",
+      "topic": "page displays a second author comment without visible textual body; reactions are displayed",
+      "evidence": "PUBLIC_PRIMARY",
+      "limitation": "no content reconstructed from empty rendered body; different object from long nested reply"
+    },
+    {
       "id": "AS-D1138",
       "platform": "astron",
       "kind": "discussion",
@@ -77,6 +89,18 @@
       "topic": "real task reliability and trust beyond capability",
       "evidence": "PUBLIC_PRIMARY",
       "limitation": "directly inspected"
+    },
+    {
+      "id": "AS-C1138-M",
+      "platform": "astron",
+      "kind": "discussion_comment",
+      "url": "https://github.com/iflytek/astron-agent/discussions/1138",
+      "date": "2026-10-14",
+      "actor": "FenjuFu",
+      "title": "Maintainer reply proposing reproducible acceptance scenarios",
+      "topic": "side effect retry/idempotency; approved-input identity across recovery; memory version and provenance; invite minimal redacted workflow repro",
+      "evidence": "PUBLIC_PRIMARY",
+      "limitation": "suggestion for reproducer and issue breakdown, not an accepted implementation or existing test PASS"
     },
     {
       "id": "AS-D1359",
