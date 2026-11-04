@@ -9,8 +9,8 @@ Astron has the clearest link between a concrete training-camp AgentFlow artifact
 |---|---|---|
 | 2026-01-08 | [#824](https://github.com/iflytek/astron-agent/discussions/824) | ResumeZhiYoutong (简历智优通): OCR/PDF, model orchestration, two-mode branch, state-driven interaction, structured advice; **author-described design**, not independently replayed result |
 | 2026-01-10 | [#824 maintainer reply](https://github.com/iflytek/astron-agent/discussions/824) | FenjuFu invited an article for Awesome Astron Workflow; invitation ≠ verified publication |
-| 2026-01-11 | [#824 author detailed reply](https://github.com/iflytek/astron-agent/discussions/824) | Extended architecture; preserve reply as separate authored edge, not a second Discussion |
-| 2026-04-04 | [#1138](https://github.com/iflytek/astron-agent/discussions/1138) | Entrustability: actual real-task execution reliability beyond capability |
+| 2026-01-11 | [#824 author detailed reply](https://github.com/iflytek/astron-agent/discussions/824) | Extended architecture; preserve reply as separate authored edge, not a second Discussion. The page also shows a second author comment with **no visible body**, indexed as presence only |
+| 2026-04-04 | [#1138](https://github.com/iflytek/astron-agent/discussions/1138) | Entrustability: actual real-task execution reliability beyond capability; **2026-10-14 FenjuFu public reply** proposes reproducible checks for idempotent write retries, approval/recovery input consistency, and memory-version provenance (proposal, not tests run) |
 | 2026-05-31 | [#1359](https://github.com/iflytek/astron-agent/discussions/1359) | Workflow as explicit structural contract; **author's interpretation**, not official spec |
 | 2026-05-31 | [#1360](https://github.com/iflytek/astron-agent/discussions/1360) | What remains after contract: continuity, authority, long-term responsibility |
 | 2026-07-25 | [iFLYTEK org Discussion #4](https://github.com/orgs/iflytek/discussions/4) | User comment re public demos, community uptime vs official service/SLA, deployment templates |
