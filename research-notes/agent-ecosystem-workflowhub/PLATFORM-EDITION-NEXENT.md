@@ -4,7 +4,10 @@
 ## Why this edition
 Nexent is not merely another Astron flowchart engine. The [maintainer's 2025-12-12 correction](https://github.com/ModelEngine-Group/nexent/discussions/2056) distinguishes **runtime-generated, context-driven semantic tool orchestration** from predeclared static Workflow. This is primary evidence for a different research question.
 
-## Seven confirmed authored repository Discussions
+## Organization-level precursor + seven confirmed repository Discussions
+- **2025-11-22:** [ModelEngine-Group organization Discussion #14](https://github.com/orgs/ModelEngine-Group/discussions/14) is an earlier **organization-level RailSmart entry**, Closed with 0 comments. It is distinct GitHub object identity from nexent #1816 but **the same underlying RailSmart case**, not a second independent technical implementation.
+
+### Seven confirmed repository Discussions
 | Date | Thread | Research role |
 |---|---|---|
 | 2025-11-23 | [#1816 RailSmart](https://github.com/ModelEngine-Group/nexent/discussions/1816) | DeepSeek-V3/MCP multi-agent travel decision system competition submission; includes attached JSON and DOCX; [geruihappy-creator replied positively 2025-12-15](https://github.com/ModelEngine-Group/nexent/discussions/1816) |
