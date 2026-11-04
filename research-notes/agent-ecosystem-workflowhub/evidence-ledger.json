@@ -175,6 +175,18 @@
       "limitation": "acknowledgement only"
     },
     {
+      "id": "NX-ORG14",
+      "platform": "nexent",
+      "kind": "organization_discussion",
+      "url": "https://github.com/orgs/ModelEngine-Group/discussions/14",
+      "date": "2025-11-22",
+      "actor": "lostlight530",
+      "title": "RailSmart competition submission at organization level",
+      "topic": "Organization-level entry for the same RailSmart case also seen in nexent #1816",
+      "evidence": "PUBLIC_PRIMARY",
+      "limitation": "Not a second independent RailSmart project; closed, 0 comments"
+    },
+    {
       "id": "NX-D1816",
       "platform": "nexent",
       "kind": "discussion",
