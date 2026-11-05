@@ -1391,3 +1391,57 @@ The non-monotonic 83.33% patch-history result challenges the assumption that lon
 
 ### Delivery boundary
 Only bilingual append-only Daily research; previous Jules/GPT material retained. No Sxx allocation, Verified Core promotion, runtime/Weekly/Monthly update or repository validator execution.
+
+
+---
+
+## 2026-11-04 GPT Native Daily Research — Formal Memory Basis and Coverage Validity
+
+### Provenance and source identity
+- Canonical task: `foundations/research/daily` / Memory System
+- Logical period: **2026-11-04 Asia/Shanghai**. Actual research and write: **2026-11-05**; NOT a historical Jules replay and NOT a Nov 4 execution claim
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_NATIVE_DAILY
+- Base main: `b5b158b0e6e86a0a4ac584bb4aa26b67dfedb5f3`
+- Run identity: `agent-foundations/research/daily/2026-11-04/GPT_NATIVE/b5b158b0e6e86a0a4ac584bb4aa26b67dfedb5f3/gpt-native-20261105-memory-01`
+- Original academic source: Hongyao Tang, *Towards a Formal Definition of Agent Memory: Basis, Span, Optimality, and the Sequential Memory Problem*, arXiv:2608.11654v1, published **2026-08-12**. https://arxiv.org/abs/2608.11654 / https://arxiv.org/html/2608.11654
+- Source review: original formal definitions, Sections 3–5, noisy-extraction and sequential-memory discussion, stated limitations and generation-operator assumptions. Access/check date 2026-11-05. An older paper can be a newly studied theory within this logical Daily without becoming a new 2026-11-04 publication
+- Authority: author preprint for its own definitions and qualified results, NOT independently checked proof, benchmark replication, or repository implementation. One original academic paper cited in EN and ZH remains one source lineage
+- Canonical source registry: NO Sxx admission; Verified Core: NOT PROMOTED
+
+### Mechanism and mathematical conditions
+Let `D` be source data, `E_D` its atomic-event set, and `M_D ⊆ E_D` the retained **memory basis** subject to `|M_D| ≤ S`. A generation operator `Φ:2^E → 2^N` produces the **knowledge span** `Φ(M_D)`. Under **single-item support**, a query is covered when at least one generated knowledge item suffices. The paper optimizes expected coverage under query distribution `p_D(q)`, not actual correctness.
+
+```text
+stored event != derived knowledge span
+coverage u(q,M_D) != end-to-end correctness u^e2e(q,M_D,π_reasoner)
+apparent coverage != true, current or applicable knowledge
+selection theorem != deployed memory controller
+```
+
+The paper's monotonic generation assumption `A⊆B ⇒ Φ(A)⊆Φ(B)` is not automatically valid for LLM extraction in the presence of contradictory evidence. In the stronger **decomposable** case, storage-budget selection maps to weighted maximum coverage with a greedy `1−1/e` bound; cross-event synergy in the general case does not inherit this bound. The sequential version is formulated with memory state and delayed reward as an MDP, which is a model, not proof that a safe optimal online policy exists in the repository.
+
+With noisy extraction, candidate events may include false items. The distinction `Φ(M_D)` versus `Φ(M_D ∩ E_D)` prevents apparent span from being treated as verified truth. Extracted event provenance, historical occurrence and present-day validity are separate questions.
+
+### Falsifiable counterexamples and bounded mapping
+1. **Joint-answer-time composition:** two separate facts must be combined after retrieval. This violates strict single-item support, not the agent's whole-memory correctness contract
+2. **False/contradictory event:** a false claim increases apparent recall or coverage while reducing correct answers, defeating naive monotonicity and high-coverage authority claims
+3. **Superseded historical evidence:** authentic old event remains historical truth, but its use to assert a current state may fail without date-aware correction and fresh authority
+4. **Shifted query distribution:** offline memory basis optimized for `p_D(q)` can become suboptimal under a new workload; storage optimality is not production stability
+
+Research-only Memory System mapping: represent event identity/version, extraction/provenance, validity window, coverage objective, reasoning policy identity and independent final-answer evaluation separately. Do NOT promote an abstract Memory basis to an implemented Store, automatic correction mechanism, online retention algorithm, or verified compression capability.
+
+### Five-axis state / Evidence Delta
+- Claim State: `OBSERVED` — author framework and its assumptions
+- Evidence Level: `E4_PREPRINT` — original preprint read; independent theorem/experiment verification NOT_PERFORMED
+- Mapping State: `CANDIDATE_MECHANISM`
+- Implementation State: `NOT_IMPLEMENTED` — no target runtime implementation demonstrated
+- Validation State: `NOT_TESTED` — no repo validator or experiment run
+- NEW_EVIDENCE: primary formal separation of event basis, generated span, weighted query coverage and actual answer correctness
+- CORRECTED_INTERPRETATION: conditional coverage or greedy approximation does not certify claim truth, reasoning correctness, local capability, or durability
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; bilingual repetition does not count as independent proof
+- NEW_COUNTEREVIDENCE: single-item support fails in compositional queries; non-monotone and noisy extraction can inflate apparent coverage
+- UNKNOWN_RETAINED: independent proof review, actual extraction accuracy, relevant query distribution, current validity and local runtime effects
+- NEXT_RETEST_CONDITION: pin paper/version, data and query distribution; inject contradictory/stale events, compare decomposable vs synergistic questions, independently score coverage AND answer correctness at fixed revision
+
+### Delivery boundary
+Append-only bilingual native research within existing Memory System containers. No change to prior history, SOURCES, Verified Core, other containers, weekly/monthly, runtime, tests, Actions or separate WorkflowHub PR #378. Native validator and empirical replication: NOT_EXECUTED. Human Maintainer retains merge decision.
