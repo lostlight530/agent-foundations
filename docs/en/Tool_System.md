@@ -815,3 +815,73 @@ A deterministic or trusted checker must validate **exact final bytes** under its
 
 ### Delivery and promotion boundary
 This section is a bilingual append-only Native Daily research chunk. It allocates no `Sxx`, updates no Verified Core claim, and does not claim current Tool System implementation. No prior research chunk, archive, code, test, source registry, Monthly blueprint or Weekly cascade was changed. Repository validator and independent proof checks: NOT_EXECUTED. Human Maintainer review/merge required.
+
+
+---
+
+## 2026-11-05 GPT Native Daily Research — Effect-Typed Tool Boundaries and Trace Safety
+
+### Identity, primary source and scope
+- Canonical Task: `foundations/research/daily`
+- Logical Date: 2026-11-05, Asia/Shanghai; actual research and GitHub authoring 2026-11-05 (not a historical Jules replay)
+- Agent: GPT-6 / GPT_NATIVE; Base Main SHA: `368db3ba5feffbfef5d8414f203af0bcc873b212`
+- Run ID: `agent-foundations/research/daily/2026-11-05/GPT_NATIVE/368db3ba5feffbfef5d8414f203af0bcc873b212/native-20261105-tool-01`
+- System Container: **Tool System** (EN and ZH append the same theory and bounded contract)
+- Frontier Source: *ETAS: An Effect-Typed Language for Agent Systems*
+- Authors: Huiri Tan, Yikun Wang, Puyang Zhang, Shangyu Li, Jiasi Shen
+- Source: https://arxiv.org/abs/2607.17780 ; original complete web-rendered paper https://arxiv.org/html/2607.17780
+- Version/publication: original arXiv manuscript dated 2026-07-20T10:11:53Z; **historical paper studied today, not a 2026-11-05 release**
+- Date Checked: 2026-11-05; source type: original author preprint, not peer-review or an independent proof reproduction
+- Selection rationale: explicit typing, effects, policy traces and residual runtime checks offer an auditable Tool/Harness contract. This is not another generic benchmark or the November 4 Memory System selection problem.
+
+### Original problem, assumptions, and mathematical mechanism
+A tool-using agent is not adequately characterized by the signature of a Python callback or the success text of a final answer. Its externally requested and committed actions can differ, especially under handlers, denials, human approvals and retries. ETAS models these as program-level effects and typed trace events.
+
+The paper states a static judgement with five distinct outputs:
+```text
+Ξ ; Γ ; Π ⊢ e ⇒ τ ! ε ▷ A ⊣ R
+
+τ : ordinary result type
+ε : escaping effect row
+A : abstraction of requested-action trace
+R : residual obligations to enforce dynamically
+Π : active policy/trace specs, compiled to monitor M_Π
+```
+Do not reduce `ε` to `A`: a handler can intercept a requested action so that it does not escape/commit, yet the attempted request remains visible in the trace. Policy checking must not lose that provenance.
+
+Theorem 5 (Policy safety) is explicitly conditional: for a well-typed program under well-formed static assumptions `Ξ,Π`, **provided the runtime contains the residual obligations R and enforces each relevant check before request or commit**, every resulting trace prefix is accepted by its compiled monitor `M_Π`. In compact terms, the conditional target is `∀k, M_Π(trace[:k]) ∉ Bad`. Theorem 6 adds handler trace-transparency: handling a request does not erase the request event or create unreviewed commit authority.
+
+This is a source-level formal claim about the authors' calculus, not a proof that any current real-world Agent runtime, this repository, or this Tool System meets the theorem's premises. The paper also reports a Rust prototype and typed HIR/policy checks; that repository executable was NOT downloaded, built or tested here.
+
+### Convergence/behavior bound, constraints and counterexamples
+- **Conditional boundary:** guarantee covers only typed action events modeled by the compiled monitor and mediated by the runtime; it does not cover an unmodeled direct network route, a rogue tool outside the effect boundary or semantic correctness of generated text.
+- **Approval gap:** if human approval is only in prompt prose or absent from trace/policy facts, no policy theorem can establish it dominated the external commit.
+- **Residual-check failure:** a dynamic resource cannot be fully decided statically; if the generated `R` is not actually enforced before an action, the theorem's premise fails, regardless of compile success.
+- **Handler laundering:** a handler that hides requests or commits without boundary checks contradicts trace transparency, even if execution eventually returns a success object.
+- **Replay/duplicate effect:** request, handled, denied and committed events must be differentiated; retrying a logical step is not evidence of exactly-once external effect.
+- **Trace-compliance limit:** even a correctly mediated effect trace does not prove the task's result is true or that the external service applied a side effect as reported.
+
+### Bounded mapping to the Tool System
+- Design candidate `ToolRequest`: bind stable task identity, tool name, arguments digest, policy version, resource scope and untrusted/trusted provenance to each requested action.
+- Design candidate `EffectCommit`: require an independent effect/approval authority, dynamic residual precondition and evidence receipt, trace-linked to the original request, with explicit denial/handler outcomes.
+- Design candidate `TraceMonitor`: check each enforceable prefix, preserve request records when handlers intercept calls, and persist trace/effect identities across retries.
+- These are **proposed contracts**, not source-code facts about the current repo. A code-level implementation would require an exact target runtime, pinned revision and negative tests including denied approval, changed arguments, handler interception, missing residual and duplicate commit.
+
+**Beginner analogy:** a tool request resembles a purchase order, while a committed external effect resembles money actually leaving the bank. Recording an order or obtaining an assistant's approval sentence does not prove the bank authorized a transfer.
+
+### Five-axis state, evidence delta and promotion gate
+- Daily Mapping Status: `DESIGN_CANDIDATE` / `CONCEPTUAL_MAPPING`; publication-only result is `PAPER_ONLY`
+- Claim State: `OBSERVED` (paper's premises and theorem statement, not independently proved)
+- Evidence Level: `E4_PREPRINT` / FULL_TEXT_READ / INDEPENDENT_FORMAL_CHECK_NOT_PERFORMED
+- Mapping State: `CANDIDATE_MECHANISM` / `DESIGN_ANALOGY`
+- Implementation State: `NOT_IMPLEMENTED` / NO_DEPLOYED_TARGET_IDENTIFIED
+- Validation State: `NOT_TESTED` / LOCAL_CHECKS_NOT_EXECUTED
+- NEW_EVIDENCE: formal separation of escaping effects, requested trace abstraction, and dynamically enforced policy obligations
+- CORRECTED_INTERPRETATION: type soundness or a submitted approval request does not itself establish approved/committed external behavior
+- UNCHANGED_BOUNDARY: paper != proposed Tool contract != implemented Trust/Control plane != tested runtime. EN and ZH mirror a single source, not independent proof
+- NEW_COUNTEREVIDENCE: unmodeled external actions and absent residual checks explicitly fall outside the conditional safety statement
+- UNKNOWN_RETAINED: independent Dafny/Rust check, all Etas language behavior, actual runtime adaptation, host/applicability, replay safety and measured defense
+- NEXT_RETEST_CONDITION: freeze precise Etas paper/source revision, instantiate request/deny/handler/commit traces, inject missing residual, untrusted direct effect path, changed approval scope and retry, then independently verify effect records and monitor verdicts
+
+### Delivery boundary
+Append-only Native Daily research in `docs/en/Tool_System.md` and its ZH counterpart only. Original theory, historical text, SOURCE Registry, Verified Core `Sxx`, code, tests, other four containers, weekly/monthly and unrelated WorkflowHub PR are not touched. Native validator and paper-code experiments: NOT_EXECUTED. Human Maintainer reviews the proposed PR; do not count a paper theorem as an implemented guarantee.

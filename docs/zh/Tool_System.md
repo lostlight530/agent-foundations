@@ -798,3 +798,73 @@ MONTH_OPEN
 
 ### 交付与提升边界
 只在 Tool System 中英文文档尾部追加本日原生研究，未分配 `Sxx`，未晋升 Verified Core，未宣称本仓实现任何验证 Runtime。先前研究、归档、代码、测试、Source Registry、Monthly Blueprint、Weekly Cascade 均不修改。本仓 validator 及证明实验: NOT_EXECUTED。等待 Human Maintainer 审查与合并。
+
+
+---
+
+## 2026-11-05 GPT Native Daily Research — Effect-Typed Tool Boundaries and Trace Safety（工具效应类型与轨迹安全）
+
+### 任务身份、原始来源与范围
+- Canonical Task: `foundations/research/daily`
+- Logical Date: 2026-11-05，Asia/Shanghai；实际研究和 GitHub 提交也在 2026-11-05，不是 Jules 历史回放
+- Agent: GPT-6 / GPT_NATIVE；Base Main SHA：`368db3ba5feffbfef5d8414f203af0bcc873b212`
+- Run ID: `agent-foundations/research/daily/2026-11-05/GPT_NATIVE/368db3ba5feffbfef5d8414f203af0bcc873b212/native-20261105-tool-01`
+- System Container：**Tool System**，仅对中英文同一容器末尾追加
+- Frontier Source：*ETAS: An Effect-Typed Language for Agent Systems*
+- 作者：Huiri Tan、Yikun Wang、Puyang Zhang、Shangyu Li、Jiasi Shen
+- 原始论文：https://arxiv.org/abs/2607.17780；已打开的论文正文：https://arxiv.org/html/2607.17780
+- 版本与发表：2026-07-20T10:11:53Z 首次投稿；这是**今天研究的一篇历史论文，不是 11 月 5 日新发布**
+- 实际核验：2026-11-05；来源等级为作者原始预印本，不等于独立审稿或独立定理复核
+- 选择理由：给出 Tool/Harness 的 effect、approval、typed trace、残余运行检查的形式化约束，不只比较 benchmark，也不重复昨天 Memory System 的记忆选取问题
+
+### 原始问题、假设和数学机制
+一个 Agent 不应仅以 Python 回调签名和最终回答成功描述工具能力。**请求动作**与**实际提交外部效果**可以不同，尤其在 handler、拒绝、人工审批与重试场景。ETAS 把这些事件变成程序语义的一部分
+
+论文提出带有不同输出的静态类型判断：
+```text
+Ξ ; Γ ; Π ⊢ e ⇒ τ ! ε ▷ A ⊣ R
+
+τ：普通结果类型
+ε：可逃逸的 effect row
+A：已请求动作轨迹的抽象
+R：必须交由 Runtime 执行的残余检查义务
+Π：当前 trace/policy 规范，编译为监视器 M_Π
+```
+不能将 `ε` 当成 `A`。即使 handler 截获动作使其不提交，**请求本身仍应在审计轨迹中可见**；否则会出现权限事件被异常处理器隐匿的风险
+
+**Theorem 5（Policy safety）具有严格前提**：程序经过对应类型检查，`Ξ,Π` 良构，Runtime 确实装载 `R` 并在相应 request 或 commit 发生**之前**执行动态检查，才可以得到每一个已产生轨迹前缀均被 `M_Π` 接受。可用有条件的目标表达为 `∀k, M_Π(trace[:k]) ∉ Bad`。Theorem 6（Handler trace transparency）进一步要求被处理的请求不会从轨迹消失，也不能因为 handler 代执行而绕开 commit 审批
+
+这只是**作者形式语言及其运行语义**上的定理声明，绝不等于当前 Tool System、现实 Agent 框架或用户仓库已满足前提。论文描述 Rust 实验原型和 HIR/policy 检查器，本次**未构建或运行**该原型
+
+### 行为约束、适用边界与反例
+- **有界保证**：安全性限于 typed action boundary 内、被 monitor 覆盖、真正由 Runtime 中介的事件；直接绕开边界的网络请求或未建模外部效果不在证明范围
+- **审批缺口**：仅将“需审批”写进 Prompt，或缺失真实 approval 事件及其作用域，不能推出外部 commit 已由人类批准
+- **残余检查缺失**：资源参数需运行时解析时，静态通过不等于 `R` 已执行；跳过 `R` 就破坏定理前提
+- **Handler 洗白**：若 handler 吞掉 request 审计事件，或未经边界验证执行 commit，则不满足轨迹透明性
+- **重试重复副作用**：request、handled、denied、committed 必须分开记录；重复提交逻辑动作不意味着外部效果 exactly-once
+- **正确性分离**：合法效应轨迹不证明回答内容真实，也不自动证明外部系统实际完成效果
+
+### Tool System 的有界架构映射
+- 候选 `ToolRequest`：将任务身份、工具名、参数摘要、策略版本、资源作用域、信任来源绑定到每一次请求
+- 候选 `EffectCommit`：独立效果/审批授权、动态残余闸门、证据回执、与原始请求一致的关联标识，以及明确的拒绝/处理结果
+- 候选 `TraceMonitor`：对可判定的每个前缀执行校验；handler 不得抹除 request；跨重试保留 trace 与 effect identity
+- 上述全部是 `DESIGN_CANDIDATE`，**不是本仓源码解析或已部署能力**。验证需指定确切 Runtime、代码版本，注入审批拒绝、参数变更、handler 截获、残余检查缺失及重复 commit 等负例
+
+**初学者类比：** Tool Request 类似提交采购单；Effect Commit 类似银行真的划款。记录了采购单、甚至助手说“我批准”，都不能证明银行已完成授权转账
+
+### 五轴证据状态、证据变化与晋升门槛
+- Daily Mapping Status：`DESIGN_CANDIDATE` / `CONCEPTUAL_MAPPING`；只有论文原意时为 `PAPER_ONLY`
+- Claim State：`OBSERVED`（作者论文定理及前提已读，不是独立证明）
+- Evidence Level：`E4_PREPRINT` / 已读完整论文 / INDEPENDENT_FORMAL_CHECK_NOT_PERFORMED
+- Mapping State：`CANDIDATE_MECHANISM` / `DESIGN_ANALOGY`
+- Implementation State：`NOT_IMPLEMENTED` / 没有证据证明本仓目标 Runtime 已存在
+- Validation State：`NOT_TESTED` / 未执行本仓验证
+- NEW_EVIDENCE：清楚区分 escaping effects、requested-action trace 与动态 policy 残余义务的形式系统
+- CORRECTED_INTERPRETATION：静态类型通过、请求了审批都不直接证明外部效果获授权或已提交
+- UNCHANGED_BOUNDARY：论文 != 候选工具合同 != 已实现 Trust/Control Plane != 运行验证；英中双语只引用同一来源，不是两次独立实验
+- NEW_COUNTEREVIDENCE：模型外部未建模的直接效果，以及被跳过的 `R`，都不能套用论文的有条件安全保证
+- UNKNOWN_RETAINED：独立复核 Rust 原型/定理、现实运行时映射、具体宿主适用性、重试安全性、量化防御效果
+- NEXT_RETEST_CONDITION：固定论文与原型精确版本，构造 request/deny/handler/commit 轨迹，注入缺失的 R、绕开边界的外部调用、审批作用域变化和重试，独立读取监视器结论与效果回执
+
+### 交付与晋升边界
+只对现有 `docs/en/Tool_System.md`、`docs/zh/Tool_System.md` 进行 append-only 新增，旧理论、历史文本、SOURCES、Verified Core `Sxx`、代码、测试、其他容器、Weekly/Monthly 与独立 WorkflowHub PR 均不修改。本仓 Validator 和论文原型：NOT_EXECUTED。待 Human Maintainer 审阅合并，不能将预印本定理写为真实系统的部署保证
