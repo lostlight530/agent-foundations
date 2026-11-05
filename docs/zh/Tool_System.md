@@ -868,3 +868,84 @@ R：必须交由 Runtime 执行的残余检查义务
 
 ### 交付与晋升边界
 只对现有 `docs/en/Tool_System.md`、`docs/zh/Tool_System.md` 进行 append-only 新增，旧理论、历史文本、SOURCES、Verified Core `Sxx`、代码、测试、其他容器、Weekly/Monthly 与独立 WorkflowHub PR 均不修改。本仓 Validator 和论文原型：NOT_EXECUTED。待 Human Maintainer 审阅合并，不能将预印本定理写为真实系统的部署保证
+
+
+## 2026-11-06 GPT Native 每日研究 —— 工具效应的 Controller-Agnostic PAC Reach–Avoid Shield
+
+### 研究身份与原始来源
+- 规范任务身份：\`agent-foundations/research/daily/2026-11-06/GPT_NATIVE/0090958c3f522b5147f96be50015819143546088/native-20261106-tool-01\`
+- System Container：**Tool System**
+- 技术点：利用可审计的状态抽象与日志数据，对工具动作构造独立于具体控制器的有限时域风险上界及实时动作屏蔽器
+- 论文完整标题：*Controller-Agnostic Runtime Safety Certificates for Tool-Using AI Agents via Data-Driven Robust Reachability*
+- 作者：**Ali Baheri、Peng Wei**
+- 原始来源：https://arxiv.org/abs/2610.16865 ，作者全文：https://arxiv.org/html/2610.16865
+- 实际阅读版本：**arXiv:2610.16865v2**，HTML 标记 **2026-10-23**；v1 最早提交于 **2026-10-12**，不同版本的摘要和实验表述不可无声混合
+- 检查日期：**2026-11-06 Asia/Shanghai**；来源类别：作者原始预印本，不等于正式同行评审或部署验证
+- 选择原因：具备明确公式、数学前提、行为上界和可证伪的工具安全闸门，可补充既有 Tool 研究中效果授权/类型约束之外的风险预算层；不是排行榜新闻
+
+### 原始问题、假设与方法
+作者将语言模型视为不透明的动作控制器，在其与外部环境之间设置 Shield。目标是：在有限任务时域内，将**曾经进入不可逆危险状态**的概率限制在给定预算下，即使模型被替换也无需重新证明每种模型；这一说法**完全依赖指定的抽象与数据前提**。
+
+- **A1 / Markov 抽象：**对话历史 \`h_t\` 通过谓词映射为有限状态 \`s_t=φ(h_t)\`，后继分布由状态与动作决定；漏掉关键历史变量会破坏前提
+- **A2 / 危险吸收态：**不可逆效果发生后不能用事后撤销或道歉将危险状态归零
+- **A3 / 安全停止：**每个非危险状态均存在进入安全终止态的 halt 动作
+- **A4 / 控制器独立：**条件在给定状态和有效工具动作后，转移核不依赖提出动作的模型身份；会随 Agent 身份变化的环境不满足这一假设
+- **后继集合覆盖：**\`K_{s,a}\` 必须包含所有真实可能的后继；遗漏危险后继会破坏证书有效性
+- **样本承诺：**每个状态/动作 \`n_0(s,a)\` 的样本预算必须在观察数据前确定，不能见到结果后挑选有利的样本数
+
+### 数学机制与有条件保证
+对每个状态/动作，作者在经验转移核附近构造置信集合。设 \`R\` 是状态/动作行数，\`k_{s,a}=|K_{s,a}|\` 是候选后继数量，\`δ\` 是置信失败预算，\`n_0(s,a)\` 是预先承诺的样本数：
+
+\[
+\beta_{s,a}=\sqrt{\frac{2}{n_0(s,a)}\log\left(\frac{(2^{k_{s,a}}-2)R}{\delta}\right)}
+\]
+
+该半径针对至少两个可能后继的随机行。样本不足的行使用**不收缩的完整候选后继分布集合**；日志总量大不等于每个危险路径都已被覆盖。
+
+利用包含最坏后继概率的动态规划，定义被允许动作集合 \`D(s)\` 下的风险上界：
+
+\[
+\bar V_t(s)=\max_{a\in D(s)}\max_{q\in C_{s,a}}\sum_{s'}q(s')\bar V_{t-1}(s')
+\]
+
+**作者的 Theorem 1（有条件 PAC 证书）：**当 \`D\` 满足 \`\bar V_T(s_0)\le\varepsilon\`，且 Markov、危险吸收、安全 halt、控制器独立和后继集合覆盖等前提成立时：
+
+\[
+\Pr_{\mathrm{data}}\!\left[\sup_{\pi\ \mathrm{admissible}}V_T^\pi(s_0;P)\le\varepsilon\right]\ge 1-\delta
+\]
+
+概率空间来自抽样日志，不代表每次工具调用以 \`1-δ\` 的概率安全；模型可替换的结论仅对**实际服从同一个 Shield，且位于被建模环境中的控制器**成立。
+
+### 收敛/行为边界与反证空间
+- Corollary 1 的 \`O(T/\sqrt M)\` 是在所有可达相关行的样本覆盖随数据量增长时的**有条件**松弛速率；稀疏观察的危险路径没有这个无条件结论
+- 若某行未达到预先承诺的样本数，方法保留 vacuous 集合；“日志里没有危险事件”不能用作危险概率为零的 plug-in 证明
+- 作者报告了文件系统沙箱与 1,050 次 Agent episode，但**实验观察未见危险不等于数学定理本身**，更不保证未建模副作用或未来任务。v2 摘要描述七个控制器、其中六个基于开源权重模型；较早的 v1 摘要数字不同，不能混合统计口径
+- all-halt 在安全停止假设下可以满足形式上的风险预算，却使任务失去可达目标；**安全退出 != 任务完成**
+- 如果抽象状态漏掉授权过期、资源身份、运行时权限、动态审批或隐含工具参数，可能破坏 Markov 条件或后继覆盖条件
+- 论文发布的源码链接仅是未来复核线索；本次**未运行论文代码、定理检查器、工具调用或实验**
+
+### Tool System 的有界架构映射
+- **状态抽象候选：**\`(principal, resource class, capability, approval/effect status, task horizon, action class)\`，必须先用具体场景证明不存在遗漏的安全敏感变量
+- **动作闸门候选：**效应发生前由 \`D(s)\` 重新确定准入；被拒绝的动作不等于已经观察到外部系统提交
+- **证据包候选：**每个证书绑定 \`(source log ID, extraction cutoff, K_{s,a}, n_0, δ, horizon T, shield digest, controller identity, tool-effect trace)\`
+- **可证伪测试：**注入 \`K\` 外的危险后继、过期凭据、未解决审批、没有足够样本的状态/动作以及绕过 Shield 的直接副作用通路；这些只是**测试方案，并未执行**
+- **权威不可继承：**若新工具拓扑改变了状态/动作抽象或可能后继，旧 Shield 证书不能自动沿用
+
+**初学者类比：**铁路调度员可以拒绝通往封闭轨道的路线，但安全计算只在地图包含全部道岔、列车确实遵守调度指令时成立。允许安全停车，并不意味着顺利到站。
+
+### 五轴证据状态
+- Daily Mapping Status：\`CONCEPTUAL_MAPPING / DESIGN_CANDIDATE\`
+- Claim State：\`OBSERVED_AUTHOR_THEOREM_AND_ASSUMPTIONS\`（读到作者论证，不等于独立形式证明）
+- Evidence Level：\`E4_PREPRINT / FULL_TEXT_V2_READ\`
+- Mapping State：\`CANDIDATE_MECHANISM / DESIGN_ANALOGY\`
+- Implementation State：\`NOT_IMPLEMENTED / NO_AGENT_FOUNDATIONS_RUNTIME_SHIELD_SHOWN\`
+- Validation State：\`NOT_TESTED / NO_LOCAL_REPLAY_OR_FORMAL_RECHECK\`
+- NEW_EVIDENCE：原始研究给出对有限抽象状态/动作日志的有条件风险预算及不依赖模型身份的动作 Shield
+- CORRECTED_INTERPRETATION：PAC 置信证书、安全停止、实验未观察到危险与任务成功是四个不同命题
+- UNCHANGED_BOUNDARY：论文 != 本仓 Tool System 实现；源码公式 != 独立证明；待审批动作 != 已发生的外部 effect
+- NEW_COUNTEREVIDENCE：漏掉危险后继或历史依赖都会破坏证明前提；样本不足不能补写 PASS
+- UNKNOWN_RETAINED：外部复现、真实 Markov 抽象、目标存储身份、工具拓扑、运行时授权和端到端完成情况
+- NEXT_RETEST_CONDITION：固定论文代码/状态模型，对有覆盖和无覆盖的状态行构造反例，注入被遗漏的危险后继，并比较风险上界与真实运行轨迹
+
+### 交付与身份边界
+仅对现有中英文 Tool System 追加 11/06 Daily Research Chunk；旧理论、SOURCE Registry、Verified Core、Runtime、Tests、其他三个容器、Weekly/Monthly 与无关 Draft 保持不变。v1/v2 摘要数字差异保留而不静默重写。论文代码和本仓测试均为 \`NOT_EXECUTED\`。
