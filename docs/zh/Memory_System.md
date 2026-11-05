@@ -1398,3 +1398,59 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 
 ### 交付边界
 仅向原有中英文 Memory System 追加 2026-11-02 Native Daily，旧 Jules/GPT 文本均原样保留，不新增 Sxx、不提升 Verified Core、不修改 Runtime、Weekly、Monthly，仓库 Validator：NOT_EXECUTED
+
+
+---
+
+## 2026-11-04 GPT Native Daily Research — Formal Memory Basis 与知识覆盖有效性
+
+### 来源身份与运行证据
+- Canonical Task: `foundations/research/daily`，正式容器 Memory System
+- Logical Date: **2026-11-04 Asia/Shanghai**，实际阅读与写入 **2026-11-05**，不是 11 月 4 日执行回执，更不是 Jules 历史重放
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_NATIVE_DAILY
+- Base Main SHA: `b5b158b0e6e86a0a4ac584bb4aa26b67dfedb5f3`
+- Run ID: `agent-foundations/research/daily/2026-11-04/GPT_NATIVE/b5b158b0e6e86a0a4ac584bb4aa26b67dfedb5f3/gpt-native-20261105-memory-01`
+- 原始论文: Hongyao Tang, *Towards a Formal Definition of Agent Memory: Basis, Span, Optimality, and the Sequential Memory Problem*, arXiv:2608.11654v1，发表于 **2026-08-12**，摘要 https://arxiv.org/abs/2608.11654，正文 https://arxiv.org/html/2608.11654
+- 阅读范围: 原始定义、第 3–5 节、噪声抽取和连续 Memory 问题、论文局限及生成算子条件；核验日期 2026-11-05，不将 8 月论文伪装为 11 月 4 日新闻
+- 来源权威: 作者预印本只能说明其模型、受限定理和作者提供的研究证据，独立证明核验与实验复现未执行
+- 双语镜像属于一个原始学术来源，不额外增加 independent evidence，也不新增 Sxx、Verified Core Claim
+
+### 机制与数学条件
+设资料为 `D`，其抽取的原子事件为 `E_D`，有限容量下的 Memory basis 为 `M_D⊆E_D` 且 `|M_D|≤S`，生成算子 `Φ:2^E→2^N` 导出知识张成空间 `Φ(M_D)`
+
+论文在 single-item support 假设下，要求一个生成后的知识项足以支持查询；利用查询分布 `p_D(q)` 定义预期知识覆盖，却明确将覆盖效用 `u(q,M_D)` 与最终答对 `u^e2e(q,M_D,π_reasoner)` 区分
+
+```text
+事件存储 != 知识张成
+信息覆盖 != 最终答案正确
+表面覆盖 != 声明真实或当前有效
+理论优化 != 本仓已实现在线记忆控制器
+```
+
+其 `A⊆B ⇒ Φ(A)⊆Φ(B)` 单调性是假设，真实 LLM 面对矛盾事件时可能改变已导出的判断，不可直接继承.仅在更强的 decomposability 前提下，容量约束选择才转为 weighted maximum coverage，并可使用贪心 `1−1/e` 近似界；不可分解的跨事件协同不自动满足该定理
+
+连续写入被表达为具有记忆状态与延迟查询奖励的 MDP，这是形式化目标，不是经过验证的在线优化器.对混有错误声明的候选事件，区分 `Φ(M_D)` 和真实事件保留部分 `Φ(M_D∩E_D)`，避免把错误知识造成的可见覆盖升级成事实正确
+
+### 反证、适用边界与研究映射
+1. **联合推理**：查询需要把两条分别检索的事实在回答时组合，严格 single-item support 不再成立，该理论覆盖度不是通用完备性指标
+2. **矛盾抽取**：错误或过时声明可能提升表面命中，却降低真实答案正确率，事件数量、命中数不能作为真值证明
+3. **历史与当前分账**：旧事件即使曾真实、签名有效，也可能已经 superseded，新的有效性证据必须作为 forward correction 保留，不能覆盖原事件
+4. **查询分布漂移**：对旧 `p_D(q)` 最优的 Memory，在新任务分布下可能不适用，离线选择的数学界不等于长期运行性能
+
+本次只向 Memory System 提出候选研究契约：分别标识 source/version、event identity、抽取可信度、时效性、覆盖目标、推理/评价器身份、最终正确性回执.没有证据证明 Agent Foundations 已具备相应 Memory Store、自动纠错、在线压缩或持久化 Runtime
+
+### 五轴状态与 Evidence Delta
+- Claim State: `OBSERVED`，仅原论文表述及假设
+- Evidence Level: `E4_PREPRINT`，已读原论文，独立定理检查与实验 `NOT_PERFORMED`
+- Mapping State: `CANDIDATE_MECHANISM`
+- Implementation State: `NOT_IMPLEMENTED`，本仓未验证对应实际 Runtime
+- Validation State: `NOT_TESTED`，未运行本仓 Validator 或原论文实验
+- NEW_EVIDENCE: 正式区分事件基、知识张成、预期查询覆盖和端到端答案正确性，并明确贪心近似界的额外条件
+- CORRECTED_INTERPRETATION: 覆盖优化不证明记忆事实正确，不证明长期稳定，也不能推导本仓已经实现
+- UNCHANGED_BOUNDARY: `Paper != Mapping != Implementation != Validation`，双语重复和跨仓引用不是独立实验
+- NEW_COUNTEREVIDENCE: 多事实联合推理、矛盾抽取、噪声事件都可以使单项支持或单调性前提失效
+- UNKNOWN_RETAINED: 独立验算、抽取准确率、真实查询分布、来源新鲜度、本仓实现与实际效果
+- NEXT_RETEST_CONDITION: 固定源版本、数据集和查询分布，注入假知识与过时事件，对比可分解和联合推理条件，并分别测量覆盖率和最终答案正确率，保留独立检查回执
+
+### 写入与提升边界
+仅在原有 Memory System 中英文容器后 append-only 增补 11 月 4 日研究，保留所有历史正文，不修改 `FOUNDATION/SOURCES.md`、Verified Core、代码、测试、Weekly/Monthly、Actions 与独立 WorkflowHub Draft PR.Validator 与论文复现 `NOT_EXECUTED`，等待 Human Maintainer 决定 merge
