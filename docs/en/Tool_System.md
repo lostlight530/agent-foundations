@@ -890,7 +890,7 @@ Append-only Native Daily research in `docs/en/Tool_System.md` and its ZH counter
 ## 2026-11-06 GPT Native Daily Research — Controller-Agnostic PAC Reach–Avoid Shield for Tool Effects
 
 ### Daily research identity and canonical source
-- Canonical identity: \`agent-foundations/research/daily/2026-11-06/GPT_NATIVE/0090958c3f522b5147f96be50015819143546088/native-20261106-tool-01\`
+- Canonical identity: `agent-foundations/research/daily/2026-11-06/GPT_NATIVE/0090958c3f522b5147f96be50015819143546088/native-20261106-tool-01`
 - System Container: **Tool System**
 - Technical point: controller-agnostic, data-driven finite-horizon safety bound for tool actions, with a logged-state abstraction and a decision-time shield
 - Full paper: *Controller-Agnostic Runtime Safety Certificates for Tool-Using AI Agents via Data-Driven Robust Reachability*
@@ -903,38 +903,38 @@ Append-only Native Daily research in `docs/en/Tool_System.md` and its ZH counter
 ### Original research question, assumptions and method
 The authors treat the language model as an opaque controller that proposes actions to an external environment; a shield filters the allowed action set. The goal is to keep the probability of *ever* reaching an irreversible unsafe state within a task horizon below a chosen risk budget, even when the controller changes, **conditional on model assumptions and data coverage**.
 
-- **A1 / Markov abstraction:** each history \`h_t\` maps to a finite predicate state \`s_t=φ(h_t)\`; the next-state law is determined by state and action, not an omitted detail of history
+- **A1 / Markov abstraction:** each history `h_t` maps to a finite predicate state `s_t=φ(h_t)`; the next-state law is determined by state and action, not an omitted detail of history
 - **A2 / Absorbing harm:** once an unsafe state has been reached, that state cannot be treated as undone by a later apology or tool call
 - **A3 / Safe halt:** every non-unsafe state permits an action that transitions to a known safe terminal sink
 - **A4 / Controller independence:** the transition kernel depends on the abstract state and effective tool action, not the model/controller identity; controller-dependent environments break this premise
-- **Candidate successor coverage:** a specified \`K_{s,a}\` must include every possible next state; omitting a dangerous successor invalidates the claimed coverage
-- **Log sampling:** per-row \`n_0(s,a)\` budget is committed before seeing the data; opportunistically choosing sample counts after the fact is not justified by the displayed fixed-budget confidence argument
+- **Candidate successor coverage:** a specified `K_{s,a}` must include every possible next state; omitting a dangerous successor invalidates the claimed coverage
+- **Log sampling:** per-row `n_0(s,a)` budget is committed before seeing the data; opportunistically choosing sample counts after the fact is not justified by the displayed fixed-budget confidence argument
 
 ### Mathematical mechanism and conditional bound
-For each state/action row, the author constructs a confidence set around the empirical transition kernel. Let \`R\` be the number of rows, \`k_{s,a}=|K_{s,a}|\`, \`δ\` the confidence failure allowance, and \`n_0(s,a)\` the precommitted number of observations:
+For each state/action row, the author constructs a confidence set around the empirical transition kernel. Let `R` be the number of rows, `k_{s,a}=|K_{s,a}|`, `δ` the confidence failure allowance, and `n_0(s,a)` the precommitted number of observations:
 
-\[
+$$
 \beta_{s,a}=\sqrt{\frac{2}{n_0(s,a)}\log\left(\frac{(2^{k_{s,a}}-2)R}{\delta}\right)}
-\]
+$$
 
 This radius applies to stochastic rows with at least two successors. Under-covered rows use the **vacuous** set over all candidate successors; a larger source log is not automatically a tighter certificate if relevant rows remain unobserved.
 
 A robust dynamic program upper-bounds the probability of reaching harm: with unsafe states absorbing and halt assigned zero unsafe value,
 
-\[
+$$
 \bar V_t(s)=\max_{a\in D(s)}\max_{q\in C_{s,a}}\sum_{s'}q(s')\bar V_{t-1}(s')
-\]
+$$
 
-**Theorem 1 (author's conditional PAC certificate):** if the shield \`D\` obeys \`\bar V_T(s_0)\le \varepsilon\`, then, under the named assumptions and candidate-successor coverage,
+**Theorem 1 (author's conditional PAC certificate):** if the shield `D` obeys `\bar V_T(s_0)\le \varepsilon`, then, under the named assumptions and candidate-successor coverage,
 
-\[
+$$
 \Pr_{\mathrm{data}}\!\left[\sup_{\pi\ \mathrm{admissible}}V_T^\pi(s_0;P)\le\varepsilon\right]\ge 1-\delta
-\]
+$$
 
-The probability is over the sampling of logs, not a claim that each individual tool call is safe with probability \`1-δ\`. The controller-uniform result only covers controllers *actually constrained by this shield* and transitions within the modeled environment.
+The probability is over the sampling of logs, not a claim that each individual tool call is safe with probability `1-δ`. The controller-uniform result only covers controllers *actually constrained by this shield* and transitions within the modeled environment.
 
 ### Convergence/behavioral bound and negative space
-- Corollary 1 gives a **conditional** looseness rate \`O(T/\sqrt M)\` when every reachable and relevant row receives proportionally growing sample coverage; it is not universal for sparse or adversarially omitted hazard transitions
+- Corollary 1 gives a **conditional** looseness rate `O(T/\sqrt M)` when every reachable and relevant row receives proportionally growing sample coverage; it is not universal for sparse or adversarially omitted hazard transitions
 - When a row fails its precommitted count, the method deliberately becomes vacuous there; falsely assigning zero harm because no hazardous outcome appeared would be an unsound plug-in estimator
 - The authors report a filesystem sandbox and 1,050 agent episodes, but **reported zero observed harms is not the theorem**, nor does it certify unmodeled side effects or all future tasks. The v2 abstract describes seven controllers including six open-weight-model controllers; the earlier v1 abstract uses a different count and must not be silently mixed into one empirical claim
 - The all-halt policy is formally safe under the stated stop assumption but operationally useless; "safe" without goal reachability is not sufficient task completion
@@ -942,21 +942,21 @@ The probability is over the sampling of logs, not a claim that each individual t
 - The authors' code link is a research reproduction lead only; we did **not** execute their implementation, theorem checker, tool calls or experiments
 
 ### Bounded Tool System architecture mapping
-- **State abstraction candidate:** \`(principal, resource class, capability, approval/effect status, task horizon, action class)\` may serve as an input vector only after a domain-specific test that the abstraction retains safety-relevant distinctions
-- **Guard candidate:** before a proposed effect, recompute allowed actions from \`D(s)\`; denial is a constrained-action decision, not proof of a committed result
-- **Evidence candidate:** bind \`(source log ID, extraction cutoff, K_{s,a}, n_0, δ, horizon T, policy/shield digest, controller identity, tool-effect trace)\` to each certificate
-- **Effect-time test:** inject an unauthorized successor omitted from \`K\`, a stale authority token, a long-held pending approval, an under-covered state/action row and a tool action through an unmediated side channel. These are falsification tests **proposed**, not executed
+- **State abstraction candidate:** `(principal, resource class, capability, approval/effect status, task horizon, action class)` may serve as an input vector only after a domain-specific test that the abstraction retains safety-relevant distinctions
+- **Guard candidate:** before a proposed effect, recompute allowed actions from `D(s)`; denial is a constrained-action decision, not proof of a committed result
+- **Evidence candidate:** bind `(source log ID, extraction cutoff, K_{s,a}, n_0, δ, horizon T, policy/shield digest, controller identity, tool-effect trace)` to each certificate
+- **Effect-time test:** inject an unauthorized successor omitted from `K`, a stale authority token, a long-held pending approval, an under-covered state/action row and a tool action through an unmediated side channel. These are falsification tests **proposed**, not executed
 - **Non-inheritance:** a certificate attached to a shield configuration cannot be inherited by a new tool topology unless the same state/action abstraction and support assumptions remain valid
 
 **Analogy for beginners:** A railway dispatcher can refuse routes known to lead into a closed track, but a safety calculation is valid only if the map includes every possible switch and the train actually obeys the dispatcher. A safe stop is not the same as arriving at the destination.
 
 ### Five-axis evidence state
-- Daily Mapping Status: \`CONCEPTUAL_MAPPING / DESIGN_CANDIDATE\`
-- Claim State: \`OBSERVED_AUTHOR_THEOREM_AND_ASSUMPTIONS\` (not an independently checked proof)
-- Evidence Level: \`E4_PREPRINT / FULL_TEXT_V2_READ\`
-- Mapping State: \`CANDIDATE_MECHANISM / DESIGN_ANALOGY\`
-- Implementation State: \`NOT_IMPLEMENTED / NO_AGENT_FOUNDATIONS_RUNTIME_SHIELD_SHOWN\`
-- Validation State: \`NOT_TESTED / NO_LOCAL_REPLAY_OR_FORMAL_RECHECK\`
+- Daily Mapping Status: `CONCEPTUAL_MAPPING / DESIGN_CANDIDATE`
+- Claim State: `OBSERVED_AUTHOR_THEOREM_AND_ASSUMPTIONS` (not an independently checked proof)
+- Evidence Level: `E4_PREPRINT / FULL_TEXT_V2_READ`
+- Mapping State: `CANDIDATE_MECHANISM / DESIGN_ANALOGY`
+- Implementation State: `NOT_IMPLEMENTED / NO_AGENT_FOUNDATIONS_RUNTIME_SHIELD_SHOWN`
+- Validation State: `NOT_TESTED / NO_LOCAL_REPLAY_OR_FORMAL_RECHECK`
 - NEW_EVIDENCE: explicit conditional risk envelope over logged abstract transition rows and a controller-agnostic action shield
 - CORRECTED_INTERPRETATION: a PAC confidence certificate, safe stop, observed no-harm episodes and a successfully completed task are four different claims
 - UNCHANGED_BOUNDARY: author paper != deployed Tool System, source math != independent proof, a proposed effect gate != observed external commit
@@ -965,4 +965,4 @@ The probability is over the sampling of logs, not a claim that each individual t
 - NEXT_RETEST_CONDITION: pin author code and state/action model, construct covered and under-covered transition rows, inject an omitted hazard, and compare robust reach–avoid bound to observed exact-version traces
 
 ### Delivery / identity boundary
-Appended bilingual daily research only in the canonical English and Chinese Tool System files; earlier sections, SOURCE Registry, verified core, runtime, tests, other containers, weekly/monthly and unrelated open PRs remain untouched. Source v1/v2 counts are not silently reconciled. Test and paper-code reproduction: \`NOT_EXECUTED\`.
+Appended bilingual daily research only in the canonical English and Chinese Tool System files; earlier sections, SOURCE Registry, verified core, runtime, tests, other containers, weekly/monthly and unrelated open PRs remain untouched. Source v1/v2 counts are not silently reconciled. Test and paper-code reproduction: `NOT_EXECUTED`.
