@@ -54,3 +54,18 @@
 - MEMORY: prevent paper ablation numerators from being interpreted as local Agent memory recovery success
 - TOOL: require authorization at effect time rather than inferring it from a planning-time approval claim
 - All eight checks NOT_EXECUTED as independent runtime validations in this document; no original strict PASS, extra native day or Verified Core admission is invented
+
+## Strict original A1/A2 acceptance adjudication — 2026-11-06
+- Basis: exact GitHub original pull-request patches and actual merged original delivery. This is a later documentary assessment, not an original-run replay or recomputation of original GitHub additions.
+- Gate 1: original PR merged and original additions >=100, verified for both PRs. Gate 2: >=100 new, distinct, original substantive source/relationship decisions per original: NOT_CERTIFIED; numerical GitHub additions alone cannot prove it.
+- Exclude from strict substantive counting: blank/headings, path/blobs or source inventories, copied native source text, generic policy restatements, inherited prior A1/A2 reasoning, duplicate evidence disclaimers and unchanged monthly status. Different line numbers do not prove different decisions.
+
+| Original PR | Original additions | Strict substantive result | Distinctness or evidence gap |
+|---|---:|---|---|
+| [#373](https://github.com/lostlight530/agent-foundations/pull/373) | 148 | NOT_CERTIFIED | Nov2 A1 contains bounded bilingual source and bibliographic identity checks; general five-axis definitions and source custody do not automatically establish >=100 unique paper-to-claim judgments |
+| [#374](https://github.com/lostlight530/agent-foundations/pull/374) | 134 | NOT_CERTIFIED | Nov2 A2 incorporates Daily EN/ZH and source-to-month relations; EN/ZH pair remains one research object and inherited A1 mappings, paper identity and Verified Core gates cannot count as separate new monthly findings |
+
+- To certify PASS, independently classify each line of the *original* diff with an inclusion/exclusion and source-to-decision ledger; at least 100 accepted newly authored, non-inherited, claim-specific judgments are required for that original. Current review is not a numerical PASS for that second gate.
+- Neither a new forward correction nor its additions can retroactively lift the original strict acceptance. A subsequent successor, if justified and separately accepted, must retain distinct identity and dated source authority.
+- This appendix does not assert native runtime test, live external source requery, CI or full-worktree verification. Original history stays immutable, and Draft remains awaiting maintainer decision.
+- Status: NUMERIC_ORIGINAL_DELIVERY_VERIFIED / STRICT_ORIGINAL_SUBSTANTIVE_NOT_CLOSED / DATED_FORWARD_REPAIR_SUBMITTED.
