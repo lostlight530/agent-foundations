@@ -11,7 +11,7 @@
 - Status: PARTIAL_SOURCE_CUSTODY / STRICT_100_NEW_SUBSTANTIVE_LINE_GATE_NOT_CERTIFIED; no experimental re-run implied
 
 ## Complete current-main source object coverage
-- Source object count 27; prior matrix unchanged 16; prior SHA mismatch 2; new/unmapped 6
+- Source object count 27; prior matrix unchanged 19; prior SHA mismatch 2; new/unmapped 6
 - Each row records Git identity, not automatic individual semantic sign-off. Unchanged historical objects retain *prior A1* review status, not a fabricated second reading
 | Path | Current blob | Evidence disposition | Prior A1 covered blob |
 |---|---|---|---|
@@ -92,3 +92,8 @@
 ## Coverage correction ledger — 2026-11-07
 - Additional valid paths captured: 3; original A1 branch content updated before merge, not a successor and not a change to previously merged A1 source
 - This corrects the coverage denominator only; each added row remains non-substantive for strict >=100 newly researched line acceptance
+
+## Recomputed post-correction coverage proof
+- Entries in current A1 matrix: 27; predecessor entries: 21; exact inherited blob: 19; changed inherited blob: 2; newly examined/unmapped main objects: 6
+- This is a mechanically checked Git-blob inventory, not an independent substantive research verdict, nor proof of historical task-time visibility
+- A1 strict semantic acceptance remains NOT_CERTIFIED regardless of the inventory size
