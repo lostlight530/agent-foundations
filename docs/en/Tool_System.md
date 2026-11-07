@@ -966,3 +966,57 @@ The probability is over the sampling of logs, not a claim that each individual t
 
 ### Delivery / identity boundary
 Appended bilingual daily research only in the canonical English and Chinese Tool System files; earlier sections, SOURCE Registry, verified core, runtime, tests, other containers, weekly/monthly and unrelated open PRs remain untouched. Source v1/v2 counts are not silently reconciled. Test and paper-code reproduction: `NOT_EXECUTED`.
+
+## 2026-11-07 GPT Native Daily Research — AgentLTL: a verified trace predicate is not a completed tool effect
+
+### Canonical research identity and source
+- Task: `foundations/research/daily`; logical date `2026-11-07`, `Asia/Shanghai`
+- Producer: `GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE`; **not a Jules replay**
+- Base `main`: `79474f8efa89dc549b5893558decb0170eaab605`; research target: `docs/en/Tool_System.md` and bilingual `docs/zh/Tool_System.md` only
+- Container: `Tool System` / `Tools`; no change to the other three formal containers
+- Original scientific source: Laïla Elkoussy and Julien Perez, *AgentLTL: A Trace-Verification Framework for Measuring, Enforcing, and Training Procedural Compliance in Tool-Using LLM Agents*, arXiv:2607.02599v1
+- Exact version/submission: `v1`, 2026-07-01 10:47:20 UTC; [versioned abstract](https://arxiv.org/abs/2607.02599v1), [original versioned HTML](https://arxiv.org/html/2607.02599v1)
+- Source observation date: 2026-11-07; **not** a publication on this research date
+- Checked source surface: original abstract and full-text Sections 3, 5, 6, 8 and Appendix A.5 (prefix enforceability) through the public arXiv text
+- Source lineage: ONE author paper, ONE canonical base arXiv ID; this bilingual insertion is not an independent second evidence origin
+- Canonical Sxx: NOT_ALLOCATED / NOT_REGISTERED; Verified Core claim: NOT_PROMOTED
+- Local Agent Foundations source code or executable behavior: NOT_IMPLEMENTED_FOR_THIS_MAPPING; unit/runtime tests: NOT_EXECUTED
+
+### Mechanism: trace compliance and outcome correctness form separate acceptance contracts
+Let `tau` denote an ordered trace of tool actions, `kappa_i` one procedural rule over its typed events, and `C(tau)` an evaluation of the rule set on that trace. The authors use a first-order temporal-logic-derived notation to specify call order, branching, iteration and grounding; the same specification can score a completed trace offline or gate proposed next tool calls by evaluating prefixes.
+
+A guard on `tau + proposed_call` can observe only what its event representation exposes. The paper's Appendix A.5 makes a decisive logical distinction: safety violations have a finite *bad prefix*, whereas pure liveness requirements (e.g., "eventually invoke a certain step") may remain satisfiable by a future call and cannot be rejected before the trace ends. Thus, `PREFIX_GATE_ALLOW` does not prove `FULL_TRACE_COMPLIANT`, `COMPLETED_GOAL`, or `SIDE_EFFECT_COMMITTED`.
+
+The paper reports a 12-template benchmark and 7 evaluated models, including comparisons between no enforcement, soft-block and block-and-warn. Its abstract reports improvement under block-and-warn on five of seven models; these are **author-reported and benchmark-scoped**, not independent reproduction or an implementation claim for this repository. In the discussion, trace compliance and final-answer accuracy sometimes diverge, especially for branching/loop tasks. A correct answer can be achieved via a noncompliant trace, and procedural compliance need not imply correct output.
+
+### Counterevidence gate: three ways a clean guard can mislead
+1. **Deferred liveness.** A trace prefix satisfies all locally enforceable safety constraints but never triggers a required future action; the workflow terminates. Any claim that the online guard alone guarantees the eventual step is falsified.
+2. **Vacuous grounding.** The authors expressly report that a grounding predicate can be satisfied by a refusal containing no entities to verify. Raising grounding scores can therefore reflect more refusals, not more verified correct answers. The denominator and abstention class must remain explicit.
+3. **Enforcement intervention effects.** Hard or soft blocking may prevent recovery and lower eventual accuracy compared with warning-based correction. Blocking an untrusted call also cannot establish that the authorized external service acknowledged or committed a different subsequent action.
+
+These are *source-supported limits* of a paper's procedural-evaluation model. They are not reports of local Tool System incidents or verified agent safety. A user-facing approval and an offline trace score do not by themselves prove an independently controlled effect-time authorization boundary.
+
+### Bounded theory-to-architecture mapping
+- `CANDIDATE_MECHANISM`: bind `(task_id, policy_version, trace_event_schema, trace_prefix_digest, predicate_set, proposed_call, guard_verdict, effect_receipt_id, final_task_verdict)` as **separate** potential evidence fields
+- `COUNTEREVIDENCE`: accept a guard-approved trace that omits a later required step; accept a vacuous-grounding refusal; or compare warning versus block outcomes, and check whether any tool side effect was actually committed
+- `NOT_IMPLEMENTED`: no local AgentLTL DFA engine, online tool guard, side-effect broker, independent verifier, approval-binding service or training loop is asserted
+- `NOT_TESTED`: no native package, formal property checker, protocol compatibility trial, source code execution or bench replay was run
+- `OUT_OF_SCOPE`: the paper's finite-trace procedures do not automatically establish indefinite-state invariants, arbitrary external tool effects, durable task recovery or service receipts
+
+### Five-axis record
+- Claim State: `OBSERVED` (paper's definitions and author-reported experiments only)
+- Evidence Level: `E4_PREPRINT` (original arXiv full-text source, no independent formal verification)
+- Mapping State: `CANDIDATE_MECHANISM` with `COUNTEREVIDENCE` and `OUT_OF_SCOPE` tests
+- Implementation State: `NOT_IMPLEMENTED`
+- Validation State: `NOT_TESTED`
+
+### Evidence Delta / retest
+- NEW_EVIDENCE: original full-text distinction between finite bad-prefix constraints and non-enforceable liveness, plus observed author benchmark limitations concerning vacuous grounding
+- CORRECTED_INTERPRETATION: deterministic trace compliance is narrower than factual correctness, final completion, effect authorization and durable commit evidence
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; English and Chinese copies reference one research identity
+- NEW_COUNTEREVIDENCE: a compliant refusal can satisfy grounding vacuously; a safety-prefix PASS can coexist with a missing future obligation; an overly aggressive blocker may suppress valid recovery
+- UNKNOWN_RETAINED: paper-wide theorem proof checking, independent replication, production behavior, actual local tool adapter and realized service effect receipts
+- NEXT_RETEST_CONDITION: pin exact AgentLTL version, typed trace schema and guard configuration; inject unfinished liveness, a refusal with empty entity set, a wrong-but-compliant trace and side-effect ambiguity; capture separate `guard`, `tool` and `final` receipts and compare warning/block modes
+
+Delivery note: only the paired EN/ZH research containers are appended. No change to Jules records, source registry `Sxx`, `FOUNDATION/**` verified core, four-container Weekly, October/November Monthly, implementation, schema, workflows, or unrelated WorkflowHub PR #378. Validator and native research reproduction: NOT_EXECUTED; maintainer reviews the Draft before merging.
+
