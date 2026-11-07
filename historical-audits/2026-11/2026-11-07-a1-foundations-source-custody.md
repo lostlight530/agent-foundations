@@ -15,30 +15,30 @@
 - Each row records Git identity, not automatic individual semantic sign-off. Unchanged historical objects retain *prior A1* review status, not a fabricated second reading
 | Path | Current blob | Evidence disposition | Prior A1 covered blob |
 |---|---|---|---|
-| `AGI/basepoint/daily/FOUNDATION/SOURCES.md` | `dd1605572715e3ea2d37933190ed5f250722cc68` | PREVIOUSLY_UNMAPPED_SCOPE | — |
-| `docs/en/Architecture_Principles.md` | `e2b732e348c1b4b1ef23fcc3a64c8b69e223bfef` | IDENTICAL_BLOB_REUSE_PRIOR | `e2b732e348c1b4b1ef23fcc3a64c8b69e223bfef` |
-| `docs/en/Collaboration_System.md` | `0a9749e6bf2ab9c472fc9bc31070372caca75074` | IDENTICAL_BLOB_REUSE_PRIOR | `0a9749e6bf2ab9c472fc9bc31070372caca75074` |
-| `docs/en/Memory_System.md` | `1bdc501cdd4d82e66bd75f8c8c76f3a5ff621ca3` | IDENTICAL_BLOB_REUSE_PRIOR | `1bdc501cdd4d82e66bd75f8c8c76f3a5ff621ca3` |
-| `docs/en/Tool_System.md` | `798e5bf4b2da2cb25981b35d7ee2c7c5486024ff` | VERSION_DRIFT_REVIEW | `c233dd2bb5c8a4821e5f2f569ad48752918c2147` |
-| `docs/zh/Architecture_Principles.md` | `a6c5e67f1b7e3a081b41f8cda6ca21ebbcbe6ed3` | IDENTICAL_BLOB_REUSE_PRIOR | `a6c5e67f1b7e3a081b41f8cda6ca21ebbcbe6ed3` |
-| `docs/zh/Collaboration_System.md` | `5ac08c598cfe50af7fc3339a0e20c49649644560` | IDENTICAL_BLOB_REUSE_PRIOR | `5ac08c598cfe50af7fc3339a0e20c49649644560` |
-| `docs/zh/Memory_System.md` | `db67a050069348b3014e96c28da647988371929a` | IDENTICAL_BLOB_REUSE_PRIOR | `db67a050069348b3014e96c28da647988371929a` |
-| `docs/zh/Tool_System.md` | `c6fcdb2b20debf091625d75cc5383c8f91e803fb` | VERSION_DRIFT_REVIEW | `f48441aede6ee92ecae458b7f5b50c311201872f` |
-| `FOUNDATION/MAINTENANCE.md` | `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | IDENTICAL_BLOB_REUSE_PRIOR | `bcd17d7774ddda1113ff7273424f9f6eee909fa2` |
-| `FOUNDATION/SOURCES.md` | `781bdd4f2d275e667244888e68fac48857a56d37` | IDENTICAL_BLOB_REUSE_PRIOR | `781bdd4f2d275e667244888e68fac48857a56d37` |
-| `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` | `a2f7371b9458024919c3fca895f1770031b95ae3` | IDENTICAL_BLOB_REUSE_PRIOR | `a2f7371b9458024919c3fca895f1770031b95ae3` |
-| `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` | IDENTICAL_BLOB_REUSE_PRIOR | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` |
-| `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md` | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` | IDENTICAL_BLOB_REUSE_PRIOR | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` |
-| `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md` | `60252534c32608978176e64bb7fac952a7f8e72c` | IDENTICAL_BLOB_REUSE_PRIOR | `60252534c32608978176e64bb7fac952a7f8e72c` |
-| `historical-audits/2026-11/2026-11-04--2026-11-05-original-a1-a2-acceptance-reconciliation.md` | `d58c6de9e2d16ca400066228a18e7065e4d78df9` | PREVIOUSLY_UNMAPPED_SCOPE | — |
-| `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md` | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` | IDENTICAL_BLOB_REUSE_PRIOR | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` |
-| `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md` | `9756bd28ff150443a8dff05bc750bfc43507ef05` | IDENTICAL_BLOB_REUSE_PRIOR | `9756bd28ff150443a8dff05bc750bfc43507ef05` |
-| `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md` | `03188c28c2c97f3dd74a481889a337ce03f36f36` | IDENTICAL_BLOB_REUSE_PRIOR | `03188c28c2c97f3dd74a481889a337ce03f36f36` |
-| `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md` | `2c697d784fb4e225a68b440a54480a6105edc711` | IDENTICAL_BLOB_REUSE_PRIOR | `2c697d784fb4e225a68b440a54480a6105edc711` |
-| `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md` | `b36b81fd3b6558b9d68996e9d6e67fec9310ee7c` | ADDED_N_MINUS_1_INPUT | — |
-| `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` | `23a73bc50ddfec1486372a73094b797a70bb5541` | ADDED_N_MINUS_1_INPUT | — |
-| `historical-audits/2026-11/2026-11-06-original-a1a2-semantic-forward-reconciliation.md` | `91fb915f20482d5db3688796c80297c09339fffc` | ADDED_N_MINUS_1_INPUT | — |
-| `OPEN_RESEARCH.md` | `ce494fe37fcc0617d48806dd155d06a1ca773097` | PREVIOUSLY_UNMAPPED_SCOPE | — |
+| `AGI/basepoint/daily/FOUNDATION/SOURCES.md` | `dd1605572715e3ea2d37933190ed5f250722cc68` | UNKNOWN / UNMAPPED_NEEDS_VERIFICATION | — |
+| `docs/en/Architecture_Principles.md` | `e2b732e348c1b4b1ef23fcc3a64c8b69e223bfef` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `e2b732e348c1b4b1ef23fcc3a64c8b69e223bfef` |
+| `docs/en/Collaboration_System.md` | `0a9749e6bf2ab9c472fc9bc31070372caca75074` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `0a9749e6bf2ab9c472fc9bc31070372caca75074` |
+| `docs/en/Memory_System.md` | `1bdc501cdd4d82e66bd75f8c8c76f3a5ff621ca3` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `1bdc501cdd4d82e66bd75f8c8c76f3a5ff621ca3` |
+| `docs/en/Tool_System.md` | `798e5bf4b2da2cb25981b35d7ee2c7c5486024ff` | BOUNDARY_UPDATE / READ_AS_OF_DIFFERENCE | `c233dd2bb5c8a4821e5f2f569ad48752918c2147` |
+| `docs/zh/Architecture_Principles.md` | `a6c5e67f1b7e3a081b41f8cda6ca21ebbcbe6ed3` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `a6c5e67f1b7e3a081b41f8cda6ca21ebbcbe6ed3` |
+| `docs/zh/Collaboration_System.md` | `5ac08c598cfe50af7fc3339a0e20c49649644560` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `5ac08c598cfe50af7fc3339a0e20c49649644560` |
+| `docs/zh/Memory_System.md` | `db67a050069348b3014e96c28da647988371929a` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `db67a050069348b3014e96c28da647988371929a` |
+| `docs/zh/Tool_System.md` | `c6fcdb2b20debf091625d75cc5383c8f91e803fb` | BOUNDARY_UPDATE / READ_AS_OF_DIFFERENCE | `f48441aede6ee92ecae458b7f5b50c311201872f` |
+| `FOUNDATION/MAINTENANCE.md` | `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `bcd17d7774ddda1113ff7273424f9f6eee909fa2` |
+| `FOUNDATION/SOURCES.md` | `781bdd4f2d275e667244888e68fac48857a56d37` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `781bdd4f2d275e667244888e68fac48857a56d37` |
+| `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` | `a2f7371b9458024919c3fca895f1770031b95ae3` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `a2f7371b9458024919c3fca895f1770031b95ae3` |
+| `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` |
+| `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md` | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` |
+| `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md` | `60252534c32608978176e64bb7fac952a7f8e72c` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `60252534c32608978176e64bb7fac952a7f8e72c` |
+| `historical-audits/2026-11/2026-11-04--2026-11-05-original-a1-a2-acceptance-reconciliation.md` | `d58c6de9e2d16ca400066228a18e7065e4d78df9` | UNKNOWN / UNMAPPED_NEEDS_VERIFICATION | — |
+| `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md` | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` |
+| `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md` | `9756bd28ff150443a8dff05bc750bfc43507ef05` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `9756bd28ff150443a8dff05bc750bfc43507ef05` |
+| `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md` | `03188c28c2c97f3dd74a481889a337ce03f36f36` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `03188c28c2c97f3dd74a481889a337ce03f36f36` |
+| `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md` | `2c697d784fb4e225a68b440a54480a6105edc711` | NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW | `2c697d784fb4e225a68b440a54480a6105edc711` |
+| `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md` | `b36b81fd3b6558b9d68996e9d6e67fec9310ee7c` | NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE | — |
+| `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` | `23a73bc50ddfec1486372a73094b797a70bb5541` | NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE | — |
+| `historical-audits/2026-11/2026-11-06-original-a1a2-semantic-forward-reconciliation.md` | `91fb915f20482d5db3688796c80297c09339fffc` | NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE | — |
+| `OPEN_RESEARCH.md` | `ce494fe37fcc0617d48806dd155d06a1ca773097` | UNKNOWN / UNMAPPED_NEEDS_VERIFICATION | — |
 
 ## Specific source and counterevidence judgments
 - **01 A1 cutoff:** Nov7 Tool_System AgentLTL new revision is not admissible as Nov6 A1 source, even though it now exists on current main
@@ -70,3 +70,10 @@
 - New independently phrased source-specific judgments written in this record: 17; not an independent 100-line certification
 - A2 must await upstream A1 admissible review/merge; A2 may preserve PARTIAL state but not silently turn it into ACCEPTED
 - Only this new dated historical-audit custody report is written; native source, Jules-era history, registry, workflows, test code and host data are unchanged
+
+## Explicit contract dispositions
+- Per-artifact decision statuses follow the active A1 vocabulary: NO_FOLLOW_UP, APPEND_RELATION, BOUNDARY_UPDATE, UNKNOWN and NOT_DUE; identity-only prior labels above have been normalized
+- Disposition counts (one per path): UNKNOWN / UNMAPPED_NEEDS_VERIFICATION=3; NO_FOLLOW_UP / PRIOR_SAME_BLOB_REVIEW=16; BOUNDARY_UPDATE / READ_AS_OF_DIFFERENCE=2; NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE=3
+- NO_FOLLOW_UP on an identical predecessor blob **inherits** the preceding 2026-11-06 A1 review rather than claiming an individual re-read; APPEND_RELATION is recorded in this new report only, not in the historical native owning file
+- A BOUNDARY_UPDATE on a rolling owner is a temporal interpretation change in this audit, not permission to rewrite the native monthly owner
+- UNKNOWN retains a true coverage/semantic quality gap; no false full-content review or strict >=100 acceptance is inferred
