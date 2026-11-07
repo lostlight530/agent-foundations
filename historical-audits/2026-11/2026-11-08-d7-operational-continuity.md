@@ -51,7 +51,7 @@
 - COUNTEREVIDENCE: copied source text can increase line count without independent substantive research; a theory that models tool traces does not prove external effects were enforced
 - UNRESOLVED: Verified Core promotion absent, runtime effect and external paper replication NOT_EXECUTED; strict 100 substantive lines not certified
 - NEXT_AUDIT_DEPENDENCY: W45 closes after Nov08; D10 contract drift separately, November final at natural month end
-- GOVERNANCE_CANDIDATE NONE_PROMOTED; no author source registry, architecture, host implementation or old October blueprint changed here
+- GOVERNANCE_CANDIDATE MINIMAL_BILINGUAL_CURRENT_ROUTER_CORRECTION_APPLIED; only current EN/ZH navigation headers advanced with dated evidence, no original October blueprint, Source Registry, architecture or host implementation change
 - NOT_EXECUTED_BY_THIS_D7: local code/tests/independent source proof check, Actions dispatch, any real tool invocation or durable database run
 - OPEN_PRS_AT_BASE: #378 Research draft: Astron / Nexent / DeerFlow public interaction evidence → WorkflowHub platform editions (independent research, not overlapping D7)
 
@@ -81,5 +81,12 @@
 - UNRESOLVED: original hard-gate semantic audit, independent runtime and any scoped data-plane defect detailed in the report
 - UNKNOWN: Actual effect enforcement, bilingual full semantic peer review and >=100 substantive PR gate remain unverified
 - CURRENT_RESULT: PARTIAL / DELIVERY_CUSTODY_VERIFIED / ORIGINAL_STRICT_ACCEPTANCE_NOT_MET_OR_UNCERTIFIED
-- GOVERNANCE_CANDIDATE: NONE_PROMOTED; actual owner correction only where explicitly grounded
+- GOVERNANCE_CANDIDATE: FORWARD_BILINGUAL_ROUTER_CORRECTION, source-bounded and merged Nov07 A2, not a theory/implementation promotion
 - NEXT_AUDIT_DEPENDENCY: D10 separately on its legitimate cutoff, W45 after Nov08, natural November final after Nov30
+
+## Verified current-router correction — 2026-11-08
+
+- Direct current-main read found both current routing documents still opened at the 2026-10-28 October-month checkpoint, while original Nov07 A1 #391 and A2 #392 were already merged. The older paragraph is valid historical as-of data but was stale as an unqualified *current* entry on Nov08.
+- The same D7 branch adds bilingual dated November MONTH_OPEN navigation in `docs/en/Monthly_Blueprint_Current.md` (original Git blob `0e46be0038a9f317101518d0a0b24e782fa5f1f9`) and `docs/zh/Monthly_Blueprint_Current.md` (original blob `56160c64938656c851c0036a89790c7797515ae2`). The older 2026-10-28 content remains intact underneath.
+- EN/ZH both point to actual Nov07 independent A2 Git blob `fcacd620d629db6dcb4df187d1da9eb5a47df51f`, preserve A1 original #391 / A2 original #392 `NOT_MET`, W45 OPEN and November natural final NOT_DUE; no new Monthly Strategic Blueprint or Verified Core status is asserted.
+- Link target and EN/ZH mirrored source/semantics are checked statically against current Git identity, not claimed independent translation peer review. No external tool effect or native monthly run was executed.
