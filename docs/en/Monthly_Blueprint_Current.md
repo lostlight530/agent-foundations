@@ -1,5 +1,14 @@
 # Monthly Strategic Blueprint — Current
 
+## Current routing — 2026-11-08 / November MONTH_OPEN
+
+- **Current natural month:** November 2026, `OPEN / MONTH_TO_DATE`; November natural Monthly final `NOT_DUE`, and ISO W45 is still `OPEN` until the end of 2026-11-08 Asia/Shanghai
+- **Latest actually merged independent current-month relation:** [November 7 A2](../../historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md), main Git blob `fcacd620d629db6dcb4df187d1da9eb5a47df51f`, [original A2 PR #392](https://github.com/lostlight530/agent-foundations/pull/392) merged
+- **Original A1 dependence:** [November 7 A1 PR #391](https://github.com/lostlight530/agent-foundations/pull/391) merged before A2; both original A1 and A2 remain `ORIGINAL_NOT_MET` under the independent >=100 substantive-maintenance-line gate
+- **Latest Native research:** [bilingual AgentLTL Tool System PR #390](https://github.com/lostlight530/agent-foundations/pull/390) is merged as a bounded research mapping, not an implemented or tested Tool Runtime, independent replication or Verified Core promotion
+- **September/October carryover:** the October blueprint and the 2026-10-28 routing checkpoint below are preserved dated historical text, not the current November owner; no new November final Strategic Blueprint or Source Registry admission is claimed
+- **Forward D7 evidence:** [2026-11-08 seven-day continuity audit](../../historical-audits/2026-11/2026-11-08-d7-operational-continuity.md). This is a present-day navigation correction, not a retroactive edit of October observation or proof of Human Review
+
 ## Current routing — 2026-10-28 (October month open)
 
 - **Current natural month:** October 2026, `OPEN / MONTH_TO_DATE` — not naturally closed

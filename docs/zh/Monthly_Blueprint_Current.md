@@ -1,5 +1,14 @@
 # 月度战略蓝图 — 当前状态
 
+## 当前入口校准 — 2026-11-08 / 十一月 MONTH_OPEN
+
+- **当前自然月：** 2026 年 11 月，`OPEN / MONTH_TO_DATE`；11 月原生 Monthly final 仍为 `NOT_DUE`，ISO W45 截至北京时间 11 月 8 日自然周结束前仍为 `OPEN`
+- **当前最新已合并的独立月内关系：** [11 月 7 日 A2](../../historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md)，main Git blob `fcacd620d629db6dcb4df187d1da9eb5a47df51f`，[原始 A2 PR #392](https://github.com/lostlight530/agent-foundations/pull/392) 已合并
+- **原始 A1 依赖：** [11 月 7 日 A1 PR #391](https://github.com/lostlight530/agent-foundations/pull/391) 先于 A2 合并；A1 与 A2 的原始 ≥100 行独立实质维护验收仍为 `ORIGINAL_NOT_MET`，不可由合并结果升级
+- **最新 Native 研究：** [双语 AgentLTL Tool System PR #390](https://github.com/lostlight530/agent-foundations/pull/390) 已合并，其证据限定为理论研究与映射，不等于 Tool Runtime 已实现、已测试、独立复现或 Verified Core 提升
+- **历史承接：** 下方 2026-10-28 的「当前入口」是当时的历史截点，十月蓝图保持原文，不能作为今日十一月的现行 owner；不制造十一月自然月最终蓝图或 Source Registry 晋级
+- **前向 D7 证据：** [2026-11-08 七天连续性审计](../../historical-audits/2026-11/2026-11-08-d7-operational-continuity.md)。这里只校准现行入口，不追改十月原始观察，也不将授权合并冒充独立 Human Review
+
 ## 当前入口校准 — 2026-10-28（十月自然月未关闭）
 
 - **当前自然月：** 2026 年 10 月，`OPEN / MONTH_TO_DATE`，并非月末最终闭账
