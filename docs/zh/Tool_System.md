@@ -949,3 +949,56 @@ $$
 
 ### 交付与身份边界
 仅对现有中英文 Tool System 追加 11/06 Daily Research Chunk；旧理论、SOURCE Registry、Verified Core、Runtime、Tests、其他三个容器、Weekly/Monthly 与无关 Draft 保持不变。v1/v2 摘要数字差异保留而不静默重写。论文代码和本仓测试均为 `NOT_EXECUTED`。
+
+## 2026-11-07 GPT Native 每日研究 — AgentLTL：轨迹约束通过不等于工具副作用完成
+
+### 正式任务身份与来源
+- Canonical Task：`foundations/research/daily`，逻辑日期 `2026-11-07`（`Asia/Shanghai`）
+- Producer：`GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE`，不是对 Jules 的历史重演
+- 原始 `main` 基线：`79474f8efa89dc549b5893558decb0170eaab605`；写入范围仅 `docs/en/Tool_System.md`、`docs/zh/Tool_System.md`
+- 所属容器：`Tool System / Tools`，不修改其余三个正式系统容器
+- 原始论文：Laïla Elkoussy、Julien Perez，*AgentLTL: A Trace-Verification Framework for Measuring, Enforcing, and Training Procedural Compliance in Tool-Using LLM Agents*，arXiv:2607.02599v1
+- 明确版本：2026-07-01 10:47:20 UTC 提交的 v1，[原始摘要](https://arxiv.org/abs/2607.02599v1)、[原始全文 HTML](https://arxiv.org/html/2607.02599v1)，2026-11-07 是本次复核日而非发表日
+- 核查范围：arXiv 原始摘要、全文第 3、5、6、8 节和附录 A.5 的前缀约束
+- 证据身份：同一作者论文与同一 arXiv base ID；中英文重复记录不增加独立证据
+- Canonical Sxx：`NOT_ALLOCATED / NOT_REGISTERED`；Verified Core：`NOT_PROMOTED`
+- 本仓实际实现：`NOT_IMPLEMENTED_FOR_THIS_MAPPING`；本轮运行/实验：`NOT_EXECUTED`
+
+### 机制：过程合规和最终正确属于不同验收合同
+令 `tau` 为有序工具调用轨迹、`kappa_i` 为针对具类型事件的过程规则、`C(tau)` 为约束集合对轨迹的评分。作者采用派生自一阶时序逻辑的规则语言描述调用顺序、分支、循环与 grounding；同一规则既可离线评估完整轨迹，也可在线检查“前缀 + 拟执行工具调用”。
+
+在线 guard 只能观察类型化轨迹中可见的字段。论文附录 A.5 的关键边界是：safety 违规有有限的 *bad prefix*，但纯 liveness（例如“最终必须执行某步骤”）在轨迹尚未结束时仍可能被未来行为满足，不能因此提前判失败。故 `PREFIX_GATE_ALLOW` **不等于** `FULL_TRACE_COMPLIANT`、`COMPLETED_GOAL` 或 `SIDE_EFFECT_COMMITTED`。
+
+作者报告了 12 类任务模板、7 个模型和无约束、soft-block、block-and-warn 等设置；摘要中的“五个模型改善”限定于作者的 benchmark 与干预设置，不能推导为本仓可复现的安全增益。论文讨论还显示过程合规和答案正确可能分离：有些结果正确但过程不合规，有些调用顺序合规却未完成正确目标。
+
+### Counterevidence Gate：三类“看似通过”的失败反例
+1. **liveness 被延迟判定**：所有已看到的 safety 前缀检查都通过，但 workflow 终止前没有执行要求的后续动作；在线 guard 本身不能证明最终义务完成
+2. **vacuous grounding（空真）**：作者明确报告，拒答由于没有可核验的实体，也可能满足全称量化 grounding 谓词；grounding 得分提高可能意味着拒答增加，而不是更多正确、有依据的回答。必须保留分母和 abstention 类别
+3. **拦截改变过程结果**：soft/hard blocking 可能阻止后续恢复，使最终正确率不及 warning 后重试；工具调用被 guard 放行也不等于外部服务实际完成、持久化或确认副作用
+
+这是作者模型范围内的可复核限制，不是 Zero/Foundations 的真实事故证据。人类审批提示、离线合规分数与效果时刻的独立授权仍属于不同证据平面。
+
+### 面向 Tool System 的有界架构映射
+- `CANDIDATE_MECHANISM`：未来可考虑分别绑定 `(task_id, policy_version, trace_event_schema, trace_prefix_digest, predicate_set, proposed_call, guard_verdict, effect_receipt_id, final_task_verdict)`
+- `COUNTEREVIDENCE`：构造未完成 liveness 的通过前缀、空实体拒答、过程合规但回答错误，以及工具执行回执缺失的案例，分别判定
+- `NOT_IMPLEMENTED`：本仓未证明存在 AgentLTL DFA guard、受控副作用 broker、独立 verifier、审批绑定服务或实际训练循环
+- `NOT_TESTED`：本轮未执行论文代码、协议兼容测试、形式验证器、benchmark 复现或本地工具调用
+- `OUT_OF_SCOPE`：有限轨迹规则不自动证明无限期状态不变量、跨进程 Durable Execution、任意外部服务效果或真实完成语义
+
+### 五轴状态
+- Claim State：`OBSERVED`（论文定义与作者自报实验，非独立证实）
+- Evidence Level：`E4_PREPRINT`（原始 arXiv 全文，未独立检查所有形式证明）
+- Mapping State：`CANDIDATE_MECHANISM`，同时保留 `COUNTEREVIDENCE` 和 `OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED`
+- Validation State：`NOT_TESTED`
+
+### Evidence Delta 与下一次反证
+- NEW_EVIDENCE：原文给出有限 bad-prefix 可执行约束与纯 liveness 延迟判定的区别，并承认 vacuous grounding 现象
+- CORRECTED_INTERPRETATION：确定性的轨迹合规检查不能代替事实正确、最终完成、副作用授权和持久化回执
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；EN/ZH 是同一研究身份
+- NEW_COUNTEREVIDENCE：拒答可空真通过 grounding，安全前缀 PASS 可与未来义务缺失共存，过度阻断可能妨碍恢复
+- UNKNOWN_RETAINED：定理证明的独立复核、实验复现、实际生产系统、主仓工具 adapter 与外部效果回执
+- NEXT_RETEST_CONDITION：锁定 AgentLTL 版本、轨迹 schema 与 guard 配置，注入未履行 liveness、无实体拒答、合规但错误回答、回复丢失情形，分别捕获 guard、工具效果与最终任务三类回执，再比较 warning/block 模式
+
+交付边界：仅追加既有中英文 Tool System 容器，不修改 Jules 历史、Sxx Registry、Verified Core、其他 Daily/Weekly、October/November Monthly、实现、测试、workflow 或独立 WorkflowHub #378。实际验证器和论文实验：`NOT_EXECUTED`；仅交付 Draft PR，等待 Human Maintainer 审核。
+
