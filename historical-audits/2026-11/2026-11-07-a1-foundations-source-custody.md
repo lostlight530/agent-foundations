@@ -11,7 +11,7 @@
 - Status: PARTIAL_SOURCE_CUSTODY / STRICT_100_NEW_SUBSTANTIVE_LINE_GATE_NOT_CERTIFIED; no experimental re-run implied
 
 ## Complete current-main source object coverage
-- Source object count 24; prior matrix unchanged 16; prior SHA mismatch 2; new/unmapped 6
+- Source object count 27; prior matrix unchanged 16; prior SHA mismatch 2; new/unmapped 6
 - Each row records Git identity, not automatic individual semantic sign-off. Unchanged historical objects retain *prior A1* review status, not a fabricated second reading
 | Path | Current blob | Evidence disposition | Prior A1 covered blob |
 |---|---|---|---|
@@ -39,6 +39,17 @@
 | `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` | `23a73bc50ddfec1486372a73094b797a70bb5541` | NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE | — |
 | `historical-audits/2026-11/2026-11-06-original-a1a2-semantic-forward-reconciliation.md` | `91fb915f20482d5db3688796c80297c09339fffc` | NO_FOLLOW_UP / PREDECESSOR_MAINTENANCE | — |
 | `OPEN_RESEARCH.md` | `ce494fe37fcc0617d48806dd155d06a1ca773097` | UNKNOWN / UNMAPPED_NEEDS_VERIFICATION | — |
+
+| `docs/en/Monthly_Blueprint_Current.md` | `0e46be0038a9f317101518d0a0b24e782fa5f1f9` | NO_FOLLOW_UP / EXACT_PRIOR_A1_BLOB_RETAINED | `0e46be0038a9f317101518d0a0b24e782fa5f1f9` |
+| `docs/monthly/2026-10-strategic-blueprint.md` | `dc1eb2008585eccdb3d374baee29d008f8817d6a` | NO_FOLLOW_UP / EXACT_PRIOR_A1_BLOB_RETAINED | `dc1eb2008585eccdb3d374baee29d008f8817d6a` |
+| `docs/zh/Monthly_Blueprint_Current.md` | `56160c64938656c851c0036a89790c7797515ae2` | NO_FOLLOW_UP / EXACT_PRIOR_A1_BLOB_RETAINED | `56160c64938656c851c0036a89790c7797515ae2` |
+
+## Previous-month owner and current router correction
+- The prior A1 documented three October blueprint paths that the initial Nov7 matrix accidentally omitted; all three remain present on current main and are now restored as previous-month carryover references
+- `docs/monthly/2026-10-strategic-blueprint.md` is the October month-to-date historical owner, not a November Monthly final or a new November paper source
+- Both `docs/en/Monthly_Blueprint_Current.md` and `docs/zh/Monthly_Blueprint_Current.md` contain the preserved 2026-10-28 routing text, which is a historical as-of entry even though the pathname says `Current`
+- The actual present month is November; those October 28 descriptions cannot be used as Nov7 live current-state attestations or automatic November source-registry promotion
+- No attempt to overwrite the 6963-line October historical owner or its old clock is authorized by this A1. A separate current-owner follow-up requires true Nov as-of authority and bilingual review
 
 ## Specific source and counterevidence judgments
 - **01 A1 cutoff:** Nov7 Tool_System AgentLTL new revision is not admissible as Nov6 A1 source, even though it now exists on current main
@@ -77,3 +88,7 @@
 - NO_FOLLOW_UP on an identical predecessor blob **inherits** the preceding 2026-11-06 A1 review rather than claiming an individual re-read; APPEND_RELATION is recorded in this new report only, not in the historical native owning file
 - A BOUNDARY_UPDATE on a rolling owner is a temporal interpretation change in this audit, not permission to rewrite the native monthly owner
 - UNKNOWN retains a true coverage/semantic quality gap; no false full-content review or strict >=100 acceptance is inferred
+
+## Coverage correction ledger — 2026-11-07
+- Additional valid paths captured: 3; original A1 branch content updated before merge, not a successor and not a change to previously merged A1 source
+- This corrects the coverage denominator only; each added row remains non-substantive for strict >=100 newly researched line acceptance
