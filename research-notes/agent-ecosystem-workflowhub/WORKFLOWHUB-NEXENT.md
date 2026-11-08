@@ -10,7 +10,7 @@ A source-grounded research workflow that reconstructs the public evolution from 
 
 ## Source
 
-https://github.com/lostlight530/agent-foundations/tree/main/research-notes/agent-ecosystem-workflowhub
+https://github.com/lostlight530/agent-foundations/tree/research/agent-ecosystem-workflowhub-20261104/research-notes/agent-ecosystem-workflowhub
 
 ## Version comment
 
