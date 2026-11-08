@@ -208,3 +208,39 @@
 
 - All originally open PR states, author-theorem scope, publication dates and validation UNKNOWN are preserved without rewriting canonical source passages
 
+
+
+## Cross-record synthesis: 25 independently assessed relations
+- Each numbered claim is a specific comparison of separate first-party source sections or their stated limitation; neither path listings nor English/Chinese mirrors count as independent science
+
+1. Nov01 MemBubble diversity entropy and Nov02 MemScope repair-task accuracy have different dependent variables and cannot be aggregated as one memory-performance score
+2. Nov02 MemScope trace+memory 86.67% is an author ablation, while Nov04 basis coverage u(q,M) is a formal objective rather than the same empirical population
+3. Nov04 formal memory basis with single-item support cannot certify Nov01 MemBubble conditional query-relevance judgments or Nov02 provider patch safety
+4. Nov03 mini-Lean trusted final proof checking and Nov05 ETAS pre-effect policy monitoring guard different acceptance surfaces
+5. Nov05 ETAS requested trace versus committed effect and Nov07 AgentLTL prefix-compliance versus eventual task completion are logically distinct gaps
+6. Nov06 PAC shield finite-horizon harm bound cannot be inferred from AgentLTL procedural compliance on seven evaluated models
+7. Nov07 AgentLTL deferred liveness and Nov04 sequential memory MDP both depend on future transitions, neither implies current final outcome
+8. Nov03 shell-only baseline winning 7/12 versus 4/12 under fixed model is not evidence that all domains benefit from fewer tools
+9. Nov06 all-halt shield is a counterexample where mathematically bounded harm and user-requested task completion diverge
+10. Nov01 user-preference response diversity should not be used as a proxy for Nov07 actual external tool-effect integrity
+11. Nov02 source paper has missing exact vN suffix and Nov06 shield explicitly uses v2 after v1; version authority must be checked per document
+12. Nov04 assigned logical day and actual Nov05 writing are separate clocks, as are the paper's August12 publication and Nov04 coverage entry
+13. Nov01 English/Chinese source mirror has same arXiv canonical ID, so bilingual parity increases documentary coverage but adds zero independent citations
+14. Nov02 patch-history 83.33% lower than trace+memory 86.67% is direct nonmonotonic ablation counterevidence, not a failed local memory experiment
+15. Nov04 noisy extraction can increase apparent coverage while decreasing factual correctness, distinct from MemBubble narrowing the sampled answer classes
+16. Nov05 conditional type/effect theorem requires executed residual runtime checks; a static proof quote cannot establish the protected tool mediation path
+17. Nov06 PAC risk bound depends on candidate next-state support, a surface not covered by Nov05 type/effect monitor alone
+18. Nov07 grounding metric may pass vacuously for empty-entity refusal; it should not be combined with Nov03 Lean proof acceptance which rejects invalid proof artifacts
+19. W44 Weekly naturally closes Nov01 and can ingest Nov01 Memory, while Nov02 research belongs to W45 regardless of later main visibility
+20. W44 five candidate tool gates are a proposed cross-document synthesis, not a formal theorem or existing runtime contract
+21. Source registry Sxx admission is absent from all reviewed daily updates; paper use, source mapping and Verified Core promotion remain separately controlled
+22. Current November month is open, therefore any Foundation monthly Strategic Blueprint is NOT_DUE rather than missing a successful November-final run
+23. Direct bilingual source markers for MemBubble, MemScope, formal memory, mini-Lean, ETAS, PAC and AgentLTL were present in their respective EN/ZH containers at the inspected main
+24. Cross-project citation to Axiom/Zero does not supply independent empirical confirmation of the underlying same-author paper result
+25. Proof-carrying trace, shield, approval authority, actual effect receipt and final correctness are five necessary-to-distinguish evidence classes, not five already implemented local modules
+
+## Original A1 admission after branch-local supplementation
+- Initial original Draft review NOT_MET was valid for the first branch version and is retained in the Git commit history; this is a pre-merge revision of the original A1 PR, never a successor
+- Substantive numerator: 96 source-specific analyses + 25 cross-object discriminations = 121 individual non-inventory decisions on this original PR branch
+- EN/ZH source identity parity checked for seven distinct author papers. Actual validator, source experiment replication, durable implementation and Sxx promotion NOT_EXECUTED
+- Current self-QA status: PASS_SELF_QA_PENDING_FRESH_GITHUB_NUMERIC_AND_DIFF_CHECK. No independent Human Review and no A2 before this exact A1 has merged and main has been reopened
