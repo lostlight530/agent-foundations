@@ -1600,3 +1600,53 @@ NOT_TESTED
 - NEXT_RETEST_CONDITION: 固定 Lean/compiler/checker revision 与目标命题，在批准后替换工件，并变化公理/遮蔽条件，检查明确拒绝与完整 receipts；独立验证还需独立环境与评估者
 
 没有修改历史 Daily 或 Jules 内容。Weekly Cascade 与 October Monthly 是独立阶段，自然月仍 OPEN，作者未执行本仓 validator、Lean proof harness 或 GitHub Actions，因此不声明其 PASS
+
+## 2026-11-08 GPT Native 每日研究 — STEAD 精确有限验证的 Agent 等变性前提
+
+### 身份与原始来源
+- Canonical Task：`foundations/research/daily`；逻辑日期：2026-11-08 Asia/Shanghai；容器：Architecture Principles
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY. Base merged main: 38fac1422fdd75d068850a01ce847f3283e21cfd. Run: agent-foundations/research/daily/2026-11-08/GPT_NATIVE/38fac1422fdd75d068850a01ce847f3283e21cfd/stead-foctl-equivariance-01. UTC inspection: 2026-11-08T07:57:00.307Z.
+- 论文原始身份：Alejandro J. Mercado、Alessio Lomuscio，*Formal Verification of Agentic Systems over Operational Data*，arXiv:2608.03609v1，版本提交时间 2026-08-04 13:01:30 UTC
+- 本轮直接阅读的原始来源：https://arxiv.org/abs/2608.03609v1、https://arxiv.org/html/2608.03609 ，核查定义、Theorem 8/13/18、Lemma 19、Proposition 21、工作案例及部分证明附录
+- 摘要、全文、案例和中英文文档属于**一个** canonical source identity；Sxx：NOT_REGISTERED / 未分配；Verified Core：NOT_PROMOTED；研究检查日不能冒充发表日
+
+### 机制与有界定理前提
+Stateful Tool-Enabled Agentic Deployment（STEAD）把 LLM-based policy `Π`、可调用工具集合 `Offer(D)`、持久化有类型关系状态 `D` 与工具状态转移语义 `τ` 放进同一个模型。作者使用 FO-CTL 表达业务对象层面的分支安全性与最终进展，而不是仅检查工具调用是否返回成功。Theorem 8：一般 STEAD 验证问题不可判定
+
+Theorem 13 提供的有限域化简是满足前提时的**精确**结果：固定有限集合 `C` 覆盖初始活跃对象及公式常量；可达状态有各类型上界 `b_S`（C-bounded）；工具 offer 与 Agent policy 对类型保持的对象标识重命名具有 C-equivariance；工具转移满足 C-tool-uniformity。每一类型 `S` 的有限代表域必须是原全集，或满足：
+
+```text
+|U_f,S| >= 2*b_S + |C ∩ U_S| + var_S(phi)
+```
+
+在这些约束下，原文建立 `M |= phi iff M restricted to U_f |= phi`，显式有限模型上的 FO-CTL 验证联合复杂度为 PSPACE-complete。没有证明界、状态完整性和重命名不变性的现实 Agent/Tool Harness，不能直接继承此定理
+
+Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义的 user/case ID 做一致重命名，选中的 grounded tool call 应同步映射，不应改变语义目标。论文提供 LLM 违反这一条件的案例。Theorem 18 的 canonical-context wrapper 汇总**所有**合法 canonical witness 的逆向映射选择；对称对象下任意只挑一个 witness 可能破坏等变性，wrapper 可能变成多候选的非确定性策略；保留 singleton 还需要 action-rigidity（Proposition 21）。规范代表的计算具有 graph-isomorphism-hard 难度（Lemma 19），不能看作免费预处理
+
+### Counterevidence Gate 与原文案例
+1. **对象标识反例**：置换关系完全同构的 user/case ID，若 Agent 工具调用目标不按同一映射改变，则等变性被反证
+2. **对称目标反例**：两个不可区分的 ticket 有多个 canonical witness，任意 tie-break 可能破坏等变性；全部 witness 的 union 又可能改变原先的单动作语义
+3. **隐藏状态反例**：session memory、远端审批与 effect-time authorization 没有编码进 `D`，作者的完整 Markov 决策上下文前提尚未成立；即便 tool guard 通过也不能证明业务状态正确
+4. **边界增长反例**：活跃业务对象超过 `b_S` 或工具语义不满足 uniformity 时，采样有限模型不能叫精确验证
+
+原文退款案例报告 55 个状态、72 条转移、4 个不同的模型查询上下文；关键是作者的 FO-CTL 评估**反证了退款授权安全性**，同时在该特定 wrapper/workflow 上**证明了结案进展属性**。发现反例才是有价值的科研结果，不能写成系统通用 PASS。上述数字与性质是作者案例结果，不是本仓独立复现
+
+### 面向 Architecture Principles 的映射与五轴证据状态
+- `CANDIDATE_MECHANISM`：未来任何业务状态可验证性声明需绑定类型化 schema、精确 state snapshot、可选工具与语义、Agent policy/Harness revision、常量集合、域上界、FO-CTL 公式、标识映射与实际检查回执
+- `COUNTEREVIDENCE`：置换 ID、注入同构对称对象、未建模审批历史或扩大活跃域，再比较调用身份与状态时序性质
+- `OUT_OF_SCOPE`：单 LLM 关系系统定理不能直接证明多 Agent 协作、分布式持久性、效果时刻授权、真实外部副作用或本仓 Runtime
+- Claim State：`OBSERVED`（原作者定理、定义及证明摘要；未独立证实形式证明）
+- Evidence Level：`E4_PREPRINT`（原始版本全文已读）
+- Mapping State：`CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED`
+- Validation State：`NOT_TESTED`
+
+### Evidence Delta 与复验
+- NEW_EVIDENCE：FO-CTL 精确有限验证的关系状态、C-bounded、等变性、工具语义一致性与对称对象边界
+- CORRECTED_INTERPRETATION：调用级过程合规不是运行状态的授权安全性与最终进展证明
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；论文定理不等于独立形式化复验
+- NEW_COUNTEREVIDENCE：标识敏感选择、canonical witness 歧义、隐藏权限与活跃对象超界均可能破坏有限化简；原文示例甚至不满足授权属性
+- UNKNOWN_RETAINED：独立证明复核、真实 Agent 的完整状态模型、canonicalization 性能、宿主实现及外部 effect receipts
+- NEXT_RETEST_CONDITION：固定源版本和最小关系系统，构造同构状态与对称动作、加入未建模历史和改变对象上界；真正运行模型检查器时保留输入、revision、命令、环境、stdout/stderr、exit code 与 counterexample trace
+
+交付边界：仅现有中英文 Architecture Principles 两处追加研究。历史 Jules、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、实现、测试、workflow 及独立 WorkflowHub #378 不动。论文代码、证明复核与本仓 validator 均为 NOT_EXECUTED

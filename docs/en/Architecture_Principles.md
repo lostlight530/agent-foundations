@@ -1595,3 +1595,53 @@ The author reports 93 to 100 benchmark-rule successes on a fixed 100-task VeriSo
 - NEXT_RETEST_CONDITION: pin a Lean/compiler/checker revision and target statement, replace candidate bytes after approval and vary axioms/shadowing to test explicit refusal with exact receipts; require a separate environment and independent evaluator for external validation
 
 No historical Daily or Jules material was altered. Weekly cascade and October Monthly remain separate, the natural month is OPEN, and no validator, local proof harness, or GitHub Actions check is claimed executed by this authoring step.
+
+## 2026-11-08 Daily Research — STEAD exact finite verification requires an equivariant agent
+
+### Identity / original evidence
+- Canonical task: `foundations/research/daily`; logical date 2026-11-08 Asia/Shanghai; container: Architecture Principles
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY. Base merged main: 38fac1422fdd75d068850a01ce847f3283e21cfd. Run: agent-foundations/research/daily/2026-11-08/GPT_NATIVE/38fac1422fdd75d068850a01ce847f3283e21cfd/stead-foctl-equivariance-01. UTC inspection: 2026-11-08T07:57:00.307Z.
+- Primary original paper: Alejandro J. Mercado, Alessio Lomuscio, *Formal Verification of Agentic Systems over Operational Data*, arXiv:2608.03609v1; source version date 2026-08-04 13:01:30 UTC
+- Original primary sources inspected: https://arxiv.org/abs/2608.03609v1 and https://arxiv.org/html/2608.03609 ; original paper definitions, Theorems 8/13/18, Lemma 19, Proposition 21, worked case and parts of proof appendices
+- One canonical source identity across abstract, HTML, case study and bilingual record. Source Registry: NOT_REGISTERED / NO_NEW_Sxx; Verified Core: NOT_PROMOTED. Date checked is not publication date
+
+### Formal mechanism and bounded proof
+A Stateful Tool-Enabled Agentic Deployment (STEAD) couples an LLM-based policy `Π`, an offered-call function `Offer(D)`, persistent typed relational state `D` and tool transition semantics `τ`. The authors use FO-CTL to specify relational business-state safety and branching progress, not merely interface-level tool call checks. Theorem 8: general STEAD verification is undecidable.
+
+Theorem 13 provides an **exact finite restriction only under stated hypotheses**: a finite distinguished set `C` covers initial objects and formula constants; reachable state is `C`-bounded with per-sort bounds `b_S`; offered calls and agent policy are `C`-equivariant under typed identifier renamings; tool semantics are `C`-tool-uniform. For every sort `S`, the finite representative domain either is the entire sort or has
+
+```text
+|U_f,S| >= 2*b_S + |C ∩ U_S| + var_S(phi)
+```
+
+The authors then establish `M |= phi iff M restricted to U_f |= phi`; FO-CTL verification of an explicitly given restriction is PSPACE-complete in combined complexity. This does **not** establish a usable finite verifier for an arbitrary hidden-state LLM/harness or a deployment whose bounds and renaming invariants have not been proven.
+
+Agent equivariance specifically requires `Π(D2, iota(A)) = iota(Π(D1,A))`: opaque object-ID renaming in a relationally equivalent decision context should rename the chosen grounded tool call, rather than change its semantic target. The paper reports an LLM decision-context counterexample. Theorem 18's canonical-context wrapper unions mapped-back selections over **all canonical witnesses**; selecting one witness through an arbitrary tie-break may break equivariance for symmetric objects. The wrapper can therefore be set-valued/nondeterministic; singleton behavior needs additional action-rigidity (Proposition 21). Canonical representative computation is graph-isomorphism-hard (Lemma 19), not free canonicalization.
+
+### Concrete counterevidence and author-reported case
+1. **ID perturbation:** permute non-rigid user/case identifiers while keeping relations and offered calls isomorphic. A policy that selects an unrelated target violates agent equivariance
+2. **Symmetric objects:** two indistinguishable tickets yield multiple canonical labelling witnesses. Arbitrarily pinning one witness breaks symmetry; unioning all witnesses can change the action set
+3. **Unmodelled state:** memory, authorization, approval or tool data absent from `D` violates the assumed complete Markov decision context, so a passing tool guard need not imply correct operational-state evolution
+4. **Unbounded reachability:** extra live objects beyond `b_S` or nonuniform tools invalidate the finite-restriction premise; sampled finite tests are not a proof
+
+The paper's case-management example reports a 55-state / 72-transition finite system and four distinct model-query contexts. Crucially, the authors' FO-CTL evaluator **refutes refund authorization safety** while **certifying case-resolution progress** for that specific wrapped workflow. A formal method finding a counterexample must not be advertised as a universal PASS. These are author-reported case-study observations, not this repository's reproduction.
+
+### Theory-to-architecture mapping / five evidence axes
+- `CANDIDATE_MECHANISM`: before any claim of system-state verification, bind typed schema, exact state snapshot, tool offers/semantics, agent policy/harness revision, fixed constants, domain bounds, FO-CTL sentence, identifier mapping and verification receipts
+- `COUNTEREVIDENCE`: rename opaque IDs, add indistinguishable objects, inject hidden approval history or vary active-domain sizes, then check exact action identity and temporal state predicates
+- `OUT_OF_SCOPE`: one-LLM relational STEAD does not prove multi-agent collaboration, distributed durability, effect-time authorization, arbitrary external side effects or this repository's runtime
+- Claim State: `OBSERVED` (author statements, definitions and proof sketches; no independent theorem verification)
+- Evidence Level: `E4_PREPRINT` (original versioned full-text read)
+- Mapping State: `CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State: `NOT_IMPLEMENTED`
+- Validation State: `NOT_TESTED`
+
+### Evidence Delta
+- NEW_EVIDENCE: exact conditions connecting persistent relational-state FO-CTL to finite-domain verification and the source-level obstacle from object-identifier symmetry
+- CORRECTED_INTERPRETATION: interface/action guard compliance is narrower than a proof of evolving operational-state authorization or progress
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; publication/source ≠ independent reproduced theorem
+- NEW_COUNTEREVIDENCE: ID-sensitive policies, ambiguous canonical witnesses, omitted memory/authorization and unbounded populations can break the claimed reduction; even the paper's worked example fails its authorization property
+- UNKNOWN_RETAINED: independent proof replay, correct state abstraction in a real agent, canonicalization scalability, host behavior and validated effect receipts
+- NEXT_RETEST_CONDITION: pin exact paper/code, construct isomorphic typed-state and symmetric-call cases, vary hidden state and active bounds, then execute a model checker; retain model, environment, command, revision, stdout/stderr, exit status and witness trace
+
+Delivery: paired append-only EN/ZH Architecture Principles research. No historical Jules text, Source Registry Sxx, Verified Core, implementation, other containers, Weekly/Monthly, workflows or independent WorkflowHub PR #378 changes. Formal proof checking, paper code and repository validator: NOT_EXECUTED.
