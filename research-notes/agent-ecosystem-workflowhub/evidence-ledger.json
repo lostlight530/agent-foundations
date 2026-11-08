@@ -1,12 +1,22 @@
 {
-  "title": "Agent Open Ecosystem Discussions → WorkflowHub Evidence Corpus",
-  "version": "0.1.0-draft",
-  "cutoff_date": "2026-11-04",
+  "title": "Astron, Nexent and DeerFlow → WorkflowHub Research Corpus",
+  "version": "0.3.0-research",
+  "cutoff_date": "2026-11-08",
   "owner_git_login": "lostlight530",
-  "intent": "Platform-separated research objects generated from public GitHub interactions with explicit claim/reply/provenance boundaries",
-  "state": "PROPOSAL_AND_SOURCE_INDEX_ONLY; no executable research workflow or WorkflowHub DOI asserted",
+  "intent": "Three platform-separated research objects generated from public GitHub interactions and version-pinned architecture sources, preserving claim, reply, correction, version and provenance boundaries",
+  "state": "RESEARCH_SYNTHESIS_AND_WORKFLOWHUB_METADATA_COMPLETE; executable replay and external WorkflowHub publication not asserted",
   "method": "Platform edition identity is separate from each WorkflowHub workflow's own version/revision identity",
-  "evidence_scope": "Curated identified primary records; not an exhaustive GitHub-wide census; GitHub Discussions are not exposed by connected REST fetch",
+  "evidence_scope": "All publicly identified records in the scoped Astron, Nexent and DeerFlow source set; not a guarantee of an exhaustive GitHub-wide census because GitHub Discussions are not fully exposed by the connected REST fetch",
+  "observation": {
+    "reviewed_at": "2026-11-08",
+    "verification_methods": [
+      "connected GitHub plugin",
+      "public GitHub pages"
+    ],
+    "default_preservation_status": "LIVE_PAGE_ONLY",
+    "immutable_discussion_snapshot_captured": false,
+    "boundary": "A current live-page recheck verifies the rendered object at observation time but is not an immutable historical snapshot"
+  },
   "platforms": [
     {
       "edition": "E1",
@@ -155,19 +165,19 @@
       "platform": "iflytek_ecosystem",
       "kind": "issue_comment",
       "url": "https://github.com/iflytek/memflywheel/issues/72#issuecomment-5750056853",
-      "date": null,
+      "date": "2026-09-20",
       "actor": "lostlight530",
       "title": "MemFlywheel architecture interpretation",
       "topic": "host/adapter/SDK/core/data; extraction/recall/dream/skill",
       "evidence": "PUBLIC_PRIMARY",
-      "limitation": "actual issue comment, not issue authored by user"
+      "limitation": "actual issue comment under an issue authored by another account; issue closed completed 2026-09-27"
     },
     {
       "id": "IF-I72-M",
       "platform": "iflytek_ecosystem",
       "kind": "issue_comment",
       "url": "https://github.com/iflytek/memflywheel/issues/72#issuecomment-5857588519",
-      "date": null,
+      "date": "2026-09-27",
       "actor": "FenjuFu",
       "title": "Maintainer confirmation of interpretation",
       "topic": "said interpretation matches docs/architecture.md; issue closed",
@@ -179,19 +189,19 @@
       "platform": "iflytek_ecosystem",
       "kind": "issue_comment",
       "url": "https://github.com/iflytek/memflywheel/issues/18#issuecomment-5750057816",
-      "date": null,
+      "date": "2026-09-20",
       "actor": "lostlight530",
       "title": "MemFlywheel use observation",
       "topic": "cross-environment practice; portable file-native memory; experience loop",
       "evidence": "PUBLIC_PRIMARY",
-      "limitation": "self-reported practice, no independent runtime reproduction"
+      "limitation": "self-reported practice under an open community-use issue, no independent runtime reproduction"
     },
     {
       "id": "IF-I18-M",
       "platform": "iflytek_ecosystem",
       "kind": "issue_comment",
       "url": "https://github.com/iflytek/memflywheel/issues/18#issuecomment-5857589250",
-      "date": null,
+      "date": "2026-09-27",
       "actor": "FenjuFu",
       "title": "Maintainer acknowledgement",
       "topic": "thanks for hands-on experience",
@@ -352,6 +362,8 @@
       "title": "Memorial wall contribution",
       "topic": "closed without merge",
       "evidence": "PUBLIC_PRIMARY",
+      "head_sha": "1e344976eaf476f993aefe9516b4d4605c3de2e0",
+      "object_state": "CLOSED_UNMERGED",
       "limitation": "not agent runtime implementation"
     },
     {
@@ -364,6 +376,8 @@
       "title": "Memorial wall contribution revision",
       "topic": "closed without merge",
       "evidence": "PUBLIC_PRIMARY",
+      "head_sha": "fe76a3a142a03529fefdef02389a4aa646da4f23",
+      "object_state": "CLOSED_UNMERGED",
       "limitation": "not agent runtime implementation"
     },
     {
@@ -376,19 +390,25 @@
       "title": "Memorial wall contribution",
       "topic": "merged 2025-11-25",
       "evidence": "PUBLIC_PRIMARY",
+      "head_sha": "c206605be706302d76d6cf114be740500301abe7",
+      "merge_commit_sha": "7b314fc6bed6d57763d906800c8de52a4a72bc67",
+      "object_state": "MERGED",
       "limitation": "community data contribution; no orchestration code"
     },
     {
       "id": "DF-REPO",
       "platform": "deerflow",
       "kind": "official_repository",
-      "url": "https://github.com/bytedance/deer-flow",
-      "date": null,
+      "url": "https://github.com/bytedance/deer-flow/blob/284e0d537d1a5115704e71ed741b5ce37bf1fbb9/README.md",
+      "date": "2026-11-08",
       "actor": "bytedance",
       "title": "DeerFlow 2.0 official technical description",
       "topic": "subagents, memory, sandbox, Skills, context, gateways; 2.0 rewrite",
       "evidence": "PUBLIC_PRIMARY",
-      "limitation": "platform architecture reference, not user contribution"
+      "source_version": "commit:284e0d537d1a5115704e71ed741b5ce37bf1fbb9;blob:4340b4d1dec1a41a5a5ac850aacbf742ab97d0ec",
+      "preservation_status": "PINNED_GIT_OBJECT",
+      "limitation": "platform architecture reference, not user contribution; records the official README state observed on 2026-11-08"
     }
   ]
 }
+

@@ -1,38 +1,75 @@
-# Agent Open Ecosystem → WorkflowHub / GitHub 公开技术讨论科研化
-**Status:** `RESEARCH_DESIGN_DRAFT` · checked 2026-11-04 · public-source-only · no DOI, no demonstrated WorkflowHub registration, no executable workflow claimed
+# Agent 开放生态互动研究 → WorkflowHub 三研究对象
 
-## Purpose / 目的
-Reconstitute inspectable, platform-separated research objects from the researcher's **own** public GitHub Discussions, Issues, individual Comments, PRs, and the actual responses of maintainers. Our object of study is **the evolution of engineering reasoning and public collaboration**, not a contest between commercial Agent runtimes, an official collaboration dossier, a product adoption claim, or a promotional aggregate.
+**Status:** `RESEARCH_SYNTHESIS_CANDIDATE` · source cutoff 2026-11-08 · public GitHub evidence only · not an official platform statement
 
-核心转换：**GitHub original object → source identity and interaction edge → bounded knowledge / counterevidence → versioned research-workflow package → WorkflowHub discovery / citation / re-use**. A Discussion is source data; a future runnable evidence-aggregation workflow is the publishable computational method. A prose-only upload should never be advertised as an executed WorkflowHub workflow.
+## 研究对象
 
-## Platform editions / 平台版次
-| Research series edition | Topic | Evidence status | Own WorkflowHub version |
-|---|---|---|---|
-| E1 Astron | AgentFlow → Workflow Contract → Entrustability; iFLYTEK organization and MemFlywheel ecosystem separate annex | public practice + discussions + issue comments | separate entry/revision series |
-| E2 Nexent | RailSmart → dynamic semantic orchestration / MCP → Skills ≠ subagents → Harness / control plane | 7 repo Discussions + one organization Discussion + maintainer replies + 3 community PRs | separate entry/revision series |
-| E3 DeerFlow | Research Flow → Super Agent Harness, state, sandbox, memory, skills, subagents | primary software documentation; user GitHub participation not yet corroborated | separate entry only if a meaningful executable research object exists |
+这不是一次仓库审计，也不是把 GitHub 链接机械搬到 WorkflowHub
 
-Here `E1/E2/E3` are **our collection's platform editions**, *not* a claim that a Nexent upload is a successor revision of an Astron executable workflow. Each platform gets a separate workflow/RO-Crate when validated, then its own genuine revision history. No mixing of publisher versions, source revisions, and inferred implementation histories.
+本研究把 `lostlight530` 在 Astron、Nexent 与 DeerFlow 相关公开空间中的 Discussion、Comment、维护者回复、PR 和官方架构材料，转换成三个可独立发布、可继续版本化的 WorkflowHub 研究对象
 
-## Core source classes
-- `discussion`: one GitHub thread; `discussion_comment`: independently attributed response within that thread
-- `issue_comment`: separately attributed comment under an Issue someone else may own
-- `pull_request`: distinguish merged / closed-unmerged / changes actually contributed
-- `official_repository`: architectural reference, **not** evidence that the user contributed
-- `private_account`: personal event or private correspondence must not be shipped into public WorkflowHub assets by default
+1. **Astron edition** — 从 AgentFlow 实践，经由 Entrustability、Workflow Contract、系统责任、社区维护与文件原生记忆，形成可信 Agent 工作流研究
+2. **Nexent edition** — 从 RailSmart 实践，经由 MCP 接入、动态语义编排纠偏、Agent/Skill 分离、Harness、Prompt Contract 与 Skill Control Plane，形成动态编排治理研究
+3. **DeerFlow edition** — 从 Research Flow 到 2.0 Super Agent Harness，研究 Sub-agent、Memory、Sandbox、Skills、Context 与 Gateway 如何构成通用 Agent 运行底座
 
-See [machine-readable ledger](./evidence-ledger.json), [Astron](./PLATFORM-EDITION-ASTRON.md), [Nexent](./PLATFORM-EDITION-NEXENT.md), [DeerFlow](./PLATFORM-EDITION-DEERFLOW.md), and [research/release protocol](./PROTOCOL.md).
+三条研究线共享证据转换方法，但不互相冒充版本关系，也不把维护者回复、官方文档或个人参与解释成平台背书
 
-## Audit boundaries / 已检查与尚未检查
-- GitHub account: `lostlight530` from the connected GitHub account
-- Public sources checked using GitHub-linked search, PR API / issue-comment APIs, and primary GitHub Discussion pages
-- A search returning zero Issues is **not** global proof of no contributions; GitHub Discussions and all reply threads are not fully exposed through this connector's REST fetch
-- Counts concern different object classes: 7 Nexent Discussion threads ≠ 7 comments; Nexent's one merged memorial-wall PR ≠ core runtime contribution
-- DeerFlow author/event/DM contact reported in earlier personal discussions remains **self-reported external context**; do not publish correspondence or claim formal invitation/adoption on public research-object metadata without independently shareable evidence
+## 已整理的公开对象
 
-## Non-goals
-No update to `FOUNDATION/**` verified core, canonical Sxx sources, research producers, Actions, release metadata, OSF preregistration, or existing Zenodo / WorkflowHub freezes. This is a **research-notes sidecar** intended for human review before any scientific claim admission.
+| 研究线 | GitHub 原始对象 | 当前证据结构 | 研究主轴 |
+|---|---:|---|---|
+| Astron / iFLYTEK ecosystem | 4 个 Astron Discussions、2 个组织 Discussions、2 个 MemFlywheel Issues | 14 条规范记录，组织 Discussion #1 内含两条独立用户评论 | 实践 → 可信执行 → 合同 → 责任 → 生态维护与记忆 |
+| Nexent / ModelEngine | 1 个组织 Discussion、7 个仓库 Discussions、3 个 PR | 15 条规范记录 | 案例 → MCP → 动态编排纠偏 → Agent/Skill → Harness → Contract → Control Plane |
+| DeerFlow | 固定提交与 Git blob 的官方 2.0 README | 1 条固定架构记录，公开互动层待继续补齐 | Research Flow → Super Agent Harness → 通用运行底座 |
 
-## Independent significance
-From **open engineering dialogue** to **verifiable research objects**: we can preserve disagreement, maintainer correction, boundary conditions and interaction chronology, without attributing official status to personal theories. That is the transferable RSE/Open Science method, not simply cross-posting discussions.
+账本目前共 30 条规范记录，其中一个 Astron 聚合记录明确表示两条同线程评论，因此“账本记录数”不能替代“GitHub 对象数”
+
+## 从公开互动到研究对象
+
+```text
+GitHub Discussion / Comment / PR / pinned official source
+        ↓
+对象身份、作者、日期、回复关系与状态
+        ↓
+实践命题、维护者反馈、技术纠偏、架构代际与未解决问题
+        ↓
+平台内时间演进图与跨平台可比较研究维度
+        ↓
+Astron edition / Nexent edition / DeerFlow edition
+```
+
+研究转换保留四种不同事实
+
+- **提出了什么** — 用户的案例、概念或工程建议
+- **平台如何回应** — 邀请、感谢、路线图说明、技术纠偏或可复现实验建议
+- **什么真正进入代码或官方材料** — PR 是否合并、合并内容属于什么、固定文档明确声明什么
+- **什么仍然未知** — 未执行、未冻结、未由官方确认或无法从公开材料复现的部分
+
+## 三研究对象的共同贡献
+
+- 把 Agent “能力”问题转成可检查的执行合同、授权、状态、恢复与证据问题
+- 把显式 AgentFlow、动态语义编排和通用 Super Agent Harness 区分开
+- 把 Agent、Sub-agent、Skill、MCP、Tool、Sandbox、Memory 与 Harness 分成不同责任对象
+- 把开放社区互动和官方架构演进转换成可追踪研究，而不是宣传性背书
+- 为 WorkflowHub 形成可继续增加执行器、RO-Crate、测试夹具和版本说明的三对象结构
+
+## 文件
+
+- [Astron 研究版](./PLATFORM-EDITION-ASTRON.md)
+- [Nexent 研究版](./PLATFORM-EDITION-NEXENT.md)
+- [DeerFlow 研究版](./PLATFORM-EDITION-DEERFLOW.md)
+- [Astron WorkflowHub 填写资料](./WORKFLOWHUB-ASTRON.md)
+- [Nexent WorkflowHub 填写资料](./WORKFLOWHUB-NEXENT.md)
+- [DeerFlow WorkflowHub 填写资料](./WORKFLOWHUB-DEERFLOW.md)
+- [机器可读互动账本](./evidence-ledger.json)
+- [研究转换与发布合同](./PROTOCOL.md)
+
+## 边界
+
+- 研究内容来自公开 GitHub 页面，不包含微信、私信、活动现场或其他未公开通信
+- Discussion 与 Comment 是研究输入，不自动等于被平台采纳的产品需求
+- Nexent #1838 是已合并的社区纪念墙数据贡献，不是核心编排代码贡献
+- DeerFlow 当前以固定官方架构源为主，不能把未确认的个人互动写成公开贡献
+- 当前产物是完整研究语义与 WorkflowHub 元数据候选，不宣称 WorkflowHub 已执行代码、冻结版本或签发 DOI
+- 后续若加入可执行处理器，应在不改写本研究历史的前提下增加冻结输入、测试和运行回执
+
