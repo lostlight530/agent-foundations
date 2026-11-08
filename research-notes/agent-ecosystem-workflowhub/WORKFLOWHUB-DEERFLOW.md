@@ -10,7 +10,7 @@ A version-pinned architecture research workflow that maps DeerFlow's transition 
 
 ## Source
 
-https://github.com/lostlight530/agent-foundations/tree/main/research-notes/agent-ecosystem-workflowhub
+https://github.com/lostlight530/agent-foundations/tree/research/agent-ecosystem-workflowhub-20261104/research-notes/agent-ecosystem-workflowhub
 
 ## Version comment
 
