@@ -75,3 +75,136 @@
 - UNKNOWN_RETAINED: full Nov01–07 independent semantic read, date-specific snapshot of rolling current owners, original >=100 substantive judgment acceptance and local runtime proof
 - NEXT_RETEST_CONDITION: historical Nov07 as-of revision, exact branch and source version comparison, substantive diff line classification and independent runnable fixture where contract requires it
 - ORIGINAL_A1_ACCEPTANCE=NOT_MET; A2 Fresh-read Gate BLOCKED unless strict original conditions are met in real GitHub PR; no A2 started
+
+
+
+## First-party original section review for Nov01–07 (3 Memory + 4 Tool + W44 Weekly)
+
+- The eight canonical substantive source sections were reopened on current main; their paired EN/ZH containers are two language representations, not 16 independent sources
+
+- This addendum contains 96 technical source-adjudication lines across these eight distinct original research/weekly records; no source list, heading or prior full report is in the semantic numerator
+
+- Source registry, Verified Core, runtime implementation and local validation remain independent promotion gates
+
+
+
+### Nov01 Memory MemBubble — `docs/en/Memory_System.md`
+- **1/12 evidence judgment:** MemBubble arXiv:2610.25127v1 was submitted Oct18, whereas Nov01 is the repository's source observation date
+- **2/12 evidence judgment:** The 1,000 source instances are constructed from user-dialogue preference evidence, not a local Agent Foundations benchmark
+- **3/12 evidence judgment:** Functional equivalence-class judge revision is part of response-class entropy identity, unlike arbitrary memory-graph entropy
+- **4/12 evidence judgment:** Author aggregate class-entropy reduction 34.7% uses Full-history reference condition
+- **5/12 evidence judgment:** The 34.1% relative to No-memory is a different baseline and cannot be combined with the Full-history percentage
+- **6/12 evidence judgment:** Distinct-k reduction 25.7% is a separate breadth measurement, not a KL divergence
+- **7/12 evidence judgment:** Six responding model identities and five memory mechanisms constrain any generalization beyond the controlled experiment
+- **8/12 evidence judgment:** MemoryOS versus mem0 variation defeats claims all memory implementations have the same diversity tradeoff
+- **9/12 evidence judgment:** A task with one legally valid answer may benefit from reduced diversity; diversity reduction is not automatically quality loss
+- **10/12 evidence judgment:** Fixed conversation histories leave long-running feedback and preference evolution outside the study's tested scope
+- **11/12 evidence judgment:** Model-memory conditioning, task applicability and sample judge should be separately versioned in a local hypothetical evaluation
+- **12/12 evidence judgment:** EN/ZH insertions are documentary mappings with no Sxx registration, runtime implementation or verified-core admission
+
+### Nov02 Memory MemScope — `docs/en/Memory_System.md`
+- **1/12 evidence judgment:** MemScope arXiv:2610.21170 initial Oct15 manuscript was read Nov02, but exact version suffix remains unverified
+- **2/12 evidence judgment:** Provider code, stored memory and raw execution trace are three separate diagnostic inputs in MemScope's patch mechanism
+- **3/12 evidence judgment:** The source proposes bounded old-to-new provider replacements rather than unconditional rewriting of all memory state
+- **4/12 evidence judgment:** A legitimate no-patch decision exists where existing provider behavior satisfies the test
+- **5/12 evidence judgment:** GAIA summary-only 63.33% and trace-only 70.00% are author reported under specific diagnostic conditions
+- **6/12 evidence judgment:** GAIA trace+memory 86.67% is higher than patch-history 83.33% in that author's ablation; longer history was not monotonic improvement
+- **7/12 evidence judgment:** ALFWorld evolved 48/67 and original 34/67 use the author's matched task setup, not a local deployment comparison
+- **8/12 evidence judgment:** Fourteen archived transitions with median 4.4% change ratio say nothing about safety of one unverified patch
+- **9/12 evidence judgment:** A patch should bind provider revision, original trace, source snapshot, store incarnation and before/after postconditions
+- **10/12 evidence judgment:** Trace omissions or stale stores can produce a false repair diagnosis even when the code diff is small
+- **11/12 evidence judgment:** Both absence of exact source version and unrun code tests retain Validation NOT_TESTED
+- **12/12 evidence judgment:** This MemScope mapping is distinct from Nov01 MemBubble diversity and cannot be merged into a common benchmark denominator
+
+### Nov04 Memory basis — `docs/en/Memory_System.md`
+- **1/12 evidence judgment:** The Nov04 logical research was actually written Nov05; time provenance must not imply executed research Nov04
+- **2/12 evidence judgment:** Formal memory basis paper arXiv:2608.11654v1 is an August12 original source, not a new Nov04 publication
+- **3/12 evidence judgment:** The paper models retained memory basis M_D as a bounded subset of atomic source events E_D
+- **4/12 evidence judgment:** The generation operator Φ maps stored event subsets to derived knowledge spans, which need not consist solely of originally stored event tokens
+- **5/12 evidence judgment:** Single-item support requires one retrieved item sufficient for a query, not arbitrary multi-evidence reasoning
+- **6/12 evidence judgment:** Query coverage u(q,M_D) is separate from end-to-end answer correctness under a reasoning policy
+- **7/12 evidence judgment:** Decomposable weighted maximum-coverage assumptions are required before a greedy 1−1/e approximation bound can be reused
+- **8/12 evidence judgment:** Synergistic queries requiring multiple events do not inherit the decomposable approximation result automatically
+- **9/12 evidence judgment:** Monotonicity of the generation operator can fail when contradictory or stale events influence extraction
+- **10/12 evidence judgment:** Noisy extraction may improve apparent coverage by adding incorrect claims, falsifying truth-by-recall assumptions
+- **11/12 evidence judgment:** Changing query distribution can make yesterday's optimized retention set suboptimal without any underlying code defect
+- **12/12 evidence judgment:** No algorithm, local datastore, independent proof checker or source registry admission was established by this documentary mapping
+
+### W44 Weekly cascade — `docs/en/Tool_System.md`
+- **1/12 evidence judgment:** W44 ISO interval Oct26–Nov01 was naturally closed when its Weekly was reviewed Nov02
+- **2/12 evidence judgment:** Seven Daily calendar dates had visible bilingual documents, a coverage fact distinct from seven independent runtime experiments
+- **3/12 evidence judgment:** Nov02 Memory Daily is in W45 and is not eligible as input to W44 even if visible later
+- **4/12 evidence judgment:** EPGM source membership completeness is narrower than actual source truth or completed tool side effects
+- **5/12 evidence judgment:** I-HITL source constrains trusted mediator and approval binding rather than merely displaying an approval dialog
+- **6/12 evidence judgment:** Forall-Lean-Agent proof artifact identity is separate from the source statement and forbidden-axiom acceptance checks
+- **7/12 evidence judgment:** Speculative trajectory accepted prefix does not demonstrate effect-time tool authorization or committed side effect
+- **8/12 evidence judgment:** Dependency-tethered memory source validity needs every relevant changed/revoked dependency, not an arbitrary list of links
+- **9/12 evidence judgment:** Nov01 MemBubble entropy is an author-scoped response distribution rather than final task correctness evidence
+- **10/12 evidence judgment:** The five candidate gates evidence completeness, proof artifact, action authority, side-effect receipt and current completion are distinct
+- **11/12 evidence judgment:** Weekly reuses seven author-paper lineages; it performed no new independent primary replication
+- **12/12 evidence judgment:** Four bilingual containers were audited as documentary inputs, without modifying Verified Core or host Tool System runtime
+
+### Nov03 mini-Lean — `docs/en/Tool_System.md`
+- **1/12 evidence judgment:** mini-Lean-agent paper arXiv:2610.17331v1 originally submitted Oct12 and studied Nov03
+- **2/12 evidence judgment:** The model-visible agent tool is a minimal bash/file interface, not automatically a universally secure architecture
+- **3/12 evidence judgment:** Trusted evaluator copies only declared final artifact into a clean Lean/Mathlib environment
+- **4/12 evidence judgment:** Changing the theorem statement or using sorry/admit invalidates proof acceptance even when the agent ran Lean successfully
+- **5/12 evidence judgment:** Author matched Gemini 3.8 Flash comparison at $2 cap reports mini-Lean 7/12 versus AxProverBase 4/12
+- **6/12 evidence judgment:** Astra 12/12 under a different model setup cannot be interpreted as a same-model causal tool-interface comparison
+- **7/12 evidence judgment:** Both compared agents at $0.50 cap gave 0/12, a strong budget counterexample to unconditional shell-agent success
+- **8/12 evidence judgment:** One run per problem on twelve tasks limits confidence and population generality
+- **9/12 evidence judgment:** Compiler invocation is a proposed action trace, not a separately validated final theorem artifact
+- **10/12 evidence judgment:** Exact final bytes, theorem statement, allowed axioms and verifier environment form four independent acceptance predicates
+- **11/12 evidence judgment:** Author-linked code repository was not executed in the Foundations Daily
+- **12/12 evidence judgment:** Source mapping remains candidate Tool/Harness contract, not a local Lean tool implementation
+
+### Nov05 ETAS effect typing — `docs/en/Tool_System.md`
+- **1/12 evidence judgment:** ETAS arXiv:2607.17780 original July20 author manuscript was studied Nov05, not first published Nov05
+- **2/12 evidence judgment:** Type judgment separates result τ, escaping effects ε, requested-action trace abstraction A and residual dynamic obligations R
+- **3/12 evidence judgment:** A requested action captured by A may be handled/denied and never become escaping committed effect ε
+- **4/12 evidence judgment:** The compiled policy monitor M_Π operates on typed trace prefixes and cannot see an action omitted from its event model
+- **5/12 evidence judgment:** Theorem5 policy safety assumes well-formed static judgment and actually enforced residual checks before relevant effects
+- **6/12 evidence judgment:** If a dynamic precondition R is not enforced, the theorem premise fails even if typechecking succeeds
+- **7/12 evidence judgment:** Theorem6 trace transparency prohibits a handler from laundering away the original tool request event
+- **8/12 evidence judgment:** A tool handler response string does not itself prove an external effect was acknowledged
+- **9/12 evidence judgment:** Replay must distinguish request, handled, denied, committed and receipt-matched event kinds
+- **10/12 evidence judgment:** Unmediated direct network paths are outside the source's stated enforced monitor boundary
+- **11/12 evidence judgment:** Rust prototype and author theorem claims were not built, executed or independently formally checked here
+- **12/12 evidence judgment:** Proposed ToolRequest/EffectCommit/TraceMonitor types are design candidates, not current repository runtime schemas
+
+### Nov06 PAC shield — `docs/en/Tool_System.md`
+- **1/12 evidence judgment:** Shield study uses arXiv:2610.16865v2 October23 full text; its earlier v1 abstract has different empirical description
+- **2/12 evidence judgment:** Finite state abstraction s_t=φ(h_t) must preserve all safety-relevant history before Markov assumptions apply
+- **3/12 evidence judgment:** Absorbing harm cannot be treated as undone by a later safe-looking model action
+- **4/12 evidence judgment:** Safe halt existence is a formal premise; an all-halt policy may be safe but useless for goal completion
+- **5/12 evidence judgment:** Controller independence applies only if action and abstract state determine environment transition regardless of controller
+- **6/12 evidence judgment:** Candidate successor support K_{s,a} omitting a dangerous next state invalidates the advertised risk bound
+- **7/12 evidence judgment:** Per-row sample counts n_0(s,a) must be precommitted for the displayed confidence argument
+- **8/12 evidence judgment:** The confidence radius β depends on support size, row count, δ and sample count, not just dataset total
+- **9/12 evidence judgment:** Undercovered state/action rows use vacuous confidence sets; zero observed hazards does not imply zero risk
+- **10/12 evidence judgment:** Finite-horizon PAC probability is over sampled data and the shielded controller class, not a guarantee for each individual call
+- **11/12 evidence judgment:** Author reported 1,050 sandbox episodes and no observed harms do not prove unmodeled tool effects safe
+- **12/12 evidence judgment:** Local controller/tool topology lacks pinned abstraction, shield code and actual effect logs, so mapping is CANDIDATE_NOT_IMPLEMENTED
+
+### Nov07 AgentLTL — `docs/en/Tool_System.md`
+- **1/12 evidence judgment:** AgentLTL v1 arXiv:2607.02599 was submitted July1; Nov07 date is an observation not a publication event
+- **2/12 evidence judgment:** Offline trace compliance scoring and online next-action prefix gating have different event/time boundaries
+- **3/12 evidence judgment:** An unenforced future liveness obligation cannot be refuted by any earlier safe prefix unless the trace terminates
+- **4/12 evidence judgment:** A finite bad prefix can demonstrate a safety violation, but absence of such a prefix does not prove eventual task completion
+- **5/12 evidence judgment:** Guard-approved trace does not prove a committed tool-side effect or valid current approval authority
+- **6/12 evidence judgment:** Vacuous grounding from refusal with no entities can inflate a reported procedural metric without improved factual answer
+- **7/12 evidence judgment:** Block-and-warn improves author benchmark outcome on five of seven models, not an independently replicated Foundations result
+- **8/12 evidence judgment:** At least one paper experiment links procedural compliance and answer accuracy non-monotonically on branching/loop tasks
+- **9/12 evidence judgment:** An overly restrictive blocker can suppress valid recovery even if it raises local guard compliance
+- **10/12 evidence judgment:** Candidate evidence tuple must separate typed trace prefix, guard verdict, effect receipt and final task verdict
+- **11/12 evidence judgment:** No local DFA guard, broker, verifier or approval service is implemented by merely appending this source paper
+- **12/12 evidence judgment:** English and Chinese copies share one canonical source identity and do not double the research evidence
+
+
+
+## Current original A1 gate pending cross-source reconciliation
+
+- These 96 source-specific judgments need at least four distinct substantive cross-record analyses plus scope/bilingual verification before they can satisfy the original >=100 line contract
+
+- All originally open PR states, author-theorem scope, publication dates and validation UNKNOWN are preserved without rewriting canonical source passages
+
