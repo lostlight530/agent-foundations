@@ -1051,3 +1051,31 @@ $$
 - NEXT_RETEST_CONDITION：固定 v1 原文与可运行参考实现，分别注入遗漏敏感边、旧 revision `tests_passed`、绕过 gateway 的真实工具效果，执行 SMT 与 effect-time 检查，记录输入、revision、命令、stdout/stderr、exit、独立验证器和效果回执
 
 交付边界：仅在现有中英文 `Tool_System.md` **追加**同一研究增量，不改写 Jules 历史、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、代码/Schema/Actions，也不触及独立 WorkflowHub Draft PR #378。Repo validator、Z3 原始实验、外部作用效果验证均为 `NOT_EXECUTED`，交由 Human Maintainer 审查和合并
+
+
+---
+
+## 2026-W45 GPT Native 周度研究级联 — 闭合周期理论校准
+
+- Canonical task：`foundations/research/weekly`；ISO 周 `2026-W45`，2026-11-02 至 2026-11-08（Asia/Shanghai，已自然闭合）
+- Producer：GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- 输入权威：精确已合并 `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`；仅使用确实存在的 W45 Daily、中英文容器与 `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` 的证据语义
+- 本轮状态：BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- 11 月 9 日的 FAVA Daily 属于 W46，尽管目前 Tool System 中已经可见，也不得回填 W45
+
+### W45 实际输入与 Tool Contract 级联
+- 11 月 3 日 — arXiv:2610.17331v1，mini-Lean-agent：极简工具接口及证明验收边界
+- 11 月 5 日 — arXiv:2607.17780，ETAS：effect-typed 工具副作用边界
+- 11 月 6 日 — arXiv:2610.16865v2，controller-agnostic PAC reach–avoid shield；v2 日期为 10 月 23 日，不能把它写成 11 月新论文或 v1 结论
+- 11 月 7 日 — arXiv:2607.02599v1，AgentLTL：有限轨迹程序合规、可判定 bad-prefix 与未完成 liveness 的区别
+- 四个 Daily 双语对共计四个 canonical 论文来源，不是八份独立实验；11 月 9 日 FAVA 属于 W46，**本周不计入**
+- 理论编织：接口/证明验收、effect type、概率 reach–avoid、时序轨迹约束管理不同层面，不能因为某一面 PASS 就串成“工具系统已完成可靠闭环”
+- 反例：合法类型下仍有遗漏的外部效果；轨迹 safety 前缀合规但 workflow 最终没有履行义务；PAC 证书在分布漂移或超出置信度/时域时不成立；Lean 证明检查正确不等于用户意图和实际服务效果正确
+- 候选映射 `(task_id, tool_schema_revision, effect_type, policy, proof_or_predicate, trace_prefix, shield_bound, authorization_decision, external_effect_receipt, final_task_verdict)`；不是本仓实际 Runtime 或授权服务
+- 五轴：Claim State OBSERVED；Evidence Level E4_PREPRINT；Mapping State CANDIDATE_MECHANISM / COUNTEREVIDENCE；Implementation State NOT_IMPLEMENTED；Validation State NOT_TESTED
+- 不调整 Sxx / Verified Core；没有运行 Lean checker、AgentLTL、PAC 实验或工具 broker，更没有 4/4 机制验证成功
+- Evidence Delta — NEW_EVIDENCE：四类验收谓词不能互相替代；CORRECTED_INTERPRETATION：Guard PASS 不等于 Effect COMMITTED；UNCHANGED_BOUNDARY：理论不等于实现；NEW_COUNTEREVIDENCE：liveness、TOCTOU 与分布漂移；UNKNOWN_RETAINED：组合证明与真实效果；NEXT_RETEST_CONDITION：固定任务和 Harness，分别注入类型、时序、概率与副作用反例，保存独立回执
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
