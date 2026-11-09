@@ -3045,3 +3045,35 @@ This is a conceptual mapping only. The repository does not implement a trusted m
 - NEXT_RETEST_CONDITION: pin an implementation and construct bypass, prompt-injection, stale-approval, action-substitution, and service-receipt tests with an independently controlled mediator
 
 No Sxx identifier was assigned, no verified-core promotion occurred, and no runtime or protocol file changed in this Daily research update
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — evidence-preserving bilingual synthesis
+
+### Identity, closed period and inputs
+- Canonical task: `foundations/research/weekly`; producer `GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO period: **2026-W45, 2026-11-02 through 2026-11-08**, logical timezone `Asia/Shanghai`; week closed before this run
+- Review time UTC: `2026-11-09T12:44:58.259Z`; exact source baseline: merged `main` `883a0ff0138596a0a5ddd1e987918f987d74ba86`; execution identity: `agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- Input roster (one canonical author-paper lineage per Daily, translated bilingual records do not increase evidence count): **11-02 Memory** arXiv:2610.21170, **11-03 Tool** arXiv:2610.17331v1, **11-04 Memory** arXiv:2608.11654v1, **11-05 Tool** arXiv:2607.17780, **11-06 Tool** arXiv:2610.16865v2, **11-07 Tool** arXiv:2607.02599v1, **11-08 Architecture** arXiv:2608.03609v1
+- Four formal system containers and their EN/ZH versions were read; Collaboration has **no newly dated W45 Daily research chunk**, which is a legitimate negative input
+- 2026-11-09 FAVA arXiv:2607.27267v1 belongs to **W46** despite being merged into `main`; explicitly **excluded** from W45 source cohort and Weekly evidence credit
+- These papers' publication/submission dates are not their later Daily research dates. The MemScope exact arXiv revision suffix remained `NOT_VERIFIED` in its Daily input, and this cascade does not invent it
+- Current `FOUNDATION/SOURCES.md`, `EVIDENCE.md`, `MAINTENANCE.md` and Verified Core admission remain unchanged; no Sxx allocation or AF-* claim promotion here
+
+### Collaboration container — explicit zero-new-Daily classification
+- Exactly **zero W45 Daily source chunks** were introduced under the existing Collaboration System container on the checked merged main, though the container contains historical work and relevant human-control theory
+- The seven W45 inputs map only to Memory (2), Tool (4), and Architecture (1); discussing their implications for multi-agent coordination is a *cross-container research lead*, not newly sourced Collaboration evidence
+- A tool trace being compliant, a human approval prompt being displayed, or a graph safety check passing does not independently establish multi-agent consensus correctness, inalienable approval, or durable effect ownership
+- Cross-container watchlist only: per-agent actor/approval identity; task and tool effect IDs; handoff chronology; explicit mediator trust channels; disagreement/counterevidence retention; independently checked final receipts
+- No authority to rewrite historical Collaboration claims, assign an Sxx source ID or promote a new AF-COLLAB claim without a separate original-source review and admission gate
+- Five-axis disposition for *new W45 Collaboration claims*: `NOT_APPLICABLE / NO_NEW_CLAIM`; implementation and validation status unchanged, no new proof or test executed
+
+### Evidence Delta and disposition
+- NEW_EVIDENCE: ZERO new Collaboration Daily research sources for W45; auditable coverage boundary, not a fabricated gap fill
+- CORRECTED_INTERPRETATION: architecture/tool research mentioned in collaboration context cannot count as independent multi-agent evidence
+- UNCHANGED_BOUNDARY: agreement != truth; approval transcript != effect authorization; source reuse != new evidence
+- NEW_COUNTEREVIDENCE: cross-container action safety does not imply collaborative consensus or mediator trust
+- UNKNOWN_RETAINED: live multi-agent implementation, verified trust channels, group-state proof, distributed effect receipts
+- NEXT_RETEST_CONDITION: independently sourced new collaboration claim with precise failure model and actual multi-party state/authorization traces
+- Decision: NO_NEW_COLLAB_MAPPING / NO_VERIFIED_CORE_PROMOTION. No-source W45 is a legitimate Weekly result; append-only existing English container

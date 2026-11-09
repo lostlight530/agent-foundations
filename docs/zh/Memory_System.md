@@ -1454,3 +1454,35 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 
 ### 写入与提升边界
 仅在原有 Memory System 中英文容器后 append-only 增补 11 月 4 日研究，保留所有历史正文，不修改 `FOUNDATION/SOURCES.md`、Verified Core、代码、测试、Weekly/Monthly、Actions 与独立 WorkflowHub Draft PR.Validator 与论文复现 `NOT_EXECUTED`，等待 Human Maintainer 决定 merge
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — 保留证据边界的双语周度编织
+
+### 身份、闭合周与输入
+- 正式任务：`foundations/research/weekly`；生产者：`GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO 周：**2026-W45，2026-11-02 至 2026-11-08**，逻辑时区 `Asia/Shanghai`；周已自然闭合
+- 本轮 UTC：`2026-11-09T12:44:58.259Z`；精确已合并 `main`：`883a0ff0138596a0a5ddd1e987918f987d74ba86`；执行身份：`agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- 按日期恢复的 Daily 原始学术来源（中英文翻译不额外增加独立证据）：**11-02 Memory** arXiv:2610.21170；**11-03 Tool** arXiv:2610.17331v1；**11-04 Memory** arXiv:2608.11654v1；**11-05 Tool** arXiv:2607.17780；**11-06 Tool** arXiv:2610.16865v2；**11-07 Tool** arXiv:2607.02599v1；**11-08 Architecture** arXiv:2608.03609v1
+- 已检查四个正式系统容器及其 EN/ZH 版本；Collaboration 在 W45 **没有新增符合日期的 Daily 理论块**，保留真实负结果
+- 已合并到 `main` 的 2026-11-09 FAVA（arXiv:2607.27267v1）属于 **W46**，明确**排除**在 W45 聚合之外
+- 论文原始发表/版本日期不能替换 Daily 研究日期；MemScope 的精确 arXiv vN 后缀在 Daily 中未核实，本轮不补猜
+- `FOUNDATION/SOURCES.md`、`EVIDENCE.md`、`MAINTENANCE.md`、Verified Core 均不修改，不自行分配 Sxx，也不提升 AF-* claim
+
+### Memory 容器——记忆提供者修复与形式化基底不能混成一个证明
+- **11-02 [MemScope](https://arxiv.org/abs/2610.21170)** 利用轨迹、已存记忆和提供者代码定位局部问题并提出补丁，属于作者实验方法；原 Daily 的精确 vN 未确认，不能凭周度总结补写，也没有执行论文代码
+- **11-04 [Agent Memory Formal Definition](https://arxiv.org/abs/2608.11654)** 讨论指定查询分布下的 memory basis、span/coverage 与 optimality；覆盖率不直接保证事件真实、答案正确或多事实组合推理
+- 编织边界：`provider_revision`、`retrieval_policy`、`basis M_D`、`query_distribution` 和 `evaluator_revision` 需要分开记录；提供者修复可能改变可见输入，却不能推出形式化最优记忆已实现
+- 冲突与反证：误抽取、过时事实、查询分布漂移、跨片段组合问题均可使“更高覆盖/更好局部修复→更可靠最终答案”的外推不成立；两篇论文也不是同一算法的双重验证
+- 复验门槛：固定前后 revision、同一记忆候选与查询分布，注入矛盾/过时事件和组合问答，同时测量覆盖与最终准确率，记录失败样本、来源及独立验证器
+- 五轴：`OBSERVED / E4_PREPRINT / CANDIDATE_MECHANISM / NOT_IMPLEMENTED / NOT_TESTED`
+
+### Evidence Delta 与处理结论
+- NEW_EVIDENCE：区分经验型 provider 修复与抽象记忆基底的不同输入、契约和保证范围
+- CORRECTED_INTERPRETATION：补丁成功不等于真实记忆变好；span/coverage 不等于正确回答
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；中英文不增加独立源
+- NEW_COUNTEREVIDENCE：错误和过时提取、分布漂移、组合推理会反证简单覆盖保证
+- UNKNOWN_RETAINED：独立证明/实验、MemScope vN、仓库实现与真实影响
+- NEXT_RETEST_CONDITION：固定 provider/输入/query/evaluator 版本及失败-对照实验，分别统计准确率与覆盖率
+- 结论：NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE；仅向当前中文 Memory 容器追加 W45 Weekly。仓库验证在编写时 `NOT_EXECUTED`，后续独立执行

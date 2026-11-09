@@ -1645,3 +1645,36 @@ The paper's case-management example reports a 55-state / 72-transition finite sy
 - NEXT_RETEST_CONDITION: pin exact paper/code, construct isomorphic typed-state and symmetric-call cases, vary hidden state and active bounds, then execute a model checker; retain model, environment, command, revision, stdout/stderr, exit status and witness trace
 
 Delivery: paired append-only EN/ZH Architecture Principles research. No historical Jules text, Source Registry Sxx, Verified Core, implementation, other containers, Weekly/Monthly, workflows or independent WorkflowHub PR #378 changes. Formal proof checking, paper code and repository validator: NOT_EXECUTED.
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — evidence-preserving bilingual synthesis
+
+### Identity, closed period and inputs
+- Canonical task: `foundations/research/weekly`; producer `GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO period: **2026-W45, 2026-11-02 through 2026-11-08**, logical timezone `Asia/Shanghai`; week closed before this run
+- Review time UTC: `2026-11-09T12:44:58.259Z`; exact source baseline: merged `main` `883a0ff0138596a0a5ddd1e987918f987d74ba86`; execution identity: `agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- Input roster (one canonical author-paper lineage per Daily, translated bilingual records do not increase evidence count): **11-02 Memory** arXiv:2610.21170, **11-03 Tool** arXiv:2610.17331v1, **11-04 Memory** arXiv:2608.11654v1, **11-05 Tool** arXiv:2607.17780, **11-06 Tool** arXiv:2610.16865v2, **11-07 Tool** arXiv:2607.02599v1, **11-08 Architecture** arXiv:2608.03609v1
+- Four formal system containers and their EN/ZH versions were read; Collaboration has **no newly dated W45 Daily research chunk**, which is a legitimate negative input
+- 2026-11-09 FAVA arXiv:2607.27267v1 belongs to **W46** despite being merged into `main`; explicitly **excluded** from W45 source cohort and Weekly evidence credit
+- These papers' publication/submission dates are not their later Daily research dates. The MemScope exact arXiv revision suffix remained `NOT_VERIFIED` in its Daily input, and this cascade does not invent it
+- Current `FOUNDATION/SOURCES.md`, `EVIDENCE.md`, `MAINTENANCE.md` and Verified Core admission remain unchanged; no Sxx allocation or AF-* claim promotion here
+
+### Architecture container — relational state verification has conditional exactness
+- **Nov08 [Formal Verification of Agentic Systems over Operational Data](https://arxiv.org/abs/2608.03609v1)** (STEAD, v1) is the sole W45 new Architecture Principles Daily source
+- It distinguishes a stateful tool-enabled deployment's `policy Π`, offered calls `Offer(D)`, persistent typed relational state `D` and tool transition semantics. The general verification problem is undecidable; the finite-graph reduction is exact **only under bounded live objects, constants, equivariance under identifier renaming and tool uniformity** as stated by the authors
+- A canonical-context wrapper needs careful treatment of symmetric object IDs; picking one arbitrary witness can break equivariance. Omitting external approval history or relevant memory from `D` also breaks a complete operational-state model
+- Crucial author example: FO-CTL case evaluation *refutes* refund authorization safety while finding case resolution progress for a particular model. A rejected property is a valid counterexample, not something to silently repair to PASS
+- The conceptual architecture mapping is a source/version-bound state verification receipt `(policy_revision, typed_schema, state_snapshot_id, allowed_tools, renaming_invariants, object_bounds, FO-CTL_property, counterexample_trace, solver_receipt)`, not a repository specification or implementation commitment
+- This differs from Tool System W45 proof checker, type/effect and finite-trace checks: FO-CTL business-state properties cannot be inferred from successful protocol guard, runtime test, or an empty graph
+- Five axes: `OBSERVED / E4_PREPRINT / CANDIDATE_MECHANISM / NOT_IMPLEMENTED / NOT_TESTED`
+
+### Evidence Delta and disposition
+- NEW_EVIDENCE: single v1 STEAD bounded-reduction premise matrix and operational-state-versus-action-check scope
+- CORRECTED_INTERPRETATION: a finite model result has the asserted equivalence only if object and identifier symmetry hypotheses are met
+- UNCHANGED_BOUNDARY: author theorem != independent proof replay != host implementation; no universal system safety
+- NEW_COUNTEREVIDENCE: source case refutes authorization safety; missing state, symmetry ambiguity and unbounded object counts defeat generalization
+- UNKNOWN_RETAINED: exact real host state model, independent model-checker replay, source proof confidence and deployment invariants
+- NEXT_RETEST_CONDITION: pin paper/state abstraction, permute IDs, add symmetric objects and hidden approval states, replay FO-CTL checker and preserve witnesses and execution receipts
+- Decision: NO_VERIFIED_CORE_PROMOTION / NO_ADR / NO_RUNTIME_CHANGE; bilingual original Daily history unchanged

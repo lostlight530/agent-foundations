@@ -1650,3 +1650,36 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - NEXT_RETEST_CONDITION：固定源版本和最小关系系统，构造同构状态与对称动作、加入未建模历史和改变对象上界；真正运行模型检查器时保留输入、revision、命令、环境、stdout/stderr、exit code 与 counterexample trace
 
 交付边界：仅现有中英文 Architecture Principles 两处追加研究。历史 Jules、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、实现、测试、workflow 及独立 WorkflowHub #378 不动。论文代码、证明复核与本仓 validator 均为 NOT_EXECUTED
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — 保留证据边界的双语周度编织
+
+### 身份、闭合周与输入
+- 正式任务：`foundations/research/weekly`；生产者：`GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO 周：**2026-W45，2026-11-02 至 2026-11-08**，逻辑时区 `Asia/Shanghai`；周已自然闭合
+- 本轮 UTC：`2026-11-09T12:44:58.259Z`；精确已合并 `main`：`883a0ff0138596a0a5ddd1e987918f987d74ba86`；执行身份：`agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- 按日期恢复的 Daily 原始学术来源（中英文翻译不额外增加独立证据）：**11-02 Memory** arXiv:2610.21170；**11-03 Tool** arXiv:2610.17331v1；**11-04 Memory** arXiv:2608.11654v1；**11-05 Tool** arXiv:2607.17780；**11-06 Tool** arXiv:2610.16865v2；**11-07 Tool** arXiv:2607.02599v1；**11-08 Architecture** arXiv:2608.03609v1
+- 已检查四个正式系统容器及其 EN/ZH 版本；Collaboration 在 W45 **没有新增符合日期的 Daily 理论块**，保留真实负结果
+- 已合并到 `main` 的 2026-11-09 FAVA（arXiv:2607.27267v1）属于 **W46**，明确**排除**在 W45 聚合之外
+- 论文原始发表/版本日期不能替换 Daily 研究日期；MemScope 的精确 arXiv vN 后缀在 Daily 中未核实，本轮不补猜
+- `FOUNDATION/SOURCES.md`、`EVIDENCE.md`、`MAINTENANCE.md`、Verified Core 均不修改，不自行分配 Sxx，也不提升 AF-* claim
+
+### Architecture 容器——关系状态的精确验证具有严格前提
+- **11-08 [Formal Verification of Agentic Systems over Operational Data](https://arxiv.org/abs/2608.03609v1)**（STEAD，v1）是 W45 Architecture Principles 唯一新增 Daily 来源
+- 模型包含 policy `Π`、可选工具 `Offer(D)`、持久有类型关系状态 `D` 与工具转移语义；一般验证不可判定。有限域精确化简仅在作者要求的活跃对象有界、常量固定、标识重命名等变性及工具 uniformity 成立时适用
+- 对称对象的 canonical witness 不能任意选一个，否则可能破坏 equivariance；隐藏的审批历史或 Memory 未纳入 `D`，也无法声称业务状态被完整建模
+- 原文案例值得保留的**负结果**：FO-CTL **反证退款授权安全性**，同时对该特定案例的结案进展属性给出通过；不能把反证改写成“通用安全 PASS”
+- 候选架构回执：`(policy_revision, typed_schema, state_snapshot_id, allowed_tools, renaming_invariants, object_bounds, FO-CTL_property, counterexample_trace, solver_receipt)`，只是未来验证条件，不是本仓规范/实现承诺
+- 与本周 Tool System 的类型检查、概率屏蔽、有限 trace 合规和 kernel 证明不同，工具调用通过不代表 FO-CTL 业务状态性质已通过
+- 五轴：`OBSERVED / E4_PREPRINT / CANDIDATE_MECHANISM / NOT_IMPLEMENTED / NOT_TESTED`
+
+### Evidence Delta 与处理结论
+- NEW_EVIDENCE：STEAD 条件性有限化简的前提矩阵和“动作合规 vs 业务状态可验证”界限
+- CORRECTED_INTERPRETATION：只有有界和标识对称前提满足，有限模型结果才可继承论文精确性声明
+- UNCHANGED_BOUNDARY：作者定理 != 独立证明复核 != 本仓实现
+- NEW_COUNTEREVIDENCE：原文授权安全反例、遗漏状态、对称 witness 歧义及对象数量超界
+- UNKNOWN_RETAINED：真实系统状态建模、实际运行验证器、证明复核和部署不变量
+- NEXT_RETEST_CONDITION：锁定论文和 state schema，置换 ID、增加对称实体与隐藏审批输入，实际复跑 FO-CTL 检查并记录反例/退出状态
+- 结论：NO_VERIFIED_CORE_PROMOTION / NO_ADR / NO_RUNTIME_CHANGE，原有双语 Daily 历史完整保留
