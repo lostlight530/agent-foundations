@@ -1069,3 +1069,31 @@ The authors report 90.5% Decision Compliance Rate over 801 benchmark replay case
 - NEXT_RETEST_CONDITION: pin paper v1 and executable reference if available; construct two graph twins with a missing sensitive flow, positive-obligation revision mismatch and an unmediated tool effect, then inspect graph structure, SMT outcome, effect-time gateway check and independently reconstructed side effect with exact revision, stdout/stderr and exit
 
 Delivery: paired **append-only** English/Chinese Tool System Daily research, no modifications to prior chunks or existing source registry, `FOUNDATION/**` verified core, other containers, implementation, schema, Weekly/Monthly, workflows or independent WorkflowHub Draft PR #378. Native validator, Z3 proof checking and experiments: `NOT_EXECUTED`; human review/merge required.
+
+
+---
+
+## 2026-W45 GPT Native Weekly Research Cascade — closed-week theory calibration
+
+- Canonical task: `foundations/research/weekly`; ISO week `2026-W45`, 2026-11-02 through 2026-11-08, Asia/Shanghai (naturally closed)
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Input authority: exact merged `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`; only actually retained W45 Daily chunks, both language containers and `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` evidence vocabulary
+- Weekly status: BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- W46 Nov 09 FAVA Daily is EXCLUDED from this closed W45 inference even though it is now visible in Tool System
+
+### W45 actual inputs and contract cascade
+- Nov 03 — arXiv:2610.17331v1, *mini-Lean-agent*: a small coding-agent baseline with theorem-prover interface and proof acceptance limits
+- Nov 05 — arXiv:2607.17780, *ETAS*: effect-typed boundaries for tool sequences and typed side effects
+- Nov 06 — arXiv:2610.16865v2, controller-agnostic PAC reach–avoid safety certificate; version v2 (Oct 23) must not be conflated with v1 or a Nov release
+- Nov 07 — arXiv:2607.02599v1, *AgentLTL*: finite-trace procedure compliance, prefix-safe monitoring versus unfulfilled liveness
+- Four English/Chinese pairs represent FOUR arXiv source identities, not eight independent samples; Nov 09 FAVA (arXiv:2607.27267) is specifically OUT_OF_WEEK and NOT_WEAVED as a W45 Daily
+- Research relation: tool *interface* / effect type / probabilistic reach–avoid shield / temporal trace predicate regulate different slices. A theorem prover accepting Lean proof is not the same as a service committing a reversible side effect; effect types do not automatically satisfy finite-horizon probability bounds, and a prefix safety check cannot prove eventual completion
+- Counterexample cascade: a well-typed call can carry an unmodeled external effect; a verified prefix can omit a required later commit; a statistically safe controller at the stated confidence and horizon can fail under distribution shift; an accepted formal proof can certify only the encoded theorem rather than user intent or real-world operation
+- Candidate multi-plane mapping: `(task_id, tool_schema_revision, effect_type, explicit_policy, proof_or_predicate, trace_prefix, shield_bound, authorization_decision, external_effect_receipt, final_task_verdict)` — DESIGN_CANDIDATE, NOT an already implemented contract
+- Claim State: OBSERVED; Evidence Level: E4_PREPRINT per exact original; Mapping State: CANDIDATE_MECHANISM / COUNTEREVIDENCE; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- Source Registry/Verified Core unchanged; no independent Lean checker, compiler, AgentLTL run, shield training, or tool broker validation. No aggregate 4/4 mechanism PASS
+- Evidence Delta — NEW_EVIDENCE: the four independent *predicate families* are non-substitutable; CORRECTED_INTERPRETATION: guard pass != effect commit; UNCHANGED_BOUNDARY: proof/formula != host; NEW_COUNTEREVIDENCE: liveness and TOCTOU gaps; UNKNOWN_RETAINED: composition proof, empirical results; NEXT_RETEST_CONDITION: same typed task and frozen harness with intentional policy, effect and liveness violations; collect proof/trace/side-effect/final receipts
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
