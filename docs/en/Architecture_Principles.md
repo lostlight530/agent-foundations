@@ -1645,3 +1645,28 @@ The paper's case-management example reports a 55-state / 72-transition finite sy
 - NEXT_RETEST_CONDITION: pin exact paper/code, construct isomorphic typed-state and symmetric-call cases, vary hidden state and active bounds, then execute a model checker; retain model, environment, command, revision, stdout/stderr, exit status and witness trace
 
 Delivery: paired append-only EN/ZH Architecture Principles research. No historical Jules text, Source Registry Sxx, Verified Core, implementation, other containers, Weekly/Monthly, workflows or independent WorkflowHub PR #378 changes. Formal proof checking, paper code and repository validator: NOT_EXECUTED.
+
+
+---
+
+## 2026-W45 GPT Native Weekly Research Cascade — closed-week theory calibration
+
+- Canonical task: `foundations/research/weekly`; ISO week `2026-W45`, 2026-11-02 through 2026-11-08, Asia/Shanghai (naturally closed)
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Input authority: exact merged `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`; only actually retained W45 Daily chunks, both language containers and `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` evidence vocabulary
+- Weekly status: BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- W46 Nov 09 FAVA Daily is EXCLUDED from this closed W45 inference even though it is now visible in Tool System
+
+### W45 source and bounded formal-system mapping
+- Actual 2026-11-08 Daily in this container: **arXiv:2608.03609v1**, *Formal Verification of Agentic Systems over Operational Data* (STEAD). Author paper first submitted 2026-08-04, re-examined Nov 08; one source in English/Chinese
+- Distinction from the other W45 formal claims: STEAD asks for FO-CTL over **persistent typed relational states and tool transitions**, not just a tool-call sequence. General verification is undecidable; the finite representative reduction is conditional, including C-bounded state, C-equivariance of policy, tool uniformity and precise domain cardinality constraints
+- Critical counterevidence: identifier-sensitive LLM policy, symmetric objects with multiple canonical witnesses, omitted approval or memory state and unbounded object growth break the assumptions. The author's case study *refutes* authorization safety even while finding case-resolution progress for its bounded workflow
+- Weekly mapping to architecture: claim a verification envelope only after binding `(typed_schema, snapshot_id, identity_map, policy_revision, tool_semantics, authorization_history, domain_bound, property_formula, model_checker_trace, external_effect_receipt)` and recording actual counterexample or proof receipt
+- Input check: W45 has ONE new Architecture Principles Daily, not seven. Nearby Tool System work on trace constraints/typed effects and earlier I-HITL cannot be treated as independent confirmation of STEAD theorem or a jointly implemented system
+- Claim State: OBSERVED (author theorem); Evidence Level: E4_PREPRINT; Mapping State: CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- No source Sxx registration, theorem proof replay, FO-CTL model checker execution or validated architecture decision; unresolved S63 literal collision remains unchanged
+- Evidence Delta — NEW_EVIDENCE: explicit bounded-state prerequisites for precise finite verification; CORRECTED_INTERPRETATION: action guard != state authorization; UNCHANGED_BOUNDARY: formal paper != host implementation; NEW_COUNTEREVIDENCE: FO-CTL case study fails one safety property, plus equivariance pitfalls; UNKNOWN_RETAINED: real operational state-model fidelity; NEXT_RETEST_CONDITION: execute paired isomorphic typed-state models with symmetry/ID permutations and real approval/effect traces at one exact revision
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
