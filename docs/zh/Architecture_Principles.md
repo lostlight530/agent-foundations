@@ -1650,3 +1650,28 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - NEXT_RETEST_CONDITION：固定源版本和最小关系系统，构造同构状态与对称动作、加入未建模历史和改变对象上界；真正运行模型检查器时保留输入、revision、命令、环境、stdout/stderr、exit code 与 counterexample trace
 
 交付边界：仅现有中英文 Architecture Principles 两处追加研究。历史 Jules、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、实现、测试、workflow 及独立 WorkflowHub #378 不动。论文代码、证明复核与本仓 validator 均为 NOT_EXECUTED
+
+
+---
+
+## 2026-W45 GPT Native 周度研究级联 — 闭合周期理论校准
+
+- Canonical task：`foundations/research/weekly`；ISO 周 `2026-W45`，2026-11-02 至 2026-11-08（Asia/Shanghai，已自然闭合）
+- Producer：GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- 输入权威：精确已合并 `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`；仅使用确实存在的 W45 Daily、中英文容器与 `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` 的证据语义
+- 本轮状态：BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- 11 月 9 日的 FAVA Daily 属于 W46，尽管目前 Tool System 中已经可见，也不得回填 W45
+
+### W45 来源与有界形式化架构映射
+- 本容器本周实际新增 2026-11-08 Daily：**arXiv:2608.03609v1**，*Formal Verification of Agentic Systems over Operational Data*（STEAD）；原论文为 8 月 4 日提交，11 月 8 日进行研究，EN/ZH 只算一个来源
+- STEAD 把 FO-CTL 性质定义在**带类型的关系持久状态及工具状态转移**上，不只是工具调用顺序。一般可验证性问题不可判定；其精确有限化简必须满足 C-bounded、Agent C-equivariance、工具 C-uniformity 和精确的各类型有限域下界
+- 关键反证：LLM 对对象 ID 敏感、对称实体的 canonical witness 不唯一、审批与记忆状态未进入关系模型、活跃对象越界，都可能使定理前提失效；作者自己的退款案例**反证**了授权安全属性，同时在受限流程中证明结案进展，不能把一项成功概括为全部 PASS
+- 对 Architecture Principles 只提出有界候选：`(typed_schema, snapshot_id, identity_map, policy_revision, tool_semantics, authorization_history, domain_bound, property_formula, model_checker_trace, external_effect_receipt)`
+- 实际本周架构容器只有一组 Daily，不能把 Tool System 的其它论文或历史 I-HITL 当作 STEAD 定理的独立验证，也没有可证明的组合实现
+- 五轴：Claim State OBSERVED；Evidence Level E4_PREPRINT；Mapping State CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE；Implementation State NOT_IMPLEMENTED；Validation State NOT_TESTED
+- 不分配新 Sxx、不开启 Verified Core 晋升、未运行模型检查器或独立证明；历史 S63 标签冲突仍然开放，不能用本周研究静默消除
+- Evidence Delta — NEW_EVIDENCE：严格有限状态验证的前提；CORRECTED_INTERPRETATION：工具 guard 不等于状态授权；UNCHANGED_BOUNDARY：论文不等于实现；NEW_COUNTEREVIDENCE：作者退款案例失败及 ID 等变性反例；UNKNOWN_RETAINED：真实状态模型与外部效果绑定；NEXT_RETEST_CONDITION：固定精确模型，用同构状态、标识置换、对称对象与审批历史反例进行真实模型检查并保留轨迹
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
