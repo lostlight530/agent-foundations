@@ -1020,3 +1020,52 @@ These are *source-supported limits* of a paper's procedural-evaluation model. Th
 
 Delivery note: only the paired EN/ZH research containers are appended. No change to Jules records, source registry `Sxx`, `FOUNDATION/**` verified core, four-container Weekly, October/November Monthly, implementation, schema, workflows, or unrelated WorkflowHub PR #378. Validator and native research reproduction: NOT_EXECUTED; maintainer reviews the Draft before merging.
 
+
+
+---
+
+## 2026-11-09 GPT Native Daily — FAVA: permission-graph soundness is not end-to-end authorization
+
+### Source identity and access depth
+- Canonical paper identity: **arXiv:2607.27267v1**; title: *FAVA: Formal Authorization for Verified Agents with Evidence-Backed Permission Graphs*
+- Authors: Yifan Zhang, Xinkui Zhao, Sai Liu, Hengxuan Lou, Guanjie Cheng, Chang Liu
+- Original version/publication date: **2026-07-29 09:41:07 UTC**; this is an earlier paper inspected on **2026-11-09**, NOT a newly published November paper
+- Original source opened: https://arxiv.org/abs/2607.27267 and https://arxiv.org/html/2607.27267; reviewed direct sections Graph Lowering, SMT Authorization, Finite-Graph Soundness, Taint-Monotonic Safety, Security Assumptions, Experiments and Failure Analysis
+- Source class: E4_PREPRINT; source surface: ORIGINAL_FULL_TEXT / AUTHOR_THEOREMS_AND_EVALUATION_INSPECTED, **INDEPENDENT_FORMAL_PROOF_AND_CODE_REPLAY_NOT_EXECUTED**
+- Canonical Source Registry: arXiv identity checked against current `FOUNDATION/SOURCES.md`; **NOT_REGISTERED, NO Sxx ID ASSIGNED**. Bilingual versions here are one research unit and one paper, not two independent replications
+- Producer: GPT-6 / GPT_NATIVE / NOT_JULES_REPLAY; logical period 2026-11-09 Asia/Shanghai; exact baseline main `9ef3c669d71f511a87eb677f94dbbb90ca4461c0`; review UTC `2026-11-09T11:55:08.435Z`; task `foundations/research/daily`; container: Tool System
+
+### Source-level mechanism and formally bounded claim
+The paper uses an LLM for extracting a Permission IR containing intent, assets, actions, obligations, sinks and evidence spans, but separates this probabilistic extraction from deterministic graph lowering, SMT solving and a just-in-time execution gateway. Graph nodes encode evidence-bearing sources, tool actions and sinks; data, control and ancestry edges encode dependencies. The graph validator checks labels and trusted edge origins before solving; **inferred edges are not automatically authoritative runtime facts**.
+
+For a finite permission graph, the paper models propagated protected labels as `H[v,label]` and candidate capability grants as `A[v,capability]`. Its illustrative forbidden-flow constraint is `not (H[v,secret] and A[v,net:send])`, while a temporal obligation may require `grant(commit) implies Seen(tests_passed, before_commit)`. Finite-graph soundness is conditional on the explicit graph, fixed policy translation and complete gateway-visible candidate action. This is **not** a theorem that the natural-language extraction, implicit flows, credential state or downstream backends are complete and correct.
+
+The taint monotonicity theorem is about **taint-only graph extension under fixed policy and required capabilities**: adding taint without adding trusted sanitizers, declassifications or positive obligation facts cannot turn an originally forbidden grant into an allowed grant. It does **not** say every runtime permission decision is monotonically deny-only; receiving an authenticated `tests_passed` fact can satisfy a separate positive guard.
+
+The authors report 90.5% Decision Compliance Rate over 801 benchmark replay cases. DCR is a mixed binary allow/block classification metric, with false-positive blocks and false-negative permissions both counted. The trace-conditioned datasets and best-effort reproductions of other defenses have distinct evidence status; this is author-reported performance, **not** repository validation, deployment guarantee or universal safety probability.
+
+### Architecture consequence and falsifiable gates
+- Candidate contract projection: `(principal, task_intent, asset_identity, current_authority_state, tool_action, effect_target, data_lineage, obligations, observed_evidence, policy_version, gateway_decision, effect_receipt)`. Treat this as a research-only proposal, not implemented schema
+- Require provenance and freshness for each permission-graph node/edge, distinguish policy/observed/inferred trust labels and named capabilities; never let an LLM's proposed IR stand in for enforcement authority
+- Counterexample 1 — **missing source-to-sink edge**: a hidden data dependency absent from lowering can make a satisfiable graph certify an incomplete world. SMT soundness remains conditional but the real action may leak
+- Counterexample 2 — **positive guard chronology**: a `tests_passed` fact for a previous commit or test revision must not be accepted for the current action; static fact presence is insufficient without exact revision/temporal provenance
+- Counterexample 3 — **TOCTOU between authorization and effect**: even a valid snapshot may expire before a backend effect; the trusted gateway and backend must preserve the checked capability and relevant state through effect time
+- Counterexample 4 — **unmediated backend**: if a tool adapter executes side effects outside the gateway, formal graph approval says nothing about those bypassed effects
+- Counterexample 5 — **over-restriction and semantic error**: false-positive block and extraction omission show safety/utility tradeoffs; a validated graph neither proves extracted user intent correct nor downstream business completion
+
+### Five independent evidence axes
+- Claim State: `OBSERVED` — paper's specified abstraction and author-reported results, not independently established theorem
+- Evidence Level: `E4_PREPRINT` / original v1 full text inspected
+- Mapping State: `CANDIDATE_MECHANISM` / `COUNTEREVIDENCE` / `OUT_OF_SCOPE`, not verified architecture decision
+- Implementation State: `NOT_IMPLEMENTED` — no local permission IR/SMT/gateway implementation shown
+- Validation State: `NOT_TESTED` — solver, benchmark, action broker and exact effect-time receipt replay not executed in this repo
+
+### Evidence Delta and handoff
+- NEW_EVIDENCE: a permission-graph formalization of capability, taint and temporal obligations, with conditional soundness and narrowly defined taint-only monotonicity
+- CORRECTED_INTERPRETATION: a SAT decision certifies only the translated, fully represented policy graph; it cannot replace semantic completeness, runtime mediation, effect-time authorization or independent final-state verification
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; EN/ZH bilingual copy != independent source; historical source date != research date
+- NEW_COUNTEREVIDENCE: missing graph edges, stale positive facts, gateway bypass, incorrect LLM IR extraction and false-positive denial can all undermine an end-to-end authorization claim
+- UNKNOWN_RETAINED: theorem proof replay, benchmark reproducibility, actual source-graph completeness, real backend conformity, local test results, runtime behavior and verified core status
+- NEXT_RETEST_CONDITION: pin paper v1 and executable reference if available; construct two graph twins with a missing sensitive flow, positive-obligation revision mismatch and an unmediated tool effect, then inspect graph structure, SMT outcome, effect-time gateway check and independently reconstructed side effect with exact revision, stdout/stderr and exit
+
+Delivery: paired **append-only** English/Chinese Tool System Daily research, no modifications to prior chunks or existing source registry, `FOUNDATION/**` verified core, other containers, implementation, schema, Weekly/Monthly, workflows or independent WorkflowHub Draft PR #378. Native validator, Z3 proof checking and experiments: `NOT_EXECUTED`; human review/merge required.
