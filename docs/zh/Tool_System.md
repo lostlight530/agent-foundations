@@ -1002,3 +1002,52 @@ $$
 
 交付边界：仅追加既有中英文 Tool System 容器，不修改 Jules 历史、Sxx Registry、Verified Core、其他 Daily/Weekly、October/November Monthly、实现、测试、workflow 或独立 WorkflowHub #378。实际验证器和论文实验：`NOT_EXECUTED`；仅交付 Draft PR，等待 Human Maintainer 审核。
 
+
+
+---
+
+## 2026-11-09 GPT Native Daily — FAVA：权限图的形式化可靠性不等于端到端授权
+
+### 来源身份与实际阅读深度
+- Canonical paper：**arXiv:2607.27267v1**，*FAVA: Formal Authorization for Verified Agents with Evidence-Backed Permission Graphs*
+- 作者：Yifan Zhang、Xinkui Zhao、Sai Liu、Hengxuan Lou、Guanjie Cheng、Chang Liu
+- 原始 v1 日期：**2026-07-29 09:41:07 UTC**；本轮研究检查日期为 **2026-11-09**，不把旧论文冒充今日发表
+- 已直接打开 https://arxiv.org/abs/2607.27267 与 https://arxiv.org/html/2607.27267 ，阅读 Graph Lowering、SMT Authorization、Finite-Graph Soundness、Taint-Monotonic Safety、Security Assumptions、Experiments、Failure Analysis
+- Evidence Level：`E4_PREPRINT`，阅读作者原始全文与声明，并**未**独立执行形式证明、Z3 验证或作者实验
+- 当前 `FOUNDATION/SOURCES.md` 未发现同一 arXiv 编号；`Sxx = NOT_REGISTERED / NOT_ASSIGNED`，不擅自新增 Verified Core 或分配来源编号
+- 生产身份：GPT-6 / GPT_NATIVE / NOT_JULES_REPLAY；任务 `foundations/research/daily`；逻辑日期 `2026-11-09 Asia/Shanghai`；基线 main `9ef3c669d71f511a87eb677f94dbbb90ca4461c0`；UTC 检查时间 `2026-11-09T11:55:08.435Z`；所属容器 Tool System
+
+### 核心机制与定理的适用边界
+论文将自然语言任务解析为 Permission IR，包括意图、资产、动作、前置义务、外部目的地和证据片段，再由确定性 lowering 形成含 data/control/parent 依赖边的权限图，SMT authorizer 在执行前检查策略，Just-in-Time gateway 执行允许或阻断。LLM 只负责提出结构化表示，**不直接拥有最终授权权威**；推断出的关系边也不能无条件成为可信运行事实
+
+对有限图，作者用 `H[v,label]` 表示传递的敏感标签、`A[v,capability]` 表示能力授权；例如 `not (H[v,secret] and A[v,net:send])` 是禁止敏感数据流向网络的约束，`grant(commit) implies Seen(tests_passed,before_commit)` 是时间性前提。有限图 soundness 的前提是图结构已正确表达事实、策略翻译固定、候选动作可见、所有敏感副作用均经过 gateway，且后端不超出授予能力
+
+特别注意 **taint-only monotonicity**：在固定策略与能力集合下，仅增加 taint 且不增加可信 sanitizer、declassification 或 positive obligation 事实，不能把原已禁止的动作转为允许；这一结论不适用于所有授权事实的任意变化，例如新增有效 `tests_passed` 可以满足独立正向前提。因此“图单调增长”不代表“所有许可决策只会越来越严格”
+
+作者报告在 801 个混合基准 replay 案例上达到 90.5% Decision Compliance Rate（DCR）。DCR 是允许/拒绝的二分类指标，包含误拒（FP）和漏阻（FN），不同 benchmark split 和复现基线的可比性有限。这是作者自报评估，**不等于本仓独立复现、真实生产误拒率或通用安全保证**
+
+### 面向 Tool System 的有界映射与反证
+- 候选授权记录元组：`(principal, task_intent, asset_identity, current_authority_state, tool_action, effect_target, data_lineage, obligations, observed_evidence, policy_version, gateway_decision, effect_receipt)`，只是设计候选，未变成仓库实现
+- 可信边必须标注来自观测、策略还是推断，并记录来源、有效窗口和任务/工具对象 incarnation。模型抽出的 IR 不是当前真实审批状态
+- **反例一：隐式数据流缺失**。敏感信息到输出 sink 的一条实际边未被抽取时，SMT 对残缺图 SAT 仍可能放行真实泄漏，形式化求解正确并不意味着输入世界完整
+- **反例二：过时成功前提**。旧 commit 上的 `tests_passed` 被复用到新 revision，存在前提匹配错误；必须比较作用域、时序与受测对象身份
+- **反例三：审批与效果之间 TOCTOU**。授权时的快照正确，实际 tool effect 前发生权限变化，未做原子绑定仍可能不合法
+- **反例四：绕过网关**。某工具适配器直接写入后端，任何权限图求解均不证明这条绕过路径受约束
+- **反例五：抽取偏差与误拒**。LLM 误读用户意图、阻止合法恢复或漏掉约束，都超出固定图 soundness 本身
+
+### 五轴证据状态
+- Claim State：`OBSERVED`（作者方法与实验的明确陈述，未独立检查全部证明）
+- Evidence Level：`E4_PREPRINT`（v1 原始全文）
+- Mapping State：`CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED`（本仓无已证实的对应 IR/SMT/gateway 运行实现）
+- Validation State：`NOT_TESTED`（未运行求解器、作者基准或实际 effect broker）
+
+### Evidence Delta 与复验门槛
+- NEW_EVIDENCE：将权限、taint、前置义务建模为有限证据图，并明确条件性 soundness 与 taint-only 单调性
+- CORRECTED_INTERPRETATION：SAT 结果只代表给定图与策略中的可满足性，不代表自然语言理解完整、运行中所有副作用被中介或最终完成正确
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；双语不增加独立来源；发表日与本轮研究日不同
+- NEW_COUNTEREVIDENCE：漏掉数据流边、正向前提过期、绕过网关、模型抽取遗漏、误拒等均反证端到端授权泛化结论
+- UNKNOWN_RETAINED：证明复核、实验复现、输入图完整性、真实后端约束有效性、本仓运行与 Verified Core 准入状态
+- NEXT_RETEST_CONDITION：固定 v1 原文与可运行参考实现，分别注入遗漏敏感边、旧 revision `tests_passed`、绕过 gateway 的真实工具效果，执行 SMT 与 effect-time 检查，记录输入、revision、命令、stdout/stderr、exit、独立验证器和效果回执
+
+交付边界：仅在现有中英文 `Tool_System.md` **追加**同一研究增量，不改写 Jules 历史、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、代码/Schema/Actions，也不触及独立 WorkflowHub Draft PR #378。Repo validator、Z3 原始实验、外部作用效果验证均为 `NOT_EXECUTED`，交由 Human Maintainer 审查和合并
