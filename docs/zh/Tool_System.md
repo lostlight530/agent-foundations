@@ -1051,3 +1051,37 @@ $$
 - NEXT_RETEST_CONDITION：固定 v1 原文与可运行参考实现，分别注入遗漏敏感边、旧 revision `tests_passed`、绕过 gateway 的真实工具效果，执行 SMT 与 effect-time 检查，记录输入、revision、命令、stdout/stderr、exit、独立验证器和效果回执
 
 交付边界：仅在现有中英文 `Tool_System.md` **追加**同一研究增量，不改写 Jules 历史、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、代码/Schema/Actions，也不触及独立 WorkflowHub Draft PR #378。Repo validator、Z3 原始实验、外部作用效果验证均为 `NOT_EXECUTED`，交由 Human Maintainer 审查和合并
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — 保留证据边界的双语周度编织
+
+### 身份、闭合周与输入
+- 正式任务：`foundations/research/weekly`；生产者：`GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO 周：**2026-W45，2026-11-02 至 2026-11-08**，逻辑时区 `Asia/Shanghai`；周已自然闭合
+- 本轮 UTC：`2026-11-09T12:44:58.259Z`；精确已合并 `main`：`883a0ff0138596a0a5ddd1e987918f987d74ba86`；执行身份：`agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- 按日期恢复的 Daily 原始学术来源（中英文翻译不额外增加独立证据）：**11-02 Memory** arXiv:2610.21170；**11-03 Tool** arXiv:2610.17331v1；**11-04 Memory** arXiv:2608.11654v1；**11-05 Tool** arXiv:2607.17780；**11-06 Tool** arXiv:2610.16865v2；**11-07 Tool** arXiv:2607.02599v1；**11-08 Architecture** arXiv:2608.03609v1
+- 已检查四个正式系统容器及其 EN/ZH 版本；Collaboration 在 W45 **没有新增符合日期的 Daily 理论块**，保留真实负结果
+- 已合并到 `main` 的 2026-11-09 FAVA（arXiv:2607.27267v1）属于 **W46**，明确**排除**在 W45 聚合之外
+- 论文原始发表/版本日期不能替换 Daily 研究日期；MemScope 的精确 arXiv vN 后缀在 Daily 中未核实，本轮不补猜
+- `FOUNDATION/SOURCES.md`、`EVIDENCE.md`、`MAINTENANCE.md`、Verified Core 均不修改，不自行分配 Sxx，也不提升 AF-* claim
+
+### Tool 容器——四种不同保证不能直接相乘
+- **11-03 [mini-Lean-agent](https://arxiv.org/abs/2610.17331)** 将极简 coding-agent 工具接口与 Lean kernel 的独立证明接受区分开；调用成功、生成证明文本或模型评分不等于 kernel 接受
+- **11-05 [ETAS](https://arxiv.org/abs/2607.17780)** 讨论语言内部的 effect type、策略迹线和剩余运行检查；类型正确只在给定语言抽象内成立，不是外部服务最终副作用的回执
+- **11-06 [PAC reach–avoid shield](https://arxiv.org/abs/2610.16865)**（研究 v2）在有限 horizon、数据假设、置信度和误差边界下给出概率性屏蔽；不能冒充确定性零风险
+- **11-07 [AgentLTL](https://arxiv.org/abs/2607.02599)**（v1）研究工具过程的有限轨迹与 bad-prefix 检查。通过安全前缀不表示未来 liveness 已完成，拒答也可能让 grounding 空真通过
+- 仅作为候选架构映射，可以提出 `request/source → intended typed effect → bounded shield → procedural trace check → authoritative effect receipt → final validation/proof acceptance`，但四篇论文**没有**共同证明这套完整系统，本仓更无实现或实验
+- 冲突/反例：类型正确仍可存在未建模副作用；PAC 的训练分布变化可使界失效；安全前缀可留下未履行义务；kernel 接受不会自动给工具授权
+- 需要分别运行类型/效果检查、指定统计分母的 PAC 校准、保留 unfinished liveness 的监视器、外部 effect broker 与独立最终验收。未执行前不得给出总体 PASS
+- 五轴：`OBSERVED / E4_PREPRINT / CANDIDATE_MECHANISM / NOT_IMPLEMENTED / NOT_TESTED`
+
+### Evidence Delta 与处理结论
+- NEW_EVIDENCE：本周四源映射矩阵区分 proof acceptance、类型化效果、概率屏蔽和有限迹线合规
+- CORRECTED_INTERPRETATION：程序合规、定理进展不能代替有权威的不可逆效果回执
+- UNCHANGED_BOUNDARY：typing != effect authorization；prefix PASS != eventual completion；概率界 != 零风险
+- NEW_COUNTEREVIDENCE：漏记副作用、分布变化、空真 grounding、未来义务未完成
+- UNKNOWN_RETAINED：联合系统组合保证、论文复验、仓库工具适配器与生产效果
+- NEXT_RETEST_CONDITION：固定论文版本与工具 schema，独立注入四类 failure mode，捕获命令、日志、效果身份和最终验收
+- 结论：不自动登记 Sxx、不提升 Verified Core、不声明已实现；仅在中文 Tool 容器追加 W45，11-09 的 FAVA 属 W46，不纳入

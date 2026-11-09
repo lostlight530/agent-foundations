@@ -1445,3 +1445,35 @@ Research-only Memory System mapping: represent event identity/version, extractio
 
 ### Delivery boundary
 Append-only bilingual native research within existing Memory System containers. No change to prior history, SOURCES, Verified Core, other containers, weekly/monthly, runtime, tests, Actions or separate WorkflowHub PR #378. Native validator and empirical replication: NOT_EXECUTED. Human Maintainer retains merge decision.
+
+
+---
+
+## 2026-W45 Weekly Research Cascade — evidence-preserving bilingual synthesis
+
+### Identity, closed period and inputs
+- Canonical task: `foundations/research/weekly`; producer `GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- ISO period: **2026-W45, 2026-11-02 through 2026-11-08**, logical timezone `Asia/Shanghai`; week closed before this run
+- Review time UTC: `2026-11-09T12:44:58.259Z`; exact source baseline: merged `main` `883a0ff0138596a0a5ddd1e987918f987d74ba86`; execution identity: `agent-foundations/research/weekly/2026-W45/GPT_NATIVE/883a0ff0138596a0a5ddd1e987918f987d74ba86/four-container-bilingual-cascade-01`
+- Input roster (one canonical author-paper lineage per Daily, translated bilingual records do not increase evidence count): **11-02 Memory** arXiv:2610.21170, **11-03 Tool** arXiv:2610.17331v1, **11-04 Memory** arXiv:2608.11654v1, **11-05 Tool** arXiv:2607.17780, **11-06 Tool** arXiv:2610.16865v2, **11-07 Tool** arXiv:2607.02599v1, **11-08 Architecture** arXiv:2608.03609v1
+- Four formal system containers and their EN/ZH versions were read; Collaboration has **no newly dated W45 Daily research chunk**, which is a legitimate negative input
+- 2026-11-09 FAVA arXiv:2607.27267v1 belongs to **W46** despite being merged into `main`; explicitly **excluded** from W45 source cohort and Weekly evidence credit
+- These papers' publication/submission dates are not their later Daily research dates. The MemScope exact arXiv revision suffix remained `NOT_VERIFIED` in its Daily input, and this cascade does not invent it
+- Current `FOUNDATION/SOURCES.md`, `EVIDENCE.md`, `MAINTENANCE.md` and Verified Core admission remain unchanged; no Sxx allocation or AF-* claim promotion here
+
+### Memory container — repair policy versus formal basis
+- **Nov02 [MemScope](https://arxiv.org/abs/2610.21170)** proposes localized patches to the executable memory provider based on traces, stored memory and code, conditioned on its own empirical setup. Its source version suffix remains unresolved; no author code or benchmark rerun is claimed
+- **Nov04 [Towards a Formal Definition of Agent Memory](https://arxiv.org/abs/2608.11654)** treats a selected memory basis, span/coverage and optimality for a specified query distribution. Coverage is not equivalent to truthful extraction or correct compositional answers
+- Weave into the existing Memory System: a provider revision, retrieval/selection policy and basis `M_D` are different identities; an empirical repair on one provider can change which memory events are exposed, without proving a theoretical optimal basis
+- Conflict/qualification: any claim of guaranteed improving memory from a local patch conflicts with unmeasured source truth, false or superseded events, distribution drift and joint-answer-time composition. The two papers are **different mechanisms**, not independent validations of a single algorithm
+- Counterexample gate: pin provider before/after revision, same candidate memory and query distribution; inject stale/contradictory events and compositional queries, compare coverage **and** answer accuracy at equal evaluator revision, retain failed cases and provenance
+- W45 claim state: `OBSERVED`; evidence `E4_PREPRINT / ORIGINAL_DAILY_SOURCE_REVIEW`; mapping `CANDIDATE_MECHANISM`; implementation `NOT_IMPLEMENTED`; validation `NOT_TESTED`
+
+### Evidence Delta and disposition
+- NEW_EVIDENCE: documented distinction between the empirical memory-provider repair surface and abstract basis/coverage conditions across two original source identities
+- CORRECTED_INTERPRETATION: provider patch success is not proof of improved truthful memory, and basis span is not automatically answer correctness
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; same source cited EN/ZH is not independent
+- NEW_COUNTEREVIDENCE: inaccurate/stale extraction, query drift and compositional reasoning break simplistic memory-coverage guarantees
+- UNKNOWN_RETAINED: independent paper proof/benchmark rerun, original MemScope vN suffix, local implementation and cross-query effect
+- NEXT_RETEST_CONDITION: exact versioned memory provider+input+query/evaluator snapshots, controlled failure pairs and separately measured accuracy/coverage
+- Decision: NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE. Only this existing English container receives an append-only W45 Weekly section. Native validator: NOT_EXECUTED at authoring; human-authorized review/merge to follow
