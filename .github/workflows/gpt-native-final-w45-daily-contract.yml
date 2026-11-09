@@ -1,0 +1,23 @@
+name: "GPT Native agent-foundations W45 Daily final verification"
+on:
+  push:
+    branches:
+      - gpt-native/foundations-weekly-w45-postdaily
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Native contract and tests
+        run: python3 FOUNDATION/validate.py && python3 -m unittest FOUNDATION.test_contract
+      - name: No tracked source mutations
+        run: |
+          git status --short
+          git diff --exit-code
+          test -z "$(git diff --name-only)"
