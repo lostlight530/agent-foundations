@@ -1454,3 +1454,29 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 
 ### 写入与提升边界
 仅在原有 Memory System 中英文容器后 append-only 增补 11 月 4 日研究，保留所有历史正文，不修改 `FOUNDATION/SOURCES.md`、Verified Core、代码、测试、Weekly/Monthly、Actions 与独立 WorkflowHub Draft PR.Validator 与论文复现 `NOT_EXECUTED`，等待 Human Maintainer 决定 merge
+
+
+---
+
+## 2026-W45 GPT Native 周度研究级联 — 闭合周期理论校准
+
+- Canonical task：`foundations/research/weekly`；ISO 周 `2026-W45`，2026-11-02 至 2026-11-08（Asia/Shanghai，已自然闭合）
+- Producer：GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- 输入权威：精确已合并 `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`；仅使用确实存在的 W45 Daily、中英文容器与 `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` 的证据语义
+- 本轮状态：BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- 11 月 9 日的 FAVA Daily 属于 W46，尽管目前 Tool System 中已经可见，也不得回填 W45
+
+### 本周实际输入与理论关系
+- 11 月 2 日 Memory Daily：arXiv:2610.21170，基于轨迹的局部记忆修复，研究事件的来源、更正及时间窗口
+- 11 月 4 日 Memory Daily：arXiv:2608.11654v1，Memory basis、span、查询覆盖与最终答案正确性的边界；原记录的实际检查发生在 11 月 5 日，不能把研究逻辑日期冒充原始访问时间
+- W45 实际只有两组 Memory Daily 双语研究；EN/ZH 镜像不是四份独立学术证据，更不是每天都有研究增量
+- 周度关系：记忆纠错的来源与时效规则可以约束候选 Memory basis，但 `检索覆盖`、`事实有效性`、`回答正确性` 分母不同；single-item support、单调性、可分解性等定理前提不因有 trace 而自动成立
+- 反例：一个版本完整但已过时的事实仍可能提高表面覆盖却误导当前回答；联合使用两项事实才能解题时不能冒充 single-item support
+- 本周只提出候选纪录元组 `(source_version, event_incarnation, correction_window, query_distribution, evidence_gate, answer_receipt)`，不是已经实现的在线压缩或自动纠错
+- 五轴：Claim State OBSERVED；Evidence Level E4_PREPRINT（仅原作者证据）；Mapping State CANDIDATE_MECHANISM；Implementation State NOT_IMPLEMENTED；Validation State NOT_TESTED
+- 不分配 Sxx、不提升 Verified Core、未执行本地效果测量
+- Evidence Delta — NEW_EVIDENCE：来源合格事件与知识覆盖的映射；CORRECTED_INTERPRETATION：覆盖不等于真值；UNCHANGED_BOUNDARY：研究不等于运行；NEW_COUNTEREVIDENCE：过时事实与联合推理；UNKNOWN_RETAINED：实际记忆实现和性能；NEXT_RETEST_CONDITION：锁定语料/版本，注入矛盾事实和多跳查询并独立评分
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
