@@ -1445,3 +1445,29 @@ Research-only Memory System mapping: represent event identity/version, extractio
 
 ### Delivery boundary
 Append-only bilingual native research within existing Memory System containers. No change to prior history, SOURCES, Verified Core, other containers, weekly/monthly, runtime, tests, Actions or separate WorkflowHub PR #378. Native validator and empirical replication: NOT_EXECUTED. Human Maintainer retains merge decision.
+
+
+---
+
+## 2026-W45 GPT Native Weekly Research Cascade — closed-week theory calibration
+
+- Canonical task: `foundations/research/weekly`; ISO week `2026-W45`, 2026-11-02 through 2026-11-08, Asia/Shanghai (naturally closed)
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Input authority: exact merged `main` revision `883a0ff0138596a0a5ddd1e987918f987d74ba86`; only actually retained W45 Daily chunks, both language containers and `FOUNDATION/{SOURCES,EVIDENCE,INDEX,REVIEW,MAINTENANCE}.md` evidence vocabulary
+- Weekly status: BOUNDED_DOCUMENTARY_WEAVE / NO_SOURCE_REGISTRY_PROMOTION / NO_IMPLEMENTATION_REPRODUCTION
+- W46 Nov 09 FAVA Daily is EXCLUDED from this closed W45 inference even though it is now visible in Tool System
+
+### Actual W45 input and theory relation
+- Nov 02 Memory Daily — arXiv:2610.21170 (trace-grounded local memory repair). Exact source date and status remain controlled by the original Daily record; the event/trace correction model addresses *when* a memory update has trustworthy evidence
+- Nov 04 Memory Daily — arXiv:2608.11654v1 (formal basis, span, query coverage, knowledge vs answer correctness); its research/check time is recorded Nov 05 and must not be silently redated to Nov 04
+- Input date coverage: two W45 English/Chinese research chunks (each pair is ONE underlying source identity), not seven Daily Memory studies
+- Weekly relation: event provenance and correction identity can constrain candidate basis selection, but `retrieval span`, `verified valid events` and `end-to-end answer correctness` use different denominators. The basis formalization may require single-item support, monotonicity and/or decomposability; local trace repair does not prove those assumptions
+- Non-equivalence counterexample: a trace-linked but superseded fact remains historically authentic and may improve coverage while misleading current-answer retrieval. Two separately valid facts that must be composed also break the simple single-item basis predicate
+- Weave: a **candidate documentary mapping** to `(source_version, event_incarnation, correction_window, query_distribution, evidence_gate, answer_receipt)`, NOT an implemented memory controller
+- Claim State: OBSERVED; Evidence Level: E4_PREPRINT for source-specific author claims; Mapping State: CANDIDATE_MECHANISM; Implementation State: NOT_IMPLEMENTED; Validation State: NOT_TESTED
+- SOURCE ID: no new Sxx. Two arXiv identities preserved, not promoted to Verified Core. No local recall/precision/online compression experiment executed
+- Evidence Delta — NEW_EVIDENCE: relation between provenance-qualified events and bounded coverage; CORRECTED_INTERPRETATION: coverage != factual truth; UNCHANGED_BOUNDARY: research != runtime; NEW_COUNTEREVIDENCE: stale facts, multi-item composition; UNKNOWN_RETAINED: source implementation and corpus outcomes; NEXT_RETEST_CONDITION: version-fixed corpus with stale/contradictory events, multi-hop questions and independent answer-correctness receipts
+
+### Delivery and next handoff / 交付边界
+- Weekly only / 周度研究：no historical rewrite, no new Sxx, no Verified Core admission, no repo runtime change, no claim of external reproduction, no additional independent evidence by translation
+- All checker/theorem/protocol experiments remain NOT_EXECUTED until a separate real runner receipt is collected; current status is DOCUMENTARY_REVIEW and subject to exact revision validation
