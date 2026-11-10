@@ -1678,3 +1678,54 @@ Delivery: paired append-only EN/ZH Architecture Principles research. No historic
 - UNKNOWN_RETAINED: exact real host state model, independent model-checker replay, source proof confidence and deployment invariants
 - NEXT_RETEST_CONDITION: pin paper/state abstraction, permute IDs, add symmetric objects and hidden approval states, replay FO-CTL checker and preserve witnesses and execution receipts
 - Decision: NO_VERIFIED_CORE_PROMOTION / NO_ADR / NO_RUNTIME_CHANGE; bilingual original Daily history unchanged
+
+ 
+---
+
+## 2026-11-10 GPT Native Daily — VerifierBench: rejection is not a completion oracle
+
+### Canonical source identity and research provenance
+- Canonical task: `foundations/research/daily`; logical date 2026-11-10 Asia/Shanghai; producer GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Baseline main: `a9fadcd4cfa02499d7a3d1825bb710e59b8970e6`; run identity: `agent-foundations/research/daily/2026-11-10/GPT_NATIVE/a9fadcd4cfa02499d7a3d1825bb710e59b8970e6/verifierbench-architecture-01`
+- Original paper: *VerifierBench: Benchmarking the Generation of Executable Verifiers for LLM Agents*, arXiv:2610.28679v2; updated 2026-10-30, initially submitted 2026-10-19. Today's **research check date** is not the paper publication date
+- Authors: Jianing Yin, Ziyi Chen, Hao Wang, Yiyou Sun, Zijian Jin, Dawn Song, Daoan Zhang
+- Original source surfaces directly inspected: https://arxiv.org/abs/2610.28679 and https://arxiv.org/html/2610.28679, including task formulation, screening, scoring, experiment boundaries, source case studies and selected appendices
+- Source registry check: exact arXiv identity was not found in the current `FOUNDATION/SOURCES.md` read at this task cutoff. `Sxx=NOT_REGISTERED / NOT_ASSIGNED`; this Daily research does not allocate an ID or promote verified-core claims
+
+### Method and numbers within the paper's harness
+A generated executable verifier `V_t` takes a candidate task solution and must accept each valid solution, including valid alternatives, while rejecting invalid solutions. The paper's V4V screening specifies six checks for source verifiers and constructed cases: replay, repeatability, provenance, input-label consistency, trivial all-accept/all-reject/reference-only baselines, and mutation testing. Agreement with a source verifier is *not* independent semantic truth of that verifier; disputes are adjudicated against the task requirements.
+
+The authors retain **222 tasks from six agent benchmarks**, with **4,993 test cases**: 1,566 labelled PASS and 3,427 labelled FAIL. Positive cases include reference solutions and permitted alternatives, not only the authors' designated solution. The common harness evaluation covers 19 models, with additional alternative model-harness configurations. These are author-reported figures for a screened evaluation corpus, not this repository's measured success rate.
+
+For each task, the authors average positive acceptance (TPR) and negative rejection (TNR) and define normalized balanced accuracy in percentage points as `BA_norm = TPR + TNR - 100`. Missing/invalid decisions remain in the denominator. Under the examined common-harness runs, author-reported TPR spans 21.1–70.2%, while TNR spans 79.2–96.3%. A verifier that always returns FAIL has high rejection of negatives but zero positive acceptance, and its normalized balanced accuracy is zero. The paper's error analysis attributes 87.9–96.0% of false rejections in the analyzed records to all-reject verifiers; this is not a universal prevalence estimate for all agents.
+
+### Architectural mechanism: verifier independence needs positive-permission coverage
+- A verifier is an *acceptance contract* over a task's allowed solution space, not a classifier for a single preferred trace. Its correctness requires both `accept(valid_alternatives)` and `reject(invalid_and_attack_cases)`, with case identity and the task's actual requirement boundary preserved
+- Self-tests created by the same agent can share an omitted requirement or restrictive parser with its verifier. Implementational independence alone does not make the accepted-solution semantics independent
+- A case in the original paper rejects a valid read-only query because the generated allowlist omits a permitted tool. An early self-test that never confirms any valid full solution cannot certify the final acceptance boundary
+- Static checker PASS, code-review approval, failed-test count, CI green, and absence of unauthorized effects are distinct evidence planes. None proves a semantic completion predicate when valid alternatives and state-based final outcomes have not been exercised
+
+### Counterevidence Gate and bounded theory-to-architecture mapping
+- **All-reject counterexample**: reject every candidate and observe apparent high invalid-case detection but zero valid-case coverage. If no positive controls exist, a system may conceal this defect
+- **Equivalent valid outcome**: construct two distinct authorized tool-call sequences or code patches satisfying the same task, and require the verifier to accept both without assuming a privileged tool order, file layout or representation
+- **Source verifier failure**: an apparent ground truth may itself count skipped tests as passes or parse completion incorrectly; a reference oracle needs independent task-contract review before evaluating a generated verifier
+- **Environment/state adversary**: a correct-looking trace without the intended persisted state is invalid; a legitimate alternative tool implementation can produce the correct state without matching a canonical transcript
+- Candidate architecture receipt only: `(task_identity, task_contract_revision, verifier_revision, candidate_identity, environment_snapshot, positive_variant_set, negative_attack_set, test_label_provenance, actual_outcome, counterexample_receipt)`. This is a research mapping, not an implemented schema or validated system
+- Out of scope: paper statistics do not certify Plasma, GAS, Welcome or Zero; no generalized formal safety theorem or real-world verifier acceptance rate follows from the author benchmark alone
+
+### Five evidence axes
+- Claim State: `OBSERVED` — original paper's methods and author-reported results, not independent reproduction
+- Evidence Level: `E4_PREPRINT` / exact original v2 HTML inspected; proof/experiment replication not performed
+- Mapping State: `CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State: `NOT_IMPLEMENTED`
+- Validation State: `NOT_TESTED`
+
+### Evidence Delta and retest
+- NEW_EVIDENCE: explicit dual-positive/negative acceptance contract, original screened task/case denominator, six-check V4V oracle screening, and an all-reject failure family with visible trace-level examples
+- CORRECTED_INTERPRETATION: rejection coverage and a green verifier check cannot substitute for positive allowed-solution coverage or task-final-state receipts
+- UNCHANGED_BOUNDARY: PAPER != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION; an EN/ZH translation is one source lineage, not two independent papers
+- NEW_COUNTEREVIDENCE: omitted permitted read-only tool, all-reject behavior, self-test common-mode assumptions, incorrect source test parser and final-state mismatches
+- UNKNOWN_RETAINED: authors' released benchmark reproducibility, independent case-label adjudication, applicable real deployment data, local verifier behavior, integrated runtime evidence and Verified Core admission
+- NEXT_RETEST_CONDITION: pin v2 and a verifier revision; create permitted alternative tools and code paths, invalid-state and forged-receipt attacks, and a deliberately restrictive all-reject oracle; retain actual command/env/revision/stdout/stderr/exit, source labels, positive and negative coverage denominators, and independently reconstructed final state
+
+Delivery: append-only bilingual Daily research in the two existing Architecture Principles containers. No change to earlier research text, `FOUNDATION/**`, source registry, memory, code, tests, Weekly/Monthly, workflow or any unrelated open PR. Native repository validation and paper benchmark execution: `NOT_EXECUTED`; human review/merge required.
