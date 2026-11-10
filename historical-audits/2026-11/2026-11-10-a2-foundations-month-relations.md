@@ -127,3 +127,70 @@
 - Historical successor and cleanup are distinct from file currently retained on main; no cleanup inferred without exact removal evidence
 - Next retest: pin paper v2, create positive legal alternative and negative adversarial candidate, execute independent oracle and capture stdout/stderr/exit
 - Next legal trigger Nov11 native research, A1 Nov01–10 merged and A2 Nov01–11 with source/citation changes
+
+## Current-main eight-container EN/ZH source and evidence-state matrix
+- Four conceptual containers in two languages; eight file paths **do not mean eight independent experiments**. Updated Nov10 VerifierBench candidate must remain citation/mapping rather than Verified Core.
+### docs/en/Architecture_Principles.md
+- Current exact blob `11790c1a002af7736504d5d8214238530bb7ea6d`, text lines 1732; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: ## 2026-11-10 GPT Native Daily — VerifierBench: rejection is not a completion oracle; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: Based on the latest accepted 2025 paper *"Divergence of Empirical Neural Tangent Kernel in Classification Problems"*.; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **Current five-axis calibration — 2026-08-28.** Historical generated blocks are preserved. In every such block, 'CONCEPTUAL_MAPPING' means 'Mapping State: DESIGN_ANALOGY'; implementation 'EVIDENCE_INSUFFICIENT' means 'Implementation ; absence of explicit validation stays UNKNOWN
+- Language and ownership: English independent file, translation lineage shared with paired Chinese container; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/zh/Architecture_Principles.md
+- Current exact blob `08f19c4c89d76d9d68eb9cbf3c203fc20fec665f`, text lines 1737; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: ## 2026-11-10 GPT Native Daily — VerifierBench：拒绝非法结果不等于正确验收任务; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: 基于 2025 年最新被接受的论文 *"Divergence of Empirical Neural Tangent Kernel in Classification Problems"*。; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **当前五轴校准 — 2026-08-28。** 历史生成块原文保留。所有块中的 'CONCEPTUAL_MAPPING' 当前解释为 'Mapping State: DESIGN_ANALOGY'；实现字段的 'EVIDENCE_INSUFFICIENT' 在未指向仓库实现路径时解释为 'Implementation State: REFERENCE_ONLY'；测试字段解释为 'Validation State: NOT_TESTED'。旧标签本身不决定 E; absence of explicit validation stays UNKNOWN
+- Language and ownership: Chinese independent file, shared academic source lineage with English counterpart; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/en/Memory_System.md
+- Current exact blob `445cce4e3e6202f05795212badcb3cb57427ba41`, text lines 1480; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. 'CONCEPTUAL_MAPPING' maps to 'DESIGN_ANALOGY'; implementation 'EVIDENCE_INSUFFICIENT' maps to 'REFERENCE_ONLY'; test status maps to 'NOT_TESTED'. ; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. 'CONCEPTUAL_MAPPING' maps to 'DESIGN_ANALOGY'; implementation 'EVIDENCE_INSUFFICIENT' maps to 'REFERENCE_ONLY'; test status maps to 'NOT_TEST; absence of explicit validation stays UNKNOWN
+- Language and ownership: English independent file, translation lineage shared with paired Chinese container; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/zh/Memory_System.md
+- Current exact blob `4b2cb72d9106788bf592a7d97fd1fdab436e62e8`, text lines 1489; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: > **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；'CONCEPTUAL_MAPPING' 当前映射为 'DESIGN_ANALOGY'，实现字段的 'EVIDENCE_INSUFFICIENT' 映射为 'REFERENCE_ONLY'，测试字段映射为 'NOT_TESTED'。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；'CONCEPTUAL_MAPPING' 当前映射为 'DESIGN_ANALOGY'，实现字段的 'EVIDENCE_INSUFFICIENT' 映射为 'REFERENCE_ONLY'，测试字段映射为 'NOT_TESTED'。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。; absence of explicit validation stays UNKNOWN
+- Language and ownership: Chinese independent file, shared academic source lineage with English counterpart; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/en/Tool_System.md
+- Current exact blob `d867f354f75ee77b455cf0a42944fc560f6a3b7d`, text lines 1106; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: ## 2026-11-09 GPT Native Daily — FAVA: permission-graph soundness is not end-to-end authorization
+- Candidate/source excerpt: - **URL:** http://arxiv.org/abs/2312.09674v1; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **Current five-axis calibration — 2026-08-28.** Historical 'CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT' text is preserved as generated output and currently resolves to 'DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED'. It is not evidenc; absence of explicit validation stays UNKNOWN
+- Language and ownership: English independent file, translation lineage shared with paired Chinese container; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/zh/Tool_System.md
+- Current exact blob `9701ba58516556feaef12edc8aa91376b3439703`, text lines 1088; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: ## 2026-11-09 GPT Native Daily — FAVA：权限图的形式化可靠性不等于端到端授权
+- Candidate/source excerpt: - **URL:** http://arxiv.org/abs/2312.09674v1; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **当前五轴校准 — 2026-08-28。** 历史 'CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT' 原文作为生成记录保留，当前统一解释为 'DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED'，不构成已部署工具控制面的证据。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。; absence of explicit validation stays UNKNOWN
+- Language and ownership: Chinese independent file, shared academic source lineage with English counterpart; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/en/Collaboration_System.md
+- Current exact blob `63b23d645dd3e433a803f73a0194b494741376a2`, text lines 3080; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: - **URL:** https://arxiv.org/abs/2312.15667; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. 'CONCEPTUAL_MAPPING' currently resolves to 'DESIGN_ANALOGY'; implementation 'EVIDENCE_INSUFFICIENT' to 'REFERENCE_ONLY'; test 'EVIDENCE_INSUF; absence of explicit validation stays UNKNOWN
+- Language and ownership: English independent file, translation lineage shared with paired Chinese container; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
+### docs/zh/Collaboration_System.md
+- Current exact blob `2c0a7483e413317c15f57ac4f05bdf5b656a1b12`, text lines 2916; actual file content re-read at post-A1 main
+- Nov10/date-tag headings: NO_EXACT_HEADING; older Nov09 headings: NONE_MATCHING
+- Candidate/source excerpt: - **URL:** https://arxiv.org/abs/2312.15667; citation does not prove a repo integration
+- Implementation/validation status excerpt: > **当前五轴校准 — 2026-08-28。** 历史生成标签继续可见；'CONCEPTUAL_MAPPING' 当前解释为 'DESIGN_ANALOGY'，实现字段的 'EVIDENCE_INSUFFICIENT' 解释为 'REFERENCE_ONLY'，测试字段解释为 'NOT_TESTED'。Evidence Level 与 Source Surface 独立判定。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。; absence of explicit validation stays UNKNOWN
+- Language and ownership: Chinese independent file, shared academic source lineage with English counterpart; no duplicate paper evidence
+- Theory lifecycle gate: origin publication and independently checked result must be separated from speculation, architecture mapping, implementer tests, adoption and Verified Core
+- A2 action: preserve Nov01–09 authored theory context, append Nov10 as bounded source mapping only, no SOURCE registry Sxx promotion
