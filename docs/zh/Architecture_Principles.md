@@ -1683,3 +1683,54 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - UNKNOWN_RETAINED：真实系统状态建模、实际运行验证器、证明复核和部署不变量
 - NEXT_RETEST_CONDITION：锁定论文和 state schema，置换 ID、增加对称实体与隐藏审批输入，实际复跑 FO-CTL 检查并记录反例/退出状态
 - 结论：NO_VERIFIED_CORE_PROMOTION / NO_ADR / NO_RUNTIME_CHANGE，原有双语 Daily 历史完整保留
+
+
+---
+
+## 2026-11-10 GPT Native Daily — VerifierBench：拒绝非法结果不等于正确验收任务
+
+### 原始来源身份与研究 provenance
+- Canonical Task：`foundations/research/daily`；Logical Date：2026-11-10 Asia/Shanghai；Producer：GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY
+- Base main SHA：`a9fadcd4cfa02499d7a3d1825bb710e59b8970e6`；Run Identity：`agent-foundations/research/daily/2026-11-10/GPT_NATIVE/a9fadcd4cfa02499d7a3d1825bb710e59b8970e6/verifierbench-architecture-01`
+- 原始论文：*VerifierBench: Benchmarking the Generation of Executable Verifiers for LLM Agents*，arXiv:2610.28679v2，2026-10-30 更新，v1 于 2026-10-19 初次提交.本轮研究检查日期为 2026-11-10，不能冒充论文发表日期
+- 作者：Jianing Yin、Ziyi Chen、Hao Wang、Yiyou Sun、Zijian Jin、Dawn Song、Daoan Zhang
+- 实际直接打开和阅读的原始来源：https://arxiv.org/abs/2610.28679 与 https://arxiv.org/html/2610.28679，涉及任务定义、V4V 来源审查、评分、实验边界、具体失败案例及部分附录
+- 检查当前 `FOUNDATION/SOURCES.md` 后未找到此精确 arXiv 身份；`Sxx=NOT_REGISTERED / NOT_ASSIGNED`，本轮 Daily 不新增来源编号，也不自动提升 Verified Core
+
+### 原论文中的方法与明确分母
+生成式可执行验证器 `V_t` 接收一个任务候选解，需要接受**所有符合任务要求的有效实现路径**，包括与标准轨迹不同的有效替代方案，同时拒绝错误、违规及攻击性结果.V4V 对原始验证器与测试案例提出六种审查：replay、repeatability、provenance、input-label consistency、恒允许/恒拒绝/只允许参考解的 trivial baselines，以及 mutation testing.参考验证器与构造标签一致不代表双方在语义上一定正确，冲突仍须对照真实任务合同裁决
+
+论文保留来自六个 Agent Benchmark 的 **222 个任务、4,993 个测试案例**，其中 PASS 为 1,566、FAIL 为 3,427.PASS 包括指定参考答案和其他允许的实现，不限于原作者选择的唯一轨迹.作者对 19 个模型开展统一 harness 评测，另测试其他 model-harness 配置.这些都是作者报告的 benchmark 人群与分母，**不是本仓测量值**
+
+对每个任务分别计算有效方案接受率 TPR、无效方案拒绝率 TNR，作者使用归一化平衡准确率（百分比点）`BA_norm = TPR + TNR - 100`.超时、崩溃或无有效裁定仍留在分母，不得当作拒绝成功.论文统一 harness 设置下，作者报告 TPR 范围 21.1–70.2%，TNR 范围 79.2–96.3%.恒拒绝验证器虽然可能对无效样例显示高拒绝率，但对合法样例接受率为零，归一化平衡准确率为零.作者在其**被分析的记录**中将 87.9–96.0% 的误拒归因于恒拒绝验证器，不得把这一范围外推为所有 Agent 的普遍发生率
+
+### 架构机制：Verifier 必须验证合法解空间，而非单一标准轨迹
+- Verifier 属于任务**允许解空间的验收合同**，不是识别某条唯一理想调用轨迹的分类器.正确性需同时考察 `accept(valid_alternatives)` 与 `reject(invalid_and_attack_cases)`，并明确案例身份和任务原始要求
+- 由生成验证器的同一个 Agent 撰写的 self-tests 可能共享遗漏字段、过窄解析规则或错误前提；不同代码实现不自动产生语义独立性
+- 论文案例中，生成的工具 allowlist 漏掉任务允许的只读查询，导致合法结果被误拒；早期自测甚至未证明任何完整有效解可以通过
+- 静态 checker PASS、PR 审核、失败测试数量、绿色 CI 以及未观察到非法副作用分别属于不同证据面，不能替代未覆盖的有效替代方案及最终状态验收
+
+### Counterevidence Gate 与有界理论映射
+- **恒拒绝反例**：验证器一律返回 FAIL，非法样例检出率可能看似优秀，但合法方案覆盖率为零；没有正向控制时此错误可能长期隐藏
+- **不同实现同一合法结果**：设计两条不同的授权工具调用序列或代码补丁，满足同一任务后置条件，要求 verifier 接受二者，而不是固化工具顺序、文件布局或表达形式
+- **原始 Oracle 自身失效**：参考测试可能把 skipped 计作 pass，或错误解析完成状态；进行生成验证器评测前，需要独立审查任务合同与来源 verifier
+- **执行轨迹与环境状态分离**：轨迹文本看似正确而最终持久化状态不满足条件，应判非法；合法替代工具路径即使不同于参考 trace，仍可能满足正确后置条件
+- 仅作为设计候选的验收记录：`(task_identity, task_contract_revision, verifier_revision, candidate_identity, environment_snapshot, positive_variant_set, negative_attack_set, test_label_provenance, actual_outcome, counterexample_receipt)`.未形成仓库实现、Schema 或已验证系统
+- 适用性边界：论文数据不能证明 Plasma、GAS、Welcome 或 Zero 的能力，不形成普遍形式安全定理，也不能推导真实生产环境的验证器误拒率
+
+### 五轴证据状态
+- Claim State：`OBSERVED`，仅证明原始论文所述方法与作者自报实验范围，非独立复现
+- Evidence Level：`E4_PREPRINT`，精确 v2 原始 HTML 已阅读，未独立复现论文实验或形式证明
+- Mapping State：`CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED`
+- Validation State：`NOT_TESTED`
+
+### Evidence Delta 与复验条件
+- NEW_EVIDENCE：明确正向合法替代方案与负向攻击案例的双重验收义务，带分母的原论文筛选结果、V4V 六道来源审查，以及恒拒绝失败模式
+- CORRECTED_INTERPRETATION：非法样例拒绝率和 checker 绿灯不足以证明合法解空间覆盖率或任务最终状态正确
+- UNCHANGED_BOUNDARY：Paper != Architecture Mapping != Implementation != Validation；中英文对应内容属于同一来源，不增加第二份独立证据
+- NEW_COUNTEREVIDENCE：遗漏合法只读工具、恒拒绝、自测共因假设、参考测试 parser 错误、执行轨迹与真实最终状态不一致
+- UNKNOWN_RETAINED：作者公开 benchmark 的外部复现、独立案例标签裁决、生产使用数据、本仓 verifier 行为、集成 Runtime 效果和 Verified Core 准入
+- NEXT_RETEST_CONDITION：锁定 v2、验证器修订号及任务合同，分别注入合法替代工具/代码路径、无效状态、伪造回执及恒拒绝验证器，记录真实命令、环境、revision、stdout/stderr/exit、标签来源、正负覆盖分母及独立重建的最终状态
+
+交付边界：仅在既有中英文 Architecture Principles 容器 append-only 增加同一 Daily 研究，不修改旧文本、`FOUNDATION/**`、Sxx 注册表、Memory、代码、测试、Weekly/Monthly、workflow 或不相关开放 PR.本轮未运行本仓 validator 与论文 benchmark，状态 `NOT_EXECUTED`，等待 Human Maintainer 审查合并
