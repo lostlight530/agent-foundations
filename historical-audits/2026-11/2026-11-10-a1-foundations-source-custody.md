@@ -137,3 +137,46 @@
 - A1 outcome: canonical source-container custody directly read, historical Nov01–09 review and limitations preserved
 - PR numeric additions, substantive-line count, merged state and human review are separate acceptance checks
 - A2 dependency requires merged exact A1 and refreshed main before binding the new Nov10 arXiv paper section
+
+## Bilingual canonical source-boundary cross-check by actual section identity
+- Nov10 appended theory is excluded from A1 even if present in the same physical file; A1 scope is a logical text range, not an entire current-file promotion
+### docs/en/Architecture_Principles.md
+- Source section total=170; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: ## 2026-11-10 GPT Native Daily — VerifierBench: rejection is not a completion oracle
+- Evidence-state token occurrences in current file: {"papers":26,"implemented":19,"unknown":1,"testing":25}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: English is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
+### docs/zh/Architecture_Principles.md
+- Source section total=169; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: ## 2026-11-10 GPT Native Daily — VerifierBench：拒绝非法结果不等于正确验收任务
+- Evidence-state token occurrences in current file: {"papers":26,"implemented":20,"unknown":1,"testing":25}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: Chinese is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
+### docs/en/Memory_System.md
+- Source section total=153; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":31,"implemented":26,"unknown":0,"testing":28}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: English is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
+### docs/zh/Memory_System.md
+- Source section total=154; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":31,"implemented":26,"unknown":0,"testing":27}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: Chinese is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
+### docs/en/Tool_System.md
+- Source section total=113; 2026-11-09 heading(s): ## 2026-11-09 GPT Native Daily — FAVA: permission-graph soundness is not end-to-end authorization; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":24,"implemented":19,"unknown":0,"testing":20}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: English is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 section-level text directly visible; origin/claim/mapping/implementation/validation gates remain separate
+### docs/zh/Tool_System.md
+- Source section total=112; 2026-11-09 heading(s): ## 2026-11-09 GPT Native Daily — FAVA：权限图的形式化可靠性不等于端到端授权; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":23,"implemented":19,"unknown":0,"testing":19}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: Chinese is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 section-level text directly visible; origin/claim/mapping/implementation/validation gates remain separate
+### docs/en/Collaboration_System.md
+- Source section total=337; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":37,"implemented":13,"unknown":1,"testing":16}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: English is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
+### docs/zh/Collaboration_System.md
+- Source section total=319; 2026-11-09 heading(s): NOT_FOUND_AS_EXACT_HEADING; Nov10 heading(s) withheld from A1: NOT_FOUND_AS_EXACT_HEADING
+- Evidence-state token occurrences in current file: {"papers":35,"implemented":13,"unknown":0,"testing":15}; **occurrences are not paper, claim or experimental denominator counts**
+- Translation custody: Chinese is an authored language container; mapping this container to its partner does not add an independent original paper
+- Date-scope finding: Nov09 content may reside in inherited cumulative sections; origin/claim/mapping/implementation/validation gates remain separate
