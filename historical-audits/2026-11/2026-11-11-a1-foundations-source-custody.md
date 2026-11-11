@@ -1,0 +1,198 @@
+# 2026-11-11 ORIGINAL A1 — Foundations bilingual source and theory contract custody
+
+## Scope and exact author-time distinction
+- BASE_MAIN: 4e487608e7278fe0cab771764d84baa9ef66806a; independent A1 Nov01–10; GPT Native source-body reviewer distinct from native theory author
+- Twelve source files individually retrieved on main: four FOUNDATIONS admission/evidence owners and eight English/Chinese existing research containers
+- Nov11 new Tool System research is withheld by A1 logical cutoff, retained as candidate Day N for A2 only
+- Paper, mapping, implementation, independent validation and verified admission are distinct states; bilingual translations do not create independent issuers
+- November W45 weekly already closed and W46 OPEN; no natural month-end admission claimed
+- No SOURCE Sxx promotion, VERIFIED_CORE mutation, schema/runtime run, history rewrite or WorkflowHub draft merge performed
+- Prev Nov10 original A1/A2 and Oct31 strict 0/10 historical result remain original and separate from this PR
+
+## Exact body-read identity, five-axis claim and author-time decisions
+### FOUNDATION/INDEX.md
+- Retained source path `FOUNDATION/INDEX.md` at exact Git blob `289ad219a795090fd5c24e9528f207dcd95a43dc`; reviewed domain is verified core admission
+- Paper identity: verified core admission has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: verified core admission may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of verified core admission
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate verified core admission
+- Verified Core admission: current source record alone cannot promote verified core admission to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: foundation owner policy is a contract, not another peer-reviewed primary source
+- Counterevidence: verified core admission does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `FOUNDATION/INDEX.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: verified core admission does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### FOUNDATION/MAINTENANCE.md
+- Retained source path `FOUNDATION/MAINTENANCE.md` at exact Git blob `bcd17d7774ddda1113ff7273424f9f6eee909fa2`; reviewed domain is five axis maintenance
+- Paper identity: five axis maintenance has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: five axis maintenance may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of five axis maintenance
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate five axis maintenance
+- Verified Core admission: current source record alone cannot promote five axis maintenance to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: foundation owner policy is a contract, not another peer-reviewed primary source
+- Counterevidence: five axis maintenance does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `FOUNDATION/MAINTENANCE.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: five axis maintenance does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### FOUNDATION/SOURCES.md
+- Retained source path `FOUNDATION/SOURCES.md` at exact Git blob `781bdd4f2d275e667244888e68fac48857a56d37`; reviewed domain is source issuer registry
+- Paper identity: source issuer registry has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: source issuer registry may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of source issuer registry
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate source issuer registry
+- Verified Core admission: current source record alone cannot promote source issuer registry to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: foundation owner policy is a contract, not another peer-reviewed primary source
+- Counterevidence: source issuer registry does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `FOUNDATION/SOURCES.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: source issuer registry does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### FOUNDATION/EVIDENCE.md
+- Retained source path `FOUNDATION/EVIDENCE.md` at exact Git blob `9c7e0cd274081148b34eb0a6c9d0097cea085ff5`; reviewed domain is source evidence taxonomy
+- Paper identity: source evidence taxonomy has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: source evidence taxonomy may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of source evidence taxonomy
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate source evidence taxonomy
+- Verified Core admission: current source record alone cannot promote source evidence taxonomy to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: foundation owner policy is a contract, not another peer-reviewed primary source
+- Counterevidence: source evidence taxonomy does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `FOUNDATION/EVIDENCE.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: source evidence taxonomy does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/en/Architecture_Principles.md
+- Retained source path `docs/en/Architecture_Principles.md` at exact Git blob `11790c1a002af7736504d5d8214238530bb7ea6d`; reviewed domain is STEAD equivariance and VerifierBench
+- Paper identity: STEAD equivariance and VerifierBench has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: STEAD equivariance and VerifierBench may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of STEAD equivariance and VerifierBench
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate STEAD equivariance and VerifierBench
+- Verified Core admission: current source record alone cannot promote STEAD equivariance and VerifierBench to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: English authored counterpart and Chinese translations are one research source lineage
+- Counterevidence: STEAD equivariance and VerifierBench does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/en/Architecture_Principles.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: STEAD equivariance and VerifierBench does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/zh/Architecture_Principles.md
+- Retained source path `docs/zh/Architecture_Principles.md` at exact Git blob `08f19c4c89d76d9d68eb9cbf3c203fc20fec665f`; reviewed domain is STEAD 等变性与 VerifierBench
+- Paper identity: STEAD 等变性与 VerifierBench has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: STEAD 等变性与 VerifierBench may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of STEAD 等变性与 VerifierBench
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate STEAD 等变性与 VerifierBench
+- Verified Core admission: current source record alone cannot promote STEAD 等变性与 VerifierBench to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: Chinese authored counterpart preserves the same source identity as English; NOT an extra reproduced experiment
+- Counterevidence: STEAD 等变性与 VerifierBench does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/zh/Architecture_Principles.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: STEAD 等变性与 VerifierBench does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/en/Memory_System.md
+- Retained source path `docs/en/Memory_System.md` at exact Git blob `445cce4e3e6202f05795212badcb3cb57427ba41`; reviewed domain is memory response diversity, trace and coverage
+- Paper identity: memory response diversity, trace and coverage has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: memory response diversity, trace and coverage may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of memory response diversity, trace and coverage
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate memory response diversity, trace and coverage
+- Verified Core admission: current source record alone cannot promote memory response diversity, trace and coverage to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: English authored counterpart and Chinese translations are one research source lineage
+- Counterevidence: memory response diversity, trace and coverage does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/en/Memory_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: memory response diversity, trace and coverage does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/zh/Memory_System.md
+- Retained source path `docs/zh/Memory_System.md` at exact Git blob `4b2cb72d9106788bf592a7d97fd1fdab436e62e8`; reviewed domain is 记忆多样性、轨迹修复、形式化覆盖
+- Paper identity: 记忆多样性、轨迹修复、形式化覆盖 has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: 记忆多样性、轨迹修复、形式化覆盖 may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of 记忆多样性、轨迹修复、形式化覆盖
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate 记忆多样性、轨迹修复、形式化覆盖
+- Verified Core admission: current source record alone cannot promote 记忆多样性、轨迹修复、形式化覆盖 to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: Chinese authored counterpart preserves the same source identity as English; NOT an extra reproduced experiment
+- Counterevidence: 记忆多样性、轨迹修复、形式化覆盖 does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/zh/Memory_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: 记忆多样性、轨迹修复、形式化覆盖 does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/en/Tool_System.md
+- Retained source path `docs/en/Tool_System.md` at exact Git blob `cec30f2a26b45bbf7d77a0627c48f42a15d7888b`; reviewed domain is minimal tool, effect typing, PAC, AgentLTL and FAVA
+- Paper identity: minimal tool, effect typing, PAC, AgentLTL and FAVA has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: minimal tool, effect typing, PAC, AgentLTL and FAVA may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of minimal tool, effect typing, PAC, AgentLTL and FAVA
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate minimal tool, effect typing, PAC, AgentLTL and FAVA
+- Verified Core admission: current source record alone cannot promote minimal tool, effect typing, PAC, AgentLTL and FAVA to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: English authored counterpart and Chinese translations are one research source lineage
+- Counterevidence: minimal tool, effect typing, PAC, AgentLTL and FAVA does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/en/Tool_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: minimal tool, effect typing, PAC, AgentLTL and FAVA does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/zh/Tool_System.md
+- Retained source path `docs/zh/Tool_System.md` at exact Git blob `924e596c1e5a4c7702c48d4f3d43222f267fb4c9`; reviewed domain is 最小工具、效应类型、PAC、AgentLTL 与 FAVA
+- Paper identity: 最小工具、效应类型、PAC、AgentLTL 与 FAVA has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: 最小工具、效应类型、PAC、AgentLTL 与 FAVA may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of 最小工具、效应类型、PAC、AgentLTL 与 FAVA
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate 最小工具、效应类型、PAC、AgentLTL 与 FAVA
+- Verified Core admission: current source record alone cannot promote 最小工具、效应类型、PAC、AgentLTL 与 FAVA to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: Chinese authored counterpart preserves the same source identity as English; NOT an extra reproduced experiment
+- Counterevidence: 最小工具、效应类型、PAC、AgentLTL 与 FAVA does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/zh/Tool_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: 最小工具、效应类型、PAC、AgentLTL 与 FAVA does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/en/Collaboration_System.md
+- Retained source path `docs/en/Collaboration_System.md` at exact Git blob `63b23d645dd3e433a803f73a0194b494741376a2`; reviewed domain is SpecAgent, I-HITL and W45 no-source
+- Paper identity: SpecAgent, I-HITL and W45 no-source has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: SpecAgent, I-HITL and W45 no-source may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of SpecAgent, I-HITL and W45 no-source
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate SpecAgent, I-HITL and W45 no-source
+- Verified Core admission: current source record alone cannot promote SpecAgent, I-HITL and W45 no-source to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: English authored counterpart and Chinese translations are one research source lineage
+- Counterevidence: SpecAgent, I-HITL and W45 no-source does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/en/Collaboration_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: SpecAgent, I-HITL and W45 no-source does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+### docs/zh/Collaboration_System.md
+- Retained source path `docs/zh/Collaboration_System.md` at exact Git blob `2c0a7483e413317c15f57ac4f05bdf5b656a1b12`; reviewed domain is SpecAgent、I-HITL 与 W45 无新增来源
+- Paper identity: SpecAgent、I-HITL 与 W45 无新增来源 has its own original issuer and version/claim boundary; reading the narrative does not create another upstream publication
+- Mapping axis: SpecAgent、I-HITL 与 W45 无新增来源 may express DESIGN_ANALOGY but not a proven executable mapping of this repository's Agent Runtime
+- Implementation axis: no new implementation source, Git patch, compiled binary or running adapter was observed during this review of SpecAgent、I-HITL 与 W45 无新增来源
+- Validation axis: no exact independent command, fixtures, revision, stdout, exit and run receipt was executed by this maintenance to validate SpecAgent、I-HITL 与 W45 无新增来源
+- Verified Core admission: current source record alone cannot promote SpecAgent、I-HITL 与 W45 无新增来源 to VERIFIED without the FOUNDATION admission requirements
+- History and dating: source passages retain original assigned time and producer, and Day-N Nov11 portions are outside Nov01–10 A1 even when in current blob
+- Issuer independence: Chinese authored counterpart preserves the same source identity as English; NOT an extra reproduced experiment
+- Counterevidence: SpecAgent、I-HITL 与 W45 无新增来源 does not certify local host state, independently proven theorem, production policy enforcement or completed external effect
+- Scope decision: NO_SOURCE_EDIT for `docs/zh/Collaboration_System.md`; no fabricated source registry row, paper count or validation outcome
+- Custody: PRESENT_AND_BODY_READ, current blob identity known; original source-time PR delivery and merged-main state remain separate
+- Cross-system boundary: SpecAgent、I-HITL 与 W45 无新增来源 does not automatically validate the other three theory systems or make bilingual versions distinct evidence
+
+## Source-specific Nov01–10 scientific decisions
+- Architecture Nov08 STEAD finite proof relies on a stated equivariant agent precondition, not a universal real-world deployed result
+- Architecture Nov10 VerifierBench rejection oracle differs from correct completion oracle; accepted negative label is not a valid workflow postcondition
+- Memory Nov01 conditioned response diversity does not prove stable memory quality across tasks or retained agents
+- Memory Nov02 trace-grounded local memory repair needs exact trace/run/state and cannot be adopted from paper text alone
+- Memory Nov04 formal memory basis/coverage theory does not imply actually persisted multi-session graph
+- Tool Nov03 minimal interface design requires independent proof and permission semantics beyond a tool schema
+- Tool Nov05 effect typing distinguishes intent, authorized call and effect receipts
+- Tool Nov06 PAC Reach–Avoid is explicitly probabilistic and scoped to assumptions; not a deterministic all-controller safety guarantee
+- Tool Nov07 AgentLTL verified trace predicate is not an externally committed tool effect
+- Tool Nov09 FAVA permission-graph soundness lacks end-to-end purpose authorization proof for a multi-step workflow
+- Tool Nov11 compositional authorization is not part of this A1 cutoff and cannot be folded into the W45 corpus
+- Collaboration Oct25 SpecAgent trajectory audit cannot verify irreversible delegated effects
+- Collaboration Oct27 I-HITL mediation is necessary but not sufficient for postcondition or approval completeness
+- W45 source cohort ends Nov08; Nov09 FAVA is W46 even if its file is currently retained on main
+- No extra independent research credit comes from the Chinese translation of the same source chunk
+- Architecture and Tool System authorization sources address related questions but do not comprise one validated local composite Runtime
+- Memory representation and Collaboration trust claims do not establish each other's executable system state
+- SOURCE registry counts are unique source entries, not current paper implementation or validation success counts
+- Original labels CONCEPTUAL_MAPPING and EVIDENCE_INSUFFICIENT remain historical while current reading uses DESIGN_ANALOGY / NOT_IMPLEMENTED
+- Nov10 A1 original blob ab9a07cb8f72e92bfe101435ac930c7e114e913b remains its prior exact author-time source
+- Nov10 A2 original blob 240dd4d048282f1178c7ec72b02eb07fdb789db0 remains a separate relationship version
+- Open WorkflowHub draft #378 stays outside this original A1 and is not automatically a blocker
+- Nov11 original A1 additions and substance must be validated on its single PR, not borrowed from a previous source review
+- Source read does not execute FOUNDATION validator or an independent SAT/SMT proof checker
+- No new runtime, tests, actions, source paper issuance or Human Review asserted by this A1
+- Source-level current retention is evidence of delivered Markdown, not of native theory execution or independently verified implementation
+- An absence of a novel paper for a particular domain is a valid bounded no-source result rather than a reason to fabricate Sxx admission
+- Final review disposition: twelve documents present and read, source custody checked, Verified Core unchanged and no unknown status promoted
