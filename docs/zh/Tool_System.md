@@ -1085,3 +1085,54 @@ $$
 - UNKNOWN_RETAINED：联合系统组合保证、论文复验、仓库工具适配器与生产效果
 - NEXT_RETEST_CONDITION：固定论文版本与工具 schema，独立注入四类 failure mode，捕获命令、日志、效果身份和最终验收
 - 结论：不自动登记 Sxx、不提升 Verified Core、不声明已实现；仅在中文 Tool 容器追加 W45，11-09 的 FAVA 属 W46，不纳入
+
+
+---
+
+## 2026-11-11 GPT Native 每日研究 — 局部允许不自动合成为全局授权
+
+### 规范来源身份、版本与阅读边界
+- 正式任务：foundations/research/daily，正式容器：Tool System，逻辑日期：2026-11-11 Asia/Shanghai
+- 生产身份：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED_SUBSTITUTE / NOT_JULES_REPLAY，基线 main：bf29f5414977a842fcdb7fa48850dd2e0c6d420a
+- 原始论文：Anmol Pandey、Aditya Jain、Liang Chen、Carsten Maple，*Local Allow, Global Deny: Why Per-Action Authorization Does Not Compose in LLM Agents*，arXiv:2610.27620v1，首次提交时间 2026-10-20 04:35:39 UTC
+- 一手全文：https://arxiv.org/html/2610.27620 ，版本与摘要：https://arxiv.org/abs/2610.27620 ，作者提供的源码与复现入口：https://github.com/anmolpandey299/al-synth
+- 已阅读原文摘要、威胁模型、组合授权失败定义、单迹/关系性质、可观测性、分离结论、SAT/SMT 反例合成及作者实验局限，未对全部形式证明进行独立重证
+- 论文发表于 10 月，不是 11 月 11 日的新发表研究，中英文使用同一 arXiv 身份，翻译不增加独立证据
+- SOURCES 的 Sxx 未登记/未分配，Verified Core 的 AF-* claim 未提升，本轮不修改 FOUNDATION/SOURCES.md、EVIDENCE.md 或核心声明
+
+### 机制：Action-level ALLOW 不能推出 Workflow-level Authorization
+作者用有限、带类型的状态转移系统描述工具动作，每个动作有当前状态下的局部 guard，另设一个涵盖意图、目的、来源、同意与委托的全局策略 Phi，Compositional Authorization Failure（CAF）允许每一步独立通过检查，整条轨迹却违反全局策略
+
+这里至少有两类不同验收对象：单条轨迹可显示的全局安全违规，以及需要比较两条轨迹才能显现的目的相关违规，后者在论文非退化条件下属于 2-safety hyperproperty，不得写成所有 Agent 安全问题均必须跨两次运行验证
+
+核心分离结论有严格前提：若单条轨迹的 monitor 对局部合规轨迹从不误报，则它无法从单条轨迹判断这类关系性目的违规，因为该违规没有某个独立、必然违规的单步，允许误报的保守阻断器可能拦截部分情况，具有配对观察能力的 monitor 也仍受随机采样和环境可比性限制
+
+原文的排期助手反例：用户允许泄露 free/busy，但没有允许透露为什么忙，例如涉密面试的原因，两个世界中允许透露的空闲状态相同，助手实际建议的时间却因私密原因而不同，每次读取日历、生成建议和发送消息均可局部允许，而两条运行的输出关系违反授权目的
+
+作者使用无 LLM 的 AL-Synth SAT/SMT 构造最小违反见证，并用有界穷举 oracle 检查，论文还报告九个模型裁判及开放权重 Agent 的 60 次 rollout 中 22 次组合授权违规，这些数字属于作者限定配置的报告，不是本仓复现、不代表真实生产总体风险率，更不能自动成为本仓安全基线
+
+### 面向 Tool System 的有界架构映射与反证
+- CANDIDATE_MECHANISM：把单次 Tool/Broker 权限和全局目的、同意、隐含数据依赖、跨动作因果链分开验收，不能以多次 ALLOW 的合取自动替代整条 Workflow 授权
+- 候选证据结构：(task identity, run identity, policy version, purpose/consent authority, input/environment identity, allowed disclosure D, observer projection alpha, per-action verdicts, trace ID, matched counterfactual trace ID, effect receipts, final workflow verdict)，仅为候选研究结构，未纳入实现
+- CANDIDATE_MECHANISM：可以在明确权限下用成对、受控的反事实运行测试关系性泄露，但并不授权自动提取或传播真实用户隐私数据，也不代表已经部署了跨运行的监视器
+- COUNTEREVIDENCE：允许误报的单迹保守监视器可能通过过度阻断发现风险，所以不可能性结论必须连同“无误报”假设一起传递
+- COUNTEREVIDENCE：如果目的约束写错、允许解密/泄露的投影 D 或可见输出 alpha 设计不完整、两次执行的环境不等价、采样不足、外部工具绕过监视，配对检查亦不能证明端到端授权
+- OUT_OF_SCOPE：有限模型证明、作者代码、模型判定分数与仓库可执行授权 Broker、效果时刻审批、生产权限并非同一证据对象
+- 与 11 月 9 日 FAVA 研究保持分层：FAVA 的权限图求解正确性受建模完整性与 Gateway 中介条件约束，本论文额外指出跨轨迹关系性目的谓词的表达能力限制，两论文没有共同验证的组合系统定理
+
+### 五轴状态
+- Claim State：OBSERVED_AUTHOR_THEOREM_AND_AUTHOR_REPORTED_RESULTS / NOT_INDEPENDENTLY_PROVED
+- Evidence Level：E4_PREPRINT / ORIGINAL_V1_FULL_TEXT_SCOPED_REVIEW
+- Mapping State：CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE
+- Implementation State：NOT_IMPLEMENTED / NO_LOCAL_RELATIONAL_AUTHORIZATION_MONITOR_OBSERVED
+- Validation State：NOT_TESTED / NO_SMT_SOLVER_RUN / NO_AGENT_OR_TOOL_EFFECT_REPLAY
+
+### Evidence Delta 与下一步反证
+- NEW_EVIDENCE：论文构造了各动作被允许但全局目的未被授权的失败家族，并为某类关系性目的违规给出带前提的分离结论和有界反例生成机制
+- CORRECTED_INTERPRETATION：局部 Tool ALLOW、每步测试成功、单迹合规、运行正常，均不能无条件推出整个 Agent 工作流符合授权目的
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；作者理论 != 独立证明；作者 22/60 != 本仓故障率
+- NEW_COUNTEREVIDENCE：同一条局部合规轨迹可处于满足或违反关系策略的不同轨迹集合，保守误报、错误投影、遗漏的反事实配对都会改变推论条件
+- UNKNOWN_RETAINED：定理独立证明、AL-Synth 复现、实验外推性、真实授权目的表达、成对运行可比性、仓库实现与生产效应
+- NEXT_RETEST_CONDITION：锁定 arXiv v1 与 AL-Synth 源码版本，在 free/busy 一致而机密原因不同的两个环境构造配对轨迹，比较每步 guard 和跨迹目的谓词，执行 SAT/SMT 与 Agent 控制用例，保留 fixture、revision、command、stdout/stderr、exit、effect receipt 与误报分母
+
+交付边界：仅向现有中英文 Tool System 容器追加本日理论研究，不改写旧论文块、11 月 9 日 FAVA、W45 Weekly、其他三容器、Sxx Registry、Verified Core、Schema、Runtime 或独立 WorkflowHub Draft PR #378，不伪造研究原型、工具运行或数学重证，Validator、SMT 与本地实验在写入时均为 NOT_EXECUTED，交由 Human Maintainer 审查合并
