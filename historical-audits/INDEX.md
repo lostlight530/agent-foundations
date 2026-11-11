@@ -54,3 +54,11 @@ As of 2026-09-19 this is the latest completed independent periodic-maintenance r
 ## 2026-10-29 forward status-scope erratum
 
 - [2026-09 Strategic Blueprint month-closure scope](01-corrections-and-errata/2026-10-29--september-blueprint-closure-scope--erratum.md) — the original September Blueprint marks `MONTH_OPEN`, labels its blueprint `FINAL`, and explicitly excludes September 30; the dated erratum limits the `FINAL` interpretation without changing historical theory or upgrading verified-core/runtime claims.
+
+## 2026-11-11 independent A1/A2 original-PR acceptance reconciliation
+
+- [2026-11-01..11 effective PR gate reconciliation](2026-11/2026-11-11-a1a2-effective-pr-acceptance-reconciliation.md) records 20 merged independent original PRs for Nov02..11, 11 with >=100 GitHub additions and 9 with original numeric NOT_MET
+- Nov01 is the source-window start and is not a fabricated independent A1/A2 original run
+- Numeric additions, real contract-complete maintenance, scientific validity, native runtime evidence and merge retention remain separately evaluated
+- Early Draft labels must be compared with final original diff without silently rewriting old PR/title history
+- This forward note does not replace the November native bilingual Memory/Tool owners or existing periodic audits

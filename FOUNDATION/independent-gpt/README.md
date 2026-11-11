@@ -121,3 +121,19 @@ A durable handoff should make it possible to recover:
 No separate audit artifact is required merely to prove that review happened. Prefer correcting the owning maintenance source and using the Draft PR description as the delivery summary.
 
 Final merge and doctrine authority remains with the maintainer.
+
+## 2026-11-11 scoped independent A1/A2 effective-PR acceptance
+
+For the 2026-11-01..11 evidence window see the [dated original PR acceptance reconciliation](../../historical-audits/2026-11/2026-11-11-a1a2-effective-pr-acceptance-reconciliation.md). This is a forward interpretation correction, not a rewrite of original PR history, bilingual native research, or periodic audit.
+
+- Independent A1: complete applicable MonthStart..N−1 coverage, verified evidence/source/provenance custody and explicit per-file dispositions, including justified NO_FOLLOW_UP.
+- Independent A2: original A1 must already be merged and reread on fresh main, followed by complete MonthStart..N bilingual/theory/source/effect relationship maintenance.
+- Real per-file evidence identities, exact source paths/blob SHAs, claim-to-evidence bounds, bilingual correspondence decisions, relationship continuity, admissible inheritance, unknowns and counterexamples are meaningful maintenance content.
+- Original PR additions >=100 is checked for each final merged original PR independently; never combine successor, correction, Native, Periodic Audit or other repository additions.
+- A valid 100-line maintenance diff does not require 100 new scientific discoveries; neither may mechanically copied filler or fictional execution inflate the count.
+- Keep DELIVERY_MERGED, NUMERIC_GATE, COVERAGE, SEMANTIC_QUALITY, BILINGUAL_CONSISTENCY, NATIVE_EXECUTION, TESTS_EXECUTED and MAIN_RETENTION distinct.
+- An initial Draft NOT_MET is not necessarily the final source-reviewed original head; an author's PASS_SELF_QA is not independent Human Review.
+- When the original additions are <100, retain NUMERIC_NOT_MET while acknowledging the actual bounded source maintenance; do not falsely say no work was delivered.
+- Preserve all actual Native/PAC/effect verification gaps as PARTIAL/UNKNOWN/NOT_EXECUTED; GitHub merging does not establish live PAC shield enforcement.
+- Nov02–11: 20/20 original independent PRs merged, 11 meet >=100 additions and nine are original numeric NOT_MET; these counts alone do not certify semantic quality.
+- November and W46 remain OPEN at this cut, with W45 CLOSED; D7/D10 separate, future D14/D30 and natural month final NOT_DUE.
