@@ -53,3 +53,16 @@ Describe the smallest safe rollback.
 - [ ] Bilingual claim surfaces remain aligned where applicable.
 - [ ] Historical evidence was not silently rewritten to match later knowledge.
 - [ ] No credentials, private data, or unrelated generated/local state is included.
+
+## Independent A1/A2 original PR acceptance (when applicable)
+
+- [ ] Identify independent maintenance A1 vs A2 separately from repository-native task labels, Periodic Audit, successor and correction
+- [ ] A1 covers the entire MonthStart..N−1 applicable input set and records every applicable file's reviewed disposition
+- [ ] A2 starts from a freshly inspected main with original A1 merged, and reconciles all MonthStart..N relationships
+- [ ] Record true original PR GitHub additions (minimum 100), final head/diff, merge receipt and main retention separately
+- [ ] Valid content includes evidence-backed per-file decisions, provenance/SHA custody, coverage proof, relationships, counterexamples, status changes and qualified NO_FOLLOW_UP
+- [ ] Do not demand 100 unrelated novel scientific findings; do not pad with duplicate/empty/fabricated lines
+- [ ] Distinguish delivery, numeric gate, content validity, Native execution and checks actually run; preserve UNKNOWN and PARTIAL
+- [ ] Late same-original-PR revisions must be reviewed at the final head; early Draft NOT_MET is not automatically final
+- [ ] Original numeric shortfalls remain historic facts; successor additions never backfill them
+- [ ] For 2026-11-01..11 reference [dated independent A1/A2 calibration](../historical-audits/2026-11/2026-11-11-a1a2-effective-pr-acceptance-reconciliation.md) without rewriting the originals
