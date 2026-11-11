@@ -1103,3 +1103,52 @@ Delivery: paired **append-only** English/Chinese Tool System Daily research, no 
 - UNKNOWN_RETAINED: cross-mechanism compositional guarantees, independent paper reproduction, implemented tool adapter and production outcomes
 - NEXT_RETEST_CONDITION: pin source versions and tool schema; inject each of four failure modes in separate harness fixtures and retain commands, transcripts, effect IDs and outcome receipts
 - Decision: NO_SOURCE_REGISTRY_AUTO_ADMISSION / NO_VERIFIED_CORE_PROMOTION / NO_IMPL_CLAIM. Only append to existing English Tool container; W46 FAVA excluded from this W45 synthesis
+
+
+---
+
+## 2026-11-11 GPT Native Daily Research — Compositional authorization: locally allowed actions do not establish globally authorized purpose
+
+### Canonical source identity, version, and inspection
+- Task: foundations/research/daily; system container: Tool System; logical date: 2026-11-11 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_REQUESTED_SUBSTITUTE / NOT_JULES_REPLAY; base merged main: bf29f5414977a842fcdb7fa48850dd2e0c6d420a
+- Source: Anmol Pandey, Aditya Jain, Liang Chen, Carsten Maple, *Local Allow, Global Deny: Why Per-Action Authorization Does Not Compose in LLM Agents*, arXiv:2610.27620v1, first submitted 2026-10-20 04:35:39 UTC
+- Exact primary source: https://arxiv.org/html/2610.27620 ; source identity and abstract: https://arxiv.org/abs/2610.27620 ; author-supplied implementation/reproducibility lead: https://github.com/anmolpandey299/al-synth
+- Read depth: original HTML abstract, threat model, compositional authorization failure definition, expressiveness and observability distinctions, separation/impossibility statements, synthesis method, author-described empirical study, and stated limits; not an independent mathematical proof audit
+- Paper publication date != this Daily research date; arXiv version and authors are one canonical bibliographic object; bilingual translation does not create a second source
+- Source Registry: Sxx NOT_ALLOCATED / NOT_REGISTERED, and verified-core AF-* claim NOT_PROMOTED. This Daily report does not mutate FOUNDATION/SOURCES.md or verified-core contracts
+
+### Mechanism: a per-action decision is not a workflow-level authorization
+The paper models finite typed state transitions with a local guard on each action and a distinct global authorization policy Phi governing the whole episode, including intent, purpose, provenance, consent, and delegation. A compositional authorization failure (CAF) can satisfy every individual guard while violating the global contract. Some failures have a violating single trace; a distinct relational-purpose failure needs a pair of locally allowed traces and is represented as a 2-safety hyperproperty.
+
+The formal separation has a precise quantifier: under the paper's stated non-collapse condition, a single-trace monitor that never falsely alarms on a locally compliant trace cannot detect the relational-purpose violation, because no one trace supplies an individual locus of blame. A monitor may choose a conservative block with false positives, and a cross-execution monitor may inspect the required trace pair; neither option proves that sampling stochastic agent outputs gives exhaustive coverage.
+
+An instructive witness is the paper's scheduling assistant: authorized disclosure is free/busy availability, not the confidential reason why an interval is busy. Two executions can agree on the permitted availability view yet emit different proposal patterns because the hidden reason differs. Every calendar-read, proposal, and message action can be individually allowed, while the relation across outputs violates the specified purpose.
+
+The authors propose AL-Synth, an LLM-free SAT/SMT witness synthesizer with bounded exhaustive-oracle checking. They report nine model-judge comparisons and a live open-weights experiment with 22 violations in 60 rollouts before composition-aware intervention. These are *author-reported, setting-specific* observations, not independent replication or a local failure rate. A surveyed guardrail count and an author-side proof are not evidence of this repository running those guards.
+
+### Bounded theory-to-architecture mapping
+- CANDIDATE_MECHANISM: distinguish per-action tool/broker permission from the purpose and consent of the full composed workflow; policy admission should carry task intent and authorized disclosure projection, not only action-local allow
+- Candidate evidence object: (task identity, run identity, current policy version, purpose/consent authority, input and environment identity, allowed declassification D, observer projection alpha, individual action guard verdicts, trace/event identity, matched counterfactual trace identity, tool-effect receipts, final workflow decision)
+- CANDIDATE_MECHANISM: pairwise comparison of controlled counterfactual runs may detect relational policy violations missed by individually successful guards; it does not authorize automatically instrumenting live personal data or silently upgrading a tool permission system
+- COUNTEREVIDENCE: a legitimate but conservative single-trace blocker can detect some cases by also blocking compliant runs, so the impossibility theorem does not claim that every conceivable single-trace monitor detects zero violations without its false-alarm-free premise
+- COUNTEREVIDENCE: an incorrect disclosure projection, missing hidden dependency, mismatched environment, nondeterministic sampling, incomplete trace capture, or unmediated external effect can invalidate the intended monitor conclusion
+- OUT_OF_SCOPE: proof statements over finite formal models do not certify open-ended arbitrary tool stacks, installed SDKs, real user consent, backend effect-time authority, or all stochastic executions
+- Compared with the Nov09 FAVA Daily: finite permission-graph SAT soundness is conditional on correct graph and gateway mediation, whereas this paper stresses a separate relational/noninterference expressiveness boundary. Neither paper supplies a composition theorem combining both systems
+
+### Five-axis evidence status
+- Claim State: OBSERVED_AUTHOR_THEOREM_AND_AUTHOR_REPORTED_RESULTS / NOT_INDEPENDENTLY_PROVED
+- Evidence Level: E4_PREPRINT / ORIGINAL_V1_FULL_TEXT_SCOPED_REVIEW
+- Mapping State: CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE
+- Implementation State: NOT_IMPLEMENTED / NO_LOCAL_RELATIONAL_AUTHORIZATION_MONITOR_OBSERVED
+- Validation State: NOT_TESTED / NO_SMT_SOLVER_RUN / NO_AGENT_OR_TOOL_EFFECT_REPLAY
+
+### Evidence Delta and falsification gate
+- NEW_EVIDENCE: an explicit locally permitted but globally unauthorized class of executions, with a theorem-conditioned relational-purpose separation and bounded synthesizable counterexamples
+- CORRECTED_INTERPRETATION: per-action ALLOW, successful guarded tool calls, valid individual traces and a correctly mediated step do not establish a purpose-authorized overall workflow
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; AUTHOR_PROOF != INDEPENDENT_RECHECK; PAPER_ROLLOUT_DENOMINATOR != LOCAL_FAILURE_RATE
+- NEW_COUNTEREVIDENCE: the same locally compliant trace may participate in violating and nonviolating trace sets; a conservative false-positive monitor, wrong declassification projection or incomplete counterfactual pair changes detection assumptions
+- UNKNOWN_RETAINED: theorem proof recheck, reproducibility of AL-Synth, author benchmark generalization, real-world policy encoding, independent trace pairing, local code and production implementation
+- NEXT_RETEST_CONDITION: pin exact v1 and executable AL-Synth revision, construct two traces with equal permitted free/busy inputs but different unauthorized confidential-context dependence, compare local guards versus explicit pair-aware predicate, run SAT/SMT and agent controls, retain input fixtures, command, revision, stdout/stderr, exit, effect receipts and false-positive counts
+
+Delivery boundary: append-only bilingual Daily research in existing Tool System containers only, not a native runtime implementation or independent maintenance pass. Preserve all historical source chunks, the Nov09 FAVA Daily and W45 Weekly, other containers, SOURCE Registry, Verified Core, and open WorkflowHub Draft PR #378. Validator, SAT/SMT replay, model evaluation, runtime tools and host integration: NOT_EXECUTED at authoring. Human Maintainer review and merge required.
