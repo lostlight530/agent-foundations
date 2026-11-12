@@ -1136,3 +1136,61 @@ $$
 - NEXT_RETEST_CONDITION：锁定 arXiv v1 与 AL-Synth 源码版本，在 free/busy 一致而机密原因不同的两个环境构造配对轨迹，比较每步 guard 和跨迹目的谓词，执行 SAT/SMT 与 Agent 控制用例，保留 fixture、revision、command、stdout/stderr、exit、effect receipt 与误报分母
 
 交付边界：仅向现有中英文 Tool System 容器追加本日理论研究，不改写旧论文块、11 月 9 日 FAVA、W45 Weekly、其他三容器、Sxx Registry、Verified Core、Schema、Runtime 或独立 WorkflowHub Draft PR #378，不伪造研究原型、工具运行或数学重证，Validator、SMT 与本地实验在写入时均为 NOT_EXECUTED，交由 Human Maintainer 审查合并
+
+
+---
+
+## 2026-11-12 GPT Native Daily Research — AgentCap / 工具效果时刻的能力授权
+
+### 任务身份、论文来源与问题边界
+- 正式任务：`foundations/research/daily`，逻辑日：**2026-11-12 Asia/Shanghai**，生产者：`GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- 原始仓库 `lostlight530/agent-foundations`，冷启动合并基线 `67854562dcb87ec36bbeb965bdf22294a2bbb56d`，执行身份：`agent-foundations/research/daily/2026-11-12/GPT_NATIVE/67854562dcb87ec36bbeb965bdf22294a2bbb56d/agentcap-tool-runtime-authorization-01`
+- 本轮仅在 Tool System 现有中英文容器追加研究，不覆盖先前 Daily/Weekly、其他三个容器及 Jules 历史
+- 规范论文身份：**arXiv:2611.00729v1**，首次提交时间 **2026-10-31T08:13:11Z**，不能冒充 11 月 12 日新发表
+- 题名：*AgentCap: Capability-Based Runtime Authorization for Secure LLM Agent Execution*
+- 作者：**Aravinda Kashyap Kabbinamakki Suresh、Peng Gao**
+- 实际查阅：[arXiv v1 元数据](https://arxiv.org/abs/2611.00729) 与 [v1 原文 HTML](https://arxiv.org/html/2611.00729v1)，检查了威胁模型、Token 与委托关系、策略签发、参数来源、实验口径和限制
+- arXiv 载明 NeurIPS 2026 Agents in the Wild 非归档 Workshop 接收，但这不是独立理论重证
+- 原容器未发现此 arXiv 对象的既存 Daily 引用；`FOUNDATION/SOURCES.md` Sxx 分配与 Verified Core 准入均 **NOT_PERFORMED**
+- 研究问题：如何把模型的动作建议与真正可执行的授权分离，在具体 Agent、Session、Action、Resource、参数来源与执行时刻检查权限
+
+### 核心机制：Proposal / Issuance / Enforcement 三层不能坍缩
+作者定义 `ACTION_PROPOSAL`、`CAPABILITY_ISSUANCE` 和 `TOOL_BOUNDARY_VERIFICATION` 为三个不同信任步骤，模型提出的 intent 本身不可信，需要外部 Policy Engine 依据既定规则签发短时、有限预算且带签名的能力凭证，再由 Gateway 在工具调用前独立检查
+
+论文 Token 记作 `tau=<j,u,a,r,i,s,theta,q,e,b,P,G,rho>`，分别约束凭证 ID、Agent、Action、Resource、声明意图、Session、签发时信任状态、签发/过期时间、预算、先决能力、互斥权限组和审计引用，作者描述以 Ed25519 签名并编码为 JWT
+
+签发后的凭证仍不能代替当前态判断，Gateway 还必须检查过期、撤销、剩余预算、调用者身份以及本次动作和资源的精确匹配，所以 `ISSUED_TOKEN != CURRENT_EXECUTION_PERMISSION`
+
+委托衰减要求：`a'=a, r'=r, b'<=b, e'<=e, d'<d`，即子权限保留动作与资源、不能扩大预算/寿命，委托深度严格下降，这仅是论文在完整中介与信任假设下的设计条件，不是任意 A2A/MCP 系统的自动保证
+
+`bound_params` 进一步检查敏感参数的来源：如果支付对象只出现在攻击者控制的工具内容中，即使支付动作在高层被允许，也不能把低可信收款人升级为用户授权的目标，参数可信来源与动作授权必须分别证明
+
+### 作者实验、反例与不适用条件
+- 论文作者报告 AgentDojo 97 个 benign task、949 个攻击实例，InjecAgent 1054 个攻击实例，并构造 51 个 clean 实例，部分 GPT-5.4 基准组合的 Attack Success Rate 为零
+- 原文明确每个 model–benchmark condition 只有**单次全套运行**，仅报告点估计、没有方差，因此 `AUTHOR_REPORTED_ZERO_ASR != INDEPENDENT_REPRODUCTION != UNIVERSAL_SECURITY`
+- 威胁模型直接信任 Policy Engine、Wrapper、Gateway、签名密钥及传输，假定攻击者不能绕过受控工具接口或伪造签名；策略和来源标签的正确性由部署者负责，不能由模型自证
+- **反例 A：错误来源标签**，把攻击者提交的收款人误当作可信任务参数，Token 即使签名有效，策略也可能错误放行
+- **反例 B：绕开 Gateway**，另一个带常驻凭证的工具通路直接执行效果，受控 Wrapper 的 PASS 不能证明全局无未授权效果
+- **反例 C：签发后授权过时**，撤销、预算耗尽、过期发生在效果时刻前，历史签发记录不能证明当前调用仍获允许
+- **反例 D：策略过度宽松**，完整中介和正确签名都不能补偿错误的白名单、互斥组或业务目的定义
+- 作者论文的完整定理、运行时代码、AgentDojo/InjecAgent 复验、策略编译器、签名、真实 MCP 工具效果与本仓 Validator：本轮均 **NOT_EXECUTED / NOT_TESTED**
+
+### 理论到系统架构的有限映射
+- `CANDIDATE_MECHANISM`：`proposal_id + task/purpose authority + agent/session + action/resource identity + protected argument provenance + policy revision + issuance record + delegation chain + current expiry/revocation/budget + gateway verdict + effect receipt`
+- 这是未来验证工具授权语义的候选证据结构，并非声明本仓已经实现 Authorization Broker、Gateway、Approval Runtime 或受控委托链
+- `Counterevidence Gate`：在钉住版本和实验环境后，对合法/非法调用、低可信参数替换、子代理越权、跨 Session Token 重放、预算耗尽及撤销竞态设置正反对照，直接核对效果回执而非只看模型回答
+- 与 11 月 9 日 FAVA 和 11 月 11 日关系性工作流授权论文的关系：三者分别涉及策略图、跨迹目的语义及执行边界能力机制，**没有一份已验证的组合定理或本仓联合实现**
+
+### 五轴状态与 Evidence Delta
+- Claim State：`OBSERVED_AUTHOR_PROPOSED_MECHANISM_AND_REPORTED_RESULTS`
+- Evidence Level：`E4_PREPRINT / ORIGINAL_V1_FULL_TEXT_SCOPED_REVIEW`
+- Mapping State：`CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED / NO_LOCAL_RUNTIME_AUTHORIZATION_GATEWAY_OBSERVED`
+- Validation State：`NOT_TESTED / NO_AUTHOR_BENCHMARK_REPRODUCTION / NO_NATIVE_VALIDATOR_EXECUTION`
+- **NEW_EVIDENCE**：提取了原论文精确 Token 字段、委托衰减条件、敏感参数来源控制及完整中介的威胁模型假设
+- **CORRECTED_INTERPRETATION**：动作建议、长期会话凭证、能力签发与工具效果时刻授权是不同的 Contract，不应合并成一次 `ALLOW`
+- **UNCHANGED_BOUNDARY**：Paper != Mapping != Implementation != Validation，中英文与跨仓复用不构成新独立来源
+- **NEW_COUNTEREVIDENCE**：来源标签误判、Gateway 旁路、过时 Token、错误 Policy 均限制统一安全结论
+- **UNKNOWN_RETAINED**：独立证明检查、作者代码精确版本与可复现性、实验方差、真实部署、本仓 Runtime 实现
+- **NEXT_RETEST_CONDITION**：固定论文 v1、实现 revision 与策略版本，在完整中介的隔离环境运行授权/拒绝、委托/撤销/预算和实际效果对照，保留凭证、参数来源、日志、退出码、效果回执与负结果
+- **交付边界**：仅追加现有中英文 Tool System，保持其他容器、Sxx Registry、Verified Core、历史块和 WorkflowHub Draft PR #378 不变，Validator 与原论文实验 `NOT_EXECUTED`，交由 Human Maintainer 审查合并
