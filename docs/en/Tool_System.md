@@ -1152,3 +1152,58 @@ The authors propose AL-Synth, an LLM-free SAT/SMT witness synthesizer with bound
 - NEXT_RETEST_CONDITION: pin exact v1 and executable AL-Synth revision, construct two traces with equal permitted free/busy inputs but different unauthorized confidential-context dependence, compare local guards versus explicit pair-aware predicate, run SAT/SMT and agent controls, retain input fixtures, command, revision, stdout/stderr, exit, effect receipts and false-positive counts
 
 Delivery boundary: append-only bilingual Daily research in existing Tool System containers only, not a native runtime implementation or independent maintenance pass. Preserve all historical source chunks, the Nov09 FAVA Daily and W45 Weekly, other containers, SOURCE Registry, Verified Core, and open WorkflowHub Draft PR #378. Validator, SAT/SMT replay, model evaluation, runtime tools and host integration: NOT_EXECUTED at authoring. Human Maintainer review and merge required.
+
+
+---
+
+## 2026-11-12 Native Daily Research — AgentCap / effect-time capability authorization
+
+### Run, source identity, and research objective
+- Task: `foundations/research/daily`; logical date: **2026-11-12 Asia/Shanghai**; producer: `GPT-6 / GPT_NATIVE / HUMAN_AUTHORIZED_SUBSTITUTE / NOT_JULES_REPLAY`
+- Repository: `lostlight530/agent-foundations`; current merged main at recovery: `67854562dcb87ec36bbeb965bdf22294a2bbb56d`; run identity: `agent-foundations/research/daily/2026-11-12/GPT_NATIVE/67854562dcb87ec36bbeb965bdf22294a2bbb56d/agentcap-tool-runtime-authorization-01`
+- Owning container: Tool System, English and Chinese peers only; previous Tool System Daily/Weekly claims and four-container history remain immutable
+- Canonical paper identity: **arXiv:2611.00729**, exact **v1**, submitted **2026-10-31T08:13:11Z**, not a newly published 2026-11-12 paper
+- Title: *AgentCap: Capability-Based Runtime Authorization for Secure LLM Agent Execution*
+- Authors: **Aravinda Kashyap Kabbinamakki Suresh; Peng Gao**
+- Original source surfaces: [arXiv v1 metadata](https://arxiv.org/abs/2611.00729) and [v1 full-text HTML](https://arxiv.org/html/2611.00729v1); original abstract, threat model, policy issuance, token/delegation constraints, limitations and evaluation setup were directly inspected
+- Venue statement: 2026 NeurIPS Agents in the Wild workshop, non-archival, according to arXiv authors' metadata; not a formal independent theorem or benchmark replication
+- Source identity check against current system contents: no existing `2611.00729` citation found in the two Tool containers at authoring; `FOUNDATION/SOURCES.md` admission and Sxx numbering deliberately **NOT_PERFORMED**
+- Research question: can tool-use authorization be bound to the exact agent, session, action, resource, parameters and current effect boundary without trusting the model's own judgment?
+
+### Original mechanism and formal boundaries
+The author separates `ACTION_PROPOSAL`, `CAPABILITY_ISSUANCE` and `TOOL_BOUNDARY_VERIFICATION`. The LLM's proposed intent is untrusted input to a separate policy engine; a short-lived signed capability is checked by the gateway immediately before forwarding the invocation. An ordinary pre-approved session credential or a tool's nominal name is not equivalent to effect-specific authorization.
+
+The paper writes its capability as `tau=<j,u,a,r,i,s,theta,q,e,b,P,G,rho>`, binding token ID, agent, action, resource, declared intent, session, trust at issuance, issue/expiry times, call budget, prerequisites, incompatible authority groups and audit reference. The reported implementation uses Ed25519 signatures over JWT claims. A gateway additionally checks expiry, revocation, remaining budget and exact caller/action/resource match, so issuance-time claims and current enforcement state are separate evidence objects.
+
+The attenuation relation for delegated child and parent capabilities is `tau_child <= tau_parent` only under **same action/resource**, **non-increasing budget and expiry**, and **strictly decreasing delegation depth**: `a'=a, r'=r, b'<=b, e'<=e, d'<d`. This is a conditional property of the described mediated capability design, **not** a theorem that arbitrary A2A/MCP delegation or any deployed agent automatically satisfies it.
+
+The policy engine separately checks catalog membership, approved declared intent, provenance of protected arguments, agent trust/sandbox state, current-session prerequisites and mutually exclusive authority. The `bound_params` mechanism distinguishes a user-authorized recipient from a recipient that exists solely in attacker-controlled tool content, even when the high-level action is otherwise allowed.
+
+### Experiment claims, limits, and counterexamples
+- The authors report **97 benign tasks / 949 attacked instances** from AgentDojo, **1,054 attacked instances** from InjecAgent, and 51 constructed clean InjecAgent examples. Their GPT-5.4 model/benchmark settings report zero attack success, but each condition is **one run** and **no variance is reported**
+- These are `AUTHOR_REPORTED_BENCHMARK_OUTCOMES`, not independent replications, not a local tool-policy failure rate, not blanket immunity, and not a verified effect-time production guarantee
+- Explicit trusted base: policy engine, MCP wrapper, gateway, cryptographic keys and transport; attacker **cannot bypass** mediation or forge a signature. Incorrect policy grants or argument-integrity labels and alternate unmediated tool paths therefore remain outside the claimed guarantee
+- **Counterexample A — misclassified provenance**: an attacker-controlled recipient labeled as application-trusted passes the advertised provenance gate despite valid signatures
+- **Counterexample B — gateway bypass**: standing credentials reachable through a separate tool path produce an effect without the authorization token; the wrapper's local PASS does not cover that path
+- **Counterexample C — stale authority**: a token valid when issued may be revoked, exhausted or expired before a call; an issuance receipt does not prove current invocation authority
+- **Counterexample D — over-permission and incomplete policy**: a fully enforced but incorrectly configured intent/privilege combination can permit a harmful operation within the formal rule set
+- No paper code, policy compiler, benchmark, cryptographic verification, MCP gateway, tool side effect or repository validator was executed by this Daily producer: `NOT_EXECUTED`
+
+### Bounded architecture mapping and five independent axes
+- **CANDIDATE Tool Contract**: `proposal_id + task/purpose authority + agent/session + exact action/resource + protected argument provenance + policy revision + capability issuance ID + delegated parent chain + current revocation/budget + gateway verification + actual tool effect receipt`
+- **Counterevidence Gate**: only consider promotion if a pinned version passes both deliberately authorized and unauthorized invocation controls, malicious low-integrity parameter substitution, parent-child privilege amplification attempts, replay across sessions and effect-time revocation/budget changes; independently verify actual tool-effect receipts, not only model answers or issuer logs
+- Relationship to prior Tool System research: FAVA's authorization graph and the 2026-11-11 relational-workflow paper cover distinct model and policy scopes. AgentCap adds a candidate **invocation-time capability mechanism**, not independent verification or a composition theorem combining their safeguards
+- Claim State: `OBSERVED_AUTHOR_PROPOSED_MECHANISM_AND_REPORTED_RESULTS`
+- Evidence Level: `E4_PREPRINT / ORIGINAL_V1_FULL_TEXT_SCOPED_REVIEW`
+- Mapping State: `CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State: `NOT_IMPLEMENTED / NO_LOCAL_RUNTIME_AUTHORIZATION_GATEWAY_OBSERVED`
+- Validation State: `NOT_TESTED / NO_AUTHOR_BENCHMARK_REPRODUCTION / NO_NATIVE_VALIDATOR_EXECUTION`
+
+### Evidence Delta and delivery scope
+- **NEW_EVIDENCE**: exact v1 formal token and attenuation identities, protected-argument provenance, and explicit enforcement trust-base assumptions from an original paper source
+- **CORRECTED_INTERPRETATION**: an LLM-proposed tool call, a session-scoped credential, a signed token and an effect-time gateway decision are different runtime/authority contracts
+- **UNCHANGED_BOUNDARY**: paper != local mapping != implementation != validation; identical EN/ZH use and any cross-repository lead count as one source lineage
+- **NEW_COUNTEREVIDENCE**: mislabelled provenance, bypassable gateway, stale revocation/budget and overly permissive policy block universal safety promotion even under correct cryptographic signatures
+- **UNKNOWN_RETAINED**: independent proof analysis, publisher implementation/release pin, benchmark variance, cross-vendor deployment behavior and this repository's own executable tool control
+- **NEXT_RETEST_CONDITION**: pin v1 paper and author code revision, test crafted low-trust arguments and authority transitions under exact mediation, capture policy token bytes, traces, command/effect receipts, denial reasons and negative controls
+- **Delivery boundary**: append-only bilingual Daily under existing Tool System containers only. Do not change SOURCE registry, verified-core AF-* claims, the other three formal containers, old chunks, the unrelated open WorkflowHub Draft PR #378 or any Runtime/Actions. Repository validator and paper experiment: `NOT_EXECUTED`; human review and merge required
