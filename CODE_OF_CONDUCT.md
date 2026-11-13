@@ -1,5 +1,6 @@
 # Code of Conduct
 
+
 ## Scope
 
 This code applies to repository Issues, pull requests, reviews, Discussions, and other public collaboration around this project.
@@ -7,6 +8,12 @@ This code applies to repository Issues, pull requests, reviews, Discussions, and
 ## Expected conduct
 
 Participants should communicate professionally and respectfully, focus criticism on claims and artifacts rather than individuals, disclose uncertainty, protect private information, and respect attribution and third-party rights. Harassment, discrimination, threats, doxxing, impersonation, fabricated evidence, deliberate deception, and repeated disruption are unacceptable.
+
+### 声明与证据纪律 / Claim and evidence discipline
+
+中文：对 Agent 能力、科研出处、架构建议与模型输出的争议应以可核验来源、明确假设和反例讨论，避免将理论图谱、合并的 PR 或阶段展示称为已验证自治能力
+
+English: Disputes about agent capabilities, research sources, architecture proposals and model outputs should rely on verifiable sources, explicit assumptions and counterexamples. A theory graph, merged PR or stage display does not establish verified autonomous capability
 
 ## Evidence-aware collaboration
 

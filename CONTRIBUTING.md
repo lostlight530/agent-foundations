@@ -1,5 +1,10 @@
 # Contributing
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；贡献应依当前代码、证据契约与审查流程，不以模型回答替代维护者验收；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Contributions follow current repository contracts and review, not model-generated completion claims. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 ## Open research contributions
 
 For research-method or positioning changes, start with [`OPEN_RESEARCH.md`](./OPEN_RESEARCH.md). For new bounded research records, use [`RESEARCH_TEMPLATE.md`](./RESEARCH_TEMPLATE.md). The FOUNDATION verified core, evidence/provenance vocabulary, implementation and validation states, and historical records remain authoritative.
@@ -55,6 +60,12 @@ python FOUNDATION/validate.py --base-ref origin/main
 ```
 
 Record only checks actually executed. A validator present in the repository is not an executed result.
+
+### 阶段数据和独立核验 / Stage data and independent verification
+
+对长期研究指标或 FOUNDATION 索引的贡献应说明来源独立性、索引更新规则、声明身份、观察截止点与可执行验证的有无；引用同一文章的多份摘要不是独立验证；外部发布、GitHub PR 和实际研究结论属于不同身份；通过贡献审查不能自动使模型推断成为已验证事实
+
+For longitudinal metrics or FOUNDATION index changes, specify source independence, indexing rule, claim identity, cutoff and whether executable verification exists. Multiple summaries of one paper are not independent evidence; external publication, GitHub PR and scientific conclusion are different identities. Contribution review does not validate a model inference by itself
 
 ## Evidence and provenance
 

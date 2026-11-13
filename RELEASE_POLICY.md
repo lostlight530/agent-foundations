@@ -1,5 +1,10 @@
 # Release and Archival Policy
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；区分当前 main、发布标签、软件归档、DOI 和逐次运行证据；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Distinguish current main, immutable release tags, archives, DOIs, and run-specific evidence. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 This repository treats `main` as the current repository state and release tags as immutable point-in-time snapshots.
 
 ## Policy
@@ -47,6 +52,12 @@ The fourth archived version is [v2026.10-fourteen-day-evidence-checkpoint](https
 - Software-family concept DOI: [10.5281/zenodo.22791169](https://doi.org/10.5281/zenodo.22791169)
 
 Use the version DOI for this exact checkpoint and the concept DOI for the software family. `CITATION.cff` and CodeMeta retain the family identifier and recorded September 16 baseline date. Later changes to `main` belong to subsequent repository state; the checkpoint tag remains unchanged.
+
+### Fixed software archives and evolving theory / 冻结归档与演进理论
+
+**中文**：软件家族 concept DOI `10.5281/zenodo.22791169` 不代表每次 `main` 的演进；各个 Git tag 和 version DOI 只能引用当时归档的源码与文档；理论框架、验证图谱或来源判断的后续修正须保留自身时间和来源链，不能借新 Release 回写旧研究命题的证据状态；可复核的验证还需具体修订、输入／文献、方法和结果
+
+**English**: Family concept DOI `10.5281/zenodo.22791169` does not track each evolving `main` revision; tags and version DOIs cite their own archived source and documents. Later revisions to theory, validation maps or source judgments preserve their dates and provenance rather than rewriting old claim states. Reproducibility requires a specific revision, input/literature, procedure and result
 
 ## Open-science reuse and research records
 
