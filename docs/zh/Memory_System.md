@@ -1486,3 +1486,54 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 - UNKNOWN_RETAINED：独立证明/实验、MemScope vN、仓库实现与真实影响
 - NEXT_RETEST_CONDITION：固定 provider/输入/query/evaluator 版本及失败-对照实验，分别统计准确率与覆盖率
 - 结论：NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE；仅向当前中文 Memory 容器追加 W45 Weekly。仓库验证在编写时 `NOT_EXECUTED`，后续独立执行
+
+
+---
+
+## 2026-11-13 GPT Native Daily Research — AstroMemBench / 会话断点后的历史状态与动作证据
+
+### 原始论文身份与研究问题
+- 正式任务：foundations/research/daily；逻辑日期：2026-11-13 Asia/Shanghai；生产者：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED_SUBSTITUTE / NOT_JULES_REPLAY
+- 冷启动基线：2bb8a47f55a2ebc2fc2f6ffa4e1db43e5ee9b669；运行身份：agent-foundations/research/daily/2026-11-13/GPT_NATIVE/2bb8a47f55a2ebc2fc2f6ffa4e1db43e5ee9b669/astromembench-memory-paired-state-01
+- 论文：You Wu、Guhong Zhang、Hongwei Li、Xinyue Hong、Yuan Jia，AstroMemBench: A Benchmark for Memory Systems in Embodied Spacecraft Agents，arXiv:2611.16590v1，原始提交时间 2026-11-12T10:23:15Z，并非 11 月 13 日发表
+- 今日实际查阅：https://arxiv.org/abs/2611.16590 与 https://arxiv.org/html/2611.16590；检查 SCC 设计、任务和历史协议、附录 B.3 成对反例、执行评分与作者局限
+- 正式容器：现有 Memory System 中英文两份；未分配新 Sxx，未将论文加入 Verified Core，中英文共用一个 canonical 论文身份而非两份独立科学证据
+- 问题：在当前请求、工具菜单和大部分历史都一致的条件下，记忆能否分辨先前操作是“已经真实执行”还是“仅被计划”
+
+### 具体机制：历史记录不等于当前执行状态
+作者通过 Scenario–Challenge–Capability（SCC）构造 16 项记忆子挑战、140 种模板、每模板 16 个实例，总计 2240 个确定性环境评分实例，覆盖 9 类空间任务；每例含 30 轮只读历史，之后要求根据动作、状态、安全及资源后果决定下一操作.这里是作者的模拟基准，而非真实航天器事故或部署证据.
+
+附录 B.3 给出可证伪的配对设计：两个实例的当前请求、12 个候选动作及 29 轮历史一致，关键第七轮在 A 记录了已完成的接线操作，在 B 则只记录了“拟接线但未执行”；当前真实连线状态不同，正确下一步操作因此相反.**相同当前输入外观，不能替代精确历史效果证据**.这是评测机制的受控设计，不等于本仓实验已运行.
+
+候选 Architecture / Memory 证据映射：
+- Task request 身份 != 当前世界状态
+- PROPOSED != COMMITTED != EFFECT_VERIFIED
+- 历史文本存在 != 该文本适用于当前动作
+- Session continuity != 准确恢复效应状态
+- 模拟环境确定性得分 != 外部真实物理安全
+
+论文使用 headroom-normalized gain 指标 G = (M - B)/(100 - B) × 100%，前提 B < 100，M/B 分别是增强/原生均分.这是作者的统计指标而非 Memory 正确性定理.作者在跨 Session 条件下报告 RAG 均分 53.03、Mem0 65.28，差异为 12.25 分，报告的 95% 区间为 [10.09, 14.37]；仅对相同模拟任务、模型及评测设置成立，不能声称 Mem0 在所有 Agent 系统里普遍优越.
+
+### 反证与边界
+- 如果能实时获取具权威身份的当前连线状态，系统可能不需要从旧历史推断，即成对样例的必要信息入口会变化
+- 如果记忆把计划误标为真实 effect，召回越充分也可能越自信地执行错误动作
+- 基准的环境、动作菜单、任务分布和 Pi Agent 配置限制了普适推论，不能直接转译成编码 Agent 或 Zero / Reflective 的真实事故率
+- 模拟成功不证明真实航天器控制的安全性、权限完整性或持久化连续性
+- 作者公开代码链接并不等于本轮取得代码版本并执行，论文实验复现、独立统计复核和本仓 Validator 皆 NOT_EXECUTED
+
+最低可复验实验：控制相同当前任务，只把历史中的关键事件由 PROPOSED 换成 COMMITTED，并加入独立 effect receipt；冻结模型、Memory provider、检索策略、评估器、动作菜单，在同会话与会话重启中分别核对实际动作、效果状态和错误分母，再注入过时/被撤回的事件作为反例.
+
+### 五轴状态与 Evidence Delta
+- Claim State：OBSERVED / AUTHOR_REPORTED_EXPERIMENT_AND_DESIGN
+- Evidence Level：E4_PREPRINT / EXACT_ARXIV_V1_FULL_TEXT_READ
+- Mapping State：CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE_FOR_GENERAL_SAFETY
+- Implementation State：NOT_IMPLEMENTED / 本仓没有被验证的真实航天任务 Memory Runtime
+- Validation State：NOT_TESTED / 原论文实验与仓库 Validator 均未执行
+- NEW_EVIDENCE：原始 v1 的成对历史反例在相同当前请求下区分计划与真实执行；2240 个实例是作者的确定性评测合同
+- CORRECTED_INTERPRETATION：记忆保存事件不代表 effects 已核验，基准分数与作者跨会话优势不能升级为部署保证
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation，中英双语及跨仓引用不增加独立科学证据
+- NEW_COUNTEREVIDENCE：直接权威状态读取、过时历史和领域特定模拟器都限制从记忆质量推导一般正确性
+- UNKNOWN_RETAINED：代码复现、独立统计、真实 effect receipt、物理环境适用性和本仓实际持久化运行状态
+- NEXT_RETEST_CONDITION：固定论文 v1、基准代码 SHA、模型与记忆版本，在同会话/重启下重放成对历史并独立核验当前状态、动作效果、分数和失败痕迹
+
+交付边界：只在现有中英文 Memory System 追加当日研究，不修改历史 Daily/Weekly、其他三个容器、Source Registry、Verified Core、Schema、Runtime、Actions 或治理.未运行的检查保持 NOT_EXECUTED，交由 Human Maintainer 决定合并.
