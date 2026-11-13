@@ -719,6 +719,20 @@ body.show-zh .af-nav [lang="zh"]{display:inline}
 @media(max-width:680px){.container{padding:0 15px 65px}.af-nav{margin:8px 0 28px;gap:7px;flex-wrap:wrap;padding:10px}.af-brand{font-size:.7rem}.af-nav-links{order:3;width:100%;max-width:100%;margin-left:0}.af-nav-links a{padding:7px 8px}.header.af-hero{padding:21px}.af-reading-path,.triple-view,.repo-grid,.timeline{grid-template-columns:1fr}.af-reading-path{margin-bottom:44px}.af-reading-path a{min-height:0}.section{margin-bottom:50px}#evidence-contract{padding:16px!important}.triple-card{min-height:0}.philosophy{font-size:1rem;line-height:1.88}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.af-reading-path a{transition:none}}
 
+
+/* Source-first evidence navigation: explicit light-on-dark contrast instead of inherited blue links. */
+.af-evidence-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(144px,1fr));gap:10px;margin-top:16px}
+.af-evidence-links a{display:flex;min-width:0;min-height:74px;flex-direction:column;gap:8px;padding:13px 14px;border:1px solid rgba(223,191,121,.4);border-radius:10px;background:rgba(201,168,76,.075);color:#f7dfad!important;text-decoration:none!important}
+.af-evidence-links a strong{color:#ffe7ac;font:700 .78rem var(--font-ui);letter-spacing:.04em}
+.af-evidence-links a span{color:#e9dcc3;font:500 .75rem/1.5 var(--font-ui)}
+.af-evidence-links a:hover,.af-evidence-links a:focus-visible{border-color:#ffe4a0;background:rgba(201,168,76,.18);outline:2px solid transparent;box-shadow:0 0 0 2px rgba(243,210,139,.25)}
+.triple-card-body code{padding:2px 5px;border-radius:5px;background:rgba(245,204,116,.13);color:#ffe7ab;overflow-wrap:anywhere}
+#evidence-contract [style*="color:#22c55e"]{color:#9ff5b3!important}
+#evidence-contract [style*="color:#a78bfa"]{color:#d9c3ff!important}
+#evidence-contract [style*="color:#94a3b8"]{color:#cbd5e1!important}
+#evidence-contract [style*="color:#f87171"]{color:#ffadad!important}
+@media(max-width:680px){.af-evidence-links{grid-template-columns:repeat(auto-fit,minmax(142px,1fr))}}
+
 </style>
 </head>
 <body>
@@ -789,8 +803,8 @@ body.show-zh .af-nav [lang="zh"]{display:inline}
         <span lang="en">Verified Core</span><span lang="zh">可验证核心</span>
       </div>
       <div class="triple-card-body">
-        <span lang="en">FOUNDATION/** — long-lived theory, evidence, provenance and architecture core</span>
-        <span lang="zh">FOUNDATION/**——长期理论 证据 溯源与架构核心</span>
+        <span lang="en"><code>FOUNDATION/</code> is the versioned document directory: research index, evidence rules, source register, provenance and architecture notes — not a deployed agent runtime</span>
+        <span lang="zh"><code>FOUNDATION/</code> 是版本化研究文档目录，包含研究索引、证据规则、来源登记、溯源和架构说明，不代表已部署 Agent Runtime</span>
       </div>
     </div>
     <div class="triple-card">
@@ -835,19 +849,19 @@ body.show-zh .af-nav [lang="zh"]{display:inline}
 
   <div style="max-width:720px; margin:0 auto 2rem; padding:1rem 1.2rem; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,0.012);">
     <div style="font-family:var(--font-ui); font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:8px;">
-      <span lang="en">Current Verified Core</span><span lang="zh">当前可验证核心</span>
+      <span lang="en">Current evidence baseline</span><span lang="zh">当前证据基线</span>
     </div>
     <p style="font-family:var(--font-ui); font-size:11px; color:var(--text-dim); line-height:1.6; margin:0 0 10px;">
-      <span lang="en">Current claim interpretation starts from the verified core Current source identity implementation state validation state and historical material remain separate</span>
-      <span lang="zh">当前声明解释从 verified core 开始 来源身份 实现状态 验证状态与历史材料保持分离</span>
+      <span lang="en">Interpret each current claim from the indexed evidence baseline: inspect the source identity and revision, implementation state and actually executed validation separately, then distinguish historical research from current observations</span>
+      <span lang="zh">判断当前研究声明时，先核对索引中的证据基线，再分别确认来源与版本、实现状态和实际执行的验证结果，历史研究记录不能替代当前运行证据</span>
     </p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px 14px;font-family:var(--font-mono);font-size:11px;">
-      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/INDEX.md">INDEX ↗</a>
-      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/EVIDENCE.md">EVIDENCE ↗</a>
-      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/SOURCES.md">SOURCES ↗</a>
-      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/PROVENANCE.md">PROVENANCE ↗</a>
-      <a href="https://github.com/lostlight530/agent-foundations">GitHub ↗</a>
-    </div>
+    <nav class="af-evidence-links" aria-label="Evidence document references">
+      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/INDEX.md"><strong>INDEX</strong><span lang="en">Research index</span><span lang="zh">研究索引</span></a>
+      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/EVIDENCE.md"><strong>EVIDENCE</strong><span lang="en">Claim / validation rules</span><span lang="zh">声明与验证规则</span></a>
+      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/SOURCES.md"><strong>SOURCES</strong><span lang="en">Source register</span><span lang="zh">来源登记</span></a>
+      <a href="https://github.com/lostlight530/agent-foundations/blob/main/FOUNDATION/PROVENANCE.md"><strong>PROVENANCE</strong><span lang="en">Origin &amp; lineage</span><span lang="zh">来源与演进记录</span></a>
+      <a href="https://github.com/lostlight530/agent-foundations"><strong>GITHUB ↗</strong><span lang="en">Repository</span><span lang="zh">仓库主页</span></a>
+    </nav>
   </div>
   <!-- Reading Contents -->
   <div style="max-width:720px; margin:0 auto 1.5rem;">
