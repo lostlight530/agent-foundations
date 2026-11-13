@@ -1,5 +1,10 @@
 # Release and Archival Policy
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；区分当前 main、发布标签、软件归档、DOI 和逐次运行证据；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Distinguish current main, immutable release tags, archives, DOIs, and run-specific evidence. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 This repository treats `main` as the current repository state and release tags as immutable point-in-time snapshots.
 
 ## Policy

@@ -1,5 +1,10 @@
 # Code of Conduct
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；说明公开协作与社区行为规范，不改变原文的处理规则；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Explain the public collaboration and conduct boundary without replacing the policy below. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 ## Scope
 
 This code applies to repository Issues, pull requests, reviews, Discussions, and other public collaboration around this project.

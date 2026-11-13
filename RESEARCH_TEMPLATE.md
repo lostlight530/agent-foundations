@@ -1,5 +1,10 @@
 # Research Template / 科研记录模板
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；仅指导未来记录；不得借新模板倒改旧结论、失败记录或验证状态；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; For prospective records only; never retroactively overwrite older conclusions, failures, or validation states. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 Status: prospective research-record template
 Scope: new research records only; durable open-research method is owned by `OPEN_RESEARCH.md`
 
@@ -7,7 +12,7 @@ Scope: new research records only; durable open-research method is owned by `OPEN
 
 English is the canonical/default language of this template. Chinese labels and guidance are provided for accessibility. If bilingual wording diverges, the English instruction governs; repository-native contracts remain authoritative over this template.
 
-英文为本模板的默认与规范语言；中文标签与说明用于辅助理解。若双语表述出现差异，以英文说明为准；仓库原生 contract 对本模板始终具有更高权威。
+英文为本模板的默认与规范语言；中文标签与说明用于辅助理解；若双语表述出现差异，以英文说明为准；仓库原生 contract 对本模板始终具有更高权威；
 
 Historical records are not rewritten by this template
 

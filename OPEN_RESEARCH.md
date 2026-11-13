@@ -1,5 +1,10 @@
 # Open Research / 开放科研
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；开放科研方法区分研究问题、可追踪来源、推断和已观察验证，英文规范口径仍优先；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Separate research questions, traceable sources, inference, and observed verification; retain the English normative policy. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 Status: durable open-research production guide
 Scope: repository-level research positioning, research-production method, scholarly-metadata boundaries, and semantic-drift governance
 
@@ -7,7 +12,7 @@ Scope: repository-level research positioning, research-production method, schola
 
 English is the canonical and default language for this open-research contract. Chinese text is provided as an accessibility and interpretation aid. If wording diverges, the English normative text governs; repository evidence and current owning contracts remain authoritative over both.
 
-英文是本开放科研契约的默认与规范语言；中文用于辅助理解与可访问性。若中英文表述有差异，以英文规范文本为准；仓库事实与当前 owning contract 的权威仍高于任何翻译。
+英文是本开放科研契约的默认与规范语言；中文用于辅助理解与可访问性；若中英文表述有差异，以英文规范文本为准；仓库事实与当前 owning contract 的权威仍高于任何翻译；
 
 
 ## Authority
@@ -152,8 +157,8 @@ external indexing != repository self-definition
 
 ## 中文摘要
 
-本文件定义仓库长期开放科研方法，而不是替代现有 verified core、research/artifact contract、maintenance contract 或历史记录。共同科研骨架要求：研究问题、可证伪假设、证据/来源身份、固定对象/版本/环境、实际执行程序、原始观测、反例检查、有界结论、研究增量与复验条件。
+本文件定义仓库长期开放科研方法，而不是替代现有 verified core、research/artifact contract、maintenance contract 或历史记录；共同科研骨架要求：研究问题、可证伪假设、证据/来源身份、固定对象/版本/环境、实际执行程序、原始观测、反例检查、有界结论、研究增量与复验条件；
 
-仓库自身的实现、证据、provenance、artifact/claim contract 与历史记录继续拥有原生 authority。外部 scholarly graph 或分类系统只能派生表示，不能反向成为 repository identity。
+仓库自身的实现、证据、provenance、artifact/claim contract 与历史记录继续拥有原生 authority；外部 scholarly graph 或分类系统只能派生表示，不能反向成为 repository identity；
 
-未来 scholarly metadata 应保持 canonical type、one-line positioning、primary domains、non-goals、少量准确 subjects 与 5–7 个定义性 keywords；若外部分类漂移，先修真实 upstream ambiguity，否则记录 classifier noise。
+未来 scholarly metadata 应保持 canonical type、one-line positioning、primary domains、non-goals、少量准确 subjects 与 5–7 个定义性 keywords；若外部分类漂移，先修真实 upstream ambiguity，否则记录 classifier noise；

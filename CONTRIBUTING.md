@@ -1,5 +1,10 @@
 # Contributing
 
+> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
+> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；贡献应依当前代码、证据契约与审查流程，不以模型回答替代维护者验收；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
+> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Contributions follow current repository contracts and review, not model-generated completion claims. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
+
+
 ## Open research contributions
 
 For research-method or positioning changes, start with [`OPEN_RESEARCH.md`](./OPEN_RESEARCH.md). For new bounded research records, use [`RESEARCH_TEMPLATE.md`](./RESEARCH_TEMPLATE.md). The FOUNDATION verified core, evidence/provenance vocabulary, implementation and validation states, and historical records remain authoritative.
