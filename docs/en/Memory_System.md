@@ -1477,3 +1477,54 @@ Append-only bilingual native research within existing Memory System containers. 
 - UNKNOWN_RETAINED: independent paper proof/benchmark rerun, original MemScope vN suffix, local implementation and cross-query effect
 - NEXT_RETEST_CONDITION: exact versioned memory provider+input+query/evaluator snapshots, controlled failure pairs and separately measured accuracy/coverage
 - Decision: NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE. Only this existing English container receives an append-only W45 Weekly section. Native validator: NOT_EXECUTED at authoring; human-authorized review/merge to follow
+
+
+---
+
+## 2026-11-13 GPT Native Daily Research — AstroMemBench / history-grounded action under session discontinuity
+
+### Original paper, provenance and question
+- Canonical task: foundations/research/daily; logical date 2026-11-13 Asia/Shanghai; producer: GPT-6 / GPT_NATIVE / HUMAN_REQUESTED_SUBSTITUTE / NOT_JULES_REPLAY
+- Base merged main: 2bb8a47f55a2ebc2fc2f6ffa4e1db43e5ee9b669; run identity: agent-foundations/research/daily/2026-11-13/GPT_NATIVE/2bb8a47f55a2ebc2fc2f6ffa4e1db43e5ee9b669/astromembench-memory-paired-state-01
+- Exact original paper: You Wu, Guhong Zhang, Hongwei Li, Xinyue Hong, Yuan Jia, AstroMemBench: A Benchmark for Memory Systems in Embodied Spacecraft Agents, arXiv:2611.16590v1, submitted 2026-11-12T10:23:15Z (not November 13 publication)
+- Original metadata and full text read on 2026-11-13: https://arxiv.org/abs/2611.16590 and https://arxiv.org/html/2611.16590; examined SCC design, task construction, paired histories in Appendix B.3, session protocol, scoring and reported limitations
+- Owner: existing Memory System English/Chinese containers; canonical Sxx registry admission NOT_PERFORMED, no new Verified Core source/claim allocation. Bilingual study is one original paper lineage, not two independent studies
+- Research question: can current agent memory distinguish an operation executed in history from a proposed-but-unexecuted operation when the current request and visible action menu are identical?
+
+### Mechanism: historical evidence, current state and action consequence
+The authors define a Scenario–Challenge–Capability (SCC) design with 16 memory subchallenges, 140 templates and 16 instances per template, yielding 2240 deterministic-scored instances across nine spacecraft tasks. Each instance exposes 30 read-only history turns, followed by environment-scored action selection. These are authored benchmark objects, not real aerospace production events.
+
+In the especially falsifiable Appendix B.3 pair, the two instances share a current request, a 12-option action menu and 29 historical turns. The crucial seventh historical turn differs: in one history the line was actually connected to a port, whereas in the other a connection was only proposed, not executed. Thus the correct current action differs despite the same apparent task request. This is a direct experimental design separating historical *plan identity* from *effect occurrence* and *current state reconstruction*.
+
+Candidate architecture/evidence mapping, not a formal theorem of agent memory:
+- task_request identity != reconstructed current world state
+- proposed plan != committed action != observed effect receipt
+- history presence != correct applicability at the action boundary
+- session continuity != accurate historical state reconstruction
+- benchmark deterministic score != proof of external operational safety
+
+The paper also defines headroom-normalized gain G = (M - B) / (100 - B) × 100%, subject to B < 100, with M augmented and B native mean scores. This is an author-defined descriptive normalization, not a mathematical guarantee that any memory augmentation improves correctness. Authors report new-session RAG 53.03 versus Mem0 65.28, a 12.25-point difference with their reported 95% interval [10.09, 14.37] under their exact task/model conditions. That comparison is not a universal superiority statement and does not authorize deployment.
+
+### Counterevidence gate and applicability limits
+- The pair isolates one history-dependent action: an independent authoritative read of current port connection could resolve the state without retrieving the original history, where available
+- If a memory store preserves a plan as an executed event, higher recall can lead to the wrong effect; storing more text or having an unbroken session does not enforce effect-truth
+- The authors' evaluation is a spacecraft-specific deterministic simulator and a particular Pi Agent baseline, memory methods and sample construction; transfer to ordinary coding or research agents is HYPOTHESIS, not measured
+- A scored environment can verify its own simulated task consequences but cannot independently prove physically safe spacecraft action, real telemetry continuity, or general agent reliability
+- The source code repository is linked by the authors, but no package/revision-pinned benchmark rerun, original test execution, independent statistical re-analysis, or local Memory runtime test was executed today
+
+Proposed falsifiable fixture: two identical current task snapshots with one history event switched between PROPOSED and COMMITTED, with separately signed effect receipts. Freeze the memory provider, retrieval index, model/evaluator version and action menu; compare actual selected action and resulting state, across same-session and restart variants. Add stale/superseded event and missing receipt controls to expose false-completion and wrong-target behavior.
+
+### Five-axis state and Evidence Delta
+- Claim State: OBSERVED / AUTHOR_REPORTED_EXPERIMENT_AND_DESIGN
+- Evidence Level: E4_PREPRINT / EXACT_ARXIV_V1_FULL_TEXT_READ
+- Mapping State: CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE_FOR_GENERAL_SAFETY
+- Implementation State: NOT_IMPLEMENTED; no verified local executable Memory Store or spacecraft task adapter
+- Validation State: NOT_TESTED; neither source experiment nor repository validator was executed
+- NEW_EVIDENCE: exact v1 paired-instance construction distinguishes plans and effects under the same current request; source publishes 2240-instance deterministic benchmark contract
+- CORRECTED_INTERPRETATION: remembered history is not verified effect state; benchmark scores and author-reported session gains are not deployable guarantees
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation; identical EN/ZH citations and cross-repository discussion do not add independent support
+- NEW_COUNTEREVIDENCE: direct authoritative state inspection, stale events and the domain-specific simulator limit inference from historical memory to universal correctness
+- UNKNOWN_RETAINED: source code reproduction, independent benchmark review, real state/effect receipts, true spacecraft applicability and local runtime memory behavior
+- NEXT_RETEST_CONDITION: freeze paper v1, benchmark/code commit, model and memory version; execute the paired history and session-restart counterexamples with independent state/effect verification, exact scores and failure traces
+
+Delivery boundary: append-only bilingual Native Daily to existing Memory System containers. Do not rewrite historical research, alter the other three system containers, allocate Sxx, promote Verified Core, edit schema, run unobserved validators or touch operational state. Human Maintainer review/merge required.
