@@ -1,11 +1,13 @@
 # Security Policy
 
-> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
-> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；区分安全问题受理规则和实际安全保证，公开报告不应暴露私密信息；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
-> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Distinguish vulnerability-reporting policy from proven security assurances; avoid posting secrets publicly. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
-
 
 Please report security-sensitive issues privately to the maintainer rather than opening a public issue.
+
+### 私密报告与理论／实现边界 / Private reporting and theory-to-implementation boundary
+
+中文：在公开 Issue、PR、研究实例与 CI 输出中避免披露凭据、私人材料或未修复漏洞；文档讨论安全假设不表示已实现安全控制；对确切程序和环境的漏洞应走私密渠道，检查结果只适用实际测试范围
+
+English: Do not disclose secrets, private materials or unpatched exploit details in public issues, PRs, research examples or CI output. Discussion of security assumptions does not implement controls. Report concrete vulnerabilities privately; test results apply only to their executed scope
 
 ## Scope
 

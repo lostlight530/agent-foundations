@@ -1,9 +1,5 @@
 # Code of Conduct
 
-> **Bilingual reading guide / 双语阅读指引（2026-11-13）**  
-> **中文**：本文件属于Agent 系统理论、证据契约和架构判断的独立研究基础的公开仓库说明；说明公开协作与社区行为规范，不改变原文的处理规则；所述历史时间点保持原有截止口径，不能将文件存在解释为已执行或已验证  
-> **English**: This root document belongs to independent theory, evidence-contract, and architecture reasoning for agent systems; Explain the public collaboration and conduct boundary without replacing the policy below. Historical cutoffs retain their original meaning; document presence alone does not establish execution or validation
-
 
 ## Scope
 
@@ -12,6 +8,12 @@ This code applies to repository Issues, pull requests, reviews, Discussions, and
 ## Expected conduct
 
 Participants should communicate professionally and respectfully, focus criticism on claims and artifacts rather than individuals, disclose uncertainty, protect private information, and respect attribution and third-party rights. Harassment, discrimination, threats, doxxing, impersonation, fabricated evidence, deliberate deception, and repeated disruption are unacceptable.
+
+### 声明与证据纪律 / Claim and evidence discipline
+
+中文：对 Agent 能力、科研出处、架构建议与模型输出的争议应以可核验来源、明确假设和反例讨论，避免将理论图谱、合并的 PR 或阶段展示称为已验证自治能力
+
+English: Disputes about agent capabilities, research sources, architecture proposals and model outputs should rely on verifiable sources, explicit assumptions and counterexamples. A theory graph, merged PR or stage display does not establish verified autonomous capability
 
 ## Evidence-aware collaboration
 
