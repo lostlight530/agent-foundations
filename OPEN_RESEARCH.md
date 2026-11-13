@@ -100,6 +100,12 @@ Unknown and untested states stay explicit. External sources remain independently
 
 These support open research; they do not create claim support or reproduction evidence.
 
+### Claim lineage, historical stages and citation / 声明血缘、阶段数据与科研引用
+
+**中文**：将来源登记、理论命题、实现状态、验证状态、周期汇总和页面投影分开，任何长期指标都标明具体 claim、数据来源、原始／聚合口径、证据审查时点与未知项；CITATION、CodeMeta 和 DOI 仅证明出版身份，不代替独立复核，也不能从某个阶段记录倒推之前已实现能力
+
+**English**: Keep source registry, theoretical claims, implementation state, validation state, period synthesis and display projections distinct. Longitudinal indicators cite specific claims, source, raw/derived denominator, review cutoff and unknowns. CFF, CodeMeta and DOI establish publication identity only, not independent validation or historical implementation
+
 ## Scholarly metadata discipline
 
 Preserve Canonical Type, One-line Positioning, Primary Domains, Non-goals, accurate structured subjects where supported, and 5–7 defining keywords before future metadata publication. Avoid vendor keyword stuffing or classifier-facing marketing copy.

@@ -85,6 +85,12 @@ These checks cover repository contracts such as required files, Claim IDs, sourc
 
 这些检查验证仓库结构契约，不证明定理正确性、翻译质量、语义真值或外部实验复现；
 
+### Long-term claim/evidence presentation / 长期声明与证据展示
+
+**中文**：`FOUNDATION/` 的理论与已映射证据需要按 claim ID、source revision、采集／验证日期、映射状态、实现状态、反例和未解决缺口恢复，而不是以 Markdown 篇幅或网页展示判定研究成熟；Daily/Weekly/Monthly、历史审计与当前 verified core 处于不同时间和权威层；阶段展示可以引用这些记录，但不得将研究命题提升为已运行自治 Agent 或独立科学验证
+
+**English**: Research claims in `FOUNDATION/` are recovered by claim ID, source revision, acquisition/validation date, mapping status, implementation status, counterexamples and unresolved gaps—not by Markdown volume or page display. Daily/Weekly/Monthly, historical audits and the current verified core have different temporal and authority boundaries. Stage views may cite them but cannot promote theory into a deployed autonomous agent or independently validated result
+
 ## Publication, source, and revision identity / 出版、来源与版本身份
 
 The DOI above identifies an archived Agent Foundations software publication. It is repository-publication provenance, not an `Sxx` external scientific source and not direct support for a Foundation Claim.

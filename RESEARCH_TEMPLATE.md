@@ -86,6 +86,11 @@ State one question that can be contradicted by evidence
 - Support condition:
 - Falsifier:
 
+### Longitudinal claim and publication fields / 长期声明与出版字段
+
+- 中文：记录 claim ID、来源引用和检索时间、原始或聚合证据、理论假设、实现／验证状态、反证、Git revision、周期阶段与未决事项；软件概念 DOI 不是论文接受、实现或复现的证据，特定归档引用使用 version DOI
+- English: Record claim ID, source/retrieval time, raw or aggregated evidence, hypothesis, implementation/validation state, counterevidence, Git revision, period and unresolved questions. Concept DOI is not paper acceptance, implementation or reproduction; cite a version DOI when an exact release is used
+
 ## Evidence or source basis / 证据基础
 
 For each material source or input record identity, authority, time, supported proposition, limitation, and independence where relevant
