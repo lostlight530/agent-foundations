@@ -1734,3 +1734,50 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - NEXT_RETEST_CONDITION：锁定 v2、验证器修订号及任务合同，分别注入合法替代工具/代码路径、无效状态、伪造回执及恒拒绝验证器，记录真实命令、环境、revision、stdout/stderr/exit、标签来源、正负覆盖分母及独立重建的最终状态
 
 交付边界：仅在既有中英文 Architecture Principles 容器 append-only 增加同一 Daily 研究，不修改旧文本、`FOUNDATION/**`、Sxx 注册表、Memory、代码、测试、Weekly/Monthly、workflow 或不相关开放 PR.本轮未运行本仓 validator 与论文 benchmark，状态 `NOT_EXECUTED`，等待 Human Maintainer 审查合并
+
+
+---
+
+## 2026-11-14 GPT Native Daily — Evidence-Governed Evolution：候选更新生成不等于长期准入
+
+### 原始来源与运行身份
+- Canonical Task：`foundations/research/daily`；Logical Date：2026-11-14 Asia/Shanghai
+- Producer：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY
+- Base Main SHA：`12f30d74dd66b2e1d2f85ae44df17b5336b85be7`
+- Run Identity：`agent-foundations/research/daily/2026-11-14/GPT_NATIVE/12f30d74dd66b2e1d2f85ae44df17b5336b85be7/ege-adoption-gates-architecture-01`
+- 原始论文：Subodh Lonkar，*Evidence-Governed Adoption of Self-Generated Updates in Autonomous AI Agents*，arXiv:2611.16378v1，初次提交 2026-11-12T06:45:02Z
+- 2026-11-14 实际打开并阅读的一手全文：https://arxiv.org/abs/2611.16378，检查引言、准入规则、条件化置信下界、参考基线桥接、模拟设计和局限性
+- 当前 `FOUNDATION/SOURCES.md` 未登记精确论文身份 2611.16378；`Sxx=NOT_REGISTERED / NOT_ASSIGNED`，本次不新增编号，不自动提升 Verified Core
+- 11 月 10 日 Architecture Principles 中的 VerifierBench 与 11 月 13 日 Memory System 中的 AstroMemBench 属于不同研究来源，不等于对今天论文的独立验证
+
+### 条件化理论机制
+- 论文将 Agent 自生成 Prompt、Memory、Tool、Workflow、Routing 和 Policy 的候选修改，与长期采用所需的**独立确认**拆开，候选看起来合理并不构成准入回执
+- 候选先冻结，之后分别使用满足论文假设的全新确认样本与独立评估器校准样本，对照预先指定的参考过程，检验主要目标的有意义改善以及每个受保护能力的非劣性
+- 论文给出候选事件 `j`、指标 `r` 的下界 `L^R_{j,r} = L^E_{j,r} - U^b_{j,r}`，从操作评估器的下界减去可能乐观偏差的上界，而不是把操作评估器当作天然独立真值
+- 在论文使用的可数审计事件族中，评估和校准的错误预算分别为 `e_{j,r}=c_{j,r}=3*alpha/(pi^2*j^2*R)`，合计控制全族 `alpha`；成立前提包括条件化新鲜采样、有界成对观测、预设参考评估过程及其构念有效性，本仓**未独立复核定理证明**
+- 受保护参考基线替换必须单独做 bridge test，消耗不可重复使用的全局审计事件编号和错误预算；版本更新不能清零沿参考谱系累积的容许退化
+- 强制治理检查与受控 canary 属于独立决策边界，统计过关不能替代权限或外部效果检查；原文 Monte Carlo 是合成统计实验，不是生产 Agent 部署结果
+
+### 对 Agent 架构的有界映射
+- 候选结构化回执：`(proposed_change_identity, frozen_candidate_revision, primary_objective, protected_metric_set, reference_revision, fresh_sample_receipts, calibration_source_identity, bound_and_budget_receipts, bridge_lineage, governance_decision, canary_outcome)`
+- 此结构只是研究映射，不是本仓已经实现的 Schema、自动评估器、准入网关、Harness 或 Agent Runtime
+- Counterevidence Gate：重复使用生成候选时的开发数据；评估器随候选漂移但没有新鲜独立校准；结果出现后才挑选受保护指标；未经桥接更换基线；分数达标却缺少真实权限或效果完成证明
+- 理论局限：任务相关性、数据非平稳、参考评估器自身错误、分布漂移、均值隐藏的低概率严重伤害，以及配置回滚无法撤销既有外部效果，保守阈值亦可能降低好候选通过的统计功效
+- 与先前 VerifierBench 的关系只属于概念层：拒绝非法方案的高比率不证明能接受合法替代方案；类似地，候选的高分也不证明参考有效或没有受保护能力退化.这不是两篇论文的交叉实证复现
+
+### 五轴证据状态
+- Claim State：`OBSERVED`，仅对应作者论文内的机制与条件化结论
+- Evidence Level：`E4_PREPRINT`，精确 v1 全文已读取，未在本仓复现
+- Mapping State：`CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State：`NOT_IMPLEMENTED`
+- Validation State：`NOT_TESTED`
+- Review boundary：`SOURCE_IDENTITY_VERIFIED / MAPPING_SCOPED / NO_VERIFIED_CORE_PROMOTION`
+
+### EVIDENCE_DELTA 与复验条件
+- NEW_EVIDENCE：一篇新原始论文提出候选级独立校准的同时置信下界和不可重用的参考桥接审计身份
+- CORRECTED_INTERPRETATION：生成器在局部任务取得的高分不是长期采用证据，基线版本替换不能消除累积退化风险
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；双语文本同属一个来源，不增加独立样本
+- NEW_COUNTEREVIDENCE：自适应重复用样、评估器乐观偏差、受保护指标遗漏、基线无桥接漂移以及失效的真实权限与效果边界
+- UNKNOWN_RETAINED：独立数学审查、模拟复现、真实 Agent 场景、适当指标和成本、校准稳定性及本仓适用性
+- NEXT_RETEST_CONDITION：固定 v1 原文与可获得的作者代码，使用冻结候选、真正独立的成对确认和校准样本、全局审计事件编号及版本化基线，复跑正反例并保留命令、随机种子、样本身份、置信界、错误预算、功效与失败记录
+- 交付边界：只向现有中英文 Architecture Principles 追加同一天的一手研究；不改写旧研究、`FOUNDATION/**`、Sxx、Verified Core、代码、测试、Weekly/Monthly 或 Workflow.本轮未执行本仓 validator 和论文模拟，`NOT_EXECUTED`，交 Human Maintainer 审查
