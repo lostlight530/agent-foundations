@@ -1729,3 +1729,50 @@ For each task, the authors average positive acceptance (TPR) and negative reject
 - NEXT_RETEST_CONDITION: pin v2 and a verifier revision; create permitted alternative tools and code paths, invalid-state and forged-receipt attacks, and a deliberately restrictive all-reject oracle; retain actual command/env/revision/stdout/stderr/exit, source labels, positive and negative coverage denominators, and independently reconstructed final state
 
 Delivery: append-only bilingual Daily research in the two existing Architecture Principles containers. No change to earlier research text, `FOUNDATION/**`, source registry, memory, code, tests, Weekly/Monthly, workflow or any unrelated open PR. Native repository validation and paper benchmark execution: `NOT_EXECUTED`; human review/merge required.
+
+
+---
+
+## 2026-11-14 GPT Native Daily — Evidence-Governed Evolution: candidate admission is not update generation
+
+### Source identity, logical date, and producer
+- Canonical task: `foundations/research/daily`; logical date 2026-11-14 Asia/Shanghai
+- Producer: GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY
+- Cold-start merged base: `12f30d74dd66b2e1d2f85ae44df17b5336b85be7`
+- Run identity: `agent-foundations/research/daily/2026-11-14/GPT_NATIVE/12f30d74dd66b2e1d2f85ae44df17b5336b85be7/ege-adoption-gates-architecture-01`
+- Original source: Subodh Lonkar, *Evidence-Governed Adoption of Self-Generated Updates in Autonomous AI Agents*, arXiv:2611.16378v1, first submitted 2026-11-12T06:45:02Z
+- Original full-text primary source inspected 2026-11-14: https://arxiv.org/abs/2611.16378 (arXiv-rendered paper, sections 1, 4–6, 9–10 including assumptions, lower-bound construction, reference bridges, simulation design, and limitations)
+- Canonical paper identity checked against current `FOUNDATION/SOURCES.md`: exact 2611.16378 identity NOT_REGISTERED / Sxx NOT_ASSIGNED. This Daily does not update the source registry or create Verified Core admission
+- Prior November 10 Architecture Principles VerifierBench research and November 13 Memory System AstroMemBench are distinct original paper lineages; no inherited independent validation is claimed
+
+### Conditional scientific mechanism
+- The paper treats generation of a self-update candidate separately from confirmation and persistent adoption. Candidates may affect prompts, memory, tools, routing, workflow or policy; producing a plausible change is not an admission receipt
+- A candidate is frozen before confirmatory audit. Evaluator measurements and independent evaluator-calibration samples are drawn from fresh conditionally valid samples and compared with a declared reference procedure. Primary improvement and non-inferiority across each protected capability are separately required
+- For candidate/audit event `j` and metric `r`, the paper constructs an adjusted reference lower bound `L^R_{j,r} = L^E_{j,r} - U^b_{j,r}`, subtracting an upper bound for positive evaluator optimism rather than treating the operational evaluator as an independent oracle
+- Its countable audit-event control allocates evaluation and calibration failure budgets `e_{j,r}=c_{j,r}=3*alpha/(pi^2*j^2*R)`, summing to a family-wide `alpha`. The paper's claim depends on conditional fresh sampling, bounded paired observations, the prespecified reference procedure and the validity of its comparison construct. Mathematical proof NOT independently checked here
+- When a protected reference baseline changes, a separately audited bridge test consumes its own non-reusable global event index and error budget. A sequence of reference replacements can accumulate bounded tolerance; starting a new version does not zero historical degradation
+- A mandatory governance gate and bounded canary remain independent of statistical acceptance. The paper's Monte Carlo study is synthetic, not a production agent deployment
+
+### Theory-to-architecture mapping, with explicit non-claims
+- Candidate architecture interpretation: separate `proposed_change_identity`, `frozen_candidate_revision`, `primary_objective`, `protected_metric_set`, `reference_revision`, `fresh_sample_receipts`, `calibration_source_identity`, `bound_and_budget_receipts`, `bridge_lineage`, `governance_decision`, and `canary_outcome`
+- This is only a documentary mapping for a possible future governed update contract. It does not implement a statistical evaluator, a policy gate, an Agent Runtime, or an automated promotion mechanism in this repository
+- Counterevidence gate: reusing candidate-development data as confirmatory samples; adapting the evaluator without fresh independent calibration; cherry-picking protected metrics after results; silently replacing the baseline; passing a numerical threshold while failing a hard permission or effect boundary
+- Scientific limits: dependent or nonstationary tasks, misspecified reference evaluators, distribution shift, severe rare events hidden in an average score, and external effects that a configuration rollback cannot undo. A high conservative rejection rate may also reduce improvement acceptance power
+- Relevance to prior VerifierBench: rejection-only accuracy is not a positive-solution acceptance oracle; likewise a candidate's apparently strong operational evaluator score cannot replace valid-reference and protected-capability evidence. These are conceptual related boundaries, NOT independent corroboration or a combined empirical result
+
+### Five-axis evidence state
+- Claim State: `OBSERVED` — the original author's conditional construction and claims, not an independent theorem verification
+- Evidence Level: `E4_PREPRINT` / exact v1 primary full text read, not locally reproduced
+- Mapping State: `CANDIDATE_MECHANISM / COUNTEREVIDENCE / OUT_OF_SCOPE`
+- Implementation State: `NOT_IMPLEMENTED`
+- Validation State: `NOT_TESTED`
+- Review boundary: `SOURCE_IDENTITY_VERIFIED / MAPPING_SCOPED / NO_VERIFIED_CORE_PROMOTION`
+
+### EVIDENCE_DELTA and next retest
+- NEW_EVIDENCE: candidate-wise conditional simultaneous evaluator-calibrated bounds and non-reusable reference-bridge event identity from one new original paper
+- CORRECTED_INTERPRETATION: an update generator's local success metric is not persistent-adoption evidence, and reference version rotation cannot erase accumulated capability drift
+- UNCHANGED_BOUNDARY: PAPER != ARCHITECTURE_MAPPING != IMPLEMENTATION != VALIDATION; translated EN/ZH sections are the same paper, not independent evidence
+- NEW_COUNTEREVIDENCE: adaptive sample reuse, evaluator optimism, unreported protected regressions, reference drift and an invalid or stale external-effect permission boundary
+- UNKNOWN_RETAINED: mathematical proof review, independent simulation replication, representative real-agent deployment, choice of legitimate operational metrics, calibration cost and local applicability
+- NEXT_RETEST_CONDITION: pin the v1 formula and author code if available; independently reproduce small frozen-candidate/paired-sample experiments with exact seeds, sample identities, reference-bridge indices, bounds and positive/negative controls; measure rejection/power and hard-governance failures before proposing any implementation or source-registry promotion
+- Delivery: append-only bilingual Daily research only in existing Architecture Principles containers. `FOUNDATION/**`, Verified Core, source registry, earlier research, implementation, tests, Weekly, Monthly and workflow unchanged. Repository validator and paper Monte Carlo: `NOT_EXECUTED`; Human Maintainer review and merge required
