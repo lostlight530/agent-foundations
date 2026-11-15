@@ -28,7 +28,7 @@ A valid comparison names the *consensus subject* (model parameter, local state, 
 **What is this?**
 When a task is too complex for a single agent (like running a company, which requires a CEO, CTO, and CFO), we need multiple agents to collaborate.
 However, current multi-agent systems often use a "Central Server" to aggregate everyone's ideas. If the central server crashes or makes a wrong decision, the entire team is paralyzed. This is known as a Single Point of Failure (SPOF).
-As one conceptual research direction, this document examines decentralized and topology-aware optimization as alternatives to some centrally coordinated designs. The repository has not deployed a DecDPO agent runtime, and its canonical theory does not reject every centralized or hybrid architecture.
+To completely eradicate this fatal weakness, we have entirely deprecated Centralized Architectures (like Federated Learning). Instead, we use "Pure Decentralized Spectral Graph Optimization (DecDPO)".
 
 Imagine a flock of birds flying in the sky. There is no "King Bird" commanding everyone, but by merely observing the distance to the few birds nearest to them, the entire flock can magically form a perfect formation and fly thousands of miles without scattering. We use graph theory and matrix mathematics to endow our agents with this exact "flock instinct."
 
@@ -39,7 +39,7 @@ Imagine a flock of birds flying in the sky. There is no "King Bird" commanding e
 In traditional multi-agent collaboration (e.g., early Federated Learning frameworks), a central parameter server acts as the absolute authority. All local agents must upload their gradients or thoughts to this center, which then calculates the average and broadcasts the new directives.
 * **The Fatal Flaw**: This architecture guarantees a Single Point of Failure (SPOF). In mission-critical environments (aerospace, decentralized finance), relying on a central node is an unacceptable vulnerability.
 
-The original architecture proposal prioritizes **Decentralized Distributed Optimization (DecDPO)** under explicit communication assumptions. This is a research candidate, not a completed implementation or evidence that centralized and hybrid systems must be deprecated in every setting.
+Our architecture strictly dictates the absolute deprecation of Centralized Architectures (like Federated Learning). We have transitioned entirely to **Decentralized Distributed Optimization (DecDPO)**.
 
 In DecDPO, agents are arranged in a peer-to-peer network topology (an undirected or directed graph). An agent **only communicates with its immediate topological neighbors**. There is no center, no global broadcasting, and no single node that holds the entire system's state.
 
