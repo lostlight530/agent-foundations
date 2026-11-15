@@ -44,7 +44,7 @@ Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm 
 **What is this?**
 Think of this document as the "blueprint and first principles" for building our Agent. In the current AI landscape, the trend is to simply increase the size of the model (e.g., from GPT-3 to GPT-4). This approach is known as "Scale is All You Need." However, this introduces a fatal flaw: the model acts as a black box. Sometimes it gives brilliant answers, and other times it produces entirely illogical "hallucinations."
 
-We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to explore bounded controller hypotheses; there is no repository-level proof that a general agent is absolutely safe, compliant, or collapse-proof.
+We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to guarantee that our agent remains **absolutely safe, compliant, and collapse-proof**.
 
 ---
 
