@@ -93,3 +93,15 @@ The claims below are research/evidence maps. Their implementation and validation
 **ZH.** 追加式修订、明确替代、回滚和删除墓碑使记忆变更可检查，但不会自动决定哪个版本为真；仍需验证和权限规则。
 
 **Scope and limits / 范围与局限:** This is a proposed lifecycle principle; Agent Foundations has no memory-versioning runtime. / 这是候选生命周期原则；Agent Foundations 没有 memory-versioning runtime。
+
+## 2026-11-15 state and provenance research model / 记忆状态与来源模型
+
+The existing AF-MEM claims permit a **candidate lifecycle** rather than a claimed repository engine:
+
+`candidate -> provenance_checked -> admitted_to_scoped_memory -> retrieved_for_task -> compacted_or_superseded -> retained_or_tombstoned`.
+
+Each arrow would require a separately specified input, authority and failure outcome in an implementing system. In particular, "retrieved" says only that a storage/search mechanism surfaced a record; it does not prove source truth, current applicability or authorization to act. "Compacted" does not prove the critical source-role and delegation boundary survived compression. "Tombstoned" expresses a logical lifecycle record, not a guarantee of physical deletion from backups or downstream copies.
+
+**Counterexample / 反例：** a memory summary containing a forged `[User]:` line can preserve literal words while losing the authenticated origin channel. If the downstream harness trusts the flattened role string, byte-level text fidelity is insufficient for authority fidelity. The appropriate research question is whether the representation preserves both **content and authenticated role/provenance** under retrieval and compaction, not whether the summary looks fluent.
+
+**Evaluation object:** source/actor identity, trust/authority role, document/content version, retrieval time, scope/expiry, derived-from chain, correction/tombstone state, and reconstruction evidence. `AF-MEM-001` through `AF-MEM-005` remain literature-backed documentary claim maps. `FOUNDATION/**` has no local ingestion, retrieval, vector-store, compaction, consolidation or deletion implementation; no test has been run by this amendment.
