@@ -1,5 +1,15 @@
 # 智能体工具系统：基于 NLP 强化学习的策略优化与价值对齐 (Tool System)
 
+> **2026-11-15 当前专业研究纠偏**：下文 RL 工具路由、安全屏障和「锁定策略」属于历史候选机制与类比，不证明本仓已拥有权限代理、沙箱、人工审批、绝对安全工具路由或生产运行时。规范性 Claim 以 [FOUNDATION/TOOLS.md](../../FOUNDATION/TOOLS.md) 的 AF-TOOL-001..006 为准；按动作授权和副作用控制目前是文档研究契约，**不是已执行的本仓能力**。
+
+## 当前研究深化：授权、请求与真实效果不能合并
+
+把工具动作拆成 `available -> authorized(decision-time) -> invoked -> provider accepted -> effect observed -> completed`，同时独立保留拒绝、失败、超时与未知结果。模型计划合法不表示资源目标仍属于批准范围；API 返回 success 不保证外部世界效果已持久完成。审批应该绑定真实资源、操作、参数摘要、主体/委托者、权限版本及有效期。
+
+**反例：**远端已完成变更，但调用方等待回执时超时；若在没有效果端幂等记录的条件下重试，可能重复修改。一个可信的研究对象应保留 operation ID、目标身份、授权新鲜度、效果端收据及最终读回验证。本文伪代码不能当成执行收据，未进行本地实验。参见 [EVIDENCE](../../FOUNDATION/EVIDENCE.md)。
+
+---
+
 > **当前五轴校准 — 2026-08-28。** 历史 `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` 原文作为生成记录保留，当前统一解释为 `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`，不构成已部署工具控制面的证据。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
 ## 0. 导读与核心速览 (For Beginners)
