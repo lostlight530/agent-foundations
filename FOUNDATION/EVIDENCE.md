@@ -279,3 +279,18 @@ A rigorous five-axis record should be interpreted as a product of **independent 
 **Concrete repository caveat:** `SOURCES.md` retains a documented historical `S63` label collision: the canonical current registry and an earlier architecture research passage have used the same label for different paper objects. Resolve such cases by *exact paper identity, version, title and provenance*, never by an isolated `Sxx` string. This note is a source-registry interpretation and does not silently reassign the ID or rewrite historical research.
 
 Claims about tool execution, cross-session memory, distributed consensus or guarantee strength must still cite their owning `AF-*` domain entry and actual implementation/validation dimensions. The five-axis schema checks representation; it cannot adjudicate source propositions.
+
+## 2026-11-15 primary-source spot-check — source identity is not scientific reproduction
+
+This narrow current check reads the public arXiv record surfaces for two **existing** canonical Source IDs, without changing their identity, original producer, five-axis disposition or historical research text
+
+| Existing object | Primary source checked | Directly supported scope | Not promoted |
+| --- | --- | --- | --- |
+| `S57`, `AF-COLLAB-006`, arXiv:2609.39211v1 | [arXiv record](https://arxiv.org/abs/2609.39211), submitted 2026-09-30 | The paper identifies the title, authors, study population and its abstract-level finding that stronger semantic consensus does not make unanimous answers an independent truth certificate under its investigated language-model interaction configurations | No universal proof about all agent populations, no source-code reproduction, no repository consensus runtime |
+| `S67`, arXiv:2409.09869v1 | [arXiv record](https://arxiv.org/abs/2409.09869), submitted 2024-09-15 | The paper discusses a Critic-as-Lyapunov-Function controller for stabilization of a dynamical system and reports mobile-robot-simulator studies, this is a controller-/setting-scoped result | No LLM Agent safety theorem, no implemented local Lyapunov governor, no full mathematical verification |
+
+**Source surface:** official bibliographic page and abstract, checked 2026-11-15, not downloaded source code, full theorem proof, independent experiment or repository runtime trace  
+**Resulting disposition:** `PRIMARY_IDENTITY_AND_ABSTRACT_SCOPE_CHECKED`; keep existing `E4_PREPRINT`, source relationships and implementation/validation dimensions unchanged, except through a separately evidenced decision that genuinely meets their definitions
+
+An external source can be current and authoritative for its own paper metadata while remaining inadequate to prove this repository deployed its mechanism, the phrase "latest authoritative November state" describes this documented **November inspection cutoff** and must not be misread as a November publication date for the papers
+
