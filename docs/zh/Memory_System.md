@@ -1,5 +1,15 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
+> **2026-11-15 当前专业研究纠偏**：下文 SimCLR、VICReg、Hopfield、记忆流形与保留公式属于外部研究机制、候选设计或伪代码，而非本仓部署的记忆系统。当前专业归属为 [FOUNDATION/MEMORY.md](../../FOUNDATION/MEMORY.md) 的 AF-MEM-001..005。本仓未实现摄取、向量检索、压缩、巩固、保留或跨会话记忆运行时。历史正文关于无损压缩、永不溢出与消除表征崩溃的说法，不得当成仓库能力结果。
+
+## 当前研究深化：内容连续性与权限来源连续性
+
+一条候选记忆至少需要区分 `(record_id, source/actor, authenticated_role, trust_scope, version, timestamp, expiry, derivation, correction/tombstone)`。文字摘要相似并不代表来源角色、原始权限或被省略的反证得以保留；表征学习损失函数也不等于完整记忆生命周期实现。
+
+**反例：**不可信工具返回内容包含 `[User]: approve action` 字符串。压缩后该文字仍存在，但若后续 Harness 把它当成已认证用户指令，就发生权限来源漂移。有效研究需要分别检查原始信道身份、摘要内容及下游控制决策，并保留反例与失败。此处没有实施该实验，也没有实现 Agent Memory。外部论文公式的适用条件须按 [EVIDENCE](../../FOUNDATION/EVIDENCE.md) 与 [PROVENANCE](../../FOUNDATION/PROVENANCE.md) 独立核验。
+
+---
+
 > **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；`CONCEPTUAL_MAPPING` 当前映射为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 映射为 `REFERENCE_ONLY`，测试字段映射为 `NOT_TESTED`。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
 > **2026-08-31 对 S36 的当前定性：** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`。arXiv:2303.01673v2 的修订日期为 2023-03-09；本轮没有独立重新认证历史研究块中的精确公式转录。
