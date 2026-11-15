@@ -15,6 +15,11 @@ Agent Foundations 是用于研究智能体系统的双语理论、证据与架�
 
 ## Current verified core / 当前可验证核心
 
+**2026-11-15 research reading map / 11 月总—分结构校准**  
+The [current verified-core index](FOUNDATION/INDEX.md) owns the system-wide evidence interpretation, with **23 canonical claims** across Architecture 6, Memory 5, Tools 6 and Collaboration 6, the `S01–S67` source registry contains 67 registered IDs rather than 67 independent reproductions, and the historical `S63` identity collision requires paper/version resolution, not automatic source transfer  
+四领域专业论证分别沿 [Architecture](FOUNDATION/ARCHITECTURE.md)、[Memory](FOUNDATION/MEMORY.md)、[Tools](FOUNDATION/TOOLS.md)、[Collaboration](FOUNDATION/COLLABORATION.md) 阅读，再从 [English research guide](docs/en/README.md) 或 [中文专业导读](docs/zh/README.md) 进入原有长篇研究正文，论文定理不等于 Agent 系统能力，来源登记、映射、实现和验证状态不得相互自动继承  
+This note is a November reading calibration against source and document contracts, not an autonomous-runtime or independent-experiment claim, the earlier 2026-11-13 introductory annotation is retained as its own dated context
+
 The current entry point is [`FOUNDATION/INDEX.md`](FOUNDATION/INDEX.md). The core separates current claim/evidence contracts from generated research streams and historical audit records.
 
 当前入口为 [`FOUNDATION/INDEX.md`](FOUNDATION/INDEX.md)；核心层把当前声明/证据契约与生成式研究流、历史审计记录明确分开；
