@@ -1,5 +1,15 @@
 # Collaboration System: Distributed Convergence via Pure Decentralized Spectral Graph Optimization (DecDPO)
 
+> **2026-11-15 authoritative research correction.** Claims below that central coordination is universally obsolete, that DecDPO guarantees all-agent agreement, or that coordination algorithms ensure universally correct outcomes are historical theoretical proposals or overgeneralizations. The current [FOUNDATION/COLLABORATION.md](../../FOUNDATION/COLLABORATION.md) specifically retains AF-COLLAB-001 as topology counterevidence and AF-COLLAB-006 as **agreement != factual correctness**. No local multi-agent transport, consensus runtime or distributed correctness test exists.
+
+## Current research problem: distinguish consensus, state and truth
+
+For an empirical collaboration claim, retain the actor population, model/harness versions, topology, communication schedule, failure/partition model, source lineage and independent evaluation of the task proposition. `MESSAGE_AGREEMENT` may be high even if participants repeat one wrong source; `STATE_CONVERGENCE` under a mathematical update rule is a distinct formal property; `FACTUAL_CORRECTNESS` requires evidence outside the coordination loop. Neither centralization nor decentralization is a universal optimality statement without an explicit cost/failure model.
+
+**Counterexample:** multiple agents agree after consulting one inaccurate or adversarial upstream document. The agreement signal increases while grounding may decline. To falsify an unrestricted convergence/truth claim, vary topology and shared-source contamination while holding task and evaluator constant. Record the paper population and theorem assumptions separately from any local implementation. This repository's verified core represents the research, not a deployed distributed protocol.
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` currently resolves to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` to `REFERENCE_ONLY`; test `EVIDENCE_INSUFFICIENT` to `NOT_TESTED`. Evidence Level and Source Surface are assigned separately. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
 > **2026-08-31 source-identity calibration:** the 08-29 epsilon-MATS chunk resolves to existing canonical source S25 (arXiv:2312.15549v1, AAAI 2024). It is inherited documentary use, not a new source and not independent corroboration.
