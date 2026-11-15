@@ -1,5 +1,15 @@
 # 智能体核心架构原则与梯度熵理论 (Architecture Principles & Gradient Entropy)
 
+> **2026-11-15 当前专业研究纠偏（并非新增实验结果）**：下文保留的「必定收敛」「绝对安全」「物理级保证」等表达属于历史研究愿景、类比或尚未验证的普遍化推断，不是本仓当前具备的运行时性质。规范性 Claim 解释以 [FOUNDATION/ARCHITECTURE.md](../../FOUNDATION/ARCHITECTURE.md) 为准：AF-ARCH-001 要求完整 Agent System 身份，AF-ARCH-002 的确定性外壳为候选方案且 `NOT_IMPLEMENTED`，AF-ARCH-003 明确数学定理适用域不等于 Agent 端到端适用域。本仓不包含自主智能体运行时。保留旧正文用于审查历史研究思路，但**不再将旧绝对化话语当作当前能力声明**。
+
+## 当前研究深化：定理适用域与 Agent 系统声明的映射
+
+把待评价系统写成版本化对象 `S=(model, instructions, harness, tools/authority, memory, retries/budgets, environment, evaluator)`。某个 Lyapunov、收缩性或遗憾界定理只能约束其明确定义的变量、假设、量词与目标函数；若没有构造并验证从实际 Agent 轨迹到数学状态变量的映射 `R(S,A)`，就不能把论文定理推出为 Agent 通用安全或必然收敛。
+
+**反例设计：**保持模型相同而改变授权范围、记忆快照或评分器版本，观察声明是否仍可比；若不可比，模型名与单一不等式不是完整的系统身份。**证据义务：** 论文精确版本与被检查的定理/假设、仓库中的映射、真正存在的实现路径、与版本绑定的运行结果。历史伪代码不自动满足这些义务。参见 [EVIDENCE](../../FOUNDATION/EVIDENCE.md) 与 [PROVENANCE](../../FOUNDATION/PROVENANCE.md)。
+
+---
+
 > **当前五轴校准 — 2026-08-28。** 历史生成块原文保留。所有块中的 `CONCEPTUAL_MAPPING` 当前解释为 `Mapping State: DESIGN_ANALOGY`；实现字段的 `EVIDENCE_INSUFFICIENT` 在未指向仓库实现路径时解释为 `Implementation State: REFERENCE_ONLY`；测试字段解释为 `Validation State: NOT_TESTED`。旧标签本身不决定 Evidence Level。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
 > **2026-08-31 对 08-30 Joint Lyapunov 研究块的当前定性：** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`。本轮核对了 arXiv 官方身份与摘要，没有独立重新认证公式转录、数值实验或密码学构造。
