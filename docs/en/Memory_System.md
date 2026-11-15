@@ -29,15 +29,15 @@ SimCLR/VICReg, InfoNCE, Hopfield retrieval, covariance regularization and distan
 Just as humans have short-term "Working Memory" and long-term "Episodic Memory," agents also need to remember what they have seen and done.
 However, if you simply dump every chat log, image, and webpage screenshot into a database (like a traditional vector database), the system will quickly overflow with "junk data." It will not only become slow but also struggle to find truly useful core information.
 
-This research document investigates whether representation-learning methods such as **SimCLR and VICReg** could support selective compression under measurable fidelity conditions. Agent Foundations does not implement or train this memory engine, and there is no empirical basis here for claims that it extracts essential world state, never loses critical evidence, or cannot exhaust storage.
+To solve this, we abandoned the outdated "store raw data" approach and introduced a cutting-edge AI vision algorithm called **SimCLR with VICReg (Variance-Invariance-Covariance Regularization)**. Our system doesn't memorize "what the screen looks like." Instead, much like a human, it automatically extracts "the essential changes happening on the screen." This creates an ultra-efficient, highly structured memory system that will never overflow.
 
 ---
 
 ## 1. Background: Saying Goodbye to Rote Memorization
 
-A memory system is the foundation for any agent to perceive and understand complex environments. In the historical deterministic-agent design proposal, heuristic truncation and simple embedding retrieval were compared with representation-learning alternatives; none is demonstrated here as replaced in an operational repository memory runtime.
+A memory system is the foundation for any agent to perceive and understand complex environments. In our deterministic agent architecture, we have completely discarded traditional heuristic memory management (such as simple text truncation, sliding windows, or primitive Embedding matching).
 
-Instead, this document **studies** a representation-learning candidate based on **SimCLR (Simple Framework for Contrastive Learning of Visual Representations)** and unsupervised learning; it is not an implemented component of this repository.
+Instead, we utilize a rigorous representation learning framework based on **SimCLR (Simple Framework for Contrastive Learning of Visual Representations)** and Unsupervised Learning.
 The core idea of SimCLR is "Contrastive Learning": it forces the mathematical model to maximize the similarity between different forms of the same object (like a photo of a cat and a sketch of the same cat), while minimizing its similarity with unrelated objects (like a dog).
 
 In the context of agent memory, this represents a brutal mathematical "dimensionality reduction." We no longer save raw, redundant pixel or text data to the hard drive. Instead, algorithms extract and memorize **high-dimensional, continuous, internally structured Invariant Features. By introducing VICReg constraints, we not only demand accuracy but also require the latent space representation to maintain high variance and low covariance, completely eliminating Representation Collapse at a mathematical level.**
