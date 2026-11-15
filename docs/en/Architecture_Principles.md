@@ -14,6 +14,15 @@ The correct analysis unit is a complete versioned system `S = (model, instructio
 
 > **2026-08-31 current disposition for the 08-30 Joint Lyapunov chunk:** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`. Official arXiv identity and abstract were checked; formula transcription and numerical/cryptographic claims were not independently re-certified here.
 
+## Current repository-realization boundary (source-grounded clarification, 2026-11-15)
+
+**Document type:** retained theory, analogies, exploratory formulas and literature interpretation, **not** a tested deterministic-agent implementation. Current canonical claims live in [FOUNDATION/ARCHITECTURE.md](../../FOUNDATION/ARCHITECTURE.md) under `AF-ARCH-001..006`; [FOUNDATION/EVIDENCE.md](../../FOUNDATION/EVIDENCE.md) owns independent Claim State, Evidence Level, Mapping State, Implementation State and Validation State. The repository's executable tools are documentary/source validators, not the convergence controllers or autonomous agents described in historical examples.
+
+The methodologically important distinction is **theorem domain versus system domain**: a mathematical bound reported for a specified optimization process, game, topology, loss, noise assumption or proof technique cannot be promoted to a universal LLM-agent theorem. Before using a Lyapunov/NTK/convergence expression in an agent architecture claim, identify the exact external source and version, its state variables, dynamics, assumptions and quantifiers, which conclusion is actually proved, and whether any repository code implements and tests those assumptions. None of those last two steps is established by this narrative alone.
+
+**Counterexample criterion:** a small simulation proving numerical decrease of one chosen energy function does not prove that a deployed model's tool actions, source citations, or external side effects obey that energy function. `DETERMINISTIC_BOUNDARY_PROPOSED` is not `AGENT_SAFETY_PROVED`; paper result is not local implementation. This interpretation preserves the original research sketches while explicitly retracting unscoped agent-safety or inevitable-convergence claims as present repository capabilities. **No experiment/theorem was newly executed or independently proved in this documentation correction.**
+
+
 ## 0. Introduction & Core Quick Look (For Beginners)
 
 ### Analogy for Distributed Stochastic Optimization under Heavy-Tailed Noises
@@ -35,7 +44,7 @@ Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm 
 **What is this?**
 Think of this document as the "blueprint and first principles" for building our Agent. In the current AI landscape, the trend is to simply increase the size of the model (e.g., from GPT-3 to GPT-4). This approach is known as "Scale is All You Need." However, this introduces a fatal flaw: the model acts as a black box. Sometimes it gives brilliant answers, and other times it produces entirely illogical "hallucinations."
 
-We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to guarantee that our agent remains **absolutely safe, compliant, and collapse-proof**.
+We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to explore bounded controller hypotheses; there is no repository-level proof that a general agent is absolutely safe, compliant, or collapse-proof.
 
 ---
 
