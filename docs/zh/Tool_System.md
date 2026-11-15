@@ -1194,3 +1194,68 @@ $$
 - **UNKNOWN_RETAINED**：独立证明检查、作者代码精确版本与可复现性、实验方差、真实部署、本仓 Runtime 实现
 - **NEXT_RETEST_CONDITION**：固定论文 v1、实现 revision 与策略版本，在完整中介的隔离环境运行授权/拒绝、委托/撤销/预算和实际效果对照，保留凭证、参数来源、日志、退出码、效果回执与负结果
 - **交付边界**：仅追加现有中英文 Tool System，保持其他容器、Sxx Registry、Verified Core、历史块和 WorkflowHub Draft PR #378 不变，Validator 与原论文实验 `NOT_EXECUTED`，交由 Human Maintainer 审查合并
+
+
+---
+
+## 2026-11-15 GPT Native Daily Research — PACE / 准入判定不可区分性与效果边界执行控制
+
+### 任务、来源与研究边界
+- Canonical Task：`foundations/research/daily`；逻辑日 **2026-11-15 Asia/Shanghai**；生产者 **GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY**
+- 仓库 `lostlight530/agent-foundations`；冷启动已合并 main `9702b3f7ac2f8b26877a1be816f7a090a352dcd7`；执行身份：`agent-foundations/research/daily/2026-11-15/GPT_NATIVE/9702b3f7ac2f8b26877a1be816f7a090a352dcd7/pace-noninterference-effect-boundary-01`
+- 原生输出归属：现有中英文 **Tool System** 两个容器，不把 Memory、Collaboration、Architecture Principles 误算为当日独立科研产出
+- 论文规范身份：**arXiv:2610.01349v1**，*PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents*，**2026-10-01T09:18:05Z** 首次提交，绝非 11 月 15 日新发表
+- 作者：Fengpeng Li、Qizhou Wang、Yuke Hu、Kemou Li、Jun Liu、Haiwei Wu、Jiantao Zhou、Di Wang
+- 真实查阅：原始元数据 https://arxiv.org/abs/2610.01349 与作者 v1 全文 https://arxiv.org/html/2610.01349v1 ，重点为第 2–5 节、第三节准入证据不足问题、第四节认证控制合同与原型差异、附录 C.6/D.1 的条件和残余限制
+- 证据归属：单一作者论文谱系、E4_PREPRINT；本次无作者实验重跑、独立定理重证、代码重现或仓库本地验证
+- 目前**不分配新的 Sxx**、不修改 `FOUNDATION/SOURCES.md`，不将论文或本文提升为 Verified Core；后续来源准入另行按规范 identity 去重
+
+### 理论增量：为什么“准入时审过”不足以解除具体效果的控制
+作者将安全分析对象定义为 artifact 在不同上下文中的**行为族**，而不仅是技能说明文字或工具接口。两份 artifact 的源码、接口与出口位置可能相同，准入审查得到同一判断，但由攻击者控制的说明文字可使实际 Agent 在后续上下文产生不同输出。
+
+- **有条件的定理 1**：给定审查判断无法区分安全与泄露变体（C1）、允许放宽控制后存在违反目标界限的攻击者见证（C2），以及明示的 soundness 与 mediator 假设，仅依赖该判断的安全 gate 不能对二者随意放宽该效果出口。
+- 定理不意味着“所有静态审查都没用”；它只针对满足 C1/C2 的不可区分变体。若前提不成立，则不能套用这个不可能性结论。
+- 因此目录注册、签名、Schema PASS、技能白名单或既有“安全”标签，在上述条件下都不能单独证明后续具体调用满足非干扰约束。
+- **反例**：两个技能具有相同外部 API 定义，但低可信说明改变了后续发送邮件的收件人或内容。只审 API 结构无法在执行时判定收件人与用户授权是否一致。
+- **反向控制**：真正由确定性代码固定、且与敏感上下文无关的参数调用，在补充足够依赖证明后可能具有不同结论；不能把论文写成“所有动作必须永远拒绝”。
+
+### 两种控制义务，以及“被证明的合同”和“被测量的原型”的区别
+- Path confinement：在已有表示的低可信来源到敏感效果图上寻找并保持切断相关 influence path 的方案。
+- Capability / effect verification：以真实认证请求、Schema 声明的具体副作用、实际动作与参数为输入做授权检查，而不是信任模型描述的执行意图。
+- **认证的最终动作**须同时满足“保留被表示的路径切断”和“具体效果获得授权”；一次 ALLOW 不能同时自动证明参数没有受低可信数据影响。
+- 作者明确区分 **PACE-c** 的 certified contract 与实验评估中的 **PACE-p**：后者可恢复被 path gate 阻断但通过能力检查的动作，或实行声明过的 repair，而不必对最终动作完整重新认证。因此原型的实验效果不自动继承更强的形式保证。
+- 附录 C.6 指出未声明数据读取、工具内部二次调用、模型语义重述/重新构造字符串、绕过版本化适配器的外部资源改变等残余风险；没有被观测到的边不等于没有真实影响。
+- 核心区分：`CERTIFIED_FINAL_ACTION != EVALUATED_PROTOTYPE_ACTION`，`GRAPH_EDGE_NOT_REPRESENTED != REAL_DEPENDENCY_ABSENT`
+- 与 11 月 12 日 AgentCap 候选不同：签名、委托、预算、撤销时刻的能力约束不自动证明信息流路径被切断；反过来信息流切断也不能证明 token 有效或实际副作用完成。本仓没有已验证的组合协议。
+- 与此前 PROVISO 不同：provenance-typed 的学习型动作选择，不等价于 PACE 对准入审查不可区分性的条件式定理；多引用两篇论文不产生独立联合复现。
+
+### 作者实验口径、可证伪反例
+- 作者在 **8 个可执行 agent 安全基准、3 组模型家族**报告，PACE-p 在 **79 个符合资格的攻击列中 62 列**具有严格最低攻击成功率，另 **14 列并列**；这些列不是 79 个真实部署环境。
+- 因子消融使用 **1,167 个成对 case**、8 种组合、9,336 个评分结果；这些均属论文作者的实验报告，本次未执行原始代码或独立复算。
+- 受限自适应搜索在 30 个越权目标上报告 0 成功，有明确预算和测试范围，不应写成“全局零风险”。
+- **反例 A：未声明的次生效果**，中间工具内部写出未经 Schema 声明的外部资源，路径图和效果清单都不完整。
+- **反例 B：语义重述**，模型从低可信原文重构、翻译或运算生成敏感参数，简单字符串匹配未必追踪到真实来源。
+- **反例 C：权限时效漂移**，从动作建议到真正 dispatch 之间权限或 Policy Revision 发生变化，旧凭证不能代表当前授权。
+- **反例 D：原型恢复动作**，某动作通过 capability 检查而从 path block 中被恢复，如果缺少最终重认证，原先的 separation 证明条件可能不再成立。
+- **负对照**：授权合法、无低可信影响、效果 Schema 完整、权限版本固定、受控工具边界覆盖完整的良性请求应允许正常完成；简单 all-deny 不代表工具系统具备有效能力。
+
+### 五轴状态与有限架构映射
+- 候选 Contract 字段：`(request_id, authenticated_principal, policy_revision, source_lineage, effect_schema_version, proposed_action, bound_args, represented_cut, final_action_id, final_authority_verdict, dispatch_receipt, observed_effect_receipt, replay_state)`
+- `request_id/policy_revision` 是授权与追溯上下文，不证明真实工具出口没有旁路；`represented_cut` 只涉及可表示的边，不能证明所有隐藏内部效果均安全
+- `dispatch_receipt` 只有在可信执行追踪范围内才能说明调用交接，不能等同真实、持久且可补偿的外部效果回执
+- Claim State：**OBSERVED**（作者定义、条件与报告的观察；并非本仓提升后的机制真值）
+- Evidence Level：**E4_PREPRINT**（实际查阅原始 v1，定理未独立证明）
+- Mapping State：**CANDIDATE_MECHANISM**，另保留未表示路径和原型最终动作的 **COUNTEREVIDENCE**
+- Implementation State：**NOT_IMPLEMENTED**（本仓未部署此控制平面）
+- Validation State：**NOT_TESTED**（仓库 Validator、求解器、原论文基准和本地工具效果均未运行）
+- 不能以来源引用、已有论文近似结论、双语同步内容或代码片段自动生成 `AF-TOOL-*` Verified Core claim
+
+### EVIDENCE_DELTA 与后续复测
+- **NEW_EVIDENCE**：定理的 C1/C2 不可区分条件、双闸门的最终动作证明义务、PACE-c/PACE-p 的证据边界
+- **CORRECTED_INTERPRETATION**：准入扫描、能力签发、路径隔离、最终授权、真实副作用完成是相互独立的执行与证据合同
+- **UNCHANGED_BOUNDARY**：Paper != Mapping != Implementation != Validation；作者实验 != 我们已复现
+- **NEW_COUNTEREVIDENCE**：未声明效果、模型重构、授权版本变化及 prototype restore/repair 都能打破广义保证的前提
+- **UNKNOWN_RETAINED**：前提之外的定理适用性、代码复验、跨基准泛化、本仓授权实现、真实 effect sink 与持久状态一致性
+- **NEXT_RETEST_CONDITION**：固定论文 v1、工具效果 Schema 与实验运行环境，构造准入判定相同但效果不同的一对技能；分别对 PACE-c 与 PACE-p 测试最终 cut、合法权限、隐藏工具二次效果、权限时效与良性请求效用，记录命令、stdout/stderr、exit 与真实效果回执
+- **交付边界**：只向已有中英文 Tool System 原生内容追加，不更改 Jules 历史、Sxx Registry、Verified Core、其他三个系统容器、协议或运行时代码
+- `FOUNDATION/validate.py`、真实论文实验、原型、Proof Checker 与工具效果验证：本轮 **NOT_EXECUTED**；由 Human Maintainer 审查后决定是否合并
