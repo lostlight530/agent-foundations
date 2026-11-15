@@ -122,3 +122,17 @@ Current repository-wide implementation classification:
 not:
 
 `IMPLEMENTED_AUTONOMOUS_AGENT_RUNTIME`.
+
+## 2026-11-15 system-level evaluation boundary / 系统级评估边界
+
+**EN — Concrete unit of comparison.** AF-ARCH-001 is stronger when the evaluated object is represented as a versioned configuration tuple rather than a model string:
+
+`(model and version, system/developer instructions and their revisions, harness/control loop, tools and tool versions, delegated authorities, memory snapshot, environment, retry/timeout/budget policy, evaluator and scoring policy)`.
+
+A single missing component can invalidate a cross-run attribution claim: equal model IDs with different tool permissions are different agent systems; equal prompts under different evaluator versions may produce scores that are not directly comparable. This is an **evaluation method and proposed record design**, not an implementation provided by this repository.
+
+**ZH — 不可跨越的证明对象。** AF-ARCH-002 的 deterministic shell 是候选工程约束：可确定的输入检查或授权接口，并不意味着模型推理路径确定，更不意味着开放环境中任务结果必然相同。AF-ARCH-003 要求区分数学定理的变量、假设、概率事件、结论对象与真实 Agent 任务的状态和副作用。若没有将任务行为映射进定理对象的明确定义及验证，不能把定理结论升级为端到端保证。
+
+**Falsification questions / 反证问题：** Can a model/version-constant system with different authority or memory produce a different result? Does a proposed invariant still hold under timeout, tool error, stale authorization or evaluator drift? What is the controlled variable, counterexample and observability surface? Record failures as potential disconfirming evidence rather than rewriting the intended theorem.
+
+**Repository realization:** `FOUNDATION/claim.schema.json`, `validate.py`, the domain documents and `SOURCES.md` offer documentary representation/structural checking. They do not implement any of these agent-system transitions or mathematically certify convergence. This section does not create new `AF-ARCH-*` claims or change their five-axis statuses.
