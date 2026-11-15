@@ -1,5 +1,15 @@
 # 智能体协作系统：基于完全去中心化图谱优化 (DecDPO) 的分布式收敛
 
+> **2026-11-15 当前专业研究纠偏**：下文关于必须全面废弃中心架构、DecDPO 必然使所有 Agent 一致、达成共识即得到正确答案的表述，属于历史候选理论或超出证据范围的推广。当前 [FOUNDATION/COLLABORATION.md](../../FOUNDATION/COLLABORATION.md) 以 AF-COLLAB-001 保留拓扑取舍的反证，以 AF-COLLAB-006 明确 **agreement != factual correctness**；本仓未实现多 Agent 消息传输、共识运行时或分布式正确性验证。
+
+## 当前研究深化：消息共识、状态收敛与事实正确性
+
+描述协作系统时应保留参与者/模型身份、Harness 版本、通信拓扑、消息时序、失败/网络分区假设、来源血缘及独立事实评价。数学状态迭代的收敛、群体消息的表面一致性、真实命题的正确性是三个不同对象；高一致性可与高度一致的错误共存。中心化和去中心化各有可用性、延迟、可观测性与信任成本，不能无条件推导一个方案优于所有方案。
+
+**反例：**多个 Agent 共享同一错误来源并相互复述，群体一致性可能上升而真实性下降。要检验普遍化论断，至少控制任务和评分，分别改变拓扑与来源污染，保留论文定理的假设、对象与实际实验数据。本仓的 Claim/Source 映射是研究文档，不是已运行的分布式协议。
+
+---
+
 > **当前五轴校准 — 2026-08-28。** 历史生成标签继续可见；`CONCEPTUAL_MAPPING` 当前解释为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 解释为 `REFERENCE_ONLY`，测试字段解释为 `NOT_TESTED`。Evidence Level 与 Source Surface 独立判定。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
 
 > **2026-08-31 来源身份校准：** 08-29 的 epsilon-MATS 研究块统一解析到已有 canonical source S25（arXiv:2312.15549v1，AAAI 2024）。这是文档继承，不是新来源，也不是独立佐证。
