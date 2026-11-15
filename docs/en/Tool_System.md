@@ -1,5 +1,15 @@
 # Tool System: Policy Optimization & Value Alignment via NLP RL
 
+> **2026-11-15 authoritative research correction.** The tool-routing RL, safety barriers and "locked" action policies described below are historical proposed mechanisms and analogies. They **do not** demonstrate an implemented permission broker, sandbox, approval system, verified safe tool route or zero-incident deployment. The current source-of-truth claim map is [FOUNDATION/TOOLS.md](../../FOUNDATION/TOOLS.md) (AF-TOOL-001..006). In particular the per-action authority requirement and bounded side-effect design remain documentary; this repository has no tool execution runtime.
+
+## Current research problem: authority and effect are separate states
+
+A consequential tool action must distinguish `available -> authorized(at decision time) -> invoked -> accepted by provider -> effect observed -> completed`, with `denied`, `failed`, and `outcome unknown` branches. A syntactically safe command or planned route does not establish target ownership, current approval, or the downstream effect. Approval should be bound to a resolved target, requested operation, parameter identity, actor/delegate, policy version and expiry, not merely to a model's intent.
+
+**Counterexample:** a remote API commits a mutation and the client times out before receiving the receipt. Repeating the call without a sink-backed idempotency guarantee may duplicate an effect; a tool success label without authoritative read-back may also misstate completion. A useful future experiment would record operation ID, exact target, authorization freshness, sink receipts, and post-effect verification. Neither this document nor its pseudocode is a run receipt or executable policy.
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` text is preserved as generated output and currently resolves to `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`. It is not evidence of a deployed tool-control plane. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
 ## 0. Introduction & Quick Overview (For Beginners)
