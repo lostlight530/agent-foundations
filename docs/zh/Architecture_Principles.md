@@ -14,6 +14,15 @@
 
 > **2026-08-31 对 08-30 Joint Lyapunov 研究块的当前定性：** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`。本轮核对了 arXiv 官方身份与摘要，没有独立重新认证公式转录、数值实验或密码学构造。
 
+## 当前仓库实现与证据边界（源码校准，2026-11-15）
+
+**文档类别：** 长期保留的理论解释、类比、数学建模与设计假设，不是已经实现并验证的确定性 Agent。当前规范性 Claim 以 [FOUNDATION/ARCHITECTURE.md](../../FOUNDATION/ARCHITECTURE.md) 的 `AF-ARCH-001..006` 为准；[FOUNDATION/EVIDENCE.md](../../FOUNDATION/EVIDENCE.md) 分开记录 Claim、Evidence、Mapping、Implementation、Validation 五轴。仓库内的 `FOUNDATION/validate.py` 是文档/结构校验器，不是智能体运行时、数学定理证明器或安全监控服务
+
+**核心研究判别：** 论文在特定目标函数、拓扑、噪声分布、学习率、动力系统假设下推导的 Lyapunov 或收敛界，不会自动变成任意 LLM Agent 系统的安全定理。引用公式前必须保留确切论文版本、状态变量、假设、量词、被证明的性质、可能的反例，并明确本仓是否有实现与针对性实验。原文“保证收敛”等研究口号保留其历史设计语境，但**不是当前本仓能力保证**
+
+**反证设计（未执行）：** 即使某个受控仿真中的能量函数递减，也不意味着外部工具动作、来源引用、授权和副作用受到同一能量函数约束。需先证明被研究系统与形式模型同构到相关性质，且有实际证据。本段属于仓库源码/Claim 文档对照，没有执行新的实验或独立证明定理
+
+
 ## 0. 导读与核心速览 (For Beginners)
 
 ### 重尾噪声下的分布式随机优化类比 (Practical Analogies)
@@ -35,7 +44,7 @@
 **这是什么？**
 你可以把这篇文档看作是我们打造智能体（Agent）的“图纸与第一性原理”。在当前的 AI 世界里，大家都在疯狂地增加模型的大小（比如从 GPT-3 到 GPT-4，再到各种超大参数模型），这被称为“大力出奇迹（Scale is All You Need）”。但这带来了一个致命问题：模型就像一个黑盒，有时候它会给你惊艳的答案，但有时候它会产生完全不合逻辑的“幻觉（Hallucination）”。
 
-我们不想造一个充满不确定性的黑盒。我们要造的是一架精密的“钟表”——它的每一次运转都符合物理定律和数学计算。这篇文档就是告诉你，我们如何用三条铁律（不实现、不扩展、不优化）以及一个原创理论（梯度熵），来保证智能体**绝对安全、绝对听话、绝对不崩溃**。
+我们希望研究能明确声明约束条件、观测范围和失败边界的智能体系统。这里的“三条铁律”和梯度熵属于原有研究构想与方法假设；本仓没有实现相应通用 Agent 运行时，也没有证明所有工具行为与外部世界状态都满足绝对安全、服从或收敛性质。
 
 ---
 
