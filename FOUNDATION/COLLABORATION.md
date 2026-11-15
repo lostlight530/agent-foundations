@@ -120,3 +120,17 @@ SEMANTIC_COHESION
 PAPER_RESULT
 != REPOSITORY_RUNTIME
 ```
+
+## 2026-11-15 typed agreement and topology experiment design / 有类型的共识与拓扑
+
+`AF-COLLAB-001` and `AF-COLLAB-006` jointly prohibit two shortcuts: (1) assuming decentralized topology is always superior and (2) assuming high agreement establishes factual truth. The unit of analysis should include participant/model identities, messaging graph, sender provenance, task/evaluation target, prompt/harness conditions, and the independent truth or task-success measurement method.
+
+**Three distinct propositions:**
+
+- `MESSAGE_AGREEMENT`: participants produce compatible messages or decisions under a declared similarity/consensus metric.
+- `STATE_CONVERGENCE`: distributed replicas reach compatible state under a specified algorithm, membership/transport/failure model and time condition.
+- `FACTUAL_CORRECTNESS`: produced propositions agree with independently grounded facts under the evaluation's declared data and scoring assumptions.
+
+No one proposition logically follows from another without additional premises. Counterexample: agents share the same inaccurate upstream source and all repeat it; agreement can increase while correctness remains poor. Likewise removing a central coordinator can increase failure exposure through network partitions, authentication failures and conflict-resolution costs.
+
+**Versioned collaborative trace design:** record actors, incoming source IDs, message/event IDs, roles, tool permissions, delivery/order, retry/timeout, dispute state and external evaluation. The repository stores the research argument and Claim IDs; it does not implement message transport, a consensus engine, an evaluator or a multi-agent runtime. The paper-backed S57 example remains scoped to its own population and method; this section adds no new source certification.
