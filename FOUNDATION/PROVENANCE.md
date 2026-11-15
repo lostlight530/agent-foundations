@@ -216,3 +216,15 @@ DAILY_RESEARCH_EVENT
 ```
 
 The source version/date and claim admission are current documentary provenance. They do not retroactively change the 2026-10-04 Daily producer event or imply that the Daily producer executed repository validation.
+
+## 2026-11-15 source-versus-runtime provenance example
+
+Two independent IDs matter even inside one document: **source bibliographic identity** (such as an arXiv base identifier with version/date history) and **repository claim identity** (`AF-ARCH-*`, `AF-MEM-*`, `AF-TOOL-*`, `AF-COLLAB-*`). An identical `Sxx` literal can be ambiguous in historical text; `SOURCES.md` explicitly documents the S63 collision. The safe bridge is:
+
+`repository claim -> exact proposition -> source object / version / inspected surface -> mapping -> local implementation -> retained validation result`.
+
+A summary generated from one paper and a later revision of that same paper are not independent external corroboration. Likewise English and Chinese restatements of one underlying source are not separate implementation experiments.
+
+**Concrete negative case:** a mathematically themed historical `docs/en/Architecture_Principles.md` passage may claim universal deterministic safety, while the canonical `FOUNDATION/ARCHITECTURE.md` classifies the mapped mechanism as `PROPOSED` / `NOT_IMPLEMENTED` / `NOT_TESTED`. The latter is the current repository-owned realization boundary; preserve the former as an inspectable research draft rather than silently changing the original producer or inventing its execution.
+
+A future runtime claim would additionally need code revision, input fixture, executable command, environment, result, failure record and artifact identity. No such runtime evidence is created by revising the research prose here.
