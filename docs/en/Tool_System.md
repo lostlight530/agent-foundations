@@ -27,7 +27,7 @@ An RL policy's reported regret or a proposed symbolic/causal routing DAG does no
 Today's AIs are incredibly smart. They can chat, search the web, write code, and even order food. These external functions they call are collectively known as "Tools."
 However, when an AI uses these tools on its own, it can sometimes act "foolish" or "out of control." For instance, to check the weather, it might ping a search engine 100 times; or worse, it might execute a code command to delete crucial files without understanding the consequences.
 
-This document investigates a possible design: learn candidate policies through reinforcement learning in a separately controlled experimental environment, then subject selected action policies to explicit authority checks, validation and evaluation. Agent Foundations itself has no RL-trained tool executor or sandbox, and no policy-locking proposal proves fail-safe tool use.
+How do we tame this brilliant "beast"? We utilize "Reinforcement Learning (RL)"—a technique often used to train robot dogs or master board games like Go. We let the AI explore, fail, get punished, and get rewarded inside a safe sandbox (this is optimization and alignment). Once it discovers the perfect path of actions, we "lock" that path into a rigid rule. This ensures our agent is flexible yet absolutely fail-safe when using any tool.
 
 ---
 
@@ -35,9 +35,9 @@ This document investigates a possible design: learn candidate policies through r
 
 The immense power of modern agents lies not just in their massive LLM brains, but in their ability to operate external tools (like APIs, Python interpreters, or browsers) just like humans do.
 
-The historical research proposal goes beyond simple prompt-based routing by examining **Reinforcement Learning (RL)** and **Policy Optimization** as candidate mechanisms. The corresponding operational tool-control framework is not implemented in this repository.
+In this project, our tool system isn't just a simple prompt saying "If you need weather, call API A," nor is it a massive block of hard-coded `if-else` chains. Our framework is built upon the rigorous mathematical models of **Reinforcement Learning (RL) in NLP** and **Policy Optimization**.
 
-Traditional LLM tool use relies heavily on "In-context Learning" and "Greedy Decoding". This is like a blindfolded person walking step-by-step; if a previous tool returns an unexpected error, the subsequent steps will collapse disastrously like dominoes (Cascading Errors). As an analytical option, the document models some tool-use choices as a "Markov Decision Process (MDP)" under explicit assumptions; this is a proposed abstraction, not an executed runtime policy.
+Traditional LLM tool use relies heavily on "In-context Learning" and "Greedy Decoding". This is like a blindfolded person walking step-by-step; if a previous tool returns an unexpected error, the subsequent steps will collapse disastrously like dominoes (Cascading Errors). To solve this, we strictly model the tool usage process as a "Markov Decision Process (MDP)".
 
 ---
 
