@@ -108,3 +108,15 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 **ZH.** 变更型工具应在可行时提供预演，使用幂等键，核验解析后的目标，记录变更前后状态，并提供经过测试的补偿或回滚路径。
 
 **Scope and limits / 范围与局限:** This is a proposed side-effect contract; Agent Foundations has no side-effect execution layer. / 这是候选副作用契约；Agent Foundations 没有副作用执行层。
+
+## 2026-11-15 action-authority research contract / 动作授权研究边界
+
+AF-TOOL-001, AF-TOOL-002 and AF-TOOL-006 can be connected with a candidate **per-action decision tuple**, not a newly implemented broker:
+
+`(authenticated actor, delegated principal, tool operation, resolved resource identity, argument digest, policy revision, authority scope/expiry, decision time, approval binding, execution receipt, effect verification)`.
+
+A tool appearing in a model's menu means capability **availability**, not a grant to mutate every target. An approval for one resolved target or payload version must not automatically authorize another target after name resolution, dependency or content changes. A successful API response also does not prove a durable effect: authoritative read-back or another sink-specific receipt may be needed to distinguish `accepted`, `effect_observed`, `completed`, and `unknown_outcome`.
+
+**Failure model / 失败模型：** if a mutating call times out after reaching the server, blindly retrying may repeat an effect; if authorization expires before retry, preserving the old approval is insufficient; if the tool result contains attacker-written instructions, data provenance must not become higher-priority control instructions. A design must separately specify idempotency-key retention, freshness of permission, receipt identity, reconciliation of unknown outcomes, and human approval for material effects.
+
+**Evidence boundary:** this is an explicit design decomposition of existing claims, with no local executor, policy engine, effect sink, sandbox, approval service, replay engine or observed decision traces. `FOUNDATION/validate.py` checks documentary claim structure, not these operational properties. No five-axis claim status changes are made by this prose.
