@@ -1,6 +1,25 @@
 # Tool System: Policy Optimization & Value Alignment via NLP RL
 
+> **2026-11-15 authoritative research correction.** The tool-routing RL, safety barriers and "locked" action policies described below are historical proposed mechanisms and analogies. They **do not** demonstrate an implemented permission broker, sandbox, approval system, verified safe tool route or zero-incident deployment. The current source-of-truth claim map is [FOUNDATION/TOOLS.md](../../FOUNDATION/TOOLS.md) (AF-TOOL-001..006). In particular the per-action authority requirement and bounded side-effect design remain documentary; this repository has no tool execution runtime.
+
+## Current research problem: authority and effect are separate states
+
+A consequential tool action must distinguish `available -> authorized(at decision time) -> invoked -> accepted by provider -> effect observed -> completed`, with `denied`, `failed`, and `outcome unknown` branches. A syntactically safe command or planned route does not establish target ownership, current approval, or the downstream effect. Approval should be bound to a resolved target, requested operation, parameter identity, actor/delegate, policy version and expiry, not merely to a model's intent.
+
+**Counterexample:** a remote API commits a mutation and the client times out before receiving the receipt. Repeating the call without a sink-backed idempotency guarantee may duplicate an effect; a tool success label without authoritative read-back may also misstate completion. A useful future experiment would record operation ID, exact target, authorization freshness, sink receipts, and post-effect verification. Neither this document nor its pseudocode is a run receipt or executable policy.
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` text is preserved as generated output and currently resolves to `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`. It is not evidence of a deployed tool-control plane. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
+
+## Current repository-realization boundary (source-grounded clarification, 2026-11-15)
+
+**Document type:** literature-derived tool-control research, architectural sketches and pseudocode, **not** an installed tool executor, RL-trained router, sandbox, permission broker or guaranteed-safe effect handler. The owning current claims are [FOUNDATION/TOOLS.md](../../FOUNDATION/TOOLS.md): `AF-TOOL-001` requires per-action authority, `AF-TOOL-002` separates untrusted input from instruction, `AF-TOOL-003/004/005` bound planning, debugging and monitoring, and `AF-TOOL-006` describes a proposed side-effect contract. Their Implementation/Validation fields are `NOT_IMPLEMENTED`/`NOT_TESTED` for relevant tool controls.
+
+An RL policy's reported regret or a proposed symbolic/causal routing DAG does not prove operational safety. A bounded sequence terminating at `HALT` is not the same as correctly achieving a task, having authority to execute, or reversing earlier external effects. Distinguish (1) proposed control policy, (2) validated authorization at decision time, (3) executed tool request, (4) authoritative observation of the resulting side effect, and (5) current completion/recovery. A source can support a policy-search idea without supporting all five.
+
+**Concrete negative case, unexecuted:** an action plan may be acyclic but still target an unauthorized resource, or may terminate after a non-idempotent external effect without a compensating receipt. The repo contains no runnable implementation of the purported RL-trained locked tool chain. Preserve historical theory as proposals and mark test/verification **NOT_EXECUTED** rather than claiming zero tool risk.
+
 
 ## 0. Introduction & Quick Overview (For Beginners)
 
@@ -8,7 +27,7 @@
 Today's AIs are incredibly smart. They can chat, search the web, write code, and even order food. These external functions they call are collectively known as "Tools."
 However, when an AI uses these tools on its own, it can sometimes act "foolish" or "out of control." For instance, to check the weather, it might ping a search engine 100 times; or worse, it might execute a code command to delete crucial files without understanding the consequences.
 
-How do we tame this brilliant "beast"? We utilize "Reinforcement Learning (RL)"—a technique often used to train robot dogs or master board games like Go. We let the AI explore, fail, get punished, and get rewarded inside a safe sandbox (this is optimization and alignment). Once it discovers the perfect path of actions, we "lock" that path into a rigid rule. This ensures our agent is flexible yet absolutely fail-safe when using any tool.
+This document investigates a possible design: learn candidate policies through reinforcement learning in a separately controlled experimental environment, then subject selected action policies to explicit authority checks, validation and evaluation. Agent Foundations itself has no RL-trained tool executor or sandbox, and no policy-locking proposal proves fail-safe tool use.
 
 ---
 
@@ -16,9 +35,9 @@ How do we tame this brilliant "beast"? We utilize "Reinforcement Learning (RL)"�
 
 The immense power of modern agents lies not just in their massive LLM brains, but in their ability to operate external tools (like APIs, Python interpreters, or browsers) just like humans do.
 
-In this project, our tool system isn't just a simple prompt saying "If you need weather, call API A," nor is it a massive block of hard-coded `if-else` chains. Our framework is built upon the rigorous mathematical models of **Reinforcement Learning (RL) in NLP** and **Policy Optimization**.
+The historical research proposal goes beyond simple prompt-based routing by examining **Reinforcement Learning (RL)** and **Policy Optimization** as candidate mechanisms. The corresponding operational tool-control framework is not implemented in this repository.
 
-Traditional LLM tool use relies heavily on "In-context Learning" and "Greedy Decoding". This is like a blindfolded person walking step-by-step; if a previous tool returns an unexpected error, the subsequent steps will collapse disastrously like dominoes (Cascading Errors). To solve this, we strictly model the tool usage process as a "Markov Decision Process (MDP)".
+Traditional LLM tool use relies heavily on "In-context Learning" and "Greedy Decoding". This is like a blindfolded person walking step-by-step; if a previous tool returns an unexpected error, the subsequent steps will collapse disastrously like dominoes (Cascading Errors). As an analytical option, the document models some tool-use choices as a "Markov Decision Process (MDP)" under explicit assumptions; this is a proposed abstraction, not an executed runtime policy.
 
 ---
 

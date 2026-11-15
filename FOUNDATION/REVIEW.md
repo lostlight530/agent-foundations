@@ -208,3 +208,37 @@ SOURCE_IDENTITY_VERIFIED
 `ACCEPTED_FOR_VERIFIED_CORE` here means the bounded documentary claim is admitted with its evidence class and limitations. It does not mean the paper is universally true, the equations were independently reproduced, or the repository implements the mechanism.
 
 The Weekly #244 bilingual cascade remains documentary propagation only. The closed-unmerged #243 rewrite is not used as current verified-core evidence.
+
+## Five-axis review of current bilingual domain updates — 2026-11-15
+
+This is a review-disposition clarification for the existing verified core. It does not add a Claim ID, create a source, change an evidence level, approve a pending research PR, or assert a new validator run.
+
+When `FOUNDATION/ARCHITECTURE.md`, `MEMORY.md`, `TOOLS.md`, or `COLLABORATION.md` changes alongside `docs/en/` and `docs/zh/`, review the **same identified proposition** across the canonical source and its bilingual projections. Agreement of prose is not proof that the proposition is supported, implemented, or reproduced.
+
+### Independent review questions for one Claim ID
+
+| Axis | Review object | Reject unsupported promotion when |
+| --- | --- | --- |
+| Claim | Exact Claim ID, proposition, qualifiers, domain and EN/ZH correspondence | One language removes an assumption or turns a candidate mapping into a universal claim |
+| Evidence | Canonical S ID, source version, inspected surface and claim-specific support | An abstract, repeated citation or source registration substitutes for theorem/experiment support |
+| Mapping | Defined source-to-Agent-architecture relation and counterexample | Conceptual analogy is presented as code behavior or operating architecture |
+| Implementation | Named local module or genuine external-system implementation identity | Proposed design, imported library, sample, or PR text is presented as deployed behavior |
+| Validation | Precise command/fixture, revision, environment, result and untested range | A validator's structural pass is treated as claim truth or independent runtime reproduction |
+
+`CLAIM_SURFACE_VERIFIED` is a statement about the inspected source proposition; `MAPPING_SCOPED` is about its bounded applicability. Neither grants `IMPLEMENTATION_SEPARATED` a positive implementation verdict. `ACCEPTED_FOR_VERIFIED_CORE` is a **bounded documentary admission** with the evidence and limitations still attached.
+
+### Reviewer handling of incomplete or changing evidence
+
+- If the source exists but the text inspected does not support the new proposition, retain `INSUFFICIENT_EVIDENCE` or `PRIMARY_SOURCE_CONFLICT` as applicable, without inventing a stronger source class
+- If a claim has a local code or tool mapping but no matched run receipt, keep the implementation mapping explicit and validation `NOT_TESTED` rather than treating code presence as execution
+- If EN/ZH wording differs in certainty, scope, identity or exception cases, withhold bilingual equivalence and identify the exact mismatched Claim ID and surface
+- If a proposed source version is newer than a previously accepted version, preserve the canonical source identity and review the new version's actual changed proposition, rather than allocating a new S ID by date
+- If an open research PR revises the same Claim ID, label that branch's proposed state separately from merged `main`; reviewer acknowledgment is not its merge
+- If two sources repeat the same upstream experiment, record one publisher/experiment lineage unless independent methods and provenance are evidenced
+- If later evidence invalidates an earlier assertion, use the owning current claim/evidence source and a traceable correction, leaving dated research outputs recoverable
+
+### Evidence receipt for a concrete review
+
+A review that affects status should identify `main_sha`, `claim_id`, `canonical_source_id`, `source_version`, `checked_source_surface`, `proposition_and_limit`, `en_path`, `zh_path`, `mapping_state`, `implementation_state`, `validation_state`, `executed_checks`, `not_executed_checks`, and `disposition`. Missing fields should remain unknown rather than be filled by a model-generated interpretation.
+
+`python FOUNDATION/validate.py` and `python -m unittest FOUNDATION.test_contract -v` are relevant available structural checks when the owning claims change. This documentation revision did not execute them. Their success, if later observed, would not by itself verify external theorems or actual Agent effects.

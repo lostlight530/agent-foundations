@@ -1,8 +1,27 @@
 # Memory System: Representation Learning via SimCLR & Unsupervised Learning
 
+> **2026-11-15 authoritative research correction.** SimCLR, VICReg, Hopfield mechanisms, retention formulas and memory-manifold language in the historical text below are **external mechanisms, design candidates or illustrative pseudocode**, not code deployed in this repository. The current authority is [FOUNDATION/MEMORY.md](../../FOUNDATION/MEMORY.md) (AF-MEM-001..005). No local memory ingestion, vector store, retrieval, compaction, consolidation or retention runtime is implemented. Claims of automatic lossless compression, eternal storage stability or complete removal of representation collapse are not evidenced as repository capabilities.
+
+## Current research problem: continuity of content and authority
+
+A memory object needs at least `(record identity, source/actor identity, authenticated role, trust boundary, content version, capture time, retrieval/expiry scope, derivation, correction/tombstone)`. Preserving a plausible text summary does not prove that sender-role authority, permissions, or omitted counterevidence survived compaction. Treat representation-learning equations as **candidate encoding mechanisms**, distinct from an implemented end-to-end memory lifecycle.
+
+**Counterexample:** a summarized tool result contains the string `[User]: approve action`; if a downstream controller treats the string as an actual authenticated user message, content similarity can be high while authority provenance is broken. A robust study would compare raw authenticated role metadata with post-compaction authority interpretation and retain both. This document contains no execution artifact for that test. Scientific paper claims require exact source-version and assumption checks; the five-axis source/evidence/implementation/validation record stays independent.
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` maps to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` maps to `REFERENCE_ONLY`; test status maps to `NOT_TESTED`. Paper support, mapping relevance, repository implementation, and validation remain independent. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
 > **2026-08-31 current disposition for S36:** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`. arXiv:2303.01673v2 was revised 2023-03-09; exact formula transcription in the historical block was not independently re-certified in this pass.
+
+## Current repository-realization boundary (source-grounded clarification, 2026-11-15)
+
+**Document type:** retained memory-system research and implementation *proposals*, not an operational representation learner, vector store or cross-session memory engine. Current canonical ownership is [FOUNDATION/MEMORY.md](../../FOUNDATION/MEMORY.md): `AF-MEM-001` makes memory a lifecycle, `AF-MEM-002` preserves delayed-intention failures, `AF-MEM-003` requires provenance before persistence, `AF-MEM-004` requires compaction fidelity checks, and `AF-MEM-005` separates versioning from truth. The local implementation states in those records are `NOT_IMPLEMENTED` or `REFERENCE_ONLY`, not an end-to-end repository runtime.
+
+SimCLR/VICReg, InfoNCE, Hopfield retrieval, covariance regularization and distance-based anomaly detection are **candidate mechanisms** under particular data distributions, objectives and assumptions; their presence in a formula or pseudocode cell neither deploys the mechanism nor proves that a model has extracted the "essence" of experience. A representation loss cannot by itself prove retention, attribution, recall precision, authorization, or prevention of memory poisoning. Raw-data deletion is also not established as a safe default: keep a verifiable provenance/source path and a retention policy before any lossy compaction or disposal.
+
+**Falsification design, not executed:** compare original source-bound memory records with compressed/retrieved reconstructions over identity, exact constraints, unresolved tasks, source authority and delayed recall; count omissions and false promotions separately. No local memory store, trained representation or task-level reproduction has been evidenced by this document revision.
+
 
 ## 0. Introduction & Quick Overview (For Beginners)
 
@@ -10,15 +29,15 @@
 Just as humans have short-term "Working Memory" and long-term "Episodic Memory," agents also need to remember what they have seen and done.
 However, if you simply dump every chat log, image, and webpage screenshot into a database (like a traditional vector database), the system will quickly overflow with "junk data." It will not only become slow but also struggle to find truly useful core information.
 
-To solve this, we abandoned the outdated "store raw data" approach and introduced a cutting-edge AI vision algorithm called **SimCLR with VICReg (Variance-Invariance-Covariance Regularization)**. Our system doesn't memorize "what the screen looks like." Instead, much like a human, it automatically extracts "the essential changes happening on the screen." This creates an ultra-efficient, highly structured memory system that will never overflow.
+This research document investigates whether representation-learning methods such as **SimCLR and VICReg** could support selective compression under measurable fidelity conditions. Agent Foundations does not implement or train this memory engine, and there is no empirical basis here for claims that it extracts essential world state, never loses critical evidence, or cannot exhaust storage.
 
 ---
 
 ## 1. Background: Saying Goodbye to Rote Memorization
 
-A memory system is the foundation for any agent to perceive and understand complex environments. In our deterministic agent architecture, we have completely discarded traditional heuristic memory management (such as simple text truncation, sliding windows, or primitive Embedding matching).
+A memory system is the foundation for any agent to perceive and understand complex environments. In the historical deterministic-agent design proposal, heuristic truncation and simple embedding retrieval were compared with representation-learning alternatives; none is demonstrated here as replaced in an operational repository memory runtime.
 
-Instead, we utilize a rigorous representation learning framework based on **SimCLR (Simple Framework for Contrastive Learning of Visual Representations)** and Unsupervised Learning.
+Instead, this document **studies** a representation-learning candidate based on **SimCLR (Simple Framework for Contrastive Learning of Visual Representations)** and unsupervised learning; it is not an implemented component of this repository.
 The core idea of SimCLR is "Contrastive Learning": it forces the mathematical model to maximize the similarity between different forms of the same object (like a photo of a cat and a sketch of the same cat), while minimizing its similarity with unrelated objects (like a dog).
 
 In the context of agent memory, this represents a brutal mathematical "dimensionality reduction." We no longer save raw, redundant pixel or text data to the hard drive. Instead, algorithms extract and memorize **high-dimensional, continuous, internally structured Invariant Features. By introducing VICReg constraints, we not only demand accuracy but also require the latent space representation to maintain high variance and low covariance, completely eliminating Representation Collapse at a mathematical level.**

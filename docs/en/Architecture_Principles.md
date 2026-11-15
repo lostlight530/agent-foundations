@@ -1,8 +1,27 @@
 # Architecture Principles & Gradient Entropy
 
+> **2026-11-15 authoritative research correction (current reading, not a new experiment).** The historical narrative below contains language about inevitable convergence, absolute safety, and physically guaranteed agent behavior. Those sentences are **research aspirations, analogies, or unverified generalizations**, not established properties of this repository. The current owning claim map is [FOUNDATION/ARCHITECTURE.md](../../FOUNDATION/ARCHITECTURE.md): in particular AF-ARCH-001 (complete system boundary), AF-ARCH-002 (candidate deterministic shell; NOT_IMPLEMENTED), AF-ARCH-003 (theorem assumptions do not transfer to end-to-end agent behavior), and AF-ARCH-004 (evaluator results are evidence, not truth). The repository does not implement an autonomous agent runtime. Historical prose and formulas are retained for inspectability; **this correction governs present interpretation**.
+
+## Current research argument: from theorem scope to configured-agent claims
+
+The correct analysis unit is a complete versioned system `S = (model, instruction stack, harness, tool interfaces and grants, memory, retry/budget policy, environment, evaluator)`. Any guarantee about an algorithm or dynamical system `A` must state the formal relationship `R(S,A)`, the assumptions that make it valid, and the event or invariant proved. A contraction argument, Lyapunov inequality or algorithmic regret bound in a source paper is **not** automatically an invariant of the complete system `S`; tool side effects, stochastic outputs, environment drift, missing provenance, and evaluator changes all demand explicit treatment.
+
+**Falsifying scenario:** keep model name constant but change tool permissions or memory contents; ask whether the stated agent-wide property survives. A theorem applying to an idealized state update cannot answer this without a verified translation from concrete run to the theorem's state variables. **Evidence obligation:** exact paper version and inspected theorem/assumptions; explicit repository mapping; identified implementation; revision-matched test and observed property. None is supplied by the presence of pseudocode in this document. See [EVIDENCE](../../FOUNDATION/EVIDENCE.md) and [PROVENANCE](../../FOUNDATION/PROVENANCE.md).
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical generated blocks are preserved. In every such block, `CONCEPTUAL_MAPPING` means `Mapping State: DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` means `Implementation State: REFERENCE_ONLY` unless a repository path is named; test `EVIDENCE_INSUFFICIENT` means `Validation State: NOT_TESTED`. These labels do not assign an Evidence Level. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
 > **2026-08-31 current disposition for the 08-30 Joint Lyapunov chunk:** `Claim State: SUPPORTED / Evidence Level: E4_PREPRINT / Source Surface: ABSTRACT_SUPPORTED / Mapping State: DESIGN_ANALOGY / Implementation State: REFERENCE_ONLY / Validation State: NOT_TESTED / Canonical Source: S37`. Official arXiv identity and abstract were checked; formula transcription and numerical/cryptographic claims were not independently re-certified here.
+
+## Current repository-realization boundary (source-grounded clarification, 2026-11-15)
+
+**Document type:** retained theory, analogies, exploratory formulas and literature interpretation, **not** a tested deterministic-agent implementation. Current canonical claims live in [FOUNDATION/ARCHITECTURE.md](../../FOUNDATION/ARCHITECTURE.md) under `AF-ARCH-001..006`; [FOUNDATION/EVIDENCE.md](../../FOUNDATION/EVIDENCE.md) owns independent Claim State, Evidence Level, Mapping State, Implementation State and Validation State. The repository's executable tools are documentary/source validators, not the convergence controllers or autonomous agents described in historical examples.
+
+The methodologically important distinction is **theorem domain versus system domain**: a mathematical bound reported for a specified optimization process, game, topology, loss, noise assumption or proof technique cannot be promoted to a universal LLM-agent theorem. Before using a Lyapunov/NTK/convergence expression in an agent architecture claim, identify the exact external source and version, its state variables, dynamics, assumptions and quantifiers, which conclusion is actually proved, and whether any repository code implements and tests those assumptions. None of those last two steps is established by this narrative alone.
+
+**Counterexample criterion:** a small simulation proving numerical decrease of one chosen energy function does not prove that a deployed model's tool actions, source citations, or external side effects obey that energy function. `DETERMINISTIC_BOUNDARY_PROPOSED` is not `AGENT_SAFETY_PROVED`; paper result is not local implementation. This interpretation preserves the original research sketches while explicitly retracting unscoped agent-safety or inevitable-convergence claims as present repository capabilities. **No experiment/theorem was newly executed or independently proved in this documentation correction.**
+
 
 ## 0. Introduction & Core Quick Look (For Beginners)
 
@@ -25,7 +44,7 @@ Imagine hiking down a rugged mountain (the loss landscape). A regular algorithm 
 **What is this?**
 Think of this document as the "blueprint and first principles" for building our Agent. In the current AI landscape, the trend is to simply increase the size of the model (e.g., from GPT-3 to GPT-4). This approach is known as "Scale is All You Need." However, this introduces a fatal flaw: the model acts as a black box. Sometimes it gives brilliant answers, and other times it produces entirely illogical "hallucinations."
 
-We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to guarantee that our agent remains **absolutely safe, compliant, and collapse-proof**.
+We refuse to build a black box filled with uncertainty. We want to construct a precise "clockwork" mechanism—where every tick and gear movement follows physical laws and mathematical proofs. This document outlines how we use three ironclad rules (Do not implement, do not scale, do not optimize) and an original theory (Gradient Entropy) to explore bounded controller hypotheses; there is no repository-level proof that a general agent is absolutely safe, compliant, or collapse-proof.
 
 ---
 

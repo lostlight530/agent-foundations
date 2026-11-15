@@ -13,7 +13,7 @@
 
 Current calibration: 2026-10-04. Registry presence means “eligible to cite”, not “repository capability”.
 
-当前校准：2026-10-04。进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”。
+当前校准：2026-10-04，进入登记表仅表示“可引用”，不表示“仓库已经具备该能力”
 
 Canonical rules:
 

@@ -17,7 +17,7 @@ Agent Foundations does **not** implement a multi-agent collaboration runtime, in
 
 The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENTED` describe their local implementation state and must not be promoted by analogy, source prestige, or repeated discussion.
 
-本仓没有实现多智能体协作运行时、Agent 间传输、共识协议、任务仲裁器、角色路由器或轨迹捕获服务。下列条目属于研究/证据映射，本地实现状态以每条 Claim 的明确字段为准。
+本仓没有实现多智能体协作运行时、Agent 间传输、共识协议、任务仲裁器、角色路由器或轨迹捕获服务；下列条目属于研究/证据映射，本地实现状态以每条 Claim 的明确字段为准
 
 ## AF-COLLAB-001 — Topology is a tradeoff, not an ideology / 拓扑是权衡而非信条
 
@@ -30,9 +30,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** Centralized, hierarchical, and decentralized coordination expose different failure, observability, latency, and consistency properties. CHMAS is a concrete counterexample to rejecting every central strategic component while retaining distributed tactical execution.
 
-**ZH.** 中心化、分层和去中心化协作具有不同的故障、可观测性、延迟和一致性属性。CHMAS 是“保留分布式战术执行但不排除中心战略层”的具体反例。
+**ZH.** 中心化、分层和去中心化协作具有不同的故障、可观测性、延迟和一致性属性；CHMAS 是“保留分布式战术执行但不排除中心战略层”的具体反例
 
-**Scope and limits / 范围与局限:** CHMAS results belong to its MARL setting and assumptions, not general LLM teams. `STATIC_CHECKED` here is documentary/source review only. / CHMAS 结果属于其 MARL 设置和假设，不代表一般 LLM 团队；此处 `STATIC_CHECKED` 仅指文档/来源核对。
+**Scope and limits / 范围与局限:** CHMAS results belong to its MARL setting and assumptions, not general LLM teams. `STATIC_CHECKED` here is documentary/source review only. / CHMAS 结果属于其 MARL 设置和假设，不代表一般 LLM 团队；此处 `STATIC_CHECKED` 仅指文档/来源核对
 
 ## AF-COLLAB-002 — Decentralization removes only specified single points / 去中心化只消除特定单点
 
@@ -45,9 +45,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** Removing a central dispatcher can remove one availability dependency, but semantic errors can still propagate through peer communication and topology. Resilience claims must name the failure model.
 
-**ZH.** 移除中心调度器可以消除一个可用性依赖，但语义错误仍可能沿对等通信和拓扑传播。韧性声明必须明确故障模型。
+**ZH.** 移除中心调度器可以消除一个可用性依赖，但语义错误仍可能沿对等通信和拓扑传播；韧性声明必须明确故障模型
 
-**Scope and limits / 范围与局限:** HalluProp estimates risk; it does not prove prevention or an Agent Foundations resilience property. / HalluProp 估计风险，并不证明能够阻止故障，也不证明 Agent Foundations 具有对应韧性。
+**Scope and limits / 范围与局限:** HalluProp estimates risk; it does not prove prevention or an Agent Foundations resilience property. / HalluProp 估计风险，并不证明能够阻止故障，也不证明 Agent Foundations 具有对应韧性
 
 ## AF-COLLAB-003 — Attribution requires preserved trajectories / 归因需要保留轨迹
 
@@ -60,9 +60,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** Multi-agent failure localization needs ordered messages, tool calls, state changes, role assignments, and evaluator decisions. Final output alone is weak evidence of the responsible agent or earliest decisive step.
 
-**ZH.** 多智能体故障定位需要有序消息、工具调用、状态变化、角色分配和评估器判断。只有最终输出，难以证明责任智能体或最早决定性错误步骤。
+**ZH.** 多智能体故障定位需要有序消息、工具调用、状态变化、角色分配和评估器判断；只有最终输出，难以证明责任智能体或最早决定性错误步骤
 
-**Scope and limits / 范围与局限:** This repository does not implement trajectory capture or multi-agent attribution. / 本仓没有实现轨迹捕获或多智能体归因。
+**Scope and limits / 范围与局限:** This repository does not implement trajectory capture or multi-agent attribution. / 本仓没有实现轨迹捕获或多智能体归因
 
 ## AF-COLLAB-004 — Messages carry contracts and provenance / 消息携带契约与来源
 
@@ -75,9 +75,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** Inter-agent messages should declare schema version, sender, intended recipient, task and correlation IDs, authority, evidence references, expiry, and integrity metadata. Receivers validate them as untrusted input.
 
-**ZH.** 智能体间消息应声明 Schema 版本、发送者、预期接收者、任务与关联 ID、权限、证据引用、过期时间和完整性元数据。接收方必须按不可信输入进行验证。
+**ZH.** 智能体间消息应声明 Schema 版本、发送者、预期接收者、任务与关联 ID、权限、证据引用、过期时间和完整性元数据；接收方必须按不可信输入进行验证
 
-**Scope and limits / 范围与局限:** This is a proposed message-contract requirement; no inter-agent message schema/transport is implemented here. / 这是候选消息契约要求；本仓没有实现 Agent 间消息 schema 或传输层。
+**Scope and limits / 范围与局限:** This is a proposed message-contract requirement; no inter-agent message schema/transport is implemented here. / 这是候选消息契约要求；本仓没有实现 Agent 间消息 schema 或传输层
 
 ## AF-COLLAB-005 — Consensus has typed subjects / 共识必须指明对象
 
@@ -90,9 +90,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** Agreement on parameters, replicated state, task ownership, evidence sufficiency, and factual truth are different consensus problems. A convergence result for one typed state must not be presented as agreement on another.
 
-**ZH.** 参数、复制状态、任务归属、证据充分性和事实真伪是不同的共识问题。某类状态的收敛结果不能表述为另一类对象已经达成一致。
+**ZH.** 参数、复制状态、任务归属、证据充分性和事实真伪是不同的共识问题；某类状态的收敛结果不能表述为另一类对象已经达成一致
 
-**Scope and limits / 范围与局限:** Agent Foundations has no consensus protocol; the claim only bounds how external convergence results may be interpreted. / Agent Foundations 没有共识协议；该条只约束如何解释外部收敛结果。
+**Scope and limits / 范围与局限:** Agent Foundations has no consensus protocol; the claim only bounds how external convergence results may be interpreted. / Agent Foundations 没有共识协议；该条只约束如何解释外部收敛结果
 
 
 ## AF-COLLAB-006 — Consensus and factual correctness are separate evaluation axes / 共识与事实正确性是独立评估轴
@@ -106,9 +106,9 @@ The claims below are research/evidence maps. `REFERENCE_ONLY` and `NOT_IMPLEMENT
 
 **EN.** High semantic agreement inside an interacting language-model population does not by itself establish factual correctness. A collaboration system should treat agreement/cohesion and externally grounded factuality as separate evidence axes. The S57 source provides direct counterevidence to any rule that equates consensus with truth inside the source's studied population and interaction conditions.
 
-**ZH.** 交互式语言模型群体中的高语义一致性本身不能证明事实正确。协作系统应把一致性/内聚度与有外部依据的事实性作为独立证据轴。S57 在其研究群体和交互条件内，直接构成“共识等于真理”这一假设的反证。
+**ZH.** 交互式语言模型群体中的高语义一致性本身不能证明事实正确；协作系统应把一致性/内聚度与有外部依据的事实性作为独立证据轴；S57 在其研究群体和交互条件内，直接构成“共识等于真理”这一假设的反证
 
-**Scope and limits / 范围与局限:** S57 is a preprint and its reported dynamics remain source/model/topology specific. The repository does not implement semantic magnetisation, factuality scoring, a consensus protocol, a truth oracle, or a multi-agent runtime. The Daily extraction and this claim-map admission do not establish independent reproduction, theorem-level verification, or general convergence across all LLM populations. / S57 属于预印本，其结果仍受论文使用的模型、拓扑和实验条件约束。本仓库没有实现语义磁化率、事实性评分、共识协议、真值判定器或多智能体运行时。Daily 摘要与本条 claim-map 准入都不代表独立复现、定理级验证或对所有 LLM 群体的一般收敛证明。
+**Scope and limits / 范围与局限:** S57 is a preprint and its reported dynamics remain source/model/topology specific. The repository does not implement semantic magnetisation, factuality scoring, a consensus protocol, a truth oracle, or a multi-agent runtime. The Daily extraction and this claim-map admission do not establish independent reproduction, theorem-level verification, or general convergence across all LLM populations. / S57 属于预印本，其结果仍受论文使用的模型、拓扑和实验条件约束；本仓库没有实现语义磁化率、事实性评分、共识协议、真值判定器或多智能体运行时；Daily 摘要与本条 claim-map 准入都不代表独立复现、定理级验证或对所有 LLM 群体的一般收敛证明
 
 ```text
 AGREEMENT
@@ -120,3 +120,17 @@ SEMANTIC_COHESION
 PAPER_RESULT
 != REPOSITORY_RUNTIME
 ```
+
+## 2026-11-15 typed agreement and topology experiment design / 有类型的共识与拓扑
+
+`AF-COLLAB-001` and `AF-COLLAB-006` jointly prohibit two shortcuts: (1) assuming decentralized topology is always superior and (2) assuming high agreement establishes factual truth. The unit of analysis should include participant/model identities, messaging graph, sender provenance, task/evaluation target, prompt/harness conditions, and the independent truth or task-success measurement method.
+
+**Three distinct propositions:**
+
+- `MESSAGE_AGREEMENT`: participants produce compatible messages or decisions under a declared similarity/consensus metric.
+- `STATE_CONVERGENCE`: distributed replicas reach compatible state under a specified algorithm, membership/transport/failure model and time condition.
+- `FACTUAL_CORRECTNESS`: produced propositions agree with independently grounded facts under the evaluation's declared data and scoring assumptions.
+
+No one proposition logically follows from another without additional premises. Counterexample: agents share the same inaccurate upstream source and all repeat it; agreement can increase while correctness remains poor. Likewise removing a central coordinator can increase failure exposure through network partitions, authentication failures and conflict-resolution costs.
+
+**Versioned collaborative trace design:** record actors, incoming source IDs, message/event IDs, roles, tool permissions, delivery/order, retry/timeout, dispute state and external evaluation. The repository stores the research argument and Claim IDs; it does not implement message transport, a consensus engine, an evaluator or a multi-agent runtime. The paper-backed S57 example remains scoped to its own population and method; this section adds no new source certification.

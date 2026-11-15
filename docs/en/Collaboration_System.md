@@ -1,15 +1,34 @@
 # Collaboration System: Distributed Convergence via Pure Decentralized Spectral Graph Optimization (DecDPO)
 
+> **2026-11-15 authoritative research correction.** Claims below that central coordination is universally obsolete, that DecDPO guarantees all-agent agreement, or that coordination algorithms ensure universally correct outcomes are historical theoretical proposals or overgeneralizations. The current [FOUNDATION/COLLABORATION.md](../../FOUNDATION/COLLABORATION.md) specifically retains AF-COLLAB-001 as topology counterevidence and AF-COLLAB-006 as **agreement != factual correctness**. No local multi-agent transport, consensus runtime or distributed correctness test exists.
+
+## Current research problem: distinguish consensus, state and truth
+
+For an empirical collaboration claim, retain the actor population, model/harness versions, topology, communication schedule, failure/partition model, source lineage and independent evaluation of the task proposition. `MESSAGE_AGREEMENT` may be high even if participants repeat one wrong source; `STATE_CONVERGENCE` under a mathematical update rule is a distinct formal property; `FACTUAL_CORRECTNESS` requires evidence outside the coordination loop. Neither centralization nor decentralization is a universal optimality statement without an explicit cost/failure model.
+
+**Counterexample:** multiple agents agree after consulting one inaccurate or adversarial upstream document. The agreement signal increases while grounding may decline. To falsify an unrestricted convergence/truth claim, vary topology and shared-source contamination while holding task and evaluator constant. Record the paper population and theorem assumptions separately from any local implementation. This repository's verified core represents the research, not a deployed distributed protocol.
+
+---
+
 > **Current five-axis calibration — 2026-08-28.** Historical generated labels remain visible. `CONCEPTUAL_MAPPING` currently resolves to `DESIGN_ANALOGY`; implementation `EVIDENCE_INSUFFICIENT` to `REFERENCE_ONLY`; test `EVIDENCE_INSUFFICIENT` to `NOT_TESTED`. Evidence Level and Source Surface are assigned separately. See the [maintenance contract](../../FOUNDATION/MAINTENANCE.md).
 
 > **2026-08-31 source-identity calibration:** the 08-29 epsilon-MATS chunk resolves to existing canonical source S25 (arXiv:2312.15549v1, AAAI 2024). It is inherited documentary use, not a new source and not independent corroboration.
+
+## Current repository-realization boundary (source-grounded clarification, 2026-11-15)
+
+**Document type:** longitudinal theory/analogy and decentralization research, not a deployed distributed-agent or consensus runtime. The current verified-core owner is [FOUNDATION/COLLABORATION.md](../../FOUNDATION/COLLABORATION.md), especially `AF-COLLAB-001` (topology trade-offs), `AF-COLLAB-005` (typed consensus) and `AF-COLLAB-006` (agreement != factual correctness). The `FOUNDATION/claim.schema.json` vocabulary and exact `Sxx` source registry bound any claim promotion.
+
+Decentralization may remove an identified coordination bottleneck, but does not automatically eliminate semantic common-mode failure, Byzantine influence, delayed messages or the need for source truth checks. The original "pure decentralization" design is therefore a **candidate architecture**, not a universal constraint that rejects every centralized or hybrid topology; the canonical CHMAS-backed counterexample is retained in `AF-COLLAB-001`. Mathematical convergence under a paper's communication graph, tabular model or step-size assumptions cannot be imported as proof of convergence of arbitrary LLM teams.
+
+A valid comparison names the *consensus subject* (model parameter, local state, task assignment, message ordering, or evidence claim) and an independent *factuality/authorization* test. Agreement between agents can coexist with a shared false premise. The current repository has no inter-agent transport, consensus implementation or topology benchmark. Historic illustrative formulas remain research inputs, not implementation or new test evidence.
+
 
 ## 0. Introduction & Quick Overview (For Beginners)
 
 **What is this?**
 When a task is too complex for a single agent (like running a company, which requires a CEO, CTO, and CFO), we need multiple agents to collaborate.
 However, current multi-agent systems often use a "Central Server" to aggregate everyone's ideas. If the central server crashes or makes a wrong decision, the entire team is paralyzed. This is known as a Single Point of Failure (SPOF).
-To completely eradicate this fatal weakness, we have entirely deprecated Centralized Architectures (like Federated Learning). Instead, we use "Pure Decentralized Spectral Graph Optimization (DecDPO)".
+As one conceptual research direction, this document examines decentralized and topology-aware optimization as alternatives to some centrally coordinated designs. The repository has not deployed a DecDPO agent runtime, and its canonical theory does not reject every centralized or hybrid architecture.
 
 Imagine a flock of birds flying in the sky. There is no "King Bird" commanding everyone, but by merely observing the distance to the few birds nearest to them, the entire flock can magically form a perfect formation and fly thousands of miles without scattering. We use graph theory and matrix mathematics to endow our agents with this exact "flock instinct."
 
@@ -20,7 +39,7 @@ Imagine a flock of birds flying in the sky. There is no "King Bird" commanding e
 In traditional multi-agent collaboration (e.g., early Federated Learning frameworks), a central parameter server acts as the absolute authority. All local agents must upload their gradients or thoughts to this center, which then calculates the average and broadcasts the new directives.
 * **The Fatal Flaw**: This architecture guarantees a Single Point of Failure (SPOF). In mission-critical environments (aerospace, decentralized finance), relying on a central node is an unacceptable vulnerability.
 
-Our architecture strictly dictates the absolute deprecation of Centralized Architectures (like Federated Learning). We have transitioned entirely to **Decentralized Distributed Optimization (DecDPO)**.
+The original architecture proposal prioritizes **Decentralized Distributed Optimization (DecDPO)** under explicit communication assumptions. This is a research candidate, not a completed implementation or evidence that centralized and hybrid systems must be deprecated in every setting.
 
 In DecDPO, agents are arranged in a peer-to-peer network topology (an undirected or directed graph). An agent **only communicates with its immediate topological neighbors**. There is no center, no global broadcasting, and no single node that holds the entire system's state.
 

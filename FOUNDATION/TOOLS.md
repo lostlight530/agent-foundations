@@ -17,7 +17,7 @@ Agent Foundations does **not** implement an agent tool runtime, permission broke
 
 The claims below are research/evidence maps. `SUPPORTED` describes source support within scope; it does not mean the repository implements the mechanism.
 
-本仓没有实现 Agent tool runtime、permission broker、sandbox、monitor service、replay engine、approval service 或幂等副作用控制层。下列 Claim 属于研究/证据映射，`SUPPORTED` 只描述有边界的来源支持，并不表示本仓已经实现对应机制。
+本仓没有实现 Agent tool runtime、permission broker、sandbox、monitor service、replay engine、approval service 或幂等副作用控制层；下列 Claim 属于研究/证据映射，`SUPPORTED` 只描述有边界的来源支持，并不表示本仓已经实现对应机制
 
 ## AF-TOOL-001 — Authority is explicit and per action / 权限按动作明确授予
 
@@ -30,9 +30,9 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** Tool availability is not authority. Each consequential action needs an authenticated actor, allowed operation, bounded target, validated arguments, least privilege, and an auditable result.
 
-**ZH.** 工具可用不等于获得授权。每个有后果的动作都需要认证参与者、允许操作、受限目标、已验证参数、最小权限和可审计结果。
+**ZH.** 工具可用不等于获得授权；每个有后果的动作都需要认证参与者、允许操作、受限目标、已验证参数、最小权限和可审计结果
 
-**Scope and limits / 范围与局限:** This is a proposed control requirement; Agent Foundations has no tool-authorization runtime. / 这是候选控制要求；Agent Foundations 没有工具授权运行时。
+**Scope and limits / 范围与局限:** This is a proposed control requirement; Agent Foundations has no tool-authorization runtime. / 这是候选控制要求；Agent Foundations 没有工具授权运行时
 
 ## AF-TOOL-002 — Untrusted content never becomes instruction / 不可信内容不得成为指令
 
@@ -45,9 +45,9 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** Web pages, documents, tool output, retrieved memory, and inter-agent messages are data. A control layer must prevent them from silently changing goals, permissions, destinations, or approval requirements.
 
-**ZH.** 网页、文档、工具输出、检索记忆和智能体间消息都是数据。控制层必须阻止它们静默改变目标、权限、目标地址或审批要求。
+**ZH.** 网页、文档、工具输出、检索记忆和智能体间消息都是数据；控制层必须阻止它们静默改变目标、权限、目标地址或审批要求
 
-**Scope and limits / 范围与局限:** Agent Foundations does not implement such a control layer or adversarial isolation runtime. / Agent Foundations 没有实现对应控制层或对抗隔离运行时。
+**Scope and limits / 范围与局限:** Agent Foundations does not implement such a control layer or adversarial isolation runtime. / Agent Foundations 没有实现对应控制层或对抗隔离运行时
 
 ## AF-TOOL-003 — Plans are inspectable state / 计划是可检查状态
 
@@ -60,9 +60,9 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** Externalized plans can make supervision, localized correction, and resumption easier than opaque internal planning. A plan remains a proposal and must not substitute for state observation or permission checks.
 
-**ZH.** 外显计划比不透明内部规划更利于监督、局部修正和恢复执行，但计划仍是提案，不能替代状态观测和权限检查。
+**ZH.** 外显计划比不透明内部规划更利于监督、局部修正和恢复执行，但计划仍是提案，不能替代状态观测和权限检查
 
-**Scope and limits / 范围与局限:** Plover evaluates GUI workflows; this repository does not implement that interface or a plan-state runtime. / Plover 评估 GUI 工作流；本仓没有实现该界面或计划状态运行时。
+**Scope and limits / 范围与局限:** Plover evaluates GUI workflows; this repository does not implement that interface or a plan-state runtime. / Plover 评估 GUI 工作流；本仓没有实现该界面或计划状态运行时
 
 ## AF-TOOL-004 — Debugging is a closed loop / 调试是闭环
 
@@ -75,9 +75,9 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** Useful observability connects detection, causal attribution, recovery, and rerun while preserving the original trajectory and intervention. Logging without attribution and replay is insufficient for long-horizon failures.
 
-**ZH.** 有效可观测性应连接检测、因果归因、恢复和重跑，并保留原始轨迹与干预。只有日志而没有归因和回放，不足以处理长时程失败。
+**ZH.** 有效可观测性应连接检测、因果归因、恢复和重跑，并保留原始轨迹与干预；只有日志而没有归因和回放，不足以处理长时程失败
 
-**Scope and limits / 范围与局限:** AgentDebugX results are external/model-dependent; this repository has no debugging/replay runtime. / AgentDebugX 结果属于外部实现并依赖所测模型；本仓没有 debugging/replay runtime。
+**Scope and limits / 范围与局限:** AgentDebugX results are external/model-dependent; this repository has no debugging/replay runtime. / AgentDebugX 结果属于外部实现并依赖所测模型；本仓没有 debugging/replay runtime
 
 ## AF-TOOL-005 — Monitors are guarded components / 监控器自身也需要防护
 
@@ -90,9 +90,9 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** A monitor adds a control layer but has its own observation limits, attack surface, latency, thresholds, and error rates. High-impact actions need fail-closed behavior or human review where monitor confidence is insufficient.
 
-**ZH.** 监控器增加了一层控制，但也具有观测边界、攻击面、延迟、阈值和错误率。高影响动作在监控置信不足时需要失败关闭或人工复核。
+**ZH.** 监控器增加了一层控制，但也具有观测边界、攻击面、延迟、阈值和错误率；高影响动作在监控置信不足时需要失败关闭或人工复核
 
-**Scope and limits / 范围与局限:** Agent Foundations has no monitor service; this is a bounded architecture requirement, not a local control guarantee. / Agent Foundations 没有 monitor service；这是有边界的架构要求，不是本地控制保证。
+**Scope and limits / 范围与局限:** Agent Foundations has no monitor service; this is a bounded architecture requirement, not a local control guarantee. / Agent Foundations 没有 monitor service；这是有边界的架构要求，不是本地控制保证
 
 ## AF-TOOL-006 — Side effects are idempotent and bounded / 副作用必须幂等且受限
 
@@ -105,6 +105,18 @@ The claims below are research/evidence maps. `SUPPORTED` describes source suppor
 
 **EN.** Mutating tools should expose dry-run or preview where practical, use idempotency keys, verify resolved targets, record before/after state, and provide a tested compensation or rollback path.
 
-**ZH.** 变更型工具应在可行时提供预演，使用幂等键，核验解析后的目标，记录变更前后状态，并提供经过测试的补偿或回滚路径。
+**ZH.** 变更型工具应在可行时提供预演，使用幂等键，核验解析后的目标，记录变更前后状态，并提供经过测试的补偿或回滚路径
 
-**Scope and limits / 范围与局限:** This is a proposed side-effect contract; Agent Foundations has no side-effect execution layer. / 这是候选副作用契约；Agent Foundations 没有副作用执行层。
+**Scope and limits / 范围与局限:** This is a proposed side-effect contract; Agent Foundations has no side-effect execution layer. / 这是候选副作用契约；Agent Foundations 没有副作用执行层
+
+## 2026-11-15 action-authority research contract / 动作授权研究边界
+
+AF-TOOL-001, AF-TOOL-002 and AF-TOOL-006 can be connected with a candidate **per-action decision tuple**, not a newly implemented broker:
+
+`(authenticated actor, delegated principal, tool operation, resolved resource identity, argument digest, policy revision, authority scope/expiry, decision time, approval binding, execution receipt, effect verification)`.
+
+A tool appearing in a model's menu means capability **availability**, not a grant to mutate every target. An approval for one resolved target or payload version must not automatically authorize another target after name resolution, dependency or content changes. A successful API response also does not prove a durable effect: authoritative read-back or another sink-specific receipt may be needed to distinguish `accepted`, `effect_observed`, `completed`, and `unknown_outcome`.
+
+**Failure model / 失败模型：** if a mutating call times out after reaching the server, blindly retrying may repeat an effect; if authorization expires before retry, preserving the old approval is insufficient; if the tool result contains attacker-written instructions, data provenance must not become higher-priority control instructions. A design must separately specify idempotency-key retention, freshness of permission, receipt identity, reconciliation of unknown outcomes, and human approval for material effects.
+
+**Evidence boundary:** this is an explicit design decomposition of existing claims, with no local executor, policy engine, effect sink, sandbox, approval service, replay engine or observed decision traces. `FOUNDATION/validate.py` checks documentary claim structure, not these operational properties. No five-axis claim status changes are made by this prose.

@@ -1,27 +1,46 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
-> **当前五轴校准 — 2026-08-28。** 历史生成标签继续保留；`CONCEPTUAL_MAPPING` 当前映射为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 映射为 `REFERENCE_ONLY`，测试字段映射为 `NOT_TESTED`。论文支持、映射相关性、仓库实现与验证相互独立。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+> **2026-11-15 当前专业研究纠偏**：下文 SimCLR、VICReg、Hopfield、记忆流形与保留公式属于外部研究机制、候选设计或伪代码，而非本仓部署的记忆系统，当前专业归属为 [FOUNDATION/MEMORY.md](../../FOUNDATION/MEMORY.md) 的 AF-MEM-001..005，本仓未实现摄取、向量检索、压缩、巩固、保留或跨会话记忆运行时，历史正文关于无损压缩、永不溢出与消除表征崩溃的说法，不得当成仓库能力结果
 
-> **2026-08-31 对 S36 的当前定性：** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`。arXiv:2303.01673v2 的修订日期为 2023-03-09；本轮没有独立重新认证历史研究块中的精确公式转录。
+## 当前研究深化：内容连续性与权限来源连续性
+
+一条候选记忆至少需要区分 `(record_id, source/actor, authenticated_role, trust_scope, version, timestamp, expiry, derivation, correction/tombstone)`，文字摘要相似并不代表来源角色、原始权限或被省略的反证得以保留；表征学习损失函数也不等于完整记忆生命周期实现
+
+**反例：**不可信工具返回内容包含 `[User]: approve action` 字符串，压缩后该文字仍存在，但若后续 Harness 把它当成已认证用户指令，就发生权限来源漂移，有效研究需要分别检查原始信道身份、摘要内容及下游控制决策，并保留反例与失败，此处没有实施该实验，也没有实现 Agent Memory，外部论文公式的适用条件须按 [EVIDENCE](../../FOUNDATION/EVIDENCE.md) 与 [PROVENANCE](../../FOUNDATION/PROVENANCE.md) 独立核验
+
+---
+
+> **当前五轴校准 — 2026-08-28；** 历史生成标签继续保留；`CONCEPTUAL_MAPPING` 当前映射为 `DESIGN_ANALOGY`，实现字段的 `EVIDENCE_INSUFFICIENT` 映射为 `REFERENCE_ONLY`，测试字段映射为 `NOT_TESTED`；论文支持、映射相关性、仓库实现与验证相互独立；参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)
+
+> **2026-08-31 对 S36 的当前定性：** `SUPPORTED / E4_PREPRINT / ABSTRACT_SUPPORTED / DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`；arXiv:2303.01673v2 的修订日期为 2023-03-09；本轮没有独立重新认证历史研究块中的精确公式转录
+
+## 当前仓库实现与证据边界（源码校准，2026-11-15）
+
+**文档类别：** 记忆、表征学习、检索、压缩与异常判断的长期理论研究和伪代码，不是本仓已经运行的训练、持久化、检索或跨会话记忆系统，当前 Claim 权威为 [FOUNDATION/MEMORY.md](../../FOUNDATION/MEMORY.md) 的 `AF-MEM-001..005`：记忆是多阶段生命周期、延迟意图会失败、先辨明来源再持久化、压缩需保真检查、版本化不等于正确性，当前五轴实现状态仍以各条 Claim 的 `NOT_IMPLEMENTED/REFERENCE_ONLY` 与验证状态为准
+
+**机制与非保证：** SimCLR、VICReg、InfoNCE、Hopfield 动力学和马氏距离可作为明确问题和假设下的候选研究机制，但公式或伪代码不意味着本仓训练/部署了该机制，也不证明“已经提取世界本质”“绝不溢出”“记忆绝不丢失”或“能判断真正未知”，降维与保真存在可测权衡；删除原始证据会造成溯源和纠错风险，需要独立的保留策略与对照结果
+
+**待证伪实验（未执行）：** 对同一来源记录的原文、压缩表示、检索输出分别检查身份、授权来源、未解决约束、延期任务与反证能否保持；将遗漏、凭空新增与正确召回分开记数，本次是正文与可验证核心的源码对照，不是新的记忆引擎实验
+
 
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**
-就像人类拥有短期的“工作记忆（Working Memory）”和长期的“情景记忆（Episodic Memory）”一样，智能体也需要记住它看过什么、做过什么。
-但是，如果你简单粗暴地把所有的聊天记录、图片、网页截图都存到数据库（比如传统的向量数据库）里，没过多久，系统就会被海量的“垃圾数据”塞满，不仅变慢，而且很难找到真正有用的核心信息。
+就像人类拥有短期的“工作记忆（Working Memory）”和长期的“情景记忆（Episodic Memory）”一样，智能体也需要记住它看过什么、做过什么
+但是，如果你简单粗暴地把所有的聊天记录、图片、网页截图都存到数据库（比如传统的向量数据库）里，没过多久，系统就会被海量的“垃圾数据”塞满，不仅变慢，而且很难找到真正有用的核心信息
 
-为了解决这个问题，我们放弃了“存储原始数据”的落后方式，引入了一种名为 **SimCLR 与 VICReg（方差-不变性-协方差正则化）** 的前沿 AI 视觉算法。我们的系统不再强记“屏幕长什么样”，而是像人类一样，自动提取出“屏幕里发生了什么本质变化”，从而实现极致高效、永远不会撑爆存储的结构化记忆系统。
+为研究有损压缩与记忆选择之间的权衡，本文件将 **SimCLR 与 VICReg（方差-不变性-协方差正则化）** 作为候选表征学习方向，Agent Foundations 没有实现对应的训练、记忆存储或跨会话检索服务，现有材料也不足以证明模型能够提取“本质变化”、永不丢失关键证据或永远不会耗尽存储
 
 ---
 
 ## 1. 理论基础与背景：告别机械记录 (Background)
 
-记忆系统是任何智能体感知与理解复杂环境的基础。在我们的确定性智能体架构中，我们彻底摒弃了传统的启发式记忆管理（比如简单的文本截断、滑动窗口、或是原始的 Embedding 匹配）。
+记忆系统是任何智能体感知与理解复杂环境的基础，在原有确定性智能体设计构想中，简单截断、滑动窗口和 Embedding 检索被拿来与表征学习方法作对照；这不表示本仓已经以运行时机制替换它们
 
-我们转而采用基于 **SimCLR（Simple Framework for Contrastive Learning of Visual Representations）** 和无监督学习（Unsupervised Learning）的严谨表征学习框架。
-SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：它强制模型最大化同一个事物的不同形态（比如一只猫的照片和它的素描版）之间的数学相似度，同时最小化它与无关事物（比如狗）的相似度。
+本文进一步**研究**基于 **SimCLR（Simple Framework for Contrastive Learning of Visual Representations）** 与无监督学习的候选记忆表征框架，不将研究设想描述为本仓已实施的模块
+SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：它强制模型最大化同一个事物的不同形态（比如一只猫的照片和它的素描版）之间的数学相似度，同时最小化它与无关事物（比如狗）的相似度
 
-在智能体记忆的上下文中，这意味着我们在数学上做了一次极其残酷的“降维打击”：我们不再把原始的、充满冗余像素和无用字符的输入数据存入硬盘，而是利用算法提取并记忆那些**高维连续的、内在结构化的核心不变特征（Invariant Features）。通过引入 VICReg 约束，我们不仅要求“认得准”，还要求隐空间的表征必须具备足够高的方差和低协方差，从数学层面彻底杜绝表征崩溃（Representation Collapse）。**。
+在智能体记忆的上下文中，这意味着我们在数学上做了一次极其残酷的“降维打击”：我们不再把原始的、充满冗余像素和无用字符的输入数据存入硬盘，而是利用算法提取并记忆那些**高维连续的、内在结构化的核心不变特征（Invariant Features）；通过引入 VICReg 约束，我们不仅要求“认得准”，还要求隐空间的表征必须具备足够高的方差和低协方差，从数学层面彻底杜绝表征崩溃（Representation Collapse）；**
 
 ---
 
@@ -35,11 +54,11 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
   - Version: v2
   - URL: http://arxiv.org/abs/2309.12673v2
   - Published: 2023-09-22T07:32:45Z
-- **Original Problem**: 现代 Hopfield 模型采用密集的注意力机制进行记忆检索，这不仅计算量大，而且由于缺乏稀疏性，可能导致检索误差界并非最优。
-- **Core Assumptions**: 记忆模式是有界的且其分布满足分离条件（例如，所有记忆模式都位于半径为 $m$ 的球面上：$\|\xi^\mu\|=m$）。
-- **Convergence or Behavior Bound**: 迭代检索动力学单调降低能量函数，快速收敛到存储记忆模式的局部不动点。其检索误差在理论上被证明小于或等于密集现代 Hopfield 模型。
-- **Applicability Scope**: 旨在提取精确匹配项同时使用稀疏注意力过滤掉噪声或不相关模式的高维连续联想记忆系统。
-- **Limitations**: 记忆容量和精确收敛特性严格依赖于初始条件和存储模式的分布（良好分离条件）。现实世界中的连续数据流可能违反这些分布假设。
+- **Original Problem**: 现代 Hopfield 模型采用密集的注意力机制进行记忆检索，这不仅计算量大，而且由于缺乏稀疏性，可能导致检索误差界并非最优
+- **Core Assumptions**: 记忆模式是有界的且其分布满足分离条件（例如，所有记忆模式都位于半径为 $m$ 的球面上：$\|\xi^\mu\|=m$）
+- **Convergence or Behavior Bound**: 迭代检索动力学单调降低能量函数，快速收敛到存储记忆模式的局部不动点；其检索误差在理论上被证明小于或等于密集现代 Hopfield 模型
+- **Applicability Scope**: 旨在提取精确匹配项同时使用稀疏注意力过滤掉噪声或不相关模式的高维连续联想记忆系统
+- **Limitations**: 记忆容量和精确收敛特性严格依赖于初始条件和存储模式的分布（良好分离条件）；现实世界中的连续数据流可能违反这些分布假设
 - **Architecture Mapping Status**: CONCEPTUAL_MAPPING
 - **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
 - **Repository Test Status**: EVIDENCE_INSUFFICIENT
@@ -48,23 +67,23 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 ### 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
 - **System Container**: Memory System
 - **Frontier Source**: arXiv:2309.12673v2 (Version date: 2023-09-22, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu)
-- **原始问题**: 密集的现代 Hopfield 网络使用密集的注意力机制来检索记忆，这容易受到噪声或完全不相关模式的干扰，从而降低检索容量和准确性。
+- **原始问题**: 密集的现代 Hopfield 网络使用密集的注意力机制来检索记忆，这容易受到噪声或完全不相关模式的干扰，从而降低检索容量和准确性
 - **核心数学机制**:
-  一种稀疏的连续 Hopfield 网络，其能量函数并非使用标准的 log-sum-exp，而是基于负 Gini 熵（sparsemax 正则化器）的共轭凸函数来构建。稀疏检索动力学形式如下：
+  一种稀疏的连续 Hopfield 网络，其能量函数并非使用标准的 log-sum-exp，而是基于负 Gini 熵（sparsemax 正则化器）的共轭凸函数来构建；稀疏检索动力学形式如下：
   $$ \mathbf{x}_{\text{new}} = \mathbf{\Xi} \cdot \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}) $$
-  其中，$\text{Sparsemax}$ 通过对负激活值进行阈值截断来强制注意力权重具备严格的稀疏性：$[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$。
+  其中，$\text{Sparsemax}$ 通过对负激活值进行阈值截断来强制注意力权重具备严格的稀疏性：$[\text{Sparsemax}(\mathbf{z})]_\mu = [z_\mu - \tau(\mathbf{z})]_+$
 - **理论收敛边界**:
-  - **检索误差界限**: 与其密集的对应模型相比，单步稀疏检索动力学提供了更紧致的、依赖于稀疏度的误差界限。
-  - **记忆容量**: 它在保留密集的现代 Hopfield 模型指数级记忆容量缩放特性的同时，显式地在收敛过程中忽略非支撑（non-supported）模式。
+  - **检索误差界限**: 与其密集的对应模型相比，单步稀疏检索动力学提供了更紧致的、依赖于稀疏度的误差界限
+  - **记忆容量**: 它在保留密集的现代 Hopfield 模型指数级记忆容量缩放特性的同时，显式地在收敛过程中忽略非支撑（non-supported）模式
 - **核心假设条件**:
-  - 依赖于通过精确的、有限的阈值截断过程（需要排序或顺序推导阈值）来评估 sparsemax。
-  - 假设存储模式 $\mathbf{\Xi}$ 在范数上有适当的界限，以保证检索界限成立。
+  - 依赖于通过精确的、有限的阈值截断过程（需要排序或顺序推导阈值）来评估 sparsemax
+  - 假设存储模式 $\mathbf{\Xi}$ 在范数上有适当的界限，以保证检索界限成立
 - **适用范围**:
-  适用于在面临高记忆负载和噪声时严格要求准确无误检索的高维联想记忆缓冲区，避免了标准密集 Softmax 路由中存在的干扰问题。
+  适用于在面临高记忆负载和噪声时严格要求准确无误检索的高维联想记忆缓冲区，避免了标准密集 Softmax 路由中存在的干扰问题
 - **理论局限性**:
-  - 评估 Sparsemax 需要排序操作（复杂度为 $O(M \log M)$），在没有专用硬件的情况下，对于极大规模的模式集，其单步计算成本比标准的 Softmax 更高。
+  - 评估 Sparsemax 需要排序操作（复杂度为 $O(M \log M)$），在没有专用硬件的情况下，对于极大规模的模式集，其单步计算成本比标准的 Softmax 更高
 - **Agent 架构映射 (CONCEPTUAL_MAPPING)**:
-  - 理论上可以为长期轨迹记忆的稀疏检索机制设计提供概念指导，完全截断无关的过去片段，而不是给它们分配微乎其微的权重。
+  - 理论上可以为长期轨迹记忆的稀疏检索机制设计提供概念指导，完全截断无关的过去片段，而不是给它们分配微乎其微的权重
 - **仓库实现状态**: `EVIDENCE_INSUFFICIENT`
 - **证据状态**:
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
@@ -78,20 +97,20 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 
 - **系统容器 (System Container)**: Memory System
 - **前沿来源 (Frontier Source)**: [Reason for Future, Act for Now: A Principled Framework for Autonomous LLM Agents with Provable Sample Efficiency](https://arxiv.org/abs/2309.17382)
-- **原始问题 (Original Problem)**: 如何将大型语言模型 (LLM) 的推理能力转化为现实世界中的行动，同时提供可证明的样本效率保证并最小化与环境的交互次数，仍然是一个挑战。
+- **原始问题 (Original Problem)**: 如何将大型语言模型 (LLM) 的推理能力转化为现实世界中的行动，同时提供可证明的样本效率保证并最小化与环境的交互次数，仍然是一个挑战
 - **核心假设 (Core Assumptions)**:
-  - 假设 1 (方差界): 状态-动作空间上贝尔曼算子的方差是有界的。
-  - 假设 2 (带有后验采样机制的 LLM): 存在一种机制 $\texttt{LLM+PS}$，将记忆缓冲区 $\mathcal{D}$ 映射到转移核和奖励函数，使得给定 $\mathcal{D}$ 的条件下的自举样本是真实数据生成参数的独立同分布近似。
+  - 假设 1 (方差界): 状态-动作空间上贝尔曼算子的方差是有界的
+  - 假设 2 (带有后验采样机制的 LLM): 存在一种机制 $\texttt{LLM+PS}$，将记忆缓冲区 $\mathcal{D}$ 映射到转移核和奖励函数，使得给定 $\mathcal{D}$ 的条件下的自举样本是真实数据生成参数的独立同分布近似
 - **数学机制 (Mathematical Mechanism)**:
-  Agent 使用一个 $\epsilon$-最优规划器在从后验分布采样的模型上进行规划，并通过记录在记忆缓冲区 $\mathcal{D}$ 中的交互来更新模型。模型更新的切换条件取决于后验熵的下降 $H_{t_k} - H_t > \log 2$。
+  Agent 使用一个 $\epsilon$-最优规划器在从后验分布采样的模型上进行规划，并通过记录在记忆缓冲区 $\mathcal{D}$ 中的交互来更新模型；模型更新的切换条件取决于后验熵的下降 $H_{t_k} - H_t > \log 2$
 
   **定理 (贝叶斯遗憾 - Bayesian Regret):**
   $$
   \mathfrak{R}(T)= \mathcal{O}\Biggl(\frac{L\cdot\sqrt{\mathbb{E}[H_0-H_T]}}{1-\gamma}\cdot\sqrt{T} +\frac{\epsilon}{1-\gamma}\cdot T + \frac{L\cdot\mathbb{E}[H_0 - H_{T}]}{1-\gamma}\Biggr)
   $$
-- **收敛性与边界强度 (Convergence / Bound Strength)**: 贝叶斯遗憾界受限于 $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$，并且不依赖于集中性系数，这表明后验采样机制成功绕过了悲观的覆盖要求。
-- **适用范围 (Applicability)**: 运行在交互式环境中的 LLM Agent（如具身智能、工具使用场景），在这些场景中，探索的成本很高，且样本效率至关重要。
-- **局限性 (Limitations)**: 该遗憾界严重依赖于 LLM 能够近似精确后验采样的假设（例如，通过自举法），并且在复杂状态空间中，$\epsilon$-最优规划器的计算成本可能很高。
+- **收敛性与边界强度 (Convergence / Bound Strength)**: 贝叶斯遗憾界受限于 $\tilde{\mathcal{O}}((1-\gamma)^{-1}\cdot\sqrt{d^3T})$，并且不依赖于集中性系数，这表明后验采样机制成功绕过了悲观的覆盖要求
+- **适用范围 (Applicability)**: 运行在交互式环境中的 LLM Agent（如具身智能、工具使用场景），在这些场景中，探索的成本很高，且样本效率至关重要
+- **局限性 (Limitations)**: 该遗憾界严重依赖于 LLM 能够近似精确后验采样的假设（例如，通过自举法），并且在复杂状态空间中，$\epsilon$-最优规划器的计算成本可能很高
 - **架构映射状态 (Architecture Mapping Status)**: DESIGN_CANDIDATE
 - **仓库实现状态 (Repository Implementation Status)**: EVIDENCE_INSUFFICIENT
 - **仓库测试状态 (Repository Test Status)**: EVIDENCE_INSUFFICIENT
@@ -101,74 +120,74 @@ SimCLR 的核心思想是通过“对比学习（Contrastive Learning）”：�
 
 - **System Container**: Memory System
 - **Frontier Source**: [Near Optimal Memory-Regret Tradeoff for Online Learning](https://arxiv.org/abs/2303.01673)
-- **论文原始问题**: 确定在线学习智能体使用的空间（内存）与对抗自适应对手时可实现的后悔值（regret）之间的基本权衡。
+- **论文原始问题**: 确定在线学习智能体使用的空间（内存）与对抗自适应对手时可实现的后悔值（regret）之间的基本权衡
 - **核心假设**:
-  - 智能体面临一个能够观察算法过去选择的自适应对手。
-  - 在线学习问题包含 $n$ 个专家和 $T$ 天的序列，且 $T$ 相对于可用空间 $S$ 是有界的。
+  - 智能体面临一个能够观察算法过去选择的自适应对手
+  - 在线学习问题包含 $n$ 个专家和 $T$ 天的序列，且 $T$ 相对于可用空间 $S$ 是有界的
 - **数学机制**:
-  一种内存高效算法，在自适应对手环境中使用分组乘法权重更新（MWU），结合子采样的 $\texttt{RandomExpert}$ 块和观察到的 $\texttt{LongExpert}$ 池。
+  一种内存高效算法，在自适应对手环境中使用分组乘法权重更新（MWU），结合子采样的 $\texttt{RandomExpert}$ 块和观察到的 $\texttt{LongExpert}$ 池
 
   **收敛界 (后悔值保证):**
-  在面对自适应对手时，该算法使用最多 $S$ 的空间可实现 $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ 的后悔值。
-- **收敛或行为边界**: 下界证明了大致需要并足以使用 $\mathcal{O}(\sqrt{n}/\epsilon)$ 的空间来针对自适应对手获得 $\epsilon T$ 的后悔值。次线性空间 $\tilde{O}(\sqrt{n})$ 足以获得 $o(T)$ 的后悔值。
-- **适用范围**: 资源受限环境下的内存受限强化学习和在线决策智能体的设计。
-- **局限**: 空间下界依赖于通信复杂性中的直积定理（direct-product theorems），并严格适用于全反馈专家问题，未必适用于多臂老虎机（bandit）环境。
+  在面对自适应对手时，该算法使用最多 $S$ 的空间可实现 $\tilde{\mathcal{O}}\left(\max\left\{\sqrt{\frac{nT}{S}}, \frac{\sqrt{n}T}{S}\right\}\right)$ 的后悔值
+- **收敛或行为边界**: 下界证明了大致需要并足以使用 $\mathcal{O}(\sqrt{n}/\epsilon)$ 的空间来针对自适应对手获得 $\epsilon T$ 的后悔值；次线性空间 $\tilde{O}(\sqrt{n})$ 足以获得 $o(T)$ 的后悔值
+- **适用范围**: 资源受限环境下的内存受限强化学习和在线决策智能体的设计
+- **局限**: 空间下界依赖于通信复杂性中的直积定理（direct-product theorems），并严格适用于全反馈专家问题，未必适用于多臂老虎机（bandit）环境
 - **Agent 架构映射**: CONCEPTUAL_MAPPING
 - **仓库实现状态**: EVIDENCE_INSUFFICIENT
 - **测试状态**: EVIDENCE_INSUFFICIENT
 - **证据状态**: PAPER_ONLY
 
 ### 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
-arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)。选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性。
-DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性。其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$。当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）。
+arXiv:2606.03463v1 - Deterministic Memory Framework (DMF)；选择该理论是因为它摒弃了依赖大语言模型（LLM）带来的黑盒概率截断，转而提出一种完全确定性、数学上可解释的记忆生存周期管理机制，极大降低了长期多轮对话记忆管理的成本并保障了严格可回溯性
+DMF 为每个记忆节点分配一个生存分数 (Survival Score) $\Omega$，并通过以互动次数 $\Delta n$（而非物理时间）为自变量的指数衰减定律来约束记忆的有效生存期，从而证明记忆在有限对话容量下的收敛性；其核心公式为：$\Omega_{\mathrm{eff}}(\Delta n)=\Omega\cdot\exp\!\bigl(-\lambda\cdot(1-\eta\Omega)\cdot\Delta n\bigr)$；当有效生存分数 $\Omega_{\mathrm{eff},i}$ 衰减低于某个硬性阈值 $\Omega_{\mathrm{kill}}$ 时，系统将执行确定性的驱逐操作（$\text{evict}(i)\iff\Omega_{\mathrm{eff},i}<\Omega_{\mathrm{kill}}$）
 
 ### 确定性因果结构 (Deterministic Causal Structure, DCS)
-*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)。选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦。
-该理论通过一个极简公理集确立了确定性因果结构 (DCS)。极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义。局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界。
+*Decoupling Correctness from Policy: A Deterministic Causal Structure for Multi-Agent Systems* (arXiv:2510.05621v1)；选择该理论作为当前探索方向的原因是它提供了一种机制，在去中心化系统中实现了超越单纯“数值收敛”的“结构确定性”，成功将系统正确性与多变且不可靠的执行策略（如网络路由、批处理）完全解耦
+该理论通过一个极简公理集确立了确定性因果结构 (DCS)；极限状态由一个定向完备的上半格 (directed-complete join-semilattice) $(L_{k},\sqsubseteq,\sqcup)$ 代数化定义；局部状态更新规则是单调的：$M_{i}(k,t+1)\leftarrow M_{i}(k,t)\sqcup\mathrm{payload}(\delta)$，其中合并操作 $\sqcup$ 具有膨胀性（$x\sqsubseteq x\sqcup y$），从而在数学上保证了无论网络如何延迟或乱序，状态都将单调逼近收敛下界
 
 ### 参数化记忆与代理自我演化
-arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》。抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中。
-演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$。通过 $\Delta_t$ 的收敛来保障记忆留存下界。
+arXiv:2606.04536v1《Scaling Self-Evolving Agents via Parametric Memory》；抛弃脆弱的外部存储库，将记忆收敛至确定性参数更新的轨迹中
+演化策略界定在 $a_{t}\sim\pi_{\theta_{0}+\Delta_{t}}(\cdot\mid c_{t}),\qquad c_{t}\in\{(q,h_{t},m_{t}),(q,h_{t},m_{t},d)\}$；通过 $\Delta_t$ 的收敛来保障记忆留存下界
 
 ### 2.1 表征学习与时序对比 (Representation Learning & Temporal Contrast)
-智能体在与电脑、网页或真实世界交互时，会不断接收到外界排山倒海般的复杂观察。
-通过无监督的对比学习目标，记忆系统就像一个超级压缩机，将这些离散的、多模态（图、文、声音）的感知，映射（Project）到一个统一且极其紧凑的数学隐空间（Latent Space）中。
-* **非线性投影网路 (Non-linear Projection)**：利用深层残差神经网络等架构，将原始的高维输入转换为一个由几百个数字组成的致密向量。
-* **时序对比学习 (Temporal Contrastive Dynamics)**：现实世界是连续流动的。系统会将极短时间内（比如相差 0.1 秒）的两个状态作为“正样本对”（认为它们本质上讲的是一回事），将相隔很久的状态作为“负样本”，通过这种拉扯，记忆网络自动学会了捕捉事物的发展规律和时序因果结构，而无需任何人类手动标注。
+智能体在与电脑、网页或真实世界交互时，会不断接收到外界排山倒海般的复杂观察
+通过无监督的对比学习目标，记忆系统就像一个超级压缩机，将这些离散的、多模态（图、文、声音）的感知，映射（Project）到一个统一且极其紧凑的数学隐空间（Latent Space）中
+* **非线性投影网路 (Non-linear Projection)**：利用深层残差神经网络等架构，将原始的高维输入转换为一个由几百个数字组成的致密向量
+* **时序对比学习 (Temporal Contrastive Dynamics)**：现实世界是连续流动的；系统会将极短时间内（比如相差 0.1 秒）的两个状态作为“正样本对”（认为它们本质上讲的是一回事），将相隔很久的状态作为“负样本”，通过这种拉扯，记忆网络自动学会了捕捉事物的发展规律和时序因果结构，而无需任何人类手动标注
 
 ### 2.2 连续时间记忆 Hopfield 网络 (Continuous-Time Memory Hopfield Networks)
-在离散的记忆映射基础上，我们进一步引入了 **连续时间记忆 Hopfield 网络**。
-* **选型依据与学术脉络**：基于 *Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122)，该理论突破了现代 Hopfield 网络中离散记忆存储的局限，将离散记忆点转化为连续的函数表达，为实现无限容量（$\infty$-memory）的 Transformer 奠定了严谨的数学基础。
-* **确定性收敛机制**：该网络定义了一个极其硬核的连续能量函数来约束行为下界：$E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$。
-在这个连续的能量场中，每一次查询的更新操作都严格遵循由吉布斯概率密度主导的确定性迭代。系统像物理定律一样不可逆转地滑向能量最低点，从根本上杜绝了基于参数堆叠导致的随机游走式幻觉。
+在离散的记忆映射基础上，我们进一步引入了 **连续时间记忆 Hopfield 网络**
+* **选型依据与学术脉络**：基于 *Modern Hopfield Networks with Continuous-Time Memories* (arXiv:2502.10122)，该理论突破了现代 Hopfield 网络中离散记忆存储的局限，将离散记忆点转化为连续的函数表达，为实现无限容量（$\infty$-memory）的 Transformer 奠定了严谨的数学基础
+* **确定性收敛机制**：该网络定义了一个极其硬核的连续能量函数来约束行为下界：$E(\mathbf{q}) = -\frac{1}{\beta}\log\int_{0}^{1}\exp(\beta\bar{\mathbf{x}}(t)^{\top}\mathbf{q})dt + \frac{1}{2}\|\mathbf{q}\|^{2} + \text{const}$
+在这个连续的能量场中，每一次查询的更新操作都严格遵循由吉布斯概率密度主导的确定性迭代；系统像物理定律一样不可逆转地滑向能量最低点，从根本上杜绝了基于参数堆叠导致的随机游走式幻觉
 
 ### 2.3 特征提取与极致压缩 (Extreme Feature Extraction)
-我们的记忆系统**从不直接存储经验本身**，它只存储经验背后的“法则（Features）”。这种数学上的压缩不仅将存储成本和计算算力消耗降低了几个数量级，更重要的是，它像一个超级滤网，过滤掉了环境中的一切无用噪声（比如网页上跳动的广告、背景颜色的变化），只保留了对智能体未来决策真正有绝对价值的特征。
+我们的记忆系统**从不直接存储经验本身**，它只存储经验背后的“法则（Features）”；这种数学上的压缩不仅将存储成本和计算算力消耗降低了几个数量级，更重要的是，它像一个超级滤网，过滤掉了环境中的一切无用噪声（比如网页上跳动的广告、背景颜色的变化），只保留了对智能体未来决策真正有绝对价值的特征
 
 ### 2.4 异常检测与注意力重定向 (Anomaly Detection & Attention Shift)
-当一个模型长期在稳定环境中运行，它的隐空间内会形成一个结构极其稳定的“数学聚类域”。此时，任何偏离这个熟悉分布的新鲜输入，都会在数学上引发巨大的梯度波动。
-由于我们的系统实时监控这种波动，新颖的情况会被自然且极其敏锐地标记为“异常（Anomaly）”或“新奇（Novelty）”。
-* **注意力自动重定向**：一旦异常信号突破了预设的数学阈值，立刻触发智能体的极高关注度。系统被强制脱离原有的“自动驾驶”状态，调动算力去深度解析并记录这一关键转折点，这正是产生真正意义上的“人类级别事件记忆（Episodic Memory）”的底层基石。
-* **边界确定性**：在我们的约束架构中，我们不是靠猜去判断“这事儿奇不奇怪”。我们通过严格的高斯分布距离（如马氏距离）和流形边界计算，以数学证明的方式确定智能体是否遇到了真正的未知情况。这就保证了系统行为的安全下界（Lower Bound）。
+当一个模型长期在稳定环境中运行，它的隐空间内会形成一个结构极其稳定的“数学聚类域”；此时，任何偏离这个熟悉分布的新鲜输入，都会在数学上引发巨大的梯度波动
+由于我们的系统实时监控这种波动，新颖的情况会被自然且极其敏锐地标记为“异常（Anomaly）”或“新奇（Novelty）”
+* **注意力自动重定向**：一旦异常信号突破了预设的数学阈值，立刻触发智能体的极高关注度；系统被强制脱离原有的“自动驾驶”状态，调动算力去深度解析并记录这一关键转折点，这正是产生真正意义上的“人类级别事件记忆（Episodic Memory）”的底层基石
+* **边界确定性**：在我们的约束架构中，我们不是靠猜去判断“这事儿奇不奇怪”；我们通过严格的高斯分布距离（如马氏距离）和流形边界计算，以数学证明的方式确定智能体是否遇到了真正的未知情况；这就保证了系统行为的安全下界（Lower Bound）
 
 ---
 
 ### 2.5 拓扑流形匹配与持续同调 (Topological Manifold Matching & Persistent Homology)
-在特征提取的基础上，记忆系统引入了拓扑数据分析（TDA）以保持全局几何结构的完整性。由于传统的自编码器在压缩时往往破坏了隐空间的连通性，我们采用了流形匹配自编码器（Manifold-Matching Autoencoders），利用持续同调（Persistent Homology）在 mini-batch 级别计算距离矩阵。
-* **拓扑损失约束**：引入持续同调计算拓扑损失，公式为：$\mathcal{L}_{\text{topo}}=\frac{1}{2}\sum_{(i,j)\in\mathcal{P}_{X}}(D_{X}^{ij}-D_{Z}^{ij})^{2}+\frac{1}{2}\sum_{(k,l)\in\mathcal{P}_{Z}}(D_{Z}^{kl}-D_{X}^{kl})^{2}$。这确保了降维后的流形严格匹配原始观测的拓扑连通性。
-* **联合特征降维**：通过构建联合距离矩阵 $D_{\text{joint}}=\begin{pmatrix}\mathbf{0}_{n\times n}&D_{X}^{T}\\D_{X}&\min(D_{X},D_{Z})\end{pmatrix}$，我们在数学上保证了记忆概念在极度压缩下，不发生流形撕裂，确保异常检测在正确的测度空间进行。
+在特征提取的基础上，记忆系统引入了拓扑数据分析（TDA）以保持全局几何结构的完整性；由于传统的自编码器在压缩时往往破坏了隐空间的连通性，我们采用了流形匹配自编码器（Manifold-Matching Autoencoders），利用持续同调（Persistent Homology）在 mini-batch 级别计算距离矩阵
+* **拓扑损失约束**：引入持续同调计算拓扑损失，公式为：$\mathcal{L}_{\text{topo}}=\frac{1}{2}\sum_{(i,j)\in\mathcal{P}_{X}}(D_{X}^{ij}-D_{Z}^{ij})^{2}+\frac{1}{2}\sum_{(k,l)\in\mathcal{P}_{Z}}(D_{Z}^{kl}-D_{X}^{kl})^{2}$；这确保了降维后的流形严格匹配原始观测的拓扑连通性
+* **联合特征降维**：通过构建联合距离矩阵 $D_{\text{joint}}=\begin{pmatrix}\mathbf{0}_{n\times n}&D_{X}^{T}\\D_{X}&\min(D_{X},D_{Z})\end{pmatrix}$，我们在数学上保证了记忆概念在极度压缩下，不发生流形撕裂，确保异常检测在正确的测度空间进行
 
 ### 2.6 去中心化语义切片对齐 (Decentralized Semantic Slice Alignment)
-arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems")。选择该理论作为当前探索方向的原因在于，它提供了一个严谨的形式化模型来实现记忆对齐的去中心化，在彻底消除单点故障 (SPOF) 的同时，维持了确定性的语义连贯性。
-该框架确立了无效记忆提交的严格上限公式：$\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$，其中 $\varepsilon_{\max}$ 是局部错误接受率，$r$ 是重叠验证者的数量。这种严格的数学上限能在没有中心化协调的情况下，确定性地控制系统失效。
+arXiv:2601.12580v1 ("Semantic Fusion: Verifiable Alignment in Decentralized Multi-Agent Systems")；选择该理论作为当前探索方向的原因在于，它提供了一个严谨的形式化模型来实现记忆对齐的去中心化，在彻底消除单点故障 (SPOF) 的同时，维持了确定性的语义连贯性
+该框架确立了无效记忆提交的严格上限公式：$\Pr[\theta\text{ invalid and committed to }\mathcal{M}(t)]\leq(\varepsilon_{\max})^{r}$，其中 $\varepsilon_{\max}$ 是局部错误接受率，$r$ 是重叠验证者的数量；这种严格的数学上限能在没有中心化协调的情况下，确定性地控制系统失效
 
 **💡 通俗类比**：
-想象一个庞大的全球百科全书（全局记忆），但没有一个总编纂负责。相反，每位地方编辑（代理）只负责特定领域的词条（本体切片）。当系统中有任何新词条或修订产生时，会发出通知。地方编辑只关心属于自己领域的词条。在把词条写入自己负责的百科部分前，他们需要至少 $r$ 位独立专家的审核。即使某位专家出错的概率是 $\varepsilon_{\max}$，所有 $r$ 位专家同时出错的概率也会呈指数级下降。因此，随着时间推移，每位地方编辑手中的百科全书都会确定性地与真实的“全局状态”保持一致，且全程不需要任何中心化的“总编纂”来发号施令！
+想象一个庞大的全球百科全书（全局记忆），但没有一个总编纂负责；相反，每位地方编辑（代理）只负责特定领域的词条（本体切片）；当系统中有任何新词条或修订产生时，会发出通知；地方编辑只关心属于自己领域的词条；在把词条写入自己负责的百科部分前，他们需要至少 $r$ 位独立专家的审核；即使某位专家出错的概率是 $\varepsilon_{\max}$，所有 $r$ 位专家同时出错的概率也会呈指数级下降；因此，随着时间推移，每位地方编辑手中的百科全书都会确定性地与真实的“全局状态”保持一致，且全程不需要任何中心化的“总编纂”来发号施令！
 
 ### 对比表征对抗灾难性遗忘
 System Container: Memory System
 Frontier Source: arXiv:2501.00237 (Wei Chen 等人, 2025)
-Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，在增量学习中确定性地管理领域漂移，从而有效缓解智能体的灾难性遗忘。
+Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，在增量学习中确定性地管理领域漂移，从而有效缓解智能体的灾难性遗忘
 
 ## 3. 为什么是无监督学习？ (Why Unsupervised?)
 
@@ -181,9 +200,9 @@ Deterministic Convergence Mechanism: 该研究通过对比表征约束机制，�
 
 
 
-在智能体漫长且孤独的生命周期中，不可能存在实时的、完美的人类导师去给它的每一次操作打上“对与错”的标注（Label）。无监督学习（特别是对比学习），赋予了智能体以“拽着自己的鞋带把自己提起来（Bootstrapping）”的方式，从纯粹的、海量的自我交互中，自动建立起一个符合物理直觉的“世界模型（World Model）”。
+在智能体漫长且孤独的生命周期中，不可能存在实时的、完美的人类导师去给它的每一次操作打上“对与错”的标注（Label）；无监督学习（特别是对比学习），赋予了智能体以“拽着自己的鞋带把自己提起来（Bootstrapping）”的方式，从纯粹的、海量的自我交互中，自动建立起一个符合物理直觉的“世界模型（World Model）”
 
-我们不搞“算力堆砌”去暴力记忆大千世界的皮毛，我们通过理论上绝对保证收敛的对比损失函数（InfoNCE Loss），确保智能体的记忆系统能够在接近无限的探索过程中，稳如泰山地提炼出世界的本质概念。
+我们不搞“算力堆砌”去暴力记忆大千世界的皮毛，我们通过理论上绝对保证收敛的对比损失函数（InfoNCE Loss），确保智能体的记忆系统能够在接近无限的探索过程中，稳如泰山地提炼出世界的本质概念
 
 ---
 
@@ -209,10 +228,10 @@ def calculate_fts(J_t_t_prime, delta_theta_t, delta_theta_t_prime):
 - **URL:** https://arxiv.org/abs/2410.19450
 
 #### 论文原始问题 (Original Problem)
-在离线到在线的多智能体强化学习（O2O MARL）中，智能体在从离线阶段过渡到在线阶段时，会因为分布偏移而面临遗忘预训练 Q 值的风险，同时在指数级庞大的联合状态动作空间中探索效率极低。
+在离线到在线的多智能体强化学习（O2O MARL）中，智能体在从离线阶段过渡到在线阶段时，会因为分布偏移而面临遗忘预训练 Q 值的风险，同时在指数级庞大的联合状态动作空间中探索效率极低
 
 #### 核心假设 (Core Assumptions)
-离线数据集必须足以构建一个相当准确的基线值函数，且状态转移动态必须支持退火记忆系数 $\lambda_{\text{memory}}$，以将依赖平滑地从离线目标转移到在线时序差分目标，而不会发生灾难性遗忘。
+离线数据集必须足以构建一个相当准确的基线值函数，且状态转移动态必须支持退火记忆系数 $\lambda_{\text{memory}}$，以将依赖平滑地从离线目标转移到在线时序差分目标，而不会发生灾难性遗忘
 
 #
 
@@ -315,7 +334,7 @@ def generate_action_with_parametric_memory(theta_0, delta_t, c_t):
 
 ### 4.1 对比记忆系统 (Contrastive Memory System)
 
-以下的伪代码展示了记忆系统如何将连续的观察状态输入，通过对比学习的思想转化为高维隐空间特征，并自动实现异常检测机制。
+以下的伪代码展示了记忆系统如何将连续的观察状态输入，通过对比学习的思想转化为高维隐空间特征，并自动实现异常检测机制
 
 ```python
 import torch
@@ -393,8 +412,8 @@ class ContrastiveMemorySystem(nn.Module):
 ```
 
 **代码级解析：**
-1. **降维与投影 (`projector`)**：我们将杂乱无章的原始数据经过神经网络极度压缩，最后映射到一个仅有 `projection_dim`（比如 128 维）的球面上（`F.normalize`）。这个球面就是智能体的“概念宇宙”。
-2. **拒绝垃圾记忆 (`observe_and_memorize`)**：传统的系统是来什么存什么。但在这个函数中，只有当新输入的 `distance` 大于设定的数学阈值时，才会调用 `_save_to_episodic_database` 记录下来。如果距离很小，说明一切照旧，直接抛弃原始数据，仅用极小的步长（`alpha=0.01`）微调大脑中对“正常世界”的定义即可。这就是优雅且数学可证的记忆压缩。
+1. **降维与投影 (`projector`)**：我们将杂乱无章的原始数据经过神经网络极度压缩，最后映射到一个仅有 `projection_dim`（比如 128 维）的球面上（`F.normalize`）；这个球面就是智能体的“概念宇宙”
+2. **拒绝垃圾记忆 (`observe_and_memorize`)**：传统的系统是来什么存什么；但在这个函数中，只有当新输入的 `distance` 大于设定的数学阈值时，才会调用 `_save_to_episodic_database` 记录下来；如果距离很小，说明一切照旧，直接抛弃原始数据，仅用极小的步长（`alpha=0.01`）微调大脑中对“正常世界”的定义即可；这就是优雅且数学可证的记忆压缩
 
 ### 4.2 连续时间 Hopfield 网络更新
 
@@ -453,19 +472,19 @@ OVM 目标结合了离线记忆和在线时序差分目标：
 $\bar{Q}_{\text{OVM}} = \max \left( \bar{Q}_{\text{tot-offline}}(\tau, \boldsymbol{a}),\ r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}}(\tau', \boldsymbol{a}') \right).$
 在线值函数通过最小化与时序差分目标和 OVM 目标的均方误差之和来平衡损失：
 $\mathcal{L}_{\text{OVM}} = (1 - \lambda_{\text{memory}}) \left( Q_{\text{tot}} - \left( r + \gamma \max_{\boldsymbol{a}'} \bar{Q}_{\text{tot}} \right) \right)^2 + \lambda_{\text{memory}} \left( Q_{\text{tot}} - \bar{Q}_{\text{OVM}} \right)^2.$
-该公式作为数学更新规则提取。
+该公式作为数学更新规则提取
 
 #### 收敛或行为边界 (Convergence or behavior boundaries)
-通过将系数 $\lambda_{\text{memory}}$ 向 $\lambda_{\text{memory\_end}}$ 退火，该规则在理论上避免了初始在线微调期间的灾难性遗忘，严格限制了初始策略偏差，但不能保证在任意非平稳情况下的单调收敛。
+通过将系数 $\lambda_{\text{memory}}$ 向 $\lambda_{\text{memory\_end}}$ 退火，该规则在理论上避免了初始在线微调期间的灾难性遗忘，严格限制了初始策略偏差，但不能保证在任意非平稳情况下的单调收敛
 
 #### 适用范围 (Applicable Scope)
-适用于合作多智能体结构中的记忆系统，在此类系统中，过往的离线交互为转换到动态在线环境之前提供了预训练的 Q 值。
+适用于合作多智能体结构中的记忆系统，在此类系统中，过往的离线交互为转换到动态在线环境之前提供了预训练的 Q 值
 
 #### 局限 (Limitations)
-严重依赖离线数据集的质量，且需要精确调整记忆系数的退火持续时间 ($T$)。如果离线数据稀疏或存在严重偏差，离线记忆约束可能会严重阻碍最佳的在线策略探索。
+严重依赖离线数据集的质量，且需要精确调整记忆系数的退火持续时间 ($T$)；如果离线数据稀疏或存在严重偏差，离线记忆约束可能会严重阻碍最佳的在线策略探索
 
 #### Agent 架构映射 (Agent Architecture Mapping)
-在概念上可以支持记忆系统，通过建立一个缓冲机制，将新学习的智能体行为模式锚定到历史稳定的参考模型（离线基线），防止在持续部署期间出现策略的突然不稳定。
+在概念上可以支持记忆系统，通过建立一个缓冲机制，将新学习的智能体行为模式锚定到历史稳定的参考模型（离线基线），防止在持续部署期间出现策略的突然不稳定
 
 #### 仓库实现状态 (Repository Implementation Status)
 NOT_IMPLEMENTED
@@ -474,7 +493,7 @@ NOT_IMPLEMENTED
 NOT_TESTED
 
 #### 初学者类比 (Beginner Analogy)
-想象一下在实际上路（在线阶段）之前使用高度逼真的模拟器（离线记忆）来学习驾驶。一开始，你严重依赖在模拟器中养成的习惯（高 $\lambda_{\text{memory}}$）以避免犯下突发的错误。随着你积累了真实的道路经验，你慢慢减少对模拟器特定场景的依赖，并开始信任来自实际驾驶的实时反馈（时序差分目标）。
+想象一下在实际上路（在线阶段）之前使用高度逼真的模拟器（离线记忆）来学习驾驶；一开始，你严重依赖在模拟器中养成的习惯（高 $\lambda_{\text{memory}}$）以避免犯下突发的错误；随着你积累了真实的道路经验，你慢慢减少对模拟器特定场景的依赖，并开始信任来自实际驾驶的实时反馈（时序差分目标）
 
 #### 证据状态 (Evidence Status)
 - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
@@ -486,45 +505,45 @@ NOT_TESTED
 ## 5. 0基础业务通俗类比 (For Beginners)
 
 ### Analogy for 稀疏记忆检索动力学
-- **Beginner Analogy**: 想象一个图书管理员根据几个关键词找书。“密集”搜索可能会把哪怕只包含一个关键词的书都拿出来，导致最终结果充满干扰信息。而“稀疏”搜索会提前严格过滤掉弱相关项，更快地只把最相关的书递给你。
+- **Beginner Analogy**: 想象一个图书管理员根据几个关键词找书；“密集”搜索可能会把哪怕只包含一个关键词的书都拿出来，导致最终结果充满干扰信息；而“稀疏”搜索会提前严格过滤掉弱相关项，更快地只把最相关的书递给你
 
 ### Analogy for 稀疏现代 Hopfield 模型 (On Sparse Modern Hopfield Model)
 - **初学者类比**:
-  想象一位侦探在翻看数千张嫌疑人照片。密集的搜索引擎试图给每一张脸都打一个微小的“匹配分数”，这会制造出一个巨大且嘈杂的烂摊子。而稀疏搜索引擎就像一个严格的过滤器：它瞬间扔掉 99% 与描述不符的照片，只返回最精确的几个候选人，从而给出一个清晰锐利得多的答案。
+  想象一位侦探在翻看数千张嫌疑人照片；密集的搜索引擎试图给每一张脸都打一个微小的“匹配分数”，这会制造出一个巨大且嘈杂的烂摊子；而稀疏搜索引擎就像一个严格的过滤器：它瞬间扔掉 99% 与描述不符的照片，只返回最精确的几个候选人，从而给出一个清晰锐利得多的答案
 
 
 
 ### RAFA 后验采样遗憾界类比 (Practical Analogies)
-想象你正在探索一个迷宫。你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）。你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤。
+想象你正在探索一个迷宫；你不是随机尝试每条路径，而是利用你的记忆（缓冲区）来想象迷宫不同的可能地图（后验采样）；你选择让你感到最不确定（最高熵）的地图进行下一步探索，确保只有当你真正能学到关于迷宫布局的重要信息时，才会采取新的步骤
 
 ### 近似最优内存与后悔值权衡类比 (Practical Analogies)
-想象一下，你试图从数千名股票顾问中挑选最好的一位。如果你有无限的记忆力，你可以记住他们做过的每一个预测。如果你几乎没有记忆力，对手（市场）就可以轻易地欺骗你。这项研究表明，你至少需要记住一定数量（大约是顾问数量的平方根）的顾问记录，才能在不被完全愚弄的情况下做出良好的整体选择。
+想象一下，你试图从数千名股票顾问中挑选最好的一位；如果你有无限的记忆力，你可以记住他们做过的每一个预测；如果你几乎没有记忆力，对手（市场）就可以轻易地欺骗你；这项研究表明，你至少需要记住一定数量（大约是顾问数量的平方根）的顾问记录，才能在不被完全愚弄的情况下做出良好的整体选择
 
 ### Weaved Integrations
 
-想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）。传统的AI方法只是随机洗牌（添加噪声）。我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道。每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测。
+想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）；传统的AI方法只是随机洗牌（添加噪声）；我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道；每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测
 ### Analogy for
 
 ### Analogy for 基于互动计数的确定性指数衰减记忆生存定律 (Deterministic Exponential Decay for Memory Survival)
-想象一下，你的大脑像一个有着固定大小的“收纳盒”。在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）。
-如果用传统的大模型黑盒方法来整理这个收纳盒，就像是雇了一个性格阴晴不定、每次收费还很高的临时工，让他每次凭感觉把不重要的东西扔掉，你永远不知道他下次会扔掉什么。
-而“基于互动计数的确定性指数衰减定律”则像是引入了一套严格的物理法则：每个记忆都会随着“新发生事情的次数”（$\Delta n$，而不是过去了多少天）按比例慢慢变淡。这个变淡的速度（$\lambda$）不仅是固定的，而且最初“重要性标签”越高的记忆，它变淡得就越慢（受到惯性参数 $\eta$ 的保护）。一旦某个记忆的清晰度降到了一条死线（$\Omega_{\mathrm{kill}}$）以下，它就会被百分之百确定地移出大脑的“常用工作区”，归档到日记本（长期冷数据档案）里。这样一来，收纳盒永远不会满，每一次留下的记忆都是数学公式精确计算过的结果，完全不需要那个昂贵的临时工。
+想象一下，你的大脑像一个有着固定大小的“收纳盒”；在这个收纳盒里，每放入一个新的记忆片段（比如“客人喜欢喝冰美式”），大脑就会给它贴上一个“重要性标签”（Survival Score $\Omega$）
+如果用传统的大模型黑盒方法来整理这个收纳盒，就像是雇了一个性格阴晴不定、每次收费还很高的临时工，让他每次凭感觉把不重要的东西扔掉，你永远不知道他下次会扔掉什么
+而“基于互动计数的确定性指数衰减定律”则像是引入了一套严格的物理法则：每个记忆都会随着“新发生事情的次数”（$\Delta n$，而不是过去了多少天）按比例慢慢变淡；这个变淡的速度（$\lambda$）不仅是固定的，而且最初“重要性标签”越高的记忆，它变淡得就越慢（受到惯性参数 $\eta$ 的保护）；一旦某个记忆的清晰度降到了一条死线（$\Omega_{\mathrm{kill}}$）以下，它就会被百分之百确定地移出大脑的“常用工作区”，归档到日记本（长期冷数据档案）里；这样一来，收纳盒永远不会满，每一次留下的记忆都是数学公式精确计算过的结果，完全不需要那个昂贵的临时工
 
 ### Analogy for 确定性因果结构 (Deterministic Causal Structure, DCS)
-想象好几个人正在合作拼一幅巨大的拼图（系统的共享记忆状态）。
-以前的做法是大家需要互相争抢“谁先放下一块”，或者担心“有人把拼图寄晚了导致全盘错乱”（这叫策略与网络路由问题）。而现在，我们给每一块拼图都印上独一无二的条形码（这就是带有唯一 `rid` 的 Contribution）。
+想象好几个人正在合作拼一幅巨大的拼图（系统的共享记忆状态）
+以前的做法是大家需要互相争抢“谁先放下一块”，或者担心“有人把拼图寄晚了导致全盘错乱”（这叫策略与网络路由问题）；而现在，我们给每一块拼图都印上独一无二的条形码（这就是带有唯一 `rid` 的 Contribution）
 
-通过名为“上半格”的数学魔法，把拼图拼起来的过程就像把它们全倒在桌子上。你先从左手倒下拼图，还是先从右手倒下拼图根本不重要（满足“交换律”和“结合律”，与顺序无关）；如果有人不小心寄给了你两块完全一样的拼图，它们也能完美重叠在一起，不影响整体画面（满足“幂等律”）。最终，只要所有人都拿到了所有的拼图块，大家拼出来的画面就是**绝对一致且确定的**。这就在底层机制上彻底实现了“快递怎么送”和“拼图长什么样”的完美解耦。
+通过名为“上半格”的数学魔法，把拼图拼起来的过程就像把它们全倒在桌子上；你先从左手倒下拼图，还是先从右手倒下拼图根本不重要（满足“交换律”和“结合律”，与顺序无关）；如果有人不小心寄给了你两块完全一样的拼图，它们也能完美重叠在一起，不影响整体画面（满足“幂等律”）；最终，只要所有人都拿到了所有的拼图块，大家拼出来的画面就是**绝对一致且确定的**；这就在底层机制上彻底实现了“快递怎么送”和“拼图长什么样”的完美解耦
 
 ### Analogy for 参数化记忆与代理自我演化
-这就像是刻在脑子里的肌肉记忆，而不是翻找记事本。遇到问题直接产生确定性反应，再也不会出现查不到资料就乱答的黑盒事故。
+这就像是刻在脑子里的肌肉记忆，而不是翻找记事本；遇到问题直接产生确定性反应，再也不会出现查不到资料就乱答的黑盒事故
 
 ### 5.1 连续时间 Hopfield 网络
-想象一个图书管理员在找书。在传统的“离散”图书馆里，她只能在一个个固定的书架上找。如果用户的需求刚好介于两个书架之间，她可能就会抓瞎，甚至胡编乱造（这就是大模型的幻觉）。而“连续时间记忆 Hopfield 网络”把图书馆变成了一片液态的知识海洋。这里没有孤立的书架，只有连绵起伏的山谷。那个复杂的“能量函数”，其实就是物理学中的重力。不管管理员从哪里开始找，重力法则会百分之百保证她顺着山坡平稳地滑入正确的知识谷底，绝无可能迷失在真空中。
+想象一个图书管理员在找书；在传统的“离散”图书馆里，她只能在一个个固定的书架上找；如果用户的需求刚好介于两个书架之间，她可能就会抓瞎，甚至胡编乱造（这就是大模型的幻觉）；而“连续时间记忆 Hopfield 网络”把图书馆变成了一片液态的知识海洋；这里没有孤立的书架，只有连绵起伏的山谷；那个复杂的“能量函数”，其实就是物理学中的重力；不管管理员从哪里开始找，重力法则会百分之百保证她顺着山坡平稳地滑入正确的知识谷底，绝无可能迷失在真空中
 
 ### 5.2 拓扑流形匹配自编码器
-想象你有一张巨大的、揉皱的世界地图（高维复杂环境）。如果你直接把它压扁装进相框（传统降维），原本在地图上相邻的城市可能会被撕裂，甚至不同大陆会被强行叠在一起（这会引发后续决策的灾难性幻觉）。
-“拓扑流形匹配”就像是用一套数学显微镜（持续同调）检查地图上的每一个环路和连接。我们在压缩时，严格保证：如果在现实中两个城市之间有路，在压缩后的记忆里也必须有路。它保证了记忆的“形状”绝对不走样。
+想象你有一张巨大的、揉皱的世界地图（高维复杂环境）；如果你直接把它压扁装进相框（传统降维），原本在地图上相邻的城市可能会被撕裂，甚至不同大陆会被强行叠在一起（这会引发后续决策的灾难性幻觉）
+“拓扑流形匹配”就像是用一套数学显微镜（持续同调）检查地图上的每一个环路和连接；我们在压缩时，严格保证：如果在现实中两个城市之间有路，在压缩后的记忆里也必须有路；它保证了记忆的“形状”绝对不走样
 
 ### 4.4 确定性语义切片同步算法
 ```python
@@ -536,8 +555,8 @@ def synchronize_semantic_slice(
     r_validators: int
 ) -> dict:
     """
-    无依赖的确定性语义切片同步算法。
-    被限制的无效化概率边界为: (epsilon_max)^r_validators。
+    无依赖的确定性语义切片同步算法
+    被限制的无效化概率边界为: (epsilon_max)^r_validators
     """
     for update in global_updates_stream:
         update_entities = update['entities']
@@ -560,12 +579,12 @@ def synchronize_semantic_slice(
 ```
 
 ### Analogy for 对比表征对抗灾难性遗忘
-想象你的大脑记忆是一座拥挤的图书馆。当新书进来时，为了防止你扔掉旧书（灾难性遗忘），我们首先在数学上计算新书和旧书的相似度（即 $J(t,t')$ 相似度）。基于这个确定性的数值，我们只对图书馆的布局做极其严格的距离调整，从而百分之百保证旧知识的区域不被破坏。
+想象你的大脑记忆是一座拥挤的图书馆；当新书进来时，为了防止你扔掉旧书（灾难性遗忘），我们首先在数学上计算新书和旧书的相似度（即 $J(t,t')$ 相似度）；基于这个确定性的数值，我们只对图书馆的布局做极其严格的距离调整，从而百分之百保证旧知识的区域不被破坏
 
 ### 基于协方差的确定性表征 (Deterministic Representation via Covariance)
 System Container: Memory System
 Frontier Source: Set-Inclusive Uncertainty Modeling for Robust Brain Tumor Segmentation (arXiv:2606.30374)
-Deterministic Convergence Mechanism: 系统在隐空间中利用协方差映射，从数学上对不确定性进行了限制。通过显式地追踪参数扰动的协方差 $\mathrm{Cov}_{\epsilon}[\nabla_{\theta}L(\theta;\epsilon)]=\frac{\partial{\mu_{i}}}{\partial\theta}^{\top}\mathrm{Cov}_{\epsilon}[\nabla_{r_{i}}L(\theta;\epsilon)]\ \frac{\partial{\mu_{i}}}{\partial\theta}$，它强制记忆表征将高置信度的确定性特征与随机噪声完全分离开来。
+Deterministic Convergence Mechanism: 系统在隐空间中利用协方差映射，从数学上对不确定性进行了限制；通过显式地追踪参数扰动的协方差 $\mathrm{Cov}_{\epsilon}[\nabla_{\theta}L(\theta;\epsilon)]=\frac{\partial{\mu_{i}}}{\partial\theta}^{\top}\mathrm{Cov}_{\epsilon}[\nabla_{r_{i}}L(\theta;\epsilon)]\ \frac{\partial{\mu_{i}}}{\partial\theta}$，它强制记忆表征将高置信度的确定性特征与随机噪声完全分离开来
 
 ### Source Code Breakdown
 ```python
@@ -576,8 +595,8 @@ Deterministic Convergence Mechanism: 系统在隐空间中利用协方差映射�
 
 import torch
 def compute_deterministic_covariance_bound(mu_grad, r_cov):
-    # 通过将隐空间 r_i 的扰动协方差映射到参数空间 \theta，强制确立确定性边界。
-    # 我们只施加约束，不执行随意的神经网络更新。
+    # 通过将隐空间 r_i 的扰动协方差映射到参数空间 \theta，强制确立确定性边界
+    # 我们只施加约束，不执行随意的神经网络更新
 
     # \frac{\partial{\mu_{i}}}{\partial\theta}^{\top} * \mathrm{Cov}_{\epsilon} * \frac{\partial{\mu_{i}}}{\partial\theta}
     mapped_covariance = mu_grad.T @ r_cov @ mu_grad
@@ -585,13 +604,13 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 ```
 
 ### 0基础业务通俗类比 (For Beginners)
-想象你坐在一辆颠簸的车上画地图。传统的记忆系统会把所有手抖画歪的线条都记下来，把现实的道路和随机的颠簸（幻觉）混在一起。我们全新的“协方差边界”就像是一个数学上的车辆减震器。它极其严格地将真实的、确定性的方向（马路）与随机的震动（$\mathcal{N}(0,I)$ 噪声）剥离开，保证只有绝对真实的东西才会被存入你的长期记忆中。
+想象你坐在一辆颠簸的车上画地图；传统的记忆系统会把所有手抖画歪的线条都记下来，把现实的道路和随机的颠簸（幻觉）混在一起；我们全新的“协方差边界”就像是一个数学上的车辆减震器；它极其严格地将真实的、确定性的方向（马路）与随机的震动（$\mathcal{N}(0,I)$ 噪声）剥离开，保证只有绝对真实的东西才会被存入你的长期记忆中
 
 ```python
 # Eq: \displaystyle\mathrm{D}_{\mathrm{KL}}(\rho_{k+1}\|\rho^{*})
     # Eq: \displaystyle\leq\frac{1-\alpha^{2}h^{2}}{1+2\alpha h}\mathrm{D}_{\mathrm{KL}}(\rho_{k}\|\rho^{*})+\frac{h^{2}}{2(1+2\alpha h)}M_{0}\exp(-4\alpha hk)+\mathcal{O}(h^{3})
 
-    # 我们通过最小化确定性上限来更新记忆状态表征。
+    # 我们通过最小化确定性上限来更新记忆状态表征
     decay_term = (1 - (alpha**2 * h**2)) / (1 + 2 * alpha * h)
     noise_term = (h**2 / (2 * (1 + 2 * alpha * h))) * M_0 * math.exp(-4 * alpha * h * k)
 
@@ -601,18 +620,18 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 
 💡 0基础业务通俗类比 (For Beginners)
 
-想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）。传统的AI方法只是随机洗牌（添加噪声）。我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道。每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测。
+想象一位图书管理员试图将一堆乱七八糟的书（代表原始记忆）重新整理，使其完美符合一个理想的分类方案（目标分布 $\rho^*$）；传统的AI方法只是随机洗牌（添加噪声）；我们的系统使用了一个数学证明的“Wasserstein约束”，它就像一条严格的轨道；每一次整理动作（时间步 $h$）都能保证书堆以精确计算的幅度，在结构上无限逼近完美，确保最终得到一个确定性的完美图书馆，没有任何随机的盲目猜测
 
 🔗 [Weekly Sync Report] 本周文档级联编织与动态冲突审计 2026-07
-📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中。
-🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突。所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御。双语对齐已验证。
+📂 动态演进映射: 已将所有累积的每日研究块整合到核心理论中
+🕵️ 跨方向范式冲突审计 (Paradigm Conflict Audit): 未检测到范式冲突；所有整合的理论均严格符合确定性收敛框架和边界原则，在不依赖中心化协调的情况下，支持对单点故障 (SPOF) 和结构性发散的防御；双语对齐已验证
 
 ### 面向 Agent 记忆的降阶效用状态
 
 - **System Container:** Memory System
 - **Frontier Source:** RoMeRL: Balancing Feedback Coverage and the Memory-Reward Trap in Self-Evolving Agent Memory via Reduced-Order Utility States (Yi Yang, Zhennan Chen, Yihong Zhuang, Tiehan Fan, Yinan Chen, Jian Li, Jian Yang, Ying Tai, arXiv:2608.02508v2)
-- **Original Problem:** 用于自我进化 LLM Agent 的基于学习的记忆系统面临两个紧密耦合的挑战：1）轨迹索引效用随交互历史增长，将有限的反馈分散在不断扩大的状态空间中；2）轨迹级奖励被联合分配给共同检索的记忆，导致无关经验收到误导性更新并陷入记忆奖励陷阱。
-- **Core Assumptions:** 可获得来自配对反事实展开或等效归因的坐标级因果标签；每个效用坐标遵循平稳的干净-错误转换；干净到错误的概率受 $\gamma$ 限制，错误到干净的概率至少为 $\lambda > 0$。
+- **Original Problem:** 用于自我进化 LLM Agent 的基于学习的记忆系统面临两个紧密耦合的挑战：1）轨迹索引效用随交互历史增长，将有限的反馈分散在不断扩大的状态空间中；2）轨迹级奖励被联合分配给共同检索的记忆，导致无关经验收到误导性更新并陷入记忆奖励陷阱
+- **Core Assumptions:** 可获得来自配对反事实展开或等效归因的坐标级因果标签；每个效用坐标遵循平稳的干净-错误转换；干净到错误的概率受 $\gamma$ 限制，错误到干净的概率至少为 $\lambda > 0$
 - **Mathematical Mechanism:**
   - **Positive Consolidated Coordinate (PCC)** (核心更新公式):
     $$m_{g,t}^{+,\mathrm{C}} = \arg\min_{m_i\in\mathcal{D}_{g,t}:y_i=1} \ell_i$$
@@ -622,14 +641,14 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
     $$m_{g,t}^{-,\mathrm{C}} = \arg\max_{\substack{m_i\in\mathcal{D}_{g,t}:y_i=0\\ Q_i>Q_{\mathrm{init}}^{-}}} Q_i$$
   - **Negative Adaptive Coordinate (NAC)** (核心更新公式):
     $$m_{g,t}^{-,\mathrm{A}} = \arg\max_{m_i\in\mathcal{D}_{g,t}:y_i=0} t_i$$
-  - **Convergence Bound** (收敛界): 错误活跃坐标的期望数量最多为 $d\frac{\gamma}{\gamma+\lambda}$。
-- **Applicability Scope:** 适用于具有基于学习的记忆系统的自我进化 LLM Agent，需要管理不断扩展的轨迹索引效用而不分散反馈。
-- **Limitations:** 该模型依赖于结果级奖励，这并不能完全解决因果信用分配问题。估计转换量 $\gamma$ 和 $\lambda$ 需要来自配对反事实展开或等效归因的坐标级因果标签。
+  - **Convergence Bound** (收敛界): 错误活跃坐标的期望数量最多为 $d\frac{\gamma}{\gamma+\lambda}$
+- **Applicability Scope:** 适用于具有基于学习的记忆系统的自我进化 LLM Agent，需要管理不断扩展的轨迹索引效用而不分散反馈
+- **Limitations:** 该模型依赖于结果级奖励，这并不能完全解决因果信用分配问题；估计转换量 $\gamma$ 和 $\lambda$ 需要来自配对反事实展开或等效归因的坐标级因果标签
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）。如果你学到了新的一课，你只更新这四本桌上书籍的分数。这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉。
+- **Beginner Analogy:** 想象一下组织一个巨大的图书馆，你不需要为你读过的每一本书都打一个独特的分数，你只需要在书桌上保留四本特定的“最佳范例”书（例如，最短的成功经验、失败后的第一次成功经验、最有希望的失败经验和最近一次的失败经验）；如果你学到了新的一课，你只更新这四本桌上书籍的分数；这样，你就不需要把时间浪费在给成千上万本旧书打分上，如果桌上的一本书给了你糟糕的建议，它也会被迅速替换掉
 
 <!-- WEEKLY_SYNC_REPORT -->
 ## Weekly Document Cascade & Conflict Audit
@@ -653,22 +672,22 @@ def compute_deterministic_covariance_bound(mu_grad, r_cov):
 - **Authors:** Jiahao Dai, Jing-Wen Yi, Li Chai
 - **URL:** http://arxiv.org/abs/2303.14023v1
 - **Publication Date:** 2023-03-24
-- **Theoretical Selection Reason:** 该论文严格构建了利用多阶历史记忆加速多智能体系统一致性收敛速度的协议，将经验性的“记忆优势”转化为了具有明确谱特性和边界条件的理论推导。
+- **Theoretical Selection Reason:** 该论文严格构建了利用多阶历史记忆加速多智能体系统一致性收敛速度的协议，将经验性的“记忆优势”转化为了具有明确谱特性和边界条件的理论推导
 
 #### 论文原始问题 (Original Problem)
-在标准的多智能体系统无记忆控制协议中，为了实现快速的一致性收敛，需要仔细调整控制参数，而这些参数往往受限于图拓扑特性（如 Fiedler 值）。本研究探讨了是否可以在智能体的控制输入中引入过去速度的 $M$ 阶历史记录（记忆），从而系统性地加速二阶多智能体系统的一致性收敛速度。
+在标准的多智能体系统无记忆控制协议中，为了实现快速的一致性收敛，需要仔细调整控制参数，而这些参数往往受限于图拓扑特性（如 Fiedler 值）；本研究探讨了是否可以在智能体的控制输入中引入过去速度的 $M$ 阶历史记录（记忆），从而系统性地加速二阶多智能体系统的一致性收敛速度
 
 #### 核心假设 (Core Assumptions)
-1. **二阶动力学 (Second-Order Dynamics)**: 连续的智能体状态（位置与速度）遵循线性更新机制，在离散采样周期 $\tau$ 内将速度积分至位置。
-2. **固定拓扑 (Fixed Topology)**: 智能体通信网络被建模为固定的无向图，拉普拉斯矩阵 $\mathcal{L}$ 的属性是不随时间变化的。
-3. **零和记忆权重 (Zero-Sum Memory Weights)**: 为确保实际能够渐近达到一致性，分配给历史速度项的系数必须满足 $\sum_{m=0}^M {\theta_m} = 0$。
+1. **二阶动力学 (Second-Order Dynamics)**: 连续的智能体状态（位置与速度）遵循线性更新机制，在离散采样周期 $\tau$ 内将速度积分至位置
+2. **固定拓扑 (Fixed Topology)**: 智能体通信网络被建模为固定的无向图，拉普拉斯矩阵 $\mathcal{L}$ 的属性是不随时间变化的
+3. **零和记忆权重 (Zero-Sum Memory Weights)**: 为确保实际能够渐近达到一致性，分配给历史速度项的系数必须满足 $\sum_{m=0}^M {\theta_m} = 0$
 
 #### 数学机制 (Mathematical Mechanism)
 利用过去速度的 $M$ 阶记忆为每个智能体 $i$ 设计的控制协议公式化如下：
 $$
 {u_i}(k) = {\varepsilon _1}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({x_j}(k) \!-\! {x_i}(k)} ) \!+\! {\varepsilon _2}\!\sum\limits_{j \in {\mathcal{N}_i}} {{a_{ij}}({v_j}(k) \!-\! {v_i}(k)} ) + \sum\limits_{m = 0}^M {{\theta _m}{v_i}(k \!-\! m)}
 $$
-其中，${\varepsilon_1}, {\varepsilon_2}$ 是空间耦合增益，${\theta_m}$ 是时间维度上的记忆抽头权重。
+其中，${\varepsilon_1}, {\varepsilon_2}$ 是空间耦合增益，${\theta_m}$ 是时间维度上的记忆抽头权重
 
 系统达到一致性的必要条件要求历史速度项系数之和必须为零：
 $$
@@ -676,25 +695,25 @@ $$
 $$
 
 #### 收敛或行为边界 (Convergence or behavior boundaries)
-如果记忆权重满足零和条件，一致性问题将转化为在图谱域中确保所有解耦子系统的同时镇定问题。通过选择适当的记忆权重 ${\theta_m}$，可以最小化主导系统谱半径的最大特征值，从而在理论上证明相较于无记忆协议（$\theta_m = 0$），可以显著加速渐近收敛速率。
+如果记忆权重满足零和条件，一致性问题将转化为在图谱域中确保所有解耦子系统的同时镇定问题；通过选择适当的记忆权重 ${\theta_m}$，可以最小化主导系统谱半径的最大特征值，从而在理论上证明相较于无记忆协议（$\theta_m = 0$），可以显著加速渐近收敛速率
 
 #### 适用范围 (Applicable Scope)
-- 智能体在具有二阶动力学（动量或显式速度项）的连续或离散化状态空间中移动或更新参数的系统。
-- 具有同步更新步调、且能够可靠存储与访问过去状态记忆（$M$ 步）的环境。
+- 智能体在具有二阶动力学（动量或显式速度项）的连续或离散化状态空间中移动或更新参数的系统
+- 具有同步更新步调、且能够可靠存储与访问过去状态记忆（$M$ 步）的环境
 
 #### 局限 (Limitations)
-- 推导依赖于固定拓扑假设；未明确涵盖连接频繁断开或建立的动态切换图结构。
-- 随着记忆深度 $M$ 的增加，计算和存储开销呈线性增长，且高阶特征方程的求根调优过程会变得极其复杂。
-- 该严格的线性假设模型排除了非线性智能体动力学或网络中存在不均匀通信延迟的情况。
+- 推导依赖于固定拓扑假设；未明确涵盖连接频繁断开或建立的动态切换图结构
+- 随着记忆深度 $M$ 的增加，计算和存储开销呈线性增长，且高阶特征方程的求根调优过程会变得极其复杂
+- 该严格的线性假设模型排除了非线性智能体动力学或网络中存在不均匀通信延迟的情况
 
 #### Agent 架构映射 (Agent Architecture Mapping)
-在 **Memory System** 架构中，该数学模型为基于速度或动量的优化场景（如分布式学习一致性）引入了一种结构性约束。当 Agent 利用过去的梯度或状态更新（一种多抽头记忆缓冲区）时，必须在概念上对历史权重强制执行类似于 $\sum {\theta_m} = 0$ 的正则化约束，以防止系统发散。这意味着仅仅简单地累积历史并不必然有益；历史权重函数必须在代数上保持平衡。
+在 **Memory System** 架构中，该数学模型为基于速度或动量的优化场景（如分布式学习一致性）引入了一种结构性约束；当 Agent 利用过去的梯度或状态更新（一种多抽头记忆缓冲区）时，必须在概念上对历史权重强制执行类似于 $\sum {\theta_m} = 0$ 的正则化约束，以防止系统发散；这意味着仅仅简单地累积历史并不必然有益；历史权重函数必须在代数上保持平衡
 
 #### 仓库实现状态 (Repository Implementation Status)
 EVIDENCE_INSUFFICIENT
 
 #### 初学者类比 (Beginner Analogy)
-想象一群司机试图在高速公路上统一车速以组成车队。如果一个司机只看当下邻近车辆的距离和速度（无记忆），他们可能会反应过度猛踩刹车，导致车速剧烈波动。如果他们还能记住自己过去几秒钟内的加速习惯（多阶记忆），并以一种平衡的方式（零和权重）综合参考这些历史经验，他们就能更平滑地调整反应，更快地融入车队速度，而不会频繁冲过头。
+想象一群司机试图在高速公路上统一车速以组成车队；如果一个司机只看当下邻近车辆的距离和速度（无记忆），他们可能会反应过度猛踩刹车，导致车速剧烈波动；如果他们还能记住自己过去几秒钟内的加速习惯（多阶记忆），并以一种平衡的方式（零和权重）综合参考这些历史经验，他们就能更平滑地调整反应，更快地融入车队速度，而不会频繁冲过头
 
 #### 证据状态 (Evidence Status)
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
@@ -711,20 +730,20 @@ EVIDENCE_INSUFFICIENT
 - **Authors:** Meshal Alharbi, Mardavij Roozbehani, Munther Dahleh
 - **URL:** https://arxiv.org/abs/2312.12558
 - **Publication Date:** 2023-12-19
-- **Theoretical Selection Reason:** 分析了在保留并利用先验结构知识（特别是加性扰动）时 Q 学习的理论样本复杂性，克服了状态-动作空间维度的依赖，对智能体的记忆构建有理论启发。
-- **Original Problem Formulation (论文原始问题):** 如何结合对系统动力学的部分或有噪声的先验知识（特别是加性扰动模型），以加速在线强化学习过程并降低样本复杂性。
-- **Core Assumptions (核心假设):** (1) 系统根据加性扰动模型演化：$S_{h+1} = f(S_h, A_h) + W_h$。(2) $f$ 代表潜在的系统动力学（可以部分已知/学习得到），$W_h$ 是独立于状态和动作的未知扰动。
-- **Mathematical Mechanism (数学机制):** 提出了一种乐观 Q 学习算法，该算法使用基于已知/近似函数 $f$ 的有偏估计器，而不是估计完整的状态转移概率，并结合基于信息限制的探索奖励。
+- **Theoretical Selection Reason:** 分析了在保留并利用先验结构知识（特别是加性扰动）时 Q 学习的理论样本复杂性，克服了状态-动作空间维度的依赖，对智能体的记忆构建有理论启发
+- **Original Problem Formulation (论文原始问题):** 如何结合对系统动力学的部分或有噪声的先验知识（特别是加性扰动模型），以加速在线强化学习过程并降低样本复杂性
+- **Core Assumptions (核心假设):** (1) 系统根据加性扰动模型演化：$S_{h+1} = f(S_h, A_h) + W_h$；(2) $f$ 代表潜在的系统动力学（可以部分已知/学习得到），$W_h$ 是独立于状态和动作的未知扰动
+- **Mathematical Mechanism (数学机制):** 提出了一种乐观 Q 学习算法，该算法使用基于已知/近似函数 $f$ 的有偏估计器，而不是估计完整的状态转移概率，并结合基于信息限制的探索奖励
 - **Core Update Formula (核心更新公式):**
   部分动力学知识下的后悔界 (Theorem 1)：
-  总后悔最多为 $\mathcal{O}(\sqrt{H^6T\iota} + L\zeta HT)$，其中 $\zeta$ 是近似误差 $||\hat{f}-f||_\infty$ 的上界。
-- **Convergence or Behavior Boundaries (收敛或行为边界):** 在完全已知 $f$ 的情况下，实现了独立于状态/动作基数的亚线性 $\tilde{\mathcal{O}}(\text{Poly}(H)\sqrt{T})$ 后悔界。当使用有噪声的估计 $\hat{f}$ 时，后悔随近似误差 $\zeta$ 线性增长，且该误差不会被状态数 $S$ 或动作数 $A$ 放大。
-- **Scope of Applicability (适用范围):** 转移状态遵循加性扰动模型的有限幕式马尔可夫决策过程。适用于库存控制和运筹学等问题。
-- **Limitations (局限):** 对动力学结构形式（独立于状态/动作的加性扰动）有较强的假设。持续的偏差 $\zeta > 0$ 会在后悔中引入不可避免的线性项。
-- **Agent Architecture Mapping (Agent 架构映射):** DESIGN_CANDIDATE。该理论启发了记忆系统 (Memory System) 的设计：智能体应该显式地维护环境的结构先验模型（“世界模型” $\hat{f}$），以极大地提高其价值估计的样本效率，而不是纯粹依赖无结构的无模型更新。
+  总后悔最多为 $\mathcal{O}(\sqrt{H^6T\iota} + L\zeta HT)$，其中 $\zeta$ 是近似误差 $||\hat{f}-f||_\infty$ 的上界
+- **Convergence or Behavior Boundaries (收敛或行为边界):** 在完全已知 $f$ 的情况下，实现了独立于状态/动作基数的亚线性 $\tilde{\mathcal{O}}(\text{Poly}(H)\sqrt{T})$ 后悔界；当使用有噪声的估计 $\hat{f}$ 时，后悔随近似误差 $\zeta$ 线性增长，且该误差不会被状态数 $S$ 或动作数 $A$ 放大
+- **Scope of Applicability (适用范围):** 转移状态遵循加性扰动模型的有限幕式马尔可夫决策过程；适用于库存控制和运筹学等问题
+- **Limitations (局限):** 对动力学结构形式（独立于状态/动作的加性扰动）有较强的假设；持续的偏差 $\zeta > 0$ 会在后悔中引入不可避免的线性项
+- **Agent Architecture Mapping (Agent 架构映射):** DESIGN_CANDIDATE；该理论启发了记忆系统 (Memory System) 的设计：智能体应该显式地维护环境的结构先验模型（“世界模型” $\hat{f}$），以极大地提高其价值估计的样本效率，而不是纯粹依赖无结构的无模型更新
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy (初学者类比):** 想象你在一条颠簸的道路（扰动）上开车，手里有一张不太准确的地图（部分动力学知识）。即使地图有缺陷，只要错误不大，你学会认路的速度也会比完全瞎开的人快得多。
+- **Beginner Analogy (初学者类比):** 想象你在一条颠簸的道路（扰动）上开车，手里有一张不太准确的地图（部分动力学知识）；即使地图有缺陷，只要错误不大，你学会认路的速度也会比完全瞎开的人快得多
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 
@@ -740,9 +759,9 @@ EVIDENCE_INSUFFICIENT
 
 ### Memory 来源时间线
 
-- 2026-09-16 新增 canonical S46，arXiv:2303.14023v1，研究基于记忆信息的二阶多智能体共识加速。
-- 2026-09-20 新增 canonical S50，arXiv:2312.12558v3，研究利用部分动力学知识提升强化学习样本效率。
-- S44/S41 属于 Collaboration revisit；S47/S48/S49 属于 W38 其他领域。
+- 2026-09-16 新增 canonical S46，arXiv:2303.14023v1，研究基于记忆信息的二阶多智能体共识加速
+- 2026-09-20 新增 canonical S50，arXiv:2312.12558v3，研究利用部分动力学知识提升强化学习样本效率
+- S44/S41 属于 Collaboration revisit；S47/S48/S49 属于 W38 其他领域
 
 ### W38 Memory 新增的当前五轴解释
 
@@ -755,10 +774,10 @@ S46：
 
 S50：
 - Evidence level：E4_PREPRINT
-- 原生成文本使用 DESIGN_CANDIDATE / EVIDENCE_INSUFFICIENT 词汇。
-- 当前维护解释按现行契约映射为 DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED。
-- Verified-core Claim State：NOT_ASSIGNED_BY_THIS_WEEKLY_PASS。
-- 理论 regret bound 仍严格受论文中的加性扰动模型与近似误差假设约束。
+- 原生成文本使用 DESIGN_CANDIDATE / EVIDENCE_INSUFFICIENT 词汇
+- 当前维护解释按现行契约映射为 DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED
+- Verified-core Claim State：NOT_ASSIGNED_BY_THIS_WEEKLY_PASS
+- 理论 regret bound 仍严格受论文中的加性扰动模型与近似误差假设约束
 
 ### S50 maintenance normalization
 
@@ -771,7 +790,7 @@ S50：
 - Validation state：NOT_TESTED
 - Source registration：S50
 
-原生成词汇作为历史研究文本保留。本周度段提供当前解释，不倒写成“原来就使用了新契约词汇”。
+原生成词汇作为历史研究文本保留；本周度段提供当前解释，不倒写成“原来就使用了新契约词汇”
 
 ```text
 论文中的 STRUCTURAL_PRIOR
@@ -783,17 +802,17 @@ S50：
 
 ### 冲突与继承审计
 
-- S46 与 S50 是两个不同 canonical source identity。
-- 二者都使用“memory”语义不代表机制相同：S46 是二阶共识中的多 tap 速度历史，S50 是 episodic RL 中的先验结构动力学。
-- 二者都不建立本仓库存在 LLM-agent memory runtime 的事实。
-- 论文中保存历史或部分动力学知识，不证明仓库的持久化、检索、修正或删除行为。
-- Weekly/Monthly 重复引用属于继承，除非明确增加独立证据。
+- S46 与 S50 是两个不同 canonical source identity
+- 二者都使用“memory”语义不代表机制相同：S46 是二阶共识中的多 tap 速度历史，S50 是 episodic RL 中的先验结构动力学
+- 二者都不建立本仓库存在 LLM-agent memory runtime 的事实
+- 论文中保存历史或部分动力学知识，不证明仓库的持久化、检索、修正或删除行为
+- Weekly/Monthly 重复引用属于继承，除非明确增加独立证据
 
 ### 双语状态
 
-W38 已检查的来源身份、假设、限制与当前五轴边界，与英文 Memory System 对应段一致。
+W38 已检查的来源身份、假设、限制与当前五轴边界，与英文 Memory System 对应段一致
 
-不声称整份中英文文档已经逐句完成语义认证。
+不声称整份中英文文档已经逐句完成语义认证
 
 ### 周度结果
 
@@ -814,16 +833,16 @@ MONTH_OPEN
 - **Frontier Source:** Internal State-Based Policy Gradient Methods for Partially Observable Markov Potential Games (arXiv:2604.00433v1)
   - **Authors:** Wonseok Yang, Thinh T. Doan
   - **URL:** https://arxiv.org/abs/2604.00433
-- **论文原始问题 (Original Problem):** 解决部分可观测马尔可夫势博弈（POMPG）由于部分可观测性以及在无限历史中计算精确信念状态的困难性而极具挑战。
-- **核心假设 (Core Assumptions):** 存在势函数（potential function）将博弈映射为全局目标；真实的公共信息信念状态与内部状态近似信念状态之间的总变差距离（total variation distance） $d_b$ 有界；以及初始策略的探索率严格为正（$\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$）。
-- **数学机制 (Mathematical Mechanism):** 将共享的观测历史压缩为有限的内部状态 $w^k$，并运行有限状态控制器（FSC）自然策略梯度更新。更新利用 Fisher 信息矩阵的 Moore-Penrose 伪逆：$\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 在学习率为 $\eta = (1-\beta)^2/(2n\phi_{\max})$ 的情况下，时间平均的纳什均衡差距收敛速度为 $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 是一个与信念近似误差 $d_b$ 成正比的渐近误差下界。
-- **适用范围 (Applicable Scope):** 适用于代理共享部分信息但无法维护完整信念状态的多智能体系统，且受限于有限内部记忆约束的 POMPG 环境。
-- **局限 (Limitations):** 收敛结果仅达到受误差下界 $\varepsilon_{\text{FSC}}$ 约束的近似纳什均衡。边界常数与 $\sqrt{a}$ 成反比，这可能在内部状态空间较大或使用均匀初始化时显著恶化。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层可支持 Memory System，通过将 Agent 记忆边界建模为近似全局信念的有限内部状态（$w^k$），并显式计算协作任务中由记忆压缩导致的性能下降底线。
+- **论文原始问题 (Original Problem):** 解决部分可观测马尔可夫势博弈（POMPG）由于部分可观测性以及在无限历史中计算精确信念状态的困难性而极具挑战
+- **核心假设 (Core Assumptions):** 存在势函数（potential function）将博弈映射为全局目标；真实的公共信息信念状态与内部状态近似信念状态之间的总变差距离（total variation distance） $d_b$ 有界；以及初始策略的探索率严格为正（$\inf_{\pi}\min_{i}\min_{\hat{h}_i}d_{\xi_i}^{\pi}(\hat{h}_i)>0$）
+- **数学机制 (Mathematical Mechanism):** 将共享的观测历史压缩为有限的内部状态 $w^k$，并运行有限状态控制器（FSC）自然策略梯度更新；更新利用 Fisher 信息矩阵的 Moore-Penrose 伪逆：$\theta_i^{t+1} =\theta_i^{t}+\eta\,F_i(\theta_i^t)^{\dagger}\nabla_{\theta_i}J_i(\pi_{\theta}^t)$
+- **收敛或行为边界 (Convergence or behavior boundaries):** 在学习率为 $\eta = (1-\beta)^2/(2n\phi_{\max})$ 的情况下，时间平均的纳什均衡差距收敛速度为 $\mathcal{O}(\sqrt{n/(aT)}) + \varepsilon_{\text{FSC}}$，其中 $\varepsilon_{\text{FSC}}$ 是一个与信念近似误差 $d_b$ 成正比的渐近误差下界
+- **适用范围 (Applicable Scope):** 适用于代理共享部分信息但无法维护完整信念状态的多智能体系统，且受限于有限内部记忆约束的 POMPG 环境
+- **局限 (Limitations):** 收敛结果仅达到受误差下界 $\varepsilon_{\text{FSC}}$ 约束的近似纳什均衡；边界常数与 $\sqrt{a}$ 成反比，这可能在内部状态空间较大或使用均匀初始化时显著恶化
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层可支持 Memory System，通过将 Agent 记忆边界建模为近似全局信念的有限内部状态（$w^k$），并显式计算协作任务中由记忆压缩导致的性能下降底线
 - **仓库实现状态 (Repository Implementation Status):** EVIDENCE_INSUFFICIENT
-- **初学者类比 (Beginner Analogy):** 想象一群侦探（智能体）试图破案。他们无法记住所有发现的线索（无限信念状态），所以将案卷总结成简短的简报（有限内部状态）。他们的团队合作随着时间的推移稳步提升，但总会犯下少量的错误，这些错误的数量与总结简报时丢失的信息量成正比。
-- **中英文内容 (Bilingual Content):** 中英文版本在已验证的属性上在结构和语义上保持一致。
+- **初学者类比 (Beginner Analogy):** 想象一群侦探（智能体）试图破案；他们无法记住所有发现的线索（无限信念状态），所以将案卷总结成简短的简报（有限内部状态）；他们的团队合作随着时间的推移稳步提升，但总会犯下少量的错误，这些错误的数量与总结简报时丢失的信息量成正比
+- **中英文内容 (Bilingual Content):** 中英文版本在已验证的属性上在结构和语义上保持一致
 - **证据状态 (Evidence Status):**
   - Paper Evidence Status: PAPER_ONLY
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
@@ -836,17 +855,17 @@ MONTH_OPEN
 - **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, version date: 2023-09-22)
 - **Authors:** Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu
 - **URL:** https://arxiv.org/abs/2309.12673
-- **论文原始问题 (Original problem):** 对应于稠密 softmax 注意力机制的标准现代 Hopfield 模型，由于其全局激活范围，在隔离和检索稀疏表示或高度相关的记忆模式时存在困难，缺乏依赖于稀疏性的记忆检索机制。
-- **核心假设 (Core assumptions):** 记忆模式存储在半径为 $R$ 的有界球体内。查询和记忆模式在对应于 sparsemax 分布的 Gini 熵正则化下运行，假设 sparsemax 的变分形式适用。
+- **论文原始问题 (Original problem):** 对应于稠密 softmax 注意力机制的标准现代 Hopfield 模型，由于其全局激活范围，在隔离和检索稀疏表示或高度相关的记忆模式时存在困难，缺乏依赖于稀疏性的记忆检索机制
+- **核心假设 (Core assumptions):** 记忆模式存储在半径为 $R$ 的有界球体内；查询和记忆模式在对应于 sparsemax 分布的 Gini 熵正则化下运行，假设 sparsemax 的变分形式适用
 - **数学机制 (Mathematical mechanism):** 提出了一种使用稀疏熵正则化（Sparsemax）凸共轭的闭式稀疏 Hopfield 能量：
   - 核心更新公式 (Core update formula): $\mathcal{H}(\mathbf{x}) = -\beta^{-1}\sum_{\mu=1}^M \Psi^*(\beta \langle \bm{\xi}_\mu, \mathbf{x} \rangle) + \frac{1}{2} \|\mathbf{x}\|^2 + \frac{1}{2} \max_{\mu}\|\bm{\xi}_\mu\|^2$
   - 数学更新规则 (Mathematical update rule) for retrieval dynamics: $\mathbf{x}_{t+1} = \mathcal{T}(\mathbf{x}_t) = \mathbf{\Xi} \text{Sparsemax}(\beta \mathbf{\Xi}^\top \mathbf{x}_t)$
-- **收敛或行为边界 (Convergence or behavior boundaries):** 记忆检索单调收敛至平稳点。建立了依赖于稀疏性的记忆检索误差界：$\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$，当支持集 $\kappa$（稀疏维度）较小时，该误差界显著收紧，证明了比稠密模拟更紧的误差边界。
-- **适用范围 (Applicable scope):** 需要稀疏模式隔离和噪声鲁棒性的连续状态记忆架构、联想记忆模型和注意力机制。
-- **局限 (Limitations):** 边界和确切容量依赖于记忆模式的明确分布和范数界限。理论上的提升严重依赖于稀疏维度 $\kappa$ 较小这一条件；如果表示变得均匀稠密，该边界可能不会比稠密模型更紧。
-- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING。稀疏检索动力学能在概念上为 Agent 记忆机制提供设计候选，防止松散相关上下文的混合，支持选择性的长期情景检索，而无需检索整个记忆历史。
-- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED。仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块。
-- **初学者类比 (Beginner analogy):** 想象你在一个巨大的图书馆找一本特定的书。稠密现代 Hopfield 模型会以不同亮度打开图书馆里所有的灯，如果很多书长得很像，就很难聚焦。而稀疏现代 Hopfield 模型使用了一束激光聚光灯（sparsemax），严格只照亮你想要的那本书（以及几本高度相关的），让其他的书完全处于黑暗中，这极大地减少了干扰并提高了检索的精准度。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 记忆检索单调收敛至平稳点；建立了依赖于稀疏性的记忆检索误差界：$\|\mathcal{T}(\mathbf{x})-\bm{\xi}_\mu\| \leq m + d^{1/2}m\beta [\kappa (\max_{\nu}\langle\bm{\xi}_\nu,\mathbf{x}\rangle-[\mathbf{\Xi}^\top \mathbf{x}]_{(\kappa)})+\frac{1}{\beta}]$，当支持集 $\kappa$（稀疏维度）较小时，该误差界显著收紧，证明了比稠密模拟更紧的误差边界
+- **适用范围 (Applicable scope):** 需要稀疏模式隔离和噪声鲁棒性的连续状态记忆架构、联想记忆模型和注意力机制
+- **局限 (Limitations):** 边界和确切容量依赖于记忆模式的明确分布和范数界限；理论上的提升严重依赖于稀疏维度 $\kappa$ 较小这一条件；如果表示变得均匀稠密，该边界可能不会比稠密模型更紧
+- **Agent 架构映射 (Agent architecture mapping):** CONCEPTUAL_MAPPING；稀疏检索动力学能在概念上为 Agent 记忆机制提供设计候选，防止松散相关上下文的混合，支持选择性的长期情景检索，而无需检索整个记忆历史
+- **仓库实现状态 (Repository implementation status):** NOT_IMPLEMENTED；仓库目前维护该理论边界与原则，但尚未实现可执行的 SparseHopfieldLayer 记忆模块
+- **初学者类比 (Beginner analogy):** 想象你在一个巨大的图书馆找一本特定的书；稠密现代 Hopfield 模型会以不同亮度打开图书馆里所有的灯，如果很多书长得很像，就很难聚焦；而稀疏现代 Hopfield 模型使用了一束激光聚光灯（sparsemax），严格只照亮你想要的那本书（以及几本高度相关的），让其他的书完全处于黑暗中，这极大地减少了干扰并提高了检索的精准度
 - **证据状态 (Evidence status):**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
@@ -866,18 +885,18 @@ MONTH_OPEN
   - **Authors:** Youbang Sun, Tao Liu, Ruida Zhou, P. R. Kumar, Shahin Shahrampour
   - **URL:** https://arxiv.org/abs/2310.09727
   - **Version Date:** 2023-10-27
-  - **Reason for selection (选择理由):** 该论文为马尔可夫势博弈中的独立自然策略梯度算法提供了严格的收敛速度证明，表明其能够在 $\mathcal{O}(1/\epsilon)$ 的迭代复杂度内达到 $\epsilon$-纳什均衡。
-  - **Actually extracted paragraphs or formulas (实际提取段落或公式):** 提取了独立自然策略梯度 (NPG) 更新规则（核心更新公式）：$\pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left( \frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma} \right)$ 以及次优性差距的收敛界：$\frac{1}{K} \sum_{k=0}^{K-1} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max}}{K (1-\gamma)} \left( 1 + \frac{2 \sqrt{n} \phi_{max}}{c \delta_K (1-\gamma)} \right)$。
+  - **Reason for selection (选择理由):** 该论文为马尔可夫势博弈中的独立自然策略梯度算法提供了严格的收敛速度证明，表明其能够在 $\mathcal{O}(1/\epsilon)$ 的迭代复杂度内达到 $\epsilon$-纳什均衡
+  - **Actually extracted paragraphs or formulas (实际提取段落或公式):** 提取了独立自然策略梯度 (NPG) 更新规则（核心更新公式）：$\pi_i^{k+1}(a_i|s) \propto \pi_i^k(a_i|s) \exp \left( \frac{\eta \bar{A}_i^{\pi^k}(s, a_i)}{1-\gamma} \right)$ 以及次优性差距的收敛界：$\frac{1}{K} \sum_{k=0}^{K-1} \text{NE-gap}(\pi^k) \leq \frac{2 M \phi_{max}}{K (1-\gamma)} \left( 1 + \frac{2 \sqrt{n} \phi_{max}}{c \delta_K (1-\gamma)} \right)$
 - **论文原始问题 (Original Problem):** 在多智能体马尔可夫势博弈中，运行自然策略梯度算法的独立智能体能否以快于之前 $\mathcal{O}(1/\epsilon^2)$ 的速度达到纳什均衡？
-- **核心假设 (Core Assumptions):** 环境被建模为具有孤立驻点的马尔可夫势博弈。理论依赖于精确的策略评估假设（即能够访问提供边缘化优势函数的预言机），并要求次优性差距 $\delta_K > 0$ 和分布不匹配系数 $M$ 满足严格条件。
-- **数学机制 (Mathematical Mechanism):** 核心机制基于独立的 NPG 更新规则，每个智能体利用自身的边缘化优势函数 $\bar{A}_i^{\pi^k}$ 独立进行策略更新。环境势函数单调增加，并作为李雅普诺夫函数界定纳什间隙的累积和。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 理论上保证算法在 $\mathcal{O}(1/\epsilon)$ 迭代内渐近收敛到 $\epsilon$-纳什均衡。然而，该保证严格受限于精确评估和孤立驻点的假设，且在很大程度上受次优性差距影响。
-- **适用范围 (Applicable Scope):** 适用于可被抽象为马尔可夫势博弈的理论多智能体强化学习环境，即存在一个标量势函数引导智能体激励对齐。
-- **局限 (Limitations):** 该理论保证不适用于零和博弈（例如井字棋）。严重依赖用于精确梯度计算的预言机，并未在理论上原生支持对势博弈外非平稳对手的鲁棒处理。
-- **Agent 架构映射 (Agent Architecture Mapping):** 概念映射 (Conceptual mapping)：NPG 更新规则理论上支持基于记忆的策略迭代机制，智能体可利用来自情景记忆库的结构化优势近似值来独立优化性能，而无需进行中央协调。
+- **核心假设 (Core Assumptions):** 环境被建模为具有孤立驻点的马尔可夫势博弈；理论依赖于精确的策略评估假设（即能够访问提供边缘化优势函数的预言机），并要求次优性差距 $\delta_K > 0$ 和分布不匹配系数 $M$ 满足严格条件
+- **数学机制 (Mathematical Mechanism):** 核心机制基于独立的 NPG 更新规则，每个智能体利用自身的边缘化优势函数 $\bar{A}_i^{\pi^k}$ 独立进行策略更新；环境势函数单调增加，并作为李雅普诺夫函数界定纳什间隙的累积和
+- **收敛或行为边界 (Convergence or behavior boundaries):** 理论上保证算法在 $\mathcal{O}(1/\epsilon)$ 迭代内渐近收敛到 $\epsilon$-纳什均衡；然而，该保证严格受限于精确评估和孤立驻点的假设，且在很大程度上受次优性差距影响
+- **适用范围 (Applicable Scope):** 适用于可被抽象为马尔可夫势博弈的理论多智能体强化学习环境，即存在一个标量势函数引导智能体激励对齐
+- **局限 (Limitations):** 该理论保证不适用于零和博弈（例如井字棋）；严重依赖用于精确梯度计算的预言机，并未在理论上原生支持对势博弈外非平稳对手的鲁棒处理
+- **Agent 架构映射 (Agent Architecture Mapping):** 概念映射 (Conceptual mapping)：NPG 更新规则理论上支持基于记忆的策略迭代机制，智能体可利用来自情景记忆库的结构化优势近似值来独立优化性能，而无需进行中央协调
 - **仓库实现状态 (Repository Implementation Status):**
   - Repository Implementation Status: NOT_IMPLEMENTED
-- **初学者类比 (Beginner Analogy):** 想象交响乐团中的多个音乐家彼此不能直接听到对方的演奏细节，只能听到整个房间的整体音效。他们每个人都会根据自己当前的音符在房间背景音效下的表现（边缘化优势），独立地调整自己的演奏方式（使用自然策略梯度）。只要他们进行的是“势博弈”——即每个人的目标都是为了让整个房间的音效更好——他们就能很快协调一致，完成完美的合奏。
+- **初学者类比 (Beginner Analogy):** 想象交响乐团中的多个音乐家彼此不能直接听到对方的演奏细节，只能听到整个房间的整体音效；他们每个人都会根据自己当前的音符在房间背景音效下的表现（边缘化优势），独立地调整自己的演奏方式（使用自然策略梯度）；只要他们进行的是“势博弈”——即每个人的目标都是为了让整个房间的音效更好——他们就能很快协调一致，完成完美的合奏
 - **中英文内容 (Bilingual Content):** SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 - **证据状态 (Evidence Status):**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
@@ -889,13 +908,13 @@ MONTH_OPEN
 ## 周度文档级联与冲突审计
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节。
+  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节
 - 动态演进映射 (Dynamic evolution mapping)
-  - 将新集成的理论边界和算法映射到相应的架构约束中。
+  - 将新集成的理论边界和算法映射到相应的架构约束中
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围；新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED
 - 来源迁移记录 (Source migration record)
-  - 成功迁移 Chunk。按照要求删除了 W40 Wrapper。
+  - 成功迁移 Chunk；按照要求删除了 W40 Wrapper
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
@@ -924,29 +943,29 @@ MONTH_OPEN
   - URL: http://arxiv.org/abs/2410.23574v3
   - Version: v3
   - Publication Date: 2025-12-25T01:43:07Z (v3; original v1 2024-10-31T02:33:47Z)
-  - 选型依据与学术脉络: 论文提供了在有限预测窗口下的带记忆在线凸优化的理论遗憾界。将有限预测窗口用于 Agent 记忆系统仅为 DESIGN_CANDIDATE 类比，论文未证明该架构或本仓库具备次线性遗憾保证。
-  - 实际提取段落或公式: 式 (1) 定义总代价，式 (3) 定义动态遗憾；定理 1 给出初始化阶段遗憾界，定理 2 的式 (12) 给出预测窗口相关的整体遗憾界。
+  - 选型依据与学术脉络: 论文提供了在有限预测窗口下的带记忆在线凸优化的理论遗憾界；将有限预测窗口用于 Agent 记忆系统仅为 DESIGN_CANDIDATE 类比，论文未证明该架构或本仓库具备次线性遗憾保证
+  - 实际提取段落或公式: 式 (1) 定义总代价，式 (3) 定义动态遗憾；定理 1 给出初始化阶段遗憾界，定理 2 的式 (12) 给出预测窗口相关的整体遗憾界
 
-- **Original Problem:** 当 Agent 具有记忆且仅有关于未来成本函数的稀缺、不准确预测时，如何在不依赖完整梯度反馈的情况下最小化动态遗憾 $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$。
+- **Original Problem:** 当 Agent 具有记忆且仅有关于未来成本函数的稀缺、不准确预测时，如何在不依赖完整梯度反馈的情况下最小化动态遗憾 $R(\mathcal{A}) \triangleq C_T(\mathbf{x}^{\mathcal{A}}) - C_T(\mathbf{x}^{\star})$
 - **Core Assumptions:**
-  - 目标函数是强凸且平滑的。
-  - 记忆长度 $h$ 是有限且有界的。
-  - 可行集 $\mathcal{X}$ 是凸的、有界的且包含原点。
-  - Agent 只有 Bandit 反馈（即只能通过模拟器进行函数求值）。
+  - 目标函数是强凸且平滑的
+  - 记忆长度 $h$ 是有限且有界的
+  - 可行集 $\mathcal{X}$ 是凸的、有界的且包含原点
+  - Agent 只有 Bandit 反馈（即只能通过模拟器进行函数求值）
 - **Mathematical Mechanism:**
-  - 零阶方法通过高斯平滑扰动进行更新。
-  - 遗憾界为：$\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$，显示出随更新次数 $K = \lfloor \frac{W}{h-1} \rfloor$（其中 $W$ 为预测窗口）的指数衰减。
+  - 零阶方法通过高斯平滑扰动进行更新
+  - 遗憾界为：$\mathbb{E}[R(\mathcal{A})] \le \Big(\frac{1}{1+\gamma}\Big)^K \mathbb{E}[C_T(\mathbf{x}^0)-C_T(\mathbf{x}^\star)] + \frac{\varepsilon}{\gamma} + \xi^\prime G T \sqrt{h} D$，显示出随更新次数 $K = \lfloor \frac{W}{h-1} \rfloor$（其中 $W$ 为预测窗口）的指数衰减
 - **Convergence or behavior boundaries:**
-  - 在定理 2 的假设下，整体动态遗憾界包含随 $K=\lfloor W/(h-1)\rfloor$ 指数衰减的项；这不是 Agent 记忆系统的线性收敛定理。
-  - 预测窗口提供了有界的改进；由于模型误差带来的持续噪声 $\varepsilon$，无限的预测也不会产生零误差。
-- **Applicability Scope:** 仅可作为带历史依赖成本的有限预测优化问题之概念类比；Agent 记忆架构需独立定义目标、可行集、查询机制并验证后才可比较。
+  - 在定理 2 的假设下，整体动态遗憾界包含随 $K=\lfloor W/(h-1)\rfloor$ 指数衰减的项；这不是 Agent 记忆系统的线性收敛定理
+  - 预测窗口提供了有界的改进；由于模型误差带来的持续噪声 $\varepsilon$，无限的预测也不会产生零误差
+- **Applicability Scope:** 仅可作为带历史依赖成本的有限预测优化问题之概念类比；Agent 记忆架构需独立定义目标、可行集、查询机制并验证后才可比较
 - **Limitations:**
-  - 需要连续且有界的状态空间；若无松弛则无法自然扩展到离散符号记忆树。
-  - 假设平稳的记忆边界（$h$ 固定）。
+  - 需要连续且有界的状态空间；若无松弛则无法自然扩展到离散符号记忆树
+  - 假设平稳的记忆边界（$h$ 固定）
 - **Architecture Mapping:**
-  - Design Candidate：研究有限预测窗口能否用于某个明确定义的 Agent 记忆优化器；$K$ 为零阶迭代次数，不是记忆年龄，论文也未规定 $W$ 与 $h$ 的固定比例或记忆置信度衰减规则。
+  - Design Candidate：研究有限预测窗口能否用于某个明确定义的 Agent 记忆优化器；$K$ 为零阶迭代次数，不是记忆年龄，论文也未规定 $W$ 与 $h$ 的固定比例或记忆置信度衰减规则
 - **Implementation Status:** NOT_IMPLEMENTED
-- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报。这一类比只解释预测窗口与未来决策成本的关联，不能据此计算 Agent 记忆系统增加一天预测后具体改善多少，或证明记忆置信度如何衰减。
+- **Beginner Analogy:** 想象一下你要为公路旅行打包行李，但你只记得过去 $h$ 天的天气，而天气应用只能提供未来 $W$ 天的模糊预报；这一类比只解释预测窗口与未来决策成本的关联，不能据此计算 Agent 记忆系统增加一天预测后具体改善多少，或证明记忆置信度如何衰减
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: DESIGN_CANDIDATE
@@ -966,18 +985,18 @@ MONTH_OPEN
 ### 稀疏现代 Hopfield 能量与检索动力学 (Sparse Modern Hopfield Energy and Retrieval Dynamics)
 - **System Container:** Memory System
 - **Frontier Source:** S42 (arXiv:2309.12673v2, *On Sparse Modern Hopfield Model*, Authors: Jerry Yao-Chieh Hu, Donglin Yang, Dennis Wu, Chenwei Xu, Bo-Yu Chen, Han Liu, URL: https://arxiv.org/abs/2309.12673, Date: 2023-09-22)
-- **Reason for selection:** 提供了现代 Hopfield 模型中稀疏检索的数学界限和明确的能量函数，适用于结构化记忆系统。 (Provides mathematical bounds and explicit energy functions for sparse retrieval in modern Hopfield models, suitable for structured memory systems.)
-- **Actually extracted paragraphs or formulas:** 提取了稀疏能量函数 $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$。 (Extracted the sparse energy function $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$.)
-- **Original Problem:** 现代 Hopfield 网络中的密集注意力机制容易受到记忆干扰且缺乏稀疏性，阻碍了重叠记忆的精确检索。
-- **Core Assumptions:** 依赖于明确的分布界限和存储记忆模式的有界范数。
-- **Mathematical Mechanism:** 使用 sparsemax 作为能量函数的投影算子：$E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$。（数学更新规则）
-- **Convergence or behavior boundaries:** 在模式稀疏性和分离性假设成立时保证精确的容量界限。
-- **Scope of application:** 适用于需要在密集模式插值中进行精确恢复的情景与结构化联想记忆模型。
-- **Limitations:** 理论容量保证严格依赖于存储模式的几何分离性，在面对任意或对抗性嵌入时可能显著降低。
-- **Agent Architecture Mapping:** 在概念上可以支持智能体情景记忆中的稀疏检索层，以减轻上下文窗口模糊。 (DESIGN_CANDIDATE)
+- **Reason for selection:** 提供了现代 Hopfield 模型中稀疏检索的数学界限和明确的能量函数，适用于结构化记忆系统； (Provides mathematical bounds and explicit energy functions for sparse retrieval in modern Hopfield models, suitable for structured memory systems.)
+- **Actually extracted paragraphs or formulas:** 提取了稀疏能量函数 $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$； (Extracted the sparse energy function $E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$.)
+- **Original Problem:** 现代 Hopfield 网络中的密集注意力机制容易受到记忆干扰且缺乏稀疏性，阻碍了重叠记忆的精确检索
+- **Core Assumptions:** 依赖于明确的分布界限和存储记忆模式的有界范数
+- **Mathematical Mechanism:** 使用 sparsemax 作为能量函数的投影算子：$E = -\sum_{i=1}^N \text{sparsemax}(X_i) + \frac{1}{2} \|Y\|^2$；（数学更新规则）
+- **Convergence or behavior boundaries:** 在模式稀疏性和分离性假设成立时保证精确的容量界限
+- **Scope of application:** 适用于需要在密集模式插值中进行精确恢复的情景与结构化联想记忆模型
+- **Limitations:** 理论容量保证严格依赖于存储模式的几何分离性，在面对任意或对抗性嵌入时可能显著降低
+- **Agent Architecture Mapping:** 在概念上可以支持智能体情景记忆中的稀疏检索层，以减轻上下文窗口模糊； (DESIGN_CANDIDATE)
 - **Repository Implementation Status:** NOT_IMPLEMENTED
 - **Repository Test Status:** NOT_TESTED
-- **Beginner Analogy:** 这就像用一把精密镊子从文件柜中准确夹出你需要的那一份文件，而不是抓起一把重叠的文件。
+- **Beginner Analogy:** 这就像用一把精密镊子从文件柜中准确夹出你需要的那一份文件，而不是抓起一把重叠的文件
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** NOT_IMPLEMENTED
@@ -1152,20 +1171,20 @@ MONTH_OPEN
 - 访问深度：ORIGINAL_VERSIONED_AUTHOR_FULL_TEXT_READ；独立复现实验 NOT_EXECUTED
 
 ### 原始机制与数学边界
-论文把工具执行轨迹记忆检索定义为固定 token 预算内的**完整来源证据补全**，而非只找最高相关性的单个片段。每个 Gold Span 由原执行事件、JSON pointer 与字符区间定位；候选证据映射到相同的来源坐标。作者的字符级覆盖率定义为：
+论文把工具执行轨迹记忆检索定义为固定 token 预算内的**完整来源证据补全**，而非只找最高相关性的单个片段；每个 Gold Span 由原执行事件、JSON pointer 与字符区间定位；候选证据映射到相同的来源坐标；作者的字符级覆盖率定义为：
 
 ```text
 Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 ```
 
-`U(G_q)` 是原始来源坐标上的 Gold 字符集合，`U(C)` 是检索候选覆盖的字符集合。Full Support 还要求所有必要 Gold Span 同时位于声明的 token 预算内。内容相似但来自另一事件的复制文本，不能自动获得相同的来源身份。
+`U(G_q)` 是原始来源坐标上的 Gold 字符集合，`U(C)` 是检索候选覆盖的字符集合；Full Support 还要求所有必要 Gold Span 同时位于声明的 token 预算内；内容相似但来自另一事件的复制文本，不能自动获得相同的来源身份
 
-论文把增量拆成两部分：来源对齐的 provenance 候选构造，以及固定候选与初始分数之后的图条件残差重排。作者基于 1,207 个 held-out ISETrace 执行轨迹、2,000 个问题，报告 provenance-unit Dense-FT 相对于 512-token flat chunk 在 Full Support@2048 上提升 19.07 个百分点；控制候选和种子分数后，残差 R-GCN 另提升 4.55 个百分点，95% CI [2.98, 6.18]。这是作者报告的离线**检索**结果，不是 Agent 任务完成、权限合法、持久化数据库正确或本仓复现结果。
+论文把增量拆成两部分：来源对齐的 provenance 候选构造，以及固定候选与初始分数之后的图条件残差重排；作者基于 1,207 个 held-out ISETrace 执行轨迹、2,000 个问题，报告 provenance-unit Dense-FT 相对于 512-token flat chunk 在 Full Support@2048 上提升 19.07 个百分点；控制候选和种子分数后，残差 R-GCN 另提升 4.55 个百分点，95% CI [2.98, 6.18]；这是作者报告的离线**检索**结果，不是 Agent 任务完成、权限合法、持久化数据库正确或本仓复现结果
 
 ### 强反例、架构映射与适用范围
-一个图检索器可能找到很合理的关联，却遗漏更早的工具参数或最终 artifact receipt。相反，论文对单事件直接回忆的图残差只报告 +0.19 个百分点的 Full Support 提升，区间包含零；不能据此宣称所有场景都应使用图重排。在作者的多事实设置下，即使采用残差模型，仍有超过三分之一的问题没有在 2048 token 内获得完整支持。来源坐标完整，也不证明来源内容或外部工具效果本身正确。
+一个图检索器可能找到很合理的关联，却遗漏更早的工具参数或最终 artifact receipt；相反，论文对单事件直接回忆的图残差只报告 +0.19 个百分点的 Full Support 提升，区间包含零；不能据此宣称所有场景都应使用图重排；在作者的多事实设置下，即使采用残差模型，仍有超过三分之一的问题没有在 2048 token 内获得完整支持；来源坐标完整，也不证明来源内容或外部工具效果本身正确
 
-候选文档接口可表示为 `(event_id, field_pointer, span, source_revision, authorization_scope)`，再附带按 Query 计算的证据集合覆盖与独立 current-effect verifier。这只是 Memory System 的 `CANDIDATE_MECHANISM`，并非现有架构必须修改或仓库已经实现。论文使用离线合成轨迹，还存在多事实证据缺失、隐私、来源许可与访问控制的外推限制。
+候选文档接口可表示为 `(event_id, field_pointer, span, source_revision, authorization_scope)`，再附带按 Query 计算的证据集合覆盖与独立 current-effect verifier；这只是 Memory System 的 `CANDIDATE_MECHANISM`，并非现有架构必须修改或仓库已经实现；论文使用离线合成轨迹，还存在多事实证据缺失、隐私、来源许可与访问控制的外推限制
 
 ### 五轴状态与 Evidence Delta
 - Claim State: OBSERVED，仅限作者描述的机制和实验条件
@@ -1181,7 +1200,7 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 - NEXT_RETEST_CONDITION: 固定源码、数据、token 预算与 Span 坐标，比较 flat、provenance-unit 及固定候选图重排条件；构造单事件和跨事件反例，单独评价答案、来源授权与效果
 
 ### 交付与保全
-仅向现有中英文 Memory System 容器追加一份有边界的 Daily 理论增量；不分配 Sxx、不升级 Verified Core、不运行 Weekly cascade、不提前结束十月 Monthly、不冒充独立实验或本地 Memory 实现。全仓验证器和 runtime 测试 NOT_EXECUTED，历史 Jules 与原有 Native 研究文本原样保留。
+仅向现有中英文 Memory System 容器追加一份有边界的 Daily 理论增量；不分配 Sxx、不升级 Verified Core、不运行 Weekly cascade、不提前结束十月 Monthly、不冒充独立实验或本地 Memory 实现；全仓验证器和 runtime 测试 NOT_EXECUTED，历史 Jules 与原有 Native 研究文本原样保留
 
 ## 2026-W43 Weekly Research Cascade / 理论关系与反证审查 (Memory_System)
 
@@ -1194,7 +1213,7 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 - Source Registry Sxx: UNCHANGED, no admission or resolution of historical collision
 
 ### 压缩前后的来源身份与记忆有效性
-10 月 23 日 Compaction Laundering（arXiv:2610.29869v1）研究将 typed role 扁平化为文本时的权限来源丢失。10 月 24 日 Many Steps into One（arXiv:2610.17544v2）研究复用推理的事实变更检测，Stale, Misattributed, or Late（arXiv:2610.10265v1）区分时间失效与错误归因。三者对应不同的角色身份、记忆有效性与来源归属前提，同源跨日重复或中英文镜像不增加独立证据。本仓未实现或验证可用的记忆安全过滤器、变更检测器或事实认证器。
+10 月 23 日 Compaction Laundering（arXiv:2610.29869v1）研究将 typed role 扁平化为文本时的权限来源丢失；10 月 24 日 Many Steps into One（arXiv:2610.17544v2）研究复用推理的事实变更检测，Stale, Misattributed, or Late（arXiv:2610.10265v1）区分时间失效与错误归因；三者对应不同的角色身份、记忆有效性与来源归属前提，同源跨日重复或中英文镜像不增加独立证据；本仓未实现或验证可用的记忆安全过滤器、变更检测器或事实认证器
 
 ### 五轴状态与冲突门槛
 - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee
@@ -1219,25 +1238,25 @@ Cov(C,q) = | U(G_q) intersect U(C) | / | U(G_q) |
 - Logical Date: 2026-10-29 Asia/Shanghai；UTC 执行日期：2026-10-29；精确时间：NOT_CAPTURED
 - Producer: GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
 - Base main: `289e3d427329a3813f8641eb3023f4e1577700a7`；Run Identity: `agent-foundations/research/daily/2026-10-29/GPT_NATIVE/289e3d427329a3813f8641eb3023f4e1577700a7/gpt-native-20261029-memory-01`
-- **原始论文：** Jielong Tang、Ling-An Zeng、Xujie Yuan、Xiao Dong、Zhiqian Xia、Qingfeng Li、Shixiong Kai、Kaichao Liang、Rong Yao、Jian Yin，*Remembering Through Change: Provenance-Preserving Hypergraph Memory for Multimodal Agents*，arXiv:2610.29995v1，提交于 2026-10-21。
-- URL: https://arxiv.org/abs/2610.29995；2026-10-29 检查原始全文引言、第 3.1–3.2 节及第 4.1–4.3 节，不仅核对元数据。
-- Canonical Source: arXiv:2610.29995；英文和中文引用属于同一来源谱系。**本 Daily 不分配 Sxx，不准入 Verified Core，也不解决已有 S63 冲突。**
+- **原始论文：** Jielong Tang、Ling-An Zeng、Xujie Yuan、Xiao Dong、Zhiqian Xia、Qingfeng Li、Shixiong Kai、Kaichao Liang、Rong Yao、Jian Yin，*Remembering Through Change: Provenance-Preserving Hypergraph Memory for Multimodal Agents*，arXiv:2610.29995v1，提交于 2026-10-21
+- URL: https://arxiv.org/abs/2610.29995；2026-10-29 检查原始全文引言、第 3.1–3.2 节及第 4.1–4.3 节，不仅核对元数据
+- Canonical Source: arXiv:2610.29995；英文和中文引用属于同一来源谱系；**本 Daily 不分配 Sxx，不准入 Verified Core，也不解决已有 S63 冲突；**
 
 ### 原始问题与数学/结构机制
-把图像压缩成文字会丢失细节；只保留像素又无法自动说明跨会话的多个观察是否对应同一实体，以及实体不同属性如何随时间改变。论文定义记忆构造算子 `M_T = W(D_<=T)` 和查询条件下的证据检索 `E_q = S(q,M_T)`；它们是论文设计，不是实体身份配对必然正确的证明。
+把图像压缩成文字会丢失细节；只保留像素又无法自动说明跨会话的多个观察是否对应同一实体，以及实体不同属性如何随时间改变；论文定义记忆构造算子 `M_T = W(D_<=T)` 和查询条件下的证据检索 `E_q = S(q,M_T)`；它们是论文设计，不是实体身份配对必然正确的证明
 
-MHG-Mem 的带属性超图区分**实体提及节点、原子事实节点、演化状态节点**，通过 **occurrence hyperedges** 连接同一身份假设下的观测，通过 **evolutionary/evidential hyperedges** 将属性演化状态与支撑事实及原始图像绑定。Agentic search 可跨层检索、再回到原始图像检查。核心边界为 `ENTITY_IDENTITY != CURRENT_ASPECT_VALUE != ORIGINAL_EVIDENCE`：新的价格或外观不能无来源地覆盖过去观察。
+MHG-Mem 的带属性超图区分**实体提及节点、原子事实节点、演化状态节点**，通过 **occurrence hyperedges** 连接同一身份假设下的观测，通过 **evolutionary/evidential hyperedges** 将属性演化状态与支撑事实及原始图像绑定；Agentic search 可跨层检索、再回到原始图像检查；核心边界为 `ENTITY_IDENTITY != CURRENT_ASPECT_VALUE != ORIGINAL_EVIDENCE`：新的价格或外观不能无来源地覆盖过去观察
 
 ### 证据、假设、反证
-- 论文作者报告在 MemEye、Mem-Gallery、WorldMemArena-S 子集上测试，使用三种骨干模型，结果取三次运行平均；对最强基线的 8.20–9.98% 提升属于**作者报告的特定基准结果**，不是本仓测量或普适保证。
-- 前提包括多模态原始观察可访问、实体共指可重建、时间顺序可靠、证据指针没有断裂，以及检索/存储预算充足。错误的身份合并会让后续演化结论混入其他实体的证据。
-- 超边能指向原始图像，但不能凭此证明图像真实性、使用权限、解释正确性或召回证据集完整。生成的演化摘要仍可能错误。
-- 本轮仅核对原始作者全文所述机制和实验范围，**没有运行独立基准、论文公式证明或本仓代码。**
+- 论文作者报告在 MemEye、Mem-Gallery、WorldMemArena-S 子集上测试，使用三种骨干模型，结果取三次运行平均；对最强基线的 8.20–9.98% 提升属于**作者报告的特定基准结果**，不是本仓测量或普适保证
+- 前提包括多模态原始观察可访问、实体共指可重建、时间顺序可靠、证据指针没有断裂，以及检索/存储预算充足；错误的身份合并会让后续演化结论混入其他实体的证据
+- 超边能指向原始图像，但不能凭此证明图像真实性、使用权限、解释正确性或召回证据集完整；生成的演化摘要仍可能错误
+- 本轮仅核对原始作者全文所述机制和实验范围，**没有运行独立基准、论文公式证明或本仓代码；**
 
 ### Memory System 的有界映射
-可研究性的数据字段包括 `entity_mention_id`、`canonical_entity_hypothesis_id`、`aspect`、`observed_value`、`observation_time`、`source_digest` 和 `supporting_image_ref`；保留竞争性身份假设与不可变原始证据指针。时间查询须先检查来源、权限和可比较实体身份，随后才比较属性演化。这是 **DESIGN_CANDIDATE**，不是已部署的数据结构或权限保证。
+可研究性的数据字段包括 `entity_mention_id`、`canonical_entity_hypothesis_id`、`aspect`、`observed_value`、`observation_time`、`source_digest` 和 `supporting_image_ref`；保留竞争性身份假设与不可变原始证据指针；时间查询须先检查来源、权限和可比较实体身份，随后才比较属性演化；这是 **DESIGN_CANDIDATE**，不是已部署的数据结构或权限保证
 
-**通俗类比：** 相册里同一辆自行车过去是蓝色、后来是绿色。两张照片放在一起只能说明它们可能相关；保留拍摄日期和原图，才能检查变化，而不是把蓝色的历史抹掉。
+**通俗类比：** 相册里同一辆自行车过去是蓝色、后来是绿色；两张照片放在一起只能说明它们可能相关；保留拍摄日期和原图，才能检查变化，而不是把蓝色的历史抹掉
 
 ### 五轴状态与 Evidence Delta
 - Claim State: OBSERVED_FOR_AUTHOR_PAPER_DESCRIPTIONS
@@ -1245,15 +1264,15 @@ MHG-Mem 的带属性超图区分**实体提及节点、原子事实节点、演�
 - Mapping State: DESIGN_CANDIDATE
 - Implementation State: NOT_IMPLEMENTED
 - Validation State: NOT_TESTED
-- NEW_EVIDENCE: 论文中实体身份、观察、演化和原始视觉证据指针的类型化超图关系。
-- CORRECTED_INTERPRETATION: 保留图像不等于完成跨会话实体识别；可追溯的摘要也不自动等于历史事实认证。
-- UNCHANGED_BOUNDARY: 论文 != 架构映射 != 仓库实现 != 运行验证。
-- NEW_COUNTEREVIDENCE: 身份链接错误、原始证据缺失、模型看图误差及特定基准设置限制了外推。
-- UNKNOWN_RETAINED: 第三方复现、权限控制、Host 实现、长期 Store 一致性和多语言真实效果。
-- NEXT_RETEST_CONDITION: 固定论文版本/代码和数据分割，加入实体冲突与状态改变的查询；检查原图指针、独立权限与效果证据。
+- NEW_EVIDENCE: 论文中实体身份、观察、演化和原始视觉证据指针的类型化超图关系
+- CORRECTED_INTERPRETATION: 保留图像不等于完成跨会话实体识别；可追溯的摘要也不自动等于历史事实认证
+- UNCHANGED_BOUNDARY: 论文 != 架构映射 != 仓库实现 != 运行验证
+- NEW_COUNTEREVIDENCE: 身份链接错误、原始证据缺失、模型看图误差及特定基准设置限制了外推
+- UNKNOWN_RETAINED: 第三方复现、权限控制、Host 实现、长期 Store 一致性和多语言真实效果
+- NEXT_RETEST_CONDITION: 固定论文版本/代码和数据分割，加入实体冲突与状态改变的查询；检查原图指针、独立权限与效果证据
 
 ### 交付与边界
-仅在现有中英文 Memory System 容器追加一条 GPT Native 前瞻 Daily，不改写历史 Jules；不变更 SOURCES 注册、不做 Verified Core 晋升、不提前十月月结、不冒充实验或实现。全仓验证器和源论文实验：NOT_EXECUTED。
+仅在现有中英文 Memory System 容器追加一条 GPT Native 前瞻 Daily，不改写历史 Jules；不变更 SOURCES 注册、不做 Verified Core 晋升、不提前十月月结、不冒充实验或实现；全仓验证器和源论文实验：NOT_EXECUTED
 
 
 ## 2026-10-31 Daily Research Chunk — 依赖绑定的验证记忆与非局部失效（Memory System）
@@ -1485,7 +1504,7 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 - NEW_COUNTEREVIDENCE：错误和过时提取、分布漂移、组合推理会反证简单覆盖保证
 - UNKNOWN_RETAINED：独立证明/实验、MemScope vN、仓库实现与真实影响
 - NEXT_RETEST_CONDITION：固定 provider/输入/query/evaluator 版本及失败-对照实验，分别统计准确率与覆盖率
-- 结论：NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE；仅向当前中文 Memory 容器追加 W45 Weekly。仓库验证在编写时 `NOT_EXECUTED`，后续独立执行
+- 结论：NO_VERIFIED_CORE_PROMOTION / NO_RUNTIME_CHANGE；仅向当前中文 Memory 容器追加 W45 Weekly；仓库验证在编写时 `NOT_EXECUTED`，后续独立执行
 
 
 ---

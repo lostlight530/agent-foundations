@@ -1,7 +1,7 @@
 # Agent Foundations — Verified Core / 可验证核心
 
 Status: repository documentary/evidence core  
-Current calibration: 2026-10-04
+Current calibration: 2026-11-15 (repository-source and documentary authority only)
 
 `FOUNDATION/**` is the long-lived theory, evidence, provenance, and architecture core of Agent Foundations. The repository is **not** an implemented autonomous-agent runtime.
 
@@ -15,6 +15,25 @@ theory / architecture claim
 ```
 
 External equations, papers, protocol mappings, pseudocode, and architecture analogies remain external/reference claims unless a concrete repository artifact implements the behavior.
+
+## November 2026 overview — one core, four bounded subjects / 11 月总论
+
+At the inspected `main` revision `608bf59eb503effdf211aa2f9b448f24d3ede0dc`, this repository has **23 canonical domain claims** (6 Architecture, 5 Memory, 6 Tools, 6 Collaboration), indexed under stable `AF-*` IDs, and **67 distinct, contiguous registered source identifiers S01–S67** in `SOURCES.md` — these are documentary inventory counts, **not** counts of validated agent capabilities, reproduced papers or independent tests
+
+| Current subject owner | Unit of analysis | Core falsification boundary | Local implementation state |
+| --- | --- | --- | --- |
+| `ARCHITECTURE.md` | Configured model, harness, tools, authority, memory, environment and evaluator as one agent system | Theorem scope or model ID does not prove system-wide safety and reproducibility | Documentary claims and validator only, no autonomous runtime |
+| `MEMORY.md` | Source-bound memory object, authenticated role, lifecycle, compaction and retention | Content-preserving summaries can lose origin and authorization | No ingestion, compaction or cross-session memory service |
+| `TOOLS.md` | Action-specific authority, target and arguments, invocation, sink-side effect and reconciliation | Available tool or successful request does not establish valid authorization or completed effect | No executor, sandbox or permission broker |
+| `COLLABORATION.md` | Typed agreement subject, topology, delivery/failure model, external factuality check | Agent agreement is not a truth oracle or proof of replicated-state convergence | No multi-agent transport or consensus implementation |
+
+The recommended **general-to-specific** reading order is: this index → `EVIDENCE.md` + `SOURCES.md` + `PROVENANCE.md` → domain-specific `AF-*` Claim maps → historical/theoretical English/Chinese long-form discussions in `docs/en` and `docs/zh`, with current-reading guides in [English](../docs/en/README.md) and [中文](../docs/zh/README.md)
+
+The five dimensions **Claim State / Evidence Level / Mapping State / Implementation State / Validation State** remain independent, including when prose makes a mathematically strong-sounding claim, a paper supplies a bound, or bilingual passages repeat one proposition
+
+**Source identity warning:** `SOURCES.md` documents a historical `S63` collision between two different scholarly objects, so historical `S63` alone is insufficient for identification, resolve by arXiv identifier, title, version and source/provenance record, do not silently allocate or alias a source ID
+
+**Evidence boundary:** repository source and text inspected, external theorem verification `NOT_REVERIFIED`, new runtime experiments and full validator command `NOT_EXECUTED` in this revision, no periodical record or delivery mechanism is used to infer domain correctness
 
 ## Domain maps / 领域知识图
 
@@ -146,3 +165,14 @@ S57
 ```
 
 This is a verified-core documentary admission, not an autonomous-agent runtime expansion.
+
+## 2026-11-15 domain-depth cross-reading note
+
+The existing domain Claim IDs and source registry remain authoritative. Current professional-document expansion makes each area’s key **counterexample** explicit, without reclassifying literature as local behavior:
+
+- **Architecture:** model ID does not identify a complete agent system; runtime configuration and evaluation setup are part of the evaluated object.
+- **Memory:** content-preserving compression can lose authenticated role and provenance; text fidelity is not authority fidelity.
+- **Tools:** tool availability, approval, attempted invocation and independently verified side effect are different states.
+- **Collaboration:** agreement between participants, replicated-state convergence and independently established factual correctness are different propositions.
+
+The broader bilingual `docs/en/**` and `docs/zh/**` contain historical research formulations and illustrative pseudo-code. For present five-axis interpretation, read these sections against their corresponding canonical `FOUNDATION/{ARCHITECTURE,MEMORY,TOOLS,COLLABORATION}.md` claim maps, `SOURCES.md`, `EVIDENCE.md` and `PROVENANCE.md`. This is a domain research clarification, not a new autonomous runtime, new source identity, or validation execution.
