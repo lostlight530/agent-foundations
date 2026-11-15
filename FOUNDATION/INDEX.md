@@ -146,3 +146,14 @@ S57
 ```
 
 This is a verified-core documentary admission, not an autonomous-agent runtime expansion.
+
+## 2026-11-15 domain-depth cross-reading note
+
+The existing domain Claim IDs and source registry remain authoritative. Current professional-document expansion makes each area’s key **counterexample** explicit, without reclassifying literature as local behavior:
+
+- **Architecture:** model ID does not identify a complete agent system; runtime configuration and evaluation setup are part of the evaluated object.
+- **Memory:** content-preserving compression can lose authenticated role and provenance; text fidelity is not authority fidelity.
+- **Tools:** tool availability, approval, attempted invocation and independently verified side effect are different states.
+- **Collaboration:** agreement between participants, replicated-state convergence and independently established factual correctness are different propositions.
+
+The broader bilingual `docs/en/**` and `docs/zh/**` contain historical research formulations and illustrative pseudo-code. For present five-axis interpretation, read these sections against their corresponding canonical `FOUNDATION/{ARCHITECTURE,MEMORY,TOOLS,COLLABORATION}.md` claim maps, `SOURCES.md`, `EVIDENCE.md` and `PROVENANCE.md`. This is a domain research clarification, not a new autonomous runtime, new source identity, or validation execution.
