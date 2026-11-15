@@ -1207,3 +1207,70 @@ The policy engine separately checks catalog membership, approved declared intent
 - **UNKNOWN_RETAINED**: independent proof analysis, publisher implementation/release pin, benchmark variance, cross-vendor deployment behavior and this repository's own executable tool control
 - **NEXT_RETEST_CONDITION**: pin v1 paper and author code revision, test crafted low-trust arguments and authority transitions under exact mediation, capture policy token bytes, traces, command/effect receipts, denial reasons and negative controls
 - **Delivery boundary**: append-only bilingual Daily under existing Tool System containers only. Do not change SOURCE registry, verified-core AF-* claims, the other three formal containers, old chunks, the unrelated open WorkflowHub Draft PR #378 or any Runtime/Actions. Repository validator and paper experiment: `NOT_EXECUTED`; human review and merge required
+
+
+---
+
+## 2026-11-15 GPT Native Daily Research — PACE / admission-time indistinguishability versus effect-boundary enforcement
+
+### Research identity, source and bounded scope
+- Canonical task: `foundations/research/daily`; logical date: **2026-11-15 Asia/Shanghai**; producer: **GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY**.
+- Source repository: `lostlight530/agent-foundations`; cold-start merged main: `9702b3f7ac2f8b26877a1be816f7a090a352dcd7`; run identity: `agent-foundations/research/daily/2026-11-15/GPT_NATIVE/9702b3f7ac2f8b26877a1be816f7a090a352dcd7/pace-noninterference-effect-boundary-01`.
+- Owning container: existing EN/ZH **Tool System** pair. Memory, Collaboration and Architecture Principles were candidate selection containers but this paper's executable egress-control question maps most narrowly to Tools.
+- Canonical paper object: **arXiv:2610.01349v1**, *PACE: Provenance-Aware Capability Enforcement for Tool-Using LLM Agents*, first submitted **2026-10-01T09:18:05Z**, not newly published November 15.
+- Authors: Fengpeng Li, Qizhou Wang, Yuke Hu, Kemou Li, Jun Liu, Haiwei Wu, Jiantao Zhou, Di Wang.
+- Original metadata: https://arxiv.org/abs/2610.01349 ; first-party v1 full text: https://arxiv.org/html/2610.01349v1 .
+- Actual source surface inspected: Introduction, Sections 2–5, especially Section 3's admission-time ambiguity, Section 4's certified/prototype distinction, Appendix C.6 residual assumptions and D.1 proof conditions.
+- Source identity: one author-paper lineage. No local run of the author's experiments, supplementary source, model benchmarks or independent proof; source is E4_PREPRINT, not E0_REPOSITORY_TEST.
+- Source registry: this Daily does **not** allocate an `Sxx` identifier, silently change the canonical source registry or claim Verified Core admission; future registry review must deduplicate against the full source history.
+
+### The theoretical increment: why inspecting an artifact may not relax its effect boundary
+The paper's security object is a behavior *family* under contexts, not merely the text or interface of a tool/skill object. Two variants may share code, interface, egress site and an indistinguishable admission judgment, yet differ when untrusted specification text changes the agent's behavior under an attacker-supplied context.
+
+- **Conditional Theorem 1:** given a judgment that cannot distinguish a safe and a leaking variant (C1), an attacker witness that violates the target bound under relaxed mediation (C2), and the stated soundness/mediation assumptions, a sound gate using only that judgment cannot relax the affected egress site for either variant.
+- The theorem is **not** that every static review is useless. It is an impossibility statement for an admission judgment with specified indistinguishable variants and an unsafe witness. Without C1/C2 it does not generalize.
+- A local tool catalog approval, source signature, schema check or saved "safe" label therefore cannot, in that conditional setting, prove all future action proposals noninterfering. It cannot substitute for a concrete effect-time guard.
+- **Counterexample:** a skill document may carry the same callable API contract in two variants, but low-trust instructions alter the recipient/body of a later outbound action. A catalog audit of shared code and interface cannot decide the later recipient's authority without the live request and proposed effect.
+- **Opposing control:** for a deterministic fixed-argument library call whose arguments are genuinely independent of secrets, the missing dependence can be excluded by additional evidence; blanket "every tool call is unsafe" would overstate the paper.
+
+### PACE's two independent gates and its certified/prototype split
+- Path confinement represents source-to-effect influence in a typed graph and proposes a cut between lower-trust origins and sensitive egress.
+- Capability/effect verification uses a specific authenticated request, schema-defined operation and concrete proposed effect; it does not trust an LLM's narrative of why it is authorized.
+- A certified final action must **both** preserve the represented cut and pass effect verification; authorization of an action alone cannot establish noninterference of its parameters.
+- The authors explicitly distinguish **PACE-c**, the certified contract, from evaluated **PACE-p**, which may restore an authorized call blocked by the path gate or apply a declared repair without complete final-call recertification. Prototype measured behavior must not inherit the stronger proof automatically.
+- The represented graph is incomplete under undeclared reads, secondary calls hidden inside tools, semantic rephrasing of low-trust content, or out-of-band resource changes (Appendix C.6). Missing edges cannot be treated as proof of independent dataflow.
+- Therefore `CERTIFIED_FINAL_ACTION != EVALUATED_PROTOTYPE_ACTION`, and `PROVENANCE_GRAPH_EDGE_ABSENT != INFLUENCE_ABSENT`.
+- Contrasting the November 12 AgentCap candidate: signed capability issuance, delegated scope and expiry do not by themselves establish a correct path-separation proof. Conversely, path separation does not establish current capability, revocation or actual effect occurrence. This is a theoretical contrast, not a combined verified protocol.
+- Contrasting the earlier PROVISO candidate: learned selection over provenance-typed observations and alternatives is not the same claim as the PACE theorem about admission-time indistinguishability; no independent reproduction or comparative head-to-head follows from citing both.
+
+### Author evidence, denominators and explicit failure cases
+- The paper reports eight executable security benchmarks and three target-model families; the evaluated configuration has strictly lowest attack success in **62 of 79 eligible attack columns**, tying in another 14. These are **author-reported benchmark columns**, not 79 real deployments.
+- The paper's factorial ablation uses **1,167 paired cases**, with eight arms and 9,336 scored outcomes; no local replay, confidence-interval recomputation or independent validation was performed by this Daily.
+- Its limited adaptive search reports zero success in 30 out-of-authority targets under the stated search budget. This is not a universal zero attack rate, especially under unrepresented effects or distribution shift.
+- **Failure case A — missing schema effect:** the mediator sees a benign outer call but a tool makes an undeclared secondary write; graph coverage and capability effect declaration are incomplete.
+- **Failure case B — reconstructed string:** an LLM paraphrases or computes low-trust data to form a sensitive argument; syntactic provenance matching may lose the edge.
+- **Failure case C — stale authenticated context:** policy/authorization revision changes between proposal and dispatch; stale permissions cannot authorize the final action.
+- **Failure case D — prototype restoration:** an action originally blocked for path influence is restored because its effect shape appears authorized; the certified cut is no longer guaranteed unless the final intervention rechecks both obligations.
+- **Negative control:** a benign authorized request with no lower-trust influence, a complete effect schema, stable authority and a fully mediated tool boundary should remain eligible. Always-block is not an acceptable utility success.
+
+### Bounded theory-to-architecture mapping and five-axis evidence ledger
+- Proposed evidence tuple for future design research only: `(request_id, authenticated_principal, policy_revision, source_lineage, effect_schema_version, proposed_action, bound_args, represented_cut, final_action_id, final_authority_verdict, dispatch_receipt, observed_effect_receipt, replay_state)`.
+- `request_id`/policy revision establish a traceable authorization context, not proof of an unbypassed effect sink.
+- `represented_cut` is a property of declared edges, not an unqualified security guarantee over hidden tool internals.
+- `dispatch_receipt` proves an attempted command handoff only under a trusted execution trace; it must not be conflated with a durable effect receipt or successful compensation.
+- Claim State: **OBSERVED** (paper's stated definitions, conditions and author-reported results only; local claim promotion not performed).
+- Evidence Level: **E4_PREPRINT** (source v1 original text read; original mathematical proof not independently verified).
+- Mapping State: **CANDIDATE_MECHANISM** with **COUNTEREVIDENCE** recorded for unrepresented paths and prototype finalization.
+- Implementation State: **NOT_IMPLEMENTED** (no Agent Foundations execution guard or runtime demonstrated).
+- Validation State: **NOT_TESTED** (no local validator, formal proof checker, security experiment or actual tool-effect replay).
+- Do not convert prior source-registry presence, formulas, author code or this EN/ZH pair into another independent source or an `AF-TOOL-*` Verified Core claim.
+
+### EVIDENCE_DELTA, falsification and delivery
+- **NEW_EVIDENCE:** source-scoped admission-time indistinguishability theorem conditions, two-gate certified final-action contract, and explicit measured-vs-certified separation.
+- **CORRECTED_INTERPRETATION:** admission-time artifact review, executable capability issuance, represented path isolation, final action approval and observed effect completion are distinct necessary proof obligations.
+- **UNCHANGED_BOUNDARY:** Paper != Mapping != Implementation != Validation; author-reported experiment != independently reproduced result.
+- **NEW_COUNTEREVIDENCE:** undeclared/secondary effects, model string reconstruction, stale request authority and prototype restore/repair behavior limit proof transfers.
+- **UNKNOWN_RETAINED:** proof correctness outside assumptions, full artifact re-execution, cross-benchmark transfer, current local policy implementation, tool effect sink identity and durable authorization recheck.
+- **NEXT_RETEST_CONDITION:** pin paper v1, tool/effect schema and a disposable instrumented runtime; build a paired safe/leaking skill fixture with identical admission judgment and distinguishable effect receipts; test PACE-c final-cut enforcement versus PACE-p restoration, undeclared secondary writes, policy-revision changes and benign authorized utility with explicit execution/log/exit/effect evidence.
+- Delivery: **append-only bilingual Native Daily research** within the existing Tool System containers; all prior chunks and Jules history retained, no `Sxx` allocation, no Verified Core promotion, no other container changes.
+- Local `FOUNDATION/validate.py`, tests, solver, paper benchmarks and real tool effects: **NOT_EXECUTED** in this round. Human Maintainer review/merge required.
