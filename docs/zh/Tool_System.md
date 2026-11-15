@@ -10,7 +10,7 @@
 
 ---
 
-> **当前五轴校准 — 2026-08-28。** 历史 `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` 原文作为生成记录保留，当前统一解释为 `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`，不构成已部署工具控制面的证据。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
+> **当前五轴校准 — 2026-08-28；** 历史 `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` 原文作为生成记录保留，当前统一解释为 `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`，不构成已部署工具控制面的证据；参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)
 
 ## 当前仓库实现与证据边界（源码校准，2026-11-15）
 
@@ -24,8 +24,8 @@
 ## 0. 导读与核心速览 (For Beginners)
 
 **这是什么？**
-现在的 AI 极其聪明，它们不仅能跟你聊天，还能帮你上网搜资料、写代码甚至帮你订外卖。这些能够调用的外部功能，统称为“工具（Tools）”。
-但是，当 AI 自己去调用这些工具时，它有时候会“犯傻”或者“失控”。比如，为了查一个简单的天气，它可能疯狂地调用 100 次搜索引擎；或者更糟糕的是，它可能会在不懂后果的情况下执行删除重要文件的代码指令。
+现在的 AI 极其聪明，它们不仅能跟你聊天，还能帮你上网搜资料、写代码甚至帮你订外卖；这些能够调用的外部功能，统称为“工具（Tools）”
+但是，当 AI 自己去调用这些工具时，它有时候会“犯傻”或者“失控”；比如，为了查一个简单的天气，它可能疯狂地调用 100 次搜索引擎；或者更糟糕的是，它可能会在不懂后果的情况下执行删除重要文件的代码指令
 
 本文探讨一种候选方案：在独立受控实验环境中用强化学习（Reinforcement Learning）研究工具策略，再对候选策略实施明确的授权、验证与评估，Agent Foundations 本仓没有训练并部署这一工具执行系统，也没有证据保证策略“锁定”后绝不会出错
 
@@ -33,7 +33,7 @@
 
 ## 1. 理论基础与背景：走出“盲人摸象” (Background)
 
-现代智能体（Agent）的强大威力，绝不仅仅因为其背后的 LLM 脑容量大，而更是因为它们能够像人类一样操作外部工具（如 API、Python 代码解释器、浏览器）。
+现代智能体（Agent）的强大威力，绝不仅仅因为其背后的 LLM 脑容量大，而更是因为它们能够像人类一样操作外部工具（如 API、Python 代码解释器、浏览器）
 
 原有研究构想并非仅讨论 Prompt 路由，而是考察**强化学习（RL）**与**策略优化**作为候选工具决策机制；对应的执行权限、工具路由、策略训练和外部副作用控制并未在本仓源码中实现
 
@@ -49,20 +49,20 @@
 - **Frontier Source:** Optimal Regret Bounds for Collaborative Learning in Bandits (arXiv:2312.09674v1)
 - **URL:** http://arxiv.org/abs/2312.09674v1
 - **Publication Date:** 2023-12-15
-- **Selection Reason:** 解决了使用有限通信的通用多智能体多臂老虎机场景中最佳协作遗憾最小化的挑战，通过 CExp$^2$ 算法产生了 $\mathcal{O}(\log(T))$ 界。
-- **Original Problem:** 在实际奖励由多个智能体的本地观察混合而成的协作多智能体多臂老虎机设置中，最小化遗憾需要有效的通信。没有通信，不可避免地会产生微不足道的线性遗憾。虽然已知最佳手臂识别的接近最佳样本复杂性，但需要很少预期通信轮次的最佳协作遗憾界的问题仍然悬而未决。
-- **Core Assumptions:** 该系统由 $M$ 个与 $K$ 个手臂交互的智能体组成，通过中央控制器进行通信。智能体观察到的本地奖励不同于他们的实际混合奖励（由权重矩阵 $W \in [0,1]^{M \times M}$ 控制的所有智能体的本地奖励的加权平均值）。下界依赖于正态分布的奖励，并受混合差距 $\Delta'_{k,m}$ 的限制。
+- **Selection Reason:** 解决了使用有限通信的通用多智能体多臂老虎机场景中最佳协作遗憾最小化的挑战，通过 CExp$^2$ 算法产生了 $\mathcal{O}(\log(T))$ 界
+- **Original Problem:** 在实际奖励由多个智能体的本地观察混合而成的协作多智能体多臂老虎机设置中，最小化遗憾需要有效的通信；没有通信，不可避免地会产生微不足道的线性遗憾；虽然已知最佳手臂识别的接近最佳样本复杂性，但需要很少预期通信轮次的最佳协作遗憾界的问题仍然悬而未决
+- **Core Assumptions:** 该系统由 $M$ 个与 $K$ 个手臂交互的智能体组成，通过中央控制器进行通信；智能体观察到的本地奖励不同于他们的实际混合奖励（由权重矩阵 $W \in [0,1]^{M \times M}$ 控制的所有智能体的本地奖励的加权平均值）；下界依赖于正态分布的奖励，并受混合差距 $\Delta'_{k,m}$ 的限制
 - **Mathematical Mechanism:**
   - **Regret Bound** (收敛界): CExp$^2$ 算法的遗憾性能满足所有 $T \geq T_0$：
     $$ \mathcal{R}(T) =\mathcal{O}\left(c^*\log(T) +\frac{(\Delta'_{\max})^2}{\Delta'_{\min}}(\log\log(T))^4\right) $$
-    其中 $c^*$ 是表示遗憾值除以最佳手臂分配的 $\log(T)$ 的复杂性项，它保证了所有平均混合奖励的足够小的置信区间。
-- **Applicability Scope:** 有界多智能体学习环境，特别是广义联邦学习或分布式工具执行架构，其中本地智能体反馈必须通过中央控制器聚合成统一的行为策略，同时将通信开销降至最低。
-- **Limitations:** 该界依赖于特定协作模型的假设，包括正态分布的奖励和混合奖励的静态权重矩阵。其性能需要针对资源分配的预言机 $\mathcal{P}(\Delta)$ 和差距界 ($\Delta'_{\min}$, $\Delta'_{\max}$) 的确切知识/近似值。
+    其中 $c^*$ 是表示遗憾值除以最佳手臂分配的 $\log(T)$ 的复杂性项，它保证了所有平均混合奖励的足够小的置信区间
+- **Applicability Scope:** 有界多智能体学习环境，特别是广义联邦学习或分布式工具执行架构，其中本地智能体反馈必须通过中央控制器聚合成统一的行为策略，同时将通信开销降至最低
+- **Limitations:** 该界依赖于特定协作模型的假设，包括正态分布的奖励和混合奖励的静态权重矩阵；其性能需要针对资源分配的预言机 $\mathcal{P}(\Delta)$ 和差距界 ($\Delta'_{\min}$, $\Delta'_{\max}$) 的确切知识/近似值
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** CONCEPTUAL_MAPPING
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象一群研究人员（智能体）在不同的实验室测试不同的工具（手臂）。如果他们不交流，他们可能都会把时间浪费在测试糟糕的工具上（线性遗憾）。最优协作算法（CExp$^2$）确保通过中央服务器进行几次通信，他们可以一起学习整体最佳工具。与如果他们从一开始就奇迹般地知道最好的工具相比，他们浪费的总努力（遗憾）随着时间的推移只会增长得非常慢（对数）。
+- **Beginner Analogy:** 想象一群研究人员（智能体）在不同的实验室测试不同的工具（手臂）；如果他们不交流，他们可能都会把时间浪费在测试糟糕的工具上（线性遗憾）；最优协作算法（CExp$^2$）确保通过中央服务器进行几次通信，他们可以一起学习整体最佳工具；与如果他们从一开始就奇迹般地知道最好的工具相比，他们浪费的总努力（遗憾）随着时间的推移只会增长得非常慢（对数）
 
 ### 基于 A* 搜索的高效动作空间导航 (ToolChain*)
 
@@ -70,92 +70,92 @@
 - **Frontier Source:** ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search (arXiv:2310.13227v1)
 - **URL:** https://arxiv.org/abs/2310.13227
 - **Publication Date:** 2023-10-20
-- **Selection Reason:** 解决了多步工具使用过程中动作空间组合爆炸的问题，提供了一种基于理论的 A* 搜索方法，通过动态边界成本来高效导航并修剪无效的 API 序列。
-- **Original Problem:** 基于大语言模型的 Agent 在通过 API 函数调用逐步生成解决方案计划时，面临着庞大的动作空间。现有的方法通常要么陷入局部最优的单向探索，要么因为穷举遍历导致极度低效。
-- **Core Assumptions:** 动作空间可以公式化为一个决策树，其中节点是 API 函数调用。到目标节点的总成本可以通过结合任务特定的启发式函数（从长期记忆中推导）和想象力得分（由大语言模型自我评估剩余步骤得出）来有效界定。
+- **Selection Reason:** 解决了多步工具使用过程中动作空间组合爆炸的问题，提供了一种基于理论的 A* 搜索方法，通过动态边界成本来高效导航并修剪无效的 API 序列
+- **Original Problem:** 基于大语言模型的 Agent 在通过 API 函数调用逐步生成解决方案计划时，面临着庞大的动作空间；现有的方法通常要么陷入局部最优的单向探索，要么因为穷举遍历导致极度低效
+- **Core Assumptions:** 动作空间可以公式化为一个决策树，其中节点是 API 函数调用；到目标节点的总成本可以通过结合任务特定的启发式函数（从长期记忆中推导）和想象力得分（由大语言模型自我评估剩余步骤得出）来有效界定
 - **Mathematical Mechanism:**
   - **Future Cost Function** (数学更新规则): 节点 $n$ 的未来成本 $h(n)$ 通过几何平均数积分了任务特定的启发式函数 $h_{t,1}(n)$ 和大模型的想象力得分 $h_{t,2}(n)$：
     $$h(n)=(1-h_{t,1}(n))^\beta\cdot(1-h_{t,2}(n))^{1-\beta}$$
-    其中 $\beta$ 是未来成本的权重。这有效地修剪了可能包含不正确动作的高成本分支，从而确定成本最低的有效路径。
-- **Convergence / Boundary:** 累积成本界定了搜索树的扩展；超过最低已验证路径成本的搜索分支会被数学上修剪，确保在 API 调用空间中进行高效导航而不会无限发散。
-- **Applicability Scope:** 需要多步 API 函数调用的复杂顺序决策环境，在这些环境中，穷举搜索在计算上是不可行的，而纯贪婪搜索容易失败。
-- **Limitations:** 任务特定的启发式函数在很大程度上依赖于长期记忆中参考数据的覆盖率和质量。想象力得分依赖于大语言模型准确估计路径可行性的能力，如果没有充分的校准，它仍然可能表现出过度自信。
+    其中 $\beta$ 是未来成本的权重；这有效地修剪了可能包含不正确动作的高成本分支，从而确定成本最低的有效路径
+- **Convergence / Boundary:** 累积成本界定了搜索树的扩展；超过最低已验证路径成本的搜索分支会被数学上修剪，确保在 API 调用空间中进行高效导航而不会无限发散
+- **Applicability Scope:** 需要多步 API 函数调用的复杂顺序决策环境，在这些环境中，穷举搜索在计算上是不可行的，而纯贪婪搜索容易失败
+- **Limitations:** 任务特定的启发式函数在很大程度上依赖于长期记忆中参考数据的覆盖率和质量；想象力得分依赖于大语言模型准确估计路径可行性的能力，如果没有充分的校准，它仍然可能表现出过度自信
 - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 - **Architecture Mapping Status:** DESIGN_CANDIDATE
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginner Analogy:** 想象你正在一个巨大的迷宫（工具动作空间）中寻找出口。你没有选择走遍每一条路（太慢），也没有选择盲目前进（容易卡住），而是使用了一个智能指南针。这个指南针计算两件事：根据你研究过的过去地图，这条路看起来有多近（启发式）；以及你直觉上感觉离出口还有多少步（想象力）。通过将这两个提示相乘，你可以迅速忽略死胡同，找到最快的出口路径。
+- **Beginner Analogy:** 想象你正在一个巨大的迷宫（工具动作空间）中寻找出口；你没有选择走遍每一条路（太慢），也没有选择盲目前进（容易卡住），而是使用了一个智能指南针；这个指南针计算两件事：根据你研究过的过去地图，这条路看起来有多近（启发式）；以及你直觉上感觉离出口还有多少步（想象力）；通过将这两个提示相乘，你可以迅速忽略死胡同，找到最快的出口路径
 
 ### 基于 A* 搜索的动态动作空间裁剪
 
 - **System Container:** Tool System (工具系统)
 - **Frontier Source:** S43 (arXiv:2310.13227v1, *ToolChain*: Efficient Action Space Navigation in Large Language Models with A* Search*)
-- **Original Problem Formulation:** 在引入工具的大语言模型中，每一步潜在的 API 调用会将动作空间指数级扩大。单向探索容易使智能体陷入局部最优解或错误循环，而穷举遍历则效率极低。
+- **Original Problem Formulation:** 在引入工具的大语言模型中，每一步潜在的 API 调用会将动作空间指数级扩大；单向探索容易使智能体陷入局部最优解或错误循环，而穷举遍历则效率极低
 - **Core Assumptions:**
-  - API 动作空间可以被结构化为正式的决策树。
-  - 可以定义一个特定任务的成本函数预言机 $f(n) = g(n) + h(n)$ 来引导搜索，其中 $h(n)$ 使用长期记忆启发式和 LLM“想象”来估计到达目标的成本。
-  - 给定当前状态、API 定义和演示示例，LLM 能够生成潜在的独立同分布的下一步动作。
+  - API 动作空间可以被结构化为正式的决策树
+  - 可以定义一个特定任务的成本函数预言机 $f(n) = g(n) + h(n)$ 来引导搜索，其中 $h(n)$ 使用长期记忆启发式和 LLM“想象”来估计到达目标的成本
+  - 给定当前状态、API 定义和演示示例，LLM 能够生成潜在的独立同分布的下一步动作
 - **Mathematical Mechanism:**
   - **算法伪代码:** ToolChain* 导航
-    1. 使用根节点 $s_0$ 初始化决策树 $\mathcal{T}$。
+    1. 使用根节点 $s_0$ 初始化决策树 $\mathcal{T}$
     2. 当未达到目标（或达到最大步数 $T$）时：
-       - 从边界 $\mathcal{F}$ 中选择节点 $n_{next} = \arg\min_{n \in \mathcal{F}(\mathcal{T})} f(n)$。
-       - 使用 LLM $\rho$ 扩展 $n_{next}$，生成候选动作 $\{a^{(i)}\}_{i=1}^k$。
-       - 将新状态节点追加到 $\mathcal{T}$ 中。
-       - 更新新边界节点的成本函数 $f$。
+       - 从边界 $\mathcal{F}$ 中选择节点 $n_{next} = \arg\min_{n \in \mathcal{F}(\mathcal{T})} f(n)$
+       - 使用 LLM $\rho$ 扩展 $n_{next}$，生成候选动作 $\{a^{(i)}\}_{i=1}^k$
+       - 将新状态节点追加到 $\mathcal{T}$ 中
+       - 更新新边界节点的成本函数 $f$
   - **数学更新规则:**
     - 未来成本 $h(n)$ 整合了基于长期记忆中词汇最接近动作的平均相对位置的启发式 $h_{t,1}(n)$，以及基于 LLM 设想路径中祖先比例得出的想象得分 $h_{t,2}(n)$：
     $$h(n) = (1 - h_{t,1}(n))^\beta \cdot (1 - h_{t,2}(n))^{1-\beta}$$
-- **Convergence / Bound Behavior:** 通过利用 A* 公式，算法能够裁剪高成本分支。如果启发式函数是可采纳的（admissible），它将在结构上限制所需的探索空间，并帮助确定最低成本的有效路径，从而比穷举广度优先遍历减少搜索时间。
-- **Applicable Scope:** 多步 API 调用环境和顺序决策任务，其中动作可以被分层建模，且存在历史记忆以形成启发式。
-- **Theoretical Limitations:** 保证严格依赖于特定任务启发式函数的质量和可采纳性。如果长期记忆缺乏相关覆盖，或者 LLM 的想象得分存在系统性缺陷，搜索可能会退化为贪婪选择或 BFS，无法有效地找到最优解。
-- **Architecture Mapping Candidate:** CONCEPTUAL_MAPPING. A* API 搜索公式为在系统的外部模块交互层中实现有界的工具探索提供了一个概念设计。
+- **Convergence / Bound Behavior:** 通过利用 A* 公式，算法能够裁剪高成本分支；如果启发式函数是可采纳的（admissible），它将在结构上限制所需的探索空间，并帮助确定最低成本的有效路径，从而比穷举广度优先遍历减少搜索时间
+- **Applicable Scope:** 多步 API 调用环境和顺序决策任务，其中动作可以被分层建模，且存在历史记忆以形成启发式
+- **Theoretical Limitations:** 保证严格依赖于特定任务启发式函数的质量和可采纳性；如果长期记忆缺乏相关覆盖，或者 LLM 的想象得分存在系统性缺陷，搜索可能会退化为贪婪选择或 BFS，无法有效地找到最优解
+- **Architecture Mapping Candidate:** CONCEPTUAL_MAPPING. A* API 搜索公式为在系统的外部模块交互层中实现有界的工具探索提供了一个概念设计
 - **Repository Implementation Status:** EVIDENCE_INSUFFICIENT
 - **Repository Test Status:** EVIDENCE_INSUFFICIENT
-- **Beginners' Analogy:** 想象你正在一个巨大的迷宫（API 调用的动作空间）中导航。你不是盲目地走过每一条走廊（穷举搜索），也不是只猜一条路然后被困住（单向探索），而是使用指南针（来自记忆的启发式）和一张你*认为*出口在哪里的地图（LLM 想象）在每个路口计算最短路径（A* 搜索），迅速排除错误的路线。
+- **Beginners' Analogy:** 想象你正在一个巨大的迷宫（API 调用的动作空间）中导航；你不是盲目地走过每一条走廊（穷举搜索），也不是只猜一条路然后被困住（单向探索），而是使用指南针（来自记忆的启发式）和一张你*认为*出口在哪里的地图（LLM 想象）在每个路口计算最短路径（A* 搜索），迅速排除错误的路线
 - **Evidence Provenance:**
   - **Paper Evidence Status:** VERIFIED_FROM_LATEX_SOURCE
 
 ：从试错到绝对可控 (Core Mechanisms)
 ### 因果最小化工具过滤 (CMTF) 与目标推断
-arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents》。
-严格锁定后验推断上限 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 以及 $V_{t}=F(s_{t},g,T)$。通过物理因果过滤剔除所有发散的概率路径。
+arXiv:2606.16813v1《GIST-CMTF: Goal-State Inference for Causal Minimal Tool Filtering in LLM Agents》
+严格锁定后验推断上限 $g^{\star}=\arg\max_{g_{i}}p_{i}$ 以及 $V_{t}=F(s_{t},g,T)$；通过物理因果过滤剔除所有发散的概率路径
 
 ### 2.1 策略优化 (Policy Optimization)
-在我们的数学架构中，智能体选择某个工具的决定不再是一个简单的字符串输出，而是被视为一个策略网络 $\pi_\theta(a|s)$ 所输出的数学概率。其中 $s$ 是当前状态（过去的对话历史与环境反馈），$a$ 则是具体的工具调用动作。
-* **探索与利用的博弈 (Exploration vs. Exploitation)**：我们运用近端策略优化（PPO）等策略梯度算法。智能体在训练沙盒中不断尝试不同工具的疯狂组合（探索），算法根据最终任务的完成度计算数学梯度，慢慢引导其收敛于能获取最大回报的动作序列（利用）。
-* **打破时间诅咒的延迟奖励 (Delayed Credit Assignment)**：工具的调用后果往往存在严重的滞后性。例如：智能体调用了“搜索文件”工具，得到了一个结果，又把结果传给“总结摘要”工具，最后才给出人类答案。究竟是哪一步帮了倒忙？强化学习中的价值函数（Value Function）就像一个高瞻远瞩的财务分析师，能够精准地把最终的奖励（或惩罚）逆向分摊给链条上的每一个微小动作。
+在我们的数学架构中，智能体选择某个工具的决定不再是一个简单的字符串输出，而是被视为一个策略网络 $\pi_\theta(a|s)$ 所输出的数学概率；其中 $s$ 是当前状态（过去的对话历史与环境反馈），$a$ 则是具体的工具调用动作
+* **探索与利用的博弈 (Exploration vs. Exploitation)**：我们运用近端策略优化（PPO）等策略梯度算法；智能体在训练沙盒中不断尝试不同工具的疯狂组合（探索），算法根据最终任务的完成度计算数学梯度，慢慢引导其收敛于能获取最大回报的动作序列（利用）
+* **打破时间诅咒的延迟奖励 (Delayed Credit Assignment)**：工具的调用后果往往存在严重的滞后性；例如：智能体调用了“搜索文件”工具，得到了一个结果，又把结果传给“总结摘要”工具，最后才给出人类答案；究竟是哪一步帮了倒忙？强化学习中的价值函数（Value Function）就像一个高瞻远瞩的财务分析师，能够精准地把最终的奖励（或惩罚）逆向分摊给链条上的每一个微小动作
 
 ### 2.2 价值对齐与安全铁律 (Value Alignment)
-“好用”是不够的，对于拥有执行权限的智能体来说，“安全和省钱”同样重要。这就是价值对齐（Alignment）存在的意义。
-* **多维奖励模型 (Reward Modeling)**：我们基于人类反馈（RLHF）或预定义的绝对刚性规则（RLAIF）训练了一个苛刻的裁判（奖励模型）。它不仅评估最终结果的对错，还严格评估调用过程的经济性（你是不是浪费调用了太多次 API？）和安全性（你是不是碰了不允许碰的内核文件？）。
-* **硬性信任域约束 (Trust Region Penalty)**：在数学优化过程中，我们绝不让模型像脱缰的野马一样更新。策略必须被强制约束在一个信任域（Trust Region）内，确保它的工具调用行为曲线在数学层面上绝对不会跨越危险区红线。
+“好用”是不够的，对于拥有执行权限的智能体来说，“安全和省钱”同样重要；这就是价值对齐（Alignment）存在的意义
+* **多维奖励模型 (Reward Modeling)**：我们基于人类反馈（RLHF）或预定义的绝对刚性规则（RLAIF）训练了一个苛刻的裁判（奖励模型）；它不仅评估最终结果的对错，还严格评估调用过程的经济性（你是不是浪费调用了太多次 API？）和安全性（你是不是碰了不允许碰的内核文件？）
+* **硬性信任域约束 (Trust Region Penalty)**：在数学优化过程中，我们绝不让模型像脱缰的野马一样更新；策略必须被强制约束在一个信任域（Trust Region）内，确保它的工具调用行为曲线在数学层面上绝对不会跨越危险区红线
 
 ### 2.3 降维打击：“研究并逆向工程” (Studied, then Reversed)
 
-在项目的核心 README 中有一句关键的话：“我们研究了它，然后逆向反转了它（Studied, then reversed）”。这也是我们整个系统的点睛之笔。
-我们非常清楚，强化学习在开放宇宙中是极其脆弱且对超参数极其敏感的，指望一个在线运行的 RL 智能体不发疯是不可能的。
+在项目的核心 README 中有一句关键的话：“我们研究了它，然后逆向反转了它（Studied, then reversed）”；这也是我们整个系统的点睛之笔
+我们非常清楚，强化学习在开放宇宙中是极其脆弱且对超参数极其敏感的，指望一个在线运行的 RL 智能体不发疯是不可能的
 
-* **终极逆向操作 (Reverse Engineering)**：我们并不在生产环境中让智能体用 RL 去试错。相反，我们在封闭沙盒中利用 RL 训练出了一份“完美工具依赖关系图谱（Causal Graph）”。随后，我们进行**逆向工程**，将这种原本属于黑盒的概率性策略，通过 **符号策略蒸馏（Symbolic Policy Distillation）** 技术，将复杂的策略网络直接编译转化为具有绝对因果逻辑关系的、具备可解释性的确定性执行路由流（Deterministic Execution Router）。
-* **必然的收敛 (Deterministic Guarantee)**：我们牺牲了仅仅百分之几的随机灵活性，换来的是 100% 的执行可预测性。在这个被逆向工程锁死的工具链条里，无论输入多么混乱的提示词，工具的调用流转过程在数学上都被证明是必然收敛于安全状态的。
+* **终极逆向操作 (Reverse Engineering)**：我们并不在生产环境中让智能体用 RL 去试错；相反，我们在封闭沙盒中利用 RL 训练出了一份“完美工具依赖关系图谱（Causal Graph）”；随后，我们进行**逆向工程**，将这种原本属于黑盒的概率性策略，通过 **符号策略蒸馏（Symbolic Policy Distillation）** 技术，将复杂的策略网络直接编译转化为具有绝对因果逻辑关系的、具备可解释性的确定性执行路由流（Deterministic Execution Router）
+* **必然的收敛 (Deterministic Guarantee)**：我们牺牲了仅仅百分之几的随机灵活性，换来的是 100% 的执行可预测性；在这个被逆向工程锁死的工具链条里，无论输入多么混乱的提示词，工具的调用流转过程在数学上都被证明是必然收敛于安全状态的
 
 ---
 
 ### 基于策略优化的因果路由工具约束
 System Container: Tool System
 Frontier Source: arXiv:2412.19578 (Shixuan Liu 等人, 2024)
-Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建立了一个确定性的因果边界，使得原先基于概率分布的工具选择网络（Agent 的工具箱调用）被强制锁定在严谨的因果数学约束中，避免幻觉滥用。
+Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建立了一个确定性的因果边界，使得原先基于概率分布的工具选择网络（Agent 的工具箱调用）被强制锁定在严谨的因果数学约束中，避免幻觉滥用
 
 ###
 
 
 ### 2.4 多智能体协作工具路由 (MAC-SQL)
 **Frontier Source**: MAC-SQL: A Multi-Agent Collaborative Framework for Text-to-SQL (http://arxiv.org/abs/2312.11242v6)
-**Original Problem**: 基于大语言模型的 Text-to-SQL 方法在处理包含巨大数据库和需要多步推理的复杂用户问题时，性能会出现显著下降，且通常忽略了 LLM 利用外部工具和模型协作的重要意义。
-**Core Assumption**: 假设通过利用可访问外部工具（如 Schema 选择器和修正器）的协作智能体，将逐 token 生成过程分解为子问题，可以有效缩小生成误差空间并减少误差传播。
-**Convergence / Boundary**: 逐 token 的误差累积界限在理论上受到了将问题显式分解为 $L$ 个子问题的约束。这意味着，相较于没有经过 Schema 过滤（$\mathcal{S}^{'}$）而直接进行单步的整体查询生成，在分解后的每一步中联合概率分布空间都被有效缩减了。
-**Applicability**: 涉及超大数据库 Schema 且需要复杂多步逻辑推理的 Text-to-SQL 任务。
-**Limitations**: 理论性能边界依然根本上取决于底层基础大语言模型（$\mathcal{M}$）的内在能力，并且高度依赖能否正确检索和过滤出最小 Schema $\mathcal{S}^{'}$ 而不错误地丢弃必要的数据表。
+**Original Problem**: 基于大语言模型的 Text-to-SQL 方法在处理包含巨大数据库和需要多步推理的复杂用户问题时，性能会出现显著下降，且通常忽略了 LLM 利用外部工具和模型协作的重要意义
+**Core Assumption**: 假设通过利用可访问外部工具（如 Schema 选择器和修正器）的协作智能体，将逐 token 生成过程分解为子问题，可以有效缩小生成误差空间并减少误差传播
+**Convergence / Boundary**: 逐 token 的误差累积界限在理论上受到了将问题显式分解为 $L$ 个子问题的约束；这意味着，相较于没有经过 Schema 过滤（$\mathcal{S}^{'}$）而直接进行单步的整体查询生成，在分解后的每一步中联合概率分布空间都被有效缩减了
+**Applicability**: 涉及超大数据库 Schema 且需要复杂多步逻辑推理的 Text-to-SQL 任务
+**Limitations**: 理论性能边界依然根本上取决于底层基础大语言模型（$\mathcal{M}$）的内在能力，并且高度依赖能否正确检索和过滤出最小 Schema $\mathcal{S}^{'}$ 而不错误地丢弃必要的数据表
 **Agent Architecture Mapping**: DESIGN_CANDIDATE
 **Repository Implementation Status**: EVIDENCE_INSUFFICIENT
 **Repository Test Status**: EVIDENCE_INSUFFICIENT
@@ -165,13 +165,13 @@ Deterministic Convergence Mechanism: 该研究通过信任域策略裁剪，建�
 
 - **System Container:** Tool System
 - **Frontier Source:** S59 — Cooperative Multi-Agent Constrained Stochastic Linear Bandits
-- **论文原始问题 (Original Problem):** 论文解决多智能体约束线性老虎机问题，其中一个智能体网络通过仅依靠局部通信，协作最大化预期累积奖励，同时将预期成本保持在指定阈值以下。
-- **核心假设 (Core Assumptions):** 智能体仅与直接邻居通信。结构矩阵 $W$ 是双重随机的。存在一个已知的严格可行操作 $x_0$，其成本差距为 $\tau - c_0 > 0$。通信步骤不会产生新的操作选择，从而导致后悔值增加。
+- **论文原始问题 (Original Problem):** 论文解决多智能体约束线性老虎机问题，其中一个智能体网络通过仅依靠局部通信，协作最大化预期累积奖励，同时将预期成本保持在指定阈值以下
+- **核心假设 (Core Assumptions):** 智能体仅与直接邻居通信；结构矩阵 $W$ 是双重随机的；存在一个已知的严格可行操作 $x_0$，其成本差距为 $\tau - c_0 > 0$；通信步骤不会产生新的操作选择，从而导致后悔值增加
 
-- **收敛或行为边界 (Convergence or behavior boundaries):** 到时间 $T$ 的多智能体伪后悔 $R(T)$ 以高概率受到 $\tilde{O} \left( \frac{d\sqrt{T}}{\tau - c_0} \right)$ 的限制。后悔值与通信阶段的持续时间 $q(s)$ 成正比增加。
-- **适用范围 (Applicable Scope):** 适用于执行约束探索-利用的多智能体分布式设置，其中成本阈值在全局是严格的，但奖励/成本模型在局部有所不同。
-- **局限 (Limitations):** 后悔界限对通信图的谱间隙高度敏感。没有更新新估计值的延长通信阶段会直接加剧整体后悔惩罚。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持工具执行层，其中多个去中心化智能体执行受限的工具调用。加速共识边界指导智能体之间的通信延迟如何惩罚工具执行奖励，而不违反安全阈值。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 到时间 $T$ 的多智能体伪后悔 $R(T)$ 以高概率受到 $\tilde{O} \left( \frac{d\sqrt{T}}{\tau - c_0} \right)$ 的限制；后悔值与通信阶段的持续时间 $q(s)$ 成正比增加
+- **适用范围 (Applicable Scope):** 适用于执行约束探索-利用的多智能体分布式设置，其中成本阈值在全局是严格的，但奖励/成本模型在局部有所不同
+- **局限 (Limitations):** 后悔界限对通信图的谱间隙高度敏感；没有更新新估计值的延长通信阶段会直接加剧整体后悔惩罚
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持工具执行层，其中多个去中心化智能体执行受限的工具调用；加速共识边界指导智能体之间的通信延迟如何惩罚工具执行奖励，而不违反安全阈值
 - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
 
 - **证据状态 (Evidence Status):**
@@ -190,7 +190,7 @@ def execute_tool_causal_graph(query, state, tools, goal_probs):
     return strict_filter_execute(state, g_star, tools)
 ```
 
-以下的伪代码展示了我们是如何从“强化学习奖励评估”跳跃到“确定性约束拦截”的。
+以下的伪代码展示了我们是如何从“强化学习奖励评估”跳跃到“确定性约束拦截”的
 
 ```python
 import numpy as np
@@ -247,8 +247,8 @@ class ToolExecutionRouter:
 ```
 
 **代码级解析：**
-1. **因果铁律 (`causal_dependency_graph`)**：我们不让大模型在运行时自由发挥想用什么用什么，而是让系统在启动时就加载这套雷打不动的“法律”。如果智能体想调用高危动作，发现它之前没执行过校验，路由层会像防雷墙一样直接将其打回（`_check_causal_dependencies`）。
-2. **深度截断 (`max_tool_chain_depth`)**：大模型最容易犯的错就是在一个工具里一直纠结报错出不来。这里是一条纯数学性质的物理斩断线。这体现了“我们不优化，我们保证收敛”——如果不能收敛到结果，那就强行收敛到“终止状态”，绝不允许系统失控发散。
+1. **因果铁律 (`causal_dependency_graph`)**：我们不让大模型在运行时自由发挥想用什么用什么，而是让系统在启动时就加载这套雷打不动的“法律”；如果智能体想调用高危动作，发现它之前没执行过校验，路由层会像防雷墙一样直接将其打回（`_check_causal_dependencies`）
+2. **深度截断 (`max_tool_chain_depth`)**：大模型最容易犯的错就是在一个工具里一直纠结报错出不来；这里是一条纯数学性质的物理斩断线；这体现了“我们不优化，我们保证收敛”——如果不能收敛到结果，那就强行收敛到“终止状态”，绝不允许系统失控发散
 
 ### Code for 基于策略优化的因果路由工具约束
 ```python
@@ -272,23 +272,23 @@ def calculate_kl_divergence_constraint(b_prob, pi_theta_prob):
 ```latex
 P_{\mathcal{M}}(\mathcal{Y} | \mathcal{Q}, \mathcal{S}^{'}, \mathcal{K}) = \prod_{j=1}^{L} P_{\mathcal{M}}(\mathcal{Y}^{j} | \mathcal{Y}^{<j}; \mathcal{Q}^{j}, \mathcal{S}^{'}, \mathcal{K})
 ```
-其中 $\mathcal{Q}^{j}$ 和 $\mathcal{Y}^{j}$ 是在给定前序生成的子 SQL $\mathcal{Y}^{<j}$、过滤后的最小数据库 Schema $\mathcal{S}^{'}$ 以及知识 $\mathcal{K}$ 的条件下，LLM 生成的第 $j$ 个子问题和子 SQL，而 $L$ 是子问题的总数。
+其中 $\mathcal{Q}^{j}$ 和 $\mathcal{Y}^{j}$ 是在给定前序生成的子 SQL $\mathcal{Y}^{<j}$、过滤后的最小数据库 Schema $\mathcal{S}^{'}$ 以及知识 $\mathcal{K}$ 的条件下，LLM 生成的第 $j$ 个子问题和子 SQL，而 $L$ 是子问题的总数
 
 ### Mathematical Mechanism for 合作约束随机线性老虎机
-- **数学机制 (Mathematical Mechanism):** 智能体使用乐观-悲观线性老虎机 (OPLB) 算法，并使用加速共识程序交换信息。共识更新步骤（mix 函数）如下：
+- **数学机制 (Mathematical Mechanism):** 智能体使用乐观-悲观线性老虎机 (OPLB) 算法，并使用加速共识程序交换信息；共识更新步骤（mix 函数）如下：
   $\alpha_{h+1}^i = \frac{c_h}{c_{h+1}} z_h^i - \frac{c_{h-1}}{c_{h+1}} \alpha_{h-1}^i$ (数学更新规则)
-  其中 $z_h^i = \sum_{j \in \mathcal{N}(i)} \frac{2W_{i,j}}{|\lambda_2|} \alpha_h^j$，减轻由谱间隙 $1 - |\lambda_2|$ 界定的通信延迟影响。
+  其中 $z_h^i = \sum_{j \in \mathcal{N}(i)} \frac{2W_{i,j}}{|\lambda_2|} \alpha_h^j$，减轻由谱间隙 $1 - |\lambda_2|$ 界定的通信延迟影响
 
 ## 4. 前沿演进：符号策略蒸馏实战 (Symbolic Policy Distillation)
 
-为了应对日益复杂的组合工具需求，我们在近期的架构迭代中引入了“符号策略蒸馏”技术。这也是“从试错到绝对可控”的最核心实战落地。
+为了应对日益复杂的组合工具需求，我们在近期的架构迭代中引入了“符号策略蒸馏”技术；这也是“从试错到绝对可控”的最核心实战落地
 
 ### 4.1 通俗类比 (For Beginners)：从“走迷宫”到“修铁轨”
-想象一下，传统的智能体（基于概率的大模型）像是一个蒙着眼罩在**迷宫**里摸索的人。他通过“感觉”去尝试一条路（调用搜索API），如果碰壁了，再退回来换一条路。即使他走通了一次，下一次让他重走，他依然可能走错。
-我们的“符号策略蒸馏”就像是让算法在封闭靶场里走了一万次迷宫。在它找到那条绝对完美的必胜路线后，我们直接把这条路线上的杂草全部铲平，铺上一条极其死板的**钢铁轨道**。从今天起，智能体不需要再做任何“思考”和“概率计算”，它只需要坐上火车，沿着铁轨（确定性路由）全速前进，中途绝无可能出轨。
+想象一下，传统的智能体（基于概率的大模型）像是一个蒙着眼罩在**迷宫**里摸索的人；他通过“感觉”去尝试一条路（调用搜索API），如果碰壁了，再退回来换一条路；即使他走通了一次，下一次让他重走，他依然可能走错
+我们的“符号策略蒸馏”就像是让算法在封闭靶场里走了一万次迷宫；在它找到那条绝对完美的必胜路线后，我们直接把这条路线上的杂草全部铲平，铺上一条极其死板的**钢铁轨道**；从今天起，智能体不需要再做任何“思考”和“概率计算”，它只需要坐上火车，沿着铁轨（确定性路由）全速前进，中途绝无可能出轨
 
 ### 4.2 硬核伪代码：塌缩马尔可夫决策概率
-在底层数学中，我们将强化学习输出的概率策略网络 $\pi_\theta(a|s)$ 强制塌缩（Collapse）为具有二元真值（Boolean）的符号有向无环图（DAG）。
+在底层数学中，我们将强化学习输出的概率策略网络 $\pi_\theta(a|s)$ 强制塌缩（Collapse）为具有二元真值（Boolean）的符号有向无环图（DAG）
 
 ```python
 import networkx as nx
@@ -321,19 +321,19 @@ def distill_probabilistic_policy_to_dag(rl_policy_network, confidence_threshold=
 
 ### Weaved Integrations
 
-想象一个赛车手（智能体）在一个充满不可预见漏油（随机不确定性）的赛道上疾驰。一个基础的AI可能会尝试每秒计算一次撞车的概率并祈祷好运。我们的控制屏障函数 (CBF) 在数学上沿着赛道边缘建立了一堵看不见、牢不可破的墙。在赛车手踩下油门执行工具动作之前，系统会计算绝对极限（上限）。如果一个动作哪怕有一丝可能将赛车推向屏障之外，引擎就会自动切断动力——保证 100% 的安全。
+想象一个赛车手（智能体）在一个充满不可预见漏油（随机不确定性）的赛道上疾驰；一个基础的AI可能会尝试每秒计算一次撞车的概率并祈祷好运；我们的控制屏障函数 (CBF) 在数学上沿着赛道边缘建立了一堵看不见、牢不可破的墙；在赛车手踩下油门执行工具动作之前，系统会计算绝对极限（上限）；如果一个动作哪怕有一丝可能将赛车推向屏障之外，引擎就会自动切断动力——保证 100% 的安全
 ### Analogy for
 
 ### Analogy for 因果最小化工具过滤 (CMTF) 与目标推断
-工具选择被装上了“因果条形码扫描仪”。每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏。
+工具选择被装上了“因果条形码扫描仪”；每次执行前物理扫描目标匹配度，锁死最精确的唯一工具，彻底杜绝试错破坏
 
 ### Analogy for 基于策略优化的因果路由工具约束
-如果给 AI 一个工具箱（无数个 API），普通的模型可能会随心所欲，导致它想拿锤子去拧螺丝。这套理论给 AI 画了一个严格的“信任区域”（数学围栏）。一旦 AI 的新执行计划偏离了原本安全的因果蓝图太多，上述的 KL 散度公式（一种测量偏离距离的算式）就会立刻报警并“剪断”越界的想法，从而保证每一步工具调用都绝对符合因果逻辑。
+如果给 AI 一个工具箱（无数个 API），普通的模型可能会随心所欲，导致它想拿锤子去拧螺丝；这套理论给 AI 画了一个严格的“信任区域”（数学围栏）；一旦 AI 的新执行计划偏离了原本安全的因果蓝图太多，上述的 KL 散度公式（一种测量偏离距离的算式）就会立刻报警并“剪断”越界的想法，从而保证每一步工具调用都绝对符合因果逻辑
 
 ### 约束引导验证的确定性工具交互 (Constraint-Guided Verification for Tool Use)
 System Container: Tool System
 Frontier Source: CoVe: Training Interactive Tool-Use Agents via Constraint-Guided Verification (arXiv:2603.01940)
-Deterministic Convergence Mechanism: 该框架在一个确定性的马尔可夫决策过程 $\mathcal{M}=(\mathcal{S},\mathcal{A},\mathcal{O},\mathcal{T})$ 中，对动作空间 $\mathcal{A}$ 施加了一个硬性约束集 $C=\{c_{1},c_{2},\dots,c_{n}\}$。通过在数学上验证每一步工具调用都必须满足这些约束，它彻底切断了策略发生越界发散的可能性。
+Deterministic Convergence Mechanism: 该框架在一个确定性的马尔可夫决策过程 $\mathcal{M}=(\mathcal{S},\mathcal{A},\mathcal{O},\mathcal{T})$ 中，对动作空间 $\mathcal{A}$ 施加了一个硬性约束集 $C=\{c_{1},c_{2},\dots,c_{n}\}$；通过在数学上验证每一步工具调用都必须满足这些约束，它彻底切断了策略发生越界发散的可能性
 
 ### Source Code Breakdown
 ```python
@@ -353,14 +353,14 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 ```
 
 ### 0基础业务通俗类比 (For Beginners)
-想象你把公司核心数据库的万能钥匙（工具）交给了一个实习生（AI），但你同时在他手上绑了一个GPS追踪器，并给了一本操作红线手册（约束集 $C$）。传统 AI 可能会瞎猜要删什么东西，一不小心就把库清空了。而“约束引导验证”机制就像是，只要实习生试图做任何没有在红线手册里被严格证明绝对安全的动作，大门就会在物理层面上直接锁死。这就保证了在生产环境中绝对零事故，彻底告别“试错”。
+想象你把公司核心数据库的万能钥匙（工具）交给了一个实习生（AI），但你同时在他手上绑了一个GPS追踪器，并给了一本操作红线手册（约束集 $C$）；传统 AI 可能会瞎猜要删什么东西，一不小心就把库清空了；而“约束引导验证”机制就像是，只要实习生试图做任何没有在红线手册里被严格证明绝对安全的动作，大门就会在物理层面上直接锁死；这就保证了在生产环境中绝对零事故，彻底告别“试错”
 
 ```python
 # Eq: P_{u}\leq 1-\frac{h(\mathbf{x}_{0})+\gamma-\varphi K}{M+\gamma}
 
-    # 我们严格计算工具违反上限 W_k 的概率。
-    # 我们强制将不安全的执行概率 (P_u) 锁定在屏障约束之内。
-    # 如果阈值超过了允许的 delta 极限，执行就会终止。
+    # 我们严格计算工具违反上限 W_k 的概率
+    # 我们强制将不安全的执行概率 (P_u) 锁定在屏障约束之内
+    # 如果阈值超过了允许的 delta 极限，执行就会终止
     safety_margin = 1 - (h_x_0 + gamma - (phi * K)) / (M + gamma)
 
     if safety_margin > 1.0:
@@ -370,18 +370,18 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 
 💡 0基础业务通俗类比 (For Beginners)
 
-想象一个赛车手（智能体）在一个充满不可预见漏油（随机不确定性）的赛道上疾驰。一个基础的AI可能会尝试每秒计算一次撞车的概率并祈祷好运。我们的控制屏障函数 (CBF) 在数学上沿着赛道边缘建立了一堵看不见、牢不可破的墙。在赛车手踩下油门执行工具动作之前，系统会计算绝对极限（上限）。如果一个动作哪怕有一丝可能将赛车推向屏障之外，引擎就会自动切断动力——保证 100% 的安全。
+想象一个赛车手（智能体）在一个充满不可预见漏油（随机不确定性）的赛道上疾驰；一个基础的AI可能会尝试每秒计算一次撞车的概率并祈祷好运；我们的控制屏障函数 (CBF) 在数学上沿着赛道边缘建立了一堵看不见、牢不可破的墙；在赛车手踩下油门执行工具动作之前，系统会计算绝对极限（上限）；如果一个动作哪怕有一丝可能将赛车推向屏障之外，引擎就会自动切断动力——保证 100% 的安全
 
 
 
 ### Analogy for 多智能体协作工具路由 (MAC-SQL)
-想象一个专家团队正在建造一台复杂的机器。如果不让一个人光靠记忆一次性构建所有部件（这会导致极其严重的错误堆积），而是将任务拆解：一位架构师负责逐步设计蓝图（Decomposer），另一位工程师只去仓库提取恰好所需的精确零件（Selector），最后还有一位质检员去修复哪怕最细微的组装瑕疵（Refiner）。
+想象一个专家团队正在建造一台复杂的机器；如果不让一个人光靠记忆一次性构建所有部件（这会导致极其严重的错误堆积），而是将任务拆解：一位架构师负责逐步设计蓝图（Decomposer），另一位工程师只去仓库提取恰好所需的精确零件（Selector），最后还有一位质检员去修复哪怕最细微的组装瑕疵（Refiner）
 
 
 🔗 [
 
 ### Analogy for 合作约束随机线性老虎机
-- **初学者类比 (Beginner Analogy):** 想象一个厨师团队试图创造新食谱（探索），同时确保他们不超过严格的预算（约束）。他们只能与旁边的厨师交谈。如果他们花太多时间交谈以同步他们的预算估计，他们就会失去本可以用来做饭的时间（产生后悔）。该算法帮助他们最佳地平衡做饭和交谈。
+- **初学者类比 (Beginner Analogy):** 想象一个厨师团队试图创造新食谱（探索），同时确保他们不超过严格的预算（约束）；他们只能与旁边的厨师交谈；如果他们花太多时间交谈以同步他们的预算估计，他们就会失去本可以用来做饭的时间（产生后悔）；该算法帮助他们最佳地平衡做饭和交谈
 
 
 ### 联网自动驾驶汽车的多智能体概率集成轨迹采样 (Multi-Agent Probabilistic Ensembles with Trajectory Sampling for Connected Autonomous Vehicles)
@@ -393,17 +393,17 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 - **URL:** https://arxiv.org/abs/2312.13910
 - **版本 (Version):** v3
 - **发布时间 (Publication Date):** 2024-07-17
-- **选择理由 (Reason for selection):** 提供了多智能体基于模型强化的群体后悔界，直接指导有界通信范围如何影响去中心化轨迹（工具序列）规划的收敛。
-- **实际提取段落或公式 (Actually extracted paragraphs or formulas):** 提取了群体后悔界公式 $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$。
-- **论文原始问题 (Original Problem):** 论文解决有限通信范围内联网自动驾驶汽车 (CAVs) 的去中心化基于模型的强化学习 (MBRL) 问题，智能体必须在仅局部共享信息的情况下优化轨迹规划，以减轻全局通信的成本和限制。
-- **核心假设 (Core Assumptions):** 状态和动作空间经过离散化和有界处理。智能体在动态有限通信范围 $d$ 内运行，形成动态拓扑 $\mathcal{G}_{d,k}$。收敛性取决于通信图的最小团覆盖数 (minimum clique cover number) $\bar{\chi}\left(\mathcal{G}_d\right)$。
+- **选择理由 (Reason for selection):** 提供了多智能体基于模型强化的群体后悔界，直接指导有界通信范围如何影响去中心化轨迹（工具序列）规划的收敛
+- **实际提取段落或公式 (Actually extracted paragraphs or formulas):** 提取了群体后悔界公式 $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$
+- **论文原始问题 (Original Problem):** 论文解决有限通信范围内联网自动驾驶汽车 (CAVs) 的去中心化基于模型的强化学习 (MBRL) 问题，智能体必须在仅局部共享信息的情况下优化轨迹规划，以减轻全局通信的成本和限制
+- **核心假设 (Core Assumptions):** 状态和动作空间经过离散化和有界处理；智能体在动态有限通信范围 $d$ 内运行，形成动态拓扑 $\mathcal{G}_{d,k}$；收敛性取决于通信图的最小团覆盖数 (minimum clique cover number) $\bar{\chi}\left(\mathcal{G}_d\right)$
 - **数学机制 (Mathematical Mechanism):** 群体后悔界 $\operatorname{Regret}_G(T) \leq \sqrt{C_1IT \log ({8IT}/{\delta})} + I\sqrt{T}\left[1+(1+\sqrt{2}) \sqrt{SA}\right] + D\sqrt{4C_1 IT \log ({8IT}/{\delta})} + DSAI \log _2\left({8T}/{SA}\right) + (1+\sqrt{2})DS \sqrt{C_2 \bar{\chi}\left(\mathcal{G}_d\right)IAT \log \left({2AT}/{\delta}\right)}$ (收敛界)
-- **收敛或行为边界 (Convergence or behavior boundaries):** 群体后悔随 $T$ 呈次线性增加。后悔界在本质上依赖于最小团覆盖数 $\bar{\chi}\left(\mathcal{G}_d\right)$，这意味着图连通度紧密控制着收敛。过度局部化的通信边界会限制智能体可实现的全局最优性。
-- **适用范围 (Applicable Scope):** 在地理或拓扑受限的通信范围内执行基于模型的轨迹规划或动作序列的分布式多智能体系统。
-- **局限 (Limitations):** 理论上最坏情况的群体后悔界依赖于有界的离散状态动作空间。当集成预测失效时，性能对分布外 (OOD) 状态敏感，并且由于 MPC 视界 $w$ 导致的计算延迟对敏捷性施加了实际限制。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持去中心化工具路由与规划，其中多个智能体（作为工具执行）必须形成动作轨迹，同时仅与直接的局部邻居同步内部状态变量，从而在没有中央编排器的情况下允许分布式工具序列。
+- **收敛或行为边界 (Convergence or behavior boundaries):** 群体后悔随 $T$ 呈次线性增加；后悔界在本质上依赖于最小团覆盖数 $\bar{\chi}\left(\mathcal{G}_d\right)$，这意味着图连通度紧密控制着收敛；过度局部化的通信边界会限制智能体可实现的全局最优性
+- **适用范围 (Applicable Scope):** 在地理或拓扑受限的通信范围内执行基于模型的轨迹规划或动作序列的分布式多智能体系统
+- **局限 (Limitations):** 理论上最坏情况的群体后悔界依赖于有界的离散状态动作空间；当集成预测失效时，性能对分布外 (OOD) 状态敏感，并且由于 MPC 视界 $w$ 导致的计算延迟对敏捷性施加了实际限制
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念上可以支持去中心化工具路由与规划，其中多个智能体（作为工具执行）必须形成动作轨迹，同时仅与直接的局部邻居同步内部状态变量，从而在没有中央编排器的情况下允许分布式工具序列
 - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
-- **初学者类比 (Beginner Analogy):** 想象一群在起雾的城市中行驶的司机，他们只能通过短距离对讲机交谈。与其让一个司机独自猜测路线（单智能体）或每个人都向中央塔楼报告（全局通信），他们不如与附近的汽车分享有限的交通更新，以在脑海中绘制路线图（基于模型的规划）。这帮助他们比盲目驾驶更快地避开交通拥堵，但他们的整体成功取决于对讲机网络的连接程度。
+- **初学者类比 (Beginner Analogy):** 想象一群在起雾的城市中行驶的司机，他们只能通过短距离对讲机交谈；与其让一个司机独自猜测路线（单智能体）或每个人都向中央塔楼报告（全局通信），他们不如与附近的汽车分享有限的交通更新，以在脑海中绘制路线图（基于模型的规划）；这帮助他们比盲目驾驶更快地避开交通拥堵，但他们的整体成功取决于对讲机网络的连接程度
 - **证据状态 (Evidence Status):**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
@@ -418,15 +418,15 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 - **技术点名称:** Adversarial Tool Network Optimization under Bandit Feedback
 - **System Container:** Tool System
 - **Frontier Source:** S65 — Adversarial Network Optimization under Bandit Feedback: Maximizing Utility in Non-Stationary Multi-Hop Networks
-- **论文原始问题 (Original Problem):** 在非平稳的多跳网络中优化效用，且系统仅能获得其所选路径的效用反馈，而缺乏关于其他未选择路径的完整梯度信息（Bandit 反馈）。
-- **核心假设 (Core Assumptions):** 动作可行域有界，且未知的效用函数为凹函数、一致有界且李普希茨连续。网络稳定性通过与参考策略对比进行评估。
-- **数学机制 (Mathematical Mechanism):** 效用差距收敛界：$\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$ (收敛界)。
-- **收敛或行为边界 (Convergence or behavior boundaries):** 该算法能够稳定系统，并以多项式级收敛速度使平均效用逼近参考策略，这意味着预期的效用差距将以 $\mathcal{O}_T(V^{-1})$ 的速率衰减。
-- **适用范围 (Applicable Scope):** 多步工具执行流水线、动态工具路由选择，以及具备不完整反馈的对抗性 API 交互环境。
-- **局限 (Limitations):** 效用差距的多项式衰减依赖于参数 $V$，且 $T$ 相较于 $V$ 不能太小。该界限要求有界的动作可行域与凹效用函数，这可能无法精确反映工具输出高度离散或不连续的实际情况。
-- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层面上可支持动态多工具规划与选择，其中 Agent 作为路由器进行顺序决策。该理论界指导在缺乏完整结果梯度时，如何在跨多个专业工具的路由路径上平衡探索与利用。
+- **论文原始问题 (Original Problem):** 在非平稳的多跳网络中优化效用，且系统仅能获得其所选路径的效用反馈，而缺乏关于其他未选择路径的完整梯度信息（Bandit 反馈）
+- **核心假设 (Core Assumptions):** 动作可行域有界，且未知的效用函数为凹函数、一致有界且李普希茨连续；网络稳定性通过与参考策略对比进行评估
+- **数学机制 (Mathematical Mechanism):** 效用差距收敛界：$\frac 1T \mathbb{E}\left [\sum_{t=1}^T \left (g_{t}(\mathring{\bm \lambda}(t)) - g_{t}(\bm \lambda(t))\right )\right ]=\mathcal{O}_T(V^{-1})$ (收敛界)
+- **收敛或行为边界 (Convergence or behavior boundaries):** 该算法能够稳定系统，并以多项式级收敛速度使平均效用逼近参考策略，这意味着预期的效用差距将以 $\mathcal{O}_T(V^{-1})$ 的速率衰减
+- **适用范围 (Applicable Scope):** 多步工具执行流水线、动态工具路由选择，以及具备不完整反馈的对抗性 API 交互环境
+- **局限 (Limitations):** 效用差距的多项式衰减依赖于参数 $V$，且 $T$ 相较于 $V$ 不能太小；该界限要求有界的动作可行域与凹效用函数，这可能无法精确反映工具输出高度离散或不连续的实际情况
+- **Agent 架构映射 (Agent Architecture Mapping):** 在概念层面上可支持动态多工具规划与选择，其中 Agent 作为路由器进行顺序决策；该理论界指导在缺乏完整结果梯度时，如何在跨多个专业工具的路由路径上平衡探索与利用
 - **仓库实现状态 (Repository Implementation Status):** NOT_IMPLEMENTED
-- **初学者类比 (Beginner Analogy):** 想象你正通过一系列中转航班（多跳）前往目的地，但每个航班的延误情况会不可预测地改变（非平稳）。此外，你只能得知你所乘路线的总延误时间，而不知道未选路线的情况（Bandit 反馈）。该数学界限保证了，随着时间推移，你所选路线的平均效率将极其接近最优的固定路由策略。
+- **初学者类比 (Beginner Analogy):** 想象你正通过一系列中转航班（多跳）前往目的地，但每个航班的延误情况会不可预测地改变（非平稳）；此外，你只能得知你所乘路线的总延误时间，而不知道未选路线的情况（Bandit 反馈）；该数学界限保证了，随着时间推移，你所选路线的平均效率将极其接近最优的固定路由策略
 - **中英文内容:** Ensure semantic alignment.
 - **证据状态 (Evidence Status):**
   - Paper Evidence Status: PAPER_ONLY
@@ -462,11 +462,11 @@ def constraint_guided_tool_verification(proposed_action, constraint_set_C, envir
 
 ### W38 Tool 当前判定
 
-W38 没有新的 unique Daily source 归入 Tool System。
+W38 没有新的 unique Daily source 归入 Tool System
 
-这不表示任务缺失。W38 的仓库级 Daily cadence 正常继续，但本周新增或 revisit 的来源归属于 Collaboration、Memory、Architecture。
+这不表示任务缺失；W38 的仓库级 Daily cadence 正常继续，但本周新增或 revisit 的来源归属于 Collaboration、Memory、Architecture
 
-9 月最近的 Tool-System Daily 谱系仍是较早的 ToolChain* / S43 研究流及其既有证据边界。
+9 月最近的 Tool-System Daily 谱系仍是较早的 ToolChain* / S43 研究流及其既有证据边界
 
 ### 跨领域防护
 
@@ -478,7 +478,7 @@ W38 关于：
 - partial symmetry，
 - partial dynamics knowledge
 
-的来源，不因为可概念关联 routing、control 或 action selection，就自动成为 Tool-System 实现证据。
+的来源，不因为可概念关联 routing、control 或 action selection，就自动成为 Tool-System 实现证据
 
 ```text
 CROSS_DOMAIN_RELEVANCE
@@ -488,11 +488,11 @@ NO_NEW_TOOL_SOURCE
 != TOOL_SYSTEM_HEALTH_CERTIFIED
 ```
 
-本周度文档审计没有执行 runtime tool action、授权、幂等、恢复或外部效果验证。
+本周度文档审计没有执行 runtime tool action、授权、幂等、恢复或外部效果验证
 
 ### 双语状态
 
-已检查的 W38 “无新 Tool 来源”结论和跨领域边界，与英文 Tool System 对应段一致。
+已检查的 W38 “无新 Tool 来源”结论和跨领域边界，与英文 Tool System 对应段一致
 
 ### 周度结果
 
@@ -513,13 +513,13 @@ MONTH_OPEN
 ## 周度文档级联与冲突审计
 
 - 本周文档级联编织 (Weekly document cascade weaving)
-  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节。
+  - 成功将未编织的 Daily Research Chunks 编织进核心理论、数学机制与类比章节
 - 动态演进映射 (Dynamic evolution mapping)
-  - 将新集成的理论边界和算法映射到相应的架构约束中。
+  - 将新集成的理论边界和算法映射到相应的架构约束中
 - 跨方向范式冲突审计 (Cross-direction paradigm conflict audit)
-  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围。新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED。
+  - NO_DIRECT_CONFLICT_IDENTIFIED_IN_DOCUMENTARY_REVIEW，仅限已检查文档范围；新编织内容仍属于论文证据或概念映射；运行时兼容性、实现正确性与普遍架构兼容性均为 NOT_TESTED
 - 来源迁移记录 (Source migration record)
-  - 成功迁移 Chunk。按照要求删除了 W40 Wrapper。
+  - 成功迁移 Chunk；按照要求删除了 W40 Wrapper
 - 双语对齐状态 (Bilingual alignment status)
   - SEMANTICALLY_ALIGNED_ON_CHECKED_FIELDS
 
@@ -532,20 +532,20 @@ MONTH_OPEN
   - **URL:** http://arxiv.org/abs/2404.09413v1
   - **Version:** v1
   - **Publication Date:** 2024-04-15
-  - **Reason for selection:** 提供了在满足局部隐私约束下的线性上下文 Bandit 的严格理论分析，给出了实现最优遗憾界的方法，可用于指导具有隐私限制环境中的工具路由。
-  - **Actually extracted paragraphs or formulas:** 算法 2 (RegCB.Elimination)，其累计遗憾界为 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$。
-- **Original Problem:** (论文原始问题) 在受到局部隐私约束的线性上下文 Bandit 问题中，是否能够达到无约束下的 $\tilde{O}(\sqrt{T})$ 最优遗憾界。
-- **Core Assumptions:** (核心假设) 奖励函数呈线性；满足 $\alpha$-局部隐私约束；动作空间有限且上下文为随机分布；能够通过平均绝对偏差 (MAD) 限定预言机的误差。
+  - **Reason for selection:** 提供了在满足局部隐私约束下的线性上下文 Bandit 的严格理论分析，给出了实现最优遗憾界的方法，可用于指导具有隐私限制环境中的工具路由
+  - **Actually extracted paragraphs or formulas:** 算法 2 (RegCB.Elimination)，其累计遗憾界为 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$
+- **Original Problem:** (论文原始问题) 在受到局部隐私约束的线性上下文 Bandit 问题中，是否能够达到无约束下的 $\tilde{O}(\sqrt{T})$ 最优遗憾界
+- **Core Assumptions:** (核心假设) 奖励函数呈线性；满足 $\alpha$-局部隐私约束；动作空间有限且上下文为随机分布；能够通过平均绝对偏差 (MAD) 限定预言机的误差
 - **Mathematical Mechanism:** (数学机制)
   - **Formula classification:** 算法伪代码 (Algorithm Pseudocode)
   - 动作消除规则 (RegCB.Elimination): $\mathcal{A}_{\tau'}(x_t)\leftarrow \{a\in\mathcal{A}_{\tau'-1}: \hat{f}_{\tau'}^a(x_t)+\Delta_{\tau'}^a(x_t)\ge\max_{a'\in\mathcal{A}_{\tau'-1}} \hat{f}_{\tau'}^{a'}(x_t)-\Delta_{\tau'}^{a'}(x_t)\}$
-- **Convergence or behavior boundaries:** (收敛或行为边界) 累计遗憾严格受到 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$ 的限制，在采用特定几何周期的策略下，可达到 $\tilde{O}(\sqrt{T})$。
-- **Applicability Scope:** (适用范围) 具有上下文信息且必须保护系统状态隐私的分布式工具调用环境。
-- **Limitations:** (局限) 性能界限严重依赖动作空间大小 $A$ 和上下文维度 $d$；实际算法需要维护所有活跃动作的置信区间。
-- **Agent Architecture Mapping:** (Agent 架构映射) 该机制可以在概念上支持局部隐私工具调用协议设计，使得涉及敏感状态信息的多步工具选择能依靠注入校准噪声免受泄漏，同时确保理论遗憾收敛。
+- **Convergence or behavior boundaries:** (收敛或行为边界) 累计遗憾严格受到 $O(n_1 + A^2\sum_{\tau=2}^{\tau_0} n_\tau\mathcal{E}_{\alpha,\delta}(n_{\tau-1}))$ 的限制，在采用特定几何周期的策略下，可达到 $\tilde{O}(\sqrt{T})$
+- **Applicability Scope:** (适用范围) 具有上下文信息且必须保护系统状态隐私的分布式工具调用环境
+- **Limitations:** (局限) 性能界限严重依赖动作空间大小 $A$ 和上下文维度 $d$；实际算法需要维护所有活跃动作的置信区间
+- **Agent Architecture Mapping:** (Agent 架构映射) 该机制可以在概念上支持局部隐私工具调用协议设计，使得涉及敏感状态信息的多步工具选择能依靠注入校准噪声免受泄漏，同时确保理论遗憾收敛
 - **Repository Implementation Status:** (仓库实现状态) NOT_IMPLEMENTED
 - **Repository Test Status:** (仓库测试状态) NOT_TESTED
-- **Beginner Analogy:** (初学者类比) 就像在挑选工具时戴上一层薄薄的眼罩，防止旁观者看清你的准确意图。这个算法能让你在被噪声干扰的情况下，依然通过不断排除劣质工具，最终稳定地挑出最合适的工具。
+- **Beginner Analogy:** (初学者类比) 就像在挑选工具时戴上一层薄薄的眼罩，防止旁观者看清你的准确意图；这个算法能让你在被噪声干扰的情况下，依然通过不断排除劣质工具，最终稳定地挑出最合适的工具
 - **Evidence Status:**
   - Paper Evidence Status: VERIFIED_FROM_LATEX_SOURCE
   - Architecture Mapping Status: CONCEPTUAL_MAPPING
@@ -630,7 +630,7 @@ MONTH_OPEN
 - Source Registry Sxx: UNCHANGED, no admission or resolution of historical collision
 
 ### 工具效果因果追踪与效果前权限
-10 月 21 日 AgentLoupe（arXiv:2610.23233v2）提供作者描述的后效应 chain_id 标签传递条件；10 月 22 日 PROVISO（arXiv:2610.27115v1）研究前效应 provenance-typed 行动选择。后效应的因果归属不能代替授权，前效应学得的选择结果也不能证明真实 effect 或持久回执。两篇是不同 canonical 作者论文，不是同一系统的两次独立复现。Tool System 未在本仓实际执行 eBPF 追踪或权限验证，两者只能是候选机制。
+10 月 21 日 AgentLoupe（arXiv:2610.23233v2）提供作者描述的后效应 chain_id 标签传递条件；10 月 22 日 PROVISO（arXiv:2610.27115v1）研究前效应 provenance-typed 行动选择；后效应的因果归属不能代替授权，前效应学得的选择结果也不能证明真实 effect 或持久回执；两篇是不同 canonical 作者论文，不是同一系统的两次独立复现；Tool System 未在本仓实际执行 eBPF 追踪或权限验证，两者只能是候选机制
 
 ### 五轴状态与冲突门槛
 - Claim State: OBSERVED_FOR_SOURCE_DESCRIPTIONS / not a demonstrated host guarantee
@@ -650,44 +650,44 @@ MONTH_OPEN
 ## 2026-10-30 Daily Research Chunk — 工具轨迹推测执行：语义前缀通过不等于真实效果回执
 
 ### 原生研究与原始来源
-- Canonical Task：foundations/research/daily；逻辑日期：2026-10-30 Asia/Shanghai。
-- Producer：GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY。
-- Record Provenance：HUMAN_AUTHORIZED_NATIVE_PRODUCTION；基线 main SHA：682b7383bacef94a30ecc614ca9280734c87ed07。
-- Run Identity：agent-foundations/research/daily/2026-10-30/GPT_NATIVE/682b7383bacef94a30ecc614ca9280734c87ed07/gpt-native-20261030-01。
-- 正式容器：Tool System；英文对应增量：docs/en/Tool_System.md（同一逻辑日期）。
-- 原始论文：Zilin Wang、Yinhong Liu、Chao Chen、Qun Liu、Zhijiang Guo，*Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents*，arXiv:2610.21463v1；2026-10-15 08:06:32 UTC 提交，https://arxiv.org/html/2610.21463v1；2026-10-30 检查。已查看 arXiv 摘要记录以及作者 HTML 全文 3.1–3.3 节、算法 1 与效率分析。
-- 来源登记状态：在本次所见的 FOUNDATION/SOURCES.md 中未检索到该基础 arXiv ID；Daily 不自造新 Sxx、不直接写入正式 Source Registry，须由后续 owning review 核对登记。
-- 论文属于预印本。阅读作者正文不等于独立复现实验、逐步验证证明或测试本仓实现。
+- Canonical Task：foundations/research/daily；逻辑日期：2026-10-30 Asia/Shanghai
+- Producer：GPT-6 / GPT_NATIVE_PROSPECTIVE / NOT_JULES_REPLAY
+- Record Provenance：HUMAN_AUTHORIZED_NATIVE_PRODUCTION；基线 main SHA：682b7383bacef94a30ecc614ca9280734c87ed07
+- Run Identity：agent-foundations/research/daily/2026-10-30/GPT_NATIVE/682b7383bacef94a30ecc614ca9280734c87ed07/gpt-native-20261030-01
+- 正式容器：Tool System；英文对应增量：docs/en/Tool_System.md（同一逻辑日期）
+- 原始论文：Zilin Wang、Yinhong Liu、Chao Chen、Qun Liu、Zhijiang Guo，*Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents*，arXiv:2610.21463v1；2026-10-15 08:06:32 UTC 提交，https://arxiv.org/html/2610.21463v1；2026-10-30 检查；已查看 arXiv 摘要记录以及作者 HTML 全文 3.1–3.3 节、算法 1 与效率分析
+- 来源登记状态：在本次所见的 FOUNDATION/SOURCES.md 中未检索到该基础 arXiv ID；Daily 不自造新 Sxx、不直接写入正式 Source Registry，须由后续 owning review 核对登记
+- 论文属于预印本；阅读作者正文不等于独立复现实验、逐步验证证明或测试本仓实现
 
 ### 原始问题、机制及有条件数学表达
-论文研究长工具调用轨迹中强模型逐 token 生成的成本。SpecAgent 允许弱模型先执行适配器分类为“只读”的工具动作，形成有真实观测的候选前缀；遇到第一个可能修改环境的动作时先保留、不得提交。强模型对整段轨迹作语义审查，返回最长可接受前缀、首次拒绝原因和可选修复动作，然后才可能提交所保留的写动作。被拒绝的后缀丢弃。这是作者提出的协作协议，不是本仓已经强制执行的权限策略。
+论文研究长工具调用轨迹中强模型逐 token 生成的成本；SpecAgent 允许弱模型先执行适配器分类为“只读”的工具动作，形成有真实观测的候选前缀；遇到第一个可能修改环境的动作时先保留、不得提交；强模型对整段轨迹作语义审查，返回最长可接受前缀、首次拒绝原因和可选修复动作，然后才可能提交所保留的写动作；被拒绝的后缀丢弃；这是作者提出的协作协议，不是本仓已经强制执行的权限策略
 
 论文 3.3 节 Proposition 1 在“强模型解码受显存带宽限制”和“每步被接受近似独立”等假设下，给出每已提交步骤的强模型耗时/权重读取相对比：
 `R_u = ((1-p_u)/(1-p_u^n)) * (v/d) + rho*(1-p_u)`
-其中 `p_u` 为任务接受率，`n` 为评审段长度，`v` 为 verdict 的权重读取次数，`d` 为强模型单步原始生成的读取次数，`rho` 为拒绝后需要独立修复轮次的概率。此公式是对作者文本的转录，**未独立证明或验证推导**；假设不满足时不能沿用。作者报告部分基准上显存流量与墙钟时间下降，同时估算 FLOPs 可能**上升**，所以不能宣称计算成本普遍降低。
+其中 `p_u` 为任务接受率，`n` 为评审段长度，`v` 为 verdict 的权重读取次数，`d` 为强模型单步原始生成的读取次数，`rho` 为拒绝后需要独立修复轮次的概率；此公式是对作者文本的转录，**未独立证明或验证推导**；假设不满足时不能沿用；作者报告部分基准上显存流量与墙钟时间下降，同时估算 FLOPs 可能**上升**，所以不能宣称计算成本普遍降低
 
 ### 映射、反证与适用边界
-- 候选研究机制：将 `draft_read_effect`、`held_write_intent`、`semantic_prefix_review`、`authorized_effect_commit` 和 `post_commit_effect_receipt` 分开记录。前三个阶段不能替代授权提交与效果回执。
-- 论文假设适配器定义的“读取”不修改环境；真实工具中的 GET/read 仍可能触发审计写入、计费、计数器、网络副作用或隐私暴露。因此 `READ_CLASSIFIED != EFFECT_FREE_OBSERVED`，必须单独检查工具适配器、权限与效果。
-- 强模型接受候选前缀只证明其在当前上下文给出的语义判断，不构成权限授权、形式化正确性、外部来源真实性或实际写入完成证明。
-- 作者性能结果依赖模型、任务基准、服务配置和接受率；显存流量/墙钟降低并不代表 FLOPs 更低。后续测试需保留 verifier 误判、非法效果执行、前后状态、资源开销与真实失败案例。
-- 本仓没有因这份研究而得到已部署 Tool System、完成授权控制面或新增真实运行测量。
+- 候选研究机制：将 `draft_read_effect`、`held_write_intent`、`semantic_prefix_review`、`authorized_effect_commit` 和 `post_commit_effect_receipt` 分开记录；前三个阶段不能替代授权提交与效果回执
+- 论文假设适配器定义的“读取”不修改环境；真实工具中的 GET/read 仍可能触发审计写入、计费、计数器、网络副作用或隐私暴露；因此 `READ_CLASSIFIED != EFFECT_FREE_OBSERVED`，必须单独检查工具适配器、权限与效果
+- 强模型接受候选前缀只证明其在当前上下文给出的语义判断，不构成权限授权、形式化正确性、外部来源真实性或实际写入完成证明
+- 作者性能结果依赖模型、任务基准、服务配置和接受率；显存流量/墙钟降低并不代表 FLOPs 更低；后续测试需保留 verifier 误判、非法效果执行、前后状态、资源开销与真实失败案例
+- 本仓没有因这份研究而得到已部署 Tool System、完成授权控制面或新增真实运行测量
 
 ### 五轴状态与 Evidence Delta
-- Claim State：OBSERVED / AUTHOR_REPORTED_MECHANISM；普遍安全保证保持 HYPOTHESIS_NOT_PROMOTED。
-- Evidence Level：E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION。
-- Mapping State：CANDIDATE_MECHANISM。
-- Implementation State：NOT_IMPLEMENTED。
-- Validation State：NOT_TESTED。
-- NEW_EVIDENCE：带版本身份的只读推测、写入前挂起、最长语义前缀验证算法，以及带明确条件的解码资源成本模型。
-- CORRECTED_INTERPRETATION：“强模型认为可以提交”不等于“已授权、已执行并获得权威效果回执”；只读标签必须接受实际效果边界验证。
-- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；来源登记不等于定理验证。
-- NEW_COUNTEREVIDENCE：隐性读副作用、verifier 假阳性、错误前缀与作者报告的 FLOPs 上升，限制了泛化收益与安全主张。
-- UNKNOWN_RETAINED：本仓适配器语义、真实权限模型、Registry 接纳、复现实验、实际任务的延迟/资源与失败率。
-- NEXT_RETEST_CONDITION：固定原始作者版本与基准，构造带副作用读工具和不可逆写入的受控实验，逐步捕获提交前后状态、权限/效果回执、verifier 误判及实际环境与修订号。
+- Claim State：OBSERVED / AUTHOR_REPORTED_MECHANISM；普遍安全保证保持 HYPOTHESIS_NOT_PROMOTED
+- Evidence Level：E4_PREPRINT / ORIGINAL_FULL_TEXT_SECTIONS_3.1_TO_3.3_READ / NO_INDEPENDENT_REPRODUCTION
+- Mapping State：CANDIDATE_MECHANISM
+- Implementation State：NOT_IMPLEMENTED
+- Validation State：NOT_TESTED
+- NEW_EVIDENCE：带版本身份的只读推测、写入前挂起、最长语义前缀验证算法，以及带明确条件的解码资源成本模型
+- CORRECTED_INTERPRETATION：“强模型认为可以提交”不等于“已授权、已执行并获得权威效果回执”；只读标签必须接受实际效果边界验证
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；来源登记不等于定理验证
+- NEW_COUNTEREVIDENCE：隐性读副作用、verifier 假阳性、错误前缀与作者报告的 FLOPs 上升，限制了泛化收益与安全主张
+- UNKNOWN_RETAINED：本仓适配器语义、真实权限模型、Registry 接纳、复现实验、实际任务的延迟/资源与失败率
+- NEXT_RETEST_CONDITION：固定原始作者版本与基准，构造带副作用读工具和不可逆写入的受控实验，逐步捕获提交前后状态、权限/效果回执、verifier 误判及实际环境与修订号
 
 ### 交付与来源边界
-只在现有 Tool System 中英文正式文档末尾追加本次研究增量。未回写历史 Jules、未提升 Source Registry/Verified Core、未部署 runtime、未修改 schema/workflow，也未执行 Weekly/Monthly。FOUNDATION/validate.py、合同测试、论文实验复现及独立双语语义校验在创作时均为 NOT_EXECUTED。仅交付供人工审查的 Draft PR。
+只在现有 Tool System 中英文正式文档末尾追加本次研究增量；未回写历史 Jules、未提升 Source Registry/Verified Core、未部署 runtime、未修改 schema/workflow，也未执行 Weekly/Monthly；FOUNDATION/validate.py、合同测试、论文实验复现及独立双语语义校验在创作时均为 NOT_EXECUTED；仅交付供人工审查的 Draft PR
 
 
 ---
@@ -778,7 +778,7 @@ MONTH_OPEN
 - 选择依据: 在明确任务和评价器下分离工具接口/Harness 复杂度与模型能力、最终证明验收，不重复昨天 Memory 的研究对象
 
 ### 研究问题与形式化边界
-模型可见工具更多、Agent scaffold 更复杂，并不自动证明形式验证更正确。作者比较仅暴露 `bash` 的文件系统原生 Lean coding Agent 与特殊工具基线。模型能够搜索 Mathlib、修改草稿及目标文件、调用 Lean，但提交物仍是**不可信产物**。独立评价器只把明确提交的产物复制到洁净环境，固定 Lean、Mathlib 与原始定理陈述，拒绝违禁证明捷径。
+模型可见工具更多、Agent scaffold 更复杂，并不自动证明形式验证更正确；作者比较仅暴露 `bash` 的文件系统原生 Lean coding Agent 与特殊工具基线；模型能够搜索 Mathlib、修改草稿及目标文件、调用 Lean，但提交物仍是**不可信产物**；独立评价器只把明确提交的产物复制到洁净环境，固定 Lean、Mathlib 与原始定理陈述，拒绝违禁证明捷径
 
 必须分开:
 ```text
@@ -788,19 +788,19 @@ MONTH_OPEN
 != 在允许公理条件下的合法证明
 != agent-foundations 已实现该验证系统
 ```
-验收应绑定精确最终字节、原始命题、环境版本与允许公理。模型曾调用编译器，不能单独证明验收成立。
+验收应绑定精确最终字节、原始命题、环境版本与允许公理；模型曾调用编译器，不能单独证明验收成立
 
 ### 作者实验与反证
-- 作者同模型比较使用 Gemini 3.8 Flash high thinking、12 道 Putnam 2025 题、单题 $2 上限，每个题目/Harness 一次运行。mini-Lean-agent 为 7/12，AxProverBase 为 4/12。较难 A5/B6 另有预算扩展，不得混成同一 $2 口径。
-- 用相同 mini-Lean-agent 但改用 Astra，作者报告 12/12，平均每题成本 $1.28。模型及预算条件发生变化，不能把这个结果当作同模型的工具接口因果提升。
-- 负证据: $0.50 预算下两个比较系统都是 0/12；$1.00 下 mini-Lean-agent 4/12、AxProverBase 0/12。通用 shell 接口也不是任意低预算都成功的充分条件。
-- 外推限制: 仅 12 题、直接 Harness 比较每题一次运行、受限模型及任务分布、作者自行执行评价器、当前未独立复验。与 Numina 报告结果也不是完全相同的控制实验。
-- 反例闸门: 若候选变更原始定理、引入 `sorry` / `admit` / 未授权公理，或利用污染过的可变工作区，即使 Agent 自述成功，也必须由独立验收拒绝。
+- 作者同模型比较使用 Gemini 3.8 Flash high thinking、12 道 Putnam 2025 题、单题 $2 上限，每个题目/Harness 一次运行；mini-Lean-agent 为 7/12，AxProverBase 为 4/12；较难 A5/B6 另有预算扩展，不得混成同一 $2 口径
+- 用相同 mini-Lean-agent 但改用 Astra，作者报告 12/12，平均每题成本 $1.28；模型及预算条件发生变化，不能把这个结果当作同模型的工具接口因果提升
+- 负证据: $0.50 预算下两个比较系统都是 0/12；$1.00 下 mini-Lean-agent 4/12、AxProverBase 0/12；通用 shell 接口也不是任意低预算都成功的充分条件
+- 外推限制: 仅 12 题、直接 Harness 比较每题一次运行、受限模型及任务分布、作者自行执行评价器、当前未独立复验；与 Numina 报告结果也不是完全相同的控制实验
+- 反例闸门: 若候选变更原始定理、引入 `sorry` / `admit` / 未授权公理，或利用污染过的可变工作区，即使 Agent 自述成功，也必须由独立验收拒绝
 
 ### Tool System 的有界理论映射
-- 候选 Tool Contract: 模型可见 `bash` 是比较用基线，不默认是安全生产架构；将研究探索过程和精确产物的可信验收拆开。
-- 候选 Harness Evaluation: 固定模型、预算、工具集合、benchmark、独立评价器、版本与最终产物字节，在声称复杂工具更优前进行相同任务条件下的对照。
-- 候选 Security/Trust 后果: 评价端不能信任模型已修改的工作区或模型生成的成功标签。但这只是研究映射，不能证明当前 Tool System 已有隔离、权限控制或 Lean 核验。
+- 候选 Tool Contract: 模型可见 `bash` 是比较用基线，不默认是安全生产架构；将研究探索过程和精确产物的可信验收拆开
+- 候选 Harness Evaluation: 固定模型、预算、工具集合、benchmark、独立评价器、版本与最终产物字节，在声称复杂工具更优前进行相同任务条件下的对照
+- 候选 Security/Trust 后果: 评价端不能信任模型已修改的工作区或模型生成的成功标签；但这只是研究映射，不能证明当前 Tool System 已有隔离、权限控制或 Lean 核验
 
 ### 五轴状态与 Evidence Delta
 - Claim State: OBSERVED / AUTHOR_REPORTED_ON_EXACT_EVALUATION
@@ -808,15 +808,15 @@ MONTH_OPEN
 - Mapping State: CANDIDATE_MECHANISM / DESIGN_ANALOGY
 - Implementation State: NOT_IMPLEMENTED / NO_TARGET_REPOSITORY_RUNTIME_IDENTIFIED
 - Validation State: NOT_TESTED / LOCAL_CHECKS_NOT_EXECUTED
-- NEW_EVIDENCE: 在明确同模型预算下比较最小 shell scaffold 与特殊工具接口，最终证明验收交给独立、保全原始命题的洁净环境评价器。
-- CORRECTED_INTERPRETATION: 工具数量、编译命令是否被调用、模型变化与独立证明验收不能互相代替。
-- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英文镜像及跨仓引用同一作者研究不增加独立实验数。
-- NEW_COUNTEREVIDENCE: $0.50 下两个系统都没有验证成功题目，修改命题/违禁公理必须拒绝，反驳仅凭工具成功日志就宣布证明成立。
-- UNKNOWN_RETAINED: 独立复现、开放工具任务的外推性、具体安全效果、作者代码精确 commit、本仓实现和运行证据。
-- NEXT_RETEST_CONDITION: 固定 Lean 4.28.0-rc1 / Mathlib v4.28.0-rc1、benchmark 与代码 revision，用同模型/同预算比较 Harness，注入替换命题、违禁公理和评审后修改产物，独立保存精确验收回执。
+- NEW_EVIDENCE: 在明确同模型预算下比较最小 shell scaffold 与特殊工具接口，最终证明验收交给独立、保全原始命题的洁净环境评价器
+- CORRECTED_INTERPRETATION: 工具数量、编译命令是否被调用、模型变化与独立证明验收不能互相代替
+- UNCHANGED_BOUNDARY: Paper != Mapping != Implementation != Validation；中英文镜像及跨仓引用同一作者研究不增加独立实验数
+- NEW_COUNTEREVIDENCE: $0.50 下两个系统都没有验证成功题目，修改命题/违禁公理必须拒绝，反驳仅凭工具成功日志就宣布证明成立
+- UNKNOWN_RETAINED: 独立复现、开放工具任务的外推性、具体安全效果、作者代码精确 commit、本仓实现和运行证据
+- NEXT_RETEST_CONDITION: 固定 Lean 4.28.0-rc1 / Mathlib v4.28.0-rc1、benchmark 与代码 revision，用同模型/同预算比较 Harness，注入替换命题、违禁公理和评审后修改产物，独立保存精确验收回执
 
 ### 交付与提升边界
-只在 Tool System 中英文文档尾部追加本日原生研究，未分配 `Sxx`，未晋升 Verified Core，未宣称本仓实现任何验证 Runtime。先前研究、归档、代码、测试、Source Registry、Monthly Blueprint、Weekly Cascade 均不修改。本仓 validator 及证明实验: NOT_EXECUTED。等待 Human Maintainer 审查与合并。
+只在 Tool System 中英文文档尾部追加本日原生研究，未分配 `Sxx`，未晋升 Verified Core，未宣称本仓实现任何验证 Runtime；先前研究、归档、代码、测试、Source Registry、Monthly Blueprint、Weekly Cascade 均不修改；本仓 validator 及证明实验: NOT_EXECUTED；等待 Human Maintainer 审查与合并
 
 
 ---
@@ -837,7 +837,7 @@ MONTH_OPEN
 - 选择理由：给出 Tool/Harness 的 effect、approval、typed trace、残余运行检查的形式化约束，不只比较 benchmark，也不重复昨天 Memory System 的记忆选取问题
 
 ### 原始问题、假设和数学机制
-一个 Agent 不应仅以 Python 回调签名和最终回答成功描述工具能力。**请求动作**与**实际提交外部效果**可以不同，尤其在 handler、拒绝、人工审批与重试场景。ETAS 把这些事件变成程序语义的一部分
+一个 Agent 不应仅以 Python 回调签名和最终回答成功描述工具能力；**请求动作**与**实际提交外部效果**可以不同，尤其在 handler、拒绝、人工审批与重试场景；ETAS 把这些事件变成程序语义的一部分
 
 论文提出带有不同输出的静态类型判断：
 ```text
@@ -849,11 +849,11 @@ A：已请求动作轨迹的抽象
 R：必须交由 Runtime 执行的残余检查义务
 Π：当前 trace/policy 规范，编译为监视器 M_Π
 ```
-不能将 `ε` 当成 `A`。即使 handler 截获动作使其不提交，**请求本身仍应在审计轨迹中可见**；否则会出现权限事件被异常处理器隐匿的风险
+不能将 `ε` 当成 `A`；即使 handler 截获动作使其不提交，**请求本身仍应在审计轨迹中可见**；否则会出现权限事件被异常处理器隐匿的风险
 
-**Theorem 5（Policy safety）具有严格前提**：程序经过对应类型检查，`Ξ,Π` 良构，Runtime 确实装载 `R` 并在相应 request 或 commit 发生**之前**执行动态检查，才可以得到每一个已产生轨迹前缀均被 `M_Π` 接受。可用有条件的目标表达为 `∀k, M_Π(trace[:k]) ∉ Bad`。Theorem 6（Handler trace transparency）进一步要求被处理的请求不会从轨迹消失，也不能因为 handler 代执行而绕开 commit 审批
+**Theorem 5（Policy safety）具有严格前提**：程序经过对应类型检查，`Ξ,Π` 良构，Runtime 确实装载 `R` 并在相应 request 或 commit 发生**之前**执行动态检查，才可以得到每一个已产生轨迹前缀均被 `M_Π` 接受；可用有条件的目标表达为 `∀k, M_Π(trace[:k]) ∉ Bad`；Theorem 6（Handler trace transparency）进一步要求被处理的请求不会从轨迹消失，也不能因为 handler 代执行而绕开 commit 审批
 
-这只是**作者形式语言及其运行语义**上的定理声明，绝不等于当前 Tool System、现实 Agent 框架或用户仓库已满足前提。论文描述 Rust 实验原型和 HIR/policy 检查器，本次**未构建或运行**该原型
+这只是**作者形式语言及其运行语义**上的定理声明，绝不等于当前 Tool System、现实 Agent 框架或用户仓库已满足前提；论文描述 Rust 实验原型和 HIR/policy 检查器，本次**未构建或运行**该原型
 
 ### 行为约束、适用边界与反例
 - **有界保证**：安全性限于 typed action boundary 内、被 monitor 覆盖、真正由 Runtime 中介的事件；直接绕开边界的网络请求或未建模外部效果不在证明范围
@@ -867,9 +867,9 @@ R：必须交由 Runtime 执行的残余检查义务
 - 候选 `ToolRequest`：将任务身份、工具名、参数摘要、策略版本、资源作用域、信任来源绑定到每一次请求
 - 候选 `EffectCommit`：独立效果/审批授权、动态残余闸门、证据回执、与原始请求一致的关联标识，以及明确的拒绝/处理结果
 - 候选 `TraceMonitor`：对可判定的每个前缀执行校验；handler 不得抹除 request；跨重试保留 trace 与 effect identity
-- 上述全部是 `DESIGN_CANDIDATE`，**不是本仓源码解析或已部署能力**。验证需指定确切 Runtime、代码版本，注入审批拒绝、参数变更、handler 截获、残余检查缺失及重复 commit 等负例
+- 上述全部是 `DESIGN_CANDIDATE`，**不是本仓源码解析或已部署能力**；验证需指定确切 Runtime、代码版本，注入审批拒绝、参数变更、handler 截获、残余检查缺失及重复 commit 等负例
 
-**初学者类比：** Tool Request 类似提交采购单；Effect Commit 类似银行真的划款。记录了采购单、甚至助手说“我批准”，都不能证明银行已完成授权转账
+**初学者类比：** Tool Request 类似提交采购单；Effect Commit 类似银行真的划款；记录了采购单、甚至助手说“我批准”，都不能证明银行已完成授权转账
 
 ### 五轴证据状态、证据变化与晋升门槛
 - Daily Mapping Status：`DESIGN_CANDIDATE` / `CONCEPTUAL_MAPPING`；只有论文原意时为 `PAPER_ONLY`
@@ -886,7 +886,7 @@ R：必须交由 Runtime 执行的残余检查义务
 - NEXT_RETEST_CONDITION：固定论文与原型精确版本，构造 request/deny/handler/commit 轨迹，注入缺失的 R、绕开边界的外部调用、审批作用域变化和重试，独立读取监视器结论与效果回执
 
 ### 交付与晋升边界
-只对现有 `docs/en/Tool_System.md`、`docs/zh/Tool_System.md` 进行 append-only 新增，旧理论、历史文本、SOURCES、Verified Core `Sxx`、代码、测试、其他容器、Weekly/Monthly 与独立 WorkflowHub PR 均不修改。本仓 Validator 和论文原型：NOT_EXECUTED。待 Human Maintainer 审阅合并，不能将预印本定理写为真实系统的部署保证
+只对现有 `docs/en/Tool_System.md`、`docs/zh/Tool_System.md` 进行 append-only 新增，旧理论、历史文本、SOURCES、Verified Core `Sxx`、代码、测试、其他容器、Weekly/Monthly 与独立 WorkflowHub PR 均不修改；本仓 Validator 和论文原型：NOT_EXECUTED；待 Human Maintainer 审阅合并，不能将预印本定理写为真实系统的部署保证
 
 
 ## 2026-11-06 GPT Native 每日研究 —— 工具效应的 Controller-Agnostic PAC Reach–Avoid Shield
@@ -903,7 +903,7 @@ R：必须交由 Runtime 执行的残余检查义务
 - 选择原因：具备明确公式、数学前提、行为上界和可证伪的工具安全闸门，可补充既有 Tool 研究中效果授权/类型约束之外的风险预算层；不是排行榜新闻
 
 ### 原始问题、假设与方法
-作者将语言模型视为不透明的动作控制器，在其与外部环境之间设置 Shield。目标是：在有限任务时域内，将**曾经进入不可逆危险状态**的概率限制在给定预算下，即使模型被替换也无需重新证明每种模型；这一说法**完全依赖指定的抽象与数据前提**。
+作者将语言模型视为不透明的动作控制器，在其与外部环境之间设置 Shield；目标是：在有限任务时域内，将**曾经进入不可逆危险状态**的概率限制在给定预算下，即使模型被替换也无需重新证明每种模型；这一说法**完全依赖指定的抽象与数据前提**
 
 - **A1 / Markov 抽象：**对话历史 `h_t` 通过谓词映射为有限状态 `s_t=φ(h_t)`，后继分布由状态与动作决定；漏掉关键历史变量会破坏前提
 - **A2 / 危险吸收态：**不可逆效果发生后不能用事后撤销或道歉将危险状态归零
@@ -913,13 +913,13 @@ R：必须交由 Runtime 执行的残余检查义务
 - **样本承诺：**每个状态/动作 `n_0(s,a)` 的样本预算必须在观察数据前确定，不能见到结果后挑选有利的样本数
 
 ### 数学机制与有条件保证
-对每个状态/动作，作者在经验转移核附近构造置信集合。设 `R` 是状态/动作行数，`k_{s,a}=|K_{s,a}|` 是候选后继数量，`δ` 是置信失败预算，`n_0(s,a)` 是预先承诺的样本数：
+对每个状态/动作，作者在经验转移核附近构造置信集合；设 `R` 是状态/动作行数，`k_{s,a}=|K_{s,a}|` 是候选后继数量，`δ` 是置信失败预算，`n_0(s,a)` 是预先承诺的样本数：
 
 $$
 \beta_{s,a}=\sqrt{\frac{2}{n_0(s,a)}\log\left(\frac{(2^{k_{s,a}}-2)R}{\delta}\right)}
 $$
 
-该半径针对至少两个可能后继的随机行。样本不足的行使用**不收缩的完整候选后继分布集合**；日志总量大不等于每个危险路径都已被覆盖。
+该半径针对至少两个可能后继的随机行；样本不足的行使用**不收缩的完整候选后继分布集合**；日志总量大不等于每个危险路径都已被覆盖
 
 利用包含最坏后继概率的动态规划，定义被允许动作集合 `D(s)` 下的风险上界：
 
@@ -933,12 +933,12 @@ $$
 \Pr_{\mathrm{data}}\!\left[\sup_{\pi\ \mathrm{admissible}}V_T^\pi(s_0;P)\le\varepsilon\right]\ge 1-\delta
 $$
 
-概率空间来自抽样日志，不代表每次工具调用以 `1-δ` 的概率安全；模型可替换的结论仅对**实际服从同一个 Shield，且位于被建模环境中的控制器**成立。
+概率空间来自抽样日志，不代表每次工具调用以 `1-δ` 的概率安全；模型可替换的结论仅对**实际服从同一个 Shield，且位于被建模环境中的控制器**成立
 
 ### 收敛/行为边界与反证空间
 - Corollary 1 的 `O(T/\sqrt M)` 是在所有可达相关行的样本覆盖随数据量增长时的**有条件**松弛速率；稀疏观察的危险路径没有这个无条件结论
 - 若某行未达到预先承诺的样本数，方法保留 vacuous 集合；“日志里没有危险事件”不能用作危险概率为零的 plug-in 证明
-- 作者报告了文件系统沙箱与 1,050 次 Agent episode，但**实验观察未见危险不等于数学定理本身**，更不保证未建模副作用或未来任务。v2 摘要描述七个控制器、其中六个基于开源权重模型；较早的 v1 摘要数字不同，不能混合统计口径
+- 作者报告了文件系统沙箱与 1,050 次 Agent episode，但**实验观察未见危险不等于数学定理本身**，更不保证未建模副作用或未来任务；v2 摘要描述七个控制器、其中六个基于开源权重模型；较早的 v1 摘要数字不同，不能混合统计口径
 - all-halt 在安全停止假设下可以满足形式上的风险预算，却使任务失去可达目标；**安全退出 != 任务完成**
 - 如果抽象状态漏掉授权过期、资源身份、运行时权限、动态审批或隐含工具参数，可能破坏 Markov 条件或后继覆盖条件
 - 论文发布的源码链接仅是未来复核线索；本次**未运行论文代码、定理检查器、工具调用或实验**
@@ -950,7 +950,7 @@ $$
 - **可证伪测试：**注入 `K` 外的危险后继、过期凭据、未解决审批、没有足够样本的状态/动作以及绕过 Shield 的直接副作用通路；这些只是**测试方案，并未执行**
 - **权威不可继承：**若新工具拓扑改变了状态/动作抽象或可能后继，旧 Shield 证书不能自动沿用
 
-**初学者类比：**铁路调度员可以拒绝通往封闭轨道的路线，但安全计算只在地图包含全部道岔、列车确实遵守调度指令时成立。允许安全停车，并不意味着顺利到站。
+**初学者类比：**铁路调度员可以拒绝通往封闭轨道的路线，但安全计算只在地图包含全部道岔、列车确实遵守调度指令时成立；允许安全停车，并不意味着顺利到站
 
 ### 五轴证据状态
 - Daily Mapping Status：`CONCEPTUAL_MAPPING / DESIGN_CANDIDATE`
@@ -967,7 +967,7 @@ $$
 - NEXT_RETEST_CONDITION：固定论文代码/状态模型，对有覆盖和无覆盖的状态行构造反例，注入被遗漏的危险后继，并比较风险上界与真实运行轨迹
 
 ### 交付与身份边界
-仅对现有中英文 Tool System 追加 11/06 Daily Research Chunk；旧理论、SOURCE Registry、Verified Core、Runtime、Tests、其他三个容器、Weekly/Monthly 与无关 Draft 保持不变。v1/v2 摘要数字差异保留而不静默重写。论文代码和本仓测试均为 `NOT_EXECUTED`。
+仅对现有中英文 Tool System 追加 11/06 Daily Research Chunk；旧理论、SOURCE Registry、Verified Core、Runtime、Tests、其他三个容器、Weekly/Monthly 与无关 Draft 保持不变；v1/v2 摘要数字差异保留而不静默重写；论文代码和本仓测试均为 `NOT_EXECUTED`
 
 ## 2026-11-07 GPT Native 每日研究 — AgentLTL：轨迹约束通过不等于工具副作用完成
 
@@ -984,18 +984,18 @@ $$
 - 本仓实际实现：`NOT_IMPLEMENTED_FOR_THIS_MAPPING`；本轮运行/实验：`NOT_EXECUTED`
 
 ### 机制：过程合规和最终正确属于不同验收合同
-令 `tau` 为有序工具调用轨迹、`kappa_i` 为针对具类型事件的过程规则、`C(tau)` 为约束集合对轨迹的评分。作者采用派生自一阶时序逻辑的规则语言描述调用顺序、分支、循环与 grounding；同一规则既可离线评估完整轨迹，也可在线检查“前缀 + 拟执行工具调用”。
+令 `tau` 为有序工具调用轨迹、`kappa_i` 为针对具类型事件的过程规则、`C(tau)` 为约束集合对轨迹的评分；作者采用派生自一阶时序逻辑的规则语言描述调用顺序、分支、循环与 grounding；同一规则既可离线评估完整轨迹，也可在线检查“前缀 + 拟执行工具调用”
 
-在线 guard 只能观察类型化轨迹中可见的字段。论文附录 A.5 的关键边界是：safety 违规有有限的 *bad prefix*，但纯 liveness（例如“最终必须执行某步骤”）在轨迹尚未结束时仍可能被未来行为满足，不能因此提前判失败。故 `PREFIX_GATE_ALLOW` **不等于** `FULL_TRACE_COMPLIANT`、`COMPLETED_GOAL` 或 `SIDE_EFFECT_COMMITTED`。
+在线 guard 只能观察类型化轨迹中可见的字段；论文附录 A.5 的关键边界是：safety 违规有有限的 *bad prefix*，但纯 liveness（例如“最终必须执行某步骤”）在轨迹尚未结束时仍可能被未来行为满足，不能因此提前判失败；故 `PREFIX_GATE_ALLOW` **不等于** `FULL_TRACE_COMPLIANT`、`COMPLETED_GOAL` 或 `SIDE_EFFECT_COMMITTED`
 
-作者报告了 12 类任务模板、7 个模型和无约束、soft-block、block-and-warn 等设置；摘要中的“五个模型改善”限定于作者的 benchmark 与干预设置，不能推导为本仓可复现的安全增益。论文讨论还显示过程合规和答案正确可能分离：有些结果正确但过程不合规，有些调用顺序合规却未完成正确目标。
+作者报告了 12 类任务模板、7 个模型和无约束、soft-block、block-and-warn 等设置；摘要中的“五个模型改善”限定于作者的 benchmark 与干预设置，不能推导为本仓可复现的安全增益；论文讨论还显示过程合规和答案正确可能分离：有些结果正确但过程不合规，有些调用顺序合规却未完成正确目标
 
 ### Counterevidence Gate：三类“看似通过”的失败反例
 1. **liveness 被延迟判定**：所有已看到的 safety 前缀检查都通过，但 workflow 终止前没有执行要求的后续动作；在线 guard 本身不能证明最终义务完成
-2. **vacuous grounding（空真）**：作者明确报告，拒答由于没有可核验的实体，也可能满足全称量化 grounding 谓词；grounding 得分提高可能意味着拒答增加，而不是更多正确、有依据的回答。必须保留分母和 abstention 类别
+2. **vacuous grounding（空真）**：作者明确报告，拒答由于没有可核验的实体，也可能满足全称量化 grounding 谓词；grounding 得分提高可能意味着拒答增加，而不是更多正确、有依据的回答；必须保留分母和 abstention 类别
 3. **拦截改变过程结果**：soft/hard blocking 可能阻止后续恢复，使最终正确率不及 warning 后重试；工具调用被 guard 放行也不等于外部服务实际完成、持久化或确认副作用
 
-这是作者模型范围内的可复核限制，不是 Zero/Foundations 的真实事故证据。人类审批提示、离线合规分数与效果时刻的独立授权仍属于不同证据平面。
+这是作者模型范围内的可复核限制，不是 Zero/Foundations 的真实事故证据；人类审批提示、离线合规分数与效果时刻的独立授权仍属于不同证据平面
 
 ### 面向 Tool System 的有界架构映射
 - `CANDIDATE_MECHANISM`：未来可考虑分别绑定 `(task_id, policy_version, trace_event_schema, trace_prefix_digest, predicate_set, proposed_call, guard_verdict, effect_receipt_id, final_task_verdict)`
@@ -1019,7 +1019,7 @@ $$
 - UNKNOWN_RETAINED：定理证明的独立复核、实验复现、实际生产系统、主仓工具 adapter 与外部效果回执
 - NEXT_RETEST_CONDITION：锁定 AgentLTL 版本、轨迹 schema 与 guard 配置，注入未履行 liveness、无实体拒答、合规但错误回答、回复丢失情形，分别捕获 guard、工具效果与最终任务三类回执，再比较 warning/block 模式
 
-交付边界：仅追加既有中英文 Tool System 容器，不修改 Jules 历史、Sxx Registry、Verified Core、其他 Daily/Weekly、October/November Monthly、实现、测试、workflow 或独立 WorkflowHub #378。实际验证器和论文实验：`NOT_EXECUTED`；仅交付 Draft PR，等待 Human Maintainer 审核。
+交付边界：仅追加既有中英文 Tool System 容器，不修改 Jules 历史、Sxx Registry、Verified Core、其他 Daily/Weekly、October/November Monthly、实现、测试、workflow 或独立 WorkflowHub #378；实际验证器和论文实验：`NOT_EXECUTED`；仅交付 Draft PR，等待 Human Maintainer 审核
 
 
 
@@ -1037,22 +1037,22 @@ $$
 - 生产身份：GPT-6 / GPT_NATIVE / NOT_JULES_REPLAY；任务 `foundations/research/daily`；逻辑日期 `2026-11-09 Asia/Shanghai`；基线 main `9ef3c669d71f511a87eb677f94dbbb90ca4461c0`；UTC 检查时间 `2026-11-09T11:55:08.435Z`；所属容器 Tool System
 
 ### 核心机制与定理的适用边界
-论文将自然语言任务解析为 Permission IR，包括意图、资产、动作、前置义务、外部目的地和证据片段，再由确定性 lowering 形成含 data/control/parent 依赖边的权限图，SMT authorizer 在执行前检查策略，Just-in-Time gateway 执行允许或阻断。LLM 只负责提出结构化表示，**不直接拥有最终授权权威**；推断出的关系边也不能无条件成为可信运行事实
+论文将自然语言任务解析为 Permission IR，包括意图、资产、动作、前置义务、外部目的地和证据片段，再由确定性 lowering 形成含 data/control/parent 依赖边的权限图，SMT authorizer 在执行前检查策略，Just-in-Time gateway 执行允许或阻断；LLM 只负责提出结构化表示，**不直接拥有最终授权权威**；推断出的关系边也不能无条件成为可信运行事实
 
-对有限图，作者用 `H[v,label]` 表示传递的敏感标签、`A[v,capability]` 表示能力授权；例如 `not (H[v,secret] and A[v,net:send])` 是禁止敏感数据流向网络的约束，`grant(commit) implies Seen(tests_passed,before_commit)` 是时间性前提。有限图 soundness 的前提是图结构已正确表达事实、策略翻译固定、候选动作可见、所有敏感副作用均经过 gateway，且后端不超出授予能力
+对有限图，作者用 `H[v,label]` 表示传递的敏感标签、`A[v,capability]` 表示能力授权；例如 `not (H[v,secret] and A[v,net:send])` 是禁止敏感数据流向网络的约束，`grant(commit) implies Seen(tests_passed,before_commit)` 是时间性前提；有限图 soundness 的前提是图结构已正确表达事实、策略翻译固定、候选动作可见、所有敏感副作用均经过 gateway，且后端不超出授予能力
 
-特别注意 **taint-only monotonicity**：在固定策略与能力集合下，仅增加 taint 且不增加可信 sanitizer、declassification 或 positive obligation 事实，不能把原已禁止的动作转为允许；这一结论不适用于所有授权事实的任意变化，例如新增有效 `tests_passed` 可以满足独立正向前提。因此“图单调增长”不代表“所有许可决策只会越来越严格”
+特别注意 **taint-only monotonicity**：在固定策略与能力集合下，仅增加 taint 且不增加可信 sanitizer、declassification 或 positive obligation 事实，不能把原已禁止的动作转为允许；这一结论不适用于所有授权事实的任意变化，例如新增有效 `tests_passed` 可以满足独立正向前提；因此“图单调增长”不代表“所有许可决策只会越来越严格”
 
-作者报告在 801 个混合基准 replay 案例上达到 90.5% Decision Compliance Rate（DCR）。DCR 是允许/拒绝的二分类指标，包含误拒（FP）和漏阻（FN），不同 benchmark split 和复现基线的可比性有限。这是作者自报评估，**不等于本仓独立复现、真实生产误拒率或通用安全保证**
+作者报告在 801 个混合基准 replay 案例上达到 90.5% Decision Compliance Rate（DCR）；DCR 是允许/拒绝的二分类指标，包含误拒（FP）和漏阻（FN），不同 benchmark split 和复现基线的可比性有限；这是作者自报评估，**不等于本仓独立复现、真实生产误拒率或通用安全保证**
 
 ### 面向 Tool System 的有界映射与反证
 - 候选授权记录元组：`(principal, task_intent, asset_identity, current_authority_state, tool_action, effect_target, data_lineage, obligations, observed_evidence, policy_version, gateway_decision, effect_receipt)`，只是设计候选，未变成仓库实现
-- 可信边必须标注来自观测、策略还是推断，并记录来源、有效窗口和任务/工具对象 incarnation。模型抽出的 IR 不是当前真实审批状态
-- **反例一：隐式数据流缺失**。敏感信息到输出 sink 的一条实际边未被抽取时，SMT 对残缺图 SAT 仍可能放行真实泄漏，形式化求解正确并不意味着输入世界完整
-- **反例二：过时成功前提**。旧 commit 上的 `tests_passed` 被复用到新 revision，存在前提匹配错误；必须比较作用域、时序与受测对象身份
-- **反例三：审批与效果之间 TOCTOU**。授权时的快照正确，实际 tool effect 前发生权限变化，未做原子绑定仍可能不合法
-- **反例四：绕过网关**。某工具适配器直接写入后端，任何权限图求解均不证明这条绕过路径受约束
-- **反例五：抽取偏差与误拒**。LLM 误读用户意图、阻止合法恢复或漏掉约束，都超出固定图 soundness 本身
+- 可信边必须标注来自观测、策略还是推断，并记录来源、有效窗口和任务/工具对象 incarnation；模型抽出的 IR 不是当前真实审批状态
+- **反例一：隐式数据流缺失**；敏感信息到输出 sink 的一条实际边未被抽取时，SMT 对残缺图 SAT 仍可能放行真实泄漏，形式化求解正确并不意味着输入世界完整
+- **反例二：过时成功前提**；旧 commit 上的 `tests_passed` 被复用到新 revision，存在前提匹配错误；必须比较作用域、时序与受测对象身份
+- **反例三：审批与效果之间 TOCTOU**；授权时的快照正确，实际 tool effect 前发生权限变化，未做原子绑定仍可能不合法
+- **反例四：绕过网关**；某工具适配器直接写入后端，任何权限图求解均不证明这条绕过路径受约束
+- **反例五：抽取偏差与误拒**；LLM 误读用户意图、阻止合法恢复或漏掉约束，都超出固定图 soundness 本身
 
 ### 五轴证据状态
 - Claim State：`OBSERVED`（作者方法与实验的明确陈述，未独立检查全部证明）
@@ -1069,7 +1069,7 @@ $$
 - UNKNOWN_RETAINED：证明复核、实验复现、输入图完整性、真实后端约束有效性、本仓运行与 Verified Core 准入状态
 - NEXT_RETEST_CONDITION：固定 v1 原文与可运行参考实现，分别注入遗漏敏感边、旧 revision `tests_passed`、绕过 gateway 的真实工具效果，执行 SMT 与 effect-time 检查，记录输入、revision、命令、stdout/stderr、exit、独立验证器和效果回执
 
-交付边界：仅在现有中英文 `Tool_System.md` **追加**同一研究增量，不改写 Jules 历史、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、代码/Schema/Actions，也不触及独立 WorkflowHub Draft PR #378。Repo validator、Z3 原始实验、外部作用效果验证均为 `NOT_EXECUTED`，交由 Human Maintainer 审查和合并
+交付边界：仅在现有中英文 `Tool_System.md` **追加**同一研究增量，不改写 Jules 历史、Sxx Registry、Verified Core、其他三容器、Weekly/Monthly、代码/Schema/Actions，也不触及独立 WorkflowHub Draft PR #378；Repo validator、Z3 原始实验、外部作用效果验证均为 `NOT_EXECUTED`，交由 Human Maintainer 审查和合并
 
 
 ---
@@ -1090,10 +1090,10 @@ $$
 - **11-03 [mini-Lean-agent](https://arxiv.org/abs/2610.17331)** 将极简 coding-agent 工具接口与 Lean kernel 的独立证明接受区分开；调用成功、生成证明文本或模型评分不等于 kernel 接受
 - **11-05 [ETAS](https://arxiv.org/abs/2607.17780)** 讨论语言内部的 effect type、策略迹线和剩余运行检查；类型正确只在给定语言抽象内成立，不是外部服务最终副作用的回执
 - **11-06 [PAC reach–avoid shield](https://arxiv.org/abs/2610.16865)**（研究 v2）在有限 horizon、数据假设、置信度和误差边界下给出概率性屏蔽；不能冒充确定性零风险
-- **11-07 [AgentLTL](https://arxiv.org/abs/2607.02599)**（v1）研究工具过程的有限轨迹与 bad-prefix 检查。通过安全前缀不表示未来 liveness 已完成，拒答也可能让 grounding 空真通过
+- **11-07 [AgentLTL](https://arxiv.org/abs/2607.02599)**（v1）研究工具过程的有限轨迹与 bad-prefix 检查；通过安全前缀不表示未来 liveness 已完成，拒答也可能让 grounding 空真通过
 - 仅作为候选架构映射，可以提出 `request/source → intended typed effect → bounded shield → procedural trace check → authoritative effect receipt → final validation/proof acceptance`，但四篇论文**没有**共同证明这套完整系统，本仓更无实现或实验
 - 冲突/反例：类型正确仍可存在未建模副作用；PAC 的训练分布变化可使界失效；安全前缀可留下未履行义务；kernel 接受不会自动给工具授权
-- 需要分别运行类型/效果检查、指定统计分母的 PAC 校准、保留 unfinished liveness 的监视器、外部 effect broker 与独立最终验收。未执行前不得给出总体 PASS
+- 需要分别运行类型/效果检查、指定统计分母的 PAC 校准、保留 unfinished liveness 的监视器、外部 effect broker 与独立最终验收；未执行前不得给出总体 PASS
 - 五轴：`OBSERVED / E4_PREPRINT / CANDIDATE_MECHANISM / NOT_IMPLEMENTED / NOT_TESTED`
 
 ### Evidence Delta 与处理结论
@@ -1230,33 +1230,33 @@ $$
 - 目前**不分配新的 Sxx**、不修改 `FOUNDATION/SOURCES.md`，不将论文或本文提升为 Verified Core；后续来源准入另行按规范 identity 去重
 
 ### 理论增量：为什么“准入时审过”不足以解除具体效果的控制
-作者将安全分析对象定义为 artifact 在不同上下文中的**行为族**，而不仅是技能说明文字或工具接口。两份 artifact 的源码、接口与出口位置可能相同，准入审查得到同一判断，但由攻击者控制的说明文字可使实际 Agent 在后续上下文产生不同输出。
+作者将安全分析对象定义为 artifact 在不同上下文中的**行为族**，而不仅是技能说明文字或工具接口；两份 artifact 的源码、接口与出口位置可能相同，准入审查得到同一判断，但由攻击者控制的说明文字可使实际 Agent 在后续上下文产生不同输出
 
-- **有条件的定理 1**：给定审查判断无法区分安全与泄露变体（C1）、允许放宽控制后存在违反目标界限的攻击者见证（C2），以及明示的 soundness 与 mediator 假设，仅依赖该判断的安全 gate 不能对二者随意放宽该效果出口。
-- 定理不意味着“所有静态审查都没用”；它只针对满足 C1/C2 的不可区分变体。若前提不成立，则不能套用这个不可能性结论。
-- 因此目录注册、签名、Schema PASS、技能白名单或既有“安全”标签，在上述条件下都不能单独证明后续具体调用满足非干扰约束。
-- **反例**：两个技能具有相同外部 API 定义，但低可信说明改变了后续发送邮件的收件人或内容。只审 API 结构无法在执行时判定收件人与用户授权是否一致。
-- **反向控制**：真正由确定性代码固定、且与敏感上下文无关的参数调用，在补充足够依赖证明后可能具有不同结论；不能把论文写成“所有动作必须永远拒绝”。
+- **有条件的定理 1**：给定审查判断无法区分安全与泄露变体（C1）、允许放宽控制后存在违反目标界限的攻击者见证（C2），以及明示的 soundness 与 mediator 假设，仅依赖该判断的安全 gate 不能对二者随意放宽该效果出口
+- 定理不意味着“所有静态审查都没用”；它只针对满足 C1/C2 的不可区分变体；若前提不成立，则不能套用这个不可能性结论
+- 因此目录注册、签名、Schema PASS、技能白名单或既有“安全”标签，在上述条件下都不能单独证明后续具体调用满足非干扰约束
+- **反例**：两个技能具有相同外部 API 定义，但低可信说明改变了后续发送邮件的收件人或内容；只审 API 结构无法在执行时判定收件人与用户授权是否一致
+- **反向控制**：真正由确定性代码固定、且与敏感上下文无关的参数调用，在补充足够依赖证明后可能具有不同结论；不能把论文写成“所有动作必须永远拒绝”
 
 ### 两种控制义务，以及“被证明的合同”和“被测量的原型”的区别
-- Path confinement：在已有表示的低可信来源到敏感效果图上寻找并保持切断相关 influence path 的方案。
-- Capability / effect verification：以真实认证请求、Schema 声明的具体副作用、实际动作与参数为输入做授权检查，而不是信任模型描述的执行意图。
-- **认证的最终动作**须同时满足“保留被表示的路径切断”和“具体效果获得授权”；一次 ALLOW 不能同时自动证明参数没有受低可信数据影响。
-- 作者明确区分 **PACE-c** 的 certified contract 与实验评估中的 **PACE-p**：后者可恢复被 path gate 阻断但通过能力检查的动作，或实行声明过的 repair，而不必对最终动作完整重新认证。因此原型的实验效果不自动继承更强的形式保证。
-- 附录 C.6 指出未声明数据读取、工具内部二次调用、模型语义重述/重新构造字符串、绕过版本化适配器的外部资源改变等残余风险；没有被观测到的边不等于没有真实影响。
+- Path confinement：在已有表示的低可信来源到敏感效果图上寻找并保持切断相关 influence path 的方案
+- Capability / effect verification：以真实认证请求、Schema 声明的具体副作用、实际动作与参数为输入做授权检查，而不是信任模型描述的执行意图
+- **认证的最终动作**须同时满足“保留被表示的路径切断”和“具体效果获得授权”；一次 ALLOW 不能同时自动证明参数没有受低可信数据影响
+- 作者明确区分 **PACE-c** 的 certified contract 与实验评估中的 **PACE-p**：后者可恢复被 path gate 阻断但通过能力检查的动作，或实行声明过的 repair，而不必对最终动作完整重新认证；因此原型的实验效果不自动继承更强的形式保证
+- 附录 C.6 指出未声明数据读取、工具内部二次调用、模型语义重述/重新构造字符串、绕过版本化适配器的外部资源改变等残余风险；没有被观测到的边不等于没有真实影响
 - 核心区分：`CERTIFIED_FINAL_ACTION != EVALUATED_PROTOTYPE_ACTION`，`GRAPH_EDGE_NOT_REPRESENTED != REAL_DEPENDENCY_ABSENT`
-- 与 11 月 12 日 AgentCap 候选不同：签名、委托、预算、撤销时刻的能力约束不自动证明信息流路径被切断；反过来信息流切断也不能证明 token 有效或实际副作用完成。本仓没有已验证的组合协议。
-- 与此前 PROVISO 不同：provenance-typed 的学习型动作选择，不等价于 PACE 对准入审查不可区分性的条件式定理；多引用两篇论文不产生独立联合复现。
+- 与 11 月 12 日 AgentCap 候选不同：签名、委托、预算、撤销时刻的能力约束不自动证明信息流路径被切断；反过来信息流切断也不能证明 token 有效或实际副作用完成；本仓没有已验证的组合协议
+- 与此前 PROVISO 不同：provenance-typed 的学习型动作选择，不等价于 PACE 对准入审查不可区分性的条件式定理；多引用两篇论文不产生独立联合复现
 
 ### 作者实验口径、可证伪反例
-- 作者在 **8 个可执行 agent 安全基准、3 组模型家族**报告，PACE-p 在 **79 个符合资格的攻击列中 62 列**具有严格最低攻击成功率，另 **14 列并列**；这些列不是 79 个真实部署环境。
-- 因子消融使用 **1,167 个成对 case**、8 种组合、9,336 个评分结果；这些均属论文作者的实验报告，本次未执行原始代码或独立复算。
-- 受限自适应搜索在 30 个越权目标上报告 0 成功，有明确预算和测试范围，不应写成“全局零风险”。
-- **反例 A：未声明的次生效果**，中间工具内部写出未经 Schema 声明的外部资源，路径图和效果清单都不完整。
-- **反例 B：语义重述**，模型从低可信原文重构、翻译或运算生成敏感参数，简单字符串匹配未必追踪到真实来源。
-- **反例 C：权限时效漂移**，从动作建议到真正 dispatch 之间权限或 Policy Revision 发生变化，旧凭证不能代表当前授权。
-- **反例 D：原型恢复动作**，某动作通过 capability 检查而从 path block 中被恢复，如果缺少最终重认证，原先的 separation 证明条件可能不再成立。
-- **负对照**：授权合法、无低可信影响、效果 Schema 完整、权限版本固定、受控工具边界覆盖完整的良性请求应允许正常完成；简单 all-deny 不代表工具系统具备有效能力。
+- 作者在 **8 个可执行 agent 安全基准、3 组模型家族**报告，PACE-p 在 **79 个符合资格的攻击列中 62 列**具有严格最低攻击成功率，另 **14 列并列**；这些列不是 79 个真实部署环境
+- 因子消融使用 **1,167 个成对 case**、8 种组合、9,336 个评分结果；这些均属论文作者的实验报告，本次未执行原始代码或独立复算
+- 受限自适应搜索在 30 个越权目标上报告 0 成功，有明确预算和测试范围，不应写成“全局零风险”
+- **反例 A：未声明的次生效果**，中间工具内部写出未经 Schema 声明的外部资源，路径图和效果清单都不完整
+- **反例 B：语义重述**，模型从低可信原文重构、翻译或运算生成敏感参数，简单字符串匹配未必追踪到真实来源
+- **反例 C：权限时效漂移**，从动作建议到真正 dispatch 之间权限或 Policy Revision 发生变化，旧凭证不能代表当前授权
+- **反例 D：原型恢复动作**，某动作通过 capability 检查而从 path block 中被恢复，如果缺少最终重认证，原先的 separation 证明条件可能不再成立
+- **负对照**：授权合法、无低可信影响、效果 Schema 完整、权限版本固定、受控工具边界覆盖完整的良性请求应允许正常完成；简单 all-deny 不代表工具系统具备有效能力
 
 ### 五轴状态与有限架构映射
 - 候选 Contract 字段：`(request_id, authenticated_principal, policy_revision, source_lineage, effect_schema_version, proposed_action, bound_args, represented_cut, final_action_id, final_authority_verdict, dispatch_receipt, observed_effect_receipt, replay_state)`
