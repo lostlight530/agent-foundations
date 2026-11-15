@@ -262,3 +262,20 @@ SUPPORTED
 ```
 
 The admission preserves the source's assumptions and the repository's non-runtime boundary.
+
+## 2026-11-15 admission decision table for existing scholarly claims
+
+A rigorous five-axis record should be interpreted as a product of **independent dimensions**, not one ascending confidence ladder:
+
+| Documentary observation | Supported change | Change explicitly not justified |
+|---|---|---|
+| A registered `Sxx` identity with known URL | Source identity / eligibility to inspect | `SUPPORTED`, `IMPLEMENTED` or a verified theorem |
+| Source abstract supports a bounded proposition | Source surface and scoped proposition | Full-text equations, source-version dates or independent reproduction without inspection |
+| A matching equation appears in third-party literature | Theorem-specific mapping, only with conditions | Agent-wide safety, convergence or runtime ownership |
+| `validate.py` checks Claim metadata | Structural/documentary check at a named revision | Truth, translation equivalence, local behavior, all tests passing |
+| A current local implementation exists | `IMPLEMENTED` only for the exact mechanism | `EXPERIMENTALLY_TESTED` / `REPRODUCED` without retained execution |
+| A paper receives a later version | Same canonical paper identity plus new version provenance | A new source ID or automatic stronger proof |
+
+**Concrete repository caveat:** `SOURCES.md` retains a documented historical `S63` label collision: the canonical current registry and an earlier architecture research passage have used the same label for different paper objects. Resolve such cases by *exact paper identity, version, title and provenance*, never by an isolated `Sxx` string. This note is a source-registry interpretation and does not silently reassign the ID or rewrite historical research.
+
+Claims about tool execution, cross-session memory, distributed consensus or guarantee strength must still cite their owning `AF-*` domain entry and actual implementation/validation dimensions. The five-axis schema checks representation; it cannot adjudicate source propositions.
