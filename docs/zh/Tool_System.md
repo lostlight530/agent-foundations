@@ -8,6 +8,25 @@
 
 **反例：**远端已完成变更，但调用方等待回执时超时；若在没有效果端幂等记录的条件下重试，可能重复修改，一个可信的研究对象应保留 operation ID、目标身份、授权新鲜度、效果端收据及最终读回验证，本文伪代码不能当成执行收据，未进行本地实验，参见 [EVIDENCE](../../FOUNDATION/EVIDENCE.md)
 
+
+## 2026-11-16 GPT Native Daily Research — 指令优先级与 Harness 消息承载的身份断层
+
+**Canonical task：** `foundations/research/daily` · **容器：** Tools · **Producer：** GPT-6 / HUMAN_REQUESTED / NOT_JULES_REPLAY · **逻辑日：** 2026-11-16 Asia/Shanghai · **研究身份：** `foundations/research/daily/2026-11-16/instruction-hierarchy-transport-gap` · **Base main：** `82d4d7c02f3eea5225a63cdd7928c1437cfd8de6`
+
+**一手学术来源：** Eric Wallace、Kai Xiao、Reimar Leike、Lilian Weng、Johannes Heidecke、Alex Beutel，*The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions*，arXiv:2404.13208v1，原始发布日期 2024-04-19，[摘要](https://arxiv.org/abs/2404.13208) 与 [v1 全文](https://arxiv.org/html/2404.13208v1) §3.1–3.2、§5 于 2026-11-16 核验，这是**旧论文在本日的新理论映射**，不是 2026 新论文或本地重现实验，证据表面 `E4_PREPRINT / FULL_TEXT_MECHANISM_READ / REPRODUCTION_NOT_EXECUTED`
+
+**另一种命题的一手实现来源：** [google/adk-python@c6586f19ab8a2bb8b53e70041633b10858d9902e](https://github.com/google/adk-python/commit/c6586f19ab8a2bb8b53e70041633b10858d9902e)（2026-11-16），实验性 `DYNAMIC_INSTRUCTION_ROUTING` 默认打开，现有 `finalize_dynamic_instructions` 将工具提供的动态指令包装为带标签的 `role='user'` transient content，而非附加至 system instructions，`_add_instructions_to_user_content` 使用 `_insert_transient_user_content`，这只能证实源码分支及承载方式，不能证实模型实际遵循、安全提升或宿主部署。学术论文和代码来自不同对象，**不是同一结论的两次独立运行复核**
+
+**理论机制与待证伪假设：** Wallace 等人提出在高低优先级指令存在冲突时，有条件地执行低优先级指令，分别使用 *context synthesis*（一致指令）与 *context ignorance*（冲突指令）生成训练样本；论文报告实验改善及 over-refusal 权衡，**不是形式化隔离定理**。ADK 代码引出新的 Harness Contract 问题：工具源文本若以 user wire role 发送，模型或审查器能否区分真实用户消息与工具注入的伪用户指令？建议将研究对象明确为 `(origin_actor, origin_surface, authenticated_authority, carrier_role, insertion_position, feature_revision, content_digest)`，这是 **DESIGN_ANALOGY / 待测假设**，不是已发生权限提升事故
+
+**反例和边界：** 工具内容可以写“批准转账”，即使被包装成带标签的 user-role 片段，也不能成为经过认证的真人批准；但 helper 的标签边界转义、关闭功能开关的 fallback 可能阻断部分伪造路径，目前也没有证据证明此 ADK 分支必然可以被利用。模型训练得到的拒绝行为不能替代工具侧按动作的权限检查和 effect sink 收据；一概拒绝低优先级内容也可能导致 over-refusal
+
+**五轴，不提升：** `Claim State: HYPOTHESIS`；`Evidence Level: E4_PREPRINT（论文）/ FIRST_PARTY_CODE_READ（代码事实）`；`Mapping State: DESIGN_ANALOGY`，映射 `AF-TOOL-001/002/006`；`Implementation State: NOT_IMPLEMENTED`；`Validation State: NOT_TESTED`。本轮 `Source Registry: NOT_UPDATED`、`Verified Core: NOT_PROMOTED`，不得凭日期编造 `S68`，坚持 `Paper != Mapping != Implementation != Validation`
+
+**Evidence Delta：** `NEW_EVIDENCE` = v1 论文 §3 机制与独立归因的 ADK 精确提交；`CORRECTED_INTERPRETATION` = user 传输角色不能推出真人授权身份；`UNCHANGED_BOUNDARY` = instruction hierarchy 训练不等于 tool broker；`NEW_COUNTEREVIDENCE` = 一致的低优先级指令、marker 转义、关闭开关是必要反例；`UNKNOWN_RETAINED` = 实际序列化请求、效果、攻击可行性；`NEXT_RETEST_CONDITION` = 同版本开关前后请求、可信与冲突工具文本对照、实际 origin metadata、授权与效果端收据
+
+**交付边界：** 仅向中英文正式 Tools 容器的**当前解释层**前向增加新日期研究，不改旧 Jules 正文、SOURCE Registry、Claim Maps、校验器或运行时；本地实验和验证 `NOT_EXECUTED`
+
 ---
 
 > **当前五轴校准 — 2026-08-28。** 历史 `CONCEPTUAL_MAPPING / EVIDENCE_INSUFFICIENT` 原文作为生成记录保留，当前统一解释为 `DESIGN_ANALOGY / REFERENCE_ONLY / NOT_TESTED`，不构成已部署工具控制面的证据。参见[长期维护契约](../../FOUNDATION/MAINTENANCE.md)。
