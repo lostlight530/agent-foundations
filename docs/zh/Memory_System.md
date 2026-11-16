@@ -1556,3 +1556,35 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 - NEXT_RETEST_CONDITION：固定论文 v1、基准代码 SHA、模型与记忆版本，在同会话/重启下重放成对历史并独立核验当前状态、动作效果、分数和失败痕迹
 
 交付边界：只在现有中英文 Memory System 追加当日研究，不修改历史 Daily/Weekly、其他三个容器、Source Registry、Verified Core、Schema、Runtime、Actions 或治理.未运行的检查保持 NOT_EXECUTED，交由 Human Maintainer 决定合并.
+
+
+## 2026-W46 Weekly Research Cascade — 闭合周证据与合同级联
+
+### 任务身份、闭合窗口与实际输入
+- Canonical task：`foundations/research/weekly`，Producer：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；逻辑周：2026-W46，2026-11-09..15，Asia/Shanghai，已自然闭合
+- 基线 main：`ff45513a6b533941471ad1fb402c1b7645dad766`；11 月 16 日 Tools Daily 已进入 main，但属于 W47，**不计入 W46**；本周七个 Daily 与七个中英文配对，不能算十四个独立科学来源
+- 七个原始 Daily 来源身份：
+- 11 月 9 日 Tools FAVA arXiv:2607.27267v1：权限图逻辑正确只覆盖已经正确表示的输入，遗漏 IR 敏感边即破坏端到端授权推断
+- 11 月 10 日 Architecture VerifierBench arXiv:2610.28679v2：Verifier 应同时覆盖合法替代解和非法解，不以恒拒绝代表验收成功
+- 11 月 11 日 Tools Local Allow, Global Deny arXiv:2610.27620v1：逐步 ALLOW 不能自动推出整个工作流的授权目的
+- 11 月 12 日 Tools AgentCap arXiv:2611.00729v1：模型提议、能力签发、委托衰减与效果时刻检查必须拆开
+- 11 月 13 日 Memory AstroMemBench arXiv:2611.16590v1：跨会话历史记录不自动证明当前状态或外部动作已完成
+- 11 月 14 日 Architecture Evidence-Governed Evolution arXiv:2611.16378v1：生成更新、冻结候选、独立确认与长期采用不是同一成功事件
+- 11 月 15 日 Tools PACE arXiv:2610.01349v1：入库前扫描不替代工具效果时刻的权限切断，认证合同与原型效果分层
+- 已读取 `FOUNDATION/INDEX.md`、`EVIDENCE.md`、`SOURCES.md`、`PROVENANCE.md` 和四容器中英原文，未运行本仓校验器或任何作者的数学/系统实验
+
+### 本容器的证据与跨领域关系
+- 11 月 13 日 AstroMemBench 是 W46 唯一直接落在 Memory 容器的 Daily 原生增量，其 SCC 与历史动作歧义属于作者论文机制，不是本仓已经运行持久记忆或状态验证的证据
+- 与 Tools 的关系：历史文本写着“已批准”“已执行”仍只是内容记录，AgentCap/PACE 所需的是调用时新鲜授权和效果端收据；压缩若保留文本却丢失身份、时间或失败状态，会产生伪造授权的记忆风险
+- 与 Architecture 的关系：自更新可能改变记忆取舍、压缩、修正规则，持续采用要求版本化基线与来源/效果链；高 benchmark 分数不能直接证明恢复成功
+- 反例：两个会话中动作菜单相同，一个历史只记录执行请求，另一个历史有可信效果完成；无权威后置状态时把请求当成完成属于错误记忆
+- 处置：NO_NEW_MEMORY_RUNTIME / NOT_TESTED / SOURCE_ONLY；待用成对历史、会话重启、attempt/effect ID 和独立状态 oracle 复验，分别计错误完成与来源丢失
+
+### Evidence Delta 与交付边界
+- NEW_EVIDENCE：七份来源身份明确的 Daily 在四容器上的依赖关系，双语同源不双倍计数
+- CORRECTED_INTERPRETATION：原论文支持不等于全系统定理、部署权限、持久化记忆、已验证准入或协作真值
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation，Sxx 注册与原作者结果也是独立维度
+- NEW_COUNTEREVIDENCE：逐项反例及 11 月 16 日新增来源的明确排除限制周度外推
+- UNKNOWN_RETAINED：完整数学/代码复验、部署版本、授权效果、外部副作用收据与跨平台泛化
+- NEXT_RETEST_CONDITION：锁定版本与真实授权对象，用合法/拒绝对照复验，并独立验证最终状态
+- 仅向既有正式中英容器追加当前周研究块，历史原文逐字保持，Source Registry、Verified Core、Blueprint、Runtime 均不改动；Validator NOT_EXECUTED
