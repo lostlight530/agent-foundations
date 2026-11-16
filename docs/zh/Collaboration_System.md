@@ -2932,3 +2932,30 @@ Theorem 4 给出普通拓扑下的不可能性结果：如果没有可信方位�
 - UNKNOWN_RETAINED：真实多 Agent 实现、可信通道、群体状态证明、分布式效果回执
 - NEXT_RETEST_CONDITION：取得独立的协作原始研究与可归因多方状态/授权轨迹，才能启动新的 Claim Gate
 - 结论：NO_NEW_COLLAB_MAPPING / NO_VERIFIED_CORE_PROMOTION；向既有中文容器追加合法负结果，不触碰历史
+
+
+## 2026-W46 Weekly Research Cascade — 中英证据编织与复验边界
+
+### 周期身份、来源与完整分母
+- Original task：foundations/research/weekly，GPT-6 GPT_NATIVE HUMAN_REQUESTED NOT_JULES_REPLAY，2026-W46 / 11 月 9–15 日上海自然闭合周，main ff45513a6b533941471ad1fb402c1b7645dad766
+- 七份按日生产的原生论文研究为七个 lineage，中英文翻译不增加独立来源；11 月 16 日 Daily 属于 W47 明确排除
+- 输入清单：11-09 Tool FAVA arXiv:2607.27267v1；11-10 Architecture VerifierBench arXiv:2610.28679v2；11-11 Tool Local Allow, Global Deny arXiv:2610.27620v1；11-12 Tool AgentCap arXiv:2611.00729v1；11-13 Memory AstroMemBench arXiv:2611.16590v1；11-14 Architecture Evidence-Governed Evolution arXiv:2611.16378v1；11-15 Tool PACE arXiv:2610.01349v1
+
+### 本领域关系、反例与验证合同
+- W46 Collaboration 容器没有独立的 Daily 原生论文增量，这是覆盖事实而非需要补造论文的缺陷
+- AF-COLLAB-001/005/006 原有区分依然有效：拓扑、共识对象与事实正确性不同，本周其他论文的授权/校验主题不能直接升级成分布式共识实验
+- 同源重复：多 Agent 引用一篇 FAVA/PACE 或中英文译文仍是一份来源，伙伴一致不意味着获得新的独立科学复核
+- 跨 Agent 授权属于待测假设：单个参与者的批准可能不足以满足联合任务目的，需保留 actor 身份、授权链、资源/效果端、每次副作用收据和全局目的谓词
+- 反证：三个审查 Agent 复制同一条伪造的“用户已批准”工具字符串并投一致票，无法证明人类授权或真实效果
+- 反证：中心化 Verifier 对某异常效果可以正确拒绝，分布式成员却可能一致同意；比较拓扑应保持任务、故障模型、通信成本与独立真值源不变
+- 处置：NO_DIRECT_W46_COLLAB_DAILY / CROSS_DOMAIN_SYNTHESIS_ONLY / NO_NEW_CONSENSUS_RESULT；本仓协作实现与验证依旧 NOT_IMPLEMENTED/NOT_TESTED
+- 复验：设计同源污染、多 Agent 共享信息、不同拓扑、个体/全局授权和权威效果端对照，独立评估事实真值与共识程度
+
+### Evidence Delta 与历史保护
+- NEW_EVIDENCE：按原始日期、作者论文身份及跨容器关联建立研究关系，非执行复验
+- CORRECTED_INTERPRETATION：共识、真实 Claim、工具授权和效果收据不属于同一种 PASS
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；双语同源
+- NEW_COUNTEREVIDENCE：原作者的限定前提及反证用例阻止泛化结论
+- UNKNOWN_RETAINED：数学证明复验、部署实现、协作真实安全性和效果完成
+- NEXT_RETEST_CONDITION：锁定来源版本，构造合法/恶意对照并独立核对最终状态和运行回执
+- 所有旧正文不改、SOURCE Registry 和 Verified Core 不改；实际仓库 checker 与实验 NOT_EXECUTED
