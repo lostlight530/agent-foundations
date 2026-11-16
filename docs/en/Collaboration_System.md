@@ -3096,3 +3096,30 @@ No Sxx identifier was assigned, no verified-core promotion occurred, and no runt
 - UNKNOWN_RETAINED: live multi-agent implementation, verified trust channels, group-state proof, distributed effect receipts
 - NEXT_RETEST_CONDITION: independently sourced new collaboration claim with precise failure model and actual multi-party state/authorization traces
 - Decision: NO_NEW_COLLAB_MAPPING / NO_VERIFIED_CORE_PROMOTION. No-source W45 is a legitimate Weekly result; append-only existing English container
+
+
+## 2026-W46 Weekly Research Cascade — evidence-preserving bilingual synthesis
+
+### Contract and corpus
+- Original task: foundations/research/weekly / GPT-6 GPT_NATIVE HUMAN_REQUESTED NOT_JULES_REPLAY / ISO 2026-W46 (Nov09–15 Shanghai) / source main ff45513a6b533941471ad1fb402c1b7645dad766
+- Scope: seven dated source-lineage identities under original EN/ZH Daily containers; 2026-11-16 new Daily excluded from closed W46
+- Source roster: 11-09 Tool FAVA arXiv:2607.27267v1; 11-10 Architecture VerifierBench arXiv:2610.28679v2; 11-11 Tool Local Allow, Global Deny arXiv:2610.27620v1; 11-12 Tool AgentCap arXiv:2611.00729v1; 11-13 Memory AstroMemBench arXiv:2611.16590v1; 11-14 Architecture Evidence-Governed Evolution arXiv:2611.16378v1; 11-15 Tool PACE arXiv:2610.01349v1
+
+### Cross-domain evidence and negative controls
+- Direct W46 Collaboration Daily producer contribution = ZERO; this is a source-coverage outcome, not proof the system lacks collaboration problems. Do not manufacture a paper to make every container active every day.
+- Existing AF-COLLAB-001/005/006 continue to separate topology, agreement subject and factual correctness; W46 cross-domain papers study authorizations and verifiers, not the same experimental task as distributed consensus.
+- Shared-source duplication: multiple agents referencing one FAVA or PACE paper, or a bilingual reprint, remain one source lineage. Peer agreement cannot transform a single publisher's claim into independent verification.
+- Cross-agent authorization hypothesis: actor-local approval may be compositional only for restricted purposes/relations; shared plan evaluation needs actor/authority identity, resource/sink identity, per-effect receipt and a global purpose predicate.
+- Counterexample: three reviewers agree to act based on the same forged tool-output string claiming user permission; the unanimous result does not establish authenticated consent or permitted effects.
+- Counterexample: a correct central verifier can reject an unauthorized effect while distributed peers agree; topology comparisons need matched task, failure model, communication cost and independent truth oracle before preferring one.
+- Disposition: NO_DIRECT_W46_COLLAB_DAILY / CROSS_DOMAIN_SYNTHESIS_ONLY / NO_NEW_CONSENSUS_RESULT. Current Collaboration source maps are documentary and local runtime/validation NOT_IMPLEMENTED/NOT_TESTED.
+- Retest: isolate source corruption, preserve independent origin identity, vary graph topology and shared evidence, compare actor-local decisions with workflow-global policy and authoritative effect sink.
+
+### Evidence Delta and boundary
+- NEW_EVIDENCE: cross-container comparison at the documented original date/source identity; not a seventh independent runtime experiment
+- CORRECTED_INTERPRETATION: agreement, verified claim, tool permission and actual effect are distinct validation gates
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; EN/ZH = one publication per dated study
+- NEW_COUNTEREVIDENCE: author-scope limitations and proposed paired negative controls block blanket system generalization
+- UNKNOWN_RETAINED: paper proof replication, actual installed implementation, cross-topology operational safety, effect completion
+- NEXT_RETEST_CONDITION: source-version-pinned test, paired valid and adversarial requests, independent final-state oracle and retained process receipts
+- Current repository source registry, validated AF-* claims and all earlier original text untouched; native checker and experiments NOT_EXECUTED.
