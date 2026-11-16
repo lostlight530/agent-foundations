@@ -1,5 +1,16 @@
 # Agent Foundations — English research guide
 
+## 中文权威导读 / Chinese authoritative reading guide
+
+Agent Foundations 是针对 Agent System 的架构、记忆、工具与协作研究知识库，不是通用 Agent Runtime、沙箱、记忆服务或可直接部署的多 Agent 协作系统
+
+当前规范层按 `FOUNDATION/INDEX.md` 的四领域 23 条 Claim、`FOUNDATION/EVIDENCE.md` 的 Claim/Evidence/Mapping/Implementation/Validation 五轴、`FOUNDATION/SOURCES.md` 的来源身份及 `FOUNDATION/PROVENANCE.md` 的溯源门禁解释，不从历史研究正文推断功能实现或科学复现
+
+本仓的独立中文领域全文对应于 [中文阅读入口](../zh/README.md)，双语理论正文按领域分别对应 [Architecture](../zh/Architecture_Principles.md)、[Memory](../zh/Memory_System.md)、[Tools](../zh/Tool_System.md)、[Collaboration](../zh/Collaboration_System.md)，历史 `S63` 是两个不同论文对象的标签冲突，不能仅凭 S63 编号迁移 Claim
+
+**English authority reminder:** The English and Chinese long-form research files are complementary historical narratives, while the current verified-core Claim maps and source identities remain in `FOUNDATION/**`, and a local structural check does not establish model behavior or theorem validity
+
+
 **Current interpretation: 2026-11-15** · **Reference:** repository `main` at `608bf59eb503effdf211aa2f9b448f24d3ede0dc` · **Document class:** current public navigation, not an experiment or historical producer record
 
 ## Overview — what this repository establishes
