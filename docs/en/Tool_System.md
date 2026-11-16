@@ -1312,3 +1312,30 @@ The paper's security object is a behavior *family* under contexts, not merely th
 - **NEXT_RETEST_CONDITION:** pin paper v1, tool/effect schema and a disposable instrumented runtime; build a paired safe/leaking skill fixture with identical admission judgment and distinguishable effect receipts; test PACE-c final-cut enforcement versus PACE-p restoration, undeclared secondary writes, policy-revision changes and benign authorized utility with explicit execution/log/exit/effect evidence.
 - Delivery: **append-only bilingual Native Daily research** within the existing Tool System containers; all prior chunks and Jules history retained, no `Sxx` allocation, no Verified Core promotion, no other container changes.
 - Local `FOUNDATION/validate.py`, tests, solver, paper benchmarks and real tool effects: **NOT_EXECUTED** in this round. Human Maintainer review/merge required.
+
+
+## 2026-W46 Weekly Research Cascade — evidence-preserving bilingual synthesis
+
+### Contract and corpus
+- Original task: foundations/research/weekly / GPT-6 GPT_NATIVE HUMAN_REQUESTED NOT_JULES_REPLAY / ISO 2026-W46 (Nov09–15 Shanghai) / source main ff45513a6b533941471ad1fb402c1b7645dad766
+- Scope: seven dated source-lineage identities under original EN/ZH Daily containers; 2026-11-16 new Daily excluded from closed W46
+- Source roster: 11-09 Tool FAVA arXiv:2607.27267v1; 11-10 Architecture VerifierBench arXiv:2610.28679v2; 11-11 Tool Local Allow, Global Deny arXiv:2610.27620v1; 11-12 Tool AgentCap arXiv:2611.00729v1; 11-13 Memory AstroMemBench arXiv:2611.16590v1; 11-14 Architecture Evidence-Governed Evolution arXiv:2611.16378v1; 11-15 Tool PACE arXiv:2610.01349v1
+
+### Cross-domain evidence and negative controls
+- Inputs: four distinct dated Tool Daily units — FAVA (Nov09), Local Allow Global Deny (Nov11), AgentCap (Nov12), PACE (Nov15). Their source hypotheses and threat-model premises are not a common validated permission implementation.
+- FAVA models permission graph and SMT soundness for represented IR; a missing edge or invalid LLM extraction remains outside that soundness guarantee. Local Allow Global Deny demonstrates that individually compliant actions do not automatically satisfy global-purpose properties.
+- AgentCap separates capability proposal, issuance, attenuation and enforcement, while PACE separates admission artifact review from effect-time constraints. Their synthesis motivates a possible layered authorization contract; no theorem proves that these independently authored systems compose as one secure end-to-end runtime.
+- Proposed execution trace for future isolated experiment: actor, trusted source, natural-language intent, normalized action IR, capability issuer, revision and expiry, target/resource digest, exact effect sink, retry identity, authoritative side-effect receipt, independent final-state read-back.
+- Counterexample A: a malicious tool-result URI changes a previously approved destination without changing the model's declared tool name. Counterexample B: a stale grant permits a second effect after revocation; an apparently successful request still lacks proof of sink commit.
+- Tool-related architecture relation: a verifier must accept permissible alternatives (Nov10); a new tool policy cannot be deployed merely because its generator passed its own self-test (Nov14); historical memory must never turn a proposed effect into a completed effect (Nov13).
+- Five-axis outcome: CLAIM bounded candidate; EVIDENCE source-scoped four preprints; MAPPING DESIGN_ANALOGY toward AF-TOOL-001/002/006; IMPLEMENTATION NOT_IMPLEMENTED; VALIDATION NOT_TESTED. No new Sxx, no Verified Core.
+- Future test includes paired approved vs unauthorized action and effect-time revocation, narrow authority, alternate valid plan, compromised tool output and committed-but-timeout retry. Record both negative and benign false-positive controls.
+
+### Evidence Delta and boundary
+- NEW_EVIDENCE: cross-container comparison at the documented original date/source identity; not a seventh independent runtime experiment
+- CORRECTED_INTERPRETATION: agreement, verified claim, tool permission and actual effect are distinct validation gates
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; EN/ZH = one publication per dated study
+- NEW_COUNTEREVIDENCE: author-scope limitations and proposed paired negative controls block blanket system generalization
+- UNKNOWN_RETAINED: paper proof replication, actual installed implementation, cross-topology operational safety, effect completion
+- NEXT_RETEST_CONDITION: source-version-pinned test, paired valid and adversarial requests, independent final-state oracle and retained process receipts
+- Current repository source registry, validated AF-* claims and all earlier original text untouched; native checker and experiments NOT_EXECUTED.
