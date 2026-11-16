@@ -15,6 +15,8 @@ Agent Foundations 是用于研究智能体系统的双语理论、证据与架�
 
 ## Current verified core / 当前可验证核心
 
+**2026-11-17 verified-core navigation correction / 核心阅读顺序校正：** 先阅读 [Evidence / 证据契约](FOUNDATION/EVIDENCE.md)、[Sources / 来源登记](FOUNDATION/SOURCES.md) 和 [Provenance / 溯源](FOUNDATION/PROVENANCE.md)，再进入下方 11 月 15 日的四领域阅读说明，保留原说明作为当时的文档记录 / Read the owning evidence, source and provenance contracts before the four domain maps below; the prior dated note remains unchanged
+
 **2026-11-15 research reading map / 11 月总—分结构校准**  
 The [current verified-core index](FOUNDATION/INDEX.md) owns the system-wide evidence interpretation, with **23 canonical claims** across Architecture 6, Memory 5, Tools 6 and Collaboration 6, the `S01–S67` source registry contains 67 registered IDs rather than 67 independent reproductions, and the historical `S63` identity collision requires paper/version resolution, not automatic source transfer  
 四领域专业论证分别沿 [Architecture](FOUNDATION/ARCHITECTURE.md)、[Memory](FOUNDATION/MEMORY.md)、[Tools](FOUNDATION/TOOLS.md)、[Collaboration](FOUNDATION/COLLABORATION.md) 阅读，再从 [English research guide](docs/en/README.md) 或 [中文专业导读](docs/zh/README.md) 进入原有长篇研究正文，论文定理不等于 Agent 系统能力，来源登记、映射、实现和验证状态不得相互自动继承  
