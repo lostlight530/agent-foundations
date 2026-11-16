@@ -1547,3 +1547,35 @@ Proposed falsifiable fixture: two identical current task snapshots with one hist
 - NEXT_RETEST_CONDITION: freeze paper v1, benchmark/code commit, model and memory version; execute the paired history and session-restart counterexamples with independent state/effect verification, exact scores and failure traces
 
 Delivery boundary: append-only bilingual Native Daily to existing Memory System containers. Do not rewrite historical research, alter the other three system containers, allocate Sxx, promote Verified Core, edit schema, run unobserved validators or touch operational state. Human Maintainer review/merge required.
+
+
+## 2026-W46 Weekly Research Cascade — closed-week evidence/contract synthesis
+
+### Identity, scope and actual input corpus
+- Task: `foundations/research/weekly`; producer GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY; ISO week 2026-W46, 2026-11-09..15 inclusive, Asia/Shanghai, naturally closed before the November 16 execution.
+- Main at audit start: `ff45513a6b533941471ad1fb402c1b7645dad766`; the Nov16 Tool Daily already exists but **is outside W46** and is excluded. The week contains seven dated, bilingual paired Daily research units, not fourteen independent papers.
+- Exact 7 source identities across dated original owners:
+- 2026-11-09 Tools FAVA arXiv:2607.27267v1 — permission-graph soundness within represented inputs; missing IR edge invalidates end-to-end authorization inference
+- 2026-11-10 Architecture VerifierBench arXiv:2610.28679v2 — verifier needs positive permitted-solution coverage and negative invalid-solution rejection
+- 2026-11-11 Tools Local Allow, Global Deny arXiv:2610.27620v1 — per-action ALLOW cannot establish global workflow-purpose authorization
+- 2026-11-12 Tools AgentCap arXiv:2611.00729v1 — proposal, capability issuance and effect-time enforcement are separate contracts
+- 2026-11-13 Memory AstroMemBench arXiv:2611.16590v1 — historical event memory is not authoritative current effect state across session discontinuity
+- 2026-11-14 Architecture Evidence-Governed Evolution arXiv:2611.16378v1 — update generation, frozen candidate, independent audit and persistent adoption differ
+- 2026-11-15 Tools PACE arXiv:2610.01349v1 — admission-time review cannot certify all later effect-boundary outcomes; certified versus prototype scopes differ
+- Authority: `FOUNDATION/INDEX.md`, `EVIDENCE.md`, `SOURCES.md`, `PROVENANCE.md`; EN/ZH four container owners read on current main. No repository validator/author experiments actually executed in this cascade.
+
+### Owner-specific evidence relations
+- AstroMemBench (Nov13) supplies the week's explicit Memory input. Its Scenario–Challenge–Capability benchmark and historical-action ambiguity are publisher research, not evidence that this repository holds a persistent memory service or current-state read-back.
+- Connection to Tools: a stored history saying 'approved' or 'executed' is *content provenance*, while AgentCap/PACE require current authority and effect receipts at invocation and after effect completion. Compaction preserving the words but dropping identity, time or failure status can create false authorization memory.
+- Connection to Architecture: independently accepted self-updates may later change memory selection or correction policies, so admission needs a versioned baseline and retained source/effect link. An appealing benchmark score is not a retention, correctness or recovery guarantee.
+- Counterexample: two agents receive identical current command menus but one history contains a merely requested action and the other an actually executed action. Without authoritative postcondition, a remembered proposal can be incorrectly treated as completed effect.
+- Disposition: NO_NEW_MEMORY_RUNTIME / NOT_TESTED / SOURCE_ONLY. Retest with paired identical prompts, disjoint recorded histories, restart, explicit attempt/effect IDs and independent current-state oracle; count false remembered completion and missing provenance.
+
+### Evidence Delta and delivery boundary
+- NEW_EVIDENCE: cross-domain mapping of seven dated, source-identified owner contributions with explicit non-independent EN/ZH duplication.
+- CORRECTED_INTERPRETATION: selected-paper source support cannot be promoted into full-system proof, deployed permissions, persistent memory, verified update adoption or collaboration correctness.
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; source registration and original author evidence remain independent dimensions.
+- NEW_COUNTEREVIDENCE: source-specific counterexamples and excluded unclosed Nov16 input prevent early-month or cross-domain overclaim.
+- UNKNOWN_RETAINED: exact theorem/prototype replication, installed runtime, deployed grants, source-validity beyond inspected surfaces, unobserved effect receipts.
+- NEXT_RETEST_CONDITION: revision-pinned separate domain fixtures and permitted/denied controls; reproduce author results if implementation is accessible and independently verify end state.
+- Write scope: append-only this original EN/ZH weekly relationship under existing owning container; all preexisting bytes preserved. No Source Registry, Verified Core, blueprint, historical producer or runtime modification. Validation = NOT_EXECUTED.
