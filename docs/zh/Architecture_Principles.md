@@ -1800,3 +1800,35 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - UNKNOWN_RETAINED：独立数学审查、模拟复现、真实 Agent 场景、适当指标和成本、校准稳定性及本仓适用性
 - NEXT_RETEST_CONDITION：固定 v1 原文与可获得的作者代码，使用冻结候选、真正独立的成对确认和校准样本、全局审计事件编号及版本化基线，复跑正反例并保留命令、随机种子、样本身份、置信界、错误预算、功效与失败记录
 - 交付边界：只向现有中英文 Architecture Principles 追加同一天的一手研究；不改写旧研究、`FOUNDATION/**`、Sxx、Verified Core、代码、测试、Weekly/Monthly 或 Workflow.本轮未执行本仓 validator 和论文模拟，`NOT_EXECUTED`，交 Human Maintainer 审查
+
+
+## 2026-W46 Weekly Research Cascade — 闭合周证据与合同级联
+
+### 任务身份、闭合窗口与实际输入
+- Canonical task：`foundations/research/weekly`，Producer：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；逻辑周：2026-W46，2026-11-09..15，Asia/Shanghai，已自然闭合
+- 基线 main：`ff45513a6b533941471ad1fb402c1b7645dad766`；11 月 16 日 Tools Daily 已进入 main，但属于 W47，**不计入 W46**；本周七个 Daily 与七个中英文配对，不能算十四个独立科学来源
+- 七个原始 Daily 来源身份：
+- 11 月 9 日 Tools FAVA arXiv:2607.27267v1：权限图逻辑正确只覆盖已经正确表示的输入，遗漏 IR 敏感边即破坏端到端授权推断
+- 11 月 10 日 Architecture VerifierBench arXiv:2610.28679v2：Verifier 应同时覆盖合法替代解和非法解，不以恒拒绝代表验收成功
+- 11 月 11 日 Tools Local Allow, Global Deny arXiv:2610.27620v1：逐步 ALLOW 不能自动推出整个工作流的授权目的
+- 11 月 12 日 Tools AgentCap arXiv:2611.00729v1：模型提议、能力签发、委托衰减与效果时刻检查必须拆开
+- 11 月 13 日 Memory AstroMemBench arXiv:2611.16590v1：跨会话历史记录不自动证明当前状态或外部动作已完成
+- 11 月 14 日 Architecture Evidence-Governed Evolution arXiv:2611.16378v1：生成更新、冻结候选、独立确认与长期采用不是同一成功事件
+- 11 月 15 日 Tools PACE arXiv:2610.01349v1：入库前扫描不替代工具效果时刻的权限切断，认证合同与原型效果分层
+- 已读取 `FOUNDATION/INDEX.md`、`EVIDENCE.md`、`SOURCES.md`、`PROVENANCE.md` 和四容器中英原文，未运行本仓校验器或任何作者的数学/系统实验
+
+### 本容器的证据与跨领域关系
+- 11 月 10 日 VerifierBench 与 11 月 14 日 Evidence-Governed Evolution 对应两个独立的*架构问题*，并非两次真实运行校验：验收器要识别合法替代解；长期演进要区分候选生成、冻结、独立校准与持久准入
+- 跨领域关联：FAVA 的权限图正确性依赖完整输入表示；AgentCap/PACE 则提出效果边界控制，故绿色校验必须同时检查合法工作空间与真实最终状态。任何单篇论文都不能为完整 model+harness+tool+memory+evaluator 系统背书
+- 反证：恒拒绝验证器可使非法候选的拒绝率高却误拒所有合法解；生成器反复使用同一偏好样本并跳过回归保护，也可能出现误准入
+- 准入判断：NO_VERIFIED_CORE_PROMOTION，现有 AF-ARCH Claim、不存在的 Runtime 与 checker PASS 不作提升
+- 复验条件：锁定候选、来源版本与真实任务合同，测试合法替代解及非法对照，独立读取最终状态，记录基线桥接身份、保护指标和退出码
+
+### Evidence Delta 与交付边界
+- NEW_EVIDENCE：七份来源身份明确的 Daily 在四容器上的依赖关系，双语同源不双倍计数
+- CORRECTED_INTERPRETATION：原论文支持不等于全系统定理、部署权限、持久化记忆、已验证准入或协作真值
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation，Sxx 注册与原作者结果也是独立维度
+- NEW_COUNTEREVIDENCE：逐项反例及 11 月 16 日新增来源的明确排除限制周度外推
+- UNKNOWN_RETAINED：完整数学/代码复验、部署版本、授权效果、外部副作用收据与跨平台泛化
+- NEXT_RETEST_CONDITION：锁定版本与真实授权对象，用合法/拒绝对照复验，并独立验证最终状态
+- 仅向既有正式中英容器追加当前周研究块，历史原文逐字保持，Source Registry、Verified Core、Blueprint、Runtime 均不改动；Validator NOT_EXECUTED

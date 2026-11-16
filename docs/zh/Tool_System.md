@@ -1297,3 +1297,30 @@ $$
 - **NEXT_RETEST_CONDITION**：固定论文 v1、工具效果 Schema 与实验运行环境，构造准入判定相同但效果不同的一对技能；分别对 PACE-c 与 PACE-p 测试最终 cut、合法权限、隐藏工具二次效果、权限时效与良性请求效用，记录命令、stdout/stderr、exit 与真实效果回执
 - **交付边界**：只向已有中英文 Tool System 原生内容追加，不更改 Jules 历史、Sxx Registry、Verified Core、其他三个系统容器、协议或运行时代码
 - `FOUNDATION/validate.py`、真实论文实验、原型、Proof Checker 与工具效果验证：本轮 **NOT_EXECUTED**；由 Human Maintainer 审查后决定是否合并
+
+
+## 2026-W46 Weekly Research Cascade — 中英证据编织与复验边界
+
+### 周期身份、来源与完整分母
+- Original task：foundations/research/weekly，GPT-6 GPT_NATIVE HUMAN_REQUESTED NOT_JULES_REPLAY，2026-W46 / 11 月 9–15 日上海自然闭合周，main ff45513a6b533941471ad1fb402c1b7645dad766
+- 七份按日生产的原生论文研究为七个 lineage，中英文翻译不增加独立来源；11 月 16 日 Daily 属于 W47 明确排除
+- 输入清单：11-09 Tool FAVA arXiv:2607.27267v1；11-10 Architecture VerifierBench arXiv:2610.28679v2；11-11 Tool Local Allow, Global Deny arXiv:2610.27620v1；11-12 Tool AgentCap arXiv:2611.00729v1；11-13 Memory AstroMemBench arXiv:2611.16590v1；11-14 Architecture Evidence-Governed Evolution arXiv:2611.16378v1；11-15 Tool PACE arXiv:2610.01349v1
+
+### 本领域关系、反例与验证合同
+- 实际输入：FAVA（9 日）、Local Allow Global Deny（11 日）、AgentCap（12 日）、PACE（15 日）四份不同论文对象，不是已经组合验证的权限系统
+- FAVA 的权限图求解仅对已表示的 IR 成立，遗漏边或错误抽取不能被 SMT 的正确结论弥补；Local Allow Global Deny 揭示逐步合法不必然满足全局目的
+- AgentCap 将提议、签发、衰减和执行时 enforcement 分开，PACE 将准入审核与效果边界分开；可以形成多层授权合同假设，但四篇论文之间不存在本轮已验证的组合定理
+- 建议未来运行证据键：actor、可信来源、用户意图、规范化动作 IR、能力签发者、授权版本与过期时间、具体目标 digest、effect sink、重试身份、权威收据、独立最终状态回读
+- 反证 A：恶意工具输出改变已经批准的目标 URI，工具名仍相同；反证 B：授权撤销后旧 grant 继续用于第二次副作用；接口返回成功仍可能缺少效果端证据
+- 跨容器关系：Architecture（10 日）要求接受合法替代解，Architecture（14 日）要求独立准入，Memory（13 日）要求请求与完成的历史状态不可混淆
+- 五轴：CLAIM 为有界假设；EVIDENCE 为四篇源码/论文一手阅读；MAPPING 是 DESIGN_ANALOGY；IMPLEMENTATION NOT_IMPLEMENTED；VALIDATION NOT_TESTED；Sxx、Verified Core 不提升
+- 后续复验：同一版本下比较授权、拒绝、撤销、工具内容重定向和提交后超时重试，既验证拒绝，也覆盖良性允许与误拒对照
+
+### Evidence Delta 与历史保护
+- NEW_EVIDENCE：按原始日期、作者论文身份及跨容器关联建立研究关系，非执行复验
+- CORRECTED_INTERPRETATION：共识、真实 Claim、工具授权和效果收据不属于同一种 PASS
+- UNCHANGED_BOUNDARY：Paper != Mapping != Implementation != Validation；双语同源
+- NEW_COUNTEREVIDENCE：原作者的限定前提及反证用例阻止泛化结论
+- UNKNOWN_RETAINED：数学证明复验、部署实现、协作真实安全性和效果完成
+- NEXT_RETEST_CONDITION：锁定来源版本，构造合法/恶意对照并独立核对最终状态和运行回执
+- 所有旧正文不改、SOURCE Registry 和 Verified Core 不改；实际仓库 checker 与实验 NOT_EXECUTED
