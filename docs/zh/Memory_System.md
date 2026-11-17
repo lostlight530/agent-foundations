@@ -1,5 +1,26 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
+## 2026-11-17 GPT Native Daily Research — 因果偏序不等于时间戳检索
+
+**Canonical 任务与身份：** `foundations/research/daily` · Memory · 2026-11-17 Asia/Shanghai · GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY · 研究身份 `foundations/research/daily/2026-11-17/lamport-causality-vs-session-filter` · 冷启动主线 `cd5f71c5e196075fd737c595aed660a2f29c90c3`
+
+**一手理论身份：** Leslie Lamport，《*Time, Clocks, and the Ordering of Events in a Distributed System*》，*Communications of the ACM* **21(7)**，**1978 年 7 月**，558–565 页，DOI **10.1145/359545.359563**，[作者论文目录](https://lamport.azurewebsites.net/pubs/pubs.html)，[Microsoft Research 提供的原始 ACM 论文](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/Time-Clocks-and-the-Ordering-of-Events-in-a-Distributed-System.pdf)。2026-11-17 实际检查了原论文 **559–560 页**，不是仅摘要支持，也不是 2026 年新论文。论文中 `happened-before` 非自反偏序由同一进程的先后次序、跨进程同一消息的发送先于接收、传递性定义；逻辑时钟满足 `a → b => C(a) < C(b)`，**逆命题不成立**。两事件互不先于彼此时为并发，不能仅凭数值大小得出因果边。这是有进程与消息假设的理论，不是对任意时间戳日志的正确性保证
+
+**另一对象的一手实现来源：** [google/adk-python@b7c9c40f855a91943297b63a2a45fad9a160d0d7](https://github.com/google/adk-python/commit/b7c9c40f855a91943297b63a2a45fad9a160d0d7)，上游提交时间 **2026-11-16T21:27:15Z**（上海时间 **11 月 17 日**）。已读取精确代码差异和作者测试：`GetSessionConfig.after_timestamp` 改为逐事件筛选，再施加 `num_recent_events`，不再假设 append 顺序等于事件时间顺序。作者构造 `[30, 40, 10, 50]` 时间戳、`cutoff=20`，期望返回 `[30, 40, 50]`，最多取最近两个时为 `[40, 50]`。这是作者的测试源码事实，**本次没有运行 ADK 测试**。论文支持因果定义，代码支持具体读取过滤修复；**不是同一结论的两次独立复现**。本次 Reflective R1 也引用同一个 ADK 提交，它只算一个原始发布者 lineage
+
+**新的、受限架构映射：** Agent Session/Memory 的 `event_time`、`append_index`、`observed_at`、`session_revision`、causal dependency edges 是不同证据轴。条件 `event_time >= cutoff` 只能决定某事件是否属于时间窗口，**不能自动证明因果先后、持久存储、跨会话重放一致性**。建议未来可检验的证据元组 `(session_id, event_id, producer_run_id, event_time, append_position, observed_at, causal_parent_event_ids, persisted_store_revision, retrieval_cutoff, replay_identity)`，其前提是实际上存在可信的跨进程消息与父事件身份；当前仅为候选 Contract，不是本仓已实现 Schema 或 Harness Runtime
+
+**反例与负对照：** 先写 e1(timestamp=30)，再迟到写入 e2(timestamp=10)，最后写 e3(timestamp=50)。逐项过滤可以正确保留 e1、e3，但缺少实际消息边时，仍无证据证明 e1 导致 e3；另外两个并发事件可能拥有不同物理时间或逻辑时钟读数。旧式依 append 倒序提前退出的读取可能漏掉 e3，而这一实现缺陷不意味着「修复后已证明因果一致」。正对照需要明确 send/receive 身份与命名持久化存储的 readback；负对照要保留相同时间戳却删除消息依赖边。若仅靠 timestamp 大小就声称因果，假设未过 Counterevidence Gate
+
+**五轴边界：** `Claim State: HYPOTHESIS / CANDIDATE_MAPPING`；`Evidence Level: 原论文 559–560 页直接阅读 + ADK 精确源码提交`，不代表联合复现；`Mapping State: DESIGN_ANALOGY` 对应 `AF-MEM-001/003/005`；`Implementation State: NOT_IMPLEMENTED`；`Validation State: NOT_TESTED`。不改 `FOUNDATION/SOURCES.md` 的 `S01–S67` 既有身份，不制造 `S68`，不提升 Verified Core、Claim Map 或论文真实性状态，继续区分 `Paper != Mapping != Implementation != Validation`
+
+**Evidence Delta：** `NEW_EVIDENCE` = Lamport 精确原论文偏序定义 + 当日核验的 ADK 时间过滤实现；`CORRECTED_INTERPRETATION` = event-time window inclusion 不证明 causality 或 state continuity；`UNCHANGED_BOUNDARY` = SOURCE_PATCH != LOCAL_MEMORY_RUNTIME、WALL_CLOCK_ORDER != HAPPENED_BEFORE；`NEW_COUNTEREVIDENCE` = 并发事件、乱序追加、缺失消息因果边；`UNKNOWN_RETAINED` = 实际 Agent store/run 身份、可靠事件时序、ADK 安装版本、漏记数量、长期记忆正确性；`NEXT_RETEST_CONDITION` = 固定源码版本复现实验 [30,40,10,50]，再给两个 Producer 建真实 send/receive 与命名持久化 close/reopen 对照，记录 stdout/stderr/exit、状态修正、重复与丢失
+
+**交付与验证：** 仅在正式中英文 Memory 容器的当前研究层前向新增日期块，历史 Jules 正文、`FOUNDATION/**` Registry/Claim Map、校验器与 runtime 均不动。论文页与上游 GitHub commit 已直接检查；本地 `FOUNDATION/validate.py`、ADK 运行、数学证明重演、持久状态实验、真实 Effect Sink **NOT_EXECUTED**。Draft PR 由 Human Maintainer 独立审查与决定是否合并
+
+---
+
+
 ## English technical counterpart and source boundary / 英文专业对应
 
 **English:** SimCLR, VICReg, Hopfield dynamics, manifold descriptions and memory-consolidation formulas are external mechanisms or proposals, not evidence that this repository implements ingestion, retrieval, compaction, persistence or reliable memory continuity
