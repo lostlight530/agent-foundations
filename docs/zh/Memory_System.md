@@ -1,5 +1,26 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
+## 2026-11-18 GPT Native Daily Research — 先检索证据再形成记忆，及原文按需恢复
+
+**任务与溯源。** Canonical ID `foundations/research/daily`，Memory System，逻辑日 **2026-11-18 Asia/Shanghai**，生产者 **GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY**。研究身份 `foundations/research/daily/2026-11-18/rime-formation-source-recovery-01`，冷启动合并 main `d76524c1d1984ce5c28b84a2ba342afb1324b0ce`，非 Jules 回放或实施发布。
+
+**一手理论来源。** Wanqi Zhou、Jiawei Lu、Yang Wang、Zhaolong Xing、Zhen Chen、Ai Han、Haoyue Shi，*Remember by Asking: Retrieval-Induced Memory Evolution for LLM Agents*，**arXiv:2609.34438v1**，首次提交 **2026-09-28 06:57:46 UTC**，版本页 https://arxiv.org/abs/2609.34438v1 、论文全文 https://arxiv.org/html/2609.34438v1。本轮实际检查论文 v1 摘要及 HTML 方法部分，不把九月论文当成今天新发表，也没有独立复现作者实验。
+
+**论文中的机制。** RIME 不仅直接压缩整个会话，而是先用固定的形成问题 `Q={q_r}`（作者实现为六类）执行 top-k 原文轮次检索，合并并沿邻近对话做两轮上下文扩展，再联合历史记忆，执行 `Add/Update/Delete/NoOp` 更新。回答时压缩记忆是优先而非唯一证据，支撑不足再选择性取回原始轮次。这是论文的设计与作者报告，不是本仓已经运行的 Memory Runtime。
+
+**真正新增的有限架构映射。** 将 *formation coverage*（压缩前实际检查了哪些原文）与 *answer support*（答案究竟由哪一条摘要或重新打开的原文支撑）作为两项独立证据责任。记忆条目存在不代表某个未来问题的关键证据已被纳入形成阶段。候选证据元组：`(session_id, source_revision, formation_question_id, selected_turn_ids, context_expansion_hops, historical_item_ids, operation_type, superseded_id, answer_query_id, reopened_source_turn_ids, answer_claim_ids)`。属于 **DESIGN_ANALOGY**，不表示已经写入本仓 Schema。
+
+**反证与治理边界。** 论文的 `Delete` 是记忆视图的更新动作，不等于被授权静默删除本项目原始证词、correction 与 supersession 链。候选架构需同时保留原始来源和纠错依据。语义 top-k 与两跳邻域也不能保证覆盖远距离、低相似度反例，因此引用看似准确不等于证据完整。论文的 Benchmark 结果是作者报告，本轮未重复运行或独立确认。
+
+**可证伪实验设计，NOT_EXECUTED。** 构造含原始断言、后续明确纠正、远距离低相似度关键限定的同一会话，比较直接压缩、六问题检索及扩展、按需原文回查；按实际 Claim 统计原文召回、引用精确率、无依据答案率、纠错关系留存和 Token 成本，并保留缺失项。正对照令限定紧邻检索命中轮次，负对照将限定移出两跳邻域；命名输入/版本、原文身份与非破坏性纠错账本必须完整，结果 **NOT_COMPUTED**。
+
+**五轴状态。** `CLAIM = CANDIDATE_MAPPING`；`EVIDENCE = E4_PREPRINT / VERSIONED_PRIMARY_METHOD_TEXT_INSPECTED / AUTHOR_EXPERIMENTS_NOT_REPRODUCED`；`MAPPING = DESIGN_ANALOGY` 对应 `AF-MEM-001/003/004/005`；`IMPLEMENTATION = NOT_IMPLEMENTED`；`VALIDATION = NOT_TESTED`。该来源未进入当前 S01–S67 注册，本轮不分配 Sxx，也不将论文自动提升至 Verified Core。
+
+**Evidence Delta：** `NEW_EVIDENCE` = RIME v1 在记忆形成前按问题召回原文及回答时选择性回查；`CORRECTED_INTERPRETATION` = 形成覆盖与答案证据支撑应分别度量，压缩不能证明两者；`UNCHANGED_BOUNDARY` = PAPER != MAPPING != IMPLEMENTATION != VALIDATION，中英引用只有一个原始来源；`NEW_COUNTEREVIDENCE` = 远处的反例、破坏性更新、丢失原始证据；`UNKNOWN_RETAINED` = 真正的覆盖率、实验复现、当前权限上下文、本仓 Runtime 和可持续溯源；`NEXT_RETEST_CONDITION` = 独立实现及具名来源轮次、负对照、变更账本、固定输入版本与执行收据。
+
+**交付和验证边界。** 仅对现有中英 Memory 容器添加前向研究块，既有 Jules 与后续历史内容不修改；已查阅论文及仓库 Owning Contract；`FOUNDATION/validate.py`、论文复现、运行时 ingest、跨会话持久化与效果检验 **NOT_EXECUTED**。不修改 Registry、Claim Map、Verified Core、历史 Producer、Weekly/Monthly 或 Governance，须经 Human Maintainer 审核 Draft PR。
+
+
 ## 2026-11-17 GPT Native Daily Research — 因果偏序不等于时间戳检索
 
 **Canonical 任务与身份：** `foundations/research/daily` · Memory · 2026-11-17 Asia/Shanghai · GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY · 研究身份 `foundations/research/daily/2026-11-17/lamport-causality-vs-session-filter` · 冷启动主线 `cd5f71c5e196075fd737c595aed660a2f29c90c3`
