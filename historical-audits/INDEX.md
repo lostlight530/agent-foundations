@@ -62,3 +62,12 @@ As of 2026-09-19 this is the latest completed independent periodic-maintenance r
 - Numeric additions, real contract-complete maintenance, scientific validity, native runtime evidence and merge retention remain separately evaluated
 - Early Draft labels must be compared with final original diff without silently rewriting old PR/title history
 - This forward note does not replace the November native bilingual Memory/Tool owners or existing periodic audits
+
+## 2026-10-28 classification-only relocation
+
+These two records were reclassified without rewriting their original Git blob bodies, producer identities, source-time findings, or acceptance states. Former paths remain recoverable in Git history. This is not a new Native, A1/A2, Periodic Audit, or Reconciliation execution.
+
+- `historical-audits/03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md` — former path: `historical-audits/2026-10/2026-10-28-sop-minimal-acceptance-audit.md`; preserved blob: `9c0a36e229ac80d6d262ddb2a83de8789061e046`.
+- `historical-audits/05-maintenance-and-reconciliation/2026-10-28-october-native-weekly-gap-recovery-register.md` — former path: `historical-audits/2026-10/2026-10-28-october-native-weekly-gap-recovery-register.md`; preserved blob: `45dc4c249405f6687db28d390283d9db86b0a294`.
+
+The SOP acceptance is a derived audit of previously merged work; the gap-recovery register is a maintenance evidence inventory, not an original producer run.
