@@ -67,7 +67,13 @@ As of 2026-09-19 this is the latest completed independent periodic-maintenance r
 
 These two records were reclassified without rewriting their original Git blob bodies, producer identities, source-time findings, or acceptance states. Former paths remain recoverable in Git history. This is not a new Native, A1/A2, Periodic Audit, or Reconciliation execution.
 
-- `historical-audits/03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md` — former path: `historical-audits/2026-10/2026-10-28-sop-minimal-acceptance-audit.md`; preserved blob: `9c0a36e229ac80d6d262ddb2a83de8789061e046`.
-- `historical-audits/05-maintenance-and-reconciliation/2026-10-28-october-native-weekly-gap-recovery-register.md` — former path: `historical-audits/2026-10/2026-10-28-october-native-weekly-gap-recovery-register.md`; preserved blob: `45dc4c249405f6687db28d390283d9db86b0a294`.
+- `historical-audits/03-stage-and-period-audits/2026-10-28--sop-minimal-acceptance--audit.md` — former path: `historical-audits/2026-10/2026-10-28-sop-minimal-acceptance-audit.md`; preserved blob: `9c0a36e229ac80d6d262ddb2a83de8789061e046`.
+- `historical-audits/05-maintenance-and-reconciliation/2026-10-28--october-native-weekly-gap-recovery--register.md` — former path: `historical-audits/2026-10/2026-10-28-october-native-weekly-gap-recovery-register.md`; preserved blob: `45dc4c249405f6687db28d390283d9db86b0a294`.
 
 The SOP acceptance is a derived audit of previously merged work; the gap-recovery register is a maintenance evidence inventory, not an original producer run.
+
+### 2026-11-19 OID erratum filename normalization
+
+- `historical-audits/01-corrections-and-errata/2026-10-28--a1-a2-tree-oid--erratum.md` — normalized from `historical-audits/01-corrections-and-errata/2026-10-28-a1-a2-tree-oid-erratum.md`; preserved original blob `5a32e9e413ea5de83a55a88cd0464d88578f3809`.
+- Existing two October 28 record destinations were normalized to `YYYY-MM-DD--subject--record-kind.md`. Original independent A1/A2 and D-task owners were excluded; historical bodies and source-producer identities remain unchanged.
+- Repository code-index lookup of the pre-rename path names did not surface inbound matches; Git history preserves former paths. This is not an exhaustive external backlink audit.
