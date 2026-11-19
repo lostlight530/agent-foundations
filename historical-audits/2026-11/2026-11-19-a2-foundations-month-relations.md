@@ -1,0 +1,141 @@
+# ORIGINAL Independent A2 2026-11-19 — Foundations Nov01–19 bilingual/core unified claim relations
+
+## Fresh post-A1 provenance and monthly scope
+- Repository `lostlight530/agent-foundations`, task `independent-maintenance/A2`, 2026-11-01..19 Asia/Shanghai, `MONTH_TO_DATE/OPEN/NOT_FINAL`
+- Post-merge fresh main `30b0d3b5aa0aa912b2808becc9edffd6863831a2`, fully enumerated Git tree, Open PR 0 on preflight
+- Original A1 merged and exact readback: `historical-audits/2026-11/2026-11-19-a1-foundations-source-custody.md` @ `747b83cccdbda30b59b8f31167029568faae020a`, all 12/12 owner SHA match main
+- Prior complete Nov01–18 A2: `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md` @ `4bc6610ecfc716f549681eee29c66c68503f30f1`, retained as historical prior relation snapshot
+- Current graph 12 owner files: eight bilingual topic containers plus four governing index/evidence/maintenance/source docs; two languages represent one research unit/issuer
+- Daily research is embedded in maintained `docs/en|zh/*_System.md` containers; absence of a synthetic 2026-11-19 standalone path is NOT MISSING
+- Actual GitHub owning docs and A1 lineage inspected; benchmark reproduction, memory service implementation, theorem evaluator and independent paper test NOT_EXECUTED
+
+## Full owning-file source graph, exact SHA and inherited provenance
+- OWNER `docs/en/Architecture_Principles.md` @ `4c69cbdf4a6694129f9d6fe87bd2ab73334ba636` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `docs/en/Collaboration_System.md` @ `ff8b551bd721971f27b65529200326e228638061` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `docs/en/Memory_System.md` @ `f7d30c5b07964c846b9f17eee94132740e7a9311` | NOV19_DISCERN_BILINGUAL_RESEARCH_DELTA | document statement or repository policy, not local production feature
+- OWNER `docs/en/Tool_System.md` @ `63eec0caef40a2fbbb347dfbd9dc6e2ade3ca565` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c8e153bc7e19dfe5c8b0cfc6c146e` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `docs/zh/Collaboration_System.md` @ `4c9521118cfb3f29ee690be48dbb165bcf10755a` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `docs/zh/Memory_System.md` @ `bfb9fb1058ef24b2d9afccc8c3d12f06b39804ea` | NOV19_DISCERN_BILINGUAL_RESEARCH_DELTA | document statement or repository policy, not local production feature
+- OWNER `docs/zh/Tool_System.md` @ `d36cd38906e3f7a96462224d144e019735b53f2d` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d61075cd09b1c558059a6b788786a` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `FOUNDATION/INDEX.md` @ `5fd381ace1e3adffa782cca9babd400cf1b504ef` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+- OWNER `FOUNDATION/SOURCES.md` @ `5c569375d640eaed7eb4eb787515ff4beb1ceb19` | EXACT_A1_BLOB_INHERITED | document statement or repository policy, not local production feature
+
+## Five-axis per-owner relation maintenance — claim/evidence/mapping/implementation/validation
+- AXIS `docs/en/Architecture_Principles.md` @ `4c69cbdf4a66` | CLAIM: Model vs Harness vs Host authority are different components | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Architecture_Principles.md` @ `4c69cbdf4a66` | EVIDENCE: External system paper must pin assumptions and verified source revision | evidence class must be revision and scope bounded
+- AXIS `docs/en/Architecture_Principles.md` @ `4c69cbdf4a66` | MAPPING: A design mapping does not prove a runnable orchestration environment | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Architecture_Principles.md` @ `4c69cbdf4a66` | IMPLEMENTATION: No deployed autonomous runtime follows from this theory container | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/en/Architecture_Principles.md` @ `4c69cbdf4a66` | VALIDATION: Admit new Verified Core only with owning domain evidence and independent validation | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/en/Collaboration_System.md` @ `ff8b551bd721` | CLAIM: Agreement and delegation require a typed subject and independent effect target | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Collaboration_System.md` @ `ff8b551bd721` | EVIDENCE: Multiple identical citation links do not establish multiple issuers | evidence class must be revision and scope bounded
+- AXIS `docs/en/Collaboration_System.md` @ `ff8b551bd721` | MAPPING: Proposed A2A/collaboration relation does not imply verified consensus | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Collaboration_System.md` @ `ff8b551bd721` | IMPLEMENTATION: No actual multi-agent transport or approval broker is evidenced | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/en/Collaboration_System.md` @ `ff8b551bd721` | VALIDATION: Requires independent multi-agent trace and revoked-delegation negative control | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/en/Memory_System.md` @ `f7d30c5b0796` | CLAIM: Bitemporal event chain and answer/update/clarify/abstain are distinct memory commitments | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Memory_System.md` @ `f7d30c5b0796` | EVIDENCE: DISCERN arXiv:2611.15729v1 is 2026-11-11 E4_PREPRINT; 310 synthetic queries are author-reported | evidence class must be revision and scope bounded
+- AXIS `docs/en/Memory_System.md` @ `f7d30c5b0796` | MAPPING: MAPPING=DESIGN_ANALOGY, prior RIME formation coverage and new terminal commitment distinct | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Memory_System.md` @ `f7d30c5b0796` | IMPLEMENTATION: IMPLEMENTATION=NOT_IMPLEMENTED, immutable log, view rebuild and evaluator are not current repo code | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/en/Memory_System.md` @ `f7d30c5b0796` | VALIDATION: VALIDATION=NOT_TESTED; 15 entity-resolution cases and LoCoMo .820 vs .827 are meaningful counterevidence | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/en/Tool_System.md` @ `63eec0caef40` | CLAIM: Tool description and grant freshness not equivalent to authorized effect | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Tool_System.md` @ `63eec0caef40` | EVIDENCE: External tool/source semantics require pinned action/result/issuer identities | evidence class must be revision and scope bounded
+- AXIS `docs/en/Tool_System.md` @ `63eec0caef40` | MAPPING: MCP/Tool source mapping must separate discovery, grant, dispatch and effect receipt | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/en/Tool_System.md` @ `63eec0caef40` | IMPLEMENTATION: No hosted tool executor, sandbox or permission broker proven by docs | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/en/Tool_System.md` @ `63eec0caef40` | VALIDATION: Requires before/after permission revocation and independently observed sink | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c` | CLAIM: Model vs Harness vs Host authority are different components | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c` | EVIDENCE: External system paper must pin assumptions and verified source revision | evidence class must be revision and scope bounded
+- AXIS `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c` | MAPPING: A design mapping does not prove a runnable orchestration environment | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c` | IMPLEMENTATION: No deployed autonomous runtime follows from this theory container | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c` | VALIDATION: Admit new Verified Core only with owning domain evidence and independent validation | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/zh/Collaboration_System.md` @ `4c9521118cfb` | CLAIM: Agreement and delegation require a typed subject and independent effect target | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Collaboration_System.md` @ `4c9521118cfb` | EVIDENCE: Multiple identical citation links do not establish multiple issuers | evidence class must be revision and scope bounded
+- AXIS `docs/zh/Collaboration_System.md` @ `4c9521118cfb` | MAPPING: Proposed A2A/collaboration relation does not imply verified consensus | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Collaboration_System.md` @ `4c9521118cfb` | IMPLEMENTATION: No actual multi-agent transport or approval broker is evidenced | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/zh/Collaboration_System.md` @ `4c9521118cfb` | VALIDATION: Requires independent multi-agent trace and revoked-delegation negative control | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/zh/Memory_System.md` @ `bfb9fb1058ef` | CLAIM: Bitemporal event chain and answer/update/clarify/abstain are distinct memory commitments | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Memory_System.md` @ `bfb9fb1058ef` | EVIDENCE: DISCERN arXiv:2611.15729v1 is 2026-11-11 E4_PREPRINT; 310 synthetic queries are author-reported | evidence class must be revision and scope bounded
+- AXIS `docs/zh/Memory_System.md` @ `bfb9fb1058ef` | MAPPING: MAPPING=DESIGN_ANALOGY, prior RIME formation coverage and new terminal commitment distinct | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Memory_System.md` @ `bfb9fb1058ef` | IMPLEMENTATION: IMPLEMENTATION=NOT_IMPLEMENTED, immutable log, view rebuild and evaluator are not current repo code | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/zh/Memory_System.md` @ `bfb9fb1058ef` | VALIDATION: VALIDATION=NOT_TESTED; 15 entity-resolution cases and LoCoMo .820 vs .827 are meaningful counterevidence | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `docs/zh/Tool_System.md` @ `d36cd38906e3` | CLAIM: Tool description and grant freshness not equivalent to authorized effect | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Tool_System.md` @ `d36cd38906e3` | EVIDENCE: External tool/source semantics require pinned action/result/issuer identities | evidence class must be revision and scope bounded
+- AXIS `docs/zh/Tool_System.md` @ `d36cd38906e3` | MAPPING: MCP/Tool source mapping must separate discovery, grant, dispatch and effect receipt | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `docs/zh/Tool_System.md` @ `d36cd38906e3` | IMPLEMENTATION: No hosted tool executor, sandbox or permission broker proven by docs | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `docs/zh/Tool_System.md` @ `d36cd38906e3` | VALIDATION: Requires before/after permission revocation and independently observed sink | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d` | CLAIM: Evidence vocab controls E0–E6, not intrinsic external-paper truth | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d` | EVIDENCE: Primary-source evidence class distinct from actual test command result | evidence class must be revision and scope bounded
+- AXIS `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d` | MAPPING: CLAIM/EVIDENCE/MAPPING/IMPLEMENTATION/VALIDATION have separate state axes | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d` | IMPLEMENTATION: A schema or structural validator does not prove implemented memory harness | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d` | VALIDATION: Verified Core requires owner-admitted and reproducible supporting evidence | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `FOUNDATION/INDEX.md` @ `5fd381ace1e3` | CLAIM: Canonical claim inventory 23 and source identity S01–S67 are documentary snapshots | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/INDEX.md` @ `5fd381ace1e3` | EVIDENCE: Total registered references do not count 67 replicated scientific proofs | evidence class must be revision and scope bounded
+- AXIS `FOUNDATION/INDEX.md` @ `5fd381ace1e3` | MAPPING: Domain claim IDs bridge docs to FOUNDATION owner but are not executable API IDs | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/INDEX.md` @ `5fd381ace1e3` | IMPLEMENTATION: Current repository is documentary core, not autonomous agent runtime | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `FOUNDATION/INDEX.md` @ `5fd381ace1e3` | VALIDATION: No automatic promotion from draft research block to verified system capability | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774dd` | CLAIM: Maintenance cadence controls source status, continuity and quality review | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774dd` | EVIDENCE: Maturity drift must be pinned to valid original owner and later correction | evidence class must be revision and scope bounded
+- AXIS `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774dd` | MAPPING: Document update and authoritative decision are distinct policy surfaces | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774dd` | IMPLEMENTATION: No current runtime from maintenance protocol existence | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774dd` | VALIDATION: Admission requires source and review role approval | NO_EXTERNAL_REPRODUCTION_CREDIT
+- AXIS `FOUNDATION/SOURCES.md` @ `5c569375d640` | CLAIM: S01–S67 are declared source identifiers, not independent issuers | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/SOURCES.md` @ `5c569375d640` | EVIDENCE: Repeated preprint across Chinese and English is one original publication | evidence class must be revision and scope bounded
+- AXIS `FOUNDATION/SOURCES.md` @ `5c569375d640` | MAPPING: Unregistered new primary paper should not be assigned speculative S68 | NO_AUTOMATIC_AUTHORITY_UPGRADE
+- AXIS `FOUNDATION/SOURCES.md` @ `5c569375d640` | IMPLEMENTATION: Source registry entry does not install or run source method | NOT_IMPLEMENTED absent source/runtime proof
+- AXIS `FOUNDATION/SOURCES.md` @ `5c569375d640` | VALIDATION: Independent source metadata and exact URL/version need recheck before registry acceptance | NO_EXTERNAL_REPRODUCTION_CREDIT
+
+## Historical original A1/A2 editions — separate temporal task identity
+- PRIOR_CUT 2026-11-02: `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md`@a2f7371b9458 ; `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md`@e14efd4c0f3a | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-03: `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md`@57cbe183d80e ; `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md`@60252534c326 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-04: `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md`@347df9cb3aea ; `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md`@9756bd28ff15 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-05: `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md`@03188c28c2c9 ; `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md`@2c697d784fb4 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-06: `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md`@b36b81fd3b65 ; `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md`@23a73bc50ddf | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-07: `historical-audits/2026-11/2026-11-07-a1-foundations-source-custody.md`@714d7408e680 ; `historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md`@fcacd620d629 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-08: `historical-audits/2026-11/2026-11-08-a1-foundations-source-custody.md`@5f174aaef67c ; `historical-audits/2026-11/2026-11-08-a2-foundations-month-relations.md`@a22a2c52fa0a | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-09: `historical-audits/2026-11/2026-11-09-a1-foundations-source-custody.md`@a683fb970660 ; `historical-audits/2026-11/2026-11-09-a2-foundations-month-relations.md`@5d2ad977326b | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-10: `historical-audits/2026-11/2026-11-10-a1-foundations-source-custody.md`@ab9a07cb8f72 ; `historical-audits/2026-11/2026-11-10-a2-foundations-month-relations.md`@240dd4d04828 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-11: `historical-audits/2026-11/2026-11-11-a1-foundations-source-custody.md`@7764d917ada8 ; `historical-audits/2026-11/2026-11-11-a2-foundations-month-relations.md`@c652aebe210b | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-12: `historical-audits/2026-11/2026-11-12-a1-foundations-source-custody.md`@95b45d6bff3e ; `historical-audits/2026-11/2026-11-12-a2-foundations-month-relations.md`@3f4460bddba8 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-13: `historical-audits/2026-11/2026-11-13-a1-foundations-source-custody.md`@7441cd106010 ; `historical-audits/2026-11/2026-11-13-a2-foundations-month-relations.md`@e3fd564c419e | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-14: `historical-audits/2026-11/2026-11-14-a1-foundations-source-custody.md`@d663661d745f ; `historical-audits/2026-11/2026-11-14-a2-foundations-month-relations.md`@a3a27f8deb6e | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-15: `historical-audits/2026-11/2026-11-15-a1-foundations-source-custody.md`@e0c9e6a037d5 ; `historical-audits/2026-11/2026-11-15-a2-foundations-month-relations.md`@efb2e4badff0 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-16: `historical-audits/2026-11/2026-11-16-a1-foundations-source-custody.md`@fbc437714f34 ; `historical-audits/2026-11/2026-11-16-a2-foundations-month-relations.md`@0879e71d7724 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-17: `historical-audits/2026-11/2026-11-17-a1-foundations-source-custody.md`@6462c0df31f3 ; `historical-audits/2026-11/2026-11-17-a2-foundations-month-relations.md`@9350acee8d12 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+- PRIOR_CUT 2026-11-18: `historical-audits/2026-11/2026-11-18-a1-foundations-source-custody.md`@eb42c037662a ; `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md`@4bc6610ecfc7 | dated source judgment preserved, no original PR numeric or implementation credit inherited
+
+## Nov19 DISCERN/RIME empirical scope and cross-date relation delta
+- DELTA_01: Nov17 Lamport/ADK temporal and source provenance analyses are dated historical inputs, not new N19 issuer observations
+- DELTA_02: Nov18 RIME formulation separates evidence selected at write time from answer support retrieved at read time
+- DELTA_03: Nov19 DISCERN adds decision commitment after retrieval, not a proof that the retrieved graph is factually correct
+- DELTA_04: Original preprint arXiv:2611.15729v1 first submitted Nov11, not newly published Nov19
+- DELTA_05: DISCERN bitemporal write/read design includes recorded-at and valid-at semantics, but no current repo bitemporal DB API
+- DELTA_06: Author reports 310 ENT-310 synthetic questions, 210 answerable and 100 unanswerable; cannot be recast as production user evaluations
+- DELTA_07: Author reports abstention F1 .924 and macro accuracy .861 under own benchmark; independent reproduction not performed
+- DELTA_08: Entity-resolution subgroup only 15 queries; generalization outside that sample remains UNKNOWN
+- DELTA_09: LoCoMo author result .820 below cited RAG-Agentic .827; global best-available claim is contradicted by own comparison
+- DELTA_10: English and Chinese Memory notes cite one preprint; source independence remains one publisher and one primary paper
+- DELTA_11: Claim HYPOTHESIS, EVIDENCE E4_PREPRINT, Mapping DESIGN_ANALOGY, Implementation NOT_IMPLEMENTED, Validation NOT_TESTED
+- DELTA_12: Immutable actor event ledger is a *proposed* candidate; no durable replay / compaction / multi-session persistence implemented
+- DELTA_13: Ambiguous name pairs and bitemporal supersession require a ground-truth independent oracle to test wrong graph extraction
+- DELTA_14: Final action answer/update/clarify/abstain can be deterministic over an erroneous graph: correctness is not guaranteed
+- DELTA_15: Five-axis formal owner policy is authority for admission, not latest research paper popularity
+- DELTA_16: Claim-index inventory 23 and source IDs S01–S67 stay documentary, no speculative S68 assignment
+- DELTA_17: New N19 memory research maps to existing AF-MEM claim IDs; no new Validated Core advancement
+- DELTA_18: Weekly W47 OPEN; prospective Weekly must wait for correct closed-week cadence, November strategy Monthly NOT_DUE
+- DELTA_19: Previous A2 Nov18 period ends at N18; N19 A2 re-evaluates all existing owner texts and dated relations, not append-only paper hype
+- DELTA_20: Forward corrections and upstream status transitions only when exact changed source and independent experiment show a difference
+
+## Explicit conclusion, counterevidence and handoff
+- STRENGTHENED: explicit bitemporal read-action design criteria and source/counterevidence trace; not demonstrated algorithm runtime
+- CHANGED: Memory container incorporates one new paper mapping N19, with already existing RIME/Lamport historical concepts
+- WEAKENED: small entity benchmark and LoCoMo alternative limit universal abstention performance
+- CONFLICT: author-reported deterministic decision can still be wrong when input graph extracted by LLM is wrong
+- INHERITED: unchanged other owning docs are source-SHA exact and remain separate domain responsibility
+- UNKNOWN: actual memory API, graph store, official source-registry update, independent benchmark reproduction, regression costs and reviewer approval
+- No historical Jules correction, source registry or Verified Core modified, and this Original A2 adds no new Native/Periodic Audit production
+- NUMERIC: original A2 final GitHub PR additions >=100 requires actual per-PR verification; successor/correction not imported
+- QUALITY: 12 real owner IDs, 60 five-axis source relationships, 17+ historical cuts, actual N19 paper limits; no claim of 100 separate discoveries
+- TESTS: local validator, independent DISCERN/RIME benchmark, runtime proof NOT_EXECUTED; GitHub source/readback checks only
+- DELIVERY: new original Draft PR at authoring; merge/main readback must be observed before accepted
+- NEXT_RETEST: frozen paper/retrieval traces, ambiguous entity controls, bitemporal oracle and exact opened evidence IDs; then claim owner review
