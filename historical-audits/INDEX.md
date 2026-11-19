@@ -83,3 +83,13 @@ The SOP acceptance is a derived audit of previously merged work; the gap-recover
 - `historical-audits/01-corrections-and-errata/2026-10-28--a1-a2-tree-oid--erratum.md` — normalized from `historical-audits/01-corrections-and-errata/2026-10-28-a1-a2-tree-oid-erratum.md`; preserved original blob `5a32e9e413ea5de83a55a88cd0464d88578f3809`.
 - Existing two October 28 record destinations were normalized to `YYYY-MM-DD--subject--record-kind.md`. Original independent A1/A2 and D-task owners were excluded; historical bodies and source-producer identities remain unchanged.
 - Repository code-index lookup of the pre-rename path names did not surface inbound matches; Git history preserves former paths. This is not an exhaustive external backlink audit.
+
+## Current navigation for retained duplicate paths
+
+The preferred links below are for navigation. The retained paths point to the same Git blobs and are not separate audits or additional evidence. This section supersedes conflicting path labels in earlier entries of this index without changing their historical provenance.
+
+| Record | Preferred archive path | Retained same-blob path |
+| --- | --- | --- |
+| October 28 SOP minimal acceptance audit | [Preferred](03-stage-and-period-audits/2026-10-28--sop-minimal-acceptance--audit.md) | [Retained](03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md) |
+
+The preserved [August 30 evidence ledger](04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md) uses the former relative target `AUGUST_2026_01_27_EVIDENCE_LEDGER.md`; its [current archive location](04-evidence-and-closure-ledgers/2026-08-27--august-01-27--evidence-ledger.md) is recorded here without editing the historical body.
