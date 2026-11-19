@@ -1335,3 +1335,22 @@ $$
 - UNKNOWN_RETAINED：数学证明复验、部署实现、协作真实安全性和效果完成
 - NEXT_RETEST_CONDITION：锁定来源版本，构造合法/恶意对照并独立核对最终状态和运行回执
 - 所有旧正文不改、SOURCE Registry 和 Verified Core 不改；实际仓库 checker 与实验 NOT_EXECUTED
+
+
+## 2026-11-20 GPT Native Daily Research — 可线性化对象历史与 Agent 工具效果完成的边界
+
+**Canonical task：** `foundations/research/daily` · **容器：** Tools · **Producer：** GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY · **逻辑日：** 2026-11-20 Asia/Shanghai · **研究身份：** `foundations/research/daily/2026-11-20/linearizable-history-versus-effect-receipt` · **Base main：** `2580992ffd59d8b90a8724a2be7c5545fd7c444b`，这是用 1990 年经典论文作出的 2026 年新映射，不是论文当日发表
+
+**原始学术来源：** Maurice P. Herlihy 与 Jeannette M. Wing，*Linearizability: A Correctness Condition for Concurrent Objects*，*ACM Transactions on Programming Languages and Systems* 12(3), 463–492，1990 年 7 月，DOI [10.1145/78969.78972](https://doi.org/10.1145/78969.78972)，[作者原始 PDF](https://www.cs.cmu.edu/~wing/publications/HerlihyWing90.pdf)，实际核验 Section 2.2 的印刷页 469（包括页面图像）。来源身份 `DOI:10.1145/78969.78972`，**本轮不分配新的 Sxx，也未执行 Sources Registry 全局去重/准入**，来源等级 `E2_PEER_REVIEWED`；精确定义页已查看，完整证明复验和独立实验 `NOT_VERIFIED`
+
+**理论命题：** 并发历史 `H` 可线性化，当且仅当存在一个通过追加零个或多个响应事件得到的扩展 `H'`，使其已完成操作 `complete(H')` 等价于合法顺序历史 `S`，同时保持 `H` 中非重叠操作的真实时间先后关系。论文明确允许某次调用已发生效果而调用者尚未收到响应，因此 **线性化对象的正确性不等于超时调用者知道操作结果**，更不自动推出跨服务持久效果、授权有效性、exactly-once、投递可靠或整个 Agent Task 完成
+
+**受限理论映射：** 对 Tool/Effect 侧提出待检验追踪元组 `(operation_id, object_id, sequential_spec_revision, invocation, response_or_missing, observed_sink_revision, authorization_identity, readback_receipt)`。工具超时后，`EFFECT_OCCURRED_BUT_RESPONSE_LOST` 与 `EFFECT_NOT_OCCURRED` 必须保持并存，直到同一对象与版本的权威读回能够消歧。这只是依据 pending operation 语义提出的 `DESIGN_ANALOGY`，不是论文证明了本仓的权限代理或完整 Agent 工作流可线性化。单个寄存器/存储对象的顺序正确性无法替代跨服务事务、幂等键、持久性和操作时间授权
+
+**反证 Gate：** 服务商提交远程 mutation 后响应丢失，客户端用新的身份重试形成两个效果，两个 mutation 各自可能合法且线性化，原始理论条件不足以防止双执行。对照只读重试、绑定相同资源与版本的服务商端幂等键，以及 eventual-consistency 对象，必须独立记录 sink revision、response/timeout、readback 与稳定 operation identity。即使 SDK 返回成功，也不能绕过 effect readback；跨对象不能借用一个对象的线性化保证
+
+**五轴状态：** CLAIM = `PROPOSED`（Agent 映射；并发对象原始定义由论文支持），EVIDENCE = `E2_PEER_REVIEWED`（精确定义页已核验），MAPPING = `DESIGN_ANALOGY` → `AF-TOOL-001/002/006`，IMPLEMENTATION = `NOT_IMPLEMENTED`，VALIDATION = `NOT_TESTED`。英文和中文是 **同一份 Daily 研究的双语版本**，不得重复计算独立证据。未提升 Verified Core、未新增 Sxx、未修改历史 Jules 内容
+
+**Evidence Delta：** NEW_EVIDENCE = 核对 1990 年原始论文 pending invocation 和实时顺序定义；CORRECTED_INTERPRETATION = 对象历史合法不等于调用者已证明 effect 完成；UNCHANGED_BOUNDARY = PAPER != MAPPING != IMPLEMENTATION != VALIDATION；NEW_COUNTEREVIDENCE = commit-before-timeout、重复 retry 和跨对象错配；UNKNOWN_RETAINED = 本地工具 effect sink、权威读回与全工作流完成语义；NEXT_RETEST_CONDITION = 固定服务商与对象版本，执行响应丢失注入、相同/不同幂等键对照、记录事务收据与最终效果，才能提升实现和验证声明
+
+**执行与交付边界：** 已检查公开论文精确定义，未执行定理证明、Foundation validator、真实工具调用或效果端实验；`FOUNDATION/SOURCES.md`、`FOUNDATION/TOOLS.md`、Verified Core、历史 Jules 文件均不改变，交付/合并由 Human Maintainer 与 GitHub 真实状态决定
