@@ -35,6 +35,12 @@ Not archived here:
 | Jules content-contract reconciliation | `05-maintenance-and-reconciliation/2026-09-06--jules-content-contract-jul-01-sep-06--reconciliation.md` | `docs/JULES_CONTENT_CONTRACT_2026-07-01_THROUGH_2026-09-06_RECONCILIATION.md` |
 | September ten-day successor reconciliation | `05-maintenance-and-reconciliation/2026-09-10--sep-01-10--cadence-reconciliation.md` | `docs/JULES_CADENCE_2026-09-10_TEN_DAY_SUCCESSOR_RECONCILIATION.md` |
 | September 1-13 maintenance reconciliation | `05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` | no live `docs/SEPTEMBER_2026_01_13_RECONCILIATION.md` on current main |
+| October 27 A1/A2 coverage correction | `01-corrections-and-errata/2026-10-27-a1-a2-coverage-reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-coverage-reconciliation.md` |
+| October 27 A1/A2 scope-and-state correction | `01-corrections-and-errata/2026-10-27-a1-a2-scope-and-state-reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-scope-and-state-reconciliation.md` |
+| October 28 SOP minimal acceptance audit | `03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md` | `historical-audits/2026-10/2026-10-28-sop-minimal-acceptance-audit.md` |
+| October 31 A1 acceptance successor review | `05-maintenance-and-reconciliation/2026-10-31-a1-acceptance-successor-foundations.md` | `historical-audits/2026-10/2026-10-31-a1-acceptance-successor-foundations.md` |
+| November 8 A1/A2 post-merge quality reconciliation | `05-maintenance-and-reconciliation/2026-11-08-a1a2-postmerge-quality-reconciliation.md` | `historical-audits/2026-11/2026-11-08-a1a2-postmerge-quality-reconciliation.md` |
+| November 10 Foundations A1/A2 source adjudication | `05-maintenance-and-reconciliation/2026-11-10-strict-nov08-nov09-foundations-a1a2-source-adjudication.md` | `historical-audits/2026-11/2026-11-10-strict-nov08-nov09-foundations-a1a2-source-adjudication.md` |
 
 ## Current recovery note
 
