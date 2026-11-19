@@ -1,0 +1,151 @@
+# ORIGINAL Independent A1 2026-11-19 — agent-foundations source custody under exact current main
+
+## Provenance and legal window
+- Repository: lostlight530/agent-foundations; role independent-maintenance/A1, distinct from Native and Periodic Audit
+- Logical date 2026-11-19 Asia/Shanghai; A1 canonical cutoff 2026-11-01..18 inclusive, not 11-19 Native
+- Fresh main 90f26dc640795baa6ad76de425cae8154c7fa203, full tree truncated=false, committed blobs 154; source owners 12
+- Previous complete A1 source `historical-audits/2026-11/2026-11-18-a1-foundations-source-custody.md` @ `eb42c037662a455e9efce0d21a5ac954b23da36e`; actual contents read and exact source-path/blob inherited where unchanged
+- Previous original unified A2 `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md` @ `4bc6610ecfc716f549681eee29c66c68503f30f1`; actual contents read, belongs to Nov01–18
+- Today H2/Aegis A2 and all future 11-19 Native belong to post-cutoff A2, not this A1 current N−1 research denominator
+- W47 OPEN; November natural FINAL / D30 NOT_DUE; historic D7/D10/D14 independently attributed, not produced or modified here
+- Executed: fresh GitHub full tree, previous A1/A2 text and exact source blob comparisons; latest Nov18 native source texts reviewed in prior steps
+- NOT_EXECUTED: native runner, complete local checker, independent experiments, unprovided SDK/runtime, external effect sink, current CI rerun
+
+## Full canonical owning-file audit
+- SOURCE `docs/en/Architecture_Principles.md` @ `4c69cbdf4a6694129f9d6fe87bd2ab73334ba636` | ARCHITECTURE_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: whole-harness configuration, environment and evaluation identity; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `docs/en/Collaboration_System.md` @ `ff8b551bd721971f27b65529200326e228638061` | COLLABORATION_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: actor agreement, coordination and factual oracle distinction; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `docs/en/Memory_System.md` @ `f7d30c5b07964c846b9f17eee94132740e7a9311` | MEMORY_MAPPING | CHANGED_OR_NEW_BLOB / CURRENT_REVIEW_ONLY
+  - CLAIM: memory source/role provenance, compaction loss and supersession; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+  - TEMPORAL_CUT: current owner includes 11-19 DISCERN prospective addition AFTER A1 source cutoff; do not treat it as part of the prior Nov18 evidence or another issuer
+- SOURCE `docs/en/Tool_System.md` @ `63eec0caef40a2fbbb347dfbd9dc6e2ade3ca565` | TOOLS_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: per-action approval, effect sink and retry receipt; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `docs/zh/Architecture_Principles.md` @ `a3b07a2d864c8e153bc7e19dfe5c8b0cfc6c146e` | ARCHITECTURE_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: whole-harness configuration, environment and evaluation identity; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `docs/zh/Collaboration_System.md` @ `4c9521118cfb3f29ee690be48dbb165bcf10755a` | COLLABORATION_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: actor agreement, coordination and factual oracle distinction; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `docs/zh/Memory_System.md` @ `bfb9fb1058ef24b2d9afccc8c3d12f06b39804ea` | MEMORY_MAPPING | CHANGED_OR_NEW_BLOB / CURRENT_REVIEW_ONLY
+  - CLAIM: memory source/role provenance, compaction loss and supersession; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+  - TEMPORAL_CUT: current owner includes 11-19 DISCERN prospective addition AFTER A1 source cutoff; do not treat it as part of the prior Nov18 evidence or another issuer
+- SOURCE `docs/zh/Tool_System.md` @ `d36cd38906e3f7a96462224d144e019735b53f2d` | TOOLS_MAPPING | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: per-action approval, effect sink and retry receipt; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `FOUNDATION/EVIDENCE.md` @ `405085ee8c3d61075cd09b1c558059a6b788786a` | VERIFIED_CORE_POLICY | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: owning evidence vocabulary/source identity and admission policy; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `FOUNDATION/INDEX.md` @ `5fd381ace1e3adffa782cca9babd400cf1b504ef` | VERIFIED_CORE_POLICY | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: owning evidence vocabulary/source identity and admission policy; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `FOUNDATION/MAINTENANCE.md` @ `bcd17d7774ddda1113ff7273424f9f6eee909fa2` | VERIFIED_CORE_POLICY | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: owning evidence vocabulary/source identity and admission policy; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+- SOURCE `FOUNDATION/SOURCES.md` @ `5c569375d640eaed7eb4eb787515ff4beb1ceb19` | VERIFIED_CORE_POLICY | EXACT_PRIOR_A1_BLOB / INHERITED_NO_FOLLOW_UP
+  - CLAIM: owning evidence vocabulary/source identity and admission policy; canonical claims/document route are preserved, not changed by this review
+  - EVIDENCE: original author paper or primary spec remains separate from local reading, registered Sxx and independently executed test
+  - MAPPING: documentary interpretation; admission, cross-language translation and repeated citation do not independently promote source truth
+  - IMPLEMENTATION: no local autonomous-agent runtime is inferred by the textual source or historical pseudocode
+  - VALIDATION: this reviewer did not execute FOUNDATION/validate.py, paper replication or persistent effect verification
+  - COUNTEREXAMPLE: retrieved/translated claim may lack authenticated origin or actual effect; maintain versioned source and human review gate
+
+## November original maintenance records — independent lineage inventory
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` @ `a2f7371b9458024919c3fca895f1770031b95ae3`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` @ `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md` @ `57cbe183d80eae21c76cdbfcb19c98b4f90205ae`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md` @ `60252534c32608978176e64bb7fac952a7f8e72c`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md` @ `347df9cb3aeacc97dd2c293a004d4dc8b8680c83`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md` @ `9756bd28ff150443a8dff05bc750bfc43507ef05`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md` @ `03188c28c2c97f3dd74a481889a337ce03f36f36`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md` @ `2c697d784fb4e225a68b440a54480a6105edc711`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md` @ `b36b81fd3b6558b9d68996e9d6e67fec9310ee7c`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` @ `23a73bc50ddfec1486372a73094b797a70bb5541`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-07-a1-foundations-source-custody.md` @ `714d7408e680c2f9f5892467a5d6798a8d85e8f2`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md` @ `fcacd620d629db6dcb4df187d1da9eb5a47df51f`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-08-a1-foundations-source-custody.md` @ `5f174aaef67cf8e0781d71fbe95b2dc6466958c3`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-08-a2-foundations-month-relations.md` @ `a22a2c52fa0a69bd4b73dde44f5871d951702a24`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-09-a1-foundations-source-custody.md` @ `a683fb9706605c56f9256f55731c08f594e7d24b`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-09-a2-foundations-month-relations.md` @ `5d2ad977326b9b4e2d0e6a0ee8a051bb3ae9a124`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-10-a1-foundations-source-custody.md` @ `ab9a07cb8f72e92bfe101435ac930c7e114e913b`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-10-a2-foundations-month-relations.md` @ `240dd4d048282f1178c7ec72b02eb07fdb789db0`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-11-a1-foundations-source-custody.md` @ `7764d917ada88a7a5b425d53478e9d09fafbd448`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-11-a2-foundations-month-relations.md` @ `c652aebe210b8a6be731dfaf110b7b0cc988256f`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-12-a1-foundations-source-custody.md` @ `95b45d6bff3ef7a8e59fd50424d7fce61f82a1a3`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-12-a2-foundations-month-relations.md` @ `3f4460bddba813d0ced0575b99850b6ecf4d02e7`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-13-a1-foundations-source-custody.md` @ `7441cd1060104ff41594d28a4ffa97c0813741da`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-13-a2-foundations-month-relations.md` @ `e3fd564c419eeaa7961c5e9dfeaa64190a4c429b`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-14-a1-foundations-source-custody.md` @ `d663661d745f61533c046bd13e6c7b6e01f41c8a`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-14-a2-foundations-month-relations.md` @ `a3a27f8deb6e81c5c5d1b78c746188f213056ff6`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-15-a1-foundations-source-custody.md` @ `e0c9e6a037d560ee086d6b21cfdef3251eab4c70`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-15-a2-foundations-month-relations.md` @ `efb2e4badff09a14268d11aec1ef7f3b5cbfa459`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-16-a1-foundations-source-custody.md` @ `fbc437714f34e58d0277a845ca0ae46bf1c12652`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-16-a2-foundations-month-relations.md` @ `0879e71d77246cf66caa8b903b80dc2d40f6e691`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-17-a1-foundations-source-custody.md` @ `6462c0df31f3041505df2d27342135ec87c2abe7`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-17-a2-foundations-month-relations.md` @ `9350acee8d128dac871caf29e24ceec0cb56573b`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-18-a1-foundations-source-custody.md` @ `eb42c037662a455e9efce0d21a5ac954b23da36e`; custody of independent dated review only, not a newly executed Native source
+- HISTORICAL_ORIGINAL `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md` @ `4bc6610ecfc716f549681eee29c66c68503f30f1`; custody of independent dated review only, not a newly executed Native source
+
+## Disposition and Evidence Delta
+- Complete source scope: 12 current owner files; exact prior A1 blob 10; new/drifted current owners 2
+- SOURCE_CHANGED: `docs/en/Memory_System.md`, `docs/zh/Memory_System.md`
+- 2026-11-18 RIME research and W46 bilingual mapping do not change Source Registry, paper validation or a deployed memory runtime; 2026-11-19 DISCERN is POST_CUTOFF
+- NEW_EVIDENCE: exact current blob lineage and explicit new-source/cutoff separation; earlier claims preserved only for identical SHA.
+- CORRECTED_INTERPRETATION: identical path/blob is documentary source custody, not a new origin or autonomous runtime execution.
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; bilingual text is one source lineage.
+- NEW_COUNTEREVIDENCE: any unobserved command, absent named store/readback or unauthenticated authority chain blocks higher claim maturity.
+- UNKNOWN_RETAINED: exact current experiment quality outside the scanned source, full checker, independent reproduction and actual effect sink.
+- NEXT_RETEST_CONDITION: full executable worktree, exact pinned inputs, positive/negative controls, stdout/stderr/exit and reviewer of final state.
+- NO_CHANGE_REQUIRED on correct original Native and Jules artifacts; no silent original file edits, no private scheduler publication.
+- Independent A2 for 2026-11-19 only after original A1 PR merged, exact main and source blob reread. Do not claim monthly FINAL.
+- Original GitHub additions >=100 and actual semantic validity are separate gates; successor addition does not amend original delivery.
+- This file is proposed original A1 on independent branch; merge/main retention only once actually confirmed.
