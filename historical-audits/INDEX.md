@@ -35,8 +35,8 @@ Not archived here:
 | Jules content-contract reconciliation | `05-maintenance-and-reconciliation/2026-09-06--jules-content-contract-jul-01-sep-06--reconciliation.md` | `docs/JULES_CONTENT_CONTRACT_2026-07-01_THROUGH_2026-09-06_RECONCILIATION.md` |
 | September ten-day successor reconciliation | `05-maintenance-and-reconciliation/2026-09-10--sep-01-10--cadence-reconciliation.md` | `docs/JULES_CADENCE_2026-09-10_TEN_DAY_SUCCESSOR_RECONCILIATION.md` |
 | September 1-13 maintenance reconciliation | `05-maintenance-and-reconciliation/2026-09-13--sep-01-13--maintenance-reconciliation.md` | no live `docs/SEPTEMBER_2026_01_13_RECONCILIATION.md` on current main |
-| October 27 A1/A2 coverage correction | `01-corrections-and-errata/2026-10-27-a1-a2-coverage-reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-coverage-reconciliation.md` |
-| October 27 A1/A2 scope-and-state correction | `01-corrections-and-errata/2026-10-27-a1-a2-scope-and-state-reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-scope-and-state-reconciliation.md` |
+| October 27 A1/A2 coverage correction | `01-corrections-and-errata/2026-10-27--a1-a2-coverage--reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-coverage-reconciliation.md` |
+| October 27 A1/A2 scope-and-state correction | `01-corrections-and-errata/2026-10-27--a1-a2-scope-and-state--reconciliation.md` | `historical-audits/2026-10/2026-10-27-a1-a2-scope-and-state-reconciliation.md` |
 | October 28 SOP minimal acceptance audit | `03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md` | `historical-audits/2026-10/2026-10-28-sop-minimal-acceptance-audit.md` |
 | October 31 A1 acceptance successor review | `05-maintenance-and-reconciliation/2026-10-31-a1-acceptance-successor-foundations.md` | `historical-audits/2026-10/2026-10-31-a1-acceptance-successor-foundations.md` |
 | November 8 A1/A2 post-merge quality reconciliation | `05-maintenance-and-reconciliation/2026-11-08-a1a2-postmerge-quality-reconciliation.md` | `historical-audits/2026-11/2026-11-08-a1a2-postmerge-quality-reconciliation.md` |
@@ -93,3 +93,12 @@ The preferred links below are for navigation. The retained paths point to the sa
 | October 28 SOP minimal acceptance audit | [Preferred](03-stage-and-period-audits/2026-10-28--sop-minimal-acceptance--audit.md) | [Retained](03-stage-and-period-audits/2026-10-28-sop-minimal-acceptance-audit.md) |
 
 The preserved [August 30 evidence ledger](04-evidence-and-closure-ledgers/2026-08-30--august-01-30--evidence-ledger.md) uses the former relative target `AUGUST_2026_01_27_EVIDENCE_LEDGER.md`; its [current archive location](04-evidence-and-closure-ledgers/2026-08-27--august-01-27--evidence-ledger.md) is recorded here without editing the historical body.
+
+## Archive filename normalization
+
+Only the paths changed; the historical document bodies and original task records are unchanged.
+
+| Previous revision | Current path | Unchanged Git blob |
+| --- | --- | --- |
+| [Previous path at pre-rename main](https://github.com/lostlight530/agent-foundations/blob/c773a206d79aa064ec477c723adaff0d213ff65f/historical-audits/01-corrections-and-errata/2026-10-27-a1-a2-coverage-reconciliation.md) | [2026-10-27--a1-a2-coverage--reconciliation.md](01-corrections-and-errata/2026-10-27--a1-a2-coverage--reconciliation.md) | `12a549f3a9f8ea95e750fbff711aa965bd220566` |
+| [Previous path at pre-rename main](https://github.com/lostlight530/agent-foundations/blob/c773a206d79aa064ec477c723adaff0d213ff65f/historical-audits/01-corrections-and-errata/2026-10-27-a1-a2-scope-and-state-reconciliation.md) | [2026-10-27--a1-a2-scope-and-state--reconciliation.md](01-corrections-and-errata/2026-10-27--a1-a2-scope-and-state--reconciliation.md) | `cebd2c132f55907f9c6a60e0444eeb95765016da` |
