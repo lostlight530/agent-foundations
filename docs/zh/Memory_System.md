@@ -1,5 +1,27 @@
 # 智能体记忆系统：基于 SimCLR 与无监督学习的表示学习 (Memory System)
 
+## 2026-11-19 GPT Native Daily Research — 双时间记忆解析与最终回答承诺必须分别验证
+
+**任务、周期与身份。** Canonical ID `foundations/research/daily`，Memory System，逻辑日 2026-11-19 Asia/Shanghai，GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；研究身份 `foundations/research/daily/2026-11-19/discern-bitemporal-commit-gates-01`，冷启动 main `4e8f2eb456739f5560b5f70e0d178e3f24c9a63f`。中英两份是**同一研究 unit、同一来源**，不能计为两次独立复现。
+
+**原始学术来源。** Chirag Ahuja、Vladislav Tanov、Ramcharan Kakarla、Jonathan Taws，*DISCERN: Preserve at Write, Resolve at Read for Persistent LLM-Agent Memory*，**arXiv:2611.15729v1**，**2026-11-11 17:06:07 UTC** 首次提交，作者机构 Amazon；[原始身份](https://arxiv.org/abs/2611.15729)、[v1 全文](https://arxiv.org/html/2611.15729v1)。本轮于 11 月 19 日核验 HTML 全文 §§3–5 的方法、实验口径、消融与限定，不把 11 日论文伪写成今日发布，也没有独立重现：`E4_PREPRINT / PRIMARY_FULL_TEXT_MECHANISM_READ / AUTHOR_EXPERIMENTS_NOT_REPRODUCED`。
+
+**论文机制与形式化边界。** DISCERN 将 actor 维度的追加事件日志当作 source of record，从原始事件派生可重建的实体家族、episode 和双时间事实视图；相似但不同的实体保留独立节点，旧值软失效但不抹除。Read-time 工具再检索候选及版本链，按候选集 `C`、当前有效值及 supersession 链长选择 `answer / update / clarify / abstain`。论文式 (1) 的确定性是**给定 LLM 提取图之后**的决策确定性，图节点如果误归属，该确定性不保证真实世界结论正确，也不是数学意义上的事实真值证明。
+
+**数据口径与反证。** 作者 ENT-310 为**合成的 310 个问题**，其中 **210 可答、100 不可答**，报告拒答判断 F1 **0.924**（对照最多 **0.802**）、等权领域宏平均回答正确率 **0.861**（最强对照 **0.806**）；实体消歧子集仅 **15 题**。DISCERN 等部分 headline 有三随机种子均值，其他多个基线只有单种子。LoCoMo 拒答分类中 DISCERN F1 为 **0.820**，而 RAG-Agentic 为 **0.827**，因此不能把 ENT-310 的最高 F1 扩展成「所有场景最好」。作者报告平均 4.1 次导航、5.7 次工具调用、7.6 秒/问题，仅限其配置；本仓从未量到这些指标。
+
+**真正新增的 Architecture Mapping。** 在 11 月 18 日 RIME 的 *formation coverage*（形成记忆时读了哪些原始对话）和 *answer support*（最终答案实际打开哪些证据）之外，单独增加 *terminal commitment*（何种证据使 Agent 选择回答、改答、澄清或拒答）。即使相关内容成功召回，仍可能属于同名不同实体、旧时间版本或问题根本无前提依据。候选 Harness 证据元组：`(actor_id, canonical_entity_id, ambiguous_candidate_ids, raw_event_id, event_revision, recorded_at, valid_from, valid_to, superseded_by, retrieval_operator_trace, exact_opened_evidence_ids, final_action, rejection_reason, claim_citations, reviewer_decision)`；这是 **DESIGN_ANALOGY / CANDIDATE_MECHANISM**，不是本仓已生效 Schema。
+
+**Counterevidence Gate：未执行的反证实验设计。** 两个近似公司名拥有冲突属性；后续 correction 具有独立记录时间和有效时间；再加入不可答问题。正对照涵盖完整实体身份、明确历史 as-of 查询与消歧后答案；负对照包括模糊简称要求澄清、属性不存在要求拒答，以及原始事件与 LLM 提取图故意不一致时必须由**独立原始事件 oracle**发现错误。测量召回、身份误归属、误答/误拒、引用已打开证据、双时间回溯和延迟；必须保留完整 source ID、输入版本、实际运行命令及收据。当前 `NOT_EXECUTED / NOT_COMPUTED`。
+
+**五轴状态。** `CLAIM=HYPOTHESIS`；`EVIDENCE=E4_PREPRINT`；`MAPPING=DESIGN_ANALOGY`，关联 `AF-MEM-001/003/004/005`；`IMPLEMENTATION=NOT_IMPLEMENTED`；`VALIDATION=NOT_TESTED`。仅在既有正式双语 Memory 容器中前向增加研究块，不据此分配 `Sxx` 或提升 Verified Core。Source Registry、论文引用、Architecture 假设、实际服务和验收是分离状态。
+
+**Evidence Delta。** `NEW_EVIDENCE` = 论文中显式的双时间/实体保留策略、四种终止动作和已声明样本分母；`CORRECTED_INTERPRETATION` = 高召回及确定性图门控不等于来源真值；`UNCHANGED_BOUNDARY` = PAPER != MAPPING != IMPLEMENTATION != VALIDATION；`NEW_COUNTEREVIDENCE` = 消歧仅 15 例、不同基线种子数量、LoCoMo F1 反例、图提取错误；`UNKNOWN_RETAINED` = 实体完全性、外部重现、可信原文、真实运行成本、宿主持久化和人工验收；`NEXT_RETEST_CONDITION` = 版本固定的原始事件 oracle、歧义与历史更新/拒答对照、执行日志及真正来源读回。
+
+**执行及交付边界。** 已读取 arXiv 全文和 GitHub owning 合同；完整 git 工作树获取在 2026-11-19T05:36:02.804275623Z–05:36:02.829242282Z 因 DNS 失败（`git ls-remote` exit 128，stderr `Could not resolve host: github.com`）。本仓 validator、论文复现、Memory Runtime、持续存储与效果验证 `NOT_EXECUTED`。仅插入当前日期研究增量，既有 Jules 和历史文本逐字保留；不改 Source Registry、Verified Core、Weekly/Monthly、Governance，交付 Draft PR 供 Human Maintainer 审查。
+
+
+
 ## 2026-11-18 GPT Native Daily Research — 先检索证据再形成记忆，及原文按需恢复
 
 **任务与溯源。** Canonical ID `foundations/research/daily`，Memory System，逻辑日 **2026-11-18 Asia/Shanghai**，生产者 **GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY**。研究身份 `foundations/research/daily/2026-11-18/rime-formation-source-recovery-01`，冷启动合并 main `d76524c1d1984ce5c28b84a2ba342afb1324b0ce`，非 Jules 回放或实施发布。
