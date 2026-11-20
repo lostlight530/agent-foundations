@@ -1663,3 +1663,24 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 - UNKNOWN_RETAINED：完整数学/代码复验、部署版本、授权效果、外部副作用收据与跨平台泛化
 - NEXT_RETEST_CONDITION：锁定版本与真实授权对象，用合法/拒绝对照复验，并独立验证最终状态
 - 仅向既有正式中英容器追加当前周研究块，历史原文逐字保持，Source Registry、Verified Core、Blueprint、Runtime 均不改动；Validator NOT_EXECUTED
+
+
+## 2026-11-21 GPT Native Daily Research — Durable Linearizability 是跨崩溃历史约束，不等于已保存会话
+
+**Canonical identity：** `foundations/research/daily`，Memory 容器，2026-11-21 Asia/Shanghai；Producer：GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；基线 main `1c58bebddb57288d7988ba0f3c65ec0ad6f35abc`；单次中英研究身份 `foundations/research/daily/2026-11-21/durable-linearizability-crash-history`
+
+**原始来源、版本与校验范围：** Emanuele D’Osualdo、Azalea Raad、Viktor Vafeiadis，*The Path to Durable Linearizability*，*Proceedings of the ACM on Programming Languages*，vol. 7，POPL，article 26，2023；DOI [10.1145/3571219](https://doi.org/10.1145/3571219)，扩展预印本 [arXiv:2211.07631v1](https://arxiv.org/pdf/2211.07631)，标注日期 2022-11-14。实际阅读了论文标题/作者页、引言、Section 3.3 的 Definition 3.7（PDF 第 14 页）与 Section 4.1 的 Definition 4.1/4.2、Theorem 4.3（PDF 第 16 页）。2023 年同行评审发表身份与 v1 预印本文本必须区分：未逐行验证最终期刊版本与 v1 所有证明完全一致，亦没有形式化重跑定理证明。canonical source object 为 `arXiv:2211.07631` / DOI `10.1145/3571219`，同一论文身份；**本轮不分配 Sxx，也不提升 Verified Core**
+
+**明确的理论增量：** 普通 Linearizability 约束对象操作的合法可观察历史；Definition 3.7 进一步约束由崩溃分隔的执行链，使恢复后接续的抽象历史仍可构成合法历史。持久化与恢复不仅是“把状态写到磁盘”，还涉及崩溃前已完成操作对应的持久状态、volatile linearization point 与 persistency point 的相对顺序，以及 recovery procedure 的 soundness。Definition 4.1/4.2 和 Theorem 4.3 给出特定状态表示和恢复条件下的充分性论证；本轮只核对声明与定义范围，**未机器验证其数学证明**。这些定理属于持久化并发库和指定内存/持久化模型，不能直接套成分布式 Agent 会话、任意数据库或工具调用系统的正确性定理
+
+**与 11 月 20 日研究的关系：** 昨日 Tools 容器的 Herlihy–Wing 研究区分“并发对象历史合法性”与“请求方知道超时效果是否发生”。今日论文增加的是**跨崩溃的持久化/恢复历史约束**：崩溃前线性化正确不自动推出崩溃后 durable linearizability，必须另有持久态表示与 sound recovery 的证据。更强的持久化并发库正确性仍无法单独解决外部工具 ACK 丢失、跨服务原子提交、授权有效期和 Exactly-Once Effect
+
+**Agent Memory 的有界架构映射：** 候选回执结构 `(session_id, actor_and_tenant, object_spec_revision, checkpoint_revision, volatile_operation_order, persistency_receipt, crash_boundary, recovered_state_revision, recovered_operation_set, approval_identity, external_sink_receipt_or_UNKNOWN)`。这是用于设计下一阶段实验的 hypothesis，不是论文定理推出的统一 Agent Protocol，也不是本仓已经实现的状态恢复器。会话保存确认可能早于外部效果回执；外部效果也可能先提交、而本地 checkpoint 未确认，所以恢复后的 `OUTCOME_UNKNOWN` 必须保留。NVM 持久集合的 proof 不能在没有额外假设、实现与测试时推广到 SQLite、Redis、权限审批、网络重试或多供应商工作流
+
+**Counterevidence Gate：** 反例 A：对其他线程可见的写入并未按内存模型达到持久点，随后崩溃，volatile 可见性不足以推出持久恢复正确。反例 B：恢复程序自身中途崩溃；能够启动恢复不意味着恢复期间的写入保持 durable abstract state（参见 Definition 4.1）。反例 C：工具动作在另一个 effect sink 成功提交，但 checkpoint 未持久确认；会话恢复不应把未知效果误判为“未执行，可安全重试”。反例 D：相同路径、相同 inode 和主 DB 文件 digest 仍可能处于不同 WAL 快照；Reflective 的独立 SQLite 控制实验仅提供**架构类比**，不是该论文 NVM 定理的复现。未来正向控制需固定对象 sequential spec、列举 crash points、校验已完成操作与恢复后历史关系，并对实际外部效果单独取权威回执
+
+**五轴状态：** CLAIM = `OBSERVED`（仅原论文定义与有条件命题）及 `PROPOSED`（Agent Memory 映射）；EVIDENCE = `E2_PEER_REVIEWED`（2023 发表身份与 v1 正文指定部分已阅读，全部证明与最终版逐行核验 `NOT_VERIFIED`）；MAPPING = `DESIGN_ANALOGY / COUNTEREVIDENCE`，仅映射到既有 Memory/Tools 研究；IMPLEMENTATION = `NOT_IMPLEMENTED`；VALIDATION = `NOT_TESTED`。中英文是同一个 research unit，不是两份独立科研证据
+
+**EVIDENCE_DELTA：** NEW_EVIDENCE = Definition 3.7 的跨崩溃历史约束以及 Definitions 4.1–4.2、Theorem 4.3 对恢复义务的拆分；CORRECTED_INTERPRETATION = 普通 Linearizability 与“保存过一次会话”不足以推出 crash-safe 的持续状态；UNCHANGED_BOUNDARY = Paper != Mapping != Implementation != Validation，并发库证明 != 授权后的 Agent 效果完成；NEW_COUNTEREVIDENCE = volatile-only 状态、恢复中途崩溃与 checkpoint/sink 非原子边界；UNKNOWN_RETAINED = 本仓实际存储实现、数学完整证明、跨服务效果恢复；NEXT_RETEST_CONDITION = 精确版本的对象规范、覆盖线性化/持久化/恢复断点的故障注入矩阵、回执与权威外部效果 readback
+
+**执行与交付边界：** 本轮只向既有中英 Memory System 容器追加 2026-11-21 理论增量，不变更 `FOUNDATION/**`、Sxx、Verified Core、旧 Jules 原文、Runtime、Weekly/Monthly。Git 远端获取在隔离环境遇 DNS 失败，完整本仓 `FOUNDATION/validate.py`、回归测试、崩溃模型验证均 `NOT_EXECUTED`；须待 Human Maintainer 独立审查并合并
