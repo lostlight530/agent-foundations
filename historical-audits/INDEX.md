@@ -102,3 +102,7 @@ Only the paths changed; the historical document bodies and original task records
 | --- | --- | --- |
 | [Previous path at pre-rename main](https://github.com/lostlight530/agent-foundations/blob/c773a206d79aa064ec477c723adaff0d213ff65f/historical-audits/01-corrections-and-errata/2026-10-27-a1-a2-coverage-reconciliation.md) | [2026-10-27--a1-a2-coverage--reconciliation.md](01-corrections-and-errata/2026-10-27--a1-a2-coverage--reconciliation.md) | `12a549f3a9f8ea95e750fbff711aa965bd220566` |
 | [Previous path at pre-rename main](https://github.com/lostlight530/agent-foundations/blob/c773a206d79aa064ec477c723adaff0d213ff65f/historical-audits/01-corrections-and-errata/2026-10-27-a1-a2-scope-and-state-reconciliation.md) | [2026-10-27--a1-a2-scope-and-state--reconciliation.md](01-corrections-and-errata/2026-10-27--a1-a2-scope-and-state--reconciliation.md) | `cebd2c132f55907f9c6a60e0444eeb95765016da` |
+
+## 2026-11-20 independent source and five-axis document audit
+
+- [Foundations A1/A2 source-role and five-axis review](02-document-audits/2026-11-20--foundations-source-and-five-axis--document-audit.md) — forward corrections to current November owners; no original PR history rewrite
