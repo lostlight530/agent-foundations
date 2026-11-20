@@ -55,45 +55,45 @@
 ## Nov01–19 previous original independent A1/A2 records, distinct PR identities
 | Historical path | Blob SHA | Role | Disposition |
 |---|---|---|---|
-| `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` | `a2f7371b9458024919c3fca895f1770031b95ae3` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md` | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md` | `60252534c32608978176e64bb7fac952a7f8e72c` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-04--2026-11-05-original-a1-a2-acceptance-reconciliation.md` | `d58c6de9e2d16ca400066228a18e7065e4d78df9` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md` | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md` | `9756bd28ff150443a8dff05bc750bfc43507ef05` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md` | `03188c28c2c97f3dd74a481889a337ce03f36f36` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md` | `2c697d784fb4e225a68b440a54480a6105edc711` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md` | `b36b81fd3b6558b9d68996e9d6e67fec9310ee7c` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` | `23a73bc50ddfec1486372a73094b797a70bb5541` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-06-original-a1a2-semantic-forward-reconciliation.md` | `91fb915f20482d5db3688796c80297c09339fffc` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-07-a1-foundations-source-custody.md` | `714d7408e680c2f9f5892467a5d6798a8d85e8f2` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md` | `fcacd620d629db6dcb4df187d1da9eb5a47df51f` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-08-a1-foundations-source-custody.md` | `5f174aaef67cf8e0781d71fbe95b2dc6466958c3` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-08-a2-foundations-month-relations.md` | `a22a2c52fa0a69bd4b73dde44f5871d951702a24` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-09-a1-foundations-source-custody.md` | `a683fb9706605c56f9256f55731c08f594e7d24b` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-09-a2-foundations-month-relations.md` | `5d2ad977326b9b4e2d0e6a0ee8a051bb3ae9a124` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-10-a1-foundations-source-custody.md` | `ab9a07cb8f72e92bfe101435ac930c7e114e913b` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-10-a2-foundations-month-relations.md` | `240dd4d048282f1178c7ec72b02eb07fdb789db0` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-11-a1-foundations-source-custody.md` | `7764d917ada88a7a5b425d53478e9d09fafbd448` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-11-a1a2-effective-pr-acceptance-reconciliation.md` | `ac723941a88dedb9173ca5ade7b8617e688cf541` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-11-a2-foundations-month-relations.md` | `c652aebe210b8a6be731dfaf110b7b0cc988256f` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-12-a1-foundations-source-custody.md` | `95b45d6bff3ef7a8e59fd50424d7fce61f82a1a3` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-12-a2-foundations-month-relations.md` | `3f4460bddba813d0ced0575b99850b6ecf4d02e7` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-13-a1-foundations-source-custody.md` | `7441cd1060104ff41594d28a4ffa97c0813741da` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-13-a2-foundations-month-relations.md` | `e3fd564c419eeaa7961c5e9dfeaa64190a4c429b` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-14-a1-foundations-source-custody.md` | `d663661d745f61533c046bd13e6c7b6e01f41c8a` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-14-a2-foundations-month-relations.md` | `a3a27f8deb6e81c5c5d1b78c746188f213056ff6` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-15-a1-foundations-source-custody.md` | `e0c9e6a037d560ee086d6b21cfdef3251eab4c70` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-15-a2-foundations-month-relations.md` | `efb2e4badff09a14268d11aec1ef7f3b5cbfa459` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-16-a1-foundations-source-custody.md` | `fbc437714f34e58d0277a845ca0ae46bf1c12652` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-16-a2-foundations-month-relations.md` | `0879e71d77246cf66caa8b903b80dc2d40f6e691` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-17-a1-foundations-source-custody.md` | `6462c0df31f3041505df2d27342135ec87c2abe7` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-17-a2-foundations-month-relations.md` | `9350acee8d128dac871caf29e24ceec0cb56573b` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-18-a1-foundations-source-custody.md` | `eb42c037662a455e9efce0d21a5ac954b23da36e` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md` | `4bc6610ecfc716f549681eee29c66c68503f30f1` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-19-a1-foundations-source-custody.md` | `747b83cccdbda30b59b8f31167029568faae020a` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
-| `historical-audits/2026-11/2026-11-19-a2-foundations-month-relations.md` | `731b722bf80fd5f7b1c696bf881247cc084d3b17` | PREVIOUS_ORIGINAL_A1_A2 | INHERITED_EXACT_BLOB / NOT_NEW_NATIVE_OR_NUMERIC_CREDIT |
+| `historical-audits/2026-11/2026-11-02-a1-foundations-source-custody.md` | `a2f7371b9458024919c3fca895f1770031b95ae3` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-02-a2-foundations-month-relations.md` | `e14efd4c0f3ad3ff0053ce32f2705c6a82930b19` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-03-a1-foundations-source-custody.md` | `57cbe183d80eae21c76cdbfcb19c98b4f90205ae` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-03-a2-foundations-month-relations.md` | `60252534c32608978176e64bb7fac952a7f8e72c` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-04--2026-11-05-original-a1-a2-acceptance-reconciliation.md` | `d58c6de9e2d16ca400066228a18e7065e4d78df9` | RECONCILIATION | SEPARATE_FORWARD_RECONCILIATION / NO_ORIGINAL_PR_CREDIT |
+| `historical-audits/2026-11/2026-11-04-a1-foundations-source-custody.md` | `347df9cb3aeacc97dd2c293a004d4dc8b8680c83` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-04-a2-foundations-month-relations.md` | `9756bd28ff150443a8dff05bc750bfc43507ef05` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-05-a1-foundations-source-custody.md` | `03188c28c2c97f3dd74a481889a337ce03f36f36` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-05-a2-foundations-month-relations.md` | `2c697d784fb4e225a68b440a54480a6105edc711` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-06-a1-foundations-source-custody.md` | `b36b81fd3b6558b9d68996e9d6e67fec9310ee7c` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-06-a2-foundations-month-relations.md` | `23a73bc50ddfec1486372a73094b797a70bb5541` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-06-original-a1a2-semantic-forward-reconciliation.md` | `91fb915f20482d5db3688796c80297c09339fffc` | RECONCILIATION | SEPARATE_FORWARD_RECONCILIATION / NO_ORIGINAL_PR_CREDIT |
+| `historical-audits/2026-11/2026-11-07-a1-foundations-source-custody.md` | `714d7408e680c2f9f5892467a5d6798a8d85e8f2` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-07-a2-foundations-month-relations.md` | `fcacd620d629db6dcb4df187d1da9eb5a47df51f` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-08-a1-foundations-source-custody.md` | `5f174aaef67cf8e0781d71fbe95b2dc6466958c3` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-08-a2-foundations-month-relations.md` | `a22a2c52fa0a69bd4b73dde44f5871d951702a24` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-09-a1-foundations-source-custody.md` | `a683fb9706605c56f9256f55731c08f594e7d24b` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-09-a2-foundations-month-relations.md` | `5d2ad977326b9b4e2d0e6a0ee8a051bb3ae9a124` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-10-a1-foundations-source-custody.md` | `ab9a07cb8f72e92bfe101435ac930c7e114e913b` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-10-a2-foundations-month-relations.md` | `240dd4d048282f1178c7ec72b02eb07fdb789db0` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-11-a1-foundations-source-custody.md` | `7764d917ada88a7a5b425d53478e9d09fafbd448` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-11-a1a2-effective-pr-acceptance-reconciliation.md` | `ac723941a88dedb9173ca5ade7b8617e688cf541` | RECONCILIATION | SEPARATE_FORWARD_RECONCILIATION / NO_ORIGINAL_PR_CREDIT |
+| `historical-audits/2026-11/2026-11-11-a2-foundations-month-relations.md` | `c652aebe210b8a6be731dfaf110b7b0cc988256f` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-12-a1-foundations-source-custody.md` | `95b45d6bff3ef7a8e59fd50424d7fce61f82a1a3` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-12-a2-foundations-month-relations.md` | `3f4460bddba813d0ced0575b99850b6ecf4d02e7` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-13-a1-foundations-source-custody.md` | `7441cd1060104ff41594d28a4ffa97c0813741da` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-13-a2-foundations-month-relations.md` | `e3fd564c419eeaa7961c5e9dfeaa64190a4c429b` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-14-a1-foundations-source-custody.md` | `d663661d745f61533c046bd13e6c7b6e01f41c8a` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-14-a2-foundations-month-relations.md` | `a3a27f8deb6e81c5c5d1b78c746188f213056ff6` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-15-a1-foundations-source-custody.md` | `e0c9e6a037d560ee086d6b21cfdef3251eab4c70` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-15-a2-foundations-month-relations.md` | `efb2e4badff09a14268d11aec1ef7f3b5cbfa459` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-16-a1-foundations-source-custody.md` | `fbc437714f34e58d0277a845ca0ae46bf1c12652` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-16-a2-foundations-month-relations.md` | `0879e71d77246cf66caa8b903b80dc2d40f6e691` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-17-a1-foundations-source-custody.md` | `6462c0df31f3041505df2d27342135ec87c2abe7` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-17-a2-foundations-month-relations.md` | `9350acee8d128dac871caf29e24ceec0cb56573b` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-18-a1-foundations-source-custody.md` | `eb42c037662a455e9efce0d21a5ac954b23da36e` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-18-a2-foundations-month-relations.md` | `4bc6610ecfc716f549681eee29c66c68503f30f1` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-19-a1-foundations-source-custody.md` | `747b83cccdbda30b59b8f31167029568faae020a` | ORIGINAL_A1 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
+| `historical-audits/2026-11/2026-11-19-a2-foundations-month-relations.md` | `731b722bf80fd5f7b1c696bf881247cc084d3b17` | ORIGINAL_A2 | ORIGINAL_SOURCE_PATH_BLOB_ONLY |
 
 ## Current authority and implementation identity anchors
 | Path | Blob SHA | Role | Disposition |
@@ -149,3 +149,13 @@
 - NEW_COUNTEREVIDENCE: current domain file may contain newer Nov20 changes, so historical cutoff requires prior producer provenance.
 - UNKNOWN_RETAINED: independent original-source proofs, native test outcomes, effect sinks, local state identity and unverified dated claims.
 - NEXT_RETEST_CONDITION: exact original A1 merge receipt and fresh main readback; A2 re-evaluates 20th source deltas.
+
+
+## 2026-11-20 forward source/provenance reconciliation — A1
+- Current file is minimally corrected after the original independent A1 PR #454 merge; the original PR Git diff, numeric acceptance and original producer history remain immutable. Pre-correction blob: `ef73d8a622bb5965c4ae4bdc19e874479b149105`
+- Exact historical source rows above are classified by record kind instead of the presence of `a1` or `a2` in a reconciliation path
+- The historical 20-day research dates are in-place bilingual document streams, not 20 separately named Daily source files. At 2026-11-20 the current English Tool owner blob is `c2ad36565b6beef3647956e2ecaf5afcfe424826`, Chinese counterpart `6d97008120128499e13a65b6f40f2279b175ac1b`; these blobs include the later Nov20 mapping and **cannot** be claimed to be the precise Nov01–19 content at original publication times
+- The Nov20 native Tools mapping identifies 1990 Herlihy–Wing linearizability as a historical paper cited by a new research date; this mapping's five axes remain PROPOSED / E2_PEER_REVIEWED (source classification) / DESIGN_ANALOGY / NOT_IMPLEMENTED / NOT_TESTED; no local effect sink or theorem reproduction established
+- `FOUNDATION/SOURCES.md` blob `5c569375d640eaed7eb4eb787515ff4beb1ceb19` retains the historical S63 collision correction; date-keyed source registrations and ambiguous S63 claim transfer cannot be inferred from this relation audit
+- Claim-specific full-month source/version/producer state not independently revalidated per date remains `PARTIAL / UNKNOWN`, not `COMPLETE_SEMANTIC_REVIEW`
+- [Exact independent content audit](../02-document-audits/2026-11-20--foundations-source-and-five-axis--document-audit.md) records the audit and next verified gate
