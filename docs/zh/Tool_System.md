@@ -1354,3 +1354,26 @@ $$
 **Evidence Delta：** NEW_EVIDENCE = 核对 1990 年原始论文 pending invocation 和实时顺序定义；CORRECTED_INTERPRETATION = 对象历史合法不等于调用者已证明 effect 完成；UNCHANGED_BOUNDARY = PAPER != MAPPING != IMPLEMENTATION != VALIDATION；NEW_COUNTEREVIDENCE = commit-before-timeout、重复 retry 和跨对象错配；UNKNOWN_RETAINED = 本地工具 effect sink、权威读回与全工作流完成语义；NEXT_RETEST_CONDITION = 固定服务商与对象版本，执行响应丢失注入、相同/不同幂等键对照、记录事务收据与最终效果，才能提升实现和验证声明
 
 **执行与交付边界：** 已检查公开论文精确定义，未执行定理证明、Foundation validator、真实工具调用或效果端实验；`FOUNDATION/SOURCES.md`、`FOUNDATION/TOOLS.md`、Verified Core、历史 Jules 文件均不改变，交付/合并由 Human Maintainer 与 GitHub 真实状态决定
+
+
+## 2026-11-22 GPT Native Daily Research — 端到端正确性是应用效果义务，不是传输确认
+
+**Canonical task：** `foundations/research/daily` · **容器：** Tools · **Producer：** GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY · **逻辑日：** 2026-11-22 Asia/Shanghai · **研究身份：** `foundations/research/daily/2026-11-22/end-to-end-effect-oracle` · **Base main：** `776044e0a9f4a4e60e9b55df2e0706be85182b22`。这是将 **1984 年历史学术文献**映射至当前 Agent 系统的有限研究，不是 2026 年新发表的论文
+
+**原始学术来源与实际核验：** Jerome H. Saltzer、David P. Reed、David D. Clark，*End-to-End Arguments in System Design*，*ACM Transactions on Computer Systems*，2(4)，277–288，1984 年 11 月，DOI [10.1145/357401.357402](https://doi.org/10.1145/357401.357402)。实际查阅 [MIT 作者原始 PDF](https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)，并查看文件传输正确性/校验论证与事务讨论相关页面图像。1984 年期刊出版身份、论证更早的历史演化与本次 2026 年观察日必须分开。来源身份 `DOI:10.1145/357401.357402`，**没有分配新的 Sxx**，没有改动 SOURCE Registry。证据类型为核验过原文的 `E2_PEER_REVIEWED`，完整证明泛化复核与独立实验 `NOT_EXECUTED`
+
+**原论文命题与边界：** Saltzer、Reed、Clark 指出，某些正确性功能必须依赖应用两端才具备的知识。底层机制可以降低故障频率或恢复成本，却不能单独保证应用期望的最终结果在目标端正确成立。文件传输示例对比了底层可靠传输与应用端核验最终数据正确性。这是关于检查位置、充分条件与代价的系统设计论证，**不是**“所有底层校验都无价值”“再加一次 checksum 就证明分布式事务”或“所有应用使用同一完成谓词”的定理。作者同时说明，底层校验对性能与局部可靠性仍可能有重要价值，只是不能取代端到端义务
+
+**新的 Agent / Tool Contract 映射：** 对具有真实副作用的 Agent 工具动作，`request_sent`、`transport_acknowledged`、`provider_accepted`、`effect_at_authoritative_sink_observed` 与 `user_intended_postcondition_verified` 是不同证据状态。只有应用端才有足够上下文判断用户究竟授权了哪个已解析资源、哪个版本、怎样的最终状态才算完成。HTTP 200/201、工作进程的 `success` 日志、消息队列 ACK 和本地 checkpoint 可能准确描述各自层次，却不证明最终用户效果。反过来，真实效果端 readback 也不能单独证明操作曾获合法授权、仍在有效期内、跨保留周期持久或对多服务原子
+
+**候选追踪合同（DESIGN_ANALOGY，非已实现协议）：** `(task_id, authenticated_principal, action_identity, resolved_target_and_version, approved_arguments_digest, authorization_revision, idempotency_key, provider_acceptance_receipt, authoritative_effect_sink_and_revision, postcondition_predicate, independent_readback_receipt, readback_observed_at, timeout_or_unknown_outcome, recovery_decision)`。最终端到端谓词由应用需求定义，重试时应保留必要的稳定身份，不能静默用服务商的“已接收请求”谓词替换。工具名称、参数字符串和实际解析后的资源/效果版本也必须分开
+
+**跨日理论关系：** 11 月 20 日基于 Herlihy/Wing（1990）的线性化映射讨论单个对象并发历史的合法性、真实时间先后与无返回的 pending operation；端到端论证讨论的是 **谁具备足够信息判断应用最终效果已满足**。一个并发对象的服务端操作可以是线性化且已确认的，但用户的跨服务工作流仍未完成；客户端未收到 ACK，也可能已有真实效果。这是两个不同经典来源的理论关系，**不是两次独立的实验证据**，也不证明 Agent Foundations 具有真实运行时
+
+**Counterevidence Gate 与可证伪控制：** 负例 A：日历服务商 HTTP 200 接受了变更，但真正写入的资源版本或参会人集合与用户批准的不一致，服务端局部成功不能提升为端到端完成。负例 B：队列 ACK 先于下游 effect sink commit，失效或错误作用域的幂等键导致重试重复副作用。负例 C：两个服务的更新分别成功，但用户要求的跨服务不变量失败，各自 receipt 并不能证明分布式事务。正例：用户授权的已解析目标保持稳定，以权威 sink revision 读回一次匹配的后置条件。**反向限制：** 真正只读且具备幂等语义的查询，可以合理使用底层检查与已验证缓存优化；为所有任务强行再做一次“验证性写入”反而可能制造副作用。这些都是候选测试，**本轮 NOT_EXECUTED**
+
+**五轴状态：** `CLAIM = PROPOSED`（Agent 架构映射，原始论文论证保留其论文语境）；`EVIDENCE = E2_PEER_REVIEWED`（查阅原始期刊论文）；`MAPPING = DESIGN_ANALOGY` 指向 `AF-TOOL-001 / AF-TOOL-002 / AF-TOOL-006`；`IMPLEMENTATION = NOT_IMPLEMENTED`；`VALIDATION = NOT_TESTED`。英文和中文是 **同一个 Daily 研究单元**，不是两个独立来源或实验。没有新增 Sxx、提升 Verified Core、创造新 Claim ID、宣称测试 PASS 或真实授权系统及 effect engine 已上线
+
+**EVIDENCE_DELTA：** `NEW_EVIDENCE` = 核验经典端到端论证的应用校验案例和底层性能边界，并提出类型化 effect/readback 义务；`CORRECTED_INTERPRETATION` = provider/transport ACK 只证实局部层次，不能代表用户目的达成，而端点核验也不能替代权限；`UNCHANGED_BOUNDARY` = `PAPER != MAPPING != IMPLEMENTATION != VALIDATION`，`EFFECT_OBSERVED != AUTHORIZED_EFFECT`；`NEW_COUNTEREVIDENCE` = 跨服务部分成功、过时目标/读回和错误作用域幂等键足以否定一概完成的说法；`UNKNOWN_RETAINED` = 实际 Agent 运行、效果端 oracle 可靠性、服务商保留条件、多 sink 原子性和独立实验；`NEXT_RETEST_CONDITION` = 固定真实 provider sandbox、权限主体与资源版本，注入响应丢失、延迟与部分效果，对照 provider ACK、独立 sink readback 与人工定义的最终谓词，保存环境、命令、exit、原始回执、重试和授权裁决
+
+**执行与交付边界：** 实际阅读论文 PDF 及相关页面作为来源核验；Source Registry 全局准入/完整去重、理论复现、Foundation Validator、真实工具 API、effect sink、权限测试与工作流执行均 `NOT_EXECUTED`。仅对现有中英文 Tool System 追加本日研究内容，不改 `FOUNDATION/SOURCES.md`、`FOUNDATION/TOOLS.md`、Verified Core、Jules 历史、Schemas、Runtime 或其他三个系统容器；Draft PR 不等于 Human Maintainer 认可或 main 已合并
