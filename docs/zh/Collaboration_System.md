@@ -2970,3 +2970,29 @@ Theorem 4 给出普通拓扑下的不可能性结果：如果没有可信方位�
 - UNKNOWN_RETAINED：数学证明复验、部署实现、协作真实安全性和效果完成
 - NEXT_RETEST_CONDITION：锁定来源版本，构造合法/恶意对照并独立核对最终状态和运行回执
 - 所有旧正文不改、SOURCE Registry 和 Verified Core 不改；实际仓库 checker 与实验 NOT_EXECUTED
+
+## 2026-W47 Weekly Research Cascade — 多 Agent 共识与来源独立性、授权效果的边界
+
+**正式 Weekly 身份：** `foundations/research/weekly`，2026-W47 已闭合窗口 **2026-11-16—2026-11-22**（Asia/Shanghai），GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY，基线 `main=30d12b310f4fc36f48e9a6716f932f2aa774cba8`。这是四大正式容器中的 Collaboration 周度跨领域编织，并非本领域新增独立 Daily：**NO_DIRECT_W47_COLLAB_DAILY**。本周七个原生学术研究单元分别归 Tools 3、Memory 4；七份 EN+ZH 对应同一七篇论文身份，不是十四份独立来源、论文或实验。
+
+### 输入谱系与协作研究约束
+- **Tools 原始 Daily：** 11-16 Instruction Hierarchy ([#435](https://github.com/lostlight530/agent-foundations/pull/435), arXiv:2404.13208v1)；11-20 Herlihy–Wing Linearizability ([#453](https://github.com/lostlight530/agent-foundations/pull/453), DOI:10.1145/78969.78972)；11-22 Saltzer–Reed–Clark End-to-End arguments ([#460](https://github.com/lostlight530/agent-foundations/pull/460), DOI:10.1145/357401.357402)。
+- **Memory 原始 Daily：** 11-17 Lamport happened-before ([#441](https://github.com/lostlight530/agent-foundations/pull/441), DOI:10.1145/359545.359563)；11-18 RIME ([#444](https://github.com/lostlight530/agent-foundations/pull/444), arXiv:2609.34438v1)；11-19 DISCERN ([#447](https://github.com/lostlight530/agent-foundations/pull/447), arXiv:2611.15729v1)；11-21 Durable Linearizability ([#457](https://github.com/lostlight530/agent-foundations/pull/457), DOI:10.1145/3571219)。
+- 本 Weekly 阅读了当前正式研究容器与源头身份，**未重新独立检查全部原始学术 PDF、定理证明或运行任何跨 Agent 实验**；原 Daily 所附版本、时间、生产者、作者试验与弱证据边界保持有效。
+- **协作核心边界：** 多个 Agent 阅读同一份资料、共享一致的双时间图、或者重启后恢复同一 checkpoint，既不会生成独立真值验证，也不能替代真实操作者授权与外部效果收据。
+- **候选 Trace：** `(collaboration_task, actor_id, principal_authority, source_lineage_id, event_causal_parent_ids, shared_evidence_digest, decision_quorum, per_effect_id, authoritative_sink_revision, global_purpose_predicate)`。仅为 `DESIGN_ANALOGY`，不是已经部署的 A2A 协议或形式安全定理。
+- **跨领域含义：** Lamport 的因果偏序在特定进程/消息关系上成立，却不证明传递内容的真实性；RIME/DISCERN 在抽取的证据结构上选择与回答，不能自然获得工具权限；对象 Linearizability 与 Durable Linearizability 也不等于全体 Agent 完成了同一个全局业务谓词。
+- **反例 A，同源污染：** 三个 Agent 对同一有错误的原始来源作不同翻译后投票一致，仍是一个来源，不等于三个独立事实验证。
+- **反例 B，权限载体：** 工具输出伪造一段用户指令，所有 Agent 都同意执行，未出现可信用户授权收据，哪怕模型角色标签一致也不能据此产生权限。
+- **反例 C，崩溃与副作用：** 协调者记录 APPROVED，worker 已完成外部扣费但在回执前崩溃，另一个 Agent 重试产生第二次效果；局部日志都可符合格式，却违反全局效果约束。
+- **反例 D，双时间实体混淆：** 共享图错误合并两个同名对象，多 Agent 可以一致认可错误归因，时间戳合法也无法证明结论真实。
+- **审查裁定：** `NO_DIRECT_W47_COLLAB_DAILY / CROSS_DOMAIN_WEAVING_ONLY / NO_NEW_CONSENSUS_RESULT / NO_VERIFIED_CORE_PROMOTION`。已有 AF-COLLAB claim、来源登记、拓扑理论、实现与验证五轴不随文档出现而提升。
+
+### EVIDENCE_DELTA、复验及交付
+- **NEW_EVIDENCE：** 将 actor authority、源头独立性、消息因果、跨崩溃状态与效果端校验串为本周跨领域责任边界，不增加独立实验数量。
+- **CORRECTED_INTERPRETATION：** `AGENT_AGREEMENT != FACTUAL_TRUTH != HUMAN_APPROVAL != EFFECT_SETTLEMENT`，持久化日志可以长期保留错误或越权决定。
+- **UNCHANGED_BOUNDARY：** 中英文与跨容器重复引用属于继承；`PAPER != MAPPING != IMPLEMENTATION != VALIDATION`。
+- **NEW_COUNTEREVIDENCE：** 同源集体错误、伪造授权、实体错误合并、崩溃后重复效果分别反驳无条件的协作正确性论断。
+- **UNKNOWN_RETAINED：** 本仓运行中的真实 Collaboration 协议、可比拓扑、actor grant、外部效果端、数据原始真值与防御实测。
+- **NEXT_RETEST_CONDITION：** 固定独立/共享证据的来源 identity、参与者权限及通信拓扑，注入同源伪造、冲突、崩溃后重试，以独立授权裁决和效果端最终状态对照 Agent 局部投票，并保存实际执行回执。
+- **交付：** 仅在 `docs/en/Collaboration_System.md` 与中文同名正式容器 append-only，Jules/GPT 旧记录不动；`FOUNDATION/**`、Sxx、Verified Core、Runtime、其他 Daily 和 Monthly 不动。完整 checker、多 Agent 运行、形式证明、真实 tool/effect sink 均 **NOT_EXECUTED**。11 月 Monthly **NOT_DUE**，需 Human Maintainer 审查后合并。
