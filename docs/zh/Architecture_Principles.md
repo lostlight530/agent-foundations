@@ -1843,3 +1843,41 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - UNKNOWN_RETAINED：完整数学/代码复验、部署版本、授权效果、外部副作用收据与跨平台泛化
 - NEXT_RETEST_CONDITION：锁定版本与真实授权对象，用合法/拒绝对照复验，并独立验证最终状态
 - 仅向既有正式中英容器追加当前周研究块，历史原文逐字保持，Source Registry、Verified Core、Blueprint、Runtime 均不改动；Validator NOT_EXECUTED
+
+## 2026-W47 Weekly Research Cascade — 权限、因果、恢复及效果的架构声明门槛
+
+**身份与周期：** `foundations/research/weekly`，已闭合 ISO **2026-W47（11 月 16–22 日，Asia/Shanghai）**；研究入口基线 `main=30d12b310f4fc36f48e9a6716f932f2aa774cba8`；GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY。本段仅在正式 Architecture Principles 中英容器追加本周关系审查，不构造该领域新 Daily 或已验证实现。W47 共有 **7** 个原生科研来源身份和 7 对中英文 Daily，Tools **3** 个，Memory **4** 个，Architecture 与 Collaboration **NO_DIRECT_W47_DAILY**；November 自然月尚未结束，Monthly **NOT_DUE**。
+
+### 来源时间线、生产者及证据限制
+- **11-16 Tools：** Wallace 等 Instruction Hierarchy，arXiv:2404.13208v1，[原生 PR #435](https://github.com/lostlight530/agent-foundations/pull/435)，模型论文与 ADK 实现 diff 支持不同层面的命题。
+- **11-17 Memory：** Lamport 因果顺序，DOI:10.1145/359545.359563，[#441](https://github.com/lostlight530/agent-foundations/pull/441)；时间戳过滤 patch 不能自动成为分布式因果的运行证明。
+- **11-18 Memory：** RIME 来源选择与检索，arXiv:2609.34438v1，[#444](https://github.com/lostlight530/agent-foundations/pull/444)。
+- **11-19 Memory：** DISCERN 双时间图与读时决定，arXiv:2611.15729v1，[#447](https://github.com/lostlight530/agent-foundations/pull/447)；保留作者合成数据集与样本口径限制。
+- **11-20 Tools：** Herlihy–Wing Linearizability，DOI:10.1145/78969.78972，[#453](https://github.com/lostlight530/agent-foundations/pull/453)。
+- **11-21 Memory：** D’Osualdo 等 Durable Linearizability，DOI:10.1145/3571219 / arXiv:2211.07631v1，[#457](https://github.com/lostlight530/agent-foundations/pull/457)。
+- **11-22 Tools：** Saltzer 等端到端设计论证，DOI:10.1145/357401.357402，[#460](https://github.com/lostlight530/agent-foundations/pull/460)。
+- 以上来源 identity 为本周已交付研究的继承关系，不意味着本 Weekly 新增七次对原始论文 PDF 的独立阅读、实验复验或证明检查。具体作者、版本-日期、出版级别与限定继续由原 Daily 拥有。
+
+### 六类不可互相替代的架构证明义务（研究候选）
+- **A｜Authority：** 真实 principal、指令原始来源、被授权的资源和行动不能仅从 `role='user'` 运输标签或 Agent 集体同意推导；Instruction Hierarchy 的训练效果不能替代工具授权检查。
+- **B｜Causal provenance：** Lamport 偏序依赖进程和消息之间的因果边，光有时钟或历史检索结果不足以还原事件的真实因果关系。
+- **C｜Evidence selection / commitment：** RIME 的形成覆盖与 DISCERN 的双时间读取决策有其作者设定范围；已抽取图可能丢失低相似反证、合并错误实体或遭来源投毒，均不能自动达到“可信真相”的要求。
+- **D｜Operation-history：** Linearizability 是针对某一给定并发对象的合法历史条件，允许调用 pending 时执行结果不明确；不授予权限、不保证远程工具 exactly-once，也不能仅靠 ACK 判断所有效果。
+- **E｜Recovery：** Durable Linearizability 对指定持久库的崩溃分段历史施加约束，不能不经验证迁移为通用 Agent session、跨供应商工作流或多服务事务的一致性定理。
+- **F｜Application effect：** End-to-End argument 提醒应用所需最终业务谓词与网络/队列 ACK 不同；源登记、绿色单元测试、checkpoint 保存都不能单独证实用户真实目的达成。
+- **候选字段：** `(source_claim_id, source_version, verified_surface, actor_grant, request_origin, object_spec_revision, causal_parent_set, persistence_revision, crash_epoch, external_effect_id, sink_readback, task_postcondition, verification_receipt)`，这是 `DESIGN_ANALOGY`，**不是**已存在的 Agent Foundations schema、部署系统或准许直接修改宿主的治理授权。
+- **反例 A：** 响应丢失后重试两次，对同一对象可能分别符合 Linearizability，外部系统却出现双重扣费。
+- **反例 B：** 多 Agent 一致认可一张错误合并实体的双时间图；共识与来源重复不构成新的真值证据。
+- **反例 C：** 单体库满足跨崩溃恢复，却无法与已在外部执行、未收到回执的 Tool Effect 对账，完成状态仍 UNKNOWN。
+- **反例 D：** Verifier 只看到已检索出的 Memory 条目，漏掉远处反证；结构上可校验的文本不是全量来源覆盖。
+- **反例 E：** 上游 SDK 的 feature flag 存在，但宿主并未部署对应版本；源码存在不能推出本仓风险已经发生或补丁已生效。
+- **准入判定：** `NO_NEW_ARCHITECTURE_PROOF / NO_VERIFIED_CORE_PROMOTION / NO_NEW_ADR / NO_RUNTIME_CHANGE`。新论文关系仅对应 `MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE`，仓库侧 `IMPLEMENTATION=NOT_IMPLEMENTED`、`VALIDATION=NOT_TESTED`，具体论文 EVIDENCE 等级继续保持原口径。
+
+### EVIDENCE_DELTA 与后续复验
+- **NEW_EVIDENCE：** 以七份原有 Daily 明确梳理 Authority、Causality、Evidence、Operation History、Recovery、Application Effect 六类不同义务，这是关系增量而非新的外部实验。
+- **CORRECTED_INTERPRETATION：** `CONSISTENT_SOURCE != AUTHORITATIVE_FACT`；`CORRECT_LOCAL_OBJECT != DURABLE_RECOVERY != AUTHORIZED_GLOBAL_EFFECT`。
+- **UNCHANGED_BOUNDARY：** `PAPER != MAPPING != IMPLEMENTATION != VALIDATION`；Sxx 文档身份不等于部署背书；旧 S63 来源撞号仍由原 owner 处理，不借 Weekly 静默纠正。
+- **NEW_COUNTEREVIDENCE：** 遗漏来源、单 issuer 重复、实体错误归并、响应丢失、仅易失状态及版本不匹配反驳无条件的完整系统成功推断。
+- **UNKNOWN_RETAINED：** 实施边界、数学证明复验、真实授权策略、外部 sink 与持续状态身份。
+- **NEXT_RETEST_CONDITION：** 固定源码及宿主 revision、完整输入与拒绝反例、具名持久化状态和崩溃注入、授权记录、可信效果端 readback、命令日志与退出码，门槛成立后才能考虑 Verified Core 或实现层变更。
+- **交付边界：** 仅对 `docs/en/Architecture_Principles.md` 与中文原始容器 append-only，旧 Jules/GPT 内容保全；`FOUNDATION/SOURCES.md`、AF-ARCH 核心、schema、workflows、Monthly、其他 Daily 与 Runtime 不动。完整 `FOUNDATION/validate.py`、形式证明与运行测量均 **NOT_EXECUTED**，需要 Human Maintainer 审核合并。

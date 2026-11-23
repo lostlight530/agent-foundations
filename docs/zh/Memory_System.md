@@ -1684,3 +1684,38 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 **EVIDENCE_DELTA：** NEW_EVIDENCE = Definition 3.7 的跨崩溃历史约束以及 Definitions 4.1–4.2、Theorem 4.3 对恢复义务的拆分；CORRECTED_INTERPRETATION = 普通 Linearizability 与“保存过一次会话”不足以推出 crash-safe 的持续状态；UNCHANGED_BOUNDARY = Paper != Mapping != Implementation != Validation，并发库证明 != 授权后的 Agent 效果完成；NEW_COUNTEREVIDENCE = volatile-only 状态、恢复中途崩溃与 checkpoint/sink 非原子边界；UNKNOWN_RETAINED = 本仓实际存储实现、数学完整证明、跨服务效果恢复；NEXT_RETEST_CONDITION = 精确版本的对象规范、覆盖线性化/持久化/恢复断点的故障注入矩阵、回执与权威外部效果 readback
 
 **执行与交付边界：** 本轮只向既有中英 Memory System 容器追加 2026-11-21 理论增量，不变更 `FOUNDATION/**`、Sxx、Verified Core、旧 Jules 原文、Runtime、Weekly/Monthly。Git 远端获取在隔离环境遇 DNS 失败，完整本仓 `FOUNDATION/validate.py`、回归测试、崩溃模型验证均 `NOT_EXECUTED`；须待 Human Maintainer 独立审查并合并
+
+## 2026-W47 Weekly Research Cascade — 记忆状态身份、认知证据与跨崩溃恢复
+
+**原生任务 / 周期 / 权威：** `foundations/research/weekly`，已闭合 ISO W47：2026-11-16—2026-11-22（Asia/Shanghai）；2026-11-23 由 GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY 周度编织；输入基线 `main=30d12b310f4fc36f48e9a6716f932f2aa774cba8`。本段只在正式 Memory 系统容器追加历史研究关系，不是七次新实验，也不提前结算 Monthly。W47 原始研究有 **7 个 Daily 学术来源身份及对应的 7 对中英文研究单元**：Memory **4** 个（17、18、19、21 日），Tools **3** 个（16、20、22 日），Collaboration 与 Architecture Principles 无直接 Daily。逻辑观察日不能冒充论文发表日。
+
+### 实际 Daily 输入与来源身份
+- **11-16 Tools，[原生 #435](https://github.com/lostlight530/agent-foundations/pull/435)：** Wallace 等 Instruction Hierarchy，arXiv:2404.13208v1（2024）；ADK 动态指令路由 patch 是另一实现命题的一手来源，不是对该论文的第二次科学复现。
+- **11-17 Memory，[#441](https://github.com/lostlight530/agent-foundations/pull/441)：** Lamport 因果偏序，DOI:10.1145/359545.359563（1978）；ADK 时间戳过滤更改属于独立的实现审查对象。
+- **11-18 Memory，[#444](https://github.com/lostlight530/agent-foundations/pull/444)：** Zhou 等 RIME，arXiv:2609.34438v1，通过预设问题检索、邻域扩张、回答时原文回查提高作者研究环境中的覆盖，实验未在本仓复现。
+- **11-19 Memory，[#447](https://github.com/lostlight530/agent-foundations/pull/447)：** Ahuja 等 DISCERN，arXiv:2611.15729v1，写入保留原始事件、构建双时间视图、读取时 answer/update/clarify/abstain；原论文合成数据、不同种子及外部泛化限制照旧。
+- **11-20 Tools，[#453](https://github.com/lostlight530/agent-foundations/pull/453)：** Herlihy–Wing Linearizability，DOI:10.1145/78969.78972（1990），未获响应的 pending operation 可能已经生效。
+- **11-21 Memory，[#457](https://github.com/lostlight530/agent-foundations/pull/457)：** D’Osualdo 等 Durable Linearizability，DOI:10.1145/3571219 / arXiv:2211.07631v1（2023 发表），约束指定持久化并发库跨崩溃历史，而非任意 Agent 都能恢复。
+- **11-22 Tools，[#460](https://github.com/lostlight530/agent-foundations/pull/460)：** Saltzer 等 End-to-End arguments，DOI:10.1145/357401.357402（1984），不能用传输成功代替应用目标到达。
+- 本次 Weekly 从现存正式容器和原始来源归属继承证据，**没有重新打开七份学术论文全部 PDF、核验每个版本-日期配对、重跑作者 benchmark、复验数学证明**。其论据仍受原始 Daily 的证据面限制，不增加独立学术验证信用。
+
+### 本领域新关系与反证
+- **事件成员身份不等于因果偏序：** Lamport 的 happened-before 由进程内顺序、消息发送/接收和传递性建立；时间戳、append 顺序、session cutoff 只构成不同的筛选条件。没有可信 parent 关系就不能用事件时间替代因果证明。
+- **记忆形成覆盖不等于来源完整：** RIME 的固定查询与局部邻域扩张不保证覆盖低相似度且远离候选上下文的关键更正。形成时选择的原文片段与回答时重新打开的原文应分别留 provenance 和缺失状态。
+- **可重复的读取决策不等于事实正确：** DISCERN 在 LLM 抽取的双时间实体图上作确定性 answer/update/clarify/abstain 决定；错误合并两个相似实体、投毒来源、或遗漏先前反证时，确定性选择仍可能得出错误答案。论文数据集的 abstention F1 不是所有运行场景的真值 Oracle。
+- **跨崩溃连续性不能由 checkpoint 标签推导：** Durable Linearizability 是给定持久库模型内的对象与恢复证明义务，不能通过“同一路径”“已经保存 session”“恢复出空 store”等陈述推导状态一致，更不能同时证明授权或外部效果。
+- **跨领域桥接：** 11 月 20 日 Tool 论文区分对象 pending response 与 effect；11 月 21 日 Memory 论文区分 volatile operation、persistency 与恢复；11 月 22 日端到端论证增加“用户预期且已授权的最终效果”这一独立判断。因而 `causal_trace != retrieved_fact != recovered_object != external_effect != authorized_task_completion`。
+- **反例一：** 一个延迟写入的更正事件含较早时间戳，被“最近 N 条”窗口排除，即使日志排序稳定仍不能声明所选证据具有完整因果/历史覆盖。
+- **反例二：** 记忆形成命中了附近支持条款，却遗漏远处附加条件；引文对检索子集准确，但相对全部原文仍不完整。
+- **反例三：** 原始事件未遭篡改，派生实体图却将同名对象合并，输出可自洽但归因对象错误。
+- **反例四：** checkpoint 崩溃后恢复成功，但 provider mutation 已在回执前提交；没有独立 effect readback 就不能判断重试是否会重复副作用。
+- **准入裁定：** 不增加 `Sxx`，不改变 Verified Core，不声称已实现的 Agent Memory 或已实验验证；五轴保持明确区分：`CLAIM=OBSERVED/PROPOSED`，`EVIDENCE` 沿用各论文已核验范围，`MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE`，`IMPLEMENTATION=NOT_IMPLEMENTED`，`VALIDATION=NOT_TESTED`。
+
+### EVIDENCE_DELTA 与交付边界
+- **NEW_EVIDENCE：** 四份 Memory 与三份 Tool Daily 形成“因果来源—检索范围—回答承诺—崩溃恢复—真实效果”的关系模型；不是新论文复现。
+- **CORRECTED_INTERPRETATION：** 筛选来源、因果归因、冲突处理、恢复正确性和完成实际操作属于不同谓词；不能一个 Green 状态代替全部环节。
+- **UNCHANGED_BOUNDARY：** `PAPER != MAPPING != IMPLEMENTATION != VALIDATION`，中英镜像与 Weekly 跨引用不增加独立来源。
+- **NEW_COUNTEREVIDENCE：** 远处遗漏条件、错误实体合并、缺失事件因果边、仅易失持久化及外部回执丢失分别反驳不同的强记忆保证。
+- **UNKNOWN_RETAINED：** 来源全覆盖、真实生产存储对象模型、跨进程 store、数学证明、崩溃不变量与 effect reconcile。
+- **NEXT_RETEST_CONDITION：** 固定 actor/event/store revision，保全原始事件及双时间关系，注入延迟时间戳、同名实体歧义和崩溃位置；以源码召回率、可信持久化状态和权威效果端 readback 为独立对照，保存命令、exit 与回执。
+- **写入与验证：** 仅向原有 Memory 中英两个文档 append-only 新增，历史原文不动；`FOUNDATION/**`、Sxx、Verified Core、代码、Governance、其他 Daily/Monthly 不改。本仓 `FOUNDATION/validate.py`、真实 Memory Runtime、论文证明 **NOT_EXECUTED**。11 月 Monthly **NOT_DUE**；Human Maintainer 审查和合并待定。
