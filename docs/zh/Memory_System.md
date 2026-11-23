@@ -1719,3 +1719,27 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 - **UNKNOWN_RETAINED：** 来源全覆盖、真实生产存储对象模型、跨进程 store、数学证明、崩溃不变量与 effect reconcile。
 - **NEXT_RETEST_CONDITION：** 固定 actor/event/store revision，保全原始事件及双时间关系，注入延迟时间戳、同名实体歧义和崩溃位置；以源码召回率、可信持久化状态和权威效果端 readback 为独立对照，保存命令、exit 与回执。
 - **写入与验证：** 仅向原有 Memory 中英两个文档 append-only 新增，历史原文不动；`FOUNDATION/**`、Sxx、Verified Core、代码、Governance、其他 Daily/Monthly 不改。本仓 `FOUNDATION/validate.py`、真实 Memory Runtime、论文证明 **NOT_EXECUTED**。11 月 Monthly **NOT_DUE**；Human Maintainer 审查和合并待定。
+
+## 2026-11-23 GPT Native Daily Research — 一致分布式切面并不等于同一时钟时刻或持久化 Agent Checkpoint
+
+**原生任务与研究身份：** `foundations/research/daily`，Memory System，逻辑日期 **2026-11-23 Asia/Shanghai**；GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；来源基线 `main=b560152114b83ad94501801f7aa45282315621a9`；研究身份 `foundations/research/daily/2026-11-23/chandy-lamport-consistent-cut-vs-agent-checkpoint-01`。这是把**1985 年经典论文**映射到今天的 Agent State Continuity 研究，不是 2026 年新论文，不是新实现，也不回写已闭合的 W47 Weekly。当前中英文各一份属于**一个研究单元**。
+
+**原始论文身份与实际阅读证据：** K. Mani Chandy、Leslie Lamport，*Distributed Snapshots: Determining Global States of Distributed Systems*，*ACM Transactions on Computer Systems* **3(1)**，**1985 年 2 月**，pp. 63–75，DOI [10.1145/214451.214456](https://doi.org/10.1145/214451.214456)。已直接打开 [Lamport 作者站原始 PDF](https://lamport.azurewebsites.net/pubs/chandy.pdf) 和原论文对应页面图像：印刷 p.63 核对题名、作者、年份与刊物；p.69 核对 §3 的 algorithm motivation 和单 token 不一致例子；p.72 核对 Theorem 1 的可达性陈述，并阅读原文 §2–4 相关上下文。证据身份 `DOI:10.1145/214451.214456`，`E2_PEER_REVIEWED / ORIGINAL_TEXT_AND_RELEVANT_PAGES_INSPECTED / PROOF_NOT_REPRODUCED`。`FOUNDATION/SOURCES.md` 内未搜到 Chandy/DOI 的直接候选命中，但不宣称全仓去重证明完成；**不分配新 Sxx，也不提升 Verified Core**。
+
+**精确机制、前提与定理边界：** 作者的模型由有限个进程和有向消息通道构成，§2 假设通道 **FIFO、不会丢错消息**，投递延迟任意但有限；不要求全体进程共享时钟或内存。Global State 不只是每个进程的局部状态集合，还包含各通道已经发送、尚未接收的**在途消息**。Marker 算法允许在底层计算继续执行时记录局部状态和通道消息：进程第一次收到 marker 时记录自己的状态并将该入口通道记为空；对其他入口通道则记录相关消息直到收到其 marker。以上结论依赖具体通信与记录语义，不是任意网络、非 FIFO 工具流、数据库或分布式 Agent 的普遍保证。
+
+**论文 Theorem 1 不能被解释成“拍下了真实同时刻”：** 记录的 `S*` 可以不是原始执行时间线上出现过的任一全局状态；定理指出，可以对独立事件作保留合法性的重排，令 `S*` 从快照发起状态可达，并可从 `S*` 到达原执行结束状态。论文进一步对**稳定谓词** `γ`（一旦为真，在所有后继可达状态仍为真）讨论检测；不能将它无前提用于瞬态业务指标、真实同一墙上时钟时刻、跨数据库原子提交、崩溃恢复可靠性、用户授权或第三方工具 exactly-once。一个因果一致的切面不得包含“接收了消息却未包含对应发送”的事件，且必须正确表示通道中的在途消息。
+
+**独立实际执行的最小反例，非原论文算法复现：** `foundations-2026-11-23-standalone-two-process-cut-01`，隔离 Linux 环境 `Python 3.13.5`，命令 `python3 /tmp/foundations_w48_snapshot_cut_probe.py`，exit **0**、stderr 空；原执行临时脚本 SHA-256 `ea254734c0c4d9c7eb3048c9420b788420ff5a5e29ac4808c874a8cf310a9bab`。模型只假设一个 token、一个发送者、一个接收者和“各进程在发送/接收之前或之后记录”的两个 Boolean 选择：四种组合中三种合法因果切面均保持 `token_total=1`；非法的 `sender_before_send + receiver_after_receive` 同时记录发送者与接收者各有 token，得到**不可能的 2 token**。实际 stdout：
+```json
+{"cases":[{"channel_token":0,"receiver_after_receive":false,"sender_after_send":false,"token_total":1,"violates_send_receive_causality":false},{"channel_token":0,"receiver_after_receive":true,"sender_after_send":false,"token_total":2,"violates_send_receive_causality":true},{"channel_token":1,"receiver_after_receive":false,"sender_after_send":true,"token_total":1,"violates_send_receive_causality":false},{"channel_token":0,"receiver_after_receive":true,"sender_after_send":true,"token_total":1,"violates_send_receive_causality":false}],"experiment":"foundations-2026-11-23-standalone-two-process-cut-01","python":"3.13.5"}
+```
+这个 stdlib toy 只证明**此简化模型**里的错误局部拼接能违反守恒，并非运行 Marker、FIFO 传递或完整 Chandy–Lamport 算法，不宣称论文 Theorem 1 已被代码复现，不能由 exit 0 推出任何 Agent Runtime Snapshot PASS。
+
+**相对已有研究的真实理论增量：** 11 月 17 日 Lamport happened-before 解释进程/消息因果偏序；Chandy–Lamport 增加如何把**进程状态与通道中在途消息**记录为有意义的联合切面。11 月 18 日 RIME / 19 日 DISCERN 的 Memory 来源若来自多个 Agent，可能每条记录自身都可引用，却遗漏在途消息或混合多个版本；11 月 20 日 Linearizability 对单对象的并发历史作约束，21 日 Durable Linearizability 再讨论跨崩溃持久化，而这两者都不能由一个因果一致的切面直接推出；11 月 22 日 End-to-End theory 进一步需要独立核对用户实际预期的**外部效果**。候选 `DESIGN_ANALOGY` Trace：`(snapshot_epoch, actor_id, process_local_revision, channel_id, send_sequence, receive_sequence, marker_id, in_flight_message_ids, raw_source_digest, persisted_store_revision, external_effect_id_or_UNKNOWN, authorization_grant_id_or_UNKNOWN, verification_receipt)`。这是研究建议，不是本仓已存在 schema。
+
+**Counterevidence Gate：** (A) 发送前局部状态和接收后局部状态错误组合，得到违反单 token 守恒的切面；(B) 非 FIFO 或缺失在途消息时，不满足论文假设，不能武断说原算法普遍失效；(C) 即使记录得到因果一致切面，崩溃发生在 fsync 之前仍可能丢失持久化状态；(D) Marker 或本地状态不证实人类批准或外部 Tool Effect；(E) 稳定的终止检测谓词不等于任意瞬态交易余额谓词，必须分别论证稳定性。
+
+**五轴状态与 EVIDENCE_DELTA：** `CLAIM=OBSERVED` 仅覆盖原始论文定义与 Theorem 1 已检查的可达性陈述，`CLAIM=PROPOSED` 仅为 Agent 记忆映射；`EVIDENCE=E2_PEER_REVIEWED + 原文页面核验 + ONE_STANDALONE_TOY`（不同证据对象，不是论文算法验证）；`MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE`；`IMPLEMENTATION=NOT_IMPLEMENTED`；`VALIDATION=NOT_TESTED`。**NEW_EVIDENCE** = 源论文的通道/进程状态和定理前提，加一次独立执行的错误切面 toy 反例；**CORRECTED_INTERPRETATION** = 多 Agent 各自持久化或同时间戳，不自动构成合法全局状态或已授权效果；**UNCHANGED_BOUNDARY** = PAPER != MAPPING != IMPLEMENTATION != VALIDATION；**NEW_COUNTEREVIDENCE** = 接收缺发送、漏记在途消息、崩溃未持久化、权限/效果歧义；**UNKNOWN_RETAINED** = 真实 channel FIFO 与信任、运行实现与 Store Revision、定理完整证明及外部回执；**NEXT_RETEST_CONDITION** = 固定多 Agent 事件与通信模型，记录 marker、send/receive ID、snapshot epoch、崩溃点、原始 stdout/stderr/exit 与最终第三方效果 readback，设置合法与非法切面对照。
+
+**交付边界：** 仅向已有 `docs/en/Memory_System.md` 与 `docs/zh/Memory_System.md` append-only 新增一个双语 Daily；W47 Weekly、原 Jules/GPT 历史、Source Registry、Verified Core、代码、其它三个容器与 11 月 Monthly 保持不变。完整 `FOUNDATION/validate.py`、原论文形式证明、真实分布式 Snapshot/Effect 集成均 **NOT_EXECUTED**，临时 toy 的通过不构成这些验证的 PASS。
