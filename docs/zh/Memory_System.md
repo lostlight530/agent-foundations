@@ -1734,6 +1734,28 @@ Tether 在每次验证结论形成、上下游关系仍可见时写入 `derived_
 ```json
 {"cases":[{"channel_token":0,"receiver_after_receive":false,"sender_after_send":false,"token_total":1,"violates_send_receive_causality":false},{"channel_token":0,"receiver_after_receive":true,"sender_after_send":false,"token_total":2,"violates_send_receive_causality":true},{"channel_token":1,"receiver_after_receive":false,"sender_after_send":true,"token_total":1,"violates_send_receive_causality":false},{"channel_token":0,"receiver_after_receive":true,"sender_after_send":true,"token_total":1,"violates_send_receive_causality":false}],"experiment":"foundations-2026-11-23-standalone-two-process-cut-01","python":"3.13.5"}
 ```
+**可独立复制的完整 toy 源码（上方 SHA 对应代码块本体与末尾换行）：**
+```python
+import json, hashlib, platform
+rows=[]
+for sender_after_send in (False,True):
+    for receiver_after_receive in (False,True):
+        sender_token = 0 if sender_after_send else 1
+        receiver_token = 1 if receiver_after_receive else 0
+        channel_token = int(sender_after_send and not receiver_after_receive)
+        violates_send_receive_causality = receiver_after_receive and not sender_after_send
+        rows.append(dict(sender_after_send=sender_after_send,
+                         receiver_after_receive=receiver_after_receive,
+                         channel_token=channel_token,
+                         token_total=sender_token+receiver_token+channel_token,
+                         violates_send_receive_causality=violates_send_receive_causality))
+assert sum(r['violates_send_receive_causality'] for r in rows)==1
+assert all(r['token_total']==1 for r in rows if not r['violates_send_receive_causality'])
+assert next(r['token_total'] for r in rows if r['violates_send_receive_causality'])==2
+print(json.dumps({'experiment':'foundations-2026-11-23-standalone-two-process-cut-01',
+ 'python':platform.python_version(), 'cases':rows},sort_keys=True))
+```
+
 这个 stdlib toy 只证明**此简化模型**里的错误局部拼接能违反守恒，并非运行 Marker、FIFO 传递或完整 Chandy–Lamport 算法，不宣称论文 Theorem 1 已被代码复现，不能由 exit 0 推出任何 Agent Runtime Snapshot PASS。
 
 **相对已有研究的真实理论增量：** 11 月 17 日 Lamport happened-before 解释进程/消息因果偏序；Chandy–Lamport 增加如何把**进程状态与通道中在途消息**记录为有意义的联合切面。11 月 18 日 RIME / 19 日 DISCERN 的 Memory 来源若来自多个 Agent，可能每条记录自身都可引用，却遗漏在途消息或混合多个版本；11 月 20 日 Linearizability 对单对象的并发历史作约束，21 日 Durable Linearizability 再讨论跨崩溃持久化，而这两者都不能由一个因果一致的切面直接推出；11 月 22 日 End-to-End theory 进一步需要独立核对用户实际预期的**外部效果**。候选 `DESIGN_ANALOGY` Trace：`(snapshot_epoch, actor_id, process_local_revision, channel_id, send_sequence, receive_sequence, marker_id, in_flight_message_ids, raw_source_digest, persisted_store_revision, external_effect_id_or_UNKNOWN, authorization_grant_id_or_UNKNOWN, verification_receipt)`。这是研究建议，不是本仓已存在 schema。
