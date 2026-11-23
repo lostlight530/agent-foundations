@@ -1827,3 +1827,41 @@ Delivery: append-only bilingual Daily research in the two existing Architecture 
 - UNKNOWN_RETAINED: exact theorem/prototype replication, installed runtime, deployed grants, source-validity beyond inspected surfaces, unobserved effect receipts.
 - NEXT_RETEST_CONDITION: revision-pinned separate domain fixtures and permitted/denied controls; reproduce author results if implementation is accessible and independently verify end state.
 - Write scope: append-only this original EN/ZH weekly relationship under existing owning container; all preexisting bytes preserved. No Source Registry, Verified Core, blueprint, historical producer or runtime modification. Validation = NOT_EXECUTED.
+
+## 2026-W47 Weekly Research Cascade — architecture claim-gates across authority, causality, durability and effects
+
+**Role and period:** `foundations/research/weekly`, completed ISO **2026-W47 (Nov16–22, Asia/Shanghai)**; source current main `30d12b310f4fc36f48e9a6716f932f2aa774cba8`; GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY. This existing English Architecture Principles container receives an append-only Weekly relationship section; it does **not** become a new Daily author or a verified implementation. Seven dated Daily scholarly source identities (3 Tools, 4 Memory) have seven bilingual mirror pairs; Architecture and Collaboration have **NO_DIRECT_W47_DAILY**. The November Monthly remains open and **NOT_DUE**.
+
+### Source cohort and evidence attribution
+- **Nov16 Tools:** Wallace et al. Instruction Hierarchy, arXiv:2404.13208v1, original [PR #435](https://github.com/lostlight530/agent-foundations/pull/435); source study and ADK implementation diff address different propositions.
+- **Nov17 Memory:** Lamport causal ordering, DOI:10.1145/359545.359563, [#441](https://github.com/lostlight530/agent-foundations/pull/441); separate ADK timestamp filter is not a proof of causal ordering.
+- **Nov18 Memory:** RIME source selection and retrieval, arXiv:2609.34438v1, [#444](https://github.com/lostlight530/agent-foundations/pull/444).
+- **Nov19 Memory:** DISCERN bitemporal read-time decision, arXiv:2611.15729v1, [#447](https://github.com/lostlight530/agent-foundations/pull/447); original paper's synthetic and uneven benchmark denominator limits are retained.
+- **Nov20 Tools:** Herlihy–Wing linearizability, DOI:10.1145/78969.78972, [#453](https://github.com/lostlight530/agent-foundations/pull/453).
+- **Nov21 Memory:** D’Osualdo et al. durable linearizability, DOI:10.1145/3571219 / arXiv:2211.07631v1, [#457](https://github.com/lostlight530/agent-foundations/pull/457).
+- **Nov22 Tools:** Saltzer et al. end-to-end system correctness, DOI:10.1145/357401.357402, [#460](https://github.com/lostlight530/agent-foundations/pull/460).
+- These are existing researcher-identified source objects and seven observed Daily dates. This Weekly read the retained repository research, **not seven new independent primary-source PDF inspections**, theorem proofs or external experiments. The per-Daily original authorship, publisher, version/date and validation limits remain the owning evidence.
+
+### New architecture constraint decomposition (proposed)
+- **A — Authority:** authenticated actor, original instruction surface and delegated tool permission are not derivable from carrier role or multi-agent agreement. Instruction hierarchy as a model training mechanism cannot serve as the execution permission broker.
+- **B — Causal provenance:** Lamport's process/message partial order cannot be reconstructed from clock timestamps alone; a memory retrieval window is not an operation history with authenticated parents.
+- **C — Evidence selection / epistemic commitment:** RIME formation coverage and DISCERN bitemporal candidate resolution can improve documentary handling within their source-specific settings, but neither implies that an extracted claim is true or that a missing contradiction was searched exhaustively.
+- **D — Operation-history correctness:** linearizability of one specified concurrent object admits pending-response ambiguity; it does not imply that a remote action succeeded exactly once or was authorized.
+- **E — Recovery:** durable linearizability adds crash-state obligations for particular persistent libraries. It cannot be universally transferred to arbitrary agent sessions, multi-vendor workflows or transaction systems without their implementation, assumptions and external effect boundary.
+- **F — Application effect:** end-to-end argument requires an application-defined and independently observed final condition for completion. Network/queue acknowledgements, successful tests, source-registry inclusion and checkpoint persistence remain different predicates.
+- **Candidate contract:** `(source_claim_id, source_version, verified_surface, actor_grant, request_origin, object_spec_revision, causal_parent_set, persistence_revision, crash_epoch, external_effect_id, sink_readback, task_postcondition, verification_receipt)`. This is a research mapping, **not** an existing Agent Foundations schema, deployment or mandate to modify the host.
+- **Counterexample A:** a correct local object allows two legal retries after a lost response; external service executes twice because a retry identity changed.
+- **Counterexample B:** all agents agree on an incorrectly merged bitemporal entity and independently cite the same flawed source; consensus increases confidence but not truth.
+- **Counterexample C:** crash-recovered state is sound for one library but fails to reconcile a provider effect committed before response, leaving completion UNKNOWN.
+- **Counterexample D:** a passing verifier over only retrieved memory excludes a distant counterexample; structurally valid evidence is not full-source completeness.
+- **Counterexample E:** a source-visible feature flag is enabled for one SDK revision, but the deployed host does not include that revision; source availability does not establish host risk or adoption.
+- **Claim decision:** `NO_NEW_ARCHITECTURE_PROOF / NO_VERIFIED_CORE_PROMOTION / NO_NEW_ADR / NO_RUNTIME_CHANGE`. New cross-paper relation is `DESIGN_ANALOGY` with explicit `COUNTEREVIDENCE`; `IMPLEMENTATION=NOT_IMPLEMENTED`; `VALIDATION=NOT_TESTED` in this repository.
+
+### EVIDENCE_DELTA and safe next step
+- **NEW_EVIDENCE:** a six-gate claim/effect decomposition over seven delivered Daily research units with explicit cross-paper dependency limits; no new independent runtime measurement.
+- **CORRECTED_INTERPRETATION:** `CONSISTENT_SOURCE != AUTHORITATIVE_FACT`; `CORRECT_LOCAL_OBJECT != DURABLE_RECOVERY != AUTHORIZED_GLOBAL_EFFECT`.
+- **UNCHANGED_BOUNDARY:** PAPER != MAPPING != IMPLEMENTATION != VALIDATION, `Sxx` documentary identity is not a runtime endorsement; existing S63 source collision remains an independently governed issue and is not silently resolved by Weekly.
+- **NEW_COUNTEREVIDENCE:** source blind spots, repeated issuer, incorrect entity merge, response loss, volatile-only state and host version mismatch block unconditional claims.
+- **UNKNOWN_RETAINED:** implementation applicability, source proof reproduction, actual authorization policy, service-specific effect sink and lasting state continuity.
+- **NEXT_RETEST_CONDITION:** immutable source and host revision, full input/negative controls, named persistent state with crash injection, actor-grant ledger, independent final sink readback and environment/log/exit receipts before proposing a verified-core or implementation change.
+- **Delivery:** append-only this EN/paired ZH Architecture owner, leaving all earlier text/Jules production intact. Do not mutate `FOUNDATION/SOURCES.md`, AF-ARCH claims, schema, workflows, monthly, other Daily or runtime. Local `FOUNDATION/validate.py`, formal proof checking and execution benchmarks **NOT_EXECUTED**. Human Maintainer review/merge pending.
