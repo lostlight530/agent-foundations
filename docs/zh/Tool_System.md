@@ -1377,3 +1377,39 @@ $$
 **EVIDENCE_DELTA：** `NEW_EVIDENCE` = 核验经典端到端论证的应用校验案例和底层性能边界，并提出类型化 effect/readback 义务；`CORRECTED_INTERPRETATION` = provider/transport ACK 只证实局部层次，不能代表用户目的达成，而端点核验也不能替代权限；`UNCHANGED_BOUNDARY` = `PAPER != MAPPING != IMPLEMENTATION != VALIDATION`，`EFFECT_OBSERVED != AUTHORIZED_EFFECT`；`NEW_COUNTEREVIDENCE` = 跨服务部分成功、过时目标/读回和错误作用域幂等键足以否定一概完成的说法；`UNKNOWN_RETAINED` = 实际 Agent 运行、效果端 oracle 可靠性、服务商保留条件、多 sink 原子性和独立实验；`NEXT_RETEST_CONDITION` = 固定真实 provider sandbox、权限主体与资源版本，注入响应丢失、延迟与部分效果，对照 provider ACK、独立 sink readback 与人工定义的最终谓词，保存环境、命令、exit、原始回执、重试和授权裁决
 
 **执行与交付边界：** 实际阅读论文 PDF 及相关页面作为来源核验；Source Registry 全局准入/完整去重、理论复现、Foundation Validator、真实工具 API、effect sink、权限测试与工作流执行均 `NOT_EXECUTED`。仅对现有中英文 Tool System 追加本日研究内容，不改 `FOUNDATION/SOURCES.md`、`FOUNDATION/TOOLS.md`、Verified Core、Jules 历史、Schemas、Runtime 或其他三个系统容器；Draft PR 不等于 Human Maintainer 认可或 main 已合并
+
+## 2026-W47 Weekly Research Cascade — 已闭合周的理论到工具效果合同编织
+
+**原生任务与边界：** `foundations/research/weekly`，已闭合 ISO W47：**2026-11-16—2026-11-22**（Asia/Shanghai），2026-11-23 由 GPT-6 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY 进行周度文档审查；基线 `main=30d12b310f4fc36f48e9a6716f932f2aa774cba8`。本段仅追加至现有双语 Tool System 正式容器，不算新的 Daily、独立实验、Source Registry 准入、运行能力或自然月 FINAL。W47 有 **7 个按日期划分的科研单元、7 个学术来源身份及 7 对中英文原始产物**；Tools 直接承担 **3** 个，Memory **4** 个，Collaboration 与 Architecture Principles **0** 个。翻译、Weekly 复述、跨容器引用均不增加独立科研证据数。
+
+### W47 原始科研身份与交付
+| 逻辑日期 | 原生领域 | 学术来源身份与版本（发表日期不等于研究日） | 原生 PR |
+|---|---|---|---|
+| 11-16 | Tools | Wallace 等 *The Instruction Hierarchy*，arXiv:2404.13208v1（2024）；ADK 源码修订属于不同命题的一手实现材料 | [#435](https://github.com/lostlight530/agent-foundations/pull/435) |
+| 11-17 | Memory | Lamport《Time, Clocks, and the Ordering of Events》，DOI:10.1145/359545.359563（1978）；ADK 时间过滤 patch 是另一来源 | [#441](https://github.com/lostlight530/agent-foundations/pull/441) |
+| 11-18 | Memory | Zhou 等 RIME《Remember by Asking》，arXiv:2609.34438v1 | [#444](https://github.com/lostlight530/agent-foundations/pull/444) |
+| 11-19 | Memory | Ahuja 等 DISCERN，arXiv:2611.15729v1 | [#447](https://github.com/lostlight530/agent-foundations/pull/447) |
+| 11-20 | Tools | Herlihy–Wing《Linearizability》，DOI:10.1145/78969.78972（1990） | [#453](https://github.com/lostlight530/agent-foundations/pull/453) |
+| 11-21 | Memory | D’Osualdo–Raad–Vafeiadis《The Path to Durable Linearizability》，DOI:10.1145/3571219 / arXiv:2211.07631v1 | [#457](https://github.com/lostlight530/agent-foundations/pull/457) |
+| 11-22 | Tools | Saltzer–Reed–Clark《End-to-End Arguments in System Design》，DOI:10.1145/357401.357402（1984） | [#460](https://github.com/lostlight530/agent-foundations/pull/460) |
+
+### 工具合同的实质性关系与反证
+- **11 月 16 日，来源权限：** Instruction Hierarchy 的模型训练方法与 ADK 将动态指令放进临时 `role='user'` 载体，涉及不同谓词。真正的原始来源、鉴权身份、载体角色与模型执行不能混为一谈。候选 Trace 包括 `(authenticated_origin, source_surface, carrier_role, source_revision, content_digest, delegated_permission)`，其中字符串标签不能成为工具授权收据。
+- **11 月 20 日，对象操作历史：** Herlihy–Wing 的 Linearizability 定义约束特定并发对象，可以容纳结果已生效但调用者没有收到响应的 pending operation。因此 `timeout`、`response_missing` 都不能直接解释为没有外部效果；重试应约束 operation、target 和 revision，并进行权威效果端核对。
+- **11 月 21 日，继承 Memory 的恢复边界：** Durable Linearizability 将证明义务延伸到跨崩溃历史，但恢复出的 checkpoint 不自动说明外部 provider mutation 已经完成或尚未执行。必须区分 `linearizable_object`、`durably_recovered_object` 与 `agent_task_effect_completed`。
+- **11 月 22 日，应用端效果：** End-to-End argument 区分通信/协议 ACK 与用户实际想要、且已经授权的终态。应用端 readback 是完成判断的重要依据，但不能单凭 readback 证明此前已获授权或多个服务之间原子提交。
+- **跨容器继承：** Lamport happened-before 不是时间戳排序；RIME 的形成与回查覆盖率、DISCERN 对抽取图的 answer/clarify/abstain 也不构成工具权限授予。它们最多改善对行动收据的可归因性。
+- **反例 A：** provider 已执行变更，网络响应丢失，使用新 identity 重试导致两次效果；两个单独操作仍可能各自符合对象顺序约束。
+- **反例 B：** session checkpoint 崩溃后恢复，扣费早已在外部完成，重复调度造成多一次效果；恢复成功不等于 end-to-end 成功。
+- **反例 C：** 三个 Agent 依据同一条伪造批准字符串达成共识，既不能证明真实授权，也无法推导外部效果发生。
+- **反例 D：** transport 200、Memory 引用均真实，但作用对象 revision 已过期，最终业务谓词未满足，完成状态应为 UNKNOWN。
+- **准入裁定：** `NO_VERIFIED_CORE_PROMOTION / NO_NEW_IMPLEMENTATION / NO_VALIDATED_TOOL_EFFECT`。跨论文新关系属于 `DESIGN_ANALOGY / COUNTEREVIDENCE`，不等于部署宿主的强制 `DIRECT_REQUIREMENT`。五轴仍为有条件的 `CLAIM=OBSERVED/PROPOSED`、原始来源实际分级的 `EVIDENCE`、`MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE`、`IMPLEMENTATION=NOT_IMPLEMENTED`、`VALIDATION=NOT_TESTED`。
+
+### EVIDENCE_DELTA、复验和交付
+- **NEW_EVIDENCE：** 将七个既有 Daily 串联为“权限来源 → 对象操作历史 → 持久性/恢复 → 应用效果 Oracle”的新关系分析，不把它计作新实验或独立来源。
+- **CORRECTED_INTERPRETATION：** `SOURCE_REVIEW != VERIFIED_IMPLEMENTATION`；`TRANSPORT_ACK != SINK_EFFECT != AUTHORIZED_POSTCONDITION`；`PAPER != MAPPING != IMPLEMENTATION != VALIDATION`。
+- **UNCHANGED_BOUNDARY：** 一篇论文、中英两个翻译及多个系统容器的引用仍属同一源头；本 Weekly 不重新运行作者实验、证明或原研究日检验。
+- **NEW_COUNTEREVIDENCE：** 丢失响应、崩溃后未结算、过期目标、跨服务部分完成与伪造批准分别反驳不同的无条件成功声明。
+- **UNKNOWN_RETAINED：** 权限状态与对象状态是否一致、真实 provider 回执、跨服务原子性、仓库本地实现、数学/实验复现与来源登记准入。
+- **NEXT_RETEST_CONDITION：** 固定用户授权、工具目标与版本及 provider sandbox；注入响应丢失和崩溃，执行合法/拒绝对照与幂等重试，保留 operation ID、权威 readback、授权裁决、stdout/stderr/exit 和人工目的谓词。
+- **交付边界：** 仅向既有 `docs/en/Tool_System.md` 与 `docs/zh/Tool_System.md` 追加对应 Weekly，旧 Jules/GPT 原文不动，不改 Sxx、Verified Core、其他 Daily/Monthly、运行时或治理。完整 checkout、`FOUNDATION/validate.py`、原论文复现、真实 permission/effect 端及回归检查均 **NOT_EXECUTED**。11 月 Monthly **NOT_DUE**；Human Maintainer 审查与合并待定。
