@@ -106,3 +106,13 @@ Only the paths changed; the historical document bodies and original task records
 ## 2026-11-20 independent source and five-axis document audit
 
 - [Foundations A1/A2 source-role and five-axis review](02-document-audits/2026-11-20--foundations-source-and-five-axis--document-audit.md) — forward corrections to current November owners; no original PR history rewrite
+
+## 2026-11-24 retained archive navigation additions
+
+These existing records were not explicitly linked by path in the preceding index. This is a navigation supplement, not a new audit, a new producer run, or a reclassification. The directory column reports the retained physical location; original record content and provenance govern interpretation. Path-sensitive references and legacy locations remain intact. Existing same-blob aliases are not additional evidence.
+
+| Retained record | Existing directory | Blob at inspected main |
+| --- | --- | --- |
+| [2026-10-01--external-review-source-scope--correction.md](01-corrections-and-errata/2026-10-01--external-review-source-scope--correction.md) | `01-corrections-and-errata/` | `474e360d57407cebce1921bd6e0a4e99ed905f6b` |
+| [2026-11-01--a2-successor-retention-and-acceptance--reconciliation.md](01-corrections-and-errata/2026-11-01--a2-successor-retention-and-acceptance--reconciliation.md) | `01-corrections-and-errata/` | `e65a9a494bc9d285a9ec0ec91cb0469af5d9db40` |
+| [2026-07--extra-monthly-strategic-blueprint-sidecar.md](03-stage-and-period-audits/2026-07--extra-monthly-strategic-blueprint-sidecar.md) | `03-stage-and-period-audits/` | `7ba3c07581ac94ce2414a9afc32491000d677207` |
