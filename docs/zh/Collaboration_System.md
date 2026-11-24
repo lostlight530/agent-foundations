@@ -2996,3 +2996,27 @@ Theorem 4 给出普通拓扑下的不可能性结果：如果没有可信方位�
 - **UNKNOWN_RETAINED：** 本仓运行中的真实 Collaboration 协议、可比拓扑、actor grant、外部效果端、数据原始真值与防御实测。
 - **NEXT_RETEST_CONDITION：** 固定独立/共享证据的来源 identity、参与者权限及通信拓扑，注入同源伪造、冲突、崩溃后重试，以独立授权裁决和效果端最终状态对照 Agent 局部投票，并保存实际执行回执。
 - **交付：** 仅在 `docs/en/Collaboration_System.md` 与中文同名正式容器 append-only，Jules/GPT 旧记录不动；`FOUNDATION/**`、Sxx、Verified Core、Runtime、其他 Daily 和 Monthly 不动。完整 checker、多 Agent 运行、形式证明、真实 tool/effect sink 均 **NOT_EXECUTED**。11 月 Monthly **NOT_DUE**，需 Human Maintainer 审查后合并。
+
+
+## 2026-11-24 Daily Research — 事务提交不等于协作效果结算
+
+- Canonical task：`foundations/research/daily`，Daily，2026-11-24 Asia/Shanghai；GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；base main `663bdaa4db0a615cf185c50176c21a7322373dbf`；run identity `agent-foundations/foundations/research/daily/2026-11-24/GPT_NATIVE/663bdaa4db0a/transaction-commit-boundary-01`。
+- 当前权威：FOUNDATION/INDEX.md blob 5fd381ace1e3adffa782cca9babd400cf1b504ef；FOUNDATION/EVIDENCE.md blob 405085ee8c3d61075cd09b1c558059a6b788786a；FOUNDATION/SOURCES.md blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19；FOUNDATION/PROVENANCE.md blob 7623df6a8f55635799ee955372a966eace957a27；FOUNDATION/COLLABORATION.md blob 0814fe220f4a30baa5b7c8f3c1d450f3019f1074。在来源登记、provenance、协作核心与八个 EN/ZH 系统容器按身份/标题/DOI 检索未发现该来源；仅属有限身份去重，不证明全部语义原创性，也不自动注册新来源。
+- W47 已闭合 Cascade #463 与 11-23 consistent-cut Daily #464 保留顺序和状态边界；今天研究独立历史学术来源，不是新发表论文。W48 Weekly 和 11 月 Monthly NOT_DUE。
+
+### 原始来源与机制
+- Jim Gray、Leslie Lamport，*Consensus on Transaction Commit*，arXiv:cs/0408036，原始摘要 https://arxiv.org/abs/cs/0408036（显示提交日期 2004-08-14 21:23:41 UTC）；ACM TODS 31(1), 133–160，2006 年 3 月，DOI 10.1145/1132863.1132867，出版索引 https://www.microsoft.com/en-us/research/publication/consensus-on-transaction-commit/。具体 arXiv vN/日期配对与期刊全文未独立核验；实际检查原始摘要与出版元数据，未检查完整定理证明。
+- 摘要支持的有限命题：传统两阶段提交在协调者失败时可能阻塞；Paxos Commit 对每个参与者的 commit/abort 决定应用共识，使用 2F+1 个协调者，摘要所述进展条件是至少 F+1 个协调者正常工作；传统 2PC 对应 F=0。只限论文事务提交模型与假设，不等于拜占庭安全、通用自治 Agent 安全或外部服务保证。
+- 五轴：Claim State SUPPORTED（有限摘要命题）；Evidence Level E4_PREPRINT（实际检查预印本摘要，期刊元数据分开）；Mapping State DESIGN_ANALOGY；Implementation State NOT_IMPLEMENTED；Validation State NOT_TESTED。来源检查表面 ABSTRACT_SUPPORTED；不新增 AF-* 或 Sxx 正式身份。
+- 候选架构：分别保留参与者投票/决定、协调者持久化决定、操作者授权和权威效果端结算。决定一致仍可能无法确定外部效果是否发生。建议 trace：(transaction_id, participant_id, proposal_digest, decision_epoch, participant_vote, coordinator_decision, authorization_receipt, sink_effect_id, authoritative_readback)。
+- 反例：两个 Agent 同意 COMMIT，独立支付服务执行一次但确认丢失，重试又执行一次。决定共识不能证明 exactly-once 或授权。反过来，ABORT 决定可见之前效果端可能已执行；一致决定不自动回滚。
+- 反例：协调者数量满足进展条件，参与者却不能给出可信投票，或效果端不能提供绑定 revision 的回执。协调者 quorum 不等于业务参与者完整性、事实真值或授权。
+
+### EVIDENCE_DELTA 与交付
+- NEW_EVIDENCE：一份原始摘要区分提交决定与协调者故障条件；本仓仅建立理论映射。
+- CORRECTED_INTERPRETATION：集体提交决定不等于外部效果结算或可信同意。
+- UNCHANGED_BOUNDARY：PAPER != MAPPING != IMPLEMENTATION != VALIDATION；中英两份同源。
+- NEW_COUNTEREVIDENCE：确认丢失/重试、参与者或效果回执不可用；候选反例，不是实测事故。
+- UNKNOWN_RETAINED：完整证明假设、全文公式准确性、部署与运行有效性。
+- NEXT_RETEST_CONDITION：读取精确论文版本与形式条件，构建投票/协调者故障和 crash-after-effect 对照，独立效果端回读及授权判据，分别保留实际执行结果。
+- 实际 git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main 返回 exit 128、stdout 空、stderr 无法解析 github.com；GitHub API 可精确读取，完整工作树未取得。FOUNDATION/validate.py、合同测试、分布式实验 NOT_EXECUTED。仅向 EN/ZH 正式容器 append-only；Source Registry、Verified Core、Jules/GPT 历史不变，Draft 等待维护者审查。
