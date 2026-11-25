@@ -3173,3 +3173,32 @@ No Sxx identifier was assigned, no verified-core promotion occurred, and no runt
 - UNKNOWN_RETAINED: detailed proof assumptions, full-text/formula accuracy, deployment and runtime efficacy.
 - NEXT_RETEST_CONDITION: inspect exact source version/formal assumptions; implement controlled vote/coordinator loss and crash-after-effect cases with independent sink readback and grant oracle; record separately.
 - Actual git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main exited 128, empty stdout, stderr could not resolve github.com. Exact API reads available, complete checkout unavailable. FOUNDATION/validate.py, contract tests and distributed experiments NOT_EXECUTED. Append-only EN/ZH owners; registry, verified core and old Jules/GPT text unchanged. Draft for maintainer review.
+
+
+## 2026-11-25 Daily Research — Lock ownership versus effect-side fencing
+
+- Canonical task: foundations/research/daily; Daily; logical 2026-11-25 Asia/Shanghai; GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY; base main a48d8b24443e544e7618cc4a0743b26d0f78a0c9; run identity agent-foundations/foundations/research/daily/2026-11-25/GPT_NATIVE/a48d8b24443e/lock-sequencer-boundary-01.
+- Authority: FOUNDATION/EVIDENCE.md blob 405085ee8c3d61075cd09b1c558059a6b788786a; FOUNDATION/SOURCES.md blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19; FOUNDATION/PROVENANCE.md blob 7623df6a8f55635799ee955372a966eace957a27; FOUNDATION/MAINTENANCE.md blob bcd17d7774ddda1113ff7273424f9f6eee909fa2; FOUNDATION/COLLABORATION.md blob 0814fe220f4a30baa5b7c8f3c1d450f3019f1074.
+- Exact source identity/title/author string search found no Chubby/Burrows match in registry, provenance, collaboration core and all eight EN/ZH system documents. Bounded identity check, not proof of complete semantic novelty. Nov24 transaction-commit research and W47 cascade retained; W48 and November close NOT_DUE.
+
+### Original source and mechanism
+- Mike Burrows, *The Chubby Lock Service for Loosely-Coupled Distributed Systems*, OSDI 2006, pp. 335–350; https://www.usenix.org/legacy/event/osdi06/tech/full_papers/burrows/burrows_html/index.html ; publisher abstract https://www.usenix.org/legacy/event/osdi06/tech/burrows.html ; author institution listing https://research.google/pubs/the-chubby-lock-service-for-loosely-coupled-distributed-systems/.
+- Inspected original published HTML sections 2.4 and 2.6 and publication metadata, on 2026-11-25; conference publication version, no arXiv vN asserted. Historical paper, not newly published research.
+- Bounded claim: Chubby uses advisory locks. An earlier holder may send a request whose arrival follows another holder's action. The sequencer carries lock name, mode and generation; the receiving service checks validity and mode, using cached Chubby state or most recent sequencer it has observed. The lock-delay fallback is explicitly imperfect. Sections 2.4/2.6 describe the design, not a universal distributed safety proof.
+- Five axes: CLAIM=SUPPORTED (bounded design description); EVIDENCE=E2_PEER_REVIEWED (OSDI published paper, selected full-text sections); MAPPING=DESIGN_ANALOGY; IMPLEMENTATION=NOT_IMPLEMENTED; VALIDATION=NOT_TESTED. Source surface FULL_TEXT_SUPPORTED for the selected mechanism only. No new canonical AF-* or Sxx identifier.
+
+### Architecture mapping and Counterevidence Gate
+- Distinguish coordinator ownership, sink-side epoch/mode validation, caller authorization and effect settlement. A resumed worker may hold an expired grant or a queued command from an earlier epoch. A coordinator election alone does not revoke already issued requests.
+- Candidate trace: (resource_namespace, ownership_epoch, actor_grant, action_id, command_digest, sink_epoch_check, effect_receipt, authoritative_readback). Candidate only, not repository schema or implemented runtime.
+- Counterexample: a resource validates only the latest epoch it has already seen; a delayed old request can arrive before the first request with a newer epoch. Such a check is not proof of up-to-date global authority. A sink that ignores the epoch cannot gain safety merely from a coordinator-side lease.
+- Counterexample: a valid epoch can be replayed with two distinct or duplicated actions; epoch fencing does not itself deduplicate actions, authorize the payload or prove exactly-once completion. Separate the effect and authorization oracle.
+- Contrast with Nov24: transaction commit agreement addresses a different proof obligation than rejecting stale ownership at the effect boundary.
+
+### EVIDENCE_DELTA and delivery
+- NEW_EVIDENCE: primary paper sections describe advisory ownership and recipient-side sequencer validation with explicit imperfect fallback.
+- CORRECTED_INTERPRETATION: coordinator ownership != sink acceptance != effect settlement.
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; bilingual records are one source lineage.
+- NEW_COUNTEREVIDENCE: old request arrives before sink observes newer epoch; unchecked sink and repeated valid epoch.
+- UNKNOWN_RETAINED: actual agent deployment, sink support, authoritative epoch freshness, implementation and measured effectiveness.
+- NEXT_RETEST_CONDITION: pin coordinator/sink revision, delay an old request across takeover, compare current-authority versus latest-seen versus no-check sink, retain actor grants and effect receipts, include replay negative control.
+- Actual git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main exited 128, stdout empty, stderr could not resolve github.com. Exact API reads available. FOUNDATION/validate.py, contract tests and distributed experiments NOT_EXECUTED. Append-only paired EN/ZH collaboration owners; registry, Verified Core, runtime and previous Jules/GPT history unchanged. Human Maintainer review/merge required.
