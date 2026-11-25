@@ -3020,3 +3020,32 @@ Theorem 4 给出普通拓扑下的不可能性结果：如果没有可信方位�
 - UNKNOWN_RETAINED：完整证明假设、全文公式准确性、部署与运行有效性。
 - NEXT_RETEST_CONDITION：读取精确论文版本与形式条件，构建投票/协调者故障和 crash-after-effect 对照，独立效果端回读及授权判据，分别保留实际执行结果。
 - 实际 git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main 返回 exit 128、stdout 空、stderr 无法解析 github.com；GitHub API 可精确读取，完整工作树未取得。FOUNDATION/validate.py、合同测试、分布式实验 NOT_EXECUTED。仅向 EN/ZH 正式容器 append-only；Source Registry、Verified Core、Jules/GPT 历史不变，Draft 等待维护者审查。
+
+
+## 2026-11-25 Daily Research — 锁所有权不等于效果端 fencing
+
+- Canonical task：foundations/research/daily；Daily；logical 2026-11-25 Asia/Shanghai；GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；base main a48d8b24443e544e7618cc4a0743b26d0f78a0c9；run identity agent-foundations/foundations/research/daily/2026-11-25/GPT_NATIVE/a48d8b24443e/lock-sequencer-boundary-01。
+- 权威：FOUNDATION/EVIDENCE.md blob 405085ee8c3d61075cd09b1c558059a6b788786a；FOUNDATION/SOURCES.md blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19；FOUNDATION/PROVENANCE.md blob 7623df6a8f55635799ee955372a966eace957a27；FOUNDATION/MAINTENANCE.md blob bcd17d7774ddda1113ff7273424f9f6eee909fa2；FOUNDATION/COLLABORATION.md blob 0814fe220f4a30baa5b7c8f3c1d450f3019f1074。
+- 在来源登记、provenance、协作核心与八个 EN/ZH 系统容器按来源身份/标题/作者字符串检查，未发现 Chubby/Burrows 匹配；有限身份去重，不证明完整语义原创性。保留 11-24 事务提交研究及 W47 Cascade；W48 与 11 月结算 NOT_DUE。
+
+### 原始来源与机制
+- Mike Burrows，*The Chubby Lock Service for Loosely-Coupled Distributed Systems*，OSDI 2006，335–350 页；https://www.usenix.org/legacy/event/osdi06/tech/full_papers/burrows/burrows_html/index.html ；出版方摘要 https://www.usenix.org/legacy/event/osdi06/tech/burrows.html ；作者机构索引 https://research.google/pubs/the-chubby-lock-service-for-loosely-coupled-distributed-systems/ 。
+- 2026-11-25 检查原始出版 HTML 第 2.4、2.6 节及出版元数据；会议出版版本，不声称 arXiv vN。历史学术来源而非当日新论文。
+- 有限命题：Chubby 采用 advisory lock，旧持有者发出的请求可能在新持有者行动后才抵达。Sequencer 携带锁名、模式与 generation，接收服务检查有效性和模式，可依据 Chubby 缓存或已观察的最新 sequencer；lock-delay 是明确不完美的退路。该设计描述不是通用分布式安全证明。
+- 五轴：CLAIM=SUPPORTED（有限设计命题）；EVIDENCE=E2_PEER_REVIEWED（OSDI 出版论文，检查选定正文）；MAPPING=DESIGN_ANALOGY；IMPLEMENTATION=NOT_IMPLEMENTED；VALIDATION=NOT_TESTED。仅所检查机制 FULL_TEXT_SUPPORTED，不新增 AF-* 或 Sxx 正式身份。
+
+### 架构映射与 Counterevidence Gate
+- 区分协调者所有权、效果端 epoch/mode 检查、调用主体授权、效果结算。恢复 worker 可能持有过期许可或前一 epoch 已排队命令；协调者选举不能单独撤销已发请求。
+- 候选 trace：(resource_namespace, ownership_epoch, actor_grant, action_id, command_digest, sink_epoch_check, effect_receipt, authoritative_readback)。仅候选，不是本仓 schema 或已实现 runtime。
+- 反例：效果端只检验自己见过的最新 epoch，延迟旧请求可能早于第一份新 epoch 请求抵达；此类检查不证明全局权限最新。忽略 epoch 的效果端不能凭协调者 lease 获得安全保证。
+- 反例：有效 epoch 可能伴随两个不同或重复的动作；epoch fencing 不自动去重、授权具体 payload 或证明 exactly-once。效果与授权需独立判据。
+- 与 11-24 对照：事务提交决定一致与效果边界拒绝过期所有权是不同证明义务。
+
+### EVIDENCE_DELTA 与交付
+- NEW_EVIDENCE：原始论文选定章节描述 advisory ownership、接收端 sequencer 验证与不完美退路。
+- CORRECTED_INTERPRETATION：协调者所有权 != 效果端接受 != 效果结算。
+- UNCHANGED_BOUNDARY：PAPER != MAPPING != IMPLEMENTATION != VALIDATION；中英同一来源谱系。
+- NEW_COUNTEREVIDENCE：新 epoch 尚未到达时的旧请求、无检查效果端、重复有效 epoch。
+- UNKNOWN_RETAINED：实际 Agent 部署、效果端支持、epoch 新鲜性、实现与实测效果。
+- NEXT_RETEST_CONDITION：固定协调者/效果端 revision，构造跨 takeover 延迟旧请求，对照实时权威检查、latest-seen 检查及无检查，记录主体授权与效果回执，并加入重放负控制。
+- 实际 git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main 返回 exit 128、stdout 空、stderr 无法解析 github.com；GitHub API 精确读取可用。FOUNDATION/validate.py、合同测试、分布式实验 NOT_EXECUTED。仅向 EN/ZH 协作 owner append-only，来源登记、Verified Core、runtime、旧 Jules/GPT 历史不变；等待 Human Maintainer 审查合并。
