@@ -116,3 +116,20 @@ These existing records were not explicitly linked by path in the preceding index
 | [2026-10-01--external-review-source-scope--correction.md](01-corrections-and-errata/2026-10-01--external-review-source-scope--correction.md) | `01-corrections-and-errata/` | `474e360d57407cebce1921bd6e0a4e99ed905f6b` |
 | [2026-11-01--a2-successor-retention-and-acceptance--reconciliation.md](01-corrections-and-errata/2026-11-01--a2-successor-retention-and-acceptance--reconciliation.md) | `01-corrections-and-errata/` | `e65a9a494bc9d285a9ec0ec91cb0469af5d9db40` |
 | [2026-07--extra-monthly-strategic-blueprint-sidecar.md](03-stage-and-period-audits/2026-07--extra-monthly-strategic-blueprint-sidecar.md) | `03-stage-and-period-audits/` | `7ba3c07581ac94ce2414a9afc32491000d677207` |
+
+## 2026-11-25 cloud acceptance navigation
+
+Dated documentary review at [inspected main](https://github.com/lostlight530/agent-foundations/commit/f7c7c985b64a76576e4e831e954fd260ebd9bfb2); navigation only, not a new original A1/A2, Native, or D-task submission. The historical archive classes above remain unchanged. Original task owners are linked, not relocated or reclassified.
+
+| Identity | Original GitHub delivery | Cloud evidence / disposition |
+| --- | --- | --- |
+| Independent A1 (Nov 1–24) | [#473](https://github.com/lostlight530/agent-foundations/pull/473), 103 additions, merged | [canonical file](https://github.com/lostlight530/agent-foundations/blob/f7c7c985b64a76576e4e831e954fd260ebd9bfb2/historical-audits/2026-11/2026-11-25-a1-foundations-source-custody.md) retained; numeric gate met; 80/82 listed source SHA rows match the later inspected main (cutoff/shared-owner changes are not automatically errors) |
+| Independent A2 (Nov 1–25) | [#474](https://github.com/lostlight530/agent-foundations/pull/474), 136 additions, merged | [canonical file](https://github.com/lostlight530/agent-foundations/blob/f7c7c985b64a76576e4e831e954fd260ebd9bfb2/historical-audits/2026-11/2026-11-25-a2-foundations-month-relations.md) retained; numeric gate met; 83/83 listed first source SHA rows match inspected main; PR base is the original A1 merge and creation follows that merge |
+| Oct 31 original A2 | [#363](https://github.com/lostlight530/agent-foundations/pull/363), 87 additions, merged | Original numeric gate NOT_MET; delivery and numeric acceptance remain separate |
+| Oct 31 successor | [#365](https://github.com/lostlight530/agent-foundations/pull/365), 148 additions, merged | Successor numeric gate MET; no retroactive credit to original A2 |
+| Oct 31 cleanup | [#367](https://github.com/lostlight530/agent-foundations/pull/367), merged | Separate cleanup, not original task or successor credit |
+| Nov 1 forward reconciliation | [#369](https://github.com/lostlight530/agent-foundations/pull/369), merged | [Retained correction](01-corrections-and-errata/2026-11-01--a2-successor-retention-and-acceptance--reconciliation.md); correction class, not a new original A2 |
+
+Native evidence: Daily theory [#472](https://github.com/lostlight530/agent-foundations/pull/472) distinguishes lock ownership from effect-side fencing; a bilingual theory increment does not establish runtime implementation or validation.
+
+D7/D10/D14 retain their separate original identities; D14 is an as-of partial observation, not a full-day closure. D30 is not due at this observation. November remains open. Cloud delivery, numeric acceptance, dependency and retention are confirmed at the inspected revision; source-row custody does not by itself establish full semantic validity or a new runtime execution. Existing archive aliases are navigation only, not additional evidence or task credit.
