@@ -1865,3 +1865,30 @@ Delivery: append-only bilingual Daily research in the two existing Architecture 
 - **UNKNOWN_RETAINED:** implementation applicability, source proof reproduction, actual authorization policy, service-specific effect sink and lasting state continuity.
 - **NEXT_RETEST_CONDITION:** immutable source and host revision, full input/negative controls, named persistent state with crash injection, actor-grant ledger, independent final sink readback and environment/log/exit receipts before proposing a verified-core or implementation change.
 - **Delivery:** append-only this EN/paired ZH Architecture owner, leaving all earlier text/Jules production intact. Do not mutate `FOUNDATION/SOURCES.md`, AF-ARCH claims, schema, workflows, monthly, other Daily or runtime. Local `FOUNDATION/validate.py`, formal proof checking and execution benchmarks **NOT_EXECUTED**. Human Maintainer review/merge pending.
+
+
+## 2026-11-26 Daily Research — Local invocation versus remote partial failure
+
+- Canonical task foundations/research/daily; Daily; 2026-11-26 Asia/Shanghai; GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY; base main 4e9d81ca281d634d50b732831e42973ab3edf63c; run identity agent-foundations/foundations/research/daily/2026-11-26/GPT_NATIVE/4e9d81ca281d/partial-failure-01.
+- Authority: FOUNDATION/EVIDENCE.md blob 405085ee8c3d61075cd09b1c558059a6b788786a; FOUNDATION/SOURCES.md blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19; FOUNDATION/PROVENANCE.md blob 7623df6a8f55635799ee955372a966eace957a27; FOUNDATION/MAINTENANCE.md blob bcd17d7774ddda1113ff7273424f9f6eee909fa2.
+- Source identity search across registry, provenance and eight EN/ZH domain documents found no Waldo / TR-94-29 / exact title match. This is bounded lexical deduplication, not proof of semantic novelty. Saltzer et al. (Nov22, PR #460) already cover end-to-end placement; the present increment targets partial-failure observation ambiguity rather than repeating that source.
+
+### Original source and bounded mechanism
+- Jim Waldo, Geoff Wyant, Ann Wollrath, Sam Kendall, *A Note on Distributed Computing*, Sun Microsystems Laboratories technical report SMLI TR-94-29, November 1994. Author-hosted publication/abstract: https://waldo.scholars.harvard.edu/publications/note-distributed-computing ; report: https://scholar.harvard.edu/files/waldo/files/waldo-94.pdf . Observed author publication abstract 2026-11-26; no new publication event; exact full-text report not independently reviewed in this round.
+- Abstract argues that remote object interaction differs from single-address-space interaction in latency, memory access, concurrency and partial failure. This is a bounded design argument, not a theorem guaranteeing reliability or a measured agent runtime result.
+- Five axes: CLAIM=SUPPORTED (bounded attribution to the abstract); EVIDENCE=E5_BACKGROUND (technical report abstract, no peer-review status claimed); MAPPING=DESIGN_ANALOGY; IMPLEMENTATION=NOT_IMPLEMENTED; VALIDATION=NOT_TESTED. ABSTRACT_SUPPORTED; no new canonical Sxx or AF-* ID.
+
+### Architecture mapping and Counterevidence Gate
+- A uniform Tool API can hide whether an operation crosses a process, authority or persistence boundary. A timeout is a client observation, not the remote effect state. A candidate trace separates invocation_id, effect_id, destination_revision, dispatch_observed, response_observed, authoritative_effect_state and reconciliation_cutoff.
+- Two constructed histories have the same client timeout: request never reaches the service, or service commits and its acknowledgement is lost. A timeout-only policy cannot distinguish them; retry may be necessary in the first and duplicate an effect in the second. These are conceptual counterexamples, not executed experiments.
+- Negative controls: an authoritative pre-dispatch local rejection can narrow effect uncertainty; a service with enforced idempotency scope and authoritative outcome lookup can narrow retry uncertainty. Neither is established merely by sharing an interface or a correlation ID.
+- Contrast with Nov22 end-to-end placement and Nov25 Chubby fencing: partial-failure ambiguity is a distinct observation problem; endpoint checking and epoch enforcement solve different obligations, not automatically one another.
+
+### EVIDENCE_DELTA
+- NEW_EVIDENCE: original author abstract explicitly identifies partial failure as a distributed-system distinction; historical source, not new release.
+- CORRECTED_INTERPRETATION: uniform invocation surface != uniform failure semantics; timeout != effect absent.
+- UNCHANGED_BOUNDARY: PAPER != MAPPING != IMPLEMENTATION != VALIDATION; EN/ZH one lineage.
+- NEW_COUNTEREVIDENCE: indistinguishable client timeout histories, contrasted with pre-dispatch rejection and authoritative query.
+- UNKNOWN_RETAINED: full-text argument details, provider semantics, actual effect reconciliation and measured performance.
+- NEXT_RETEST_CONDITION: pin a tool and remote sink revision; inject loss before dispatch versus after commit, retain matching client observations and independent sink receipts; test idempotency scope/expiry and compare read-only local tools.
+- Exact API reads performed; full repository checkout and FOUNDATION/validate.py, contract tests, remote failure experiment NOT_EXECUTED. W47 cascade retained; W48 and November close NOT_DUE. Append-only paired EN/ZH Architecture Principles; registry, Verified Core, previous Jules/GPT text and runtime unchanged. Draft for Human Maintainer.
