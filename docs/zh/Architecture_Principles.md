@@ -1881,3 +1881,30 @@ Agent 等变性要求 `Π(D2, iota(A)) = iota(Π(D1,A))`：对不含特殊语义
 - **UNKNOWN_RETAINED：** 实施边界、数学证明复验、真实授权策略、外部 sink 与持续状态身份。
 - **NEXT_RETEST_CONDITION：** 固定源码及宿主 revision、完整输入与拒绝反例、具名持久化状态和崩溃注入、授权记录、可信效果端 readback、命令日志与退出码，门槛成立后才能考虑 Verified Core 或实现层变更。
 - **交付边界：** 仅对 `docs/en/Architecture_Principles.md` 与中文原始容器 append-only，旧 Jules/GPT 内容保全；`FOUNDATION/SOURCES.md`、AF-ARCH 核心、schema、workflows、Monthly、其他 Daily 与 Runtime 不动。完整 `FOUNDATION/validate.py`、形式证明与运行测量均 **NOT_EXECUTED**，需要 Human Maintainer 审核合并。
+
+
+## 2026-11-26 Daily Research — 本地调用与远端部分失败不可等同
+
+- Canonical task foundations/research/daily; Daily; 2026-11-26 Asia/Shanghai; GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY; base main 4e9d81ca281d634d50b732831e42973ab3edf63c; run identity agent-foundations/foundations/research/daily/2026-11-26/GPT_NATIVE/4e9d81ca281d/partial-failure-01.
+- 权威：FOUNDATION/EVIDENCE.md blob 405085ee8c3d61075cd09b1c558059a6b788786a；FOUNDATION/SOURCES.md blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19；FOUNDATION/PROVENANCE.md blob 7623df6a8f55635799ee955372a966eace957a27；FOUNDATION/MAINTENANCE.md blob bcd17d7774ddda1113ff7273424f9f6eee909fa2。
+- 来源登记、provenance 和八份中英容器中未发现 Waldo / TR-94-29 / 精确标题匹配，仅为有限字符串去重，不证明完整语义原创性。11-22 Saltzer 等端到端论证（PR #460）已覆盖功能放置；本次增量针对部分失败的观察歧义，而非重复该来源。
+
+### 原始来源与有限机制
+- Jim Waldo、Geoff Wyant、Ann Wollrath、Sam Kendall，*A Note on Distributed Computing*，Sun Microsystems Laboratories 技术报告 SMLI TR-94-29，1994 年 11 月。作者发布页及原始摘要 https://waldo.scholars.harvard.edu/publications/note-distributed-computing ；报告 https://scholar.harvard.edu/files/waldo/files/waldo-94.pdf 。2026-11-26 观察作者发布页摘要，不是新发表事件；本轮未独立复核完整报告正文。
+- 摘要指出，远端对象交互与单地址空间对象交互在延迟、内存访问、并发和部分失败方面存在区别。这是有限的系统设计论证，不是可靠性保证定理或 Agent Runtime 实测。
+- 五轴：CLAIM=SUPPORTED（摘要有限归因）；EVIDENCE=E5_BACKGROUND（技术报告摘要，不声称同行评审）；MAPPING=DESIGN_ANALOGY；IMPLEMENTATION=NOT_IMPLEMENTED；VALIDATION=NOT_TESTED。ABSTRACT_SUPPORTED，不新增正式 Sxx 或 AF-*。
+
+### 架构映射与 Counterevidence Gate
+- 统一 Tool API 可以隐藏调用是否跨进程、权限或持久化边界。超时是客户端观察，不是远端效果状态。候选 trace 分开 invocation_id、effect_id、destination_revision、dispatch_observed、response_observed、authoritative_effect_state、reconciliation_cutoff。
+- 两个构造历史具有相同客户端超时：请求未到服务端，或服务已提交但确认丢失。只依据超时无法区分；前者可能需要重试，后者可能重复产生效果。属于概念反例，非已执行实验。
+- 负控制：权威的本地派发前拒绝可以缩小效果不确定性；具有强制幂等作用域和权威结果查询的服务可以缩小重试不确定性。统一接口或 correlation ID 本身不能证明这些机制存在。
+- 与 11-22 端到端功能放置、11-25 Chubby fencing 对照：部分失败歧义是独立观察问题，端点核验和 epoch 检查解决不同义务，不自动替代彼此。
+
+### EVIDENCE_DELTA
+- NEW_EVIDENCE：作者原始摘要明确部分失败是分布式系统区别之一；历史学术来源，非新发布。
+- CORRECTED_INTERPRETATION：统一调用面 != 统一失败语义；timeout != effect absent。
+- UNCHANGED_BOUNDARY：PAPER != MAPPING != IMPLEMENTATION != VALIDATION；中英同源。
+- NEW_COUNTEREVIDENCE：客户端不可区分的超时历史；对照派发前拒绝和权威查询。
+- UNKNOWN_RETAINED：全文详细论证、provider 语义、真实效果对账与实测性能。
+- NEXT_RETEST_CONDITION：固定工具及远端效果端 revision，注入派发前丢失与提交后确认丢失，保存相同客户端观察和独立效果端回执；验证幂等范围与有效期，并对照本地只读工具。
+- 已执行精确 API 读取；完整工作树获取、FOUNDATION/validate.py、合同测试及远端失败实验 NOT_EXECUTED。W47 Cascade 保留；W48 及 11 月结算 NOT_DUE。仅向中英文 Architecture Principles owner append-only；来源登记、Verified Core、旧 Jules/GPT 历史及 Runtime 不变。Draft 等待 Human Maintainer。
