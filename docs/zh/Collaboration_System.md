@@ -3049,3 +3049,31 @@ Theorem 4 给出普通拓扑下的不可能性结果：如果没有可信方位�
 - UNKNOWN_RETAINED：实际 Agent 部署、效果端支持、epoch 新鲜性、实现与实测效果。
 - NEXT_RETEST_CONDITION：固定协调者/效果端 revision，构造跨 takeover 延迟旧请求，对照实时权威检查、latest-seen 检查及无检查，记录主体授权与效果回执，并加入重放负控制。
 - 实际 git ls-remote https://github.com/lostlight530/agent-foundations.git refs/heads/main 返回 exit 128、stdout 空、stderr 无法解析 github.com；GitHub API 精确读取可用。FOUNDATION/validate.py、合同测试、分布式实验 NOT_EXECUTED。仅向 EN/ZH 协作 owner append-only，来源登记、Verified Core、runtime、旧 Jules/GPT 历史不变；等待 Human Maintainer 审查合并。
+
+
+## 2026-11-27 GPT Native Daily Research — 委派债务与工作流终止是不同于业务完成的证明义务
+
+- Canonical task：`foundations/research/daily`；Daily，Collaboration System；逻辑日期 2026-11-27 Asia/Shanghai；GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；base main `b8e2680c147c638f814a7a5e804f52c4e5aefee9`；研究身份 `agent-foundations/foundations/research/daily/2026-11-27/GPT_NATIVE/b8e2680c147c/delegation-debt-01`。
+- 权威：证据合同 blob 405085ee8c3d61075cd09b1c558059a6b788786a；来源登记 5c569375d640eaed7eb4eb787515ff4beb1ceb19；出处 7623df6a8f55635799ee955372a966eace957a27；维护合同 bcd17d7774ddda1113ff7273424f9f6eee909fa2。固定版本的 Registry、Provenance 与八个中英文领域文件词法检查未发现 Dijkstra–Scholten/Scholten、termination detection 或精确 DOI；不代表已经证明语义新颖性。前置检查未见 11 月 27 日标记。
+
+### 原始来源身份与机制
+- Edsger W. Dijkstra 与 C. S. Scholten，*Termination detection for diffusing computations*，1979 年 1 月 26 日署期手稿 EWD687a，[UT Austin 原始档案转录](https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD687a.html)，本轮 2026-11-27 实际查阅。[TU Eindhoven 出版记录](https://research.tue.nl/p/en/research-outputs/termination-detection-for-diffusing-computations) 确认 1980 年同行评审期刊 Information Processing Letters 11(1), 1–4，DOI [10.1016/0020-0190(80)90021-6](https://doi.org/10.1016/0020-0190(80)90021-6)。手稿日期、期刊发表与观察日期独立；未核验最终期刊全文与手稿完全一致，两者不重复计算独立学术来源。
+- 手稿研究环境启动的有限委派消息传播。每条边未结算义务为已发送工作消息数减去返回信号数；非负债务与正债务边的可达性约束终止检测，最后一个本地确认不能抹掉尚未结算的后代工作。原文给出带条件的终止可靠性和最终检测论证（P0–P4、Theorem 1–2）；已读相关定义，未独立复证或实现整个算法。
+- 机制检测满足消息、信号和进展假设的有限计算停止，不保证外部效果完成、取消、容错投递、授权或任意自发/周期 Agent 的终止。环境只主动启动一次，外部生产者、网络分区与重启可使直接映射失效。
+
+### Collaboration 候选映射与反证 Gate
+- 区分父任务响应、委派债务、子任务终止、终态收据、独立外部效果结算和用户任务完成。候选追踪元组：(root_task_id, delegation_id, parent_id, child_id, epoch, outstanding_obligation, child_terminal_receipt, effect_reconciliation_state, cutoff)。根任务暂时空闲可能仍有不可见后代工作或在途委派。
+- 构造反例 A：根委派给 worker，worker 再委派其他服务并先于后代完成返回自身成功。根看到了全部直接回调却遗漏因果债务。正确作用域的义务账应保持 UNKNOWN，而不是推定全局停止。概念负对照，NOT_EXECUTED。
+- 反例 B：所有内部工作确实已经停止，但先前远端扣费没有权威读回。终止检测器可以正确判断中立，而用户后置条件仍 UNKNOWN；反过来已知外部效果也不能证明所有 worker 停止。
+- 反例 C：取消后断线 worker 在新 epoch 恢复。没有 fencing、任务入口封闭与权威结算时，有限封闭计算假设不成立；简单计数器不能自动解决消息丢失、重复、拜占庭 Agent 或动态成员关系。
+- 与 Nov23 Chandy–Lamport 一致切面、Nov25 Chubby fencing、Nov26 Waldo partial failure 的关系：一致快照、合法 epoch、分布式终止各证明不同谓词；缺少效果证据，即使结合也不能证明业务完成。这是关系分析，不是新增独立实验。
+
+### 五轴状态与 Evidence Delta
+- CLAIM = PROPOSED（Agent 映射）；EVIDENCE = E5_BACKGROUND（实际阅读档案手稿，同行评审出版身份另行核对）；MAPPING = DESIGN_ANALOGY；IMPLEMENTATION = NOT_IMPLEMENTED；VALIDATION = NOT_TESTED。原始论证保持其形式假设。无新 Sxx、AF Claim、Verified Core 准入；中英文同一个研究身份。
+- NEW_EVIDENCE：检查具名版本原始档案中的非负委派债务与可达性约束。
+- CORRECTED_INTERPRETATION：根空闲/直接回调 != 封闭分布式计算终止 != 外部可核验任务完成。
+- UNCHANGED_BOUNDARY：PAPER != MAPPING != IMPLEMENTATION != VALIDATION。
+- NEW_COUNTEREVIDENCE：隐藏后代债务、内部停止但远端效果未结算、重启超出封闭计算假设。
+- UNKNOWN_RETAINED：真实 Agent 委派账、持久化债务恢复、通道语义、效果状态、本地实现与独立证明。
+- NEXT_RETEST_CONDITION：固定有限根任务及 epoch，注入子任务延迟确认、重复投递、重启、外部效果超时；独立比较根空闲、未结算义务、权威效果收据和人工后置条件。
+- 已实际读取固定 GitHub API 与档案原文；本地 git clone DNS 失败（exit 128）。Foundation 完整 validator、证明复验、委派运行实验 NOT_EXECUTED。W48 与十一月自然月结算 NOT_DUE。只追加现有中英文 Collaboration 文件，不改历史、Source Registry、Verified Core 或 Runtime。Draft 等待 Human Maintainer。
