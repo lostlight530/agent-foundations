@@ -1765,3 +1765,42 @@ print(json.dumps({'experiment':'foundations-2026-11-23-standalone-two-process-cu
 **五轴状态与 EVIDENCE_DELTA：** `CLAIM=OBSERVED` 仅覆盖原始论文定义与 Theorem 1 已检查的可达性陈述，`CLAIM=PROPOSED` 仅为 Agent 记忆映射；`EVIDENCE=E2_PEER_REVIEWED + 原文页面核验 + ONE_STANDALONE_TOY`（不同证据对象，不是论文算法验证）；`MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE`；`IMPLEMENTATION=NOT_IMPLEMENTED`；`VALIDATION=NOT_TESTED`。**NEW_EVIDENCE** = 源论文的通道/进程状态和定理前提，加一次独立执行的错误切面 toy 反例；**CORRECTED_INTERPRETATION** = 多 Agent 各自持久化或同时间戳，不自动构成合法全局状态或已授权效果；**UNCHANGED_BOUNDARY** = PAPER != MAPPING != IMPLEMENTATION != VALIDATION；**NEW_COUNTEREVIDENCE** = 接收缺发送、漏记在途消息、崩溃未持久化、权限/效果歧义；**UNKNOWN_RETAINED** = 真实 channel FIFO 与信任、运行实现与 Store Revision、定理完整证明及外部回执；**NEXT_RETEST_CONDITION** = 固定多 Agent 事件与通信模型，记录 marker、send/receive ID、snapshot epoch、崩溃点、原始 stdout/stderr/exit 与最终第三方效果 readback，设置合法与非法切面对照。
 
 **交付边界：** 仅向已有 `docs/en/Memory_System.md` 与 `docs/zh/Memory_System.md` append-only 新增一个双语 Daily；W47 Weekly、原 Jules/GPT 历史、Source Registry、Verified Core、代码、其它三个容器与 11 月 Monthly 保持不变。完整 `FOUNDATION/validate.py`、原论文形式证明、真实分布式 Snapshot/Effect 集成均 **NOT_EXECUTED**，临时 toy 的通过不构成这些验证的 PASS。
+
+## 2026-11-28 GPT Native Daily Research — 一致记忆快照不等于并发不变量保持
+
+**身份与边界。** Canonical task `foundations/research/daily`；Daily，Memory System；逻辑日期 2026-11-28 Asia/Shanghai；GPT-6.2 / GPT_NATIVE / HUMAN_REQUESTED / NOT_JULES_REPLAY；base main `84420371b70dc00bbf1644b0188bca469b2dfef5`；研究身份 `agent-foundations/foundations/daily/2026-11-28/GPT_NATIVE/84420371b70d/snapshot-isolation-01`。Evidence blob 405085ee8c3d61075cd09b1c558059a6b788786a，Sources blob 5c569375d640eaed7eb4eb787515ff4beb1ceb19，Index blob 5fd381ace1e3adffa782cca9babd400cf1b504ef。检查八份双语领域文档与来源注册表的候选身份、题名、作者字面匹配，以及领域文档当日身份；未发现候选字面命中或 Nov28 Daily，Nov27 Collaboration 保留。仅有限字面去重，不是全语义独立性证明。W48 与 11 月结算 NOT_DUE。
+
+**原始学术对象。** Hal Berenson、Phil Bernstein、Jim Gray、Jim Melton、Elizabeth O'Neil、Patrick O'Neil，*A Critique of ANSI SQL Isolation Levels*，ACM SIGMOD 1995 年 6 月，pp. 1–10，DOI 10.1145/223784.223785；存档 MSR-TR-95-51 / arXiv:cs/0701157，提交时间 2007-01-25 22:53:48 UTC。[书目](https://arxiv.org/abs/cs/0701157)、[原始 PDF](https://arxiv.org/pdf/cs/0701157)。2026-11-28 实查封面、出版身份、印刷页 7–8 文本和页面图像（§4.2、history H5、A5A/A5B、Remark 8）；未单独核实 arXiv 版本号，不补造版本日期配对。历史论文，不是 2026 新发表论文。仅候选来源，不分配 Sxx。
+
+**机制与有限命题。** 读快照固定事务期间可见的已提交版本；论文所定义的 Snapshot Isolation 还在提交时检查重叠写集合，这是两个不同证明义务。A5A 描述读取相关数据项期间另一事务提交导致混合版本；A5B/H5 展示不同数据项的并发更新虽各自保持关系，却可能共同破坏约束。论文模型中的 Snapshot Isolation 排除前一种 read skew，却允许后一种 write skew，故不等于 Serializable。不将其推广至所有同名实现。前提是多版本事务数据、可见性和写冲突规则，而非多 Provider Agent。
+
+**当代研究线索（独立来源身份）。** ADK [PR #8415](https://github.com/google/adk-python/pull/8415)，创建 2026-11-27T17:43:40Z，head 8ba4b9923d4e26160987fbf16be4ffd35fdf873c，本轮 OPEN/UNMERGED。实际查看 service/test hunks，将多查询放入 BEGIN/rollback 读事务；作者报告的测试/E2E 未复跑。只是提案，不是发布能力。GAS R1 共享此来源，不增加独立来源计数；GAS SQLite control 不计作 Foundations 实验。
+
+**独立实际运行的最小反例。** FOUNDATIONS-2026-11-28-STANDALONE-WRITE-SKEW-01；Linux、Python 3.13.5；执行前环境时间 UTC 2026-11-28T00:48:24Z；隔离目录命令 `python foundations.py`，exit 0、stderr 空；脚本 SHA256 ff418edd2c6bbb29cf84fa6e749435c5b07b0171484bae86db29c2cfd177174f。两个记忆维护者各在观察到另一活跃 witness 后退役一个 witness，不变量为至少保留一个，模型仅检查写集合不相交。非 SQLite 实验或完整 MVCC 模拟器。可复制完整代码（与英文同一执行身份、同一 SHA，不是第二次实验）：
+```python
+initial={'a':1,'b':1}
+snapshot1=initial.copy(); snapshot2=initial.copy()
+w1={'a':0} if snapshot1['b']==1 else {}
+w2={'b':0} if snapshot2['a']==1 else {}
+assert set(w1).isdisjoint(w2)
+merged=initial|w1|w2
+serial=initial|w1
+if serial['a']==1: serial|={'b':0}
+print('local valid:',sum((snapshot1|w1).values())>=1,sum((snapshot2|w2).values())>=1)
+print('disjoint writes:',merged,'invariant:',sum(merged.values())>=1)
+print('serial control:',serial,'invariant:',sum(serial.values())>=1)
+assert sum(merged.values())==0 and sum(serial.values())==1
+```
+实际 stdout：
+```text
+local valid: True True
+disjoint writes: {'a': 0, 'b': 0} invariant: False
+serial control: {'a': 0, 'b': 1} invariant: True
+```
+两个局部决策有效、不同写集合合并后没有 witness；串行对照仍有一个。仅证明明确建模规则下的抽象反例，不是原论文复现、数据库行为或真实记忆丢失。
+
+**理论到架构。** Nov23 Chandy–Lamport 讨论进程/通道切面；Nov24 事务与效果结算区分事务闭合和协作完成。今天进一步区分同一数据库的共同读快照与并发维护下跨记录约束保持。记忆压缩、来源保全可考虑绑定版本的证据集合和独立强制执行的保留不变量。候选 trace：(store_identity, read_snapshot, read_set, write_set, invariant_id, commit_conflict_scope, commit_receipt, postcommit_invariant_result, authorization_grant_id)。候选方案包括串行化相关决策、更新共同 guard、采用合适的 Serializable 事务；不声称任意方案普遍有效或已实现。外部授权、语义真实性、崩溃持久性仍是不同轴。
+
+**五轴与 Evidence Delta。** CLAIM=SUPPORTED 仅限原文读/写偏斜的有限区分；记忆 witness 映射 CLAIM=PROPOSED。EVIDENCE=E2_PEER_REVIEWED（指定原文页）加独立抽象反例与外部提案；MAPPING=DESIGN_ANALOGY/COUNTEREVIDENCE；IMPLEMENTATION=NOT_IMPLEMENTED；Agent 记忆合同 VALIDATION=NOT_TESTED。NEW_EVIDENCE：读一致性与不变量保持的机制区分、真实执行的不同写集反例。CORRECTED_INTERPRETATION：同一快照不证明并发更新安全。UNCHANGED_BOUNDARY：PAPER != MAPPING != IMPLEMENTATION != VALIDATION。NEW_COUNTEREVIDENCE：各自有效的退役操作可共同删除全部 witness。UNKNOWN_RETAINED：真实存储隔离、约束强制、授权、注册表准入、运行结果。NEXT_RETEST_CONDITION：固定存储引擎/版本和事务策略，构造 read skew/write skew 对照，记录读写集、提交/回滚及权威提交后约束检查；独立验证授权和持久性。
+
+**交付。** 仅 append 既有 EN/ZH Memory System，保留 Jules/GPT 历史、注册表、Verified Core、其它领域与 runtime。完整 FOUNDATION/validate.py、论文证明复现、真实记忆集成、ADK 测试 NOT_EXECUTED。需 Human Maintainer 审查；Draft 不证明 main 已保留。
